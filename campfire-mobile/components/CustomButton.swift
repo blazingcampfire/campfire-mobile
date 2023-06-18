@@ -7,23 +7,29 @@
 
 import SwiftUI
 
-struct CustomButton: View {
+struct LaunchButton: View {
+    var text: String
+    var clicked: (() -> Void)
+    
     var body: some View {
-        Button {
-        } label: {
-            Text("start")
-                .padding().foregroundColor(.black)
-                .background {
-                    Capsule()
-                        .stroke(.black, lineWidth: 4)
-                        .saturation(1.8)
-                }
+        Button(action: clicked) {
+                HStack {
+                    Text(text).font(.custom("Futura-Bold", size: 25))
+                    
+                }.frame(width: 300, alignment: .center)
+                .foregroundColor(Color.white)
+                .padding()
+                .background(HotPeach.Peach)
+                .cornerRadius(16)
+        }
         }
     }
-}
 
 struct CustomButton_Previews: PreviewProvider {
     static var previews: some View {
-        CustomButton()
+        LaunchButton(
+            text: "create account") {
+                print("Clicked")
+            }
     }
 }

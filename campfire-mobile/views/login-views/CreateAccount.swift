@@ -25,8 +25,8 @@ struct CreateAccount: View {
                         
                         
                     }
-                    LaunchButton(text: "create account"){}
-                    LaunchButton(text: "login"){}
+                    LaunchButton(text: "create account"){}.padding(8)
+                    LaunchButton(text: "login"){}.padding(8)
                     
                 })
     }

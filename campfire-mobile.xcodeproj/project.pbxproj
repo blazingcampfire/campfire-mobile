@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B17F75482A3E9EC6005581F3 /* dwddew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17F75472A3E9EC6005581F3 /* dwddew.swift */; };
 		E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */; };
 		E28D3A5C2A3E917900B1EEE9 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* CreateAccount.swift */; };
 		E28D3A602A3E968400B1EEE9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5F2A3E968400B1EEE9 /* CustomButton.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B17F75472A3E9EC6005581F3 /* dwddew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dwddew.swift; sourceTree = "<group>"; };
 		E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E28D3A5B2A3E917900B1EEE9 /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
 		E28D3A5F2A3E968400B1EEE9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 			children = (
 				E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */,
 				E28D3A5B2A3E917900B1EEE9 /* CreateAccount.swift */,
-				B17F75452A3E9948005581F3 /* pageTwo.swift */,
+				B17F75472A3E9EC6005581F3 /* dwddew.swift */,
 			);
 			path = "login-views";
 			sourceTree = "<group>";
@@ -302,8 +304,8 @@
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				E28D3A5C2A3E917900B1EEE9 /* CreateAccount.swift in Sources */,
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,
-				B17F75462A3E9948005581F3 /* pageTwo.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
+				B17F75482A3E9EC6005581F3 /* dwddew.swift in Sources */,
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

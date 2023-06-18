@@ -20,7 +20,7 @@ struct LaunchView: View {
             VStack {
                 Image(systemName: "fireplace")
                                 .font(.system(size: 100))
-                                .foregroundColor(.white)
+                                .foregroundColor(.white).padding(1)
                 
                 Text("campfire")
                     .foregroundColor(Color.white)

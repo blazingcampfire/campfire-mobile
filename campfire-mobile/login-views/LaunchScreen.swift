@@ -13,7 +13,7 @@ struct LaunchView: View {
         
         // Color(.init(red: 0, green: 0, blue: 0, alpha: 1))
         
-        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 85/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.vertical)
                     .overlay(
         ZStack {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */; };
 		E28D3A5C2A3E917900B1EEE9 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* CreateAccount.swift */; };
+		E28D3A602A3E968400B1EEE9 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5F2A3E968400B1EEE9 /* CustomButton.swift */; };
 		E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */; };
 		E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095DC2A3E473E001BEDDE /* ContentView.swift */; };
 		E29095DF2A3E4741001BEDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29095DE2A3E4741001BEDDE /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E28D3A5B2A3E917900B1EEE9 /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
+		E28D3A5F2A3E968400B1EEE9 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		E29095D72A3E473E001BEDDE /* campfire-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "campfire-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileApp.swift; sourceTree = "<group>"; };
 		E29095DC2A3E473E001BEDDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,11 +98,12 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		E28D3A5E2A3E94D100B1EEE9 /* New Group */ = {
+		E28D3A5E2A3E94D100B1EEE9 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				E28D3A5F2A3E968400B1EEE9 /* CustomButton.swift */,
 			);
-			path = "New Group";
+			path = components;
 			sourceTree = "<group>";
 		};
 		E29095CE2A3E473E001BEDDE = {
@@ -126,7 +129,7 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
-				E28D3A5E2A3E94D100B1EEE9 /* New Group */,
+				E28D3A5E2A3E94D100B1EEE9 /* components */,
 				E28D3A5D2A3E94C700B1EEE9 /* views */,
 				E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */,
 				E29095DC2A3E473E001BEDDE /* ContentView.swift */,
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
+				E28D3A602A3E968400B1EEE9 /* CustomButton.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				E28D3A5C2A3E917900B1EEE9 /* CreateAccount.swift in Sources */,
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,

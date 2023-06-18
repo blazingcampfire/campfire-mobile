@@ -14,16 +14,7 @@ struct CreateAccount: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 ZStack {
-                    Button {
-                    } label: {
-                        Text("start")
-                            .padding().foregroundColor(.white)
-                            .background {
-                                Capsule()
-                                    .stroke(.white, lineWidth: 2)
-                                    .saturation(1.8)
-                            }
-                    }
+                    
                 })
     }
 }

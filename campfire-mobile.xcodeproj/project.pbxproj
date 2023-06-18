@@ -88,6 +88,21 @@
 			path = "login-views";
 			sourceTree = "<group>";
 		};
+		E28D3A5D2A3E94C700B1EEE9 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				E28D3A562A3E4B9600B1EEE9 /* login-views */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		E28D3A5E2A3E94D100B1EEE9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		E29095CE2A3E473E001BEDDE = {
 			isa = PBXGroup;
 			children = (
@@ -111,7 +126,8 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
-				E28D3A562A3E4B9600B1EEE9 /* login-views */,
+				E28D3A5E2A3E94D100B1EEE9 /* New Group */,
+				E28D3A5D2A3E94C700B1EEE9 /* views */,
 				E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */,
 				E29095DC2A3E473E001BEDDE /* ContentView.swift */,
 				E29095DE2A3E4741001BEDDE /* Assets.xcassets */,

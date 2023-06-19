@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LaunchButton: View {
+struct LFButton: View {
     var text: String
     var clicked: (() -> Void)
     
@@ -25,9 +25,9 @@ struct LaunchButton: View {
         }
     }
 
-struct CustomButton_Previews: PreviewProvider {
+struct LFButton_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchButton(
+        LFButton(
             text: "create account") {
                 print("Clicked")
             }

@@ -22,17 +22,18 @@ struct VerifyAccount: View {
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 25))
                         
-                        CustomTextBox(placeholderText: "verification")
+                       FormTextField(placeholderText: "verification")
                         
-                        Text("code sent to (number)!")
+                        Text("code sent to (number)")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 13))
+               
+                        
+                        LFButton(text: "verify"){}
                     }
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 400)
+
                     
-                    Spacer()
-                    
-                    LaunchButton(text: "verify"){}
                 }
             )
     }

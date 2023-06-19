@@ -24,11 +24,11 @@ struct EmailOrNumber: View {
                         
                         
                     }
-                    LaunchButton(text: "phone number"){}
+                    LFButton(text: "phone number"){}
                     Text("or")
                         .foregroundColor(Color.white)
                         .font(.custom("Futura-Bold", size: 20))
-                    LaunchButton(text: "email"){}
+                    LFButton(text: "email"){}
                     
                 })
     }

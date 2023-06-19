@@ -22,9 +22,9 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 25))
                         
-                        CustomTextBox(placeholderText: "phone number")
+                        FormTextField(placeholderText: "phone number")
                         
-                        Text("check your texts for a verification code!")
+                        Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 13))
                     }
@@ -32,7 +32,7 @@ struct EnterPhoneNumber: View {
                     
                     Spacer()
                     
-                    LaunchButton(text: "next"){}
+                    LFButton(text: "next"){}
                 }
             )
     }

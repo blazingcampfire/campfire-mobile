@@ -27,6 +27,7 @@
 		E29095F12A3E4741001BEDDE /* campfire_mobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095F02A3E4741001BEDDE /* campfire_mobileTests.swift */; };
 		E29095FB2A3E4741001BEDDE /* campfire_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */; };
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
+		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
 		F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */; };
 		F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */; };
 		F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */; };
@@ -72,6 +73,7 @@
 		E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "campfire-mobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITests.swift; sourceTree = "<group>"; };
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F834163F2A40E6A500803D32 /* SetProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfilePic.swift; sourceTree = "<group>"; };
 		F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumber.swift; sourceTree = "<group>"; };
 		F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAccount.swift; sourceTree = "<group>"; };
 		F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrNumber.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */,
 				E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */,
 				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
+				F834163F2A40E6A500803D32 /* SetProfilePic.swift */,
 			);
 			path = "login-views";
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
 				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
+				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */,
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,

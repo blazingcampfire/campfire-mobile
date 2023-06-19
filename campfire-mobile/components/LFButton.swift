@@ -19,7 +19,8 @@ struct LFButton: View {
                     Text(text).font(.custom("Futura-Bold", size: 25))
                         .padding(.trailing, 5)
                     
-                    icon
+                icon
+                
                     
                 }.frame(width: 300, alignment: .center)
                 .foregroundColor(Color.white)

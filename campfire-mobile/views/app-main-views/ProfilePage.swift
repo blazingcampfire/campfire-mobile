@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ProfilePage: View {
-    let username: String = "JohnDoe"
+    let username: String = "@david_adegangbanger"
     let profilePicture: String = "ragrboard"
     let postImages: [String] = [
+        "ragrboard",
+        "ragrboard",
         "ragrboard",
         "ragrboard",
         "ragrboard",
@@ -31,23 +31,40 @@ struct ProfilePage: View {
                         .clipShape(Circle())
                     
                     Text(username)
-                        .font(.title)
+                        .font(.custom("Futura-Bold", size: 20))
+                        .foregroundColor(.white)
                     
                     Divider()
+                        .background(Color.white)
                     
-                    Text("Recent Posts")
-                        .font(.headline)
-                        .padding(.top)
+                    Text("Posts")
+                        .font(.custom("Futura-Bold", size: 15))
+                        .foregroundColor(.white)
                     
-                    List(postImages.prefix(6), id: \.self) { imageName in
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    ScrollView(.vertical, showsIndicators: false) {
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+                            ForEach(0..<postImages.count, id: \.self) { index in
+                                if index % 2 == 0 {
+                                    VStack(spacing: 10) {
+                                        Image(postImages[index])
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                                        
+                                        if index + 1 < postImages.count {
+                                            Image(postImages[index + 1])
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
                     }
                     .frame(height: 500)
-                    .padding(.horizontal)
                     
                     Spacer()
                 }
@@ -55,6 +72,8 @@ struct ProfilePage: View {
             )
     }
 }
+
+
 
 struct ProfilePage_Previews: PreviewProvider {
     static var previews: some View {

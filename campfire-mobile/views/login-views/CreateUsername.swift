@@ -1,13 +1,13 @@
 //
-//  EnterPhoneNumber.swift
+//  CreateUsername.swift
 //  campfire-mobile
 //
-//  Created by Adarsh G on 6/18/23.
+//  Created by Toni on 6/19/23.
 //
 
 import SwiftUI
 
-struct EnterPhoneNumber: View {
+struct CreateUsername: View {
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
@@ -18,13 +18,13 @@ struct EnterPhoneNumber: View {
                     Spacer()
                     
                     VStack(spacing: 40) {
-                        Text("enter your phone number")
+                        Text("enter your campfire username")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 25))
                         
-                        FormTextField(placeholderText: "phone number")
+                        FormTextField(placeholderText: "username")
                         
-                        Text("check your messages for a verification code!")
+                        Text("almost there!")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 13))
                         
@@ -39,8 +39,8 @@ struct EnterPhoneNumber: View {
 }
 
 
-struct EnterPhoneNumber_Previews: PreviewProvider {
+struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
-        EnterPhoneNumber()
+        CreateUsername()
     }
 }

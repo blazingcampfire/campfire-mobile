@@ -12,6 +12,9 @@
 		E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */; };
 		E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5F2A3E968400B1EEE9 /* LFButton.swift */; };
 		E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A642A3EB52400B1EEE9 /* colors.swift */; };
+		E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */; };
+		E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */; };
+		E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */; };
 		E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */; };
 		E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095DC2A3E473E001BEDDE /* ContentView.swift */; };
 		E29095DF2A3E4741001BEDDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29095DE2A3E4741001BEDDE /* Assets.xcassets */; };
@@ -49,6 +52,9 @@
 		E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetUp.swift; sourceTree = "<group>"; };
 		E28D3A5F2A3E968400B1EEE9 /* LFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFButton.swift; sourceTree = "<group>"; };
 		E28D3A642A3EB52400B1EEE9 /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
+		E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmail.swift; sourceTree = "<group>"; };
+		E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
+		E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsername.swift; sourceTree = "<group>"; };
 		E29095D72A3E473E001BEDDE /* campfire-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "campfire-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileApp.swift; sourceTree = "<group>"; };
 		E29095DC2A3E473E001BEDDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 				F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */,
 				F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */,
 				F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */,
+				E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */,
+				E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */,
+				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
 			);
 			path = "login-views";
 			sourceTree = "<group>";
@@ -327,8 +336,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
+				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
+				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */,
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,

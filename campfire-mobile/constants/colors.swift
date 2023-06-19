@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 
-struct HotPeach {
-    static let Peach = Color("peachy-gradient")
+struct Theme {
+    static let Peach = Color("Peach")
+    static let Apricot = Color("Apricot")
 }

@@ -6,15 +6,13 @@ struct FormTextField: View {
     var placeholderText: String
     
     var body: some View {
-        Form {
-            TextField(placeholderText, text: $text)
-                .font(.custom("Futura-Bold", size: 20))
-                .frame(width: 300, height: 10, alignment: .center)
-                .foregroundColor(Color.white)
-                .padding()
-                .background(HotPeach.Peach)
-                .cornerRadius(16)
-        }
+        TextField(placeholderText, text: $text)
+            .font(.custom("Futura-Bold", size: 20))
+            .frame(width: 300, height: 10, alignment: .center)
+            .foregroundColor(Color.white)
+            .padding()
+            .background(Theme.Peach)
+            .cornerRadius(16)
     }
 }
 

@@ -71,6 +71,7 @@ struct ProfilePage: View {
                 .padding()
             )
     }
+   
 }
 
 

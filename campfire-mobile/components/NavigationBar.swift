@@ -9,16 +9,16 @@ import SwiftUI
 struct NavigationBar: View {
     var body: some View {
         TabView {
-            Text("Feed")
+            Text("")
                 .tabItem {
                     Label("Feed", systemImage: "person.2.fill")
                 }
-            Text("Map")
+                Text("")
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
             
-            Text("Camera")
+            Text("")
                 .tabItem {
                 Image(systemName: "camera")
                 .resizable()
@@ -27,11 +27,11 @@ struct NavigationBar: View {
                 Text("Camera")
                 }
             
-            Text("Search")
+            Text("")
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-            Text("Profile")
+            Text("")
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }

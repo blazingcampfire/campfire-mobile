@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CreateAccount: View {
+struct AccountSetUp: View {
     
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
@@ -25,8 +25,11 @@ struct CreateAccount: View {
                         
                         
                     }
-                    LaunchButton(text: "create account"){}.padding(8)
-                    LaunchButton(text: "login"){}.padding(8)
+                    LaunchButton(text: "create account"){}
+                    Text("or")
+                        .foregroundColor(Color.white)
+                        .font(.custom("Futura-Bold", size: 20))
+                    LaunchButton(text: "login"){}
                     
                 })
     }
@@ -34,6 +37,7 @@ struct CreateAccount: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateAccount()
+        AccountSetUp()
     }
 }
+

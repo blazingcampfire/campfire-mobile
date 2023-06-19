@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// model for our reusable components
 struct LFButton: View {
     var text: String
     var clicked: (() -> Void)
@@ -19,7 +20,7 @@ struct LFButton: View {
                 }.frame(width: 300, alignment: .center)
                 .foregroundColor(Color.white)
                 .padding()
-                .background(HotPeach.Peach)
+                .background(Theme.Peach)
                 .cornerRadius(16)
         }
         }

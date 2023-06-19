@@ -38,9 +38,6 @@ struct VerifyEmail: View {
                     }
                     
                     LFButton(text: "Microsoft"){}
-                    Text("or")
-                        .foregroundColor(Color.white)
-                        .font(.custom("Futura-Bold", size: 20))
                     LFButton(text: "Google"){}
                     
                 })

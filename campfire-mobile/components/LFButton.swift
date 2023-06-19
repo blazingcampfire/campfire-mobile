@@ -14,28 +14,37 @@ struct LFButton: View {
     var icon: Image?
     
     var body: some View {
-        Button(action: clicked) {
+            Button(action: clicked) {
                 HStack {
-                    Text(text).font(.custom("Futura-Bold", size: 25))
-                        .padding(.trailing, 5)
-                    
-                icon
-                
-                    
-                }.frame(width: 300, alignment: .center)
-                .foregroundColor(Color.white)
+                    if let icon = icon {
+                        icon
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .padding(.trailing, 10)
+                    }
+
+                    Text(text)
+                        .font(.custom("Futura-Bold", size: 25))
+                        .foregroundColor(.white)
+                }
+                .frame(width: 300, alignment: .center)
                 .padding()
                 .background(Theme.Peach)
                 .cornerRadius(16)
-        }
+            }
         }
     }
 
-struct LFButton_Previews: PreviewProvider {
-    static var previews: some View {
-        LFButton(
-            text: "create account", clicked:  {
-                print("Clicked")
-            })
+    struct LFButton_Previews: PreviewProvider {
+        static var previews: some View {
+            LFButton(
+                text: "Create Account",
+                clicked: {
+                    print("Clicked")
+                },
+                icon: Image(systemName: "glogo2") // Replace with your image name
+            )
+        }
     }
-}
+

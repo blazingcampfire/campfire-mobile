@@ -22,16 +22,16 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 25))
                         
-                        FormTextField(placeholderText: "phone number")
+                       NumberForm()
                         
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13))
+                            .font(.custom("Futura-Bold", size: 13)).offset(x: 0, y: -20)
                         
                         LFButton(text: "next"){}
                     }
                     .padding(.bottom, 300)
-                    
+
                     
                 }
             )

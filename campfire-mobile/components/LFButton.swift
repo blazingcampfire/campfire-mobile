@@ -11,11 +11,15 @@ import SwiftUI
 struct LFButton: View {
     var text: String
     var clicked: (() -> Void)
+    var icon: Image?
     
     var body: some View {
         Button(action: clicked) {
                 HStack {
                     Text(text).font(.custom("Futura-Bold", size: 25))
+                        .padding(.trailing, 5)
+                    
+                    icon
                     
                 }.frame(width: 300, alignment: .center)
                 .foregroundColor(Color.white)
@@ -29,8 +33,8 @@ struct LFButton: View {
 struct LFButton_Previews: PreviewProvider {
     static var previews: some View {
         LFButton(
-            text: "create account") {
+            text: "create account", clicked:  {
                 print("Clicked")
-            }
+            })
     }
 }

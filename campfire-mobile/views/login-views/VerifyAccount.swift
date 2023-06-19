@@ -31,7 +31,7 @@ struct VerifyAccount: View {
                         
                         LFButton(text: "verify"){}
                     }
-                    .padding(.bottom, 400)
+                    .padding(.bottom, 300)
 
                     
                 }

@@ -27,12 +27,12 @@ struct EnterPhoneNumber: View {
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 13))
+                        
+                        LFButton(text: "next"){}
                     }
-                    .padding(.bottom, 100)
+                    .padding(.bottom, 300)
                     
-                    Spacer()
                     
-                    LFButton(text: "next"){}
                 }
             )
     }

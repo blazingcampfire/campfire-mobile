@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct NavigationBar: View {
     var body: some View {
         TabView {
@@ -43,13 +42,9 @@ struct NavigationBar: View {
         .accentColor(.red)
     }
 }
-
-
-
-
-
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationBar()
     }
 }
+

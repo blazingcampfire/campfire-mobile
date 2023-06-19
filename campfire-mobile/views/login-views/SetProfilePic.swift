@@ -1,13 +1,13 @@
 //
-//  EnterPhoneNumber.swift
+//  SetProfilePic.swift
 //  campfire-mobile
 //
-//  Created by Adarsh G on 6/18/23.
+//  Created by Adarsh G on 6/19/23.
 //
 
 import SwiftUI
 
-struct EnterPhoneNumber: View {
+struct SetProfilePic: View {
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
@@ -18,29 +18,32 @@ struct EnterPhoneNumber: View {
                     Spacer()
                     
                     VStack(spacing: 40) {
-                        Text("enter your phone number")
+                        Text("upload a profile pic")
                             .foregroundColor(Color.white)
                             .font(.custom("Futura-Bold", size: 25))
+                            .padding(.top, 100)
                         
-                       NumberForm()
-                        
-                        Text("check your messages for a verification code!")
+                        Circle()
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13)).offset(x: 0, y: -20)
+                            .frame(width: 200, height: 200)
+                            
+                        Text("you're ready!")
+                            .foregroundColor(Color.white)
+                            .font(.custom("Futura-Bold", size: 13))
                         
                         LFButton(text: "next"){}
+
                     }
                     .padding(.bottom, 300)
-
+                    
                     
                 }
             )
     }
 }
 
-
-struct EnterPhoneNumber_Previews: PreviewProvider {
+struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {
-        EnterPhoneNumber()
+        SetProfilePic()
     }
 }

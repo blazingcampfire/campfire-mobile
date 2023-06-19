@@ -25,9 +25,6 @@ struct EmailOrNumber: View {
                         
                     }
                     LFButton(text: "phone number"){}
-                    Text("or")
-                        .foregroundColor(Color.white)
-                        .font(.custom("Futura-Bold", size: 20))
                     LFButton(text: "email"){}
                     
                 })

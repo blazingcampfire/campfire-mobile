@@ -26,9 +26,6 @@ struct AccountSetUp: View {
                         
                     }
                     LFButton(text: "create account"){}
-                    Text("or")
-                        .foregroundColor(Color.white)
-                        .font(.custom("Futura-Bold", size: 20))
                     LFButton(text: "login"){}
                     
                 })

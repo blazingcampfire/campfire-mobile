@@ -20,7 +20,7 @@ struct SetProfilePic: View {
                     VStack(spacing: 40) {
                         Text("upload a profile pic")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
                         
                         Circle()
@@ -29,7 +29,7 @@ struct SetProfilePic: View {
                             
                         Text("you're ready!")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 20))
                         
                         LFButton(text: "finish"){}
 

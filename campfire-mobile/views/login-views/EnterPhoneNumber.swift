@@ -20,13 +20,13 @@ struct EnterPhoneNumber: View {
                     VStack(spacing: 40) {
                         Text("enter your phone number")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                         
                        NumberForm()
                         
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13)).offset(x: 0, y: -20)
+                            .font(.custom("LexendDeca-Bold", size: 13)).offset(x: 0, y: -20)
                         
                         LFButton(text: "next"){}
                     }

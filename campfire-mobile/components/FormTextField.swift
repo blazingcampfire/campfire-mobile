@@ -7,7 +7,7 @@ struct FormTextField: View {
     
     var body: some View {
         TextField(placeholderText, text: $text)
-            .font(.custom("Futura-Bold", size: 20))
+            .font(.custom("LexendDeca-Bold", size: 20))
             .frame(width: 300, height: 10, alignment: .center)
             .foregroundColor(Color.white)
             .padding()

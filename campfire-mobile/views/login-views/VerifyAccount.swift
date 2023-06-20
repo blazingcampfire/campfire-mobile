@@ -20,13 +20,13 @@ struct VerifyAccount: View {
                     VStack(spacing: 40) {
                         Text("enter verification code")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                         
                        FormTextField(placeholderText: "verification")
                         
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13))
+                            .font(.custom("LexendDeca-Bold", size: 20))
                
                         
                         LFButton(text: "verify"){}

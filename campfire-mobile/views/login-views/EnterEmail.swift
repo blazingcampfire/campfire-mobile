@@ -20,13 +20,13 @@ struct EnterEmail: View {
                     VStack(spacing: 40) {
                         Text("enter your '.edu' email")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(placeholderText: "email")
                         
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13))
+                            .font(.custom("LexendDeca-Bold", size: 13))
                         
                         LFButton(text: "next"){}
                     }

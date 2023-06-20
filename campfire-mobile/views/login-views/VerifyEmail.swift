@@ -22,12 +22,12 @@ struct VerifyEmail: View {
                                 .padding(10)
                                 
                             
-                            Text("choose an option below to verify your email:") .font(.custom("Futura-Bold", size: 20))
+                            Text("choose an option below to verify your email:") .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, alignment: .leading)
                             .foregroundColor(Color.white).padding(5)
                             
                             Text("memelord@hustleruniversity.edu")
-                                .font(.custom("Futura-Bold", size: 20))
+                                .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .leading)
                                 .foregroundColor(.white)
                                 .accentColor(.white)

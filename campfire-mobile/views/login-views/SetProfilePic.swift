@@ -29,9 +29,9 @@ struct SetProfilePic: View {
                             
                         Text("you're ready!")
                             .foregroundColor(Color.white)
-                            .font(.custom("Futura-Bold", size: 13))
+                            .font(.custom("Futura-Bold", size: 20))
                         
-                        LFButton(text: "next"){}
+                        LFButton(text: "finish"){}
 
                     }
                     .padding(.bottom, 300)

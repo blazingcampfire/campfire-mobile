@@ -11,7 +11,7 @@ struct NavigationBar: View {
         TabView {
             Text("")
                 .tabItem {
-                    Label("Feed", systemImage: "person.2.fill")
+                    Label("Feed", systemImage: "fireplace")
                 }
                 Text("")
                 .tabItem {
@@ -39,7 +39,7 @@ struct NavigationBar: View {
         .onAppear() {
             UITabBar.appearance().barTintColor = .white
         }
-        .accentColor(.red)
+        .accentColor(Theme.Peach)
     }
 }
 struct NavigationBar_Previews: PreviewProvider {

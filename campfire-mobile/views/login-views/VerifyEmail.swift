@@ -34,11 +34,11 @@ struct VerifyEmail: View {
 
                                 
                         }
-                        .padding(50)
+                        .padding(40)
                     }
                     
-                    LFButton(text: "Microsoft"){}
-                    LFButton(text: "Google"){}
+                    LFButton(text: "Microsoft", clicked: {}, icon: Image("microsoftlogo")).padding(10)
+                    LFButton(text: "Google", clicked: {}, icon: Image("glogo2")).padding(10)
                     
                 })
     }

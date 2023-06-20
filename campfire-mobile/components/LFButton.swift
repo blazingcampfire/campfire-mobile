@@ -16,13 +16,16 @@ struct LFButton: View {
     var body: some View {
             Button(action: clicked) {
                 HStack {
-                    if let icon = icon {
-                        icon
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .padding(.trailing, 10)
+                    HStack {
+                        if let icon = icon {
+                            icon
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 30)
+                                .padding(.trailing, 5)
+                        }
                     }
+                    .frame(width: 50, alignment: .leading)
 
                     Text(text)
                         .font(.custom("Futura-Bold", size: 25))
@@ -43,8 +46,9 @@ struct LFButton: View {
                 clicked: {
                     print("Clicked")
                 },
-                icon: Image(systemName: "glogo2") // Replace with your image name
+                icon: Image("microsoftlogo") // Replace with your image name
             )
+            
         }
     }
 

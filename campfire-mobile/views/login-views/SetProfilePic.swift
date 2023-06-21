@@ -23,9 +23,7 @@ struct SetProfilePic: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
                         
-                        Circle()
-                            .foregroundColor(Color.white)
-                            .frame(width: 200, height: 200)
+                        ProfilePictureView()
                             
                         Text("you're ready!")
                             .foregroundColor(Color.white)

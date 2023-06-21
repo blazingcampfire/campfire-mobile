@@ -34,6 +34,7 @@
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
 		E2E997B02A41456E00EBBDD7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E2E997AF2A41456E00EBBDD7 /* fonts */; };
 		F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A72A42999800864FBD /* ProfilePictureView.swift */; };
+		F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A92A42A74200864FBD /* TheFeed.swift */; };
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
 		F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */; };
 		F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */; };
@@ -89,6 +90,7 @@
 		E2E997AF2A41456E00EBBDD7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F82C10A72A42999800864FBD /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
+		F82C10A92A42A74200864FBD /* TheFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFeed.swift; sourceTree = "<group>"; };
 		F834163F2A40E6A500803D32 /* SetProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfilePic.swift; sourceTree = "<group>"; };
 		F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumber.swift; sourceTree = "<group>"; };
 		F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAccount.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				B16DFF3A2A40BED1003314FF /* VerificationCode.swift */,
 				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
 				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
+				F82C10A92A42A74200864FBD /* TheFeed.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
 				E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
+				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,
 				B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */,
 				E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */,
 				B1B6CCAD2A411135001C6A50 /* NavigationBar.swift in Sources */,

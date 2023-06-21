@@ -21,12 +21,14 @@ struct LFButton: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 30)
-                            .padding(.trailing, 5)
+                            .padding(.leading, -60)
                     }
 
                     Text(text)
                         .font(.custom("LexendDeca-Bold", size: 25))
                         .foregroundColor(.white)
+                        .offset(x:7, y: 0)
+                        
                 }
                 .frame(width: 300, alignment: .center)
                 .padding()
@@ -39,7 +41,7 @@ struct LFButton: View {
     struct LFButton_Previews: PreviewProvider {
         static var previews: some View {
             LFButton(
-                text: "create account",
+                text: "Microsoft",
                 clicked: {
                     print("Clicked")
                 },

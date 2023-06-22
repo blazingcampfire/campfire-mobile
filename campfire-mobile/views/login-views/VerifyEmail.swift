@@ -26,7 +26,7 @@ struct VerifyEmail: View {
                                 .frame(width: 380, alignment: .leading)
                                 .foregroundColor(Color.white).padding(5).offset(x: 40, y: 0).multilineTextAlignment(.center)
                             
-                            Text("memelord@hustleruniversity.edu")
+                            Text("memellord@hustleruniversity.edu")
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .leading)
                                 .foregroundColor(.white)

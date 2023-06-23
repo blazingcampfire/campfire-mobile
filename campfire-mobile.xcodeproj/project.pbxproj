@@ -11,6 +11,7 @@
 		B16DFF392A40BD95003314FF /* CodeVerifier in Frameworks */ = {isa = PBXBuildFile; productRef = B16DFF382A40BD95003314FF /* CodeVerifier */; };
 		B16DFF3B2A40BED1003314FF /* VerificationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DFF3A2A40BED1003314FF /* VerificationCode.swift */; };
 		B17F754B2A400955005581F3 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = B17F754A2A400955005581F3 /* iPhoneNumberField */; };
+		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
 		B1B6CCAD2A411135001C6A50 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */; };
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		B16DFF352A40B9D2003314FF /* NumberForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberForm.swift; sourceTree = "<group>"; };
 		B16DFF3A2A40BED1003314FF /* VerificationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCode.swift; sourceTree = "<group>"; };
+		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				B1B6CCB02A4114A1001C6A50 /* MapPage.swift */,
 				B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */,
 				B1EF99882A4289540001E8CC /* CameraPage.swift */,
+				B18B19712A46059700309256 /* SettingsPage.swift */,
 			);
 			path = "app-main-views";
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */,
 				B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */,
+				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,

@@ -18,9 +18,9 @@ struct LaunchView: View {
                     .overlay(
         ZStack {
             VStack {
-                Image(systemName: "fireplace")
-                                .font(.system(size: 100))
-                                .foregroundColor(.white).padding(1)
+                Image("newlogo")
+                    .resizable()
+                    .frame(width: 190, height: 190)
                 
                 Text("campfire")
                     .foregroundColor(Color.white)

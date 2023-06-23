@@ -17,7 +17,7 @@ struct NumberForm: View {
             .flagHidden(false)
             .flagSelectable(true)
             .font(UIFont(size: 25, weight: .light, design: .monospaced))
-            .maximumDigits(10)
+            .maximumDigits(20)
             .foregroundColor(Color.white)
             .clearButtonMode(.whileEditing)
             .onClear { _ in isEditing.toggle() }

@@ -11,23 +11,21 @@ struct LeaderboardPage: View {
     @State private var selectedOption = 0
     
     var body: some View {
-        VStack(spacing: 0) {
-            Picker(selection: $selectedOption, label: Text("")) {
-                Text("All-Time").tag(0)
-                Text("Weekly").tag(1)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            if selectedOption == 0 {
-                LeaderboardList(range: 1...10)
-            } else {
-                LeaderboardList(range: 1...10)
-            }
-            
-            Spacer()
-            
-            NavigationBar()
+                VStack(spacing: 0) {
+                    Picker(selection: $selectedOption, label: Text("")) {
+                        Text("All-Time").tag(0)
+                        Text("Weekly").tag(1)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                    
+                    if selectedOption == 0 {
+                        LeaderboardList(range: 1...10)
+                    } else {
+                        LeaderboardList(range: 1...10)
+                    }
+                    NavigationBar()
+                        .ignoresSafeArea(.all, edges: .top)
         }
     }
 }

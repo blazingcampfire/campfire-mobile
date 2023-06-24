@@ -22,7 +22,7 @@ struct AccountSetUp: View {
                         
                         Text("campfire")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 60))
+                            .font(.custom("Comfortaa-Bold", size: 60))
 
                         
                     }

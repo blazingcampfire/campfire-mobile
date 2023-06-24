@@ -20,7 +20,7 @@ struct NavigationBar: View {
                     Label("Map", systemImage: "map")
                 }
             
-            Text("")
+                Text("dreknf")
                 .tabItem {
                 Image(systemName: "camera")
                 .resizable()

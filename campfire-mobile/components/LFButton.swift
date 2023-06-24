@@ -41,12 +41,12 @@ struct LFButton: View {
                     
                     if text == "Microsoft"{
                         Text(text)
-                            .font(.custom("LexendDeca-Bold", size: 25))
+                            .font(.custom("Comfortaa-Bold", size: 25))
                             .foregroundColor(.white)
                             .offset(x: -11, y: 0)
                     } else if text == "Google" {
                         Text(text)
-                            .font(.custom("LexendDeca-Bold", size: 25))
+                            .font(.custom("Comfortaa-Bold", size: 25))
                             .foregroundColor(.white)
                             .offset(x: -20, y: 0)
                     } else {

@@ -26,7 +26,7 @@ struct EnterEmail: View {
                         
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 13))
+                            .font(.custom("LexendDeca-Bold", size: 16))
                         
                         LFButton(text: "next"){}
                     }

@@ -20,11 +20,13 @@ struct LaunchView: View {
             VStack {
                 Image("newlogo")
                     .resizable()
-                    .frame(width: 190, height: 190)
+                    .frame(width: 300, height: 300)
+                    .padding(10)
+                    
                 
                 Text("campfire")
                     .foregroundColor(Color.white)
-                    .font(.custom("JosefinSans-Regular", size: 60))
+                    .font(.custom("Comfortaa-Bold", size: 60))
                 
                 
             }

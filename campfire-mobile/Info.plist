@@ -4,10 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>LexendDeca.ttf</string>
+		<string>LexendDeca-Bold.ttf</string>
 		<string>Comfortaa.ttf</string>
 		<string>Comfortaa-Regular.ttf</string>
 		<string>JosefinSans-Regular.ttf</string>
+		<string>Comfortaa-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

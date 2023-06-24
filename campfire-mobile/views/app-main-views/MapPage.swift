@@ -6,25 +6,26 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MapPage: View {
+    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.316322, longitude: -72.922340), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+    
     var body: some View {
         VStack {
-            ZStack {
-                VStack {
-                Image(systemName: "fireplace")
-                    .font(.system(size: 55))
-                    .foregroundColor(Theme.Peach).padding(1).offset(x:0, y: 0)
+            Image(systemName: "fireplace")
+                .font(.system(size: 50))
+                .padding(.top, 5)
+                .foregroundColor(Theme.Peach)
+
+            Map(coordinateRegion: $region)
                 
-                Spacer()
-                
-                Image("googlemap").resizable().aspectRatio(contentMode: .fill).frame(width: 400, height: 600)
-            }
+
+            
         }
-        NavigationBar()
-    }
     }
 }
+
 
 struct MapPage_Previews: PreviewProvider {
     static var previews: some View {

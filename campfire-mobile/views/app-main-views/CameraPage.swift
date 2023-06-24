@@ -25,11 +25,11 @@ struct CameraPage: View {
                             .stroke(Color.white, lineWidth: 10)
                     )
             }
-            .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 150)
+            .offset(x:0, y:280)
             
             Image("marsh").resizable()
                 .frame(width: 46, height: 75)
-                .offset(x: 100, y: 320)
+                .offset(x: 100, y: 280)
         }
         
         

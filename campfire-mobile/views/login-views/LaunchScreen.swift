@@ -21,12 +21,13 @@ struct LaunchView: View {
                 Image("newlogo")
                     .resizable()
                     .frame(width: 300, height: 300)
-                    .padding(10)
+                    .offset(x:-8, y: -70)
                     
                 
                 Text("campfire")
                     .foregroundColor(Color.white)
                     .font(.custom("Comfortaa-Bold", size: 60))
+                    .offset(x:0 , y: -70)
                 
                 
             }

@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct LeaderboardPage: View {
-    @State private var selectedOption = 0
+    @State private var selectedOption = 5
     
     var body: some View {
                 VStack(spacing: 0) {
                     Picker(selection: $selectedOption, label: Text("")) {
-                        Text("All-Time").tag(0)
-                        Text("Weekly").tag(1)
+                        Text("All-Time").tag(5)
+                        Text("Weekly").tag(6)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
                     
-                    if selectedOption == 0 {
+                    if selectedOption == 5 {
                         LeaderboardList(range: 1...10)
-                    } else {
+                    } else if selectedOption == 6 {
                         LeaderboardList(range: 1...10)
                     }
-                    NavigationBar()
-                        .ignoresSafeArea(.all, edges: .top)
+        
         }
     }
 }

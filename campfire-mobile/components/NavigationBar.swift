@@ -7,36 +7,44 @@
 
 import SwiftUI
 struct NavigationBar: View {
+    @Binding var selectedTabIndex: Int
     var body: some View {
-        TabView {
-            Text("")
+        TabView(selection: $selectedTabIndex) {
+            ForYouPage()
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")
                     
                 }
-                Text("")
+                .tag(0)
+            
+            MapPage()
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
+                .tag(1)
             
-                Text("dreknf")
+            CameraPage()
                 .tabItem {
-                Image(systemName: "camera")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 30, height: 30)
-                Text("Camera")
+                    Image(systemName: "camera")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30, height: 30)
+                    Text("Camera")
                 }
+                .tag(2)
             
-            Text("")
+            SearchPage()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-            Text("")
+                .tag(3)
+            LeaderboardPage()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
+                .tag(4)
+        
         }
         .onAppear() {
             UITabBar.appearance().barTintColor = .white
@@ -46,7 +54,7 @@ struct NavigationBar: View {
 }
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar()
+        NavigationBar(selectedTabIndex: .constant(4))
     }
 }
 

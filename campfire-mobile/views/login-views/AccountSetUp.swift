@@ -15,9 +15,10 @@ struct AccountSetUp: View {
             .overlay(
                 VStack {
                     VStack {
-                        Image(systemName: "fireplace")
-                                        .font(.system(size: 100))
-                                        .foregroundColor(.white).padding(1)
+                        Image("newlogo")
+                            .resizable()
+                            .frame(width: 190, height: 190)
+                            .offset(x:0, y: 20)
                         
                         Text("campfire")
                             .foregroundColor(Color.white)

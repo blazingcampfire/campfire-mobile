@@ -25,7 +25,7 @@ struct NumberForm: View {
             .padding()
             .background(Theme.Peach)
             .cornerRadius(10)
-            .shadow(color: isEditing ? .gray : .white, radius: 10)
+            
         
         
         

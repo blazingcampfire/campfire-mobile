@@ -14,9 +14,10 @@ struct EmailOrNumber: View {
             .overlay(
                 VStack {
                     VStack {
-                        Image(systemName: "fireplace")
-                                        .font(.system(size: 100))
-                                        .foregroundColor(.white).padding(1)
+                        Image("newlogo")
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .offset(x: 0, y: 20)
                         
                         Text("campfire")
                             .foregroundColor(Color.white)

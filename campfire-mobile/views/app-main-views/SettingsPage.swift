@@ -24,7 +24,7 @@ struct SettingsPage: View {
                         }
                         
                         .font(.custom("LexendDeca", size: 16))
-                        Section(header: Text("Information")) {
+                        Section(header: Text("About")) {
                             Label("FAQ", systemImage: "doc.fill")
                             Text("Privacy Policy")
                             Text("Terms of Service")
@@ -32,7 +32,7 @@ struct SettingsPage: View {
                         .font(.custom("LexendDeca", size: 16))
                     
                 
-                    Section(header: Text("Issues")) {
+                    Section(header: Text("Support")) {
                         Label("Report Account", systemImage: "exclamationmark.triangle.fill")
                         Text("Contact Us")
                     }

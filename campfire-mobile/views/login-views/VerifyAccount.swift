@@ -22,7 +22,7 @@ struct VerifyAccount: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                       FormTextField(placeholderText: "verification")
+                       FormTextField(placeholderText: "verification code?")
                         
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)

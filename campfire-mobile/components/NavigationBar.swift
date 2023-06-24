@@ -11,7 +11,9 @@ struct NavigationBar: View {
         TabView {
             Text("")
                 .tabItem {
-                    Label("Feed", systemImage: "fireplace")
+                    Text("Feed")
+                    Image(systemName: "fireplace")
+                    
                 }
                 Text("")
                 .tabItem {

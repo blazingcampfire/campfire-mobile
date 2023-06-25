@@ -7,7 +7,8 @@
 
 import SwiftUI
 struct NavigationBar: View {
-    @Binding var selectedTabIndex: Int
+    @Binding var selectedTabIndex: Int?
+    
     var body: some View {
         TabView(selection: $selectedTabIndex) {
             ForYouPage()
@@ -54,7 +55,7 @@ struct NavigationBar: View {
 }
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(selectedTabIndex: .constant(4))
+        NavigationBar(selectedTabIndex: .constant(nil))
     }
 }
 

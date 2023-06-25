@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingsPage: View {
     var body: some View {
             NavigationView {
-                
+                //accents peach color for icon
                 Form {
                     Section(header: Text("Display")) {
                         

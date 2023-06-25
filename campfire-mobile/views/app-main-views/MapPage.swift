@@ -11,14 +11,11 @@ import MapKit
 struct MapPage: View {
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.316322, longitude: -72.922340), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
     
-    var body: some View {
+    var body: some View { //whole screen
         VStack {
-            Image(systemName: "fireplace")
-                .font(.system(size: 50))
-                .padding(.top, 5)
-                .foregroundColor(Theme.Peach)
+    
 
-            Map(coordinateRegion: $region)
+            Map(coordinateRegion: $region).edgesIgnoringSafeArea(.all)
                 
 
             

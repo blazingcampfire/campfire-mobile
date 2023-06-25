@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfilePage: View {
     let username: String = "@david_adegangbanger"
-    let profilePicture: String = "ragrboard"
+    let profilePicture: String = "ragrboard" //string 
     let bio: String = "Bio"
     let postImages: [String] = [
         "ragrboard",
@@ -18,7 +18,7 @@ struct ProfilePage: View {
         "ragrboard",
         "ragrboard",
         "ragrboard"
-    ]
+    ] //url strings in firebase
 
     var body: some View {
         VStack {
@@ -30,7 +30,7 @@ struct ProfilePage: View {
                 .clipShape(Circle())
 
             Text(username)
-                .font(.custom("Futura-Bold", size: 15))
+                .font(.custom("LexendDeca-Bold", size: 15))
                 .foregroundColor(.black)
             
             RoundedRectangle(cornerRadius: 25)
@@ -43,7 +43,7 @@ struct ProfilePage: View {
                 .background(Theme.Peach)
 
             Text("Posts")
-                .font(.custom("Futura-Bold", size: 15))
+                .font(.custom("LexendDeca-Bold", size: 15))
                 .foregroundColor(.white)
 
             ScrollView(.vertical, showsIndicators: false) {

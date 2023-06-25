@@ -22,7 +22,7 @@ struct CreateUsername: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(placeholderText: "username")
+                        FormTextField(placeholderText: "username") 
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)

@@ -18,7 +18,8 @@ struct LeaderboardPage: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
-                    
+            
+                    //reusable for each row, color scheme
                     if selectedOption == 5 {
                         LeaderboardList(range: 1...10)
                     } else if selectedOption == 6 {

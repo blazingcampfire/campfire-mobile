@@ -11,7 +11,7 @@ struct SearchPage: View {
     @State private var searchText = ""
     var body: some View {
         NavigationStack {
-            Text("Search for users or captions")
+            Text("Search for users") //users collection querey
         }
         .searchable(text: $searchText)
     }

@@ -34,7 +34,7 @@ struct LFButton: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 30)
-                                .offset(x: -30, y: 0)
+                                
                         }
                             
                     }

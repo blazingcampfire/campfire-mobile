@@ -21,7 +21,7 @@ struct ProfilePage: View {
     ] //url strings in firebase
 
     init() {
-        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username)
+        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, chocs: userInfo.marshcount)
     }
     
     var body: some View {
@@ -36,7 +36,7 @@ struct ProfilePage: View {
                 Spacer()
                
                 
-                UserBio(name: userInfo.name, text: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
+                UserBio(name: userInfo.name, text: "tell ya moms to watch out ya heard")
                 
                 Spacer()
                 Spacer()

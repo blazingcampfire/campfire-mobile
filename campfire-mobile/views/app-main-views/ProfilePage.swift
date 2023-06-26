@@ -19,13 +19,14 @@ struct ProfilePage: View {
         ["ragrboard5", " frat moment" ],
         ["ragrboard6", " my party face"]
     ] //url strings in firebase
-
+    
     init() {
         userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
     }
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
+<<<<<<< HEAD
             VStack {
                 
                 ZStack {
@@ -41,29 +42,28 @@ struct ProfilePage: View {
                 }
                 
             }
+=======
+            VStack(spacing: 20) { // Added spacing between elements
+                userProfilePic
+>>>>>>> b3af5129d9b50d0f6847330845abb422a2d7a3b6
                 
-                Spacer()
                 Divider()
-                Spacer()
-                Spacer()
-                
                 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
                         VStack(spacing: 20) {
-                            PostAttributes(post: postImages[index][0], prompt:postImages[index][1] )
+                            PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
                                 .frame(width: 275)
+                                .shadow(color: Theme.Apricot, radius: 3, x: 0, y: 2)
                         }
                     }
                 }
-
-            
             }
+            .padding(.horizontal) // Added horizontal padding to the VStack
         }
-        .padding()
+        .padding() // Added padding to the outer ScrollView
     }
 }
-
 
 
 struct ProfilePage_Previews: PreviewProvider {

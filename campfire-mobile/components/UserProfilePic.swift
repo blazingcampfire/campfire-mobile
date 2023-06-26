@@ -21,28 +21,57 @@ struct UserProfilePic: View {
                 .frame(width: 100, height: 100)
                 .clipShape(Circle())
                 .padding(.trailing)
+                .shadow(color: Theme.Apricot, radius: 2, x: 0, y: 1)
             
             HStack {
-                
                 Text(username)
                     .font(.custom("LexendDeca-Bold", size: 13))
                 
                 Rectangle() // Centered Rectangle
                     .frame(width: 1, height: 30)
                     .foregroundColor(.gray)
-                    
-                Text("chocs" + String(chocs))
+                
+                Text("chocs: " + String(chocs))
                     .font(.custom("LexendDeca-Bold", size: 13))
-               
             }
             
             Text(bio)
                 .font(.custom("LexendDeca-Bold", size: 15))
-                    .padding(8)
+                .padding(8)
             
+            HStack {
+                Button(action: {
+                    // Go to Edit Profile
+                }) {
+                    Text("Edit Profile")
+                        .font(.custom("LexendDeca-Bold", size: 15))
+                        .foregroundColor(Theme.Apricot)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(color: .black, radius: 2, x: 0, y: 1)
+                        )
+                }
+                
+                Button(action: {
+                    // Go to Edit Profile
+                }) {
+                    Image(systemName: "trophy")
+                        .font(.system(size: 15))
+                        .foregroundColor(Theme.Apricot)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(color: .black, radius: 2, x: 0, y: 1)
+                        )
+                }
+            }
         }
     }
 }
+
 
 
 struct UserProfilePic_Previews: PreviewProvider {

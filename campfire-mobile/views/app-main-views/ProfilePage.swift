@@ -26,7 +26,6 @@ struct ProfilePage: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-<<<<<<< HEAD
             VStack {
                 
                 ZStack {
@@ -42,10 +41,8 @@ struct ProfilePage: View {
                 }
                 
             }
-=======
             VStack(spacing: 20) { // Added spacing between elements
                 userProfilePic
->>>>>>> b3af5129d9b50d0f6847330845abb422a2d7a3b6
                 
                 Divider()
                 

@@ -35,6 +35,10 @@ struct UserProfilePic: View {
                     .font(.custom("LexendDeca-Bold", size: 13))
             }
             
+            Text(bio)
+                .font(.custom("LexendDeca-Bold", size: 15))
+                .padding(8)
+            
             HStack {
                 Button(action: {
                     // Go to Edit Profile
@@ -64,10 +68,6 @@ struct UserProfilePic: View {
                         )
                 }
             }
-            
-            Text(bio)
-                .font(.custom("LexendDeca-Bold", size: 15))
-                .padding(8)
         }
     }
 }

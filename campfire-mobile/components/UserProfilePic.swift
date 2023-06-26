@@ -27,9 +27,12 @@ struct UserProfilePic: View {
                     .foregroundColor(.black)
                     .padding(.bottom, 10)
                 
-                Rectangle() // Must figure out how to center
+                Rectangle() // Centered Rectangle
                     .frame(width: 1, height: 35)
                     .foregroundColor(.black)
+                    .alignmentGuide(HorizontalAlignment.center) { d in
+                        d[HorizontalAlignment.center]
+                    }
                 
                 Text("chocs : " + String(chocs))
                     .font(.custom("LexendDeca-Bold", size: 13))

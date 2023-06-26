@@ -11,13 +11,13 @@ struct ProfilePage: View {
     var userInfo = UserInfo(name: "David", username: "david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
     var userProfilePic: UserProfilePic
     
-    let postImages: [String] = [
-        "ragrboard",
-        "ragrboard2",
-        "ragrboard3",
-        "ragrboard4",
-        "ragrboard5",
-        "ragrboard6"
+    let postImages: [[String]] = [
+        ["ragrboard", "dawg moment"],
+        ["ragrboard2", " my yale moment: "],
+        ["ragrboard3", " weekend outing "],
+        ["ragrboard4", " favorite study spot"],
+        ["ragrboard5", " frat moment" ],
+        ["ragrboard6", " my party face"]
     ] //url strings in firebase
 
     init() {
@@ -39,19 +39,16 @@ struct ProfilePage: View {
                 UserBio(name: userInfo.name, text: "tell ya moms to watch out ya heard")
                 
                 Spacer()
+                Divider()
                 Spacer()
                 Spacer()
                 
                 
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 30)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
-                        VStack(spacing: 10) {
-                            Image(postImages[index])
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(RoundedRectangle(cornerRadius: 25))
-                                .shadow(color: Theme.Apricot, radius: 2)
-                                .padding(.horizontal, 10)
+                        VStack(spacing: 20) {
+                            PostAttributes(post: postImages[index][0], prompt:postImages[index][1] )
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
                         }
                     }
                 }

@@ -25,13 +25,11 @@ struct NumberForm: View {
             .padding()
             .background(Theme.Peach)
             .cornerRadius(10)
+            .padding()
             
         
         
-        
-        
-        
-            .padding()
+    
     }
 }
 

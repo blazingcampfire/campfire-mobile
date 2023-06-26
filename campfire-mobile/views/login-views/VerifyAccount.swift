@@ -13,8 +13,7 @@ struct VerifyAccount: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
-                    Spacer()
-                    Spacer()
+                    
                     Spacer()
                     
                     VStack(spacing: 60) {
@@ -26,7 +25,7 @@ struct VerifyAccount: View {
                         
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                
                         
                         LFButton(text: "verify"){}

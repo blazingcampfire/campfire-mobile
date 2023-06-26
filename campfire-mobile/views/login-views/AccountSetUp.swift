@@ -22,15 +22,18 @@ struct AccountSetUp: View {
                         Text("campfire")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 60))
+                            .padding(.top, -30)
 
                         
                     }
+                    .offset(y: -30)
+                    
                     LFButton(text: "create account"){}
-                        .padding(10)
+                        .padding(5)
                     LFButton(text: "login"){}
-                        .padding(10)
                     
                 })
+                
     }
 }
 

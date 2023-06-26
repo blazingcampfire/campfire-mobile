@@ -13,9 +13,9 @@ struct CreateUsername: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
+                    
                     Spacer()
-                    Spacer()
-                    Spacer()
+
                     
                     VStack(spacing: 60) {
                         Text("enter a campfire username")
@@ -26,7 +26,7 @@ struct CreateUsername: View {
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                         
                         LFButton(text: "next"){}
                     }

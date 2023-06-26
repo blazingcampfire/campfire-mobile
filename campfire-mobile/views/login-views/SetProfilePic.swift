@@ -14,8 +14,6 @@ struct SetProfilePic: View {
             .overlay(
                 VStack {
                     Spacer()
-                    Spacer()
-                    Spacer()
                     
                     VStack(spacing: 60) {
                         Text("upload a profile picture")
@@ -27,7 +25,7 @@ struct SetProfilePic: View {
                             
                         Text("you're ready!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                         
                         LFButton(text: "finish"){}
 

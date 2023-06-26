@@ -13,8 +13,7 @@ struct EnterPhoneNumber: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
-                    Spacer()
-                    Spacer()
+                    
                     Spacer()
                     
                     VStack(spacing: 60) {
@@ -22,7 +21,7 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                       NumberForm()
+                       FormTextField(placeholderText: "phone number")
                         
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)

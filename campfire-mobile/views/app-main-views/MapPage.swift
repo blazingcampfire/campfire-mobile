@@ -13,12 +13,7 @@ struct MapPage: View {
     
     var body: some View { //whole screen
         VStack {
-    
-
             Map(coordinateRegion: $region).edgesIgnoringSafeArea(.all)
-                
-
-            
         }
     }
 }

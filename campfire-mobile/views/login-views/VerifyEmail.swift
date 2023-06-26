@@ -24,13 +24,13 @@ struct VerifyEmail: View {
                             
                             Text("choose an option below to verify your email:") .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, alignment: .leading)
-                                .foregroundColor(Color.white).padding(5).offset(x: 40, y: -80).multilineTextAlignment(.center)
+                                .foregroundColor(Color.white).padding(5).offset(x: 20, y: -80).multilineTextAlignment(.center)
                             
                             Text("memellord@hustleruniversity.edu")
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .leading)
                                 .foregroundColor(.white)
-                                .accentColor(.white).offset(x: 40, y: -80).multilineTextAlignment(.center)
+                                .accentColor(.white).offset(x:20, y: -80).multilineTextAlignment(.center)
 
                                 
                         }

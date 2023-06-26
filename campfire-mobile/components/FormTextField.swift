@@ -12,7 +12,7 @@ struct FormTextField: View {
         VStack {
             TextField(placeholderText, text: $text)
                 .font(.custom("LexendDeca-Bold", size: 20))
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.black)
                 .padding(.horizontal)
             
             Divider()

@@ -45,6 +45,8 @@
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
 		B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */; };
+		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
+		B1B71FCC2A48F16600C54090 /* MapHotspots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FCB2A48F16600C54090 /* MapHotspots.swift */; };
 		B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EF99882A4289540001E8CC /* CameraPage.swift */; };
 		E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */; };
 		E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */; };
@@ -130,6 +132,8 @@
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
 		B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouPage.swift; sourceTree = "<group>"; };
+		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		B1B71FCB2A48F16600C54090 /* MapHotspots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHotspots.swift; sourceTree = "<group>"; };
 		B1EF99882A4289540001E8CC /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
 		E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetUp.swift; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 				B16DFF3A2A40BED1003314FF /* VerificationCode.swift */,
 				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
 				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
+				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
+				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -543,7 +549,9 @@
 				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
+				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
+				B1B71FCC2A48F16600C54090 /* MapHotspots.swift in Sources */,
 				B16DFF362A40B9D2003314FF /* NumberForm.swift in Sources */,
 				B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */,
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,

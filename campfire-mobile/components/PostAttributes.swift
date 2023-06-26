@@ -17,7 +17,7 @@ struct PostAttributes: View {
         VStack(spacing: 1) {
             Rectangle()
                 .fill(Theme.Apricot)
-                .frame(width: 250, height: 250 / 7)
+                .frame(height: 325 / 7)
                 .overlay(
                     Text(prompt)
                         .foregroundColor(.black)
@@ -26,11 +26,11 @@ struct PostAttributes: View {
             
             Image(post)
                 .resizable()
-                .aspectRatio(contentMode: .fill)  
-                .frame(width: 250, height: 250)
+                .aspectRatio(contentMode: .fill)
                 .clipped()
                 .shadow(color: Theme.Apricot, radius: 2)
         }
+            .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 
@@ -38,9 +38,12 @@ struct PostAttributes: View {
 
 struct PostAttributes_Previews: PreviewProvider {
     static var previews: some View {
-        PostAttributes(post: "ragrboard", prompt: "for the dogs")
-            .clipShape(RoundedRectangle(cornerRadius: 30))
-            .frame(height: 200)
-    
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                PostAttributes(post: "ragrboard4", prompt: "for the dogs")
+                    
+                PostAttributes(post: "ragrboard5", prompt: "for the bitches")
+            }
+        }
     }
 }

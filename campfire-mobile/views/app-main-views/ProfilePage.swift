@@ -21,7 +21,7 @@ struct ProfilePage: View {
     ] //url strings in firebase
 
     init() {
-        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, chocs: userInfo.marshcount)
+        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
     }
     
     var body: some View {
@@ -33,27 +33,21 @@ struct ProfilePage: View {
                     .padding(.top)
                 
                 Spacer()
-                Spacer()
-               
-                
-                UserBio(name: userInfo.name, text: "tell ya moms to watch out ya heard")
-                
-                Spacer()
                 Divider()
                 Spacer()
                 Spacer()
                 
                 
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 30)], spacing: 60) {
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
                         VStack(spacing: 20) {
                             PostAttributes(post: postImages[index][0], prompt:postImages[index][1] )
-                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .frame(width: 275)
                         }
                     }
                 }
-                .padding(.horizontal)
-                .frame(maxWidth: .infinity, alignment: .leading)
+
+            
             }
         }
         .padding()

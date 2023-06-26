@@ -16,18 +16,12 @@ struct LaunchView: View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.vertical)
                     .overlay(
-        ZStack {
+        VStack {
             VStack {
                 Image("newlogo")
                     .resizable()
-                    .frame(width: 300, height: 300)
+                    .frame(width: 400, height: 400, alignment: .center)
                     .offset(x:-8, y: -70)
-                    
-                
-                Text("campfire")
-                    .foregroundColor(Color.white)
-                    .font(.custom("Comfortaa-Bold", size: 60))
-                    .offset(x:0 , y: -70)
                 
                 
             }

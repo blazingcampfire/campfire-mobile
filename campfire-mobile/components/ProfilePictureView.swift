@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ProfilePictureView: View {
+    
+    var profilePicture: String?
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Button(action: {
@@ -15,7 +18,7 @@ struct ProfilePictureView: View {
             }, label: {
                 Image(systemName: "person.fill")
                     .resizable()
-                    .foregroundColor(Theme.Apricot)
+                    .foregroundColor(Theme.Peach)
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
                     .scaleEffect(0.9)
@@ -28,7 +31,7 @@ struct ProfilePictureView: View {
             Image(systemName: "plus")
                 .frame(width: 30, height: 30)
                 .foregroundColor(.white)
-                .background(Color.gray)
+                .background(Theme.Peach)
                 .clipShape(Circle())
         }
     }

@@ -16,7 +16,9 @@ struct FormTextField: View {
                 .padding(.horizontal)
             
             Divider()
-                .background(Color.black)
+                .background(Color.white)
+                .frame(height: 3)
+                .overlay(.white)
                 
         }
         .frame(height: 50)

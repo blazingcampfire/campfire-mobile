@@ -10,7 +10,7 @@ import SwiftUI
 struct CameraPage: View {
     var body: some View {
         ZStack {
-            Image("backround")
+            Image("background")
                 .resizable()
                 .ignoresSafeArea()
             
@@ -27,9 +27,6 @@ struct CameraPage: View {
             }
             .offset(x:0, y:280)
             
-            Image("marsh").resizable()
-                .frame(width: 46, height: 75)
-                .offset(x: 100, y: 280)
         }
         
         

@@ -17,7 +17,7 @@ struct EnterEmail: View {
                     Spacer()
                     Spacer()
                     
-                    VStack(spacing: 40) {
+                    VStack(spacing: 60) {
                         Text("enter your '.edu' email")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
@@ -26,7 +26,7 @@ struct EnterEmail: View {
                         
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 16))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                         
                         LFButton(text: "next"){}
                     }

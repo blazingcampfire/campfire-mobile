@@ -7,14 +7,32 @@
 
 import SwiftUI
 
-struct userBio: View {
+struct UserBio: View {
+    var name: String
+    var text: String
+    var chocs: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            RoundedRectangle(cornerRadius: 25)
+                .fill(Color.white)
+                .shadow(color: Color.pink, radius: 1)
+                .frame(width: 300, height: 75)
+                .overlay(
+                    Text(text)
+                        .font(.custom("LexendDeca-Bold", size: 15))
+                        .padding(8))
+            Text(name + " has " + String(chocs) + " chocolate!")
+                .font(.custom("LexendDeca-Bold", size: 15))
+        }
+        
+            
+        Spacer()
     }
 }
 
-struct userBio_Previews: PreviewProvider {
+struct UserBio_Previews: PreviewProvider {
     static var previews: some View {
-        userBio()
+        UserBio(name: "Adarsh", text: "wtw babygirl", chocs: 100)
     }
 }

@@ -75,6 +75,8 @@
 		F8950DC82A48003B00C13075 /* david.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8950DC72A48003B00C13075 /* david.mp4 */; };
 		F8950DCA2A48008A00C13075 /* Vid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8950DC92A48008A00C13075 /* Vid.swift */; };
 		F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */; };
+		F8ADCA262A49432700F80A90 /* UserBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADCA252A49432700F80A90 /* UserBio.swift */; };
+		F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */; };
 		F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB43F12A3F90170063205B /* FormTextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +168,8 @@
 		F8950DC72A48003B00C13075 /* david.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = david.mp4; sourceTree = "<group>"; };
 		F8950DC92A48008A00C13075 /* Vid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vid.swift; sourceTree = "<group>"; };
 		F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
+		F8ADCA252A49432700F80A90 /* UserBio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBio.swift; sourceTree = "<group>"; };
+		F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePic.swift; sourceTree = "<group>"; };
 		F8DB43F12A3F90170063205B /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,6 +271,8 @@
 				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
 				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
 				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
+				F8ADCA252A49432700F80A90 /* UserBio.swift */,
+				F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -550,6 +556,7 @@
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
+				F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
 				B1B71FCC2A48F16600C54090 /* MapHotspots.swift in Sources */,
 				B16DFF362A40B9D2003314FF /* NumberForm.swift in Sources */,
@@ -564,6 +571,7 @@
 				B1B6CCAD2A411135001C6A50 /* NavigationBar.swift in Sources */,
 				F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */,
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,
+				F8ADCA262A49432700F80A90 /* UserBio.swift in Sources */,
 				F8950DCA2A48008A00C13075 /* Vid.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
 				B16DFF3B2A40BED1003314FF /* VerificationCode.swift in Sources */,

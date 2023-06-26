@@ -14,3 +14,4 @@ struct UserInfo {
     var marshcount: Int = 10
     var rank: Int = 1
 }
+

@@ -26,32 +26,10 @@ struct ProfilePage: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack {
+            VStack(spacing: 20) { // Added spacing between elements
                 userProfilePic
-                    .padding(.top)
                 
-                Spacer()
-                
-                Button(action: {
-                    // Action to perform when the "Edit Profile" button is tapped
-                    // Add your desired code here
-                }) {
-                    Text("Edit Profile")
-                        .font(.custom("LexendDeca-Bold", size: 15))
-                        .foregroundColor(Theme.Apricot)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .shadow(color: Theme.Apricot, radius: 2, x: 0, y: 1)
-                        )
-                }
-                
-                Spacer()
-                Spacer()
                 Divider()
-                Spacer()
-                Spacer()
                 
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
@@ -63,12 +41,11 @@ struct ProfilePage: View {
                     }
                 }
             }
+            .padding(.horizontal) // Added horizontal padding to the VStack
         }
-        .padding()
+        .padding() // Added padding to the outer ScrollView
     }
 }
-
-
 
 
 struct ProfilePage_Previews: PreviewProvider {

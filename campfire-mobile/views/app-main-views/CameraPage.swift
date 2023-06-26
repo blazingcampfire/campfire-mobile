@@ -27,9 +27,6 @@ struct CameraPage: View {
             }
             .offset(x:0, y:280)
             
-            Image("marsh").resizable()
-                .frame(width: 46, height: 75)
-                .offset(x: 100, y: 280)
         }
         
         

@@ -12,4 +12,5 @@ import SwiftUI
 struct Theme {
     static let Peach = Color("Peach")
     static let Apricot = Color("Apricot")
+    static let GreyWhite = Color("greywhite")
 }

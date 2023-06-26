@@ -10,6 +10,7 @@ import SwiftUI
 struct UserProfilePic: View {
     var profilePic: String
     var username: String
+    var bio: String
     var chocs: Int
     
     var body: some View {
@@ -22,21 +23,23 @@ struct UserProfilePic: View {
                 .padding(.trailing)
             
             HStack {
+                
                 Text(username)
                     .font(.custom("LexendDeca-Bold", size: 13))
-                    .foregroundColor(.black)
-                    .padding(.bottom, 10)
                 
-                Rectangle() // Must figure out how to center
-                    .frame(width: 1, height: 35)
-                    .foregroundColor(.black)
-                
-                Text("chocs : " + String(chocs))
+                Rectangle() // Centered Rectangle
+                    .frame(width: 1, height: 30)
+                    .foregroundColor(.gray)
+                    
+                Text("chocs" + String(chocs))
                     .font(.custom("LexendDeca-Bold", size: 13))
-                    .foregroundColor(.black)
-                    .padding(.bottom, 10)
+               
             }
-            .padding(.horizontal, 20)
+            
+            Text(bio)
+                .font(.custom("LexendDeca-Bold", size: 15))
+                    .padding(8)
+            
         }
     }
 }
@@ -44,7 +47,7 @@ struct UserProfilePic: View {
 
 struct UserProfilePic_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfilePic(profilePic: "ragrboard", username: "david_adegangbanger", chocs: 100)
+        UserProfilePic(profilePic: "ragrboard", username: "david_adegangbanger", bio: "wtw", chocs: 100)
     }
 }
 

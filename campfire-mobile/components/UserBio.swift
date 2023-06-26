@@ -12,14 +12,9 @@ struct UserBio: View {
     var text: String
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 25)
-            .fill(Color.white)
-            .shadow(color: Color.pink, radius: 1)
-            .frame(width: 300, height: 75)
-            .overlay(
-                Text(text)
-                    .font(.custom("LexendDeca-Bold", size: 15))
-                        .padding(8))
+            Text(text)
+                .font(.custom("LexendDeca-Bold", size: 15))
+                    .padding(8)
     }
 }
 

@@ -51,7 +51,7 @@ struct NavigationBar: View {
             UITabBar.appearance().backgroundColor = .white
         }
         
-        .accentColor(Theme.Peach)
+        .accentColor(Theme.Apricot)
     }
 }
 struct NavigationBar_Previews: PreviewProvider {

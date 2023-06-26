@@ -12,8 +12,10 @@ struct CameraPage: View {
         ZStack {
             Image("background")
                 .resizable()
-                .ignoresSafeArea()
+                .edgesIgnoringSafeArea(.all)
+                .aspectRatio(contentMode: .fill)
             
+            HStack {
             Button(action: {
                 print("yay")
             }) {
@@ -24,14 +26,25 @@ struct CameraPage: View {
                         Circle()
                             .stroke(Color.white, lineWidth: 10)
                     )
+                    
             }
-            .offset(x:0, y:280)
-            
+            .offset(x:15, y:280)
+                
+                Button {
+                    print("upload images")
+                } label: {
+                    Image(systemName: "square.and.arrow.up.on.square")
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                }
+                .offset(x: 35, y: 280)
+        }
         }
         
         
     }
 }
+
 
 
 struct CameraPage_Previews: PreviewProvider {

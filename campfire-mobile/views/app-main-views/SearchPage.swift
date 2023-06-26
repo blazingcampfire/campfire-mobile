@@ -43,13 +43,19 @@ struct FriendsList: View {
                     
                     Spacer()
                     
-                    Image(systemName: "plus.circle")
-                        .font(.system(size: 30))
-                        .foregroundColor(Theme.Peach)
+                    Button {
+                        print("add friend")
+                    }   label: {
+                        Image(systemName: "plus.circle")
+                            .font(.system(size:30))
+                            .foregroundColor(Theme.Apricot)
+                    }
                     
                     
-                  //  Text("+")
-                    //    .font(.custom("LexendDeca-Bold", size: 23))
+                   // Image(systemName: "plus.circle")
+                     //   .font(.system(size: 30))
+                       // .foregroundColor(Theme.Apricot)
+            
                     
                 }
             }

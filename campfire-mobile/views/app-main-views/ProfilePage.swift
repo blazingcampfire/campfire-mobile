@@ -28,9 +28,19 @@ struct ProfilePage: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 
-                
+                ZStack {
                 userProfilePic
                     .padding(.top)
+                Button {
+                    print("settings")
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .font(.system(size: 35))
+                        .offset(x:145, y: -80)
+                        .foregroundColor(Theme.Apricot)
+                }
+                
+            }
                 
                 Spacer()
                 Divider()

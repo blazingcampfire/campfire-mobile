@@ -15,17 +15,33 @@ struct SettingsPage: View {
                     Section(header: Text("Display")) {
                         
                             Toggle(isOn: .constant(false)) {
-                                Label("Dark Mode", systemImage: "moon")
+                                Label {
+                                    Text("Dark Mode")
+                                } icon: {
+                                    Image(systemName: "moon")
+                                        .foregroundColor(Theme.Peach)
+                                }
                             }
                             
                             Toggle(isOn: .constant(true)) {
-                                Label("Notifications", systemImage: "bell.fill")
+                                Label {
+                                    Text("Notifications")
+                                } icon: {
+                                    Image(systemName: "bell.fill")
+                                        .foregroundColor(Theme.Peach)
+                                }
                             }
                         }
                         
                         .font(.custom("LexendDeca", size: 16))
                         Section(header: Text("About")) {
-                            Label("FAQ", systemImage: "doc.fill")
+                            Label {
+                                Text("FAQ")
+                            } icon: {
+                                Image(systemName: "doc.fill")
+                                    .foregroundColor(Theme.Peach)
+                            }
+                            Text("FAQ")
                             Text("Privacy Policy")
                             Text("Terms of Service")
                         }
@@ -33,7 +49,15 @@ struct SettingsPage: View {
                     
                 
                     Section(header: Text("Support")) {
-                        Label("Report Account", systemImage: "exclamationmark.triangle.fill")
+                      //  Label("Report Account", systemImage: "exclamationmark.triangle.fill")
+                        Label {
+                            Text("Report Account")
+                        } icon: {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(Theme.Peach)
+                        }
+                        
+                        
                         Text("Contact Us")
                     }
                     .font(.custom("LexendDeca", size: 16))

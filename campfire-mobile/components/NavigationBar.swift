@@ -11,7 +11,7 @@ struct NavigationBar: View {
     
     var body: some View {
         TabView(selection: $selectedTabIndex) {
-            ForYouPage()
+            TheFeed()
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")

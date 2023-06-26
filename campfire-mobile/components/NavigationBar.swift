@@ -48,8 +48,9 @@ struct NavigationBar: View {
         
         }
         .onAppear() {
-            UITabBar.appearance().barTintColor = .white
+            UITabBar.appearance().backgroundColor = .white
         }
+        
         .accentColor(Theme.Peach)
     }
 }

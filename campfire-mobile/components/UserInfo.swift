@@ -12,5 +12,4 @@ struct UserInfo {
     var username: String = "username"
     var profilepic: String = "person.crop.circle" //url string
     var marshcount: Int = 10
-    var rank: Int = 1
 }

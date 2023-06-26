@@ -68,10 +68,6 @@ struct LeaderboardList: View {
                     Text("\(info.marshcount) 🍫")
                         .font(.custom("LexendDeca-Bold", size: 23))
                     
-                    
-                    //Image("marshstick")
-                      // .resizable()
-                       // .frame(width: 40, height: 40)
                 }
             }
         }

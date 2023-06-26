@@ -22,7 +22,7 @@ struct LFButton: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 40, height: 30)
-                                .offset(x: -40, y: 0)
+                                .offset(x: -42, y: 0)
                         } else if icon == Image("microsoftlogo") {
                             icon
                                 .resizable()
@@ -41,19 +41,19 @@ struct LFButton: View {
                     
                     if text == "Microsoft"{
                         Text(text)
-                            .font(.custom("Comfortaa-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                             .foregroundColor(.white)
                             .offset(x: -11, y: 0)
                     } else if text == "Google" {
                         Text(text)
-                            .font(.custom("Comfortaa-Bold", size: 25))
+                            .font(.custom("LexendDeca-Bold", size: 25))
                             .foregroundColor(.white)
-                            .offset(x: -20, y: 0)
+                            .offset(x: -22, y: 0)
                     } else {
                         Text(text)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .foregroundColor(.white)
-                            .offset(x: -10, y: 0)
+                            .offset(x: 0, y: 0)
                     }
                     
                     

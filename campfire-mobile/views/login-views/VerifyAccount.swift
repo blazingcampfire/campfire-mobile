@@ -13,25 +13,24 @@ struct VerifyAccount: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
-                    Spacer()
-                    Spacer()
+                    
                     Spacer()
                     
-                    VStack(spacing: 40) {
+                    VStack(spacing: 60) {
                         Text("enter verification code")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                       FormTextField(placeholderText: "verification code?")
+                       FormTextField(placeholderText: "verification code")
                         
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                
                         
                         LFButton(text: "verify"){}
                     }
-                    .padding(.bottom, 300)
+                    .padding(.bottom, 200)
 
                     
                 }

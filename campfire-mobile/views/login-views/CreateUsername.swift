@@ -13,12 +13,12 @@ struct CreateUsername: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
-                    Spacer()
-                    Spacer()
-                    Spacer()
                     
-                    VStack(spacing: 40) {
-                        Text("enter your campfire username")
+                    Spacer()
+
+                    
+                    VStack(spacing: 60) {
+                        Text("enter a campfire username")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
@@ -26,11 +26,11 @@ struct CreateUsername: View {
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 20))
+                            .font(.custom("LexendDeca-Bold", size: 15))
                         
                         LFButton(text: "next"){}
                     }
-                    .padding(.bottom, 300)
+                    .padding(.bottom, 200)
                     
                     
                 }

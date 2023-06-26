@@ -17,21 +17,23 @@ struct AccountSetUp: View {
                     VStack {
                         Image("newlogo")
                             .resizable()
-                            .frame(width: 190, height: 190)
-                            .offset(x:0, y: 20)
+                            .frame(width: 300, height: 300)
                         
                         Text("campfire")
                             .foregroundColor(Color.white)
-                            .font(.custom("Comfortaa-Bold", size: 60))
+                            .font(.custom("LexendDeca-Bold", size: 60))
+                            .padding(.top, -30)
 
                         
                     }
+                    .offset(y: -30)
+                    
                     LFButton(text: "create account"){}
-                        .padding(10)
+                        .padding(5)
                     LFButton(text: "login"){}
-                        .padding(10)
                     
                 })
+                
     }
 }
 

@@ -203,6 +203,8 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				F8950DC72A48003B00C13075 /* david.mp4 */,
+				F8950DC52A48002800C13075 /* adarsh.mp4 */,
 				B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */,
 				B18B19892A46974300309256 /* Comfortaa-Light.ttf */,
 				B18B19872A46974300309256 /* Comfortaa-Medium.ttf */,
@@ -288,10 +290,6 @@
 		E29095CE2A3E473E001BEDDE = {
 			isa = PBXGroup;
 			children = (
-				F8950DC72A48003B00C13075 /* david.mp4 */,
-				F8950DC52A48002800C13075 /* adarsh.mp4 */,
-				F8950DC42A48000100C13075 /* feed */,
-				B18B19AE2A469D1D00309256 /* customfonts */,
 				E29095D92A3E473E001BEDDE /* campfire-mobile */,
 				E29095EF2A3E4741001BEDDE /* campfire-mobileTests */,
 				E29095F92A3E4741001BEDDE /* campfire-mobileUITests */,
@@ -312,6 +310,8 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				B18B19AE2A469D1D00309256 /* customfonts */,
+				F8950DC42A48000100C13075 /* feed */,
 				E2E997B12A41459700EBBDD7 /* Info.plist */,
 				E28D3A632A3EB51400B1EEE9 /* constants */,
 				E28D3A5E2A3E94D100B1EEE9 /* components */,
@@ -739,7 +739,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -770,7 +770,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -798,7 +798,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -819,7 +819,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";

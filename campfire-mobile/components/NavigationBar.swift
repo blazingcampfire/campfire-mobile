@@ -40,7 +40,7 @@ struct NavigationBar: View {
                     Label("Search", systemImage: "magnifyingglass")
                 }
                 .tag(3)
-            LeaderboardPage()
+            ProfilePage()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }

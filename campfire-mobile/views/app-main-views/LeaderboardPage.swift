@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+let info = UserInfo()
+
 struct LeaderboardPage: View {
     @State private var selectedOption = 5
-    
     var body: some View {
                 VStack(spacing: 0) {
                     Picker(selection: $selectedOption, label: Text("")) {
@@ -36,7 +37,42 @@ struct LeaderboardList: View {
     var body: some View {
         List {
             ForEach(range, id: \.self) { number in
-                Text("Rank \(number)")
+                HStack {
+                    
+                    
+                    
+                    Text("\(number)")
+                    .frame(width: 30, alignment: .leading)
+                    .font(.custom("LexendDeca-Bold", size: 18))
+                    .padding(.trailing, -10)
+                        
+                        
+                        
+                    Image(systemName: info.profilepic)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                    
+                    
+                    VStack(alignment: .leading) {
+                        Text(info.name)
+                            .bold()
+                        Text("@\(info.username)")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("\(info.marshcount) 🍫")
+                        .font(.custom("LexendDeca-Bold", size: 23))
+                    
+                    
+                    //Image("marshstick")
+                      // .resizable()
+                       // .frame(width: 40, height: 40)
+                }
             }
         }
         .listStyle(InsetGroupedListStyle())

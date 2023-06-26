@@ -20,6 +20,7 @@ struct ProfilePage: View {
         "ragrboard"
     ] //url strings in firebase
 
+    
     var body: some View {
         VStack {
             

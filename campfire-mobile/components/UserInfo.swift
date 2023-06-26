@@ -13,3 +13,4 @@ struct UserInfo {
     var profilepic: String = "person.crop.circle" //url string
     var marshcount: Int = 10
 }
+

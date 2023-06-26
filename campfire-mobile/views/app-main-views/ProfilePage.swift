@@ -8,68 +8,60 @@
 import SwiftUI
 
 struct ProfilePage: View {
-    let username: String = "@david_adegangbanger"
-    let profilePicture: String = "ragrboard" //string 
-    let bio: String = "Bio"
+    var userInfo = UserInfo(name: "David", username: "david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
+    var userProfilePic: UserProfilePic
+    
     let postImages: [String] = [
         "ragrboard",
-        "ragrboard",
-        "ragrboard",
-        "ragrboard",
-        "ragrboard",
-        "ragrboard"
+        "ragrboard2",
+        "ragrboard3",
+        "ragrboard4",
+        "ragrboard5",
+        "ragrboard6"
     ] //url strings in firebase
 
+    init() {
+        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, chocs: userInfo.marshcount)
+    }
     
     var body: some View {
-        VStack {
-            
-            Image(profilePicture)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-
-            Text(username)
-                .font(.custom("LexendDeca-Bold", size: 15))
-                .foregroundColor(.black)
-            
-            RoundedRectangle(cornerRadius: 25)
-                .fill(Color.white)
-                .shadow(color: Theme.Apricot,
-                        radius: 2)                .frame(height: 75)
-                .overlay(Text(bio))
-
-            Divider()
-                .background(Theme.Peach)
-
-            Text("Posts")
-                .font(.custom("LexendDeca-Bold", size: 15))
-                .foregroundColor(.white)
-
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 10)], spacing: 60) {
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                
+                
+                userProfilePic
+                    .padding(.top)
+                
+                Spacer()
+                Spacer()
+               
+                
+                UserBio(name: userInfo.name, text: "tell ya moms to watch out ya heard")
+                
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
                         VStack(spacing: 10) {
                             Image(postImages[index])
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .clipShape(RoundedRectangle(cornerRadius: 25))
-                                .shadow(color: Theme.Apricot, radius: 5)
+                                .shadow(color: Theme.Apricot, radius: 2)
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
                 .padding(.horizontal)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(height: 600)
-
-            Spacer()
         }
         .padding()
     }
 }
-
 
 
 

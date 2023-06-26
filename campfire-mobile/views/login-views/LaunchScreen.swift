@@ -26,7 +26,7 @@ struct LaunchView: View {
                 
                 Text("campfire")
                     .foregroundColor(Color.white)
-                    .font(.custom("Comfortaa-Bold", size: 60))
+                    .font(.custom("LexendDeca-Bold", size: 60))
                     .offset(x:0 , y: -70)
                 
                 

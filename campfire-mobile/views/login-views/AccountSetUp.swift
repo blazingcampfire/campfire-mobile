@@ -17,12 +17,12 @@ struct AccountSetUp: View {
                     VStack {
                         Image("newlogo")
                             .resizable()
-                            .frame(width: 190, height: 190)
+                            .frame(width: 300, height: 300)
                             .offset(x:0, y: 20)
                         
                         Text("campfire")
                             .foregroundColor(Color.white)
-                            .font(.custom("Comfortaa-Bold", size: 60))
+                            .font(.custom("LexendDeca-Bold", size: 60))
 
                         
                     }

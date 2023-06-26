@@ -16,7 +16,7 @@ struct EmailOrNumber: View {
                     VStack {
                         Image("newlogo")
                             .resizable()
-                            .frame(width: 200, height: 200)
+                            .frame(width: 300, height: 300)
                             .offset(x: 0, y: 20)
                         
                         Text("campfire")

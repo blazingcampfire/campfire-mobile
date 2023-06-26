@@ -19,27 +19,29 @@ struct VerifyEmail: View {
                             Image(systemName: "graduationcap.circle.fill")
                                 .font(.system(size: 100))
                                 .foregroundColor(.white)
-                                .padding(10).offset(x: 0, y: -120)
+                                .padding(10)
                                 
                             
-                            Text("choose an option below to verify your email:") .font(.custom("LexendDeca-Bold", size: 20))
-                                .frame(width: 380, alignment: .leading)
-                                .foregroundColor(Color.white).padding(5).offset(x: 40, y: -80).multilineTextAlignment(.center)
+                            Text("choose an option below to verify your email:") .font(.custom("LexendDeca-Bold", size: 25))
+                                .frame(width: 380, alignment: .center)
+                                .foregroundColor(Color.white).padding(15).multilineTextAlignment(.center)
                             
                             Text("memellord@hustleruniversity.edu")
                                 .font(.custom("LexendDeca-Bold", size: 20))
-                                .frame(width: 380, height: 10, alignment: .leading)
+                                .frame(width: 380, height: 10, alignment: .center)
                                 .foregroundColor(.white)
-                                .accentColor(.white).offset(x: 40, y: -80).multilineTextAlignment(.center)
+                                .accentColor(.white).multilineTextAlignment(.center)
+                                .padding(15)
 
                                 
                         }
                         .padding(40)
                     }
                     
-                    LFButton(text: "Microsoft", clicked: {}, icon: Image("microsoftlogo")).offset(x:0, y: -60)
+                    LFButton(text: "Microsoft", clicked: {}, icon: Image("microsoftlogo"))
+                    
                     LFButton(text: "Google", clicked: {}, icon: Image("glogo2"))
-                        .offset(x:0 , y: -60)
+                       
                     
                 })
     }

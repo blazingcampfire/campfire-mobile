@@ -17,8 +17,8 @@ struct SetProfilePic: View {
                     Spacer()
                     Spacer()
                     
-                    VStack(spacing: 40) {
-                        Text("upload a profile pic")
+                    VStack(spacing: 60) {
+                        Text("upload a profile picture")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
@@ -32,7 +32,7 @@ struct SetProfilePic: View {
                         LFButton(text: "finish"){}
 
                     }
-                    .padding(.bottom, 300)
+                    .padding(.bottom, 200)
                     
                     
                 }

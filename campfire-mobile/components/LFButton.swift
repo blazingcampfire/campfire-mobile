@@ -48,7 +48,7 @@ struct LFButton: View {
                         Text(text)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .foregroundColor(.white)
-                            .offset(x: -20, y: 0)
+                            .offset(x: -22, y: 0)
                     } else {
                         Text(text)
                             .font(.custom("LexendDeca-Bold", size: 25))

@@ -17,7 +17,7 @@ struct EnterPhoneNumber: View {
                     Spacer()
                     Spacer()
                     
-                    VStack(spacing: 40) {
+                    VStack(spacing: 60) {
                         Text("enter your phone number")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
@@ -26,11 +26,12 @@ struct EnterPhoneNumber: View {
                         
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 13)).offset(x: 0, y: -20)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
                         
                         LFButton(text: "next"){}
                     }
-                    .padding(.bottom, 300)
+                    .padding(.bottom, 200)
 
                     
                 }

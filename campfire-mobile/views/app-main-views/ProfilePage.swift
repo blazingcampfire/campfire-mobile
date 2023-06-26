@@ -19,7 +19,7 @@ struct ProfilePage: View {
         ["ragrboard5", " frat moment" ],
         ["ragrboard6", " my party face"]
     ] //url strings in firebase
-
+    
     init() {
         userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
     }
@@ -27,32 +27,47 @@ struct ProfilePage: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                
-                
                 userProfilePic
                     .padding(.top)
                 
+                Spacer()
+                
+                Button(action: {
+                    // Action to perform when the "Edit Profile" button is tapped
+                    // Add your desired code here
+                }) {
+                    Text("Edit Profile")
+                        .font(.custom("LexendDeca-Bold", size: 15))
+                        .foregroundColor(Theme.Apricot)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white)
+                                .shadow(color: Theme.Apricot, radius: 2, x: 0, y: 1)
+                        )
+                }
+                
+                Spacer()
                 Spacer()
                 Divider()
                 Spacer()
                 Spacer()
                 
-                
                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                     ForEach(0..<postImages.count, id: \.self) { index in
                         VStack(spacing: 20) {
-                            PostAttributes(post: postImages[index][0], prompt:postImages[index][1] )
+                            PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
                                 .frame(width: 275)
+                                .shadow(color: Theme.Apricot, radius: 3, x: 0, y: 2)
                         }
                     }
                 }
-
-            
             }
         }
         .padding()
     }
 }
+
 
 
 

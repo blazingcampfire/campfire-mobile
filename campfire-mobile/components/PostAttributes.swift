@@ -20,7 +20,7 @@ struct PostAttributes: View {
                 .frame(height: 325 / 7)
                 .overlay(
                     Text(prompt)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                         .font(.custom("LexendDeca-Bold", size: 15))
                 )
             
@@ -28,7 +28,7 @@ struct PostAttributes: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .clipped()
-                .shadow(color: Theme.Apricot, radius: 2)
+                
         }
             .clipShape(RoundedRectangle(cornerRadius: 30))
     }

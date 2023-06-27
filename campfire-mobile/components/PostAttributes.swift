@@ -16,8 +16,8 @@ struct PostAttributes: View {
     var body: some View {
         VStack(spacing: 1) {
             Rectangle()
-                .fill(Theme.Apricot)
-                .frame(height: 325 / 7)
+                .fill(Theme.Peach)
+                .frame(width: 350, height: 325 / 7)
                 .overlay(
                     Text(prompt)
                         .foregroundColor(.white)
@@ -27,7 +27,9 @@ struct PostAttributes: View {
             Image(post)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
+                .frame(width: 350, height: 350)
                 .clipped()
+                
                 
         }
             .clipShape(RoundedRectangle(cornerRadius: 30))

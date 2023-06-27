@@ -8,7 +8,8 @@
 import SwiftUI
 struct NavigationBar: View {
     @Binding var selectedTabIndex: Int?
-    
+
+        
     var body: some View {
         TabView(selection: $selectedTabIndex) {
             TheFeed()
@@ -56,18 +57,9 @@ struct NavigationBar: View {
                 .tag(4)
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.init(white: 1), for: .tabBar)
-        
         }
-        
-        
-        
-        
-     //   .onAppear() {
-       //         UITabBar.appearance().backgroundColor = .black
-         //       UITabBar.appearance().unselectedItemTintColor = .white
-       // }
-        
         .accentColor(Theme.Peach)
+        
     }
 }
 struct NavigationBar_Previews: PreviewProvider {

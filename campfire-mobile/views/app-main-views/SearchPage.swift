@@ -15,6 +15,7 @@ struct SearchPage: View {
             FriendsList(range: 1...12)
         }
         .searchable(text: $searchText)
+        .background(Color.init(white: 1))
     }
 }
 
@@ -50,12 +51,6 @@ struct FriendsList: View {
                             .font(.system(size:30))
                             .foregroundColor(Theme.Peach)
                     }
-                    
-                    
-                   // Image(systemName: "plus.circle")
-                     //   .font(.system(size: 30))
-                       // .foregroundColor(Theme.Apricot)
-            
                     
                 }
             }

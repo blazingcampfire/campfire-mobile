@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B145F5EF2A4A7815005E8787 /* FeedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B145F5EE2A4A7815005E8787 /* FeedInfo.swift */; };
+		B145F5F12A4A8D08005E8787 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B145F5F02A4A8D08005E8787 /* NavBar.swift */; };
 		B16DFF362A40B9D2003314FF /* NumberForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DFF352A40B9D2003314FF /* NumberForm.swift */; };
 		B16DFF392A40BD95003314FF /* CodeVerifier in Frameworks */ = {isa = PBXBuildFile; productRef = B16DFF382A40BD95003314FF /* CodeVerifier */; };
 		B16DFF3B2A40BED1003314FF /* VerificationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DFF3A2A40BED1003314FF /* VerificationCode.swift */; };
@@ -98,6 +100,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B145F5EE2A4A7815005E8787 /* FeedInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedInfo.swift; sourceTree = "<group>"; };
+		B145F5F02A4A8D08005E8787 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		B16DFF352A40B9D2003314FF /* NumberForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberForm.swift; sourceTree = "<group>"; };
 		B16DFF3A2A40BED1003314FF /* VerificationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCode.swift; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
 				F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */,
 				F8A0F2812A49FED900090110 /* PostAttributes.swift */,
+				B145F5EE2A4A7815005E8787 /* FeedInfo.swift */,
+				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -565,12 +571,14 @@
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
 				E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */,
+				B145F5EF2A4A7815005E8787 /* FeedInfo.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,
 				B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */,
 				E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */,
 				B1B6CCAD2A411135001C6A50 /* NavigationBar.swift in Sources */,
 				F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */,
+				B145F5F12A4A8D08005E8787 /* NavBar.swift in Sources */,
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,
 				F8950DCA2A48008A00C13075 /* Vid.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
@@ -739,7 +747,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -770,7 +778,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

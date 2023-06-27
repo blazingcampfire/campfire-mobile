@@ -25,6 +25,7 @@ struct CameraPage: View {
                     .overlay(
                         Circle()
                             .stroke(Color.white, lineWidth: 10)
+                            .overlay(Image(systemName: "flame").foregroundColor(Theme.Peach).font(.system(size: 30)))
                     )
                     
             }

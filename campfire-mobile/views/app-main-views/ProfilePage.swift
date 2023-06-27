@@ -29,39 +29,39 @@ struct ProfilePage: View {
             VStack {
                 
                 ZStack {
-                userProfilePic
-                    .padding(.top)
-                Button {
-                    print("settings")
-                } label: {
-                    Image(systemName: "gearshape.fill")
-                        .font(.system(size: 35))
-                        .offset(x:145, y: -80)
-                        .foregroundColor(Theme.Apricot)
+                    userProfilePic
+                        .padding(.top)
+                    Button(action: {
+                        // Go to Edit Profile
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 30))
+                            .foregroundColor(Theme.Peach)
+                    }
+                    .offset(x: 145, y: -100)
                 }
                 
-            }
-            VStack(spacing: 20) { // Added spacing between elements
-                userProfilePic
-                
-                Divider()
-                
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                    ForEach(0..<postImages.count, id: \.self) { index in
-                        VStack(spacing: 20) {
-                            PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
-                                .frame(width: 275)
-                                .shadow(color: Theme.Apricot, radius: 3, x: 0, y: 2)
+                VStack(spacing: 20) { // Added spacing between elements
+                    
+                    Spacer()
+                    Divider()
+                    
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
+                        ForEach(0..<postImages.count, id: \.self) { index in
+                            VStack(spacing: 20) {
+                                PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
+                                    .frame(width: 350)
+                                    //.shadow(color: .black, radius: 3)
+                            }
                         }
                     }
                 }
+                .padding(.horizontal) // Added horizontal padding to the VStack
             }
-            .padding(.horizontal) // Added horizontal padding to the VStack
         }
         .padding() // Added padding to the outer ScrollView
     }
 }
-
 
 struct ProfilePage_Previews: PreviewProvider {
     static var previews: some View {

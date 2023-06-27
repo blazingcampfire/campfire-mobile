@@ -48,7 +48,7 @@ struct FriendsList: View {
                     }   label: {
                         Image(systemName: "plus.circle")
                             .font(.system(size:30))
-                            .foregroundColor(Theme.Apricot)
+                            .foregroundColor(Theme.Peach)
                     }
                     
                     

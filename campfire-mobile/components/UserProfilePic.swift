@@ -18,25 +18,27 @@ struct UserProfilePic: View {
             Image(profilePic)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
+                .frame(width: 150, height: 150)
                 .clipShape(Circle())
-                .padding(.trailing)
-                .shadow(color: Theme.Apricot, radius: 2, x: 0, y: 1)
+                .overlay(
+                    Circle()
+                        .stroke(.gray, lineWidth: 0.3)
+                )
+                //.shadow(color: Theme.Peach, radius: 2, x: 0, y: 1)
             
             HStack {
                 Text(username)
-                    .font(.custom("LexendDeca-Bold", size: 13))
+                    .font(.custom("LexendDeca-Bold", size: 15))
                 
                 Rectangle() // Centered Rectangle
                     .frame(width: 1, height: 30)
                     .foregroundColor(.gray)
                 
-                Text("chocs: " + String(chocs))
-                    .font(.custom("LexendDeca-Bold", size: 13))
+                Text("🍫: " + String(chocs))
+                    .font(.custom("LexendDeca-Bold", size: 15))
             }
-            
             Text(bio)
-                .font(.custom("LexendDeca-Bold", size: 15))
+                .font(.custom("LexendDeca-Bold", size: 13))
                 .padding(8)
             
             HStack {
@@ -45,11 +47,11 @@ struct UserProfilePic: View {
                 }) {
                     Text("Edit Profile")
                         .font(.custom("LexendDeca-Bold", size: 15))
-                        .foregroundColor(Theme.Apricot)
+                        .foregroundColor(Theme.Peach)
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
+                                .fill(.white)
                                 .shadow(color: .black, radius: 2, x: 0, y: 1)
                         )
                 }
@@ -57,13 +59,27 @@ struct UserProfilePic: View {
                 Button(action: {
                     // Go to Edit Profile
                 }) {
-                    Image(systemName: "trophy")
-                        .font(.system(size: 15))
-                        .foregroundColor(Theme.Apricot)
+                    Image(systemName: "person.3.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(Theme.Peach)
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
+                                .fill(.white)
+                                .shadow(color: .black, radius: 2, x: 0, y: 1)
+                        )
+                }
+                
+                Button(action: {
+                    // Go to Edit Profile
+                }) {
+                    Image(systemName: "trophy.fill")
+                        .font(.system(size: 20))
+                        .foregroundColor(Theme.Peach)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.white)
                                 .shadow(color: .black, radius: 2, x: 0, y: 1)
                         )
                 }

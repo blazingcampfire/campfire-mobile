@@ -33,7 +33,7 @@ struct SettingsPage: View {
                             }
                         }
                         
-                        .font(.custom("LexendDeca", size: 16))
+                        .font(.custom("LexendDeca-Regular", size: 16))
                         Section(header: Text("About")) {
                             Label {
                                 Text("FAQ")
@@ -41,11 +41,11 @@ struct SettingsPage: View {
                                 Image(systemName: "doc.fill")
                                     .foregroundColor(Theme.Peach)
                             }
-                            Text("FAQ")
+                            
                             Text("Privacy Policy")
                             Text("Terms of Service")
                         }
-                        .font(.custom("LexendDeca", size: 16))
+                        .font(.custom("LexendDeca-Regular", size: 16))
                     
                 
                     Section(header: Text("Support")) {
@@ -60,16 +60,16 @@ struct SettingsPage: View {
                         
                         Text("Contact Us")
                     }
-                    .font(.custom("LexendDeca", size: 16))
+                    .font(.custom("LexendDeca-Regular", size: 16))
                     
                     Section(header: Text("Account Permissions")) {
                         Text("Log Out")
                         Text("Delete Account")
                     }
-                    .font(.custom("LexendDeca", size: 16))
+                    .font(.custom("LexendDeca-Regular", size: 16))
                     
                 }
-                .navigationTitle("Settings").font(.custom("LexendDeca", size: 25))
+                .navigationTitle("Settings").font(.custom("LexendDeca-Regular", size: 25))
             }
     }
 }

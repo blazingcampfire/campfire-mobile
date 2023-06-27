@@ -30,15 +30,15 @@ struct UserProfilePic: View {
                 Text(username)
                     .font(.custom("LexendDeca-Bold", size: 15))
                 
-                Rectangle() // Centered Rectangle
+                Rectangle()
                     .frame(width: 1, height: 30)
                     .foregroundColor(.gray)
                 
-                Text("🍫: " + String(chocs))
+                Text(String(chocs) + "🍫")
                     .font(.custom("LexendDeca-Bold", size: 15))
             }
             Text(bio)
-                .font(.custom("LexendDeca-Bold", size: 13))
+                .font(.custom("LexendDeca-Regular", size: 13))
                 .padding(8)
             
             HStack {
@@ -92,7 +92,7 @@ struct UserProfilePic: View {
 
 struct UserProfilePic_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfilePic(profilePic: "ragrboard", username: "david_adegangbanger", bio: "wtw", chocs: 100)
+        UserProfilePic(profilePic: "ragrboard", username: "david_adegangbanger", bio: "woah bwhwhwhhwhwhhwhwhwhwh", chocs: 100)
     }
 }
 

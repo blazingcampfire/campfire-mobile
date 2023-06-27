@@ -22,9 +22,14 @@ struct NavBar: View {
             ZStack {
                 switch selectedIndex {
                 case 0:
-                    NavigationView {
+                    TabView {
                         TheFeed()
                     }
+                    .edgesIgnoringSafeArea(.bottom)
+                    
+                  //  NavigationView {
+                    //    TheFeed()
+                    //}
                 case 1:
                     NavigationView {
                         MapPage()

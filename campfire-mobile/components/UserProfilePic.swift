@@ -26,17 +26,18 @@ struct UserProfilePic: View {
                         .stroke(.gray, lineWidth: 0.3)
                 )
                 //.shadow(color: Theme.Peach, radius: 2, x: 0, y: 1)
+            Spacer()
             Text(name)
                 .font(.custom("LexendDeca-Bold", size: 20))
-            Spacer()
+            
             HStack {
                 Text(username)
-                    .font(.custom("LexendDeca-Bold", size: 15))
+                    .font(.custom("LexendDeca-SemiBold", size: 15))
                 Circle()
                     .frame(width: 4, height: 4)
                     .foregroundColor(.black)
                 Text(String(chocs) + "🍫")
-                    .font(.custom("LexendDeca-Bold", size: 15))
+                    .font(.custom("LexendDeca-SemiBold", size: 15))
             }
             Text(bio)
                 .font(.custom("LexendDeca-Regular", size: 13))

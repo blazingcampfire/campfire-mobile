@@ -10,6 +10,8 @@ import AVKit
 
 struct CustomVideoPlayer: UIViewControllerRepresentable {
     var player: AVPlayer
+    @Binding var isPlaying: Bool
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
@@ -26,7 +28,11 @@ struct CustomVideoPlayer: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
-        
+        if isPlaying {
+            player.play()
+        } else {
+            player.pause()
+        }
     }
     
     class Coordinator: NSObject {
@@ -38,7 +44,6 @@ struct CustomVideoPlayer: UIViewControllerRepresentable {
         
         @objc func restartPlayback() {
             parent.player.seek(to: .zero)
-            
             parent.player.play()
         }
     }

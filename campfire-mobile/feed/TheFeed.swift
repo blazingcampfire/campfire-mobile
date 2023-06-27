@@ -14,6 +14,7 @@ struct TheFeed: View {
         
         let url = Bundle.main.path(forResource: item.url, ofType: "mp4") ?? ""
         let player = AVPlayer(url: URL(fileURLWithPath: url))
+       
         
         return Vid(player: player, mediafile: item)
     }
@@ -26,7 +27,7 @@ struct TheFeed: View {
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
                         .ignoresSafeArea(.all, edges: .top)
-                    
+                
                     }
             }
             .rotationEffect(.init(degrees: 90))
@@ -36,30 +37,47 @@ struct TheFeed: View {
             
         }
         .ignoresSafeArea(.all, edges: .top)
-        
+        .background(Color.black.ignoresSafeArea())
+        .onAppear {
+            currentVid = vids.first?.id ?? ""
+        }
     }
 }
+
 struct TheFeed_Previews: PreviewProvider {
     static var previews: some View {
         TheFeed()
     }
 }
+
 struct VidsPlayer: View {
-    
     @Binding var vid: Vid
     @Binding var currentVid: String
+    @State private var isPlaying = false
+
     var body: some View {
         ZStack {
             if let player = vid.player {
-                CustomVideoPlayer(player: player)
-                GeometryReader {proxy -> Color in
+                CustomVideoPlayer(player: player, isPlaying: $isPlaying)
+                    .onTapGesture {
+                        isPlaying.toggle()
+                    }
+                    .onAppear {
+                        isPlaying = true
+                        
+                    }
+                    .onDisappear {
+                        isPlaying = false
+                        player.seek(to: .zero)
+                    }
+                GeometryReader { proxy -> Color in
                     let minY = proxy.frame(in: .global).minY
                     let size = proxy.size
                     DispatchQueue.main.async {
-                        if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id  {
-                            player.play()
+                        if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
+                            isPlaying = true
                         } else {
-                            player.pause()
+                            isPlaying = false
                         }
                     }
                     return Color.clear
@@ -68,7 +86,7 @@ struct VidsPlayer: View {
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading, spacing: 10) {
                             HStack(spacing: 10) {
-                                
+                        
                             }
                         }
                     }

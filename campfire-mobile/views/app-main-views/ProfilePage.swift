@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfilePage: View {
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
-    var userProfilePic: UserProfilePic
+    var userProfile: UserProfile
     
     let postImages: [[String]] = [
         ["ragrboard", "dawg moment"],
@@ -21,7 +21,7 @@ struct ProfilePage: View {
     ] //url strings in firebase
     
     init() {
-        userProfilePic = UserProfilePic(profilePic: userInfo.profilepic, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
+        userProfile = UserProfile(profilePic: userInfo.profilepic, name: userInfo.name, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
     }
     
     var body: some View {
@@ -29,7 +29,7 @@ struct ProfilePage: View {
             VStack {
                 
                 ZStack {
-                    userProfilePic
+                    userProfile
                         .padding(.top)
                     Button(action: {
                         // Go to Edit Profile

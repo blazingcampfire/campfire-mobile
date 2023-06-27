@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfilePage: View {
-    var userInfo = UserInfo(name: "David", username: "david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
+    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
     var userProfilePic: UserProfilePic
     
     let postImages: [[String]] = [
@@ -38,13 +38,12 @@ struct ProfilePage: View {
                             .font(.system(size: 30))
                             .foregroundColor(Theme.Peach)
                     }
-                    .offset(x: 145, y: -100)
+                    .offset(x: 145, y: -120)
                 }
                 
                 VStack(spacing: 20) { // Added spacing between elements
                     
                     Spacer()
-                    Divider()
                     
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                         ForEach(0..<postImages.count, id: \.self) { index in

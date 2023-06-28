@@ -23,7 +23,7 @@ struct TheFeed: View {
             let size = proxy.size
             TabView(selection: $currentVid) {
                 ForEach($vids){$vids in
-                    VidsPlayer(vid: $vids, currentVid: $currentVid)
+                    VidsPlayer(vid: $vids, currentVid: $currentVid, caption: "when they get to dinking, they gon get to drinking")
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
                         .ignoresSafeArea(.all, edges: .top)
@@ -54,7 +54,8 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
-
+    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
+    var caption: String
     var body: some View {
         ZStack {
             if let player = vid.player {
@@ -84,13 +85,59 @@ struct VidsPlayer: View {
                 }
                 VStack {
                     HStack(alignment: .bottom) {
-                        VStack(alignment: .leading, spacing: 10) {
+                        VStack(alignment: .leading, spacing: 0) {
                             HStack(spacing: 10) {
-                        
+                                Image(userInfo.profilepic)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .clipShape(Circle())
+                                Text(userInfo.username)
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                
                             }
+                            Text(caption)
+                                .font(.custom("LexendDeca-Regular", size: 15))
+                                .padding(.leading, 40)
+                            
                         }
+                        .padding(.top, 650)
+                        Spacer(minLength: 20)
                     }
                 }
+                .padding(.horizontal)
+                .padding(.top)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, alignment: .bottom)
+                VStack {
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "heart")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                    }
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "text.bubble")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.top, 20)
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "ellipsis")
+                            .resizable()
+                            .frame(width: 30, height: 8)
+                            .foregroundColor(.white)
+                    }
+                    .padding(.top, 15)
+                }
+                .padding(.top, 500)
+                .padding(.leading, 325)
             }
         }
     }

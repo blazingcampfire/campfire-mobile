@@ -38,9 +38,9 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            currentVid = vids.first?.id ?? ""
-        }
+  //      .onAppear {
+    //        currentVid = vids.first?.id ?? ""
+      //  }
     }
 }
 

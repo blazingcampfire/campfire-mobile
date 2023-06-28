@@ -50,7 +50,7 @@ struct LeaderboardList: View {
                         
                         
                         
-                    Image(systemName: info.profilepic)
+                    Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -67,7 +67,7 @@ struct LeaderboardList: View {
                     
                     Spacer()
                     
-                    Text("\(info.marshcount) 🍫")
+                    Text("\(info.chocs) 🍫")
                         .font(.custom("LexendDeca-Bold", size: 23))
                     
                 }

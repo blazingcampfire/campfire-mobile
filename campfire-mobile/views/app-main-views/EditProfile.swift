@@ -1,5 +1,5 @@
 //
-//  LeaderboardPage.swift
+//  EditProfile.swift
 //  campfire-mobile
 //
 //  Created by Adarsh G on 6/27/23.
@@ -8,164 +8,123 @@
 import SwiftUI
 
 struct EditProfile: View {
-    @State private var isEditingName = false
-    @State private var editedName = "David"
     
-    @State private var isEditingBio = false
-    @State private var editedBio = "tell ya moms to watch out ya heard"
+    @State private var userinfo = UserInfo()
     
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
-    var userProfile: UserProfile
-    
-    let postImages: [[String]] = [
+    var postImages: [[String]] = [
         ["ragrboard", "1"],
         ["ragrboard2"],
         ["ragrboard3", "3"],
         ["ragrboard4"],
         ["ragrboard5", "5"],
         ["ragrboard6"]
-    ] //url strings in firebase
-    
-    init() {
-        userProfile = UserProfile(profilePic: userInfo.profilepic, name: userInfo.name, username: userInfo.username, bio: "io", chocs: userInfo.marshcount)
-    }
+    ]
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack {
-                VStack(spacing: 20) {
-                    Image(userProfile.profilePic)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                        .padding(.bottom, 20)
+        ScrollView {
+            VStack(spacing: 10) {
+                ZStack {
+                    UserProfilePic()
+                    
+                    Button(action: {
+                        // go to camera roll
+                    }) {
+                        Image(systemName: "camera")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 150)
+                            .background(Color.black.opacity(0.5))
+                            .clipShape(Circle())
+                    }
+                }
+                
+                Text("change profile pic")
+                    .font(.custom("LexendDeca-Bold", size: 20))
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text(userinfo.name)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                        Text(userinfo.username)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                        Text(userinfo.bio)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                    }
+                    .padding(.leading, 20)
                     
                     Spacer()
                     
-                    VStack(spacing: 8) {
-                        if isEditingName {
-                            TextField("Name", text: $editedName)
-                                .font(.custom("LexendDeca-Bold", size: 20))
-                                .padding(.horizontal)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .overlay(
-                                    HStack {
-                                        Button(action: {
-                                            // Cancel name changes
-                                            editedName = userInfo.name
-                                            isEditingName.toggle()
-                                        }) {
-                                            Text("Cancel")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(.red)
-                                                .padding(.horizontal)
-                                        }
-                                        Spacer()
-                                        Button(action: {
-                                            // Save name changes
-                                            isEditingName.toggle()
-                                        }) {
-                                            Text("Done")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(.green)
-                                                .padding(.horizontal)
-                                        }
-                                    }
-                                )
-                        } else {
-                            Text(editedName)
-                                .font(.custom("LexendDeca-Bold", size: 20))
-                                .padding(.horizontal)
+                    VStack(alignment: .trailing, spacing: 20) {
+                        Button(action: {
+                            // call edit field page with name
+                        }) {
+                            Text("edit name")
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .foregroundColor(Theme.Peach)
                         }
                         
-                        HStack {
-                            Text(userInfo.username)
-                                .font(.custom("LexendDeca-SemiBold", size: 15))
-                            Circle()
-                                .frame(width: 4, height: 4)
-                                .foregroundColor(.black)
-                            Text("\(userInfo.marshcount)🍫")
-                                .font(.custom("LexendDeca-SemiBold", size: 15))
+                        Button(action: {
+                            // call edit field page with username
+                        }) {
+                            Text("edit username")
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .foregroundColor(Theme.Peach)
                         }
                         
-                        if isEditingBio {
-                            TextField("Bio", text: $editedBio)
-                                .font(.custom("LexendDeca-Regular", size: 13))
-                                .padding(.horizontal)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .overlay(
-                                    HStack {
-                                        Button(action: {
-                                            // Cancel bio changes
-                                            isEditingBio.toggle()
-                                        }) {
-                                            Text("Cancel")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(.red)
-                                                .padding(.horizontal)
-                                        }
-                                        Spacer()
-                                        Button(action: {
-                                            // Save bio changes
-                                            isEditingBio.toggle()
-                                        }) {
-                                            Text("Done")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(.green)
-                                                .padding(.horizontal)
-                                        }
-                                    }
-                                )
-                        } else {
-                            Text(editedBio)
-                                .font(.custom("LexendDeca-Regular", size: 13))
-                                .padding(.horizontal)
+                        Button(action: {
+                            // call edit field page with bio
+                        }) {
+                            Text("edit bio")
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .foregroundColor(Theme.Peach)
                         }
-                        
-                        HStack {
-                            Button(action: {
-                                isEditingName.toggle()
-                            }) {
-                                Text(isEditingName ? "Cancel" : "Edit Name")
-                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                    .foregroundColor(Theme.Peach)
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(.white)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color.black, lineWidth: 0.3)
-                                            )
+                    }
+                    .padding(.trailing, 20)
+                }
+                
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
+                    ForEach(0..<postImages.count, id: \.self) { index in
+                        VStack(spacing: 20) {
+                            ZStack(alignment: .topTrailing) {
+                                if postImages[index].count == 2 {
+                                    PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
+                                        .frame(width: 250)
+                                } else {
+                                    PostAttributes(post: postImages[index][0], prompt: nil)
+                                        .frame(width: 250)
+                                }
+                                
+                                Circle()
+                                    .foregroundColor(.white)
+                                    .frame(width: 50, height: 50)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(.gray, lineWidth: 0.5)
+                                            .frame(width: 50, height: 50)
                                     )
-                            }
-                            
-                            Button(action: {
-                                isEditingBio.toggle()
-                            }) {
-                                Text(isEditingBio ? "Cancel" : "Edit Bio")
-                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                    .foregroundColor(Theme.Peach)
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(.white)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color.black, lineWidth: 0.3)
-                                            )
+                                    .overlay(
+                                        Button(action: {
+                                            // go to edit post
+                                        }) {
+                                            Image(systemName: "pencil")
+                                                .font(.system(size: 30))
+                                                .foregroundColor(Theme.Peach)
+                                        }
                                     )
+                                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 100, trailing: -60))
                             }
                         }
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 10)
+                .padding(.top, 30)
             }
+            .padding(.vertical, 10)
         }
-        .padding()
     }
 }
+
+
 
 
 
@@ -174,3 +133,4 @@ struct EditProfile_Previews: PreviewProvider {
         EditProfile()
     }
 }
+

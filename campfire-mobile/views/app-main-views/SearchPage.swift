@@ -27,7 +27,7 @@ struct FriendsList: View {
             ForEach(range, id: \.self) { number in
                 HStack {
                     
-                    Image(systemName: info.profilepic)
+                    Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)

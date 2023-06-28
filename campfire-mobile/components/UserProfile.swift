@@ -8,29 +8,25 @@
 import SwiftUI
 
 struct UserProfile: View {
-    var profilePic: String
-    var name: String
-    var username: String
-    var bio: String
-    var chocs: Int
+    let userinfo = UserInfo()
     
     var body: some View {
         VStack(spacing: 0) {
-            UserProfilePic(profilePic: profilePic)
+            UserProfilePic()
             Spacer()
-            Text(name)
+            Text(userinfo.name)
                 .font(.custom("LexendDeca-Bold", size: 20))
             
             HStack {
-                Text(username)
+                Text(userinfo.username)
                     .font(.custom("LexendDeca-SemiBold", size: 15))
                 Circle()
                     .frame(width: 4, height: 4)
                     .foregroundColor(.black)
-                Text(String(chocs) + "🍫")
+                Text(String(userinfo.chocs) + "🍫")
                     .font(.custom("LexendDeca-SemiBold", size: 15))
             }
-            Text(bio)
+            Text(userinfo.bio)
                 .font(.custom("LexendDeca-Regular", size: 13))
                 .padding(8)
             
@@ -76,6 +72,6 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(profilePic: "ragrboard", name: "David", username: "david_adegangbanger", bio: "woah bwhwhwhhwhsssssssssswhhwhwhwhwh", chocs: 100)
+        UserProfile()
     }
 }

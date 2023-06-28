@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfilePage: View {
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
-    var userProfile: UserProfile
+    let userInfo = UserInfo()
+    
     
     let postImages: [[String]] = [
         ["ragrboard", "1"],
@@ -20,16 +20,16 @@ struct ProfilePage: View {
         ["ragrboard6"]
     ] //url strings in firebase
     
-    init() {
-        userProfile = UserProfile(profilePic: userInfo.profilepic, name: userInfo.name, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
-    }
+  //  init() {
+    //    userProfile = UserProfile(profilePic: userInfo.profilepic, name: userInfo.name, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
+ //   }
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 
                 ZStack {
-                    userProfile
+                    UserProfile()
                         .padding(.top)
                     Button(action: {
                         // Go to Edit Profile

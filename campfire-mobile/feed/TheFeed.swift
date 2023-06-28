@@ -38,9 +38,9 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            currentVid = vids.first?.id ?? ""
-        }
+  //      .onAppear {
+    //        currentVid = vids.first?.id ?? ""
+      //  }
     }
 }
 
@@ -54,7 +54,8 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", marshcount: 100)
+    
+    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     var caption: String
     var body: some View {
         ZStack {

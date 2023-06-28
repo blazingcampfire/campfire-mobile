@@ -43,7 +43,7 @@ struct CameraPage: View {
                     Button(action: {
                         print("upload images")
                     }) {
-                        Image(systemName: "square.and.arrow.up.on.square")
+                        Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 25))
                             .foregroundColor(.white)
                     }

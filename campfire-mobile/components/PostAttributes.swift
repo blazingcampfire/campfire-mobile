@@ -10,9 +10,9 @@ import SwiftUI
 
 
 struct PostAttributes: View {
-    var post: String
-    var prompt: String
-    
+    var post: String //comment optional string
+    var prompt: String //optional string 
+ 
     var body: some View {
         VStack(spacing: 1) {
             Rectangle()

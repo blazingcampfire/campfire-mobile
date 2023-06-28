@@ -20,7 +20,7 @@ struct NavigationBar: View {
                 }
                 .tag(0)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.white, for: .tabBar)
+                .toolbarBackground(Color.black, for: .tabBar)
             
             MapPage()
                 .tabItem {

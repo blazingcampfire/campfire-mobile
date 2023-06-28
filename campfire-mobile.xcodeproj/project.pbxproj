@@ -73,6 +73,7 @@
 		F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */; };
 		F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */; };
 		F86695162A40F78300D9471C /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* ProfilePage.swift */; };
+		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F8950CCA2A4BA6C100FE30C1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8950CC92A4BA6C100FE30C1 /* UserProfile.swift */; };
 		F8950DC62A48002800C13075 /* adarsh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8950DC52A48002800C13075 /* adarsh.mp4 */; };
 		F8950DC82A48003B00C13075 /* david.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8950DC72A48003B00C13075 /* david.mp4 */; };
@@ -169,6 +170,7 @@
 		F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAccount.swift; sourceTree = "<group>"; };
 		F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrNumber.swift; sourceTree = "<group>"; };
 		F86695152A40F78300D9471C /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F8950CC92A4BA6C100FE30C1 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		F8950DC52A48002800C13075 /* adarsh.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = adarsh.mp4; sourceTree = "<group>"; };
 		F8950DC72A48003B00C13075 /* david.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = david.mp4; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				E28D3A642A3EB52400B1EEE9 /* colors.swift */,
+				F86D83A52A4BC37900223F9A /* prompts.swift */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
+				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */,
 				B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */,
 				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,

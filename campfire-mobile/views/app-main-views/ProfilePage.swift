@@ -59,10 +59,10 @@ struct ProfilePage: View {
                         }
                     }
                 }
-                .padding(.horizontal) // Added horizontal padding to the VStack
+                .padding(.horizontal)
             }
         }
-        .padding() // Added padding to the outer ScrollView
+        .padding() 
     }
 }
 

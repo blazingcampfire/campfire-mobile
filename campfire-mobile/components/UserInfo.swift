@@ -8,11 +8,11 @@
 import Foundation
 
 struct UserInfo {
-    var name: String = "Name"
-    var username: String = "username"
+    var name: String = "David"
+    var username: String = "@david_adegangbanger"
     var profilepic: String = "ragrboard" //url string
     var chocs: Int = 10
-    var bio: String = "I'm him"
+    var bio: String = "I'm him hahwugehfurgfuhiwgfuhfwe"
     var posts: [String] = ["fefef", "jfewjfje", "fjewfjewjf"]
     
 }

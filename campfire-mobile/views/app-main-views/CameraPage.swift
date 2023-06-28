@@ -15,35 +15,46 @@ struct CameraPage: View {
                 .edgesIgnoringSafeArea(.all)
                 .aspectRatio(contentMode: .fill)
             
-            HStack {
-            Button(action: {
-                print("yay")
-            }) {
-                Circle()
-                    .fill(Color.clear)
-                    .frame(width: 100, height: 90)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.white, lineWidth: 10)
-                    )
-                    
-            }
-            .offset(x:15, y:280)
+            VStack {
+                Spacer()
                 
-                Button {
-                    print("upload images")
-                } label: {
-                    Image(systemName: "square.and.arrow.up.on.square")
-                        .font(.system(size: 25))
-                        .foregroundColor(.white)
+                HStack(spacing: 25) {
+          
+                    
+                    Button(action: {
+                        print("yay")
+                    }) {
+                        Circle()
+                            .fill(Color.clear)
+                            .frame(width: 100, height: 90)
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 10)
+                                    .overlay(
+                                        Image(systemName: "flame")
+                                            .foregroundColor(Theme.Peach)
+                                            .font(.system(size: 30))
+                                    )
+                            )
+                    }
+                    .padding(.bottom, 10)
+                    
+            
+                    Button(action: {
+                        print("upload images")
+                    }) {
+                        Image(systemName: "square.and.arrow.up.on.square")
+                            .font(.system(size: 25))
+                            .foregroundColor(.white)
+                    }
                 }
-                .offset(x: 35, y: 280)
+                .padding(.leading, 55)
+            }
+            .padding(.bottom, 25)
         }
-        }
-        
-        
     }
 }
+
 
 
 

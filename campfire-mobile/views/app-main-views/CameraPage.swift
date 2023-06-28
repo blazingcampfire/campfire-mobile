@@ -8,15 +8,49 @@
 import SwiftUI
 
 struct CameraPage: View {
+    @State private var flashTapped: Bool = false
+    
     var body: some View {
+        
         ZStack {
             Image("background")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
                 .aspectRatio(contentMode: .fill)
             
+            
+            VStack(spacing:10) {
+                Button(action: {
+                    print("flip camera")
+                    self.flashTapped.toggle()
+                }) {
+                    Image(systemName: self.flashTapped == true ? "bolt.circle" : "bolt.circle.fill")
+                        .foregroundColor(.white)
+                        .font(.system(size:40))
+                }
+                
+                
+                Button(action: {
+                    print("flip camera")
+                }) {
+                    Image(systemName: "arrow.2.squarepath")
+                        .foregroundColor(.white)
+                        .font(.system(size:35, weight: .semibold))
+                }
+            }
+            .padding(.top,-300)
+            .padding(.leading, 290)
+            
+            
+            
+            
+            
+            
             VStack {
                 Spacer()
+                
+              
+                
                 
                 HStack(spacing: 25) {
           

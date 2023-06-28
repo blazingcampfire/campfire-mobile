@@ -54,6 +54,7 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
+    let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     var caption: String
@@ -88,20 +89,39 @@ struct VidsPlayer: View {
                     HStack(alignment: .bottom) {
                         VStack(alignment: .leading, spacing: 0) {
                             HStack(spacing: 10) {
-                                Image(userInfo.profilepic)
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .clipShape(Circle())
-                                Text(userInfo.username)
-                                    .font(.custom("LexendDeca-Bold", size: 15))
                                 
+                                Button(action: {
+                                   // lead to profile page
+                                }) {
+                                    Image(userInfo.profilepic)
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .clipShape(Circle())
+                                }
+                                
+                                Button(action: {
+                                    //lead to profile page
+                                }) {
+                                    Text(userInfo.username)
+                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                }
                             }
-                            Text(caption)
-                                .font(.custom("LexendDeca-Regular", size: 15))
-                                .padding(.leading, 40)
+                            VStack(spacing: 5) {
+                                Text(caption)
+                                    .font(.custom("LexendDeca-Regular", size: 15))
+                                    .padding(.leading, 40)
+                                
+                                Button(action: {
+                                    //lead to map and where location is 
+                                }) {
+                                    Text("📍 37 High Street")
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                        .padding(.leading, -130)
+                                }
+                            }
                             
                         }
-                        .padding(.top, 650)
+                        .padding(.top, 625)
                         Spacer(minLength: 20)
                     }
                 }
@@ -109,26 +129,48 @@ struct VidsPlayer: View {
                 .padding(.top)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .bottom)
-                VStack {
+                VStack(spacing: 0.8) {
+                    
                     Button(action: {
-                        
+                        //like post
                     }) {
-                        Image(systemName: "heart")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
+                        VStack(spacing: 5) {
+                      //      Image(systemName: "heart")
+                        //        .resizable()
+                          //      .frame(width: 30, height: 30)
+                            //    .foregroundColor(.white)
+                            Text("🍫")
+                                .font(.system(size: 35))
+                                
+    
+                            Text("\(feedinfo.likecount)")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-Regular", size: 15))
+                        }
+                        .padding(.top, 15)
+                        
                     }
+                    
+                    
                     Button(action: {
-                        
+                        //comment
                     }) {
+                        VStack {
                         Image(systemName: "text.bubble")
                             .resizable()
                             .frame(width: 30, height: 30)
                             .foregroundColor(.white)
+                            Text("\(feedinfo.commentnum)")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-Regular", size: 15))
+                    }
+                        
                     }
                     .padding(.top, 20)
+                    
+                    
                     Button(action: {
-                        
+                        //report post
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
@@ -137,7 +179,7 @@ struct VidsPlayer: View {
                     }
                     .padding(.top, 15)
                 }
-                .padding(.top, 500)
+                .padding(.top, 380)
                 .padding(.leading, 325)
             }
         }

@@ -12,12 +12,12 @@ struct ProfilePage: View {
     var userProfile: UserProfile
     
     let postImages: [[String]] = [
-        ["ragrboard", "dawg moment"],
-        ["ragrboard2", " my yale moment: "],
-        ["ragrboard3", " weekend outing "],
-        ["ragrboard4", " favorite study spot"],
-        ["ragrboard5", " frat moment" ],
-        ["ragrboard6", " my party face"]
+        ["ragrboard", "1"],
+        ["ragrboard2"],
+        ["ragrboard3", "3"],
+        ["ragrboard4"],
+        ["ragrboard5", "5"],
+        ["ragrboard6"]
     ] //url strings in firebase
     
     init() {
@@ -48,9 +48,13 @@ struct ProfilePage: View {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                         ForEach(0..<postImages.count, id: \.self) { index in
                             VStack(spacing: 20) {
-                                PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
-                                    .frame(width: 350)
-                                    //.shadow(color: .black, radius: 3)
+                                if postImages[index].count == 2 {
+                                    PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
+                                        .frame(width: 350)
+                                } else {
+                                    PostAttributes(post: postImages[index][0], prompt: nil)
+                                        .frame(width: 350)
+                                }
                             }
                         }
                     }

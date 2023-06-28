@@ -292,8 +292,6 @@
 				F8A0F2812A49FED900090110 /* PostAttributes.swift */,
 				B145F5EE2A4A7815005E8787 /* FeedInfo.swift */,
 				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
-				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
-				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -382,6 +380,8 @@
 				B18B19712A46059700309256 /* SettingsPage.swift */,
 				B18B19732A4613A200309256 /* LeaderboardPage.swift */,
 				F86D83A72A4BC54100223F9A /* EditProfile.swift */,
+				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
+				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
 			);
 			path = "app-main-views";
 			sourceTree = "<group>";

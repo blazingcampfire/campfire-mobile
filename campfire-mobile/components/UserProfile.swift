@@ -22,7 +22,7 @@ struct UserProfile: View {
                     .font(.custom("LexendDeca-SemiBold", size: 15))
                 Circle()
                     .frame(width: 4, height: 4)
-                    .foregroundColor(.black)
+                    .foregroundColor(Theme.TextColor)
                 Text(String(userinfo.chocs) + "🍫")
                     .font(.custom("LexendDeca-SemiBold", size: 15))
             }

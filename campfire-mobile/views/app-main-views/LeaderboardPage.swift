@@ -12,21 +12,24 @@ let info = UserInfo()
 struct LeaderboardPage: View {
     @State private var selectedOption = 5
     var body: some View {
-                VStack(spacing: 0) {
-                    Picker(selection: $selectedOption, label: Text("")) {
-                        Text("All-Time").tag(5)
-                        Text("Weekly").tag(6)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding()
+        ZStack {
             
-                    //reusable for each row, color scheme
-                    if selectedOption == 5 {
-                        LeaderboardList(range: 1...10)
-                    } else if selectedOption == 6 {
-                        LeaderboardList(range: 1...10)
-                    }
-        
+            VStack(spacing: 0) {
+                Picker(selection: $selectedOption, label: Text("")) {
+                    Text("All-Time").tag(5)
+                    Text("Weekly").tag(6)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                //reusable for each row, color scheme
+                if selectedOption == 5 {
+                    LeaderboardList(range: 1...10)
+                } else if selectedOption == 6 {
+                    LeaderboardList(range: 1...10)
+                }
+                
+            }
         }
     }
 }

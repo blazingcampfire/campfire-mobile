@@ -18,7 +18,7 @@ struct UserProfilePic: View {
             .clipShape(Circle())
             .overlay(
                 Circle()
-                    .stroke(.gray, lineWidth: 0.3)
+                    .stroke(Theme.PFPColor, lineWidth: 0.4)
                 )
     }
 }

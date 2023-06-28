@@ -12,13 +12,14 @@ import SwiftUI
 struct PostAttributes: View {
     var post: String
     var prompt: String?
+    var width: CGFloat? = 350
     
     var body: some View {
         VStack(spacing: 1) {
             if let prompt = prompt {
                 Rectangle()
                     .fill(Theme.Peach)
-                    .frame(width: 350, height: 325 / 7)
+                    .frame(width: width, height: 325 / 7)
                     .overlay(
                         Text(prompt)
                             .foregroundColor(.white)
@@ -29,7 +30,7 @@ struct PostAttributes: View {
             Image(post)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 350, height: 350)
+                .frame(width: width, height: width)
                 .clipped()
         }
         .clipShape(RoundedRectangle(cornerRadius: 30))
@@ -45,7 +46,7 @@ struct PostAttributes_Previews: PreviewProvider {
             VStack {
                 PostAttributes(post: "ragrboard4", prompt: "for the dogs")
                     
-                PostAttributes(post: "ragrboard5")
+                PostAttributes(post: "ragrboard5", width: 350)
             }
         }
     }

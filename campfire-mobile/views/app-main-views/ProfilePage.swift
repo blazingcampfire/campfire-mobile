@@ -32,7 +32,7 @@ struct ProfilePage: View {
                 .ignoresSafeArea(.all)
             
             
-            
+
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {

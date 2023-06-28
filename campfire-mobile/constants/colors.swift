@@ -13,4 +13,6 @@ struct Theme {
     static let Peach = Color("Peach")
     static let Apricot = Color("Apricot")
     static let ScreenColor = Color("screencolor")
+    static let PFPColor = Color("profileborder")
+    static let TextColor = Color("textcolor")
 }

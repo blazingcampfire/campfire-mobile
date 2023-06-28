@@ -21,7 +21,6 @@ struct SearchPage: View {
 
 struct FriendsList: View {
     let range: ClosedRange<Int>
-    
     var body: some View {
         List {
             ForEach(range, id: \.self) { number in

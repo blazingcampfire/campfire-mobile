@@ -20,5 +20,5 @@ struct FeedInfo {
     var comments: [String] = ["",""]
  //   var location: CLLocation //Not exactly sure how it collects the location, need to translate to name/string
     var comlikecount: Int = 10
-    
+    var feedpost: String = "darsh"
 }

@@ -12,25 +12,30 @@ let info = UserInfo()
 struct LeaderboardPage: View {
     @State private var selectedOption = 5
     var body: some View {
-        ZStack {
+        
+        VStack(spacing: 0) {
+            Picker(selection: $selectedOption, label: Text("")) {
+                Text("All-Time").tag(5)
+                Text("Weekly").tag(6)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
             
-            VStack(spacing: 0) {
-                Picker(selection: $selectedOption, label: Text("")) {
-                    Text("All-Time").tag(5)
-                    Text("Weekly").tag(6)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                //reusable for each row, color scheme
-                if selectedOption == 5 {
-                    LeaderboardList(range: 1...10)
-                } else if selectedOption == 6 {
-                    LeaderboardList(range: 1...10)
-                }
-                
+            Divider()
+                .frame(height: 0.8)
+                .overlay(.black)
+            
+            if selectedOption == 5 {
+                LeaderboardList(range: 1...10)
+                    .listStyle(InsetListStyle())
+            }
+            
+            else if selectedOption == 6 {
+                LeaderboardList(range: 1...10)
+                    .listStyle(InsetListStyle())
             }
         }
+    
     }
 }
 
@@ -43,8 +48,6 @@ struct LeaderboardList: View {
         List {
             ForEach(range, id: \.self) { number in
                 HStack {
-                    
-                    
                     
                     Text("\(number)")
                     .frame(width: 30, alignment: .leading)
@@ -62,9 +65,9 @@ struct LeaderboardList: View {
                     
                     VStack(alignment: .leading) {
                         Text(info.name)
-                            .bold()
+                            .font(.custom("LexendDeca-Bold", size: 18))
                         Text("@\(info.username)")
-                            .font(.system(size: 12))
+                            .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
                     
@@ -74,9 +77,12 @@ struct LeaderboardList: View {
                         .font(.custom("LexendDeca-Bold", size: 23))
                     
                 }
+                .listRowBackground(Color.white)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets(top: 9, leading: 10, bottom: 15, trailing: 10))
             }
         }
-        .listStyle(InsetGroupedListStyle())
+        .listStyle(PlainListStyle())
     }
 }
 

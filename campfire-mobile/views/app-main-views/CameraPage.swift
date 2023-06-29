@@ -33,7 +33,7 @@ struct CameraPage: View {
                 Button(action: {
                     print("flip camera")
                 }) {
-                    Image(systemName: "arrow.2.squarepath")
+                    Image(systemName: "arrow.triangle.2.circlepath.camera")
                         .foregroundColor(.white)
                         .font(.system(size:35, weight: .semibold))
                 }
@@ -64,11 +64,11 @@ struct CameraPage: View {
                             .overlay(
                                 Circle()
                                     .stroke(Color.white, lineWidth: 10)
-                                    .overlay(
-                                        Image(systemName: "flame")
-                                            .foregroundColor(Theme.Peach)
-                                            .font(.system(size: 30))
-                                    )
+//                                    .overlay(
+//                                        Image(systemName: "flame")
+//                                            .foregroundColor(Theme.Peach)
+//                                            .font(.system(size: 30))
+//                                    )
                             )
                     }
                     .padding(.bottom, 10)

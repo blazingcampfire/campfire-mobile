@@ -9,7 +9,7 @@ import Foundation
 
 struct UserInfo {
     var name: String = "David"
-    var username: String = "@david_adegangbanger"
+    var username: String = "david_adegangbanger"
     var profilepic: String = "ragrboard" //url string
     var chocs: Int = 10
     var bio: String = "I'm him hahwugehfurgfuhiwgfuhfwe"

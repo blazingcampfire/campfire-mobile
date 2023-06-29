@@ -26,8 +26,8 @@ struct SettingsPage: View {
                                     .foregroundColor(Theme.Peach)
                             }
                         }
-                        
-                        Toggle(isOn: .constant(true)) {
+                        .font(.custom("LexendDeca-Regular", size: 16))
+                        Section(header: Text("About")) {
                             Label {
                                 Text("Notifications")
                             } icon: {
@@ -60,8 +60,6 @@ struct SettingsPage: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(Theme.Peach)
                         }
-                        
-                        
                         Text("Contact Us")
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))

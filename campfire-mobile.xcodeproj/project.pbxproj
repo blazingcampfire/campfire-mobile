@@ -69,6 +69,9 @@
 		F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A72A42999800864FBD /* ProfilePictureView.swift */; };
 		F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A92A42A74200864FBD /* TheFeed.swift */; };
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
+		F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */; };
+		F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */; };
+		F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */; };
 		F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */; };
 		F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */; };
 		F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */; };
@@ -169,6 +172,9 @@
 		F82C10A72A42999800864FBD /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		F82C10A92A42A74200864FBD /* TheFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFeed.swift; sourceTree = "<group>"; };
 		F834163F2A40E6A500803D32 /* SetProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfilePic.swift; sourceTree = "<group>"; };
+		F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostPage.swift; sourceTree = "<group>"; };
+		F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
+		F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotsFeedPage.swift; sourceTree = "<group>"; };
 		F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumber.swift; sourceTree = "<group>"; };
 		F85F03972A3F9A89000DCBEF /* VerifyAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAccount.swift; sourceTree = "<group>"; };
 		F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrNumber.swift; sourceTree = "<group>"; };
@@ -377,6 +383,9 @@
 				B1B6CCB02A4114A1001C6A50 /* MapPage.swift */,
 				B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */,
 				B1EF99882A4289540001E8CC /* CameraPage.swift */,
+				F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */,
+				F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */,
+				F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */,
 				B18B19712A46059700309256 /* SettingsPage.swift */,
 				B18B19732A4613A200309256 /* LeaderboardPage.swift */,
 				F86D83A72A4BC54100223F9A /* EditProfile.swift */,
@@ -572,6 +581,7 @@
 				F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */,
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
 				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
+				F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
 				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
@@ -581,6 +591,7 @@
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
+				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,
 				F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
 				B1B71FCC2A48F16600C54090 /* MapHotspots.swift in Sources */,
@@ -605,6 +616,7 @@
 				B16DFF3B2A40BED1003314FF /* VerificationCode.swift in Sources */,
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
+				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,27 +1,29 @@
 //
-//  SearchPage.swift
+//  FriendsPage.swift
 //  campfire-mobile
 //
-//  Created by Femi Adebogun on 6/19/23.
+//  Created by Adarsh G on 6/28/23.
 //
 
 import SwiftUI
 
-struct SearchPage: View {
+struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
-        NavigationStack {
-           // Text("Search for users") //users collection querey
-            FriendsList(range: 1...12)
+        NavigationView {
+            ListFriends(range: 1...12)
+            .navigationTitle("Friends")
+            .font(.custom("LexendDeca-Bold", size: 25))
+            .listStyle(PlainListStyle())
         }
         .searchable(text: $searchText)
         .background(Color.white)
-        .listStyle(PlainListStyle())
     }
 }
 
-struct FriendsList: View {
+struct ListFriends: View {
     let range: ClosedRange<Int>
+    
     var body: some View {
         List {
             ForEach(range, id: \.self) { number in
@@ -35,23 +37,17 @@ struct FriendsList: View {
                     
                     
                     VStack(alignment: .leading) {
-                        Text(info.name)
-                            .font(.custom("LexendDeca-Bold", size: 18))
+                        Button(action: {
+                        }) {
+                            Text(info.name)
+                                .font(.custom("LexendDeca-Bold", size: 18))
+                                .foregroundColor(.black)
+                        }
+                        
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
-                    
-                    Spacer()
-                    
-                    Button {
-                        print("add friend")
-                    }   label: {
-                        Image(systemName: "plus.circle")
-                            .font(.system(size:30))
-                            .foregroundColor(Theme.Peach)
-                    }
-                    
                 }
                 .listRowBackground(Color.white)
                 .listRowSeparator(.hidden)
@@ -63,8 +59,9 @@ struct FriendsList: View {
 
 
 
-struct SearchPage_Previews: PreviewProvider {
+
+struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {
-        SearchPage()
+        FriendsPage()
     }
 }

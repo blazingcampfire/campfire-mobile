@@ -17,23 +17,23 @@ struct CamPostPage: View {
     
     var body: some View {
         VStack(spacing: 50) {
-            VStack {
-                GeometryReader { geometry in
-                                   VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "david", withExtension: "mp4")!))
-                                       .aspectRatio(1, contentMode: .fill) // Set aspect ratio to 1:1 for square shape
-                                       .frame(width: min(geometry.size.width, geometry.size.height)) // Adjust the frame to square shape
-                                       .clipped() // Clip the video to the square frame
-                               }
+           VStack {
+            //    GeometryReader { geometry in
+              //                     VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "david", withExtension: "mp4")!))
+                    //                   .aspectRatio(1, contentMode: .fill) // Set //aspect ratio to 1:1 for square shape
+                      //                 .frame(width: min(geometry.size.width, geometry.size.height)) // Adjust the frame to square shape
+                          //             .clipped() // Clip the video to the square frame
+                            //   }
                    
                 
-                // Image(feedinfo.feedpost)
-                //    .resizable()
-                //      .aspectRatio(contentMode: .fit)
-                //        .frame(width: 450, height:450)
-                //          .clipped()
+                 Image(feedinfo.feedpost)
+                    .resizable()
+                      .aspectRatio(contentMode: .fit)
+                        .frame(width: 430, height:430)
+                         .clipped()
             }
             
-            //    .clipShape(RoundedRectangle(cornerRadius: 60))
+           //   .clipShape(RoundedRectangle(cornerRadius: 60))
             
             //    Spacer()
             VStack {

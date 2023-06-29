@@ -54,6 +54,8 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
+    @State private var likeTapped: Bool = false
+    
     let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
@@ -123,6 +125,7 @@ struct VidsPlayer: View {
                         .padding(.top, 625)
                         Spacer(minLength: 20)
                     }
+                    .padding(.leading, 40)
                 }
                 .padding(.horizontal)
                 .padding(.top)
@@ -132,30 +135,29 @@ struct VidsPlayer: View {
                     
                     Button(action: {
                         //like post
+                        self.likeTapped.toggle() 
                     }) {
-                        VStack(spacing: 5) {
-                      //      Image(systemName: "heart")
-                        //        .resizable()
-                          //      .frame(width: 30, height: 30)
+                        VStack(spacing: -55) {
+                            //      Image(systemName: "heart")
+                            //        .resizable()
+                            //      .frame(width: 30, height: 30)
                             //    .foregroundColor(.white)
-                            Text("🍫")
-                                .font(.system(size: 35))
+                            
+                            Image(self.likeTapped == false ? "eaten" : "noteaten")
                                 
-    
-                            Text("\(feedinfo.likecount)")
-                                .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Regular", size: 15))
+                                Text("\(feedinfo.likecount)")
+                                    .foregroundColor(.white)
+                                    .font(.custom("LexendDeca-Regular", size: 15))
+                            
                         }
                         .padding(.top, 15)
-                        
                     }
-                    
                     
                     Button(action: {
                         //comment
                     }) {
                         VStack {
-                        Image(systemName: "text.bubble")
+                        Image(systemName: "text.bubble.fill")
                             .resizable()
                             .frame(width: 30, height: 30)
                             .foregroundColor(.white)

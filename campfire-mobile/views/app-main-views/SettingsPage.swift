@@ -27,7 +27,8 @@ struct SettingsPage: View {
                             }
                         }
                         .font(.custom("LexendDeca-Regular", size: 16))
-                        Section(header: Text("About")) {
+                
+                        Toggle(isOn: .constant(true)) {
                             Label {
                                 Text("Notifications")
                             } icon: {

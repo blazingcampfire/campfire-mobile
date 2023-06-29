@@ -47,7 +47,7 @@ struct FriendsList: View {
                     Button {
                         print("add friend")
                     }   label: {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: "plus.circle.fill")
                             .font(.system(size:30))
                             .foregroundColor(Theme.Peach)
                     }

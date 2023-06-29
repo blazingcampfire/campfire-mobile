@@ -14,7 +14,7 @@ let posterInfo = UserInfo()
 struct FeedInfo {
     var postername = UserInfo().username
     var posterpic = UserInfo().profilepic
-    var postcaption: String = ""
+    var postcaption: String = "yoooooooo"
     var likecount: Int = 10
     var commentnum: Int = 19
     var comments: [String] = ["",""]

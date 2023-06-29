@@ -23,7 +23,7 @@ struct TheFeed: View {
             let size = proxy.size
             TabView(selection: $currentVid) {
                 ForEach($vids){$vids in
-                    VidsPlayer(vid: $vids, currentVid: $currentVid, caption: "when they get to dinking, they gon get to drinking")
+                    VidsPlayer(vid: $vids, currentVid: $currentVid)
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
                         .ignoresSafeArea(.all, edges: .top)
@@ -57,7 +57,6 @@ struct VidsPlayer: View {
     let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
-    var caption: String
     var body: some View {
         ZStack {
             if let player = vid.player {
@@ -107,7 +106,7 @@ struct VidsPlayer: View {
                                 }
                             }
                             VStack(spacing: 5) {
-                                Text(caption)
+                                Text(feedinfo.postcaption)
                                     .font(.custom("LexendDeca-Regular", size: 15))
                                     .padding(.leading, 40)
                                 
@@ -116,8 +115,8 @@ struct VidsPlayer: View {
                                 }) {
                                     Text("📍 37 High Street")
                                         .font(.custom("LexendDeca-Regular", size: 15))
-                                        .padding(.leading, -130)
                                 }
+                                .frame(alignment: .trailing)
                             }
                             
                         }

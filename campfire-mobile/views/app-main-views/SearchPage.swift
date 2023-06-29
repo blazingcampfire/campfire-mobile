@@ -11,7 +11,7 @@ struct SearchPage: View {
     @State private var searchText = ""
     var body: some View {
         NavigationStack {
-           // Text("Search for users") //users collection querey
+           // Text("Search for users") //users collection query
             FriendsList(range: 1...12)
         }
         .searchable(text: $searchText)
@@ -47,7 +47,7 @@ struct FriendsList: View {
                     Button {
                         print("add friend")
                     }   label: {
-                        Image(systemName: "plus.circle")
+                        Image(systemName: "plus.circle.fill")
                             .font(.system(size:30))
                             .foregroundColor(Theme.Peach)
                     }

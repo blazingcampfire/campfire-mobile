@@ -291,7 +291,6 @@
 				B16DFF3A2A40BED1003314FF /* VerificationCode.swift */,
 				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
 				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
-				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
 				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
 				F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */,
 				F8950CC92A4BA6C100FE30C1 /* UserProfile.swift */,
@@ -305,6 +304,7 @@
 		E28D3A632A3EB51400B1EEE9 /* constants */ = {
 			isa = PBXGroup;
 			children = (
+				B18B19AE2A469D1D00309256 /* customfonts */,
 				E28D3A642A3EB52400B1EEE9 /* colors.swift */,
 				F86D83A52A4BC37900223F9A /* prompts.swift */,
 			);
@@ -334,13 +334,13 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
-				B18B19AE2A469D1D00309256 /* customfonts */,
 				F8950DC42A48000100C13075 /* feed */,
 				E2E997B12A41459700EBBDD7 /* Info.plist */,
 				E28D3A632A3EB51400B1EEE9 /* constants */,
 				E28D3A5E2A3E94D100B1EEE9 /* components */,
 				E28D3A5D2A3E94C700B1EEE9 /* views */,
 				E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */,
+				F83B0EB72A4D367B00F98CFA /* model */,
 				E29095DC2A3E473E001BEDDE /* ContentView.swift */,
 				E29095DE2A3E4741001BEDDE /* Assets.xcassets */,
 				E29095E32A3E4741001BEDDE /* Persistence.swift */,
@@ -393,6 +393,14 @@
 				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
 			);
 			path = "app-main-views";
+			sourceTree = "<group>";
+		};
+		F83B0EB72A4D367B00F98CFA /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		F8950DC42A48000100C13075 /* feed */ = {

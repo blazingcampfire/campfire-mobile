@@ -32,7 +32,6 @@ struct SettingsPage: View {
                                 }
                             }
                         }
-                        
                         .font(.custom("LexendDeca-Regular", size: 16))
                         Section(header: Text("About")) {
                             Label {
@@ -56,8 +55,6 @@ struct SettingsPage: View {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(Theme.Peach)
                         }
-                        
-                        
                         Text("Contact Us")
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))

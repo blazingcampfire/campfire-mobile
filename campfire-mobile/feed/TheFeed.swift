@@ -50,10 +50,12 @@ struct TheFeed_Previews: PreviewProvider {
     }
 }
 
+    
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
+    @State private var HotSelected = true
     let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
@@ -86,7 +88,39 @@ struct VidsPlayer: View {
                 }
                 VStack {
                     HStack(alignment: .bottom) {
+                        
                         VStack(alignment: .leading, spacing: 0) {
+                        
+                            Spacer()
+                                HStack {
+                                    Spacer()
+                                    Spacer()
+                                    Spacer()
+                                    Button(action: {
+                                        HotSelected = true
+                                    }) {
+                                        Text("Hot")
+                                            .font(.custom("LexendDeca-Bold", size: 35))
+                                            .opacity(HotSelected ? 1.0 : 0.5)
+                                    }
+                                    
+                                    Rectangle()
+                                        .frame(width: 2, height: 30)
+                                        .opacity(0.75)
+                                    Button(action: {
+                                        HotSelected = false
+                                    }) {
+                                        Text("New")
+                                            .font(.custom("LexendDeca-Bold", size: 35))
+                                            .opacity(HotSelected ? 0.5 : 1.0)
+                                    }
+                                    Spacer()
+                                    Spacer()
+                                    Spacer()
+                                }
+                                .offset(x: 10, y: -600)
+                                Spacer()
+                            
                             HStack(spacing: 10) {
                                 
                                 Button(action: {

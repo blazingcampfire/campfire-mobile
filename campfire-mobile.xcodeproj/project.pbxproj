@@ -294,7 +294,6 @@
 				E28D3A5F2A3E968400B1EEE9 /* LFButton.swift */,
 				F8DB43F12A3F90170063205B /* FormTextField.swift */,
 				B16DFF352A40B9D2003314FF /* NumberForm.swift */,
-				B16DFF3A2A40BED1003314FF /* VerificationCode.swift */,
 				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
 				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
 				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
@@ -399,8 +398,6 @@
 		E2C446892A4E86840032CF34 /* login */ = {
 			isa = PBXGroup;
 			children = (
-				E28D3A5F2A3E968400B1EEE9 /* LFButton.swift */,
-				F82C10A72A42999800864FBD /* ProfilePictureView.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -408,8 +405,6 @@
 		E2C4468A2A4E86AF0032CF34 /* user-input */ = {
 			isa = PBXGroup;
 			children = (
-				F8DB43F12A3F90170063205B /* FormTextField.swift */,
-				B16DFF352A40B9D2003314FF /* NumberForm.swift */,
 			);
 			path = "user-input";
 			sourceTree = "<group>";
@@ -417,11 +412,6 @@
 		E2C4468B2A4E86DB0032CF34 /* main-app */ = {
 			isa = PBXGroup;
 			children = (
-				B1B71FCB2A48F16600C54090 /* MapHotspots.swift */,
-				F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */,
-				F8A0F2812A49FED900090110 /* PostAttributes.swift */,
-				B145F5EE2A4A7815005E8787 /* FeedInfo.swift */,
-				F8950CC92A4BA6C100FE30C1 /* UserProfile.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -485,8 +475,6 @@
 		E2C446922A4E89C50032CF34 /* bottom-navbar */ = {
 			isa = PBXGroup;
 			children = (
-				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
-				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
 			);
 			path = "bottom-navbar";
 			sourceTree = "<group>";
@@ -902,7 +890,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -934,7 +921,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -963,7 +949,6 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -985,7 +970,6 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1006,7 +990,6 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1026,7 +1009,6 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
-				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @State private var searchText = ""
+    @State var searchText = ""
     var body: some View {
         NavigationStack {
            // Text("Search for users") //users collection query
@@ -47,6 +47,7 @@ struct FriendsList: View {
                     Button {
                         print("add friend")
                     }   label: {
+                    // Image(systemName: self.flashTapped == true ? "bolt.circle" : "bolt.circle.fill")
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size:30))
                             .foregroundColor(Theme.Peach)
@@ -60,6 +61,7 @@ struct FriendsList: View {
         .listStyle(PlainListStyle())
     }
 }
+
 
 
 

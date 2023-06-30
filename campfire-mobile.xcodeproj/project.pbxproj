@@ -43,6 +43,7 @@
 		B18B19AA2A46977200309256 /* LexendDeca-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B197F2A46974200309256 /* LexendDeca-Medium.ttf */; };
 		B18B19AB2A46977200309256 /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19782A46974200309256 /* LexendDeca-SemiBold.ttf */; };
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
+		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
 		B1B6CCAD2A411135001C6A50 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */; };
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
@@ -142,6 +143,7 @@
 		B18B198E2A46974300309256 /* Comfortaa-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comfortaa-SemiBold.ttf"; sourceTree = "<group>"; };
 		B18B198F2A46974300309256 /* JosefinSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
+		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
 		B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				F8A0F2812A49FED900090110 /* PostAttributes.swift */,
 				B145F5EE2A4A7815005E8787 /* FeedInfo.swift */,
 				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
+				B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
 				B1B71FCC2A48F16600C54090 /* MapHotspots.swift in Sources */,
+				B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */,
 				B16DFF362A40B9D2003314FF /* NumberForm.swift in Sources */,
 				B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */,
 				F8A371D92A4BEE4B0076F1C1 /* EditPost.swift in Sources */,

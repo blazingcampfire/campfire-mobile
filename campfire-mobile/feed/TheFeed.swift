@@ -133,42 +133,38 @@ struct VidsPlayer: View {
                 .frame(maxWidth: .infinity, alignment: .bottom)
                 VStack(spacing: 0.8) {
                     
-                    Button(action: {
-                        //like post
-                        self.likeTapped.toggle() 
-                    }) {
-                        VStack(spacing: -55) {
-                            //      Image(systemName: "heart")
-                            //        .resizable()
-                            //      .frame(width: 30, height: 30)
-                            //    .foregroundColor(.white)
-                            
-                            Image(self.likeTapped == false ? "eaten" : "noteaten")
-                                
-                                Text("\(feedinfo.likecount)")
-                                    .foregroundColor(.white)
-                                    .font(.custom("LexendDeca-Regular", size: 15))
-                            
+                    VStack(spacing: -60) {
+                        Button(action: {
+                            //like post
+                            self.likeTapped.toggle()
+                        }) {
+                            VStack {
+                                Image(self.likeTapped == false ? "eaten" : "noteaten")
+                            }
+                            .padding(.leading, -15)
                         }
-                        .padding(.top, 15)
+                        Text("\(feedinfo.likecount)")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Regular", size: 16))
                     }
                     
+                    
+                    VStack {
                     Button(action: {
                         //comment
                     }) {
                         VStack {
-                        Image(systemName: "text.bubble.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                            Text("\(feedinfo.commentnum)")
+                            Image(systemName: "text.bubble.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
                                 .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Regular", size: 15))
+                        }
                     }
-                        
-                    }
+                        Text("\(feedinfo.commentnum)")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Regular", size: 16))
+                }
                     .padding(.top, 20)
-                    
                     
                     Button(action: {
                         //report post

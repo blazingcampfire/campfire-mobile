@@ -14,7 +14,6 @@ struct SettingsPage: View {
                 .ignoresSafeArea(.all)
             
             NavigationView {
-                //accents peach color for icon
                 Form {
                     Section(header: Text("Display")) {
                         

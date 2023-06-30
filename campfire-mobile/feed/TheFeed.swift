@@ -189,7 +189,7 @@ struct VidsPlayer: View {
                         //comment
                     }) {
                         VStack {
-                        Image(systemName: "text.bubble")
+                        Image(systemName: "text.bubble.fill")
                             .resizable()
                             .frame(width: 30, height: 30)
                             .foregroundColor(.white)

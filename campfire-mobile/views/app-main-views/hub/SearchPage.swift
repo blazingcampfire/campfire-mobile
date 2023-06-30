@@ -10,13 +10,16 @@ import SwiftUI
 struct SearchPage: View {
     @State private var searchText = ""
     var body: some View {
-        NavigationStack {
-           // Text("Search for users") //users collection query
-            FriendsList(range: 1...12)
+        TopNavBar {
+            NavigationStack {
+                // Text("Search for users") //users collection query
+                FriendsList(range: 1...12)
+            }
+            .searchable(text: $searchText)
+            .background(Color.white)
+            .listStyle(PlainListStyle())
+            .padding(.top, -10)
         }
-        .searchable(text: $searchText)
-        .background(Color.white)
-        .listStyle(PlainListStyle())
     }
 }
 

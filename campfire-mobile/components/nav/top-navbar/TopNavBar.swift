@@ -22,6 +22,7 @@ struct TopNavBar<Content:View>: View {
             }
         }
         .navigationBarHidden(true)
+        .background(.clear)
     }
 
 }

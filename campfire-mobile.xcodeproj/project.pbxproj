@@ -65,7 +65,7 @@
 		E29095F12A3E4741001BEDDE /* campfire_mobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095F02A3E4741001BEDDE /* campfire_mobileTests.swift */; };
 		E29095FB2A3E4741001BEDDE /* campfire_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */; };
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
-		E2C446832A4E62B50032CF34 /* CustomTopNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBarView.swift */; };
+		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
 		E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */; };
 		E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446862A4E82C20032CF34 /* TopNavBar.swift */; };
 		F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A72A42999800864FBD /* ProfilePictureView.swift */; };
@@ -169,7 +169,7 @@
 		E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "campfire-mobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITests.swift; sourceTree = "<group>"; };
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E2C446822A4E62B50032CF34 /* CustomTopNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBarView.swift; sourceTree = "<group>"; };
+		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2C446862A4E82C20032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				E2C446862A4E82C20032CF34 /* TopNavBar.swift */,
-				E2C446822A4E62B50032CF34 /* CustomTopNavBarView.swift */,
+				E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */,
 				E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */,
 			);
 			path = "top-navbar";
@@ -461,11 +461,19 @@
 		E2C446912A4E88820032CF34 /* nav */ = {
 			isa = PBXGroup;
 			children = (
+				E2C446922A4E89C50032CF34 /* bottom-navbar */,
 				E2C446882A4E84610032CF34 /* top-navbar */,
-				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
-				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
 			);
 			path = nav;
+			sourceTree = "<group>";
+		};
+		E2C446922A4E89C50032CF34 /* bottom-navbar */ = {
+			isa = PBXGroup;
+			children = (
+				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
+				B1B6CCAC2A411135001C6A50 /* NavigationBar.swift */,
+			);
+			path = "bottom-navbar";
 			sourceTree = "<group>";
 		};
 		F83416432A40EA6700803D32 /* app-main-views */ = {
@@ -696,7 +704,7 @@
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
-				E2C446832A4E62B50032CF34 /* CustomTopNavBarView.swift in Sources */,
+				E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */,
 				E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */,
 				B145F5EF2A4A7815005E8787 /* FeedInfo.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,

@@ -20,6 +20,7 @@ struct CustomTopNavBar: View {
             Spacer()
         }
         .foregroundColor(Theme.Peach)
+        .background(.clear)
     }
 }
 

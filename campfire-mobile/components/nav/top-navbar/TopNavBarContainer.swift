@@ -23,6 +23,7 @@ struct TopNavBarContainer<Content: View>: View {
             content
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background(.clear)
     }
 }
 

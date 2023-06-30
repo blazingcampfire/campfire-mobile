@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchPage: View {
     @State private var searchText = ""
     var body: some View {
-        TopNavBarContainer {
+        TopNavBar {
             NavigationStack {
                 // Text("Search for users") //users collection query
                 FriendsList(range: 1...12)

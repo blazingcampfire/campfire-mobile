@@ -9,14 +9,12 @@ import SwiftUI
 
 struct CustomTopNavBar: View {
     
-    @State private var title: String = "search"
-    @State private var iconName: String = "magnifyingglass.circle.fill"
+    @State private var title: String = "campfire"
+
     
     var body: some View {
         HStack {
             Spacer()
-            Image(systemName: iconName)
-                .font(.system(size: 24))
             Text(title)
                 .font(.custom("LexendDeca-Bold", size: 20))
             Spacer()

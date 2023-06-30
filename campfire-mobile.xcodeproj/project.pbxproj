@@ -68,6 +68,7 @@
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
 		E2C446812A4E604A0032CF34 /* TopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446802A4E604A0032CF34 /* TopNavBar.swift */; };
 		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
+		E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */; };
 		F82C10A82A42999800864FBD /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A72A42999800864FBD /* ProfilePictureView.swift */; };
 		F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A92A42A74200864FBD /* TheFeed.swift */; };
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
@@ -172,6 +173,7 @@
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E2C446802A4E604A0032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
+		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F82C10A72A42999800864FBD /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		F82C10A92A42A74200864FBD /* TheFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFeed.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				B145F5F02A4A8D08005E8787 /* NavBar.swift */,
 				E2C446802A4E604A0032CF34 /* TopNavBar.swift */,
 				E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */,
+				E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */,
 				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,
 				F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */,
+				E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
 				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,

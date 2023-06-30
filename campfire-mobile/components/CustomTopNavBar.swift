@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct CustomTopNavBar: View {
+    
+    @State private var title: String = "search"
+    @State private var iconName: String = "magnifyingglass.circle.fill"
+    
     var body: some View {
         HStack {
             Spacer()
-            Image(systemName: "sun.max.fill")
-            Text("campfire")
+            Image(systemName: iconName)
+                .font(.system(size: 24))
+            Text(title)
                 .font(.custom("LexendDeca-Bold", size: 20))
             Spacer()
         }
-        .background(.white)
         .foregroundColor(Theme.Peach)
     }
 }

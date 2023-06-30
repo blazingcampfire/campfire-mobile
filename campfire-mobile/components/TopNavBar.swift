@@ -24,3 +24,7 @@ struct TopNavBarView_Previews: PreviewProvider {
         TopNavBarView()
     }
 }
+
+extension TopNavBarView {
+    
+}

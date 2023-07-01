@@ -58,6 +58,8 @@
 		B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */; };
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
 		B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EF99882A4289540001E8CC /* CameraPage.swift */; };
+		E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E22A4FCF5D00410B34 /* Notification.swift */; };
+		E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */; };
 		E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */; };
 		E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */; };
 		E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A642A3EB52400B1EEE9 /* colors.swift */; };
@@ -162,6 +164,8 @@
 		B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouPage.swift; sourceTree = "<group>"; };
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B1EF99882A4289540001E8CC /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
+		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
 		E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreen.swift; sourceTree = "<group>"; };
 		E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetUp.swift; sourceTree = "<group>"; };
 		E28D3A642A3EB52400B1EEE9 /* colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colors.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 				B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */,
 				B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */,
 				B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */,
+				E280A9E22A4FCF5D00410B34 /* Notification.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -435,6 +440,7 @@
 				B18B19732A4613A200309256 /* LeaderboardPage.swift */,
 				F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */,
 				B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */,
+				E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */,
 			);
 			path = hub;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
+				E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
 				B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */,
 				F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */,
@@ -728,6 +735,7 @@
 				E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */,
 				F8950DCA2A48008A00C13075 /* Vid.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
+				E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */,
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
@@ -897,7 +905,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -928,7 +936,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -956,7 +964,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -977,7 +985,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -997,7 +1005,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1016,7 +1024,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

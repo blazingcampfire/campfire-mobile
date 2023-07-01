@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct NotificationsPage: View {
+    
+    let range: ClosedRange<Int>
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(range, id: \.self) { number in
+                Notification()
+            }
+        }
     }
 }
 
 struct NotificationsPage_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationsPage()
+        NotificationsPage(range: 1...12)
     }
 }

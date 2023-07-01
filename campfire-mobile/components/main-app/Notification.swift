@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationView: View {
+struct Notification: View {
     
     var title: String = "Friend Request"
     var content: String = "Adarsh Gadepalli has sent you a friend request!"
@@ -47,6 +47,6 @@ struct NotificationView: View {
 
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationView()
+        Notification()
     }
 }

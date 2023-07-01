@@ -44,7 +44,8 @@ struct NavigationBar: View {
             
             SearchPage()
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Tent", systemImage: "tent.fill")
+                       
                 }
                 .tag(3)
                 .toolbar(.visible, for: .tabBar)

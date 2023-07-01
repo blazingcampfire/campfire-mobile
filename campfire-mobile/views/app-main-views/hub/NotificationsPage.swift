@@ -12,9 +12,19 @@ struct NotificationsPage: View {
     let range: ClosedRange<Int>
     
     var body: some View {
-        List {
-            ForEach(range, id: \.self) { number in
-                Notification()
+        TopNavBar {
+            NavigationView {
+                List {
+                    ForEach(range, id: \.self) { number in
+                        VStack {
+                            Notification()
+                            Divider()
+                        }
+                        .navigationTitle("Notifications")
+                        
+                    }
+                    .listRowSeparator(.hidden)
+                }
             }
         }
     }

@@ -1,30 +1,29 @@
 //
-//  SearchPage.swift
+//  FriendsPage.swift
 //  campfire-mobile
 //
-//  Created by Femi Adebogun on 6/19/23.
+//  Created by Adarsh G on 6/28/23.
 //
 
 import SwiftUI
 
-struct SearchPage: View {
-    @State var searchText = ""
+struct FriendsPage: View {
+    @State private var searchText = ""
     var body: some View {
-        TopNavBar {
-            NavigationStack {
-                // Text("Search for users") //users collection query
-                FriendsList(range: 1...12)
+            NavigationView {
+                ListFriends(range: 1...12)
+                    .font(.custom("LexendDeca-Bold", size: 25))
+                    .listStyle(PlainListStyle())
             }
             .searchable(text: $searchText)
             .background(Color.white)
-            .listStyle(PlainListStyle())
-            .padding(.top, -10)
+            .padding(-10)
         }
-    }
 }
 
-struct FriendsList: View {
+struct ListFriends: View {
     let range: ClosedRange<Int>
+    
     var body: some View {
         List {
             ForEach(range, id: \.self) { number in
@@ -38,24 +37,17 @@ struct FriendsList: View {
                     
                     
                     VStack(alignment: .leading) {
-                        Text(info.name)
-                            .font(.custom("LexendDeca-Bold", size: 18))
+                        Button(action: {
+                        }) {
+                            Text(info.name)
+                                .font(.custom("LexendDeca-Bold", size: 18))
+                                .foregroundColor(.black)
+                        }
+                        
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
-                    
-                    Spacer()
-                    
-                    Button {
-                        print("add friend")
-                    }   label: {
-                    // Image(systemName: self.flashTapped == true ? "bolt.circle" : "bolt.circle.fill")
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size:30))
-                            .foregroundColor(Theme.Peach)
-                    }
-                    
                 }
                 .listRowBackground(Color.white)
                 .listRowSeparator(.hidden)
@@ -68,8 +60,8 @@ struct FriendsList: View {
 
 
 
-struct SearchPage_Previews: PreviewProvider {
+struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {
-        SearchPage()
+        FriendsPage()
     }
 }

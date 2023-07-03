@@ -87,6 +87,7 @@
 		F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */; };
 		F8A371D92A4BEE4B0076F1C1 /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */; };
 		F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */; };
+		F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */; };
 		F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB43F12A3F90170063205B /* FormTextField.swift */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +191,7 @@
 		F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFieldPage.swift; sourceTree = "<group>"; };
 		F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
 		F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePic.swift; sourceTree = "<group>"; };
+		F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeFunc.swift; sourceTree = "<group>"; };
 		F8DB43F12A3F90170063205B /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -409,6 +411,7 @@
 				F82C10A92A42A74200864FBD /* TheFeed.swift */,
 				F8950DC92A48008A00C13075 /* Vid.swift */,
 				F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */,
+				F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */,
 			);
 			path = feed;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
 				E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */,
+				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
 				B145F5EF2A4A7815005E8787 /* FeedInfo.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,

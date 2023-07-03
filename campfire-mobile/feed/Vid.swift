@@ -20,6 +20,7 @@ struct MediaFile: Identifiable {
 }
 let MediaFileJSON = [
     MediaFile(url: "david"),
-    MediaFile(url: "adarsh")
+    MediaFile(url: "adarsh"),
+    MediaFile(url: "toni")
 ]
 

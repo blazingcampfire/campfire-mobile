@@ -10,14 +10,16 @@ import SwiftUI
 struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
-        NavigationView {
-            ListFriends(range: 1...12)
-            .navigationTitle("Friends")
-            .font(.custom("LexendDeca-Bold", size: 25))
-            .listStyle(PlainListStyle())
+        TopNavBar {
+            NavigationView {
+                ListFriends(range: 1...12)
+                    .navigationTitle("friends")
+                    .font(.custom("LexendDeca-Bold", size: 25))
+                    .listStyle(PlainListStyle())
+            }
+            .searchable(text: $searchText)
+            .background(Color.white)
         }
-        .searchable(text: $searchText)
-        .background(Color.white)
     }
 }
 

@@ -55,6 +55,8 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var isPlaying = false
+    @State private var likeTapped: Bool = false
+    
     @State private var HotSelected = true
     let feedinfo = FeedInfo()
     
@@ -157,6 +159,7 @@ struct VidsPlayer: View {
                         .padding(.top, 625)
                         Spacer(minLength: 20)
                     }
+                    .padding(.leading, 40)
                 }
                 .padding(.horizontal)
                 .padding(.top)
@@ -164,43 +167,38 @@ struct VidsPlayer: View {
                 .frame(maxWidth: .infinity, alignment: .bottom)
                 VStack(spacing: 0.8) {
                     
-                    Button(action: {
-                        //like post
-                    }) {
-                        VStack(spacing: 5) {
-                      //      Image(systemName: "heart")
-                        //        .resizable()
-                          //      .frame(width: 30, height: 30)
-                            //    .foregroundColor(.white)
-                            Text("🍫")
-                                .font(.system(size: 35))
-                                
-    
-                            Text("\(feedinfo.likecount)")
-                                .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Regular", size: 15))
+                    VStack(spacing: -60) {
+                        Button(action: {
+                            //like post
+                            self.likeTapped.toggle()
+                        }) {
+                            VStack {
+                                Image(self.likeTapped == false ? "eaten" : "noteaten")
+                            }
+                            .padding(.leading, -15)
                         }
-                        .padding(.top, 15)
-                        
+                        Text("\(feedinfo.likecount)")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Regular", size: 16))
                     }
                     
                     
+                    VStack {
                     Button(action: {
                         //comment
                     }) {
                         VStack {
-                        Image(systemName: "text.bubble")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                            Text("\(feedinfo.commentnum)")
+                            Image(systemName: "text.bubble.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
                                 .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Regular", size: 15))
+                        }
                     }
-                        
-                    }
+                        Text("\(feedinfo.commentnum)")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Regular", size: 16))
+                }
                     .padding(.top, 20)
-                    
                     
                     Button(action: {
                         //report post

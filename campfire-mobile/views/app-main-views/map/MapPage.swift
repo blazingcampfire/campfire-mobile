@@ -9,7 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapPage: View {
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.316322, longitude: -72.922340), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+    @State var region =
+    MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 41.316322, longitude: -72.922340), span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
     
     var body: some View { //whole screen
         VStack {

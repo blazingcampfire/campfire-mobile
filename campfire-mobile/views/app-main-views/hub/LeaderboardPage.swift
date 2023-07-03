@@ -21,9 +21,6 @@ struct LeaderboardPage: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
             
-            Divider()
-                .frame(height: 0.8)
-                .overlay(.black)
             
             if selectedOption == 5 {
                 LeaderboardList(range: 1...10)

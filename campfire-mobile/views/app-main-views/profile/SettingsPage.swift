@@ -26,7 +26,8 @@ struct SettingsPage: View {
                             }
                         }
                         .font(.custom("LexendDeca-Regular", size: 16))
-                        Section(header: Text("About")) {
+                
+                        Toggle(isOn: .constant(true)) {
                             Label {
                                 Text("Notifications")
                             } icon: {
@@ -41,12 +42,21 @@ struct SettingsPage: View {
                         Label {
                             Text("FAQ")
                         } icon: {
-                            Image(systemName: "doc.fill")
+                            Image(systemName: "doc.plaintext.fill")
                                 .foregroundColor(Theme.Peach)
                         }
-                        
-                        Text("Privacy Policy")
-                        Text("Terms of Service")
+                        Label {
+                            Text("Privacy Policy")
+                        } icon: {
+                            Image(systemName: "key")
+                                .foregroundColor(Theme.Peach)
+                        }
+                        Label {
+                            Text("Terms of Service")
+                        } icon: {
+                            Image(systemName: "doc.plaintext.fill")
+                                .foregroundColor(Theme.Peach)
+                        }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
                     
@@ -54,23 +64,40 @@ struct SettingsPage: View {
                     Section(header: Text("Support")) {
                         //  Label("Report Account", systemImage: "exclamationmark.triangle.fill")
                         Label {
-                            Text("Report Account")
+                            Text("Report Issue")
                         } icon: {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(Theme.Peach)
                         }
-                        Text("Contact Us")
+                        Label {
+                            Text("Contact Us")
+                        } icon: {
+                            Image(systemName: "envelope")
+                                .foregroundStyle(Theme.Peach)
+                        }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
                     
-                    Section(header: Text("Account Permissions")) {
-                        Text("Log Out")
-                        Text("Delete Account")
+                    Section(header: Text("Account")) {
+                        Label {
+                            Text("Log Out")
+                        } icon: {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(Theme.Peach)
+                        }
+                            
+                            
+                        Label {
+                            Text("Delete Account")
+                        } icon: {
+                            Image(systemName: "delete.right")
+                                .foregroundColor(Theme.Peach)
+                        }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
                     
                 }
-                .navigationTitle("Settings").font(.custom("LexendDeca-Regular", size: 25))
+                .navigationTitle("Settings").font(.custom("JosefinSans-Regular", size: 25))
             }
         }
     }

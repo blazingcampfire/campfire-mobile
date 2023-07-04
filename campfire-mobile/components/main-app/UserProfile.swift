@@ -34,7 +34,7 @@ struct UserProfile: View {
                 Button(action: {
                     // Go to Edit Profile
                 }) {
-                    Text("Edit Profile")
+                    Text("Edit Profile") //conditional visibility, if viewing another user, show Add Friend instead
                         .font(.custom("LexendDeca-Bold", size: 15))
                         .foregroundColor(Theme.Peach)
                         .padding()

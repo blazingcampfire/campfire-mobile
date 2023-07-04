@@ -12,7 +12,6 @@ struct FriendsPage: View {
     var body: some View {
             NavigationView {
                 ListFriends(range: 1...12)
-                    .font(.custom("LexendDeca-Bold", size: 25))
                     .listStyle(PlainListStyle())
             }
             .searchable(text: $searchText)
@@ -29,6 +28,7 @@ struct ListFriends: View {
             ForEach(range, id: \.self) { number in
                 HStack {
                     
+                    // user image is passed in
                     Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

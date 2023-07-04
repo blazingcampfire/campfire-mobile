@@ -21,7 +21,8 @@ struct NotificationsPage: View {
                     }
                     .listRowSeparator(.hidden)
                 }
-    }
+                .listStyle(PlainListStyle())
+        }
 }
 
 struct NotificationsPage_Previews: PreviewProvider {

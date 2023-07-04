@@ -31,6 +31,7 @@ struct TentTabView: View {
             }
             Spacer()
         }
+
     }
 }
 

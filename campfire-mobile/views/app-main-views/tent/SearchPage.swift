@@ -12,7 +12,7 @@ struct SearchPage: View {
     var body: some View {
         
         NavigationStack {
-            // Text("Search for users") //users collection query
+            // Text("Search for users") // users collection query
             FriendsList(range: 1...12)
         }
         .searchable(text: $searchText)

@@ -14,6 +14,6 @@ struct UserInfo {
     var chocs: Int = 10
     var bio: String = "I'm him hahwugehfurgfuhiwgfuhfwe"
     var posts: [String] = ["fefef", "jfewjfje", "fjewfjewjf"]
-    
+    var email: String = "memellord@hustleruniversity.edu"
 }
 

@@ -26,6 +26,7 @@ struct SetProfilePic: View {
                         Text("you're ready!")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
                         
                         LFButton(text: "finish"){}
 

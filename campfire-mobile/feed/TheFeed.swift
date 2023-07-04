@@ -38,9 +38,9 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-  //      .onAppear {
-    //        currentVid = vids.first?.id ?? ""
-      //  }
+//        .onAppear {
+//            currentVid = vids.first?.id ?? ""
+//        }
     }
 }
 
@@ -88,51 +88,60 @@ struct VidsPlayer: View {
                     }
                     return Color.clear
                 }
+                
+                
+                
+                
+                
+                
+                
+                VStack {
+                    HStack {
+                        Button(action: {
+                            HotSelected = true
+                        }) {
+                            Text("Hot")
+                                .font(.custom("LexendDeca-Bold",                 size:35))
+                                .opacity(HotSelected ? 1.0 : 0.5)
+                        }
+                        
+                        Rectangle()
+                            .frame(width: 2, height: 30)
+                            .opacity(0.75)
+                        Button(action: {
+                            HotSelected = false
+                        }) {
+                            Text("New")
+                                .font(.custom("LexendDeca-Bold", size: 35))
+                                .opacity(HotSelected ? 0.5 : 1.0)
+                        }
+                    }
+                    .padding(.top, 60)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .foregroundColor(.white)
+                
+                
+                
                 VStack {
                     HStack(alignment: .bottom) {
                         
                         VStack(alignment: .leading, spacing: 0) {
-                        
-                            Spacer()
-                                HStack {
-                                    Spacer()
-                                    Spacer()
-                                    Spacer()
-                                    Button(action: {
-                                        HotSelected = true
-                                    }) {
-                                        Text("Hot")
-                                            .font(.custom("LexendDeca-Bold", size: 35))
-                                            .opacity(HotSelected ? 1.0 : 0.5)
-                                    }
-                                    
-                                    Rectangle()
-                                        .frame(width: 2, height: 30)
-                                        .opacity(0.75)
-                                    Button(action: {
-                                        HotSelected = false
-                                    }) {
-                                        Text("New")
-                                            .font(.custom("LexendDeca-Bold", size: 35))
-                                            .opacity(HotSelected ? 0.5 : 1.0)
-                                    }
-                                    Spacer()
-                                    Spacer()
-                                    Spacer()
-                                }
-                                .offset(x: 10, y: -600)
-                                Spacer()
                             
+                            
+                            //- MARK: Profile pic/username buttons Hstack
                             HStack(spacing: 10) {
                                 
                                 Button(action: {
-                                   // lead to profile page
+                                    // lead to profile page
                                 }) {
                                     Image(userInfo.profilepic)
                                         .resizable()
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 35, height: 35)
                                         .clipShape(Circle())
                                 }
+                                .padding(.bottom, 5)
+                                
                                 
                                 Button(action: {
                                     //lead to profile page
@@ -141,31 +150,41 @@ struct VidsPlayer: View {
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                 }
                             }
+                            
+                            //- MARK: Caption/Location buttons Vstack
                             VStack(spacing: 5) {
-                                Text(feedinfo.postcaption)
-                                    .font(.custom("LexendDeca-Regular", size: 15))
-                                    .padding(.leading, 40)
+                                HStack {
+                                    Text(feedinfo.postcaption)
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                }
+                                .padding(.leading, -30)
                                 
                                 Button(action: {
-                                    //lead to map and where location is 
+                                    //lead to map and where location is
                                 }) {
-                                    Text("📍 37 High Street")
-                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                    HStack {
+                                        Text("📍37 High Street")
+                                            .font(.custom("LexendDeca-Regular", size: 15))
+                                    }
+                             //       .padding(.leading, 38)
                                 }
                                 .frame(alignment: .trailing)
                             }
-                            
                         }
-                        .padding(.top, 625)
-                        Spacer(minLength: 20)
                     }
                     .padding(.leading, 40)
                 }
-                .padding(.horizontal)
-                .padding(.top)
                 .foregroundColor(.white)
-                .frame(maxWidth: .infinity, alignment: .bottom)
-                VStack(spacing: 0.8) {
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .padding(.bottom, 30)
+                .padding(.leading, -20)
+                
+                
+                //-MARK: End of profile info
+                
+                
+                
+                VStack(spacing: 7.5) {
                     
                     VStack(spacing: -60) {
                         Button(action: {
@@ -210,8 +229,9 @@ struct VidsPlayer: View {
                     }
                     .padding(.top, 15)
                 }
-                .padding(.top, 380)
-                .padding(.leading, 325)
+                .padding(.bottom, 155)
+                .padding(.trailing, -30)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
     }

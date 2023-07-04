@@ -10,17 +10,14 @@ import SwiftUI
 struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
-        TopNavBar {
             NavigationView {
                 ListFriends(range: 1...12)
-                    .navigationTitle("friends")
-                    .font(.custom("LexendDeca-Bold", size: 25))
                     .listStyle(PlainListStyle())
             }
             .searchable(text: $searchText)
             .background(Color.white)
+            .padding(-10)
         }
-    }
 }
 
 struct ListFriends: View {
@@ -31,6 +28,7 @@ struct ListFriends: View {
             ForEach(range, id: \.self) { number in
                 HStack {
                     
+                    // user image is passed in
                     Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

@@ -41,6 +41,14 @@
 		B18B19AB2A46977200309256 /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19782A46974200309256 /* LexendDeca-SemiBold.ttf */; };
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
 		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
+		B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7D92A57293C00E30064 /* tiger.mp4 */; };
+		B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DD2A572B8100E30064 /* davo.mp4 */; };
+		B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DF2A572D7200E30064 /* me.jpeg */; };
+		B1B5D7E22A572D8E00E30064 /* hot.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E12A572D8E00E30064 /* hot.jpeg */; };
+		B1B5D7E42A5730F000E30064 /* tyler.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E32A5730EF00E30064 /* tyler.mov */; };
+		B1B5D7E62A57310B00E30064 /* stick.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E52A57310B00E30064 /* stick.mov */; };
+		B1B5D7E82A57318800E30064 /* happen.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E72A57318800E30064 /* happen.mov */; };
+		B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E92A573F6400E30064 /* animal.jpeg */; };
 		B1B5EFC82A4F569A00FA79CE /* EditPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */; };
 		B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFC72A4F569A00FA79CE /* UserBio.swift */; };
 		B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFCA2A4F56B000FA79CE /* ProfilePictureView.swift */; };
@@ -151,6 +159,14 @@
 		B18B198F2A46974300309256 /* JosefinSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
 		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
+		B1B5D7D92A57293C00E30064 /* tiger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiger.mp4; sourceTree = "<group>"; };
+		B1B5D7DD2A572B8100E30064 /* davo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = davo.mp4; sourceTree = "<group>"; };
+		B1B5D7DF2A572D7200E30064 /* me.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpeg; sourceTree = "<group>"; };
+		B1B5D7E12A572D8E00E30064 /* hot.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hot.jpeg; sourceTree = "<group>"; };
+		B1B5D7E32A5730EF00E30064 /* tyler.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = tyler.mov; sourceTree = "<group>"; };
+		B1B5D7E52A57310B00E30064 /* stick.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = stick.mov; sourceTree = "<group>"; };
+		B1B5D7E72A57318800E30064 /* happen.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = happen.mov; sourceTree = "<group>"; };
+		B1B5D7E92A573F6400E30064 /* animal.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = animal.jpeg; sourceTree = "<group>"; };
 		B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPosts.swift; sourceTree = "<group>"; };
 		B1B5EFC72A4F569A00FA79CE /* UserBio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBio.swift; sourceTree = "<group>"; };
 		B1B5EFCA2A4F56B000FA79CE /* ProfilePictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
@@ -245,6 +261,14 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				B1B5D7E92A573F6400E30064 /* animal.jpeg */,
+				B1B5D7E72A57318800E30064 /* happen.mov */,
+				B1B5D7E52A57310B00E30064 /* stick.mov */,
+				B1B5D7E32A5730EF00E30064 /* tyler.mov */,
+				B1B5D7E12A572D8E00E30064 /* hot.jpeg */,
+				B1B5D7DF2A572D7200E30064 /* me.jpeg */,
+				B1B5D7DD2A572B8100E30064 /* davo.mp4 */,
+				B1B5D7D92A57293C00E30064 /* tiger.mp4 */,
 				F8950DC72A48003B00C13075 /* david.mp4 */,
 				F8950DC52A48002800C13075 /* adarsh.mp4 */,
 				B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */,
@@ -647,7 +671,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B5D7E22A572D8E00E30064 /* hot.jpeg in Resources */,
 				F8950DC82A48003B00C13075 /* david.mp4 in Resources */,
+				B1B5D7E82A57318800E30064 /* happen.mov in Resources */,
 				F8950DC62A48002800C13075 /* adarsh.mp4 in Resources */,
 				B18B19A92A46977200309256 /* LexendDeca-Light.ttf in Resources */,
 				B18B19AA2A46977200309256 /* LexendDeca-Medium.ttf in Resources */,
@@ -658,11 +684,14 @@
 				B18B19932A46976700309256 /* Comfortaa-Medium.ttf in Resources */,
 				B18B19942A46976700309256 /* Comfortaa-Regular.ttf in Resources */,
 				B18B19952A46976700309256 /* Comfortaa-SemiBold.ttf in Resources */,
+				B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */,
 				B18B19962A46976700309256 /* JosefinSans-Bold.ttf in Resources */,
 				B18B19972A46976700309256 /* JosefinSans-BoldItalic.ttf in Resources */,
 				B18B19982A46976700309256 /* JosefinSans-ExtraLight.ttf in Resources */,
+				B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */,
 				B18B19992A46976700309256 /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				B18B199A2A46976700309256 /* JosefinSans-Italic.ttf in Resources */,
+				B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */,
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
 				B18B199D2A46976700309256 /* JosefinSans-Medium.ttf in Resources */,
@@ -672,9 +701,12 @@
 				B18B19A12A46976700309256 /* JosefinSans-SemiBoldItalic.ttf in Resources */,
 				B18B19A22A46976700309256 /* JosefinSans-Thin.ttf in Resources */,
 				B18B19A32A46976700309256 /* JosefinSans-ThinItalic.ttf in Resources */,
+				B1B5D7E62A57310B00E30064 /* stick.mov in Resources */,
 				B18B19A42A46976700309256 /* LexendDeca-Black.ttf in Resources */,
 				B18B19A52A46976700309256 /* LexendDeca-Bold.ttf in Resources */,
+				B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */,
 				B18B19A62A46976700309256 /* LexendDeca-ExtraBold.ttf in Resources */,
+				B1B5D7E42A5730F000E30064 /* tyler.mov in Resources */,
 				B18B19A72A46976700309256 /* LexendDeca-ExtraLight.ttf in Resources */,
 				B18B19A82A46976700309256 /* LexendDeca-Regular.ttf in Resources */,
 				E29095E22A3E4741001BEDDE /* Preview Assets.xcassets in Resources */,

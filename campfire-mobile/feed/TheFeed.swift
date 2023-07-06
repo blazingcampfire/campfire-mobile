@@ -9,15 +9,19 @@ import AVKit
 struct TheFeed: View {
     
     @State var currentVid = ""
-    @State var vids = MediaFileJSON.map { item ->
-        Vid in
-        
-        let url = Bundle.main.path(forResource: item.url, ofType: "mp4") ?? ""
-        let player = AVPlayer(url: URL(fileURLWithPath: url))
-       
-        
-        return Vid(player: player, mediafile: item)
+    @State var vids = MediaFileJSON.map { item in
+        switch item.mediaType {
+        case .video:
+            let url = Bundle.main.path(forResource: item.url, ofType: "mov") ?? ""
+            let player = AVPlayer(url: URL(fileURLWithPath: url))
+            return Vid(player: player, mediafile: item)
+        case .image:
+            return Vid(player: nil, mediafile: item)
+        }
     }
+        
+    
+    
     var body: some View {
         GeometryReader{proxy in
             let size = proxy.size
@@ -63,38 +67,53 @@ struct VidsPlayer: View {
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     var body: some View {
         ZStack {
-            if let player = vid.player {
-                CustomVideoPlayer(player: player, isPlaying: $isPlaying)
-                    .onTapGesture {
-                        isPlaying.toggle()
-                    }
-                    .onAppear {
-                        isPlaying = true
-                        
-                    }
-                    .onDisappear {
-                        isPlaying = false
-                        player.seek(to: .zero)
-                    }
-                GeometryReader { proxy -> Color in
-                    let minY = proxy.frame(in: .global).minY
-                    let size = proxy.size
-                    DispatchQueue.main.async {
-                        if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
-                            isPlaying = true
-                        } else {
-                            isPlaying = false
+            switch vid.mediafile.mediaType {
+            case .video:
+                if let player = vid.player {
+                    CustomVideoPlayer(player: player, isPlaying: $isPlaying)
+                        .onTapGesture {
+                            isPlaying.toggle()
                         }
+                        .onAppear {
+                            isPlaying = true
+                            
+                        }
+                        .onDisappear {
+                            isPlaying = false
+                            player.seek(to: .zero)
+                        }
+                    GeometryReader { proxy -> Color in
+                        let minY = proxy.frame(in: .global).minY
+                        let size = proxy.size
+                        DispatchQueue.main.async {
+                            if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
+                                isPlaying = true
+                            } else {
+                                isPlaying = false
+                            }
+                        }
+                        return Color.clear
                     }
-                    return Color.clear
                 }
                 
+            case .image:
+                // Construct the file path
+                if let imagePath = Bundle.main.path(forResource: vid.mediafile.url, ofType: "jpeg"),
+                   let uiImage = UIImage(contentsOfFile: imagePath) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                      //  .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
+                } else {
+                    // Handle image not found case
+                    Text("Image not found")
+                }
+            }
+               
                 
                 
                 
-                
-                
-                
+               //- MARK: Hot/New button
                 VStack {
                     HStack {
                         Button(action: {
@@ -122,7 +141,7 @@ struct VidsPlayer: View {
                 .foregroundColor(.white)
                 
                 
-                
+                //-MARK: User information
                 VStack {
                     HStack(alignment: .bottom) {
                         
@@ -166,7 +185,7 @@ struct VidsPlayer: View {
                                         Text("📍37 High Street")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
-                             //       .padding(.leading, 38)
+                             
                                 }
                                 .frame(alignment: .trailing)
                             }
@@ -183,7 +202,7 @@ struct VidsPlayer: View {
                 //-MARK: End of profile info
                 
                 
-                
+                //-MARK: Three buttons on side
                 VStack(spacing: 7.5) {
                     
                     VStack(spacing: -60) {
@@ -233,6 +252,7 @@ struct VidsPlayer: View {
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
+        .background(Color.black.ignoresSafeArea())
         }
     }
-}
+

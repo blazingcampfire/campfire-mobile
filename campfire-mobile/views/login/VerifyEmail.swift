@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VerifyEmail: View {
-    
+    let userinfo = UserInfo()
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
@@ -26,7 +26,7 @@ struct VerifyEmail: View {
                                 .frame(width: 380, alignment: .center)
                                 .foregroundColor(Color.white).padding(15).multilineTextAlignment(.center)
                             
-                            Text("memellord@hustleruniversity.edu")
+                            Text(userinfo.email) //email variable
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .center)
                                 .foregroundColor(.white)

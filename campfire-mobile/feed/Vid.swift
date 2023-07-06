@@ -16,11 +16,19 @@ struct Vid: Identifiable {
 struct MediaFile: Identifiable {
     var id = UUID().uuidString
     var url: String
+    var mediaType: MediaType
     var isExpanded: Bool = false
 }
+
+enum MediaType: String, Codable {
+    case video
+    case image
+}
+
 let MediaFileJSON = [
-    MediaFile(url: "david"),
-    MediaFile(url: "adarsh"),
-    MediaFile(url: "toni")
+    MediaFile(url: "tyler", mediaType: .video),
+    MediaFile(url: "me", mediaType: .image),
+    MediaFile(url: "happen", mediaType: .video),
+    MediaFile(url: "hot", mediaType: .image)
 ]
 

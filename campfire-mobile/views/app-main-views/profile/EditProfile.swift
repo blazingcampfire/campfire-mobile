@@ -44,6 +44,7 @@ struct EditProfile: View {
                     
                     Text("change profile pic")
                         .font(.custom("LexendDeca-Bold", size: 20))
+                        .foregroundColor(Theme.Peach)
                     
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {

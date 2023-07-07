@@ -30,7 +30,7 @@ enum MediaType: String, Codable {
 
 let MediaFileJSON = [
     MediaFile(url: "tyler", mediaType: .video),
-    MediaFile(url: "me", mediaType: .image),
+    MediaFile(url: "blonde", mediaType: .image),
     MediaFile(url: "happen", mediaType: .video),
     MediaFile(url: "hot", mediaType: .image)
 ]

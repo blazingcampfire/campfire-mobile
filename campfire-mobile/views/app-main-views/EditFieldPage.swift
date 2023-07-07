@@ -53,7 +53,7 @@ struct EditFieldPage: View {
                         isEditing = true
                     }) {
                         Label("edit", systemImage: "pencil")
-                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .font(.custom("LexendDeca-Bold", size: 18))
                             .foregroundColor(Theme.Peach)
                             .padding()
                     }

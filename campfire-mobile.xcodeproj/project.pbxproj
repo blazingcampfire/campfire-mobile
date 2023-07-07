@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B16DFF392A40BD95003314FF /* CodeVerifier in Frameworks */ = {isa = PBXBuildFile; productRef = B16DFF382A40BD95003314FF /* CodeVerifier */; };
 		B17F754B2A400955005581F3 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = B17F754A2A400955005581F3 /* iPhoneNumberField */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
@@ -40,6 +41,14 @@
 		B18B19AB2A46977200309256 /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19782A46974200309256 /* LexendDeca-SemiBold.ttf */; };
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
 		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
+		B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7D92A57293C00E30064 /* tiger.mp4 */; };
+		B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DD2A572B8100E30064 /* davo.mp4 */; };
+		B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DF2A572D7200E30064 /* me.jpeg */; };
+		B1B5D7E22A572D8E00E30064 /* hot.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E12A572D8E00E30064 /* hot.jpeg */; };
+		B1B5D7E42A5730F000E30064 /* tyler.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E32A5730EF00E30064 /* tyler.mov */; };
+		B1B5D7E62A57310B00E30064 /* stick.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E52A57310B00E30064 /* stick.mov */; };
+		B1B5D7E82A57318800E30064 /* happen.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E72A57318800E30064 /* happen.mov */; };
+		B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7E92A573F6400E30064 /* animal.jpeg */; };
 		B1B5EFC82A4F569A00FA79CE /* EditPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */; };
 		B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFC72A4F569A00FA79CE /* UserBio.swift */; };
 		B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFCA2A4F56B000FA79CE /* ProfilePictureView.swift */; };
@@ -97,9 +106,7 @@
 		F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */; };
 		F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */; };
 		F8A371D92A4BEE4B0076F1C1 /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */; };
-		F8ADCA282A494D8400F80A90 /* UserProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */; };
 		F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */; };
-		F8DB43F22A3F90170063205B /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB43F12A3F90170063205B /* FormTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +127,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -151,6 +159,14 @@
 		B18B198F2A46974300309256 /* JosefinSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
 		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
+		B1B5D7D92A57293C00E30064 /* tiger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiger.mp4; sourceTree = "<group>"; };
+		B1B5D7DD2A572B8100E30064 /* davo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = davo.mp4; sourceTree = "<group>"; };
+		B1B5D7DF2A572D7200E30064 /* me.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpeg; sourceTree = "<group>"; };
+		B1B5D7E12A572D8E00E30064 /* hot.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hot.jpeg; sourceTree = "<group>"; };
+		B1B5D7E32A5730EF00E30064 /* tyler.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = tyler.mov; sourceTree = "<group>"; };
+		B1B5D7E52A57310B00E30064 /* stick.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = stick.mov; sourceTree = "<group>"; };
+		B1B5D7E72A57318800E30064 /* happen.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = happen.mov; sourceTree = "<group>"; };
+		B1B5D7E92A573F6400E30064 /* animal.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = animal.jpeg; sourceTree = "<group>"; };
 		B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPosts.swift; sourceTree = "<group>"; };
 		B1B5EFC72A4F569A00FA79CE /* UserBio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserBio.swift; sourceTree = "<group>"; };
 		B1B5EFCA2A4F56B000FA79CE /* ProfilePictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
@@ -211,9 +227,7 @@
 		F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFieldPage.swift; sourceTree = "<group>"; };
 		F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
-		F8ADCA272A494D8400F80A90 /* UserProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePic.swift; sourceTree = "<group>"; };
 		F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeFunc.swift; sourceTree = "<group>"; };
-		F8DB43F12A3F90170063205B /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +261,14 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				B1B5D7E92A573F6400E30064 /* animal.jpeg */,
+				B1B5D7E72A57318800E30064 /* happen.mov */,
+				B1B5D7E52A57310B00E30064 /* stick.mov */,
+				B1B5D7E32A5730EF00E30064 /* tyler.mov */,
+				B1B5D7E12A572D8E00E30064 /* hot.jpeg */,
+				B1B5D7DF2A572D7200E30064 /* me.jpeg */,
+				B1B5D7DD2A572B8100E30064 /* davo.mp4 */,
+				B1B5D7D92A57293C00E30064 /* tiger.mp4 */,
 				F8950DC72A48003B00C13075 /* david.mp4 */,
 				F8950DC52A48002800C13075 /* adarsh.mp4 */,
 				B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */,
@@ -452,6 +474,7 @@
 				B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */,
 				E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */,
 				E280A9E92A4FDEEA00410B34 /* TentTabView.swift */,
+				B140DB692A53C6EC002FFA65 /* RequestsPage.swift */,
 			);
 			path = tent;
 			sourceTree = "<group>";
@@ -648,7 +671,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B5D7E22A572D8E00E30064 /* hot.jpeg in Resources */,
 				F8950DC82A48003B00C13075 /* david.mp4 in Resources */,
+				B1B5D7E82A57318800E30064 /* happen.mov in Resources */,
 				F8950DC62A48002800C13075 /* adarsh.mp4 in Resources */,
 				B18B19A92A46977200309256 /* LexendDeca-Light.ttf in Resources */,
 				B18B19AA2A46977200309256 /* LexendDeca-Medium.ttf in Resources */,
@@ -659,11 +684,14 @@
 				B18B19932A46976700309256 /* Comfortaa-Medium.ttf in Resources */,
 				B18B19942A46976700309256 /* Comfortaa-Regular.ttf in Resources */,
 				B18B19952A46976700309256 /* Comfortaa-SemiBold.ttf in Resources */,
+				B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */,
 				B18B19962A46976700309256 /* JosefinSans-Bold.ttf in Resources */,
 				B18B19972A46976700309256 /* JosefinSans-BoldItalic.ttf in Resources */,
 				B18B19982A46976700309256 /* JosefinSans-ExtraLight.ttf in Resources */,
+				B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */,
 				B18B19992A46976700309256 /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				B18B199A2A46976700309256 /* JosefinSans-Italic.ttf in Resources */,
+				B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */,
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
 				B18B199D2A46976700309256 /* JosefinSans-Medium.ttf in Resources */,
@@ -673,9 +701,12 @@
 				B18B19A12A46976700309256 /* JosefinSans-SemiBoldItalic.ttf in Resources */,
 				B18B19A22A46976700309256 /* JosefinSans-Thin.ttf in Resources */,
 				B18B19A32A46976700309256 /* JosefinSans-ThinItalic.ttf in Resources */,
+				B1B5D7E62A57310B00E30064 /* stick.mov in Resources */,
 				B18B19A42A46976700309256 /* LexendDeca-Black.ttf in Resources */,
 				B18B19A52A46976700309256 /* LexendDeca-Bold.ttf in Resources */,
+				B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */,
 				B18B19A62A46976700309256 /* LexendDeca-ExtraBold.ttf in Resources */,
+				B1B5D7E42A5730F000E30064 /* tyler.mov in Resources */,
 				B18B19A72A46976700309256 /* LexendDeca-ExtraLight.ttf in Resources */,
 				B18B19A82A46976700309256 /* LexendDeca-Regular.ttf in Resources */,
 				E29095E22A3E4741001BEDDE /* Preview Assets.xcassets in Resources */,
@@ -708,6 +739,7 @@
 				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
 				E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
+				B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */,
 				B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */,
 				F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */,
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
@@ -739,9 +771,7 @@
 				B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */,
 				E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
-				E28D3A602A3E968400B1EEE9 /* LFButton.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
-				B145F5EF2A4A7815005E8787 /* FeedInfo.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				B1B5EFD02A4F56C200FA79CE /* NumberForm.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,
@@ -923,7 +953,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -954,7 +984,7 @@
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -982,7 +1012,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1003,7 +1033,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1023,7 +1053,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1042,7 +1072,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

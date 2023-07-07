@@ -27,10 +27,11 @@ struct EnterEmail: View {
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
                         
                         LFButton(text: "next"){}
                     }
-                    .padding(.bottom, 300)
+                    .padding(.bottom, 200)
                     
                     
                 }

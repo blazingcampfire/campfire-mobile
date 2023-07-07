@@ -20,9 +20,6 @@ struct ProfilePage: View {
         ["ragrboard6"]
     ] //url strings in firebase
     
-  //  init() {
-    //    userProfile = UserProfile(profilePic: userInfo.profilepic, name: userInfo.name, username: userInfo.username, bio: "tell ya moms to watch out ya heard", chocs: userInfo.marshcount)
- //   }
     
     var body: some View {
         
@@ -47,7 +44,7 @@ struct ProfilePage: View {
                                 .font(.system(size: 30))
                                 .foregroundColor(Theme.Peach)
                         }
-                        .offset(x: 145, y: -120)
+                        .offset(x: 145, y: -130)
                     }
                     
                     VStack(spacing: 20) { // Added spacing between elements

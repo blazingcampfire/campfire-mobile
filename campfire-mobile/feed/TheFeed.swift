@@ -5,7 +5,6 @@
 //
 import SwiftUI
 import AVKit
-
 struct TheFeed: View {
     
     @State var currentVid = ""
@@ -26,7 +25,7 @@ struct TheFeed: View {
         GeometryReader{proxy in
             let size = proxy.size
             TabView(selection: $currentVid) {
-                ForEach($vids){$vids in
+                ForEach($vids){ $vids in
                     VidsPlayer(vid: $vids, currentVid: $currentVid)
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
@@ -42,23 +41,24 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-//        .onAppear {
-//            currentVid = vids.first?.id ?? ""
-//        }
+        .onAppear {
+            if let firstVid = vids.first {
+                currentVid = firstVid.id
+                vids[0].isPlaying = true
+            }
+        }
     }
 }
-
 struct TheFeed_Previews: PreviewProvider {
     static var previews: some View {
         TheFeed()
     }
 }
-
     
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
-    @State private var isPlaying = false
+    @State private var visible = false
     @State private var likeTapped: Bool = false
     
     @State private var HotSelected = true
@@ -67,34 +67,25 @@ struct VidsPlayer: View {
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     var body: some View {
         ZStack {
-            switch vid.mediafile.mediaType {
-            case .video:
-                if let player = vid.player {
-                    CustomVideoPlayer(player: player, isPlaying: $isPlaying)
-                        .onTapGesture {
-                            isPlaying.toggle()
+                    switch vid.mediafile.mediaType {
+                    case .video:
+                        if let player = vid.player {
+                            CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
+                                .onTapGesture {
+                                   vid.isPlaying.toggle()
+                                    vid.manuallyPaused.toggle()
+                                }
+                        
+                                .onChange(of: currentVid) { value in
+                                    vid.isPlaying = vid.id == value
+                                    if !vid.isPlaying {
+                                    player.seek(to: .zero)
+                                        }
+                                    if vid.isPlaying {
+                                        player.play()
+                                    }
+                                    }
                         }
-                        .onAppear {
-                            isPlaying = true
-                            
-                        }
-                        .onDisappear {
-                            isPlaying = false
-                            player.seek(to: .zero)
-                        }
-                    GeometryReader { proxy -> Color in
-                        let minY = proxy.frame(in: .global).minY
-                        let size = proxy.size
-                        DispatchQueue.main.async {
-                            if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
-                                isPlaying = true
-                            } else {
-                                isPlaying = false
-                            }
-                        }
-                        return Color.clear
-                    }
-                }
                 
             case .image:
                 // Construct the file path
@@ -102,8 +93,8 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                      //  .aspectRatio(contentMode: .fit)
-                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                     //   .scaledToFit()
                 } else {
                     // Handle image not found case
                     Text("Image not found")
@@ -243,11 +234,13 @@ struct VidsPlayer: View {
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 30, height: 8)
+          
+                  .frame(width: 30, height: 8)
                             .foregroundColor(.white)
                     }
                     .padding(.top, 15)
-                }
+      
+          }
                 .padding(.bottom, 155)
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
@@ -255,4 +248,3 @@ struct VidsPlayer: View {
         .background(Color.black.ignoresSafeArea())
         }
     }
-

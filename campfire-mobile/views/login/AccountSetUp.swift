@@ -26,9 +26,13 @@ struct AccountSetUp: View {
 
                         
                     }
-                    .offset(y: -30)
+                    .padding(.bottom, 30)
                     
-                    LFButton(text: "create account"){}
+                    LFButton(text: "create account"){
+                        NavigationLink {
+                            EnterPhoneNumber()
+                        }
+                    }
                         .padding(5)
                     LFButton(text: "login"){}
                     

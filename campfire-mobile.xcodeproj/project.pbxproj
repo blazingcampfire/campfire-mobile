@@ -64,7 +64,6 @@
 		B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */; };
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
-		B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */; };
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
 		B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EF99882A4289540001E8CC /* CameraPage.swift */; };
 		E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E22A4FCF5D00410B34 /* Notification.swift */; };
@@ -182,7 +181,6 @@
 		B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
-		B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouPage.swift; sourceTree = "<group>"; };
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B1EF99882A4289540001E8CC /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
-				F8950DC42A48000100C13075 /* feed */,
 				E2E997B12A41459700EBBDD7 /* Info.plist */,
 				E28D3A632A3EB51400B1EEE9 /* constants */,
 				E28D3A5E2A3E94D100B1EEE9 /* components */,
@@ -489,14 +486,6 @@
 			path = camera;
 			sourceTree = "<group>";
 		};
-		E2C4468F2A4E876F0032CF34 /* feed */ = {
-			isa = PBXGroup;
-			children = (
-				B1B6CCB22A411B77001C6A50 /* ForYouPage.swift */,
-			);
-			path = feed;
-			sourceTree = "<group>";
-		};
 		E2C446902A4E87750032CF34 /* profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,8 +517,8 @@
 		F83416432A40EA6700803D32 /* app-main-views */ = {
 			isa = PBXGroup;
 			children = (
+				F8950DC42A48000100C13075 /* feed */,
 				E2C446902A4E87750032CF34 /* profile */,
-				E2C4468F2A4E876F0032CF34 /* feed */,
 				E2C4468E2A4E875C0032CF34 /* camera */,
 				E2C4468D2A4E87550032CF34 /* tent */,
 				E2C4468C2A4E87500032CF34 /* map */,
@@ -554,7 +543,8 @@
 				F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */,
 				F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */,
 			);
-			path = feed;
+			name = feed;
+			path = ../../feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -752,7 +742,6 @@
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
 				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyAccount.swift in Sources */,
-				B1B6CCB32A411B77001C6A50 /* ForYouPage.swift in Sources */,
 				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,
 				E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,

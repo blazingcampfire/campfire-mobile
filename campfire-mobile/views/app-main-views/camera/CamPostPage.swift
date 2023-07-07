@@ -116,6 +116,8 @@ struct CamPostPlayer: View {
                     .foregroundColor(.white)
                     .font(.system(size: 30, weight: .bold))
             }
+            .padding(.top, -325)
+            .padding(.leading, -175)
             
                 
                 
@@ -147,11 +149,13 @@ struct CamPostPlayer: View {
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                 }
                             }
+                            .padding(.bottom, 30)
+                            .padding(.leading, 20)
                             
                             
                             
                             //- MARK: Caption/Location buttons Vstack
-                            VStack(spacing: 5) {
+                            VStack(alignment: .center, spacing: 5) {
                                 
                                 CaptionTextField(placeholderText: "enter your caption")
                                 
@@ -166,14 +170,14 @@ struct CamPostPlayer: View {
                                 }
                                 .frame(alignment: .trailing)
                             }
+                
                         }
                     }
-                    .padding(.leading, 40)
+                  
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 .padding(.bottom, 30)
-                .padding(.leading, -20)
                 
                 
             }

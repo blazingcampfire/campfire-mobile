@@ -27,6 +27,8 @@ struct CreateUsername: View {
                         Text("almost there!")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
+                        
                         
                         LFButton(text: "next"){}
                     }

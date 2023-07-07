@@ -42,7 +42,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
-            TentTabView()
+           TentTabView()
                 .tabItem {
                     Label("Tent", systemImage: "tent.fill")
                        

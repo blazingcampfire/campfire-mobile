@@ -12,28 +12,30 @@ struct ProfilePictureView: View {
     var profilePicture: String?
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            Button(action: {
+        Button(action: {
+            
+        }, label: {
+            ZStack(alignment: .bottomTrailing) {
                 
-            }, label: {
                 Image(systemName: "person.fill")
                     .resizable()
                     .foregroundColor(Theme.Peach)
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
                     .scaleEffect(0.9)
-
-            })
-            
-            .background(Color.white)
-            .clipShape(Circle())
-            
-            Image(systemName: "plus")
-                .frame(width: 30, height: 30)
-                .foregroundColor(.white)
-                .background(Theme.Peach)
-                .clipShape(Circle())
-        }
+                
+                
+                
+                    .background(Color.white)
+                    .clipShape(Circle())
+                
+                Image(systemName: "plus")
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.white)
+                    .background(Theme.Peach)
+                    .clipShape(Circle())
+            }
+        })
     }
 }
 

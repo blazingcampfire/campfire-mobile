@@ -26,7 +26,7 @@ struct VerifyAccount: View {
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
-               
+                            .padding(-20)
                         
                         LFButton(text: "verify"){}
                     }

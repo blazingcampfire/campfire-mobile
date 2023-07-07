@@ -16,7 +16,7 @@ struct TentTabView: View {
     
     var body: some View {
         VStack {
-            SlidingTabView(selection: $tabIndex, tabs: ["Notifications", "Search", " Requests"], font: .custom("LexendDeca-Regular", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, selectionBarColor: Theme.Peach)
+            SlidingTabView(selection: $tabIndex, tabs: ["Notifications", "Search", "Requests"], font: .custom("LexendDeca-Regular", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, selectionBarColor: Theme.Peach)
             Spacer()
             
             // conditional setup navigates to a different page depending on tab selection
@@ -27,7 +27,7 @@ struct TentTabView: View {
                 SearchPage()
             }
             else if tabIndex == 2 {
-                FriendsPage()
+                RequestsPage()
             }
             Spacer()
         }

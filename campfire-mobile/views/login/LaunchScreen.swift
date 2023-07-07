@@ -20,7 +20,7 @@ struct LaunchView: View {
             VStack {
                 Image("newlogo")
                     .resizable()
-                    .frame(width: 400, height: 400, alignment: .center)
+                    .frame(width: 300, height: 300, alignment: .center)
                     .offset(x:-8, y: -70)
                 
                 

@@ -18,7 +18,8 @@ struct TheFeed: View {
             return Vid(player: nil, mediafile: item)
         }
     }
-        
+        //The vids sets up a switch statement that reads the mediaType of Vid struct
+        // Then sets up what happens for the image or video, the video url is initialized here
     
     
     var body: some View {
@@ -49,6 +50,9 @@ struct TheFeed: View {
         }
     }
 }
+//In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
+//VidsPlayer handles the specific actions of what each case should look like
+
 struct TheFeed_Previews: PreviewProvider {
     static var previews: some View {
         TheFeed()
@@ -58,13 +62,13 @@ struct TheFeed_Previews: PreviewProvider {
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
-    @State private var visible = false
     @State private var likeTapped: Bool = false
-    
     @State private var HotSelected = true
     let feedinfo = FeedInfo()
-    
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+    
+    
+    //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
         ZStack {
                     switch vid.mediafile.mediaType {
@@ -75,7 +79,6 @@ struct VidsPlayer: View {
                                    vid.isPlaying.toggle()
                                     vid.manuallyPaused.toggle()
                                 }
-                        
                                 .onChange(of: currentVid) { value in
                                     vid.isPlaying = vid.id == value
                                     if !vid.isPlaying {
@@ -93,8 +96,8 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                     //   .scaledToFit()
+                    //    .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                 } else {
                     // Handle image not found case
                     Text("Image not found")
@@ -111,7 +114,7 @@ struct VidsPlayer: View {
                             HotSelected = true
                         }) {
                             Text("Hot")
-                                .font(.custom("LexendDeca-Bold",                 size:35))
+                                .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(HotSelected ? 1.0 : 0.5)
                         }
                         
@@ -173,7 +176,7 @@ struct VidsPlayer: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍37 High Street")
+                                        Text(userInfo.location)
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -202,7 +205,7 @@ struct VidsPlayer: View {
                             self.likeTapped.toggle()
                         }) {
                             VStack {
-                                Image(self.likeTapped == false ? "eaten" : "noteaten")
+                                Image(self.likeTapped == false ? "noteaten" : "eaten")
                             }
                             .padding(.leading, -15)
                         }

@@ -26,7 +26,7 @@ struct TheFeed: View {
         GeometryReader{proxy in
             let size = proxy.size
             TabView(selection: $currentVid) {
-                ForEach($vids){$vids in
+                ForEach($vids){ $vids in
                     VidsPlayer(vid: $vids, currentVid: $currentVid)
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
@@ -42,9 +42,9 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-//        .onAppear {
-//            currentVid = vids.first?.id ?? ""
-//        }
+        .onAppear {
+            currentVid = vids.first?.id ?? ""
+        }
     }
 }
 
@@ -58,7 +58,7 @@ struct TheFeed_Previews: PreviewProvider {
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
-    @State private var isPlaying = false
+    @State private var visible = false
     @State private var likeTapped: Bool = false
     
     @State private var HotSelected = true
@@ -67,34 +67,48 @@ struct VidsPlayer: View {
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     var body: some View {
         ZStack {
-            switch vid.mediafile.mediaType {
-            case .video:
-                if let player = vid.player {
-                    CustomVideoPlayer(player: player, isPlaying: $isPlaying)
-                        .onTapGesture {
-                            isPlaying.toggle()
-                        }
-                        .onAppear {
-                            isPlaying = true
-                            
-                        }
-                        .onDisappear {
-                            isPlaying = false
-                            player.seek(to: .zero)
-                        }
-                    GeometryReader { proxy -> Color in
-                        let minY = proxy.frame(in: .global).minY
-                        let size = proxy.size
-                        DispatchQueue.main.async {
-                            if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
-                                isPlaying = true
-                            } else {
-                                isPlaying = false
+                    switch vid.mediafile.mediaType {
+                    case .video:
+                        if let player = vid.player {
+                            CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
+                                .onTapGesture {
+                                    vid.isPlaying.toggle()
+                                    vid.manuallyPaused.toggle()
+                                }
+                                .onAppear {
+                                    if self.visible {
+                                        self.vid.isPlaying = true
+                                    }
+                                }
+                                .onDisappear {
+                                    vid.isPlaying = false
+                                    player.seek(to: .zero)
+                                }
+                            GeometryReader { proxy -> Color in
+                                let minY = proxy.frame(in: .global).minY
+                                let maxY = proxy.frame(in: .global).maxY
+                                let size = proxy.size
+                                
+                                DispatchQueue.main.async {
+                                    // Video becomes visible as soon as its bottom edge enters the screen,
+                                    // i.e., when its maximum Y is greater than 0.
+                                    // Video becomes invisible as soon as its top edge leaves the screen,
+                                    // i.e., when its minimum Y is less than the screen's height.
+                                    self.visible = maxY > 0 && minY < size.height
+
+                                    // If this video is the current video and it's visible,
+                                    // then video should be playing, unless user has paused it.
+                                    // If this video is not visible, it should pause playing.
+                                    if self.visible && self.vid.id == self.currentVid && !self.vid.manuallyPaused {
+                                        self.vid.isPlaying = true
+                                    } else {
+                                        self.vid.isPlaying = false
+                                    }
+                                }
+
+                                return Color.clear
                             }
                         }
-                        return Color.clear
-                    }
-                }
                 
             case .image:
                 // Construct the file path

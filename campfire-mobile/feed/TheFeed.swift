@@ -72,6 +72,11 @@ struct VidsPlayer: View {
                 if let player = vid.player {
                     CustomVideoPlayer(player: player, isPlaying: $isPlaying)
                         .onTapGesture {
+                            if isPlaying {
+                                player.pause()
+                            } else {
+                                player.play()
+                            }
                             isPlaying.toggle()
                         }
                         .onAppear {

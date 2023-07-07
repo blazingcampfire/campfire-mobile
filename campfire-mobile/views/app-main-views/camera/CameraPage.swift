@@ -48,13 +48,10 @@ struct CameraPage: View {
             
             VStack {
                 Spacer()
-                
-              
-                
-                
+            
                 HStack(spacing: 25) {
           
-                    
+                    //-MARK: Take pic or vid button
                     Button(action: {
                         print("yay")
                     }) {
@@ -64,16 +61,11 @@ struct CameraPage: View {
                             .overlay(
                                 Circle()
                                     .stroke(Color.white, lineWidth: 10)
-//                                    .overlay(
-//                                        Image(systemName: "flame")
-//                                            .foregroundColor(Theme.Peach)
-//                                            .font(.system(size: 30))
-//                                    )
                             )
                     }
                     .padding(.bottom, 10)
                     
-            
+            //-MARK: Upload pictures button
                     Button(action: {
                         print("upload images")
                     }) {
@@ -81,6 +73,24 @@ struct CameraPage: View {
                             .font(.system(size: 25))
                             .foregroundColor(.white)
                     }
+//
+                    //-MARK: Preview Post Button
+//                    Button(action: {
+//                        //condition visibility preview button
+//                        //Navigate to campostpage
+//                    }) {
+//                        HStack(alignment: .center, spacing: -10) {
+//                            Text("Preview")
+//                                .foregroundColor(.white)
+//                                .font(.custom("LexendDeca-Regular", size: 18))
+//
+//                            Image("rightarrow")
+//                                .offset(y: 2)
+//                        }
+//                        .padding(.leading,15)
+//                        .background(RoundedRectangle(cornerRadius: 40).fill(Color.blue))
+//                        .foregroundColor(.white)
+//                    }
                 }
                 .padding(.leading, 55)
             }

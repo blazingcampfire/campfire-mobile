@@ -5,7 +5,6 @@
 //
 import SwiftUI
 import AVKit
-
 struct TheFeed: View {
     
     @State var currentVid = ""
@@ -19,7 +18,8 @@ struct TheFeed: View {
             return Vid(player: nil, mediafile: item)
         }
     }
-        
+        //The vids sets up a switch statement that reads the mediaType of Vid struct
+        // Then sets up what happens for the image or video, the video url is initialized here
     
     
     var body: some View {
@@ -43,28 +43,32 @@ struct TheFeed: View {
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
         .onAppear {
-            currentVid = vids.first?.id ?? ""
+            if let firstVid = vids.first {
+                currentVid = firstVid.id
+                vids[0].isPlaying = true
+            }
         }
     }
 }
+//In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
+//VidsPlayer handles the specific actions of what each case should look like
 
 struct TheFeed_Previews: PreviewProvider {
     static var previews: some View {
         TheFeed()
     }
 }
-
     
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
-    @State private var visible = false
     @State private var likeTapped: Bool = false
-    
     @State private var HotSelected = true
     let feedinfo = FeedInfo()
-    
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+    
+    
+    //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
         ZStack {
                     switch vid.mediafile.mediaType {
@@ -72,42 +76,18 @@ struct VidsPlayer: View {
                         if let player = vid.player {
                             CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
                                 .onTapGesture {
-                                    vid.isPlaying.toggle()
+                                   vid.isPlaying.toggle()
                                     vid.manuallyPaused.toggle()
                                 }
-                                .onAppear {
-                                    if self.visible {
-                                        self.vid.isPlaying = true
-                                    }
-                                }
-                                .onDisappear {
-                                    vid.isPlaying = false
+                                .onChange(of: currentVid) { value in
+                                    vid.isPlaying = vid.id == value
+                                    if !vid.isPlaying {
                                     player.seek(to: .zero)
-                                }
-                            GeometryReader { proxy -> Color in
-                                let minY = proxy.frame(in: .global).minY
-                                let maxY = proxy.frame(in: .global).maxY
-                                let size = proxy.size
-                                
-                                DispatchQueue.main.async {
-                                    // Video becomes visible as soon as its bottom edge enters the screen,
-                                    // i.e., when its maximum Y is greater than 0.
-                                    // Video becomes invisible as soon as its top edge leaves the screen,
-                                    // i.e., when its minimum Y is less than the screen's height.
-                                    self.visible = maxY > 0 && minY < size.height
-
-                                    // If this video is the current video and it's visible,
-                                    // then video should be playing, unless user has paused it.
-                                    // If this video is not visible, it should pause playing.
-                                    if self.visible && self.vid.id == self.currentVid && !self.vid.manuallyPaused {
-                                        self.vid.isPlaying = true
-                                    } else {
-                                        self.vid.isPlaying = false
+                                        }
+                                    if vid.isPlaying {
+                                        player.play()
                                     }
-                                }
-
-                                return Color.clear
-                            }
+                                    }
                         }
                 
             case .image:
@@ -116,7 +96,7 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                      //  .aspectRatio(contentMode: .fit)
+                    //    .aspectRatio(contentMode: .fit)
                         .scaledToFit()
                 } else {
                     // Handle image not found case
@@ -134,7 +114,7 @@ struct VidsPlayer: View {
                             HotSelected = true
                         }) {
                             Text("Hot")
-                                .font(.custom("LexendDeca-Bold",                 size:35))
+                                .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(HotSelected ? 1.0 : 0.5)
                         }
                         
@@ -196,7 +176,7 @@ struct VidsPlayer: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍37 High Street")
+                                        Text(userInfo.location)
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -225,7 +205,7 @@ struct VidsPlayer: View {
                             self.likeTapped.toggle()
                         }) {
                             VStack {
-                                Image(self.likeTapped == false ? "eaten" : "noteaten")
+                                Image(self.likeTapped == false ? "noteaten" : "eaten")
                             }
                             .padding(.leading, -15)
                         }
@@ -257,11 +237,13 @@ struct VidsPlayer: View {
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 30, height: 8)
+          
+                  .frame(width: 30, height: 8)
                             .foregroundColor(.white)
                     }
                     .padding(.top, 15)
-                }
+      
+          }
                 .padding(.bottom, 155)
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
@@ -269,4 +251,3 @@ struct VidsPlayer: View {
         .background(Color.black.ignoresSafeArea())
         }
     }
-

@@ -12,6 +12,9 @@ struct Vid: Identifiable {
     var id = UUID().uuidString
     var player: AVPlayer?
     var mediafile: MediaFile
+    var isPlaying: Bool = false
+    var manuallyPaused: Bool = false
+    
 }
 struct MediaFile: Identifiable {
     var id = UUID().uuidString

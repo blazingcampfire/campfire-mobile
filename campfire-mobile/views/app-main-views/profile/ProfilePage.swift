@@ -35,7 +35,7 @@ struct ProfilePage: View {
                                 UserProfile()
                                     .padding(.top)
                                 HStack {
-                                    NavigationLink(destination: EditProfile()) { // Use NavigationLink to navigate to the EditProfile view
+                                    NavigationLink(destination: EditProfile()) { // use NavigationLink to navigate to the EditProfile view
                                         Text("Edit Profile")
                                             .font(.custom("LexendDeca-Bold", size: 15))
                                             .foregroundColor(Theme.Peach)
@@ -50,9 +50,7 @@ struct ProfilePage: View {
                                             )
                                     }
                                     
-                                    Button(action: {
-                                        // Go to Edit Profile
-                                    }) {
+                                    NavigationLink(destination: FriendsPage()){
                                         Image(systemName: "person.3.fill")
                                             .font(.system(size: 20))
                                             .foregroundColor(Theme.Peach)
@@ -70,7 +68,7 @@ struct ProfilePage: View {
                                 }
                             }
                             Button(action: {
-                                // Go to settings
+                                // Go to settings modal
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .font(.system(size: 30))
@@ -101,7 +99,6 @@ struct ProfilePage: View {
                 }
                 .padding()
             }
-            .navigationTitle("Profile") // Set the navigation title
         }
     }
 }

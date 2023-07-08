@@ -21,7 +21,6 @@ struct EditProfile: View {
     ]
     
     var body: some View {
-        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
@@ -122,7 +121,6 @@ struct EditProfile: View {
                 }
             }
         }
-    }
 }
 
 

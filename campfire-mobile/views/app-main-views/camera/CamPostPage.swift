@@ -1,13 +1,11 @@
-//  TheFeed.swift
-//  campfire-mobile
-//
-//  Created by Adarsh G on 6/20/23.
-//
+
+
+
+
+
+
 import SwiftUI
 import AVKit
-
-
-
 struct CamPostPage: View {
     @State var currentVid = ""
     @State var vids = PostFileJSON.map { item in
@@ -53,7 +51,6 @@ struct CamPostPage: View {
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
 //VidsPlayer handles the specific actions of what each case should look like
-
 struct CamPostPage_Previews: PreviewProvider {
     static var previews: some View {
         CamPostPage()
@@ -163,9 +160,23 @@ struct CamPostPlayer: View {
                                         Text(userInfo.location)
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
+                                    .padding(.trailing, 240)
                              
                                 }
                                 .frame(alignment: .trailing)
+                                Button(action: {
+                            //post to feed
+                            }) {
+                                HStack(spacing: 7) {
+                                Text("post")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-SemiBold", size: 22))
+                                Image(systemName: "arrowshape.right.fill")
+                                        .font(.system(size: 18))
+                                }
+                                .padding(15)
+                                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
+                                }
                             }
                 
                         }

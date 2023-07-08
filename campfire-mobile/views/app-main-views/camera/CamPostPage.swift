@@ -9,7 +9,6 @@ import AVKit
 
 
 struct CamPostPage: View {
-    
     @State var currentVid = ""
     @State var vids = PostFileJSON.map { item in
         switch item.mediaType {
@@ -26,7 +25,7 @@ struct CamPostPage: View {
     
     
     var body: some View {
-        GeometryReader{proxy in
+        GeometryReader { proxy in
             let size = proxy.size
             TabView(selection: $currentVid) {
                 ForEach($vids){ $vids in
@@ -41,7 +40,6 @@ struct CamPostPage: View {
             .frame(width: size.height)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(width: size.width)
-            
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
@@ -130,7 +128,6 @@ struct CamPostPlayer: View {
                             
                             //- MARK: Profile pic/username buttons Hstack
                             HStack(spacing: 10) {
-                                
                                 Button(action: {
                                     // lead to profile page
                                 }) {
@@ -143,7 +140,7 @@ struct CamPostPlayer: View {
                                 
                                 
                                 Button(action: {
-                                    //lead to profile page
+                                    // lead to profile page
                                 }) {
                                     Text(userInfo.username)
                                         .font(.custom("LexendDeca-Bold", size: 15))
@@ -158,9 +155,9 @@ struct CamPostPlayer: View {
                             VStack(alignment: .center, spacing: 5) {
                                 
                                 CaptionTextField(placeholderText: "enter your caption")
-                                
+
                                 Button(action: {
-                                    //lead to map and where location is
+                                    // lead to map and where location is
                                 }) {
                                     HStack {
                                         Text(userInfo.location)

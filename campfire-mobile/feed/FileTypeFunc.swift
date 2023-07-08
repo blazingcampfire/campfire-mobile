@@ -11,7 +11,7 @@ func fileType(url: String) -> String? {
     guard let fileExtension = URL(string: url)?.pathExtension.lowercased() else {
         return nil
     }
-    
+
     if fileExtension == "mp4" || fileExtension == "mov" || fileExtension == "avi" {
         return "video"
     } else if fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png" {
@@ -20,6 +20,3 @@ func fileType(url: String) -> String? {
         return nil
     }
 }
-
-
-

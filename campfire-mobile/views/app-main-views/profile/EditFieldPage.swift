@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct EditFieldPage: View {
-    
     @State private var newName: String = ""
     @State private var isEditing: Bool = false
-    
+
     var field: String
     var currentfield: String
-    
+
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -23,11 +22,11 @@ struct EditFieldPage: View {
                 Text("current \(field): \(currentfield)")
                     .font(.custom("LexendDeca-Bold", size: 20))
                     .padding()
-                
+
                 TextField("enter new \(field)", text: $newName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                
+
                 if isEditing {
                     HStack {
                         Button(action: {
@@ -38,7 +37,7 @@ struct EditFieldPage: View {
                                 .foregroundColor(.red)
                                 .padding()
                         }
-                        
+
                         Button(action: {
                             saveName()
                         }) {
@@ -58,17 +57,17 @@ struct EditFieldPage: View {
                             .padding()
                     }
                 }
-                
+
                 Spacer()
-            } .padding(.top, 50)
+            }.padding(.top, 50)
         }
     }
-    
+
     private func cancelEditing() {
         newName = currentfield
         isEditing = false
     }
-    
+
     private func saveName() {
         // must save new info
         isEditing = false

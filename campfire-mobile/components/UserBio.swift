@@ -10,11 +10,11 @@ import SwiftUI
 struct UserBio: View {
     var name: String
     var text: String
-    
+
     var body: some View {
-            Text(text)
-                .font(.custom("LexendDeca-Bold", size: 15))
-                    .padding(8)
+        Text(text)
+            .font(.custom("LexendDeca-Bold", size: 15))
+            .padding(8)
     }
 }
 

@@ -10,32 +10,30 @@ import SwiftUI
 struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
-            NavigationView {
-                ListFriends(range: 1...12)
-                    .listStyle(PlainListStyle())
-            }
-            .searchable(text: $searchText)
-            .background(Color.white)
-            .padding(-10)
+        NavigationView {
+            ListFriends(range: 1 ... 12)
+                .listStyle(PlainListStyle())
         }
+        .searchable(text: $searchText)
+        .background(Color.white)
+        .padding(-10)
+    }
 }
 
 struct ListFriends: View {
     let range: ClosedRange<Int>
-    
+
     var body: some View {
         List {
-            ForEach(range, id: \.self) { number in
+            ForEach(range, id: \.self) { _ in
                 HStack {
-                    
                     // user image is passed in
                     Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
-                    
-                    
+
                     VStack(alignment: .leading) {
                         Button(action: {
                         }) {
@@ -43,7 +41,7 @@ struct ListFriends: View {
                                 .font(.custom("LexendDeca-Bold", size: 18))
                                 .foregroundColor(.black)
                         }
-                        
+
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
@@ -56,9 +54,6 @@ struct ListFriends: View {
         .listStyle(PlainListStyle())
     }
 }
-
-
-
 
 struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {

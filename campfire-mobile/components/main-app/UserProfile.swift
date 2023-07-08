@@ -9,14 +9,14 @@ import SwiftUI
 
 struct UserProfile: View {
     let userinfo = UserInfo()
-    
+
     var body: some View {
         VStack(spacing: 0) {
             UserProfilePic()
             Spacer()
             Text(userinfo.name)
                 .font(.custom("LexendDeca-Bold", size: 20))
-            
+
             HStack {
                 Text(userinfo.username)
                     .font(.custom("LexendDeca-SemiBold", size: 15))

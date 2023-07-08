@@ -41,7 +41,7 @@ struct ListRequests: View {
                         }) {
                             Text(info.name)
                                 .font(.custom("LexendDeca-Bold", size: 18))
-                                .foregroundColor(.black)
+                                .foregroundColor(Theme.TextColor)
                         }
                         
                         Text("@\(info.username)")
@@ -69,7 +69,7 @@ struct ListRequests: View {
                     
                     
                 }
-                .listRowBackground(Color.white)
+                .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)
             }
         }

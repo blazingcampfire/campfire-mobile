@@ -22,7 +22,7 @@ struct HotspotsFeedPage: View {
                 }
             }
             .padding(.bottom, 700)
-            .padding(.leading, 320)
+            .padding(.trailing, 320)
     
         }
     }

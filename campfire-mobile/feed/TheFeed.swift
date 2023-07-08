@@ -64,6 +64,7 @@ struct VidsPlayer: View {
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
     @State private var HotSelected = true
+    @State var leaderboardPageShow = false
     let feedinfo = FeedInfo()
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     
@@ -133,6 +134,28 @@ struct VidsPlayer: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .foregroundColor(.white)
+            
+            VStack {
+                HStack {
+                    Button(action: {
+                        leaderboardPageShow.toggle()
+                    }) {
+                        Image(systemName: "trophy.fill")
+                            .foregroundColor(.white)
+                            .font(.system(size: 30))
+                    }
+                    .sheet(isPresented: $leaderboardPageShow) {
+                        LeaderboardPage()
+                         //   .presentationDetents([.large])
+                    }
+                }
+                .padding(.top, 65)
+                .padding(.leading, 310)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            
+            
+            
                 
                 
                 //-MARK: User information
@@ -239,7 +262,7 @@ struct VidsPlayer: View {
                             .resizable()
           
                   .frame(width: 30, height: 8)
-                            .foregroundColor(.white)
+                .foregroundColor(.white)
                     }
                     .padding(.top, 15)
       
@@ -249,5 +272,6 @@ struct VidsPlayer: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         .background(Color.black.ignoresSafeArea())
+        
         }
     }

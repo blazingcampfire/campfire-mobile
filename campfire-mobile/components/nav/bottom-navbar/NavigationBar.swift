@@ -28,7 +28,7 @@ struct NavigationBar: View {
                 }
                 .tag(1)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.init(white: 1), for: .tabBar)
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
             CameraPage()
                 .tabItem {
@@ -49,7 +49,7 @@ struct NavigationBar: View {
                 }
                 .tag(3)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.init(white:1), for: .tabBar)
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
             ProfilePage()
                 .tabItem {
@@ -57,7 +57,7 @@ struct NavigationBar: View {
                 }
                 .tag(4)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.init(white: 1), for: .tabBar)
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
         

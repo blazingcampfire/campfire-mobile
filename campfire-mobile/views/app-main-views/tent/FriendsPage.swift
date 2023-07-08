@@ -17,7 +17,7 @@ struct FriendsPage: View {
             .searchable(text: $searchText)
             .background(Color.white)
             .padding(-10)
-        }
+    }
 }
 
 struct ListFriends: View {
@@ -41,7 +41,7 @@ struct ListFriends: View {
                         }) {
                             Text(info.name)
                                 .font(.custom("LexendDeca-Bold", size: 18))
-                                .foregroundColor(.black)
+                                .foregroundColor(Theme.TextColor)
                         }
                         
                         Text("@\(info.username)")
@@ -49,7 +49,7 @@ struct ListFriends: View {
                             .foregroundColor(.gray)
                     }
                 }
-                .listRowBackground(Color.white)
+                .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)
             }
         }

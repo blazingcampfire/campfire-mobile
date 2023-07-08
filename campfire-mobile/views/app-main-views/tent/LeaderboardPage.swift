@@ -16,7 +16,7 @@ struct LeaderboardPage: View {
             
             Text("Leaderboard 👑")
                 .font(.custom("LexendDeca-SemiBold", size: 20))
-                .padding(.top, 10)
+                .padding(.top, 15)
             
             Picker(selection: $selectedOption, label: Text("")) {
                 Text("All-Time")

@@ -71,35 +71,26 @@ struct VidsPlayer: View {
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
-        ZStack {
-            switch vid.mediafile.mediaType {
-            case .video:
+             ZStack {
+                switch vid.mediafile.mediaType {
+                case .video:
                 if let player = vid.player {
-                    CustomVideoPlayer(player: player, isPlaying: $isPlaying)
+                    CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
                         .onTapGesture {
-                            isPlaying.toggle()
+                        vid.isPlaying.toggle()
+                        vid.manuallyPaused.toggle()
                         }
-                        .onAppear {
-                            isPlaying = true
-                            
+                        .onChange(of: currentVid) { value in
+                        vid.isPlaying = vid.id == value
+                        if !vid.isPlaying {
+                        player.seek(to: .zero)
                         }
-                        .onDisappear {
-                            isPlaying = false
-                            player.seek(to: .zero)
+                        if vid.isPlaying {
+                        player.play()
                         }
-                    GeometryReader { proxy -> Color in
-                        let minY = proxy.frame(in: .global).minY
-                        let size = proxy.size
-                        DispatchQueue.main.async {
-                            if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
-                                isPlaying = true
-                            } else {
-                                isPlaying = false
-                            }
-                        }
-                        return Color.clear
                     }
                 }
+
                 
             case .image:
                 // Construct the file path

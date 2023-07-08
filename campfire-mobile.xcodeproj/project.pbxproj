@@ -68,6 +68,8 @@
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
 		B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04A2A57D7B800BA5554 /* cute.jpeg */; };
 		B1CAD04D2A57D83B00BA5554 /* blonde.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */; };
+		B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2AE2A5915CE0096F335 /* talkin.mov */; };
+		B1EDD2B32A5915CE0096F335 /* gunna.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2B02A5915CE0096F335 /* gunna.mov */; };
 		B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EF99882A4289540001E8CC /* CameraPage.swift */; };
 		E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E22A4FCF5D00410B34 /* Notification.swift */; };
 		E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */; };
@@ -188,6 +190,8 @@
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B1CAD04A2A57D7B800BA5554 /* cute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute.jpeg; sourceTree = "<group>"; };
 		B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blonde.jpeg; sourceTree = "<group>"; };
+		B1EDD2AE2A5915CE0096F335 /* talkin.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = talkin.mov; sourceTree = "<group>"; };
+		B1EDD2B02A5915CE0096F335 /* gunna.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = gunna.mov; sourceTree = "<group>"; };
 		B1EF99882A4289540001E8CC /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				B1EDD2AE2A5915CE0096F335 /* talkin.mov */,
+				B1EDD2B02A5915CE0096F335 /* gunna.mov */,
 				B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */,
 				B1CAD04A2A57D7B800BA5554 /* cute.jpeg */,
 				B1B5D7E92A573F6400E30064 /* animal.jpeg */,
@@ -683,6 +689,7 @@
 				F8950DC62A48002800C13075 /* adarsh.mp4 in Resources */,
 				B18B19A92A46977200309256 /* LexendDeca-Light.ttf in Resources */,
 				B18B19AA2A46977200309256 /* LexendDeca-Medium.ttf in Resources */,
+				B1EDD2B32A5915CE0096F335 /* gunna.mov in Resources */,
 				B18B19AB2A46977200309256 /* LexendDeca-SemiBold.ttf in Resources */,
 				B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */,
 				B18B19912A46976700309256 /* Comfortaa-Bold.ttf in Resources */,
@@ -702,6 +709,7 @@
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
 				B18B199D2A46976700309256 /* JosefinSans-Medium.ttf in Resources */,
+				B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */,
 				B18B199E2A46976700309256 /* JosefinSans-MediumItalic.ttf in Resources */,
 				B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */,
 				B18B199F2A46976700309256 /* JosefinSans-Regular.ttf in Resources */,

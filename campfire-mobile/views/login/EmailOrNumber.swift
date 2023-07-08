@@ -9,18 +9,20 @@
 import SwiftUI
 
 struct EmailOrNumber: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
             LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255 / 255, green: 50 / 255, blue: 89 / 255, alpha: 1)), Color(.init(red: 255 / 255, green: 153 / 255, blue: 102 / 255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.vertical)
                 .overlay(
                     VStack {
                         HStack {
-                            Image(systemName: "arrowshape.backward.fill")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25))
-                            Text("back")
-                                .font(.custom("LexendDeca-Bold", size: 20))
-                                .foregroundColor(.white)
+                            Button {
+                                dismiss()
+                            } label: {
+                                BackButton()
+                            }
                         }
                         .padding(.leading, 15)
                         .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)

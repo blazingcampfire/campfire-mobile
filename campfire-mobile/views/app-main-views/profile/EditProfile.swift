@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct EditProfile: View {
-    
     @State private var userinfo = UserInfo()
-    
+
     var postImages: [[String]] = [
         ["ragrboard", "1"],
         ["ragrboard2"],
         ["ragrboard3", "3"],
         ["ragrboard4"],
         ["ragrboard5", "5"],
-        ["ragrboard6"]
+        ["ragrboard6"],
     ]
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -125,13 +124,8 @@ struct EditProfile: View {
     }
 }
 
-
-
-
-
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         EditProfile()
     }
 }
-

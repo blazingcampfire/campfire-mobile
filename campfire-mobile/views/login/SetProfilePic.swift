@@ -28,11 +28,10 @@ struct SetProfilePic: View {
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(-20)
                         
-                        LFButton(text: "finish"){}
+                        LFButton(text: "finish")
 
                     }
                     .padding(.bottom, 200)
-                    
                     
                 }
             )

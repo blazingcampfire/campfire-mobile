@@ -9,19 +9,17 @@ import SwiftUI
 struct NavigationBar: View {
     @Binding var selectedTabIndex: Int?
 
-        
     var body: some View {
         TabView(selection: $selectedTabIndex) {
             TheFeed()
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")
-                    
                 }
                 .tag(0)
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
-            
+
             MapPage()
                 .tabItem {
                     Label("Map", systemImage: "map")
@@ -41,11 +39,10 @@ struct NavigationBar: View {
                 .tag(2)
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
-            
-           TentTabView()
+
+            TentTabView()
                 .tabItem {
                     Label("Tent", systemImage: "tent.fill")
-                       
                 }
                 .tag(3)
                 .toolbar(.visible, for: .tabBar)
@@ -60,12 +57,11 @@ struct NavigationBar: View {
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
-        
     }
 }
+
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
         NavigationBar(selectedTabIndex: .constant(nil))
     }
 }
-

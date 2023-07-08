@@ -22,20 +22,18 @@ struct FriendsPage: View {
 
 struct ListFriends: View {
     let range: ClosedRange<Int>
-    
+
     var body: some View {
         List {
-            ForEach(range, id: \.self) { number in
+            ForEach(range, id: \.self) { _ in
                 HStack {
-                    
                     // user image is passed in
                     Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
-                    
-                    
+
                     VStack(alignment: .leading) {
                         Button(action: {
                         }) {
@@ -43,7 +41,7 @@ struct ListFriends: View {
                                 .font(.custom("LexendDeca-Bold", size: 18))
                                 .foregroundColor(Theme.TextColor)
                         }
-                        
+
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
@@ -56,9 +54,6 @@ struct ListFriends: View {
         .listStyle(PlainListStyle())
     }
 }
-
-
-
 
 struct FriendsPage_Previews: PreviewProvider {
     static var previews: some View {

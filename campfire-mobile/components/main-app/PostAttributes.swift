@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-
-
 struct PostAttributes: View {
     var post: String
     var prompt: String?
     var width: CGFloat? = 350
-    
+
     var body: some View {
         VStack(spacing: 1) {
             if let prompt = prompt {
@@ -26,7 +24,7 @@ struct PostAttributes: View {
                             .font(.custom("LexendDeca-Bold", size: 15))
                     )
             }
-            
+
             Image(post)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -37,15 +35,12 @@ struct PostAttributes: View {
     }
 }
 
-
-
-
 struct PostAttributes_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 PostAttributes(post: "ragrboard4", prompt: "for the dogs")
-                    
+
                 PostAttributes(post: "ragrboard5", width: 350)
             }
         }

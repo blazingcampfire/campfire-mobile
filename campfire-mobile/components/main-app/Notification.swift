@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct Notification: View {
-    
     var title: String = "Friend Request"
     var content: String = "Adarsh Gadepalli has sent you a friend request!"
     var timeStamp: String = "11:37am"
-    
+
     var body: some View {
         VStack(spacing: 5) {
             HStack {
@@ -25,7 +24,6 @@ struct Notification: View {
                     .padding(.trailing, 10)
                     .padding(.top, 5)
                     .font(.custom("LexendDeca-Regular", size: 15))
-                    
             }
             .foregroundColor(.white)
             HStack {
@@ -33,7 +31,7 @@ struct Notification: View {
                     .padding(.leading, 10)
                     .padding(.top, 5)
                     .font(
-                    .custom("LexendDeca-Regular", size: 15))
+                        .custom("LexendDeca-Regular", size: 15))
                 Spacer()
             }
             .foregroundColor(.white)

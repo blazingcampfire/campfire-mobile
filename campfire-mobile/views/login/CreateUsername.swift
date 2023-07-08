@@ -9,34 +9,36 @@ import SwiftUI
 
 struct CreateUsername: View {
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
-            .edgesIgnoringSafeArea(.vertical)
-            .overlay(
-                VStack {
-                    
-                    Spacer()
-
-                    
-                    VStack(spacing: 60) {
-                        Text("enter a campfire username")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 25))
+            LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.vertical)
+                .overlay(
+                    VStack {
                         
-                        FormTextField(placeholderText: "username") 
-                        
-                        Text("almost there!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
+                        Spacer()
                         
                         
-                        LFButton(text: "next"){}
+                        VStack(spacing: 60) {
+                            Text("enter a campfire username")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 25))
+                            
+                            FormTextField(placeholderText: "username") 
+                            
+                            Text("almost there!")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(-20)
+                            
+                            NavigationLink(destination: SetProfilePic(), label: {
+                                LFButton(text: "next")
+                            })
+                            
+                        }
+                        .padding(.bottom, 200)
+                        
                     }
-                    .padding(.bottom, 200)
-                    
-                    
-                }
-            )
+                )
+
     }
 }
 

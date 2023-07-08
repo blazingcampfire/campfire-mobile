@@ -10,6 +10,7 @@ import SwiftUI
 struct AccountSetUp: View {
     
     var body: some View {
+        NavigationView {
             LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.vertical)
                 .overlay(
@@ -22,20 +23,27 @@ struct AccountSetUp: View {
                             Text("campfire")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 60))
-                                .padding(.top, -29)
+                                .padding(.top, -30)
                             
                             
                         }
-                        .offset(y: -30)
+                        .padding(.bottom, 30)
                         
-                        LFButton(text: "create account"){}
-                            .padding(5)
-                        LFButton(text: "login"){}
-                        
-                    })
-        
+                        VStack {
+                            NavigationLink(destination: EnterPhoneNumber(), label: {
+                                LFButton(text: "create account")}
+                            )
+                            
+                            NavigationLink(destination: EmailOrNumber(), label: {
+                                LFButton(text: "login")
+                            })
+                        }
+                    }
+                )
+        }
     }
 }
+
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {

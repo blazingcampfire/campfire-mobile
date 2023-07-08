@@ -11,7 +11,6 @@ struct EditPost: View {
     var post: String
     var prompt: String?
 
-    
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -19,7 +18,7 @@ struct EditPost: View {
             VStack(spacing: 20) {
                 ZStack {
                     PostAttributes(post: post, prompt: prompt)
-                    
+
                     if prompt != nil {
                         Button(action: {
                             // open camera roll
@@ -46,9 +45,8 @@ struct EditPost: View {
                         }
                     }
                 }
-                
+
                 Button(action: {
-                    
                 }) {
                     Text(prompt != nil ? "Change Prompt" : "Add Prompt")
                         .font(.custom("LexendDeca-Bold", size: 20))
@@ -65,4 +63,3 @@ struct EditPost_Previews: PreviewProvider {
         EditPost(post: "ragrboard")
     }
 }
-

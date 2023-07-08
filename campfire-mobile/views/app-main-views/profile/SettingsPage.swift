@@ -12,11 +12,10 @@ struct SettingsPage: View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            
+
             NavigationView {
                 Form {
                     Section(header: Text("Display")) {
-                        
                         Toggle(isOn: .constant(false)) {
                             Label {
                                 Text("Dark Mode")
@@ -26,7 +25,7 @@ struct SettingsPage: View {
                             }
                         }
                         .font(.custom("LexendDeca-Regular", size: 16))
-                
+
                         Toggle(isOn: .constant(true)) {
                             Label {
                                 Text("Notifications")
@@ -36,7 +35,7 @@ struct SettingsPage: View {
                             }
                         }
                     }
-                    
+
                     .font(.custom("LexendDeca-Regular", size: 16))
                     Section(header: Text("About")) {
                         Label {
@@ -59,8 +58,7 @@ struct SettingsPage: View {
                         }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
-                    
-                    
+
                     Section(header: Text("Support")) {
                         //  Label("Report Account", systemImage: "exclamationmark.triangle.fill")
                         Label {
@@ -77,7 +75,7 @@ struct SettingsPage: View {
                         }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
-                    
+
                     Section(header: Text("Account")) {
                         NavigationLink(destination: AccountSetUp()) {
                         Label {
@@ -97,7 +95,6 @@ struct SettingsPage: View {
                         }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
-                    
                 }
                 .navigationTitle("Settings").font(.custom("JosefinSans-Regular", size: 25))
             }

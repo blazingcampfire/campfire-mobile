@@ -14,6 +14,17 @@ struct EmailOrNumber: View {
                 .edgesIgnoringSafeArea(.vertical)
                 .overlay(
                     VStack {
+                        HStack {
+                            Image(systemName: "arrowshape.backward.fill")
+                                .foregroundColor(.white)
+                                .font(.system(size: 25))
+                            Text("back")
+                                .font(.custom("LexendDeca-Bold", size: 20))
+                                .foregroundColor(.white)
+                        }
+                        .padding(.leading, 15)
+                        .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                       
                         VStack {
                             Image("newlogo")
                                 .resizable()
@@ -31,16 +42,16 @@ struct EmailOrNumber: View {
                             LFButton(text: "phone number")})
                         .padding(5)
                         
-                        Text("or")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 25))
+
                         
                         NavigationLink(destination: EnterEmail(), label: {
                             LFButton(text: "email")})
                         .padding(5)
                         
-                    })
-
+                    }
+                )
+                .navigationBarBackButtonHidden(true)
+    
     }
 }
 

@@ -34,6 +34,7 @@ struct EnterPhoneNumber: View {
                         .padding(.bottom, 200)
                     }
                 )
+                .navigationBarBackButtonHidden(true)
         }
 }
 

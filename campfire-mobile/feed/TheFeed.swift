@@ -5,8 +5,8 @@
 //
 import SwiftUI
 import AVKit
+
 struct TheFeed: View {
-    
     @State var currentVid = ""
     @State var vids = MediaFileJSON.map { item in
         switch item.mediaType {
@@ -18,27 +18,24 @@ struct TheFeed: View {
             return Vid(player: nil, mediafile: item)
         }
     }
-        //The vids sets up a switch statement that reads the mediaType of Vid struct
-        // Then sets up what happens for the image or video, the video url is initialized here
+        
     
     
     var body: some View {
-        GeometryReader{proxy in
+        GeometryReader { proxy in
             let size = proxy.size
             TabView(selection: $currentVid) {
-                ForEach($vids){ $vids in
+                ForEach($vids){$vids in
                     VidsPlayer(vid: $vids, currentVid: $currentVid)
                         .frame(width: size.width)
                         .rotationEffect(.init(degrees: -90))
                         .ignoresSafeArea(.all, edges: .top)
-                
-                    }
+                }
             }
             .rotationEffect(.init(degrees: 90))
             .frame(width: size.height)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(width: size.width)
-            
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
@@ -58,37 +55,50 @@ struct TheFeed_Previews: PreviewProvider {
         TheFeed()
     }
 }
+
     
 struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
+    
     @State private var HotSelected = true
     let feedinfo = FeedInfo()
+    
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
     
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
         ZStack {
-                    switch vid.mediafile.mediaType {
-                    case .video:
-                        if let player = vid.player {
-                            CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
-                                .onTapGesture {
-                                   vid.isPlaying.toggle()
-                                    vid.manuallyPaused.toggle()
-                                }
-                                .onChange(of: currentVid) { value in
-                                    vid.isPlaying = vid.id == value
-                                    if !vid.isPlaying {
-                                    player.seek(to: .zero)
-                                        }
-                                    if vid.isPlaying {
-                                        player.play()
-                                    }
-                                    }
+            switch vid.mediafile.mediaType {
+            case .video:
+                if let player = vid.player {
+                    CustomVideoPlayer(player: player, isPlaying: $isPlaying)
+                        .onTapGesture {
+                            isPlaying.toggle()
                         }
+                        .onAppear {
+                            isPlaying = true
+                            
+                        }
+                        .onDisappear {
+                            isPlaying = false
+                            player.seek(to: .zero)
+                        }
+                    GeometryReader { proxy -> Color in
+                        let minY = proxy.frame(in: .global).minY
+                        let size = proxy.size
+                        DispatchQueue.main.async {
+                            if -minY < (size.height / 2) && minY < (size.height / 2) && currentVid == vid.id {
+                                isPlaying = true
+                            } else {
+                                isPlaying = false
+                            }
+                        }
+                        return Color.clear
+                    }
+                }
                 
             case .image:
                 // Construct the file path
@@ -96,7 +106,7 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                    //    .aspectRatio(contentMode: .fit)
+                      //  .aspectRatio(contentMode: .fit)
                         .scaledToFit()
                 } else {
                     // Handle image not found case
@@ -114,7 +124,7 @@ struct VidsPlayer: View {
                             HotSelected = true
                         }) {
                             Text("Hot")
-                                .font(.custom("LexendDeca-Bold", size:35))
+                                .font(.custom("LexendDeca-Bold",                 size:35))
                                 .opacity(HotSelected ? 1.0 : 0.5)
                         }
                         
@@ -176,7 +186,7 @@ struct VidsPlayer: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text(userInfo.location)
+                                        Text("📍37 High Street")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -205,7 +215,7 @@ struct VidsPlayer: View {
                             self.likeTapped.toggle()
                         }) {
                             VStack {
-                                Image(self.likeTapped == false ? "noteaten" : "eaten")
+                                Image(self.likeTapped == false ? "eaten" : "noteaten")
                             }
                             .padding(.leading, -15)
                         }
@@ -217,7 +227,7 @@ struct VidsPlayer: View {
                     
                     VStack {
                     Button(action: {
-                        //comment
+                        // comment
                     }) {
                         VStack {
                             Image(systemName: "text.bubble.fill")
@@ -226,9 +236,9 @@ struct VidsPlayer: View {
                                 .foregroundColor(.white)
                         }
                     }
-                        Text("\(feedinfo.commentnum)")
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Regular", size: 16))
+                    Text("\(feedinfo.commentnum)")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-Regular", size: 16))
                 }
                     .padding(.top, 20)
                     
@@ -237,17 +247,15 @@ struct VidsPlayer: View {
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
-          
-                  .frame(width: 30, height: 8)
+                            .frame(width: 30, height: 8)
                             .foregroundColor(.white)
                     }
                     .padding(.top, 15)
-      
-          }
+                }
                 .padding(.bottom, 155)
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         .background(Color.black.ignoresSafeArea())
-        }
     }
+}

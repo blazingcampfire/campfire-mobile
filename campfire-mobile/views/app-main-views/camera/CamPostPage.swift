@@ -1,15 +1,12 @@
-//  TheFeed.swift
-//  campfire-mobile
-//
-//  Created by Adarsh G on 6/20/23.
-//
+
+
+
+
+
+
 import SwiftUI
 import AVKit
-
-
-
 struct CamPostPage: View {
-    
     @State var currentVid = ""
     @State var vids = PostFileJSON.map { item in
         switch item.mediaType {
@@ -26,7 +23,7 @@ struct CamPostPage: View {
     
     
     var body: some View {
-        GeometryReader{proxy in
+        GeometryReader { proxy in
             let size = proxy.size
             TabView(selection: $currentVid) {
                 ForEach($vids){ $vids in
@@ -41,7 +38,6 @@ struct CamPostPage: View {
             .frame(width: size.height)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(width: size.width)
-            
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
@@ -55,7 +51,6 @@ struct CamPostPage: View {
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
 //VidsPlayer handles the specific actions of what each case should look like
-
 struct CamPostPage_Previews: PreviewProvider {
     static var previews: some View {
         CamPostPage()
@@ -130,7 +125,6 @@ struct CamPostPlayer: View {
                             
                             //- MARK: Profile pic/username buttons Hstack
                             HStack(spacing: 10) {
-                                
                                 Button(action: {
                                     // lead to profile page
                                 }) {
@@ -143,7 +137,7 @@ struct CamPostPlayer: View {
                                 
                                 
                                 Button(action: {
-                                    //lead to profile page
+                                    // lead to profile page
                                 }) {
                                     Text(userInfo.username)
                                         .font(.custom("LexendDeca-Bold", size: 15))
@@ -158,17 +152,31 @@ struct CamPostPlayer: View {
                             VStack(alignment: .center, spacing: 5) {
                                 
                                 CaptionTextField(placeholderText: "enter your caption")
-                                
+
                                 Button(action: {
-                                    //lead to map and where location is
+                                    // lead to map and where location is
                                 }) {
                                     HStack {
                                         Text(userInfo.location)
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
+                                    .padding(.trailing, 240)
                              
                                 }
                                 .frame(alignment: .trailing)
+                                Button(action: {
+                            //post to feed
+                            }) {
+                                HStack(spacing: 7) {
+                                Text("post")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-SemiBold", size: 22))
+                                Image(systemName: "arrowshape.right.fill")
+                                        .font(.system(size: 18))
+                                }
+                                .padding(15)
+                                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
+                                }
                             }
                 
                         }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserProfilePic: View {
     let userinfo = UserInfo()
-    
+
     var body: some View {
         Image(userinfo.profilepic)
             .resizable()
@@ -19,7 +19,7 @@ struct UserProfilePic: View {
             .overlay(
                 Circle()
                     .stroke(Theme.PFPColor, lineWidth: 0.4)
-                )
+            )
     }
 }
 

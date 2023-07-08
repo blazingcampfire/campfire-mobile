@@ -5,13 +5,13 @@
 //  Created by Femi Adebogun on 6/19/23.
 //
 
-import SwiftUI
 import iPhoneNumberField
+import SwiftUI
 
 struct NumberForm: View {
     @State var text = ""
     @State var isEditing: Bool = false
-    
+
     var body: some View {
         iPhoneNumberField(text: $text)
             .flagHidden(false)
@@ -26,10 +26,6 @@ struct NumberForm: View {
             .background(Theme.Peach)
             .cornerRadius(10)
             .padding()
-            
-        
-        
-    
     }
 }
 

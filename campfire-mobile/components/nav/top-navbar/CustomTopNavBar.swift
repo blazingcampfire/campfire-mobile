@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct CustomTopNavBar: View {
-    
     @State private var title: String = "campfire"
 
-    
     var body: some View {
         HStack {
             Spacer()

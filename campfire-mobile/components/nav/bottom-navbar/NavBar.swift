@@ -9,16 +9,16 @@ import SwiftUI
 
 struct NavBar: View {
     @State var selectedIndex = 0
-    
+
     let tabBarImages = ["fireplace", "map", "camera", "magnifyingglass", "person.fill"]
     let tabBarTitles = ["Feed", "Map", "Camera", "Search", "Profile"]
-    
+
     init() {
         UITabBar.appearance().barTintColor = .systemBackground
     }
-    
+
     var body: some View {
-        VStack(spacing:0) {
+        VStack(spacing: 0) {
             ZStack {
                 switch selectedIndex {
                 case 0:
@@ -26,10 +26,10 @@ struct NavBar: View {
                         TheFeed()
                     }
                     .edgesIgnoringSafeArea(.bottom)
-                    
-                  //  NavigationView {
-                    //    TheFeed()
-                    //}
+
+                //  NavigationView {
+                //    TheFeed()
+                // }
                 case 1:
                     NavigationView {
                         MapPage()
@@ -46,29 +46,28 @@ struct NavBar: View {
                     NavigationView {
                         ProfilePage()
                     }
-                    
-                    
+
                 default:
                     NavigationView {
                         Text("okkk")
                     }
                 }
             }
-            
-       //     Spacer()
-     //       Spacer()
-            
-        //    Divider()
+
+            //     Spacer()
+            //       Spacer()
+
+            //    Divider()
             HStack(spacing: -37) { // Adjust spacing between buttons
-                ForEach(0..<5) { num in
+                ForEach(0 ..< 5) { num in
                     Spacer() // Add Spacer to distribute buttons evenly
                     Button(action: {
                         selectedIndex = num
                     }, label: {
-                        VStack(spacing: 5) { 
+                        VStack(spacing: 5) {
                             if num == 2 {
-                               ZStack {
-                                   Circle()
+                                ZStack {
+                                    Circle()
                                         .fill(Color.red)
                                         .frame(width: 60, height: 60)
                                         .overlay(
@@ -85,18 +84,13 @@ struct NavBar: View {
                                     .foregroundColor(selectedIndex == num ? Color(.red) : .init(white: 0.7))
                                     .offset(x: 0, y: 0) // Adjust vertical offset
                             }
-                            
+
                             if num == 2 {
                             } else {
                                 Text(tabBarTitles[num])
                                     .font(.system(size: 12)) // Adjust font size
                                     .foregroundColor(selectedIndex == num ? .red : .gray)
                             }
-                            
-                            
-                            
-            
-                        
                         }
                     })
                     Spacer()
@@ -104,10 +98,9 @@ struct NavBar: View {
             }
         }
         .padding(-15)
-       // .edgesIgnoringSafeArea(.bottom)
+        // .edgesIgnoringSafeArea(.bottom)
     }
 }
-
 
 struct NavBar_Previews: PreviewProvider {
     static var previews: some View {

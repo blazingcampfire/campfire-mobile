@@ -38,10 +38,10 @@ struct VerifyEmail: View {
                         .padding(40)
                     }
                     
-                    LFButton(text: "Microsoft", clicked: {}, icon: Image("microsoftlogo"))
+                    LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                         .padding(5)
                     
-                    LFButton(text: "Google", clicked: {}, icon: Image("glogo2"))
+                    LFButton(text: "Google", icon: Image("glogo2"))
                        
                     
                 })

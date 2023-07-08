@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CaptionTextField: View {
     @State private var text: String = ""
-    
+
     var placeholderText: String
-    
+
     var body: some View {
         VStack {
             ZStack(alignment: .topLeading) {
@@ -20,25 +20,22 @@ struct CaptionTextField: View {
                     .foregroundColor(.white)
                     .padding(.horizontal, 8)
                     .offset(x: 0, y: -25)
-                
+
                 TextField(placeholderText, text: $text)
                     .font(.custom("LexendDeca-Regular", size: 18))
                     .foregroundColor(Color.white)
                     .padding(.horizontal)
                     .frame(width: 360, height: 35)
                     .background(
-                        RoundedRectangle(cornerRadius: 8) 
+                        RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2)
                     )
             }
-            
         }
         .frame(height: 50)
         .padding(.horizontal)
     }
 }
-
-
 
 struct CaptionTextField_Previews: PreviewProvider {
     static var previews: some View {

@@ -5,8 +5,8 @@
 //  Created by Adarsh G on 6/24/23.
 //
 
-import SwiftUI
 import AVKit
+import SwiftUI
 
 struct Vid: Identifiable {    //This sets up the properties of the image or video that is displayed
     var id = UUID().uuidString
@@ -32,7 +32,7 @@ let MediaFileJSON = [
     MediaFile(url: "tyler", mediaType: .video),
     MediaFile(url: "blonde", mediaType: .image),
     MediaFile(url: "happen", mediaType: .video),
-    MediaFile(url: "hot", mediaType: .image)
+    MediaFile(url: "hot", mediaType: .image),
 ]
 
 let PostFileJSON = [

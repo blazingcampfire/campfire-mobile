@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct TopNavBar<Content:View>: View {
-    
+struct TopNavBar<Content: View>: View {
     let content: Content
-    
-    init (@ViewBuilder content: () -> Content) {
+
+    init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     var body: some View {
         NavigationView {
             TopNavBarContainer {
@@ -24,7 +23,6 @@ struct TopNavBar<Content:View>: View {
         .navigationBarHidden(true)
         .background(.clear)
     }
-
 }
 
 struct TopNavBarView_Previews: PreviewProvider {

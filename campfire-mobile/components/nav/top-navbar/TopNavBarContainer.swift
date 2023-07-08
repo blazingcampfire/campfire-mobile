@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-
 struct TopNavBarContainer<Content: View>: View {
-    
     let content: Content
-    
+
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             CustomTopNavBar()
@@ -29,8 +27,8 @@ struct TopNavBarContainer<Content: View>: View {
 
 struct TopNavBarContainer_Previews: PreviewProvider {
     static var previews: some View {
-        TopNavBarContainer{
-            ZStack{
+        TopNavBarContainer {
+            ZStack {
                 Color.green.ignoresSafeArea()
                 Text("Hello, world!")
             }

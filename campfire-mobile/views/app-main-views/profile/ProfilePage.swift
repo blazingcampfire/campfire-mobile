@@ -9,31 +9,23 @@ import SwiftUI
 
 struct ProfilePage: View {
     let userInfo = UserInfo()
-    
-    
+
     let postImages: [[String]] = [
         ["ragrboard", "1"],
         ["ragrboard2"],
         ["ragrboard3", "3"],
         ["ragrboard4"],
         ["ragrboard5", "5"],
-        ["ragrboard6"]
-    ] //url strings in firebase
-    
-    
+        ["ragrboard6"],
+    ] // url strings in firebase
+
     var body: some View {
-        
         ZStack {
-            
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            
-            
 
-            
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    
                     ZStack {
                         UserProfile()
                             .padding(.top)
@@ -46,13 +38,12 @@ struct ProfilePage: View {
                         }
                         .offset(x: 145, y: -130)
                     }
-                    
+
                     VStack(spacing: 20) { // Added spacing between elements
-                        
                         Spacer()
-                        
+
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                            ForEach(0..<postImages.count, id: \.self) { index in
+                            ForEach(0 ..< postImages.count, id: \.self) { index in
                                 VStack(spacing: 20) {
                                     if postImages[index].count == 2 {
                                         PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
@@ -78,4 +69,3 @@ struct ProfilePage_Previews: PreviewProvider {
         ProfilePage()
     }
 }
-

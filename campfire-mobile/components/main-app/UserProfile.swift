@@ -9,14 +9,14 @@ import SwiftUI
 
 struct UserProfile: View {
     let userinfo = UserInfo()
-    
+
     var body: some View {
         VStack(spacing: 0) {
             UserProfilePic()
             Spacer()
             Text(userinfo.name)
                 .font(.custom("LexendDeca-Bold", size: 20))
-            
+
             HStack {
                 Text(userinfo.username)
                     .font(.custom("LexendDeca-SemiBold", size: 15))
@@ -29,12 +29,12 @@ struct UserProfile: View {
             Text(userinfo.bio)
                 .font(.custom("LexendDeca-Regular", size: 13))
                 .padding(8)
-            
+
             HStack {
                 Button(action: {
                     // Go to Edit Profile
                 }) {
-                    Text("Edit Profile") //conditional visibility, if viewing another user, show Add Friend instead
+                    Text("Edit Profile") // conditional visibility, if viewing another user, show Add Friend instead
                         .font(.custom("LexendDeca-Bold", size: 15))
                         .foregroundColor(Theme.Peach)
                         .padding()
@@ -47,7 +47,7 @@ struct UserProfile: View {
                                 )
                         )
                 }
-                
+
                 Button(action: {
                     // Go to Edit Profile
                 }) {
@@ -61,7 +61,6 @@ struct UserProfile: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.black, lineWidth: 0.3)
-                                        
                                 )
                         )
                 }

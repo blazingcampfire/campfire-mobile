@@ -10,10 +10,9 @@ import SwiftUI
 struct SearchPage: View {
     @State var searchText = ""
     var body: some View {
-        
         NavigationStack {
             // Text("Search for users") // users collection query
-            FriendsList(range: 1...12)
+            FriendsList(range: 1 ... 12)
         }
         .searchable(text: $searchText)
         .background(Color.white)
@@ -26,16 +25,14 @@ struct FriendsList: View {
     let range: ClosedRange<Int>
     var body: some View {
         List {
-            ForEach(range, id: \.self) { number in
+            ForEach(range, id: \.self) { _ in
                 HStack {
-                    
                     Image(info.profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
-                    
-                    
+
                     VStack(alignment: .leading) {
                         Text(info.name)
                             .font(.custom("LexendDeca-Bold", size: 18))
@@ -43,17 +40,16 @@ struct FriendsList: View {
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
-                    
+
                     Spacer()
-                    
+
                     Button {
                         print("add friend")
-                    }   label: {
+                    } label: {
                         Image(systemName: "plus.circle.fill")
-                            .font(.system(size:30))
+                            .font(.system(size: 30))
                             .foregroundColor(Theme.Peach)
                     }
-                    
                 }
                 .listRowBackground(Color.white)
                 .listRowSeparator(.hidden)
@@ -62,9 +58,6 @@ struct FriendsList: View {
         .listStyle(PlainListStyle())
     }
 }
-
-
-
 
 struct SearchPage_Previews: PreviewProvider {
     static var previews: some View {

@@ -11,10 +11,10 @@ struct HotspotsFeedPage: View {
     var body: some View {
         ZStack {
             TheFeed()
-            
+
             VStack {
                 Button(action: {
-                    //go back to map page
+                    // go back to map page
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.white)
@@ -23,7 +23,6 @@ struct HotspotsFeedPage: View {
             }
             .padding(.bottom, 700)
             .padding(.leading, 320)
-    
         }
     }
 }

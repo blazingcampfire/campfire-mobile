@@ -8,28 +8,27 @@
 import SwiftUI
 
 struct EditProfile: View {
-    
     @State private var userinfo = UserInfo()
-    
+
     var postImages: [[String]] = [
         ["ragrboard", "1"],
         ["ragrboard2"],
         ["ragrboard3", "3"],
         ["ragrboard4"],
         ["ragrboard5", "5"],
-        ["ragrboard6"]
+        ["ragrboard6"],
     ]
-    
+
     var body: some View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            
+
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
                         UserProfilePic()
-                        
+
                         Button(action: {
                             // go to camera roll
                         }) {
@@ -41,11 +40,11 @@ struct EditProfile: View {
                                 .clipShape(Circle())
                         }
                     }
-                    
+
                     Text("change profile pic")
                         .font(.custom("LexendDeca-Bold", size: 20))
                         .foregroundColor(Theme.Peach)
-                    
+
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {
                             Text(userinfo.name)
@@ -56,9 +55,9 @@ struct EditProfile: View {
                                 .font(.custom("LexendDeca-Bold", size: 15))
                         }
                         .padding(.leading, 20)
-                        
+
                         Spacer()
-                        
+
                         VStack(alignment: .trailing, spacing: 20) {
                             Button(action: {
                                 // call edit field page with name
@@ -67,7 +66,7 @@ struct EditProfile: View {
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.Peach)
                             }
-                            
+
                             Button(action: {
                                 // call edit field page with username
                             }) {
@@ -75,7 +74,7 @@ struct EditProfile: View {
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.Peach)
                             }
-                            
+
                             Button(action: {
                                 // call edit field page with bio
                             }) {
@@ -86,9 +85,9 @@ struct EditProfile: View {
                         }
                         .padding(.trailing, 20)
                     }
-                    
+
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
-                        ForEach(0..<postImages.count, id: \.self) { index in
+                        ForEach(0 ..< postImages.count, id: \.self) { index in
                             VStack(spacing: 20) {
                                 ZStack(alignment: .topTrailing) {
                                     if postImages[index].count == 2 {
@@ -98,7 +97,7 @@ struct EditProfile: View {
                                         PostAttributes(post: postImages[index][0], prompt: nil, width: 300)
                                             .frame(width: 250)
                                     }
-                                    
+
                                     Circle()
                                         .foregroundColor(.white)
                                         .frame(width: 50, height: 50)
@@ -130,13 +129,8 @@ struct EditProfile: View {
     }
 }
 
-
-
-
-
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         EditProfile()
     }
 }
-

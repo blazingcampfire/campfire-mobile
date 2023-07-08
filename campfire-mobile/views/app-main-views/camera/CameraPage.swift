@@ -9,52 +9,39 @@ import SwiftUI
 
 struct CameraPage: View {
     @State private var flashTapped: Bool = false
-    
+
     var body: some View {
-        
         ZStack {
             Image("background")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
                 .aspectRatio(contentMode: .fill)
-            
-            
-            VStack(spacing:10) {
+
+            VStack(spacing: 10) {
                 Button(action: {
                     print("flip camera")
                     self.flashTapped.toggle()
                 }) {
                     Image(systemName: self.flashTapped == true ? "bolt.circle" : "bolt.circle.fill")
                         .foregroundColor(.white)
-                        .font(.system(size:40))
+                        .font(.system(size: 40))
                 }
-                
-                
+
                 Button(action: {
                     print("flip camera")
                 }) {
                     Image(systemName: "arrow.triangle.2.circlepath.camera")
                         .foregroundColor(.white)
-                        .font(.system(size:35, weight: .semibold))
+                        .font(.system(size: 35, weight: .semibold))
                 }
             }
-            .padding(.top,-300)
+            .padding(.top, -300)
             .padding(.leading, 290)
-            
-            
-            
-            
-            
-            
+
             VStack {
                 Spacer()
-                
-              
-                
-                
+
                 HStack(spacing: 25) {
-          
-                    
                     Button(action: {
                         print("yay")
                     }) {
@@ -72,8 +59,7 @@ struct CameraPage: View {
                             )
                     }
                     .padding(.bottom, 10)
-                    
-            
+
                     Button(action: {
                         print("upload images")
                     }) {
@@ -88,9 +74,6 @@ struct CameraPage: View {
         }
     }
 }
-
-
-
 
 struct CameraPage_Previews: PreviewProvider {
     static var previews: some View {

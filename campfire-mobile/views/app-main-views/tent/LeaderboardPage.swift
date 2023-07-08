@@ -13,9 +13,18 @@ struct LeaderboardPage: View {
     @State private var selectedOption = 5
     var body: some View {
         VStack(spacing: 0) {
+            
+            Text("Leaderboard 👑")
+                .font(.custom("LexendDeca-SemiBold", size: 20))
+                .padding(.top, 15)
+            
             Picker(selection: $selectedOption, label: Text("")) {
-                Text("All-Time").tag(5)
-                Text("Weekly").tag(6)
+                Text("All-Time")
+                .font(.custom("LexendDeca-SemiBold", size: 15))
+                .tag(5)
+                Text("Weekly")
+                .font(.custom("LexendDeca-SemiBold", size: 15))
+                .tag(6)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
@@ -52,6 +61,7 @@ struct LeaderboardList: View {
                     VStack(alignment: .leading) {
                         Text(info.name)
                             .font(.custom("LexendDeca-Bold", size: 18))
+                            .foregroundColor(Theme.TextColor)
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
@@ -62,9 +72,9 @@ struct LeaderboardList: View {
                     Text("\(info.chocs) 🍫")
                         .font(.custom("LexendDeca-Bold", size: 23))
                 }
-                .listRowBackground(Color.white)
+                .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 9, leading: 10, bottom: 15, trailing: 10))
+                .listRowInsets(EdgeInsets(top: 18, leading: 10, bottom: 15, trailing: 10))
             }
         }
         .listStyle(PlainListStyle())

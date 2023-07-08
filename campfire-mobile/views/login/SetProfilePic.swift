@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct SetProfilePic: View {
+    
+    // setting up view dismiss == going back to previous screen
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            BackButton()
+                        }
+                    }
+                    .padding(.leading, 15)
+                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
                     
                     VStack(spacing: 60) {
@@ -35,6 +48,7 @@ struct SetProfilePic: View {
                     
                 }
             )
+            .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -20,6 +20,8 @@ struct ProfilePage: View {
         ["ragrboard6"]
     ] //url strings in firebase
     
+    @State var settingsPageShow = false
+    
     
     var body: some View {
         
@@ -68,13 +70,16 @@ struct ProfilePage: View {
                                 }
                             }
                             Button(action: {
-                                // Go to settings modal
+                                settingsPageShow.toggle()
                             }) {
                                 Image(systemName: "gearshape.fill")
                                     .font(.system(size: 30))
                                     .foregroundColor(Theme.Peach)
                             }
                             .offset(x: 145, y: -130)
+                            .sheet(isPresented: $settingsPageShow) {
+                                SettingsPage()
+                            }
                         }
                         
                         VStack(spacing: 20) { // Added spacing between elements

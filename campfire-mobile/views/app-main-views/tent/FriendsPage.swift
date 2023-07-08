@@ -10,13 +10,13 @@ import SwiftUI
 struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
-        NavigationView {
-            ListFriends(range: 1 ... 12)
-                .listStyle(PlainListStyle())
-        }
-        .searchable(text: $searchText)
-        .background(Color.white)
-        .padding(-10)
+            NavigationView {
+                ListFriends(range: 1...12)
+                    .listStyle(PlainListStyle())
+            }
+            .searchable(text: $searchText)
+            .background(Color.white)
+            .padding(-10)
     }
 }
 
@@ -39,7 +39,7 @@ struct ListFriends: View {
                         }) {
                             Text(info.name)
                                 .font(.custom("LexendDeca-Bold", size: 18))
-                                .foregroundColor(.black)
+                                .foregroundColor(Theme.TextColor)
                         }
 
                         Text("@\(info.username)")
@@ -47,7 +47,7 @@ struct ListFriends: View {
                             .foregroundColor(.gray)
                     }
                 }
-                .listRowBackground(Color.white)
+                .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)
             }
         }

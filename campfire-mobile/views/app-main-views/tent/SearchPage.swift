@@ -36,6 +36,7 @@ struct FriendsList: View {
                     VStack(alignment: .leading) {
                         Text(info.name)
                             .font(.custom("LexendDeca-Bold", size: 18))
+                            .foregroundColor(Theme.TextColor)
                         Text("@\(info.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
@@ -51,7 +52,7 @@ struct FriendsList: View {
                             .foregroundColor(Theme.Peach)
                     }
                 }
-                .listRowBackground(Color.white)
+                .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)
             }
         }

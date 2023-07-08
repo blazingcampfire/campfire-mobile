@@ -77,13 +77,16 @@ struct SettingsPage: View {
                     .font(.custom("LexendDeca-Regular", size: 16))
 
                     Section(header: Text("Account")) {
+                        NavigationLink(destination: AccountSetUp()) {
                         Label {
                             Text("Log Out")
                         } icon: {
                             Image(systemName: "lock.fill")
                                 .foregroundColor(Theme.Peach)
                         }
-
+                    }
+                    
+                            
                         Label {
                             Text("Delete Account")
                         } icon: {

@@ -32,7 +32,9 @@ let MediaFileJSON = [
     MediaFile(url: "tyler", mediaType: .video),
     MediaFile(url: "blonde", mediaType: .image),
     MediaFile(url: "happen", mediaType: .video),
-    MediaFile(url: "hot", mediaType: .image),
+    MediaFile(url: "hot", mediaType: .image),  
+    MediaFile(url: "talkin", mediaType: .video),
+    MediaFile(url: "gunna", mediaType: .video)
 ]
 
 let PostFileJSON = [

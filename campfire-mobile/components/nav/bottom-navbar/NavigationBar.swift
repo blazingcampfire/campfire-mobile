@@ -26,8 +26,8 @@ struct NavigationBar: View {
                 }
                 .tag(1)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color(white: 1), for: .tabBar)
-
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
+            
             CameraPage()
                 .tabItem {
                     Image(systemName: "camera")
@@ -46,15 +46,15 @@ struct NavigationBar: View {
                 }
                 .tag(3)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color(white: 1), for: .tabBar)
-
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
+            
             ProfilePage()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
                 .tag(4)
                 .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color(white: 1), for: .tabBar)
+                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
     }

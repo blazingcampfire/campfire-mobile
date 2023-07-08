@@ -29,19 +29,18 @@ struct AccountSetUp: View {
                         }
                         .padding(.bottom, 30)
                         
-                        NavigationLink(destination: EnterPhoneNumber(), label: {
-                            LFButton(text: "create account")}
-                        )
-                        NavigationLink(destination: EmailOrNumber(), label: {
-                            LFButton(text: "login")
-                        })
-                        
-                        
-                    })
-        
+                        VStack {
+                            NavigationLink(destination: EnterPhoneNumber(), label: {
+                                LFButton(text: "create account")}
+                            )
+                            
+                            NavigationLink(destination: EmailOrNumber(), label: {
+                                LFButton(text: "login")
+                            })
+                        }
+                    }
+                )
         }
-        .navigationBarBackButtonHidden(true)
-        
     }
 }
 

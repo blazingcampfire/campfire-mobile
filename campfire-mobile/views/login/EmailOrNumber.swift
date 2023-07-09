@@ -40,11 +40,11 @@ struct EmailOrNumber: View {
                         .padding(.bottom, 30)
                         
 //MARK: - NavLinks to EnterPhoneNumber & EnterEmail screens
-                        /*
+                        
                         NavigationLink(destination: EnterPhoneNumber(), label: {
                             LFButton(text: "phone number")})
                         .padding(5)
-                         */
+                         
                         
                         NavigationLink(destination: EnterEmail(), label: {
                             LFButton(text: "email")})

@@ -13,10 +13,9 @@ struct FormTextField: View {
         VStack {
             TextField(placeholderText, text: $text)
                 .font(.custom("LexendDeca-Bold", size: 20))
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.white)
                 .padding(.horizontal)
-                .textContentType(.telephoneNumber)
-                .keyboardType(.phonePad)
+
 
             Divider()
                 .background(Color.white)

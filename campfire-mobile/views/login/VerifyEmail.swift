@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     let userinfo = UserInfo()
 
     var body: some View {

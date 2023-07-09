@@ -8,37 +8,40 @@
 import SwiftUI
 
 struct AccountSetUp: View {
-    
     var body: some View {
         NavigationStack {
-                GradientBackground()
+            GradientBackground()
                 .overlay(
                     VStack {
                         // MARK: - App logo & title
+
                         VStack {
                             Image("newlogo")
                                 .resizable()
                                 .frame(width: 300, height: 300)
-                            
+
                             Text("campfire")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 60))
                                 .padding(.top, -30)
-                            
-                            
                         }
                         .padding(.bottom, 30)
-                        
-// MARK: - NavLinks to EnterPhoneNumber & EmailOrNumber screens
+
+                        // MARK: - NavLinks to EnterPhoneNumber & EmailOrNumber screens
+
                         VStack {
                             NavigationLink(destination: EnterPhoneNumber(), label: {
-                                LFButton(text: "create account")}
-                            )
-                            
+                                LFButton(text: "create account")
+                                    .padding(5)
+                            })
+
                             NavigationLink(destination: EmailOrNumber(), label: {
                                 LFButton(text: "login")
+                                    .padding(5)
                             })
+                           
                         }
+
                     }
                     .padding(.bottom, 100)
                 )
@@ -46,10 +49,8 @@ struct AccountSetUp: View {
     }
 }
 
-
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
     }
 }
-

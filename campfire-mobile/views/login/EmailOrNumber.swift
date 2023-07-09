@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmailOrNumber: View {
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
                 GradientBackground()
@@ -25,9 +25,9 @@ struct EmailOrNumber: View {
                         }
                         .padding(.leading, 15)
                         .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
-                       
+// MARK: - App logo & title
+                        
                         VStack {
-                            // - MARK: App logo & title
                             Image("newlogo")
                                 .resizable()
                                 .frame(width: 300, height: 300)

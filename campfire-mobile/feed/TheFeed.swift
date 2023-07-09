@@ -39,12 +39,12 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            if let firstVid = vids.first {
-                currentVid = firstVid.id
-                vids[0].isPlaying = true
-            }
-        }
+//        .onAppear {
+//            if let firstVid = vids.first {
+//                currentVid = firstVid.id
+//                vids[0].isPlaying = true
+//            }
+//        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
@@ -99,7 +99,7 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
+                       .scaledToFit()
                 } else {
                     // Handle image not found case
                     Text("Image not found")
@@ -147,7 +147,7 @@ struct VidsPlayer: View {
                     }
                     .sheet(isPresented: $leaderboardPageShow) {
                         LeaderboardPage()
-                         //   .presentationDetents([.large])
+                            .presentationDragIndicator(.visible)
                     }
                 }
                 .padding(.top, 65)
@@ -256,6 +256,7 @@ struct VidsPlayer: View {
                         .sheet(isPresented: $commentsTapped) {
                             CommentsPage()
                                 .presentationDetents([.medium])
+                                .presentationDragIndicator(.visible)
                         }
                 }
                     .padding(.top, 20)

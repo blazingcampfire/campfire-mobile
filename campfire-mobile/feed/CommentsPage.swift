@@ -11,7 +11,7 @@ struct CommentsPage: View {
     let feedinfo = FeedInfo()
     var body: some View {
         NavigationView {
-            CommentsList(range: 1...10)
+                CommentsList(range: 1...10)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack() {
@@ -19,13 +19,11 @@ struct CommentsPage: View {
                                 Text("Comments")
                                     .foregroundColor(Theme.TextColor)
                                     .font(.custom("LexendDeca-Bold", size: 23))
-                                
+                             
                                 Text("\(feedinfo.commentnum)")
                                     .foregroundColor(Theme.TextColor)
                                     .font(.custom("LexendDeca-Light", size: 16))
                             }
-                
-                            
                             ZStack{
                                 Button(action: {
                                     //button to dismiss view
@@ -39,11 +37,9 @@ struct CommentsPage: View {
                             
                         }
                     }
-                    
                 }
-                .background(Theme.ScreenColor)
         }
-        .background(Theme.ScreenColor)
+      
     }
 }
 
@@ -54,50 +50,72 @@ struct CommentsList: View {
     
     
     var body: some View {
-        List {
-            ForEach(range, id: \.self) { number in
-                HStack {
-                    
-                    Image(info.profilepic)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-
-                    VStack(alignment: .leading) {
-                        Text("@\(info.username)")
-                            .font(.custom("LexendDeca-Regular", size: 12))
-                            .foregroundColor(.gray)
-                        Text(feedinfo.comments)
-                            .font(.custom("LexendDeca-Regular", size: 16))
-                            .foregroundColor(Theme.TextColor)
+            List {
+                ForEach(range, id: \.self) { number in
+                    HStack {
                         
-                    }
-
-                    Spacer()
-
-                    VStack {
-                        Button(action: {
-                            self.commentLikeTapped.toggle()
-                        }) {
-                            Image(self.commentLikeTapped == false ? "eaten" : "noteaten")
-                                .resizable()
-                                .frame(width: 90, height: 90)
+                        Image(info.profilepic)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .clipShape(Circle())
+                        
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("@\(info.username)")
+                                .font(.custom("LexendDeca-Bold", size: 14))
+                                .foregroundColor(Theme.TextColor)
+                            Text(feedinfo.comments)
+                                .font(.custom("LexendDeca-Light", size: 16))
+                                .foregroundColor(Theme.TextColor)
+                            HStack(spacing: 15){
+                                Text("1m")  //time variable
+                                    .font(.custom("LexendDeca-Light", size: 13))
+                                    .foregroundColor(Theme.TextColor)
+                                Button(action: {
+                                    
+                                }) {
+                                    Text("Reply")
+                                        .font(.custom("LexendDeca-SemiBold", size: 13))
+                                        .foregroundColor(Theme.TextColor)
+                                }
+                            }
+                            Button(action:{
+                                
+                            }) {
+                                HStack(spacing: 2){
+                                    Text("View 10 replies")
+                                        .foregroundColor(Theme.TextColor)
+                                        .font(.custom("LexendDeca-Light", size: 13))
+                                    Image(systemName: "chevron.down")
+                                        .font(.system(size: 11))
+                                }
+                            }
                         }
-                        Text("\(feedinfo.commentnum)")
-                            .foregroundColor(Theme.TextColor)
-                            .font(.custom("LexendDeca-Regular", size: 16))
+                        .padding(.top, 40)
                         
+                        Spacer()
+                        
+                        VStack(spacing: -20) {
+                            Button(action: {
+                                self.commentLikeTapped.toggle()
+                            }) {
+                                Image(self.commentLikeTapped == false ? "eaten" : "noteaten")
+                                    .resizable()
+                                    .frame(width: 90, height: 90)
+                            }
+                            Text("\(feedinfo.commentnum)")
+                                .foregroundColor(Theme.TextColor)
+                                .font(.custom("LexendDeca-Regular", size: 16))
+                        }
                     }
-                    
+                    .listRowBackground(Theme.ScreenColor)
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom:0, trailing: 5))
+                    .padding(.top, -15)
                 }
-                .listRowBackground(Theme.ScreenColor)
-                .listRowSeparator(.hidden)
-           //     .listRowInsets(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
             }
-        }
-        .listStyle(PlainListStyle())
-    }
+            .listStyle(PlainListStyle())
+}
 }
 
 

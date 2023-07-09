@@ -61,9 +61,10 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
-    
     @State private var HotSelected = true
     @State var leaderboardPageShow = false
+    @State var commentsTapped = false
+    
     let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
@@ -98,7 +99,6 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                      //  .aspectRatio(contentMode: .fit)
                         .scaledToFit()
                 } else {
                     // Handle image not found case
@@ -241,7 +241,7 @@ struct VidsPlayer: View {
                     
                     VStack {
                     Button(action: {
-                        // comment
+                        commentsTapped.toggle()
                     }) {
                         VStack {
                             Image(systemName: "text.bubble.fill")
@@ -253,6 +253,10 @@ struct VidsPlayer: View {
                     Text("\(feedinfo.commentnum)")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
+                        .sheet(isPresented: $commentsTapped) {
+                            CommentsPage()
+                                .presentationDetents([.medium])
+                        }
                 }
                     .padding(.top, 20)
                     

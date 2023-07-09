@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct LaunchView: View {
+struct LaunchScreen: View {
     var body: some View {
         
         
@@ -32,8 +32,8 @@ struct LaunchView: View {
 
 
 
-struct LaunchView_Previews: PreviewProvider {
+struct LaunchScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView()
+        LaunchScreen()
     }
 }

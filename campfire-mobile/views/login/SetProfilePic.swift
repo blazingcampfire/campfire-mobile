@@ -11,6 +11,8 @@ struct SetProfilePic: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
 
+    @State private var canAdvance: Bool = false
+
     var body: some View {
         GradientBackground()
             .overlay(
@@ -45,12 +47,13 @@ struct SetProfilePic: View {
 
                         // MARK: - Button redirecting to main app
 
-                        LFButton(text: "finish")
-                        /*
-                         NavigationLink(destination: NavigationBar(selectedTabIndex: 0), label: {
-                             LFButton(text: "finish")
-                         })
-                         */
+                        VStack {
+                            // set destination to AccountSetUp screen temporarily
+                            NavigationLink(destination: AccountSetUp(), label: {
+                                LFButton(text: "finish")
+                            })
+                        }
+                        .disabled(!canAdvance)
                     }
                     .padding(.bottom, 200)
                 }

@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct VerifyEmail: View {
-    
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) var dismiss
     let userinfo = UserInfo()
-    
+
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255 / 255, green: 50 / 255, blue: 89 / 255, alpha: 1)), Color(.init(red: 255 / 255, green: 153 / 255, blue: 102 / 255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
+                    // - MARK: Back button
                     HStack {
                         Button {
                             dismiss()
@@ -26,41 +26,39 @@ struct VerifyEmail: View {
                         }
                     }
                     .padding(.leading, 15)
-                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     VStack {
-                        VStack{
+                        // - MARK: Graduation icon & school email
+                        VStack {
                             Image(systemName: "graduationcap.circle.fill")
                                 .font(.system(size: 100))
                                 .foregroundColor(.white)
                                 .padding(.bottom, 10)
-                                
-                            
-                            Text("choose an option below to verify your email:") .font(.custom("LexendDeca-Bold", size: 25))
-                                .frame(width: 380, alignment: .center)
-                                .foregroundColor(Color.white).padding(15).multilineTextAlignment(.center)
-                            
-                            Text(userinfo.email) //email variable
+
+                            Text("verify your email:").font(.custom("LexendDeca-Bold", size: 20))
+                                .frame(alignment: .center)
+                                .foregroundColor(Color.white).padding(10).multilineTextAlignment(.center)
+
+                            Text(userinfo.email) // email variable
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .center)
                                 .foregroundColor(.white)
                                 .accentColor(.white).multilineTextAlignment(.center)
-                                .padding(15)
-
+                                .padding(.bottom, 30)
+                            
+                            // - MARK: Buttons redirecting to email verification
                             LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                 .padding(5)
-                            
+
                             LFButton(text: "Google", icon: Image("glogo2"))
-                                
                         }
                         .padding(.bottom, 200)
                     }
-                    
-                    
+
                 })
             .navigationBarBackButtonHidden(true)
     }
 }
-
 
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {

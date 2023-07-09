@@ -17,6 +17,7 @@ struct VerifyNumber: View {
             .edgesIgnoringSafeArea(.vertical)
             .overlay(
                 VStack {
+                    // - MARK: Back button
                     HStack {
                         Button {
                             dismiss()
@@ -28,6 +29,7 @@ struct VerifyNumber: View {
                     .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
 
+                    // - MARK: Verification code form & prompts
                     VStack(spacing: 60) {
                         Text("enter verification code")
                             .foregroundColor(Color.white)
@@ -39,6 +41,8 @@ struct VerifyNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(-20)
+                        
+                        // - MARK: NavLink to EnterEmail screen
                         NavigationLink(destination: EnterEmail(), label: {
                             LFButton(text: "verify")
                         }

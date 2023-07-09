@@ -17,6 +17,7 @@ struct EnterPhoneNumber: View {
                 .edgesIgnoringSafeArea(.vertical)
                 .overlay(
                     VStack {
+                        // - MARK: Back button
                         HStack {
                             Button {
                                 dismiss()
@@ -28,6 +29,7 @@ struct EnterPhoneNumber: View {
                         .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                         Spacer()
 
+                        // - MARK: Form & text prompts
                         VStack(spacing: 60) {
                             Text("enter your phone number")
                                 .foregroundColor(Color.white)
@@ -40,6 +42,7 @@ struct EnterPhoneNumber: View {
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)
 
+                            // - MARK: NavLink to VerifyNumber screen
                             NavigationLink(destination: VerifyNumber(), label: {
                                 LFButton(text: "next")
                             })

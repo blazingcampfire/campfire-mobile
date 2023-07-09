@@ -15,6 +15,7 @@ struct AccountSetUp: View {
                 .edgesIgnoringSafeArea(.vertical)
                 .overlay(
                     VStack {
+                        // - MARK: App logo & title
                         VStack {
                             Image("newlogo")
                                 .resizable()
@@ -29,6 +30,7 @@ struct AccountSetUp: View {
                         }
                         .padding(.bottom, 30)
                         
+                        // - MARK: NavLinks to EnterPhoneNumber & EmailOrNumber screens
                         VStack {
                             NavigationLink(destination: EnterPhoneNumber(), label: {
                                 LFButton(text: "create account")}

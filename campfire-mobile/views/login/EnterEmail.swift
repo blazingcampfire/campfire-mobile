@@ -12,6 +12,9 @@ struct EnterEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) var dismiss
     
+    // setting up user email as view state
+    @State var email: String = ""
+    
     var body: some View {
             GradientBackground()
             .overlay(
@@ -34,7 +37,7 @@ struct EnterEmail: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-                        FormTextField(placeholderText: "email")
+                        FormTextField(text: email, placeholderText: "email")
 
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)

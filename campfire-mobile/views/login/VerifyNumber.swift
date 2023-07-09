@@ -12,6 +12,9 @@ struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) var dismiss
     
+    // setting up verification code as view state
+    @State var verificationCode: String = ""
+    
     var body: some View {
             GradientBackground()
             .overlay(
@@ -34,7 +37,7 @@ struct VerifyNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-                        FormTextField(placeholderText: "verification code")
+                        FormTextField(text: verificationCode, placeholderText: "verification code")
 
                         Text("code sent to (number)")
                             .foregroundColor(Color.white)

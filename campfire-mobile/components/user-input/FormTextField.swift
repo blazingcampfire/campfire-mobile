@@ -3,7 +3,7 @@
 import SwiftUI
 
 struct FormTextField: View {
-    @State private var text: String = ""
+    @State var text: String = ""
 
     var placeholderText: String
 

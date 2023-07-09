@@ -12,6 +12,9 @@ struct CreateUsername: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) var dismiss
     
+    // setting up user phoneNumber as view state
+    @State var username: String = ""
+    
     var body: some View {
                 GradientBackground()
                 .overlay(
@@ -34,7 +37,7 @@ struct CreateUsername: View {
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 25))
                             
-                            FormTextField(placeholderText: "username") 
+                            FormTextField(text: username, placeholderText: "username") 
                             
                             Text("almost there!")
                                 .foregroundColor(Color.white)

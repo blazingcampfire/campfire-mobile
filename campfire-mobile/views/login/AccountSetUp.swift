@@ -41,6 +41,7 @@ struct AccountSetUp: View {
                             })
                         }
                     }
+                    .padding(.bottom, 100)
                 )
         }
     }

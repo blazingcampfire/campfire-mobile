@@ -51,6 +51,7 @@ struct EmailOrNumber: View {
                         .padding(5)
                         
                     }
+                        .padding(.bottom, 100)
                 )
                 .navigationBarBackButtonHidden(true)
     

@@ -65,5 +65,6 @@ struct SetProfilePic: View {
 struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {
         SetProfilePic()
+            .environmentObject(newUser())
     }
 }

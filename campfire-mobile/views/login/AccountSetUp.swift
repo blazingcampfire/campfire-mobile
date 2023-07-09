@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AccountSetUp: View {
+    
     var body: some View {
         NavigationStack {
             GradientBackground()
@@ -52,5 +53,6 @@ struct AccountSetUp: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
+            .environmentObject(newUser())
     }
 }

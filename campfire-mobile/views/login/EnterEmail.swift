@@ -38,7 +38,7 @@ struct EnterEmail: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: email, placeholderText: "email")
+                        FormTextField(text: $email, placeholderText: "email")
                         
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
@@ -63,5 +63,6 @@ struct EnterEmail: View {
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
+            .environmentObject(newUser())
     }
 }

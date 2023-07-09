@@ -3,9 +3,11 @@
 import SwiftUI
 
 struct FormTextField: View {
-    @State var text: String = ""
+    @Binding var text: String
 
     var placeholderText: String
+    var textContentType: String?
+    var keyboardType: String?
 
     var body: some View {
         VStack {
@@ -13,6 +15,8 @@ struct FormTextField: View {
                 .font(.custom("LexendDeca-Bold", size: 20))
                 .foregroundColor(Color.black)
                 .padding(.horizontal)
+                .textContentType(.telephoneNumber)
+                .keyboardType(.phonePad)
 
             Divider()
                 .background(Color.white)
@@ -26,6 +30,6 @@ struct FormTextField: View {
 
 struct FormTextField_Previews: PreviewProvider {
     static var previews: some View {
-        FormTextField(placeholderText: "yo")
+        FormTextField(text: .constant("now what's the word captain"), placeholderText: "yo")
     }
 }

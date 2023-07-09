@@ -90,6 +90,7 @@
 		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
 		E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */; };
 		E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446862A4E82C20032CF34 /* TopNavBar.swift */; };
+		E2E342612A5B3B110027D72F /* LoginFlowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E342602A5B3B110027D72F /* LoginFlowModel.swift */; };
 		E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E355432A58F6A300EE16C6 /* BackButton.swift */; };
 		F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A92A42A74200864FBD /* TheFeed.swift */; };
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
@@ -212,6 +213,7 @@
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2C446862A4E82C20032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
+		E2E342602A5B3B110027D72F /* LoginFlowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFlowModel.swift; sourceTree = "<group>"; };
 		E2E355432A58F6A300EE16C6 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F82C10A92A42A74200864FBD /* TheFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFeed.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				E2434C472A5A349B000A70DB /* store */,
+				E2E342602A5B3B110027D72F /* LoginFlowModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,
 				B1B5EFC82A4F569A00FA79CE /* EditPosts.swift in Sources */,
 				E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */,
+				E2E342612A5B3B110027D72F /* LoginFlowModel.swift in Sources */,
 				F8950DCA2A48008A00C13075 /* Vid.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
 				E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */,

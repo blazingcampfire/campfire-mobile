@@ -62,5 +62,6 @@ struct VerifyEmail: View {
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {
         VerifyEmail()
+            .environmentObject(newUser())
     }
 }

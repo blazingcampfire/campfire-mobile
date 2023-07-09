@@ -39,7 +39,7 @@ struct CreateUsername: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: username, placeholderText: "username")
+                        FormTextField(text: $username, placeholderText: "username")
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
@@ -64,5 +64,6 @@ struct CreateUsername: View {
 struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
         CreateUsername()
+            .environmentObject(newUser())
     }
 }

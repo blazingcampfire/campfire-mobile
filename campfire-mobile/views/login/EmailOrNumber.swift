@@ -3,7 +3,6 @@
 //  campfire-mobile
 //
 //  Created by Adarsh G on 6/18/23.
-//  LIKELY WON'T NEED THIS FILE AS OUR USERS WILL NEED TO SIGN UP USING BOTH EMAIL & PHONE #
 //
 
 import SwiftUI
@@ -16,7 +15,7 @@ struct EmailOrNumber: View {
                 GradientBackground()
                 .overlay(
                     VStack {
-                        // - MARK: Back button
+// MARK: - Back button
                         HStack {
                             Button {
                                 dismiss()
@@ -40,7 +39,7 @@ struct EmailOrNumber: View {
                         }
                         .padding(.bottom, 30)
                         
-                        // - MARK: NavLinks to EnterPhoneNumber & EnterEmail screens
+//MARK: - NavLinks to EnterPhoneNumber & EnterEmail screens
                         NavigationLink(destination: EnterPhoneNumber(), label: {
                             LFButton(text: "phone number")})
                         .padding(5)

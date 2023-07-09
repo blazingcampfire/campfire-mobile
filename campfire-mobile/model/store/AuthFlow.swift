@@ -15,6 +15,8 @@ struct loginData {
     var profilePic: String
 }
 
-func createAccount(phoneNumber: String, verificationCode: String, email: String, username: String, profilePic: String) -> Void {
-    
+func createAccount(phoneNumber: String, verificationCode: String, email: String, username: String) -> Void {
+    print(phoneNumber, verificationCode, email, username)
 }
+
+

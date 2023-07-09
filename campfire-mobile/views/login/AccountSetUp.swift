@@ -14,7 +14,7 @@ struct AccountSetUp: View {
                 GradientBackground()
                 .overlay(
                     VStack {
-                        // - MARK: App logo & title
+                        // MARK: - App logo & title
                         VStack {
                             Image("newlogo")
                                 .resizable()
@@ -29,7 +29,7 @@ struct AccountSetUp: View {
                         }
                         .padding(.bottom, 30)
                         
-                        // - MARK: NavLinks to EnterPhoneNumber & EmailOrNumber screens
+// MARK: - NavLinks to EnterPhoneNumber & EmailOrNumber screens
                         VStack {
                             NavigationLink(destination: EnterPhoneNumber(), label: {
                                 LFButton(text: "create account")}

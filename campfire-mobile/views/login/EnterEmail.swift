@@ -19,7 +19,7 @@ struct EnterEmail: View {
             GradientBackground()
             .overlay(
                 VStack {
-                    // - MARK: Back button
+// MARK: - Back button
                     HStack {
                         Button {
                             dismiss()
@@ -31,7 +31,7 @@ struct EnterEmail: View {
                     .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
                     
-                    // - MARK: Email form & prompts
+// MARK: - Email form & prompts
                     VStack(spacing: 60) {
                         Text("enter your '.edu' email")
                             .foregroundColor(Color.white)
@@ -44,7 +44,7 @@ struct EnterEmail: View {
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(-20)
                         
-                        // - MARK: NavLink to VerifyEmail screen
+// MARK: - NavLink to VerifyEmail screen
                         NavigationLink(destination: VerifyEmail(), label: {
                             LFButton(text: "next")
                         })

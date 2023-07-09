@@ -15,8 +15,8 @@ struct VerifyEmail: View {
     var body: some View {
         GradientBackground()
             .overlay(
+// MARK: - Back button
                 VStack {
-                    // - MARK: Back button
                     HStack {
                         Button {
                             dismiss()
@@ -26,8 +26,8 @@ struct VerifyEmail: View {
                     }
                     .padding(.leading, 15)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+// MARK: - Graduation icon & school email
                     VStack {
-                        // - MARK: Graduation icon & school email
                         VStack {
                             Image(systemName: "graduationcap.circle.fill")
                                 .font(.system(size: 100))
@@ -45,7 +45,7 @@ struct VerifyEmail: View {
                                 .accentColor(.white).multilineTextAlignment(.center)
                                 .padding(.bottom, 30)
                             
-                            // - MARK: Buttons redirecting to email verification
+// MARK: - Buttons redirecting to email verification
                             LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                 .padding(5)
 

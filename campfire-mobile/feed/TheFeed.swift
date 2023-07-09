@@ -103,7 +103,7 @@ struct VidsPlayer: View {
                 }
             }
 
-            // - MARK: Hot/New button
+// MARK: - Hot/New button
             VStack {
                 HStack {
                     Button(action: {
@@ -130,7 +130,7 @@ struct VidsPlayer: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
 
-            // -MARK: User information
+// MARK: - User information
             VStack {
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 0) {
@@ -154,7 +154,7 @@ struct VidsPlayer: View {
                             }
                         }
 
-                        // - MARK: Caption/Location buttons Vstack
+// MARK: - Caption/Location buttons Vstack
                         VStack(spacing: 5) {
                             HStack {
                                 Text(feedinfo.postcaption)
@@ -181,9 +181,9 @@ struct VidsPlayer: View {
             .padding(.bottom, 30)
             .padding(.leading, -20)
 
-            // -MARK: End of profile info
+// MARK: - End of profile info
 
-            // -MARK: Three buttons on side
+// MARK: - Three buttons on side
             VStack(spacing: 7.5) {
                 VStack(spacing: -60) {
                     Button(action: {

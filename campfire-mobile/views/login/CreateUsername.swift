@@ -19,7 +19,7 @@ struct CreateUsername: View {
                 GradientBackground()
                 .overlay(
                     VStack {
-                        // - MARK: Back button
+// MARK: - Back button
                         HStack {
                             Button {
                                 dismiss()
@@ -31,7 +31,7 @@ struct CreateUsername: View {
                         .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                         Spacer()
                         
-                        // - MARK: Username form & prompts
+// MARK: - Username form & prompts
                         VStack(spacing: 60) {
                             Text("enter a campfire username")
                                 .foregroundColor(Color.white)
@@ -44,7 +44,7 @@ struct CreateUsername: View {
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)
                             
-                            // - MARK: NavLink to SetProfilePic screen
+// - MARK: NavLink to SetProfilePic screen
                             NavigationLink(destination: SetProfilePic(), label: {
                                 LFButton(text: "next")
                             })

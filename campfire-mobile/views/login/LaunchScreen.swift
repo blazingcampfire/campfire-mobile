@@ -15,7 +15,7 @@ struct LaunchView: View {
                     GradientBackground()
                     .overlay(
         VStack {
-            // - MARK: App logo
+// MARK: - App logo
             VStack {
                 Image("newlogo")
                     .resizable()

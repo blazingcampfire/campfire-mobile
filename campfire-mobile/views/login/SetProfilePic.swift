@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct SetProfilePic: View {
-    
     // setting up view dismiss == going back to previous screen
-    @Environment(\.dismiss) var dismiss
-    
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var canAdvance: Bool = false
+
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color(.init(red: 255/255, green: 50/255, blue: 89/255, alpha: 1)), Color(.init(red: 255/255, green: 153/255, blue: 102/255, alpha: 1))]), startPoint: .top, endPoint: .bottom)
-            .edgesIgnoringSafeArea(.vertical)
+        GradientBackground()
             .overlay(
                 VStack {
+                    // MARK: - Back button
+
                     HStack {
                         Button {
                             dismiss()
@@ -25,27 +27,35 @@ struct SetProfilePic: View {
                         }
                     }
                     .padding(.leading, 15)
-                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
-                    
+
+                    // MARK: - Profile picture upload button & prompts
+
                     VStack(spacing: 60) {
                         Text("upload a profile picture")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
-                        
+
                         ProfilePictureView()
-                            
+
                         Text("you're ready!")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(-20)
-                        
-                        LFButton(text: "finish")
 
+                        // MARK: - Button redirecting to main app
+
+                        VStack {
+                            // set destination to AccountSetUp screen temporarily
+                            NavigationLink(destination: AccountSetUp(), label: {
+                                LFButton(text: "finish")
+                            })
+                        }
+                        .disabled(!canAdvance)
                     }
                     .padding(.bottom, 200)
-                    
                 }
             )
             .navigationBarBackButtonHidden(true)

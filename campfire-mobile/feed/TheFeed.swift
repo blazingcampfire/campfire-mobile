@@ -55,7 +55,6 @@ struct TheFeed_Previews: PreviewProvider {
         TheFeed()
     }
 }
-
     
 struct VidsPlayer: View {
     @Binding var vid: Vid
@@ -90,7 +89,6 @@ struct VidsPlayer: View {
                         }
                     }
                 }
-
                 
             case .image:
                 // Construct the file path
@@ -105,141 +103,105 @@ struct VidsPlayer: View {
                     Text("Image not found")
                 }
             }
-               
-                
-                
-                
-               //- MARK: Hot/New button
-                VStack {
-                    HStack {
-                        Button(action: {
-                            HotSelected = true
-                        }) {
-                            Text("Hot")
-                                .font(.custom("LexendDeca-Bold",                 size:35))
-                                .opacity(HotSelected ? 1.0 : 0.5)
-                        }
-                        
-                        Rectangle()
-                            .frame(width: 2, height: 30)
-                            .opacity(0.75)
-                        Button(action: {
-                            HotSelected = false
-                        }) {
-                            Text("New")
-                                .font(.custom("LexendDeca-Bold", size: 35))
-                                .opacity(HotSelected ? 0.5 : 1.0)
-                        }
-                    }
-                    .padding(.top, 60)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .foregroundColor(.white)
-            
+
+// MARK: - Hot/New button
             VStack {
                 HStack {
                     Button(action: {
-                        leaderboardPageShow.toggle()
+                        HotSelected = true
                     }) {
-                        Image(systemName: "trophy.fill")
-                            .foregroundColor(.white)
-                            .font(.system(size: 30))
+                        Text("Hot")
+                            .font(.custom("LexendDeca-Bold", size: 35))
+                            .opacity(HotSelected ? 1.0 : 0.5)
                     }
-                    .sheet(isPresented: $leaderboardPageShow) {
-                        LeaderboardPage()
-                         //   .presentationDetents([.large])
+
+                    Rectangle()
+                        .frame(width: 2, height: 30)
+                        .opacity(0.75)
+                    Button(action: {
+                        HotSelected = false
+                    }) {
+                        Text("New")
+                            .font(.custom("LexendDeca-Bold", size: 35))
+                            .opacity(HotSelected ? 0.5 : 1.0)
                     }
                 }
-                .padding(.top, 65)
-                .padding(.leading, 310)
+                .padding(.top, 60)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            
-            
-            
-                
-                
-                //-MARK: User information
-                VStack {
-                    HStack(alignment: .bottom) {
-                        
-                        VStack(alignment: .leading, spacing: 0) {
-                            
-                            
-                            //- MARK: Profile pic/username buttons Hstack
-                            HStack(spacing: 10) {
-                                
-                                Button(action: {
-                                    // lead to profile page
-                                }) {
-                                    Image(userInfo.profilepic)
-                                        .resizable()
-                                        .frame(width: 35, height: 35)
-                                        .clipShape(Circle())
-                                }
-                                .padding(.bottom, 5)
-                                
-                                
-                                Button(action: {
-                                    //lead to profile page
-                                }) {
-                                    Text(userInfo.username)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
-                                }
+            .foregroundColor(.white)
+
+// MARK: - User information
+            VStack {
+                HStack(alignment: .bottom) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        // - MARK: Profile pic/username buttons Hstack
+                        HStack(spacing: 10) {
+                            Button(action: {
+                                // lead to profile page
+                            }) {
+                                Image(userInfo.profilepic)
+                                    .resizable()
+                                    .frame(width: 35, height: 35)
+                                    .clipShape(Circle())
                             }
-                            
-                            //- MARK: Caption/Location buttons Vstack
-                            VStack(spacing: 5) {
+                            .padding(.bottom, 5)
+
+                            Button(action: {
+                                // lead to profile page
+                            }) {
+                                Text(userInfo.username)
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                            }
+                        }
+
+// MARK: - Caption/Location buttons Vstack
+                        VStack(spacing: 5) {
+                            HStack {
+                                Text(feedinfo.postcaption)
+                                    .font(.custom("LexendDeca-Regular", size: 15))
+                            }
+                            .padding(.leading, -30)
+
+                            Button(action: {
+                                // lead to map and where location is
+                            }) {
                                 HStack {
-                                    Text(feedinfo.postcaption)
+                                    Text("📍37 High Street")
                                         .font(.custom("LexendDeca-Regular", size: 15))
                                 }
-                                .padding(.leading, -30)
-                                
-                                Button(action: {
-                                    //lead to map and where location is
-                                }) {
-                                    HStack {
-                                        Text("📍37 High Street")
-                                            .font(.custom("LexendDeca-Regular", size: 15))
-                                    }
-                             
-                                }
-                                .frame(alignment: .trailing)
                             }
+                            .frame(alignment: .trailing)
                         }
                     }
-                    .padding(.leading, 40)
                 }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 30)
-                .padding(.leading, -20)
-                
-                
-                //-MARK: End of profile info
-                
-                
-                //-MARK: Three buttons on side
-                VStack(spacing: 7.5) {
-                    
-                    VStack(spacing: -60) {
-                        Button(action: {
-                            //like post
-                            self.likeTapped.toggle()
-                        }) {
-                            VStack {
-                                Image(self.likeTapped == false ? "eaten" : "noteaten")
-                            }
-                            .padding(.leading, -15)
+                .padding(.leading, 40)
+            }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            .padding(.bottom, 30)
+            .padding(.leading, -20)
+
+// MARK: - End of profile info
+
+// MARK: - Three buttons on side
+            VStack(spacing: 7.5) {
+                VStack(spacing: -60) {
+                    Button(action: {
+                        // like post
+                        self.likeTapped.toggle()
+                    }) {
+                        VStack {
+                            Image(self.likeTapped == true ? "eaten" : "noteaten")
                         }
-                        Text("\(feedinfo.likecount)")
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Regular", size: 16))
+                        .padding(.leading, -15)
                     }
-                    
-                    
-                    VStack {
+                    Text("\(feedinfo.likecount)")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-Regular", size: 16))
+                }
+
+                VStack {
                     Button(action: {
                         // comment
                     }) {

@@ -70,6 +70,8 @@
 		B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2AE2A5915CE0096F335 /* talkin.mov */; };
 		B1EDD2B32A5915CE0096F335 /* gunna.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2B02A5915CE0096F335 /* gunna.mov */; };
 		B1EF99892A4289540001E8CC /* CameraPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EF99882A4289540001E8CC /* CameraPage.swift */; };
+		E2434C4B2A5A355D000A70DB /* AuthFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2434C4A2A5A355D000A70DB /* AuthFlow.swift */; };
+		E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2434C4C2A5A412C000A70DB /* GradientBackground.swift */; };
 		E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E22A4FCF5D00410B34 /* Notification.swift */; };
 		E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */; };
 		E280A9E82A4FDEA500410B34 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = E280A9E72A4FDEA500410B34 /* SlidingTabView */; };
@@ -192,6 +194,8 @@
 		B1EDD2AE2A5915CE0096F335 /* talkin.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = talkin.mov; sourceTree = "<group>"; };
 		B1EDD2B02A5915CE0096F335 /* gunna.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = gunna.mov; sourceTree = "<group>"; };
 		B1EF99882A4289540001E8CC /* CameraPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPage.swift; sourceTree = "<group>"; };
+		E2434C4A2A5A355D000A70DB /* AuthFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlow.swift; sourceTree = "<group>"; };
+		E2434C4C2A5A412C000A70DB /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
 		E280A9E92A4FDEEA00410B34 /* TentTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TentTabView.swift; sourceTree = "<group>"; };
@@ -315,6 +319,15 @@
 			path = customfonts;
 			sourceTree = "<group>";
 		};
+		E2434C472A5A349B000A70DB /* store */ = {
+			isa = PBXGroup;
+			children = (
+				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
+				E2434C4A2A5A355D000A70DB /* AuthFlow.swift */,
+			);
+			path = store;
+			sourceTree = "<group>";
+		};
 		E28D3A562A3E4B9600B1EEE9 /* login */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +340,7 @@
 				E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */,
 				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
 				F834163F2A40E6A500803D32 /* SetProfilePic.swift */,
+				E2434C4C2A5A412C000A70DB /* GradientBackground.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -545,7 +559,7 @@
 		F83B0EB72A4D367B00F98CFA /* model */ = {
 			isa = PBXGroup;
 			children = (
-				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
+				E2434C472A5A349B000A70DB /* store */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -765,6 +779,7 @@
 				E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
+				E2434C4B2A5A355D000A70DB /* AuthFlow.swift in Sources */,
 				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
 				B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */,
@@ -776,6 +791,7 @@
 				B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */,
 				B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
+				E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */,
 				B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */,
 				E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
@@ -1073,6 +1089,7 @@
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1094,6 +1111,7 @@
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

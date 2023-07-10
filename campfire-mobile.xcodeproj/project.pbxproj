@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
+		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
+		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
 		B16DFF392A40BD95003314FF /* CodeVerifier in Frameworks */ = {isa = PBXBuildFile; productRef = B16DFF382A40BD95003314FF /* CodeVerifier */; };
 		B17F754B2A400955005581F3 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = B17F754A2A400955005581F3 /* iPhoneNumberField */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
@@ -136,7 +138,9 @@
 
 /* Begin PBXFileReference section */
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
+		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
+		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				B14D3A002A5B8AFA00056EAA /* sofrat.mov */,
 				B1EDD2AE2A5915CE0096F335 /* talkin.mov */,
 				B1EDD2B02A5915CE0096F335 /* gunna.mov */,
 				B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */,
@@ -344,6 +349,7 @@
 				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
 				F834163F2A40E6A500803D32 /* SetProfilePic.swift */,
 				E2434C4C2A5A412C000A70DB /* GradientBackground.swift */,
+				B164A9F22A5B89150033586F /* InitialMessage.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -739,6 +745,7 @@
 				B18B19A22A46976700309256 /* JosefinSans-Thin.ttf in Resources */,
 				B18B19A32A46976700309256 /* JosefinSans-ThinItalic.ttf in Resources */,
 				B1B5D7E62A57310B00E30064 /* stick.mov in Resources */,
+				B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */,
 				B18B19A42A46976700309256 /* LexendDeca-Black.ttf in Resources */,
 				B18B19A52A46976700309256 /* LexendDeca-Bold.ttf in Resources */,
 				B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */,
@@ -794,6 +801,7 @@
 				B18B19722A46059700309256 /* SettingsPage.swift in Sources */,
 				E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
+				B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
 				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,

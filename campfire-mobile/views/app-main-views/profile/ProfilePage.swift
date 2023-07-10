@@ -79,6 +79,7 @@ struct ProfilePage: View {
                             .offset(x: 145, y: -130)
                             .sheet(isPresented: $settingsPageShow) {
                                 SettingsPage()
+                                    .presentationDragIndicator(.visible)
                             }
                         }
                         

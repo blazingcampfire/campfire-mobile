@@ -9,11 +9,24 @@ import SwiftUI
 
 struct SettingsPage: View {
     var body: some View {
-        ZStack {
-            Theme.ScreenColor
-                .ignoresSafeArea(.all)
-
-            NavigationView {
+        NavigationView {
+            SettingsForm()
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        HStack {
+                            Text("Settings")
+                                .font(.custom("LexendDeca-SemiBold", size: 30))
+                                .foregroundColor(Theme.TextColor)
+                        }
+                    }
+                }
+        }
+    }
+}
+    
+    struct SettingsForm: View {
+        
+        var body: some View {
                 Form {
                     Section(header: Text("Display")) {
                         Toggle(isOn: .constant(false)) {
@@ -25,7 +38,7 @@ struct SettingsPage: View {
                             }
                         }
                         .font(.custom("LexendDeca-Regular", size: 16))
-
+                        
                         Toggle(isOn: .constant(true)) {
                             Label {
                                 Text("Notifications")
@@ -35,7 +48,7 @@ struct SettingsPage: View {
                             }
                         }
                     }
-
+                    
                     .font(.custom("LexendDeca-Regular", size: 16))
                     Section(header: Text("About")) {
                         Label {
@@ -58,7 +71,7 @@ struct SettingsPage: View {
                         }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
-
+                    
                     Section(header: Text("Support")) {
                         //  Label("Report Account", systemImage: "exclamationmark.triangle.fill")
                         Label {
@@ -75,18 +88,16 @@ struct SettingsPage: View {
                         }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
-
+                    
                     Section(header: Text("Account")) {
                         NavigationLink(destination: AccountSetUp()) {
-                        Label {
-                            Text("Log Out")
-                        } icon: {
-                            Image(systemName: "lock.fill")
-                                .foregroundColor(Theme.Peach)
+                            Label {
+                                Text("Log Out")
+                            } icon: {
+                                Image(systemName: "lock.fill")
+                                    .foregroundColor(Theme.Peach)
+                            }
                         }
-                    }
-                    
-                            
                         Label {
                             Text("Delete Account")
                         } icon: {
@@ -96,11 +107,13 @@ struct SettingsPage: View {
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
                 }
-                .navigationTitle("Settings").font(.custom("JosefinSans-Regular", size: 25))
-            }
         }
     }
-}
+
+
+
+
+
 
 struct SettingsPage_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,0 +1,41 @@
+{
+  "pins" : [
+    {
+      "identity" : "codeverifier",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/posix88/CodeVerifier",
+      "state" : {
+        "revision" : "ed509fe1e5c3b37d48b4c3e17630d2ea4bd94741",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "iphonenumberfield",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MojtabaHs/iPhoneNumberField",
+      "state" : {
+        "revision" : "5298972c899ba3555a77549bebeace2e16bc927d",
+        "version" : "0.10.1"
+      }
+    },
+    {
+      "identity" : "phonenumberkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/PhoneNumberKit",
+      "state" : {
+        "revision" : "83e68b5fea032939fd9dcb178cd5bc01fde7ee58",
+        "version" : "3.6.2"
+      }
+    },
+    {
+      "identity" : "slidingtabview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/QuynhNguyen/SlidingTabView.git",
+      "state" : {
+        "revision" : "b0f0662977418824d50546b2850a523dcd793bb0",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}

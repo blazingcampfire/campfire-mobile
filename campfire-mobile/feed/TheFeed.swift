@@ -39,12 +39,12 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            if let firstVid = vids.first {
-                currentVid = firstVid.id
-                vids[0].isPlaying = true
-            }
-        }
+//        .onAppear {
+//            if let firstVid = vids.first {
+//                currentVid = firstVid.id
+//                vids[0].isPlaying = true
+//            }
+//        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
@@ -61,9 +61,10 @@ struct VidsPlayer: View {
     @Binding var vid: Vid
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
-    
     @State private var HotSelected = true
     @State var leaderboardPageShow = false
+    @State var commentsTapped = false
+    
     let feedinfo = FeedInfo()
     
     var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
@@ -98,8 +99,7 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                      //  .aspectRatio(contentMode: .fit)
-                        .scaledToFit()
+                       .scaledToFit()
                 } else {
                     // Handle image not found case
                     Text("Image not found")
@@ -147,7 +147,7 @@ struct VidsPlayer: View {
                     }
                     .sheet(isPresented: $leaderboardPageShow) {
                         LeaderboardPage()
-                         //   .presentationDetents([.large])
+                            .presentationDragIndicator(.visible)
                     }
                 }
                 .padding(.top, 65)
@@ -241,7 +241,7 @@ struct VidsPlayer: View {
                     
                     VStack {
                     Button(action: {
-                        // comment
+                        commentsTapped.toggle()
                     }) {
                         VStack {
                             Image(systemName: "text.bubble.fill")
@@ -253,6 +253,11 @@ struct VidsPlayer: View {
                     Text("\(feedinfo.commentnum)")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
+                        .sheet(isPresented: $commentsTapped) {
+                            CommentsPage()
+                                .presentationDetents([.medium])
+                                .presentationDragIndicator(.visible)
+                        }
                 }
                     .padding(.top, 20)
                     

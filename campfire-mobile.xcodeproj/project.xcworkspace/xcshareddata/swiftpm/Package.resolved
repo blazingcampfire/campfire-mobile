@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "codeverifier",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/posix88/CodeVerifier",
-      "state" : {
-        "revision" : "ed509fe1e5c3b37d48b4c3e17630d2ea4bd94741",
-        "version" : "0.2.0"
-      }
-    },
-    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
@@ -73,15 +64,6 @@
       }
     },
     {
-      "identity" : "iphonenumberfield",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/MojtabaHs/iPhoneNumberField",
-      "state" : {
-        "revision" : "5298972c899ba3555a77549bebeace2e16bc927d",
-        "version" : "0.10.1"
-      }
-    },
-    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -97,15 +79,6 @@
       "state" : {
         "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
         "version" : "2.30909.0"
-      }
-    },
-    {
-      "identity" : "phonenumberkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/marmelroy/PhoneNumberKit",
-      "state" : {
-        "revision" : "83e68b5fea032939fd9dcb178cd5bc01fde7ee58",
-        "version" : "3.6.2"
       }
     },
     {

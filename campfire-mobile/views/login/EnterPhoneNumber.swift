@@ -10,7 +10,7 @@ import SwiftUI
 struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var user: newUser
+    @EnvironmentObject var model: authModel
 
 
     // setting up user phoneNumber & advancing as view state
@@ -40,7 +40,7 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-                        FormTextField(text: $user.phoneNumber, placeholderText: "phone number" )
+                        FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
 
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
@@ -55,7 +55,8 @@ struct EnterPhoneNumber: View {
                     
                             })
                         }
-                        .disabled(canAdvance)
+                        .opacity(buttonOpacity)
+                        .disabled(!model.validPhoneNumber)
                     }
                 }
                 .padding(.bottom, 200)
@@ -64,9 +65,15 @@ struct EnterPhoneNumber: View {
     }
 }
 
+extension EnterPhoneNumber {
+    var buttonOpacity: Double {
+        return model.validPhoneNumber ? 1 : 0.5
+    }
+}
+
 struct EnterPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
         EnterPhoneNumber()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

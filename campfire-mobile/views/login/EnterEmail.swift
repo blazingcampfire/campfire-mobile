@@ -9,8 +9,9 @@ import SwiftUI
 
 struct EnterEmail: View {
     
-    // setting up view dismiss == going back to previous screen
+    // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var model: authModel
     
     // setting up user email as view state
     @State var email: String = ""
@@ -38,7 +39,7 @@ struct EnterEmail: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $email, placeholderText: "email")
+                        FormTextField(text: $model.email, placeholderText: "email")
                         
                         Text("check your email for a magic link!")
                             .foregroundColor(Color.white)
@@ -51,7 +52,8 @@ struct EnterEmail: View {
                                 LFButton(text: "next")
                             })
                         }
-                        .disabled(!canAdvance)
+                        .opacity(buttonOpacity)
+                        .disabled(!model.validEmail)
                     }
                     .padding(.bottom, 200)
                 }
@@ -60,9 +62,15 @@ struct EnterEmail: View {
         }
 }
 
+extension EnterEmail {
+    var buttonOpacity: Double {
+        return model.validEmail ? 1 : 0.5
+    }
+}
+
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

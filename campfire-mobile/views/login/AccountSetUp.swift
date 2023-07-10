@@ -53,6 +53,6 @@ struct AccountSetUp: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

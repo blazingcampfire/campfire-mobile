@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ProfilePictureView: View {
     var profilePicture: String?
+    var clicked: (() -> Void)
 
     var body: some View {
-        Button(action: {
-        }, label: {
+        Button(action: clicked
+        , label: {
             ZStack(alignment: .bottomTrailing) {
                 Image(systemName: "person.fill")
                     .resizable()
@@ -36,6 +37,6 @@ struct ProfilePictureView: View {
 
 struct ProfilePictureView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePictureView()
+        ProfilePictureView(clicked: { print("clicked") })
     }
 }

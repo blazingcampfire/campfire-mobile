@@ -12,7 +12,7 @@ struct VerifyNumber: View {
     @Environment(\.dismiss) private var dismiss
 
     // setting up verification code & advancing as view state
-    @EnvironmentObject var user: newUser 
+    @EnvironmentObject var model: authModel
     @State private var canAdvance: Bool = false
     
     var body: some View {
@@ -39,9 +39,9 @@ struct VerifyNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $user.verificationCode, placeholderText: "verification code")
+                        FormTextField(text: $model.verificationCode, placeholderText: "verification code")
                         
-                        Text("code sent to (number)")
+                        Text("code sent to \(model.phoneNumber)")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(-20)
@@ -54,7 +54,8 @@ struct VerifyNumber: View {
                             }
                             )
                         }
-                        .disabled(!canAdvance)
+                        .opacity(buttonOpacity)
+                        .disabled(!model.validVerificationCode)
                     }
                     .padding(.bottom, 200)
                 }
@@ -63,9 +64,15 @@ struct VerifyNumber: View {
     }
 }
 
+extension VerifyNumber {
+    var buttonOpacity: Double {
+        return model.validVerificationCode ? 1 : 0.5
+    }
+}
+
 struct VerifyAccount_Previews: PreviewProvider {
     static var previews: some View {
         VerifyNumber()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

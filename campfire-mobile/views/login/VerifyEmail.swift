@@ -10,7 +10,7 @@ import SwiftUI
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    let userinfo = UserInfo()
+    @EnvironmentObject var model: authModel
 
     var body: some View {
         GradientBackground()
@@ -38,7 +38,7 @@ struct VerifyEmail: View {
                                 .frame(alignment: .center)
                                 .foregroundColor(Color.white).padding(10).multilineTextAlignment(.center)
 
-                            Text(userinfo.email) // email variable
+                            Text(model.email) // email variable
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .frame(width: 380, height: 10, alignment: .center)
                                 .foregroundColor(.white)
@@ -49,7 +49,10 @@ struct VerifyEmail: View {
                             LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                 .padding(5)
 
-                            LFButton(text: "Google", icon: Image("glogo2"))
+                            NavigationLink(destination: CreateUsername(), label: {
+                                LFButton(text: "Google", icon: Image("glogo2"))
+                            })
+                            
                         }
                         .padding(.bottom, 200)
                     }
@@ -59,9 +62,10 @@ struct VerifyEmail: View {
     }
 }
 
+
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {
         VerifyEmail()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

@@ -20,6 +20,6 @@ struct GradientBackground: View {
 struct GradientBackground_Previews: PreviewProvider {
     static var previews: some View {
         GradientBackground()
-            .environmentObject(newUser())
+            .environmentObject(authModel())
     }
 }

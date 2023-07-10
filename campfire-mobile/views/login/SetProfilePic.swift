@@ -50,7 +50,7 @@ struct SetProfilePic: View {
 
                         VStack {
                             // set destination to AccountSetUp screen temporarily
-                            NavigationLink(destination: TheFeed(), label: {
+                            NavigationLink(destination: AccountSetUp(), label: {
                                 LFButton(text: "finish")
                             })
                         }

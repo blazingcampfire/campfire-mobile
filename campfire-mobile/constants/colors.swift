@@ -12,7 +12,7 @@ import SwiftUI
 struct Theme {
     static let Peach = Color("Peach")
     static let Apricot = Color("Apricot")
-    static let ScreenColor = Color("screencolor")
+    static let ScreenColor = Color("screencolor") // custom background color to customize dark/light mode background
     static let PFPColor = Color("profileborder")
     static let TextColor = Color("textcolor")
 }

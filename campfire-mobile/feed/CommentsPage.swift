@@ -9,39 +9,62 @@ import SwiftUI
 
 struct CommentsPage: View {
     let feedinfo = FeedInfo()
+    @State private var commentText: String = ""
+    
     var body: some View {
         NavigationView {
+            VStack {
                 CommentsList(range: 1...10)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        HStack() {
-                            HStack() {
-                                Text("Comments")
-                                    .foregroundColor(Theme.TextColor)
-                                    .font(.custom("LexendDeca-Bold", size: 23))
-                             
-                                Text("\(feedinfo.commentnum)")
-                                    .foregroundColor(Theme.TextColor)
-                                    .font(.custom("LexendDeca-Light", size: 16))
+                VStack {
+                    HStack {
+                        Image(info.profilepic)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .clipShape(Circle())
+                        
+                        TextField("add comment!", text: $commentText)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        if commentText != "" {
+                            Button(action: {
+                                // button to add comment
+                            }) {
+                                Image(systemName: "paperplane.fill")
+                                    .foregroundColor(Theme.Peach)
                             }
-                            ZStack{
-                                Button(action: {
-                                    //button to dismiss view
-                                }) {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(Theme.TextColor)
-                                        .bold()
-                                }
-                            }
-                            .padding(.leading, 160)
-                            
                         }
                     }
+                    .padding()
                 }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    HStack {
+                        HStack {
+                            Text("Comments")
+                                .foregroundColor(Theme.TextColor)
+                                .font(.custom("LexendDeca-Bold", size: 23))
+                         
+                            Text("\(feedinfo.commentnum)")
+                                .foregroundColor(Theme.TextColor)
+                                .font(.custom("LexendDeca-Light", size: 16))
+                        }
+                        Spacer()
+                        Button(action: {
+                            // button to dismiss view
+                        }) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(Theme.TextColor)
+                                .bold()
+                        }
+                        .padding(.trailing, 16)
+                    }
+                }
+            }
         }
-      
     }
 }
+
 
 struct CommentsList: View {
     let range: ClosedRange<Int>

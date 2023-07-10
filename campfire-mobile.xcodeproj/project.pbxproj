@@ -468,13 +468,6 @@
 			path = "campfire-mobileUITests";
 			sourceTree = "<group>";
 		};
-		E2BD09532A5B75AE00367DCA /* validation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = validation;
-			sourceTree = "<group>";
-		};
 		E2C446882A4E84610032CF34 /* top-navbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,7 +585,6 @@
 		F83B0EB72A4D367B00F98CFA /* model */ = {
 			isa = PBXGroup;
 			children = (
-				E2BD09532A5B75AE00367DCA /* validation */,
 				E2434C472A5A349B000A70DB /* store */,
 				E2E342602A5B3B110027D72F /* AuthModel.swift */,
 			);

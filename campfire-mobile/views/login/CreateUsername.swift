@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CreateUsername: View {
-    // setting up view dismiss == going back to previous screen
+    // setting up environmental variables
     @Environment(\.dismiss) var dismiss
-
+    @EnvironmentObject var model: authModel
+    
     // setting up user phoneNumber & advance as view state
     @State var username: String = ""
     @State private var canAdvance: Bool = false
@@ -39,7 +40,7 @@ struct CreateUsername: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: username, placeholderText: "username")
+                        FormTextField(text: $model.username, placeholderText: "username")
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
@@ -52,7 +53,8 @@ struct CreateUsername: View {
                                 LFButton(text: "next")
                             })
                         }
-                        .disabled(!canAdvance)
+                        .opacity(buttonOpacity)
+                        .disabled(!model.validUsername)
                     }
                     .padding(.bottom, 200)
                 }
@@ -61,8 +63,15 @@ struct CreateUsername: View {
     }
 }
 
+extension CreateUsername {
+    var buttonOpacity: Double {
+        return model.validUsername ? 1 : 0.5
+    }
+}
+
 struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
         CreateUsername()
+            .environmentObject(authModel())
     }
 }

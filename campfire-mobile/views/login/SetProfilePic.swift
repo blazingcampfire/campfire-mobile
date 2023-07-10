@@ -10,7 +10,8 @@ import SwiftUI
 struct SetProfilePic: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-
+    @EnvironmentObject var model: authModel
+    
     @State private var canAdvance: Bool = false
 
     var body: some View {
@@ -38,7 +39,7 @@ struct SetProfilePic: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
 
-                        ProfilePictureView()
+                        ProfilePictureView(clicked: {model.validProfilePic.toggle()})
 
                         Text("you're ready!")
                             .foregroundColor(Color.white)
@@ -49,11 +50,12 @@ struct SetProfilePic: View {
 
                         VStack {
                             // set destination to AccountSetUp screen temporarily
-                            NavigationLink(destination: AccountSetUp(), label: {
+                            NavigationLink(destination: TheFeed(), label: {
                                 LFButton(text: "finish")
                             })
                         }
-                        .disabled(!canAdvance)
+                        .opacity(buttonOpacity)
+                        .disabled(!model.validUser)
                     }
                     .padding(.bottom, 200)
                 }
@@ -62,8 +64,15 @@ struct SetProfilePic: View {
     }
 }
 
+extension SetProfilePic {
+    var buttonOpacity: Double {
+        return model.validProfilePic ? 1 : 0.5
+    }
+}
+
 struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {
         SetProfilePic()
+            .environmentObject(authModel())
     }
 }

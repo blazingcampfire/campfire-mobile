@@ -87,6 +87,7 @@ private extension authModel {
     var isEmailValidPublisher: AnyPublisher<Bool, Never> {
         $email
             .map { email in
+                // has a valid "@." email
                 let emailPredicate = NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
                 return emailPredicate.evaluate(with: email)
             }

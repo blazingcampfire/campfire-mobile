@@ -26,10 +26,10 @@ struct InitialMessage: View {
                 Text("- add your own favorite pics and vids with the camera")
                 Text("- use the tent to stay up to date with the latest news and find new friends")
                 Text("- customize your profile with your favorite flicks from around campus")
-                Text("- most importantly, enjoy the time around your campus campfire!")
+                Text("- most importantly, enjoy your time around the campus campfire!")
             }
             .foregroundColor(Theme.TextColor)
-            .font(.custom("LexendDeca-Light", size: 16))
+            .font(.custom("LexendDeca-SemiBold", size: 16))
             .multilineTextAlignment(.leading)
         }
         

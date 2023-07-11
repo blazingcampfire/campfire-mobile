@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct VerifyNumber: View {
-    // setting up view dismiss == going back to previous screen
+    // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
-
-    // setting up verification code & advancing as view state
     @EnvironmentObject var model: authModel
+    
+    // setting up verification code & advancing as view state
     @State private var canAdvance: Bool = false
     
     var body: some View {

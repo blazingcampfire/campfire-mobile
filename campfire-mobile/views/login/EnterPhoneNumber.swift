@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnterPhoneNumber: View {
-    // setting up view dismiss == going back to previous screen
+    // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: authModel
 

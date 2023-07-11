@@ -10,6 +10,7 @@ struct NavigationBar: View {
     @Binding var selectedTabIndex: Int?
 
     var body: some View {
+        NavigationView {
         TabView(selection: $selectedTabIndex) {
             TheFeed()
                 .tabItem {
@@ -19,7 +20,7 @@ struct NavigationBar: View {
                 .tag(0)
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
-
+            
             MapPage()
                 .tabItem {
                     Label("Map", systemImage: "map")
@@ -39,7 +40,7 @@ struct NavigationBar: View {
                 .tag(2)
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
-
+            
             TentTabView()
                 .tabItem {
                     Label("Tent", systemImage: "tent.fill")
@@ -57,6 +58,7 @@ struct NavigationBar: View {
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
+    }
     }
 }
 

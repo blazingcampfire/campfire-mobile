@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct SetProfilePic: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: authModel
-    
-    @State private var canAdvance: Bool = false
+
 
     var body: some View {
         GradientBackground()
@@ -39,7 +39,7 @@ struct SetProfilePic: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
 
-                        ProfilePictureView(clicked: {model.validProfilePic.toggle()})
+                        ProfilePictureView()
 
                         Text("you're ready!")
                             .foregroundColor(Color.white)

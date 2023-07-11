@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct CommentsPage: View {
     let feedinfo = FeedInfo()
     @State private var commentText: String = ""
+    @Environment(\.dismiss) var dismiss
+    
     
     var body: some View {
         NavigationView {
             VStack {
                 CommentsList(range: 1...10)
+                Divider()
                 VStack {
                     HStack {
                         Image(info.profilepic)
@@ -25,6 +29,10 @@ struct CommentsPage: View {
                         
                         TextField("add comment!", text: $commentText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(Theme.Peach)
+                                     )
                         if commentText != "" {
                             Button(action: {
                                 // button to add comment
@@ -49,16 +57,17 @@ struct CommentsPage: View {
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-Light", size: 16))
                         }
-                        Spacer()
+                        
                         Button(action: {
-                            // button to dismiss view
+                            dismiss()
                         }) {
                             Image(systemName: "xmark")
                                 .foregroundColor(Theme.TextColor)
                                 .bold()
                         }
-                        .padding(.trailing, 16)
+                        .padding(.leading, 160)
                     }
+                
                 }
             }
         }
@@ -122,7 +131,7 @@ struct CommentsList: View {
                             Button(action: {
                                 self.commentLikeTapped.toggle()
                             }) {
-                                Image(self.commentLikeTapped == false ? "eaten" : "noteaten")
+                                Image(self.commentLikeTapped == false ? "noteaten" : "eaten")
                                     .resizable()
                                     .frame(width: 90, height: 90)
                             }

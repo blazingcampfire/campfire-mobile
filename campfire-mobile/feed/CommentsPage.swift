@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct CommentsPage: View {
     let feedinfo = FeedInfo()
@@ -15,6 +16,7 @@ struct CommentsPage: View {
         NavigationView {
             VStack {
                 CommentsList(range: 1...10)
+                Divider()
                 VStack {
                     HStack {
                         Image(info.profilepic)
@@ -25,6 +27,10 @@ struct CommentsPage: View {
                         
                         TextField("add comment!", text: $commentText)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 2)
+                            .foregroundColor(Theme.Peach)
+                                     )
                         if commentText != "" {
                             Button(action: {
                                 // button to add comment
@@ -49,7 +55,7 @@ struct CommentsPage: View {
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-Light", size: 16))
                         }
-                        Spacer()
+                        
                         Button(action: {
                             // button to dismiss view
                         }) {
@@ -59,6 +65,7 @@ struct CommentsPage: View {
                         }
                         .padding(.trailing, 16)
                     }
+                
                 }
             }
         }

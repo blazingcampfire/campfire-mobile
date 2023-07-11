@@ -227,7 +227,7 @@ struct VidsPlayer: View {
                             self.likeTapped.toggle()
                         }) {
                             VStack {
-                                Image(self.likeTapped == false ? "eaten" : "noteaten")
+                                Image(self.likeTapped == true ? "eaten" : "noteaten")
                             }
                             .padding(.leading, -15)
                         }

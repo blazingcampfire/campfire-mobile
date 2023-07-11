@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
-import Foundation
+
 
 struct CommentsPage: View {
     let feedinfo = FeedInfo()
     @State private var commentText: String = ""
     @Environment(\.dismiss) var dismiss
-    
-    
+  
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList(range: 1...10)
+                CommentsList()
                 Divider()
                 VStack {
                     HStack {
@@ -46,114 +45,49 @@ struct CommentsPage: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {
-                        HStack {
-                            Text("Comments")
-                                .foregroundColor(Theme.TextColor)
-                                .font(.custom("LexendDeca-Bold", size: 23))
-                         
-                            Text("\(feedinfo.commentnum)")
-                                .foregroundColor(Theme.TextColor)
-                                .font(.custom("LexendDeca-Light", size: 16))
-                        }
-                        
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Image(systemName: "xmark")
-                                .foregroundColor(Theme.TextColor)
-                                .bold()
-                        }
-                        .padding(.leading, 160)
+                        Text("Comments")
+                            .foregroundColor(Theme.TextColor)
+                            .font(.custom("LexendDeca-Bold", size: 23))
+                     
+                        Text("\(feedinfo.commentnum)")
+                            .foregroundColor(Theme.TextColor)
+                            .font(.custom("LexendDeca-Light", size: 16))
                     }
+                }
                 
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(Theme.TextColor)
+                            .bold()
+                    }
                 }
             }
         }
     }
 }
+    
+
 
 
 struct CommentsList: View {
-    let range: ClosedRange<Int>
-    @State private var commentLikeTapped: Bool = false
-    let feedinfo = FeedInfo()
-    
+    let diffComments = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, numReplies: 5, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, numReplies: 92, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, numReplies: 2, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, numReplies: 0, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, numReplies: 2, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, numReplies: 0, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, numReplies: 10, commenttime: "3w")]
     
     var body: some View {
-            List {
-                ForEach(range, id: \.self) { number in
-                    HStack {
-                        
-                        Image(info.profilepic)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
-                        
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text("@\(info.username)")
-                                .font(.custom("LexendDeca-Bold", size: 14))
-                                .foregroundColor(Theme.TextColor)
-                            Text(feedinfo.comments)
-                                .font(.custom("LexendDeca-Light", size: 16))
-                                .foregroundColor(Theme.TextColor)
-                            HStack(spacing: 15){
-                                Text("1m")  //time variable
-                                    .font(.custom("LexendDeca-Light", size: 13))
-                                    .foregroundColor(Theme.TextColor)
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("Reply")
-                                        .font(.custom("LexendDeca-SemiBold", size: 13))
-                                        .foregroundColor(Theme.TextColor)
-                                }
-                            }
-                            Button(action:{
-                                
-                            }) {
-                                HStack(spacing: 2){
-                                    Text("View 10 replies")
-                                        .foregroundColor(Theme.TextColor)
-                                        .font(.custom("LexendDeca-Light", size: 13))
-                                    Image(systemName: "chevron.down")
-                                        .font(.system(size: 11))
-                                }
-                            }
-                        }
-                        .padding(.top, 40)
-                        
-                        Spacer()
-                        
-                        VStack(spacing: -20) {
-                            Button(action: {
-                                self.commentLikeTapped.toggle()
-                            }) {
-                                Image(self.commentLikeTapped == false ? "noteaten" : "eaten")
-                                    .resizable()
-                                    .frame(width: 90, height: 90)
-                            }
-                            Text("\(feedinfo.commentnum)")
-                                .foregroundColor(Theme.TextColor)
-                                .font(.custom("LexendDeca-Regular", size: 16))
-                        }
-                    }
-                    .listRowBackground(Theme.ScreenColor)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 15, bottom:0, trailing: 5))
-                    .padding(.top, -15)
-                }
+        ScrollView {
+            ForEach(0..<diffComments.count, id: \.self) { index in
+                diffComments[index]
             }
-            .listStyle(PlainListStyle())
+           
+        }
+        
+    }
 }
-}
-
-
-
-
-
+      
 
 struct CommentsPage_Previews: PreviewProvider {
     static var previews: some View {

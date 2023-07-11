@@ -39,12 +39,12 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            if let firstVid = vids.first {
-                currentVid = firstVid.id
-                vids[0].isPlaying = true
-            }
-        }
+//        .onAppear {
+//            if let firstVid = vids.first {
+//                currentVid = firstVid.id
+//                vids[0].isPlaying = true
+//            }
+//        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component

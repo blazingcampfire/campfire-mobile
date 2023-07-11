@@ -17,9 +17,10 @@ struct InitialMessage: View {
                     .font(.custom("LexendDeca-Regular", size: 20))
             }
             .foregroundColor(Theme.TextColor)
+            .multilineTextAlignment(.center)
        
             
-            VStack(spacing: 5){
+            VStack(alignment: .leading, spacing: 5){
                 Text("- campfire is not associated with Yale")
                 Text("- check out funny pictures and videos on the feed")
                 Text("- see what's going on around campus on the map")
@@ -31,6 +32,7 @@ struct InitialMessage: View {
             .foregroundColor(Theme.TextColor)
             .font(.custom("LexendDeca-SemiBold", size: 16))
             .multilineTextAlignment(.leading)
+            .padding(.leading, 7)
         }
         
     }

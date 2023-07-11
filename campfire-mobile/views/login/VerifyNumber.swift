@@ -40,7 +40,7 @@ struct VerifyNumber: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
-                        
+                            .keyboardType(.numberPad)                        
                         Text("code sent to \(model.phoneNumber)")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 15))

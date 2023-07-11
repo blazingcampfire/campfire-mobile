@@ -41,6 +41,7 @@ struct EnterPhoneNumber: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
 
                         FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
+                            .keyboardType(.numberPad)
 
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)

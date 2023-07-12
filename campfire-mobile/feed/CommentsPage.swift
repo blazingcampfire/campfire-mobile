@@ -26,7 +26,8 @@ struct CommentsPage: View {
                             .frame(width: 40, height: 40)
                             .clipShape(Circle())
                         
-                        TextField("add comment!", text: $commentText)
+                        TextField("", text: $commentText, prompt: Text("add comment!").font(.custom("LexendDeca-Regular", size: 15)))
+                            .font(.custom("LexendDeca-Regular", size: 15))
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
@@ -95,7 +96,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(0..<diffComments.count, id: \.self) { index in
-                    diffComments[index]
+                        diffComments[index]
                 }
                 
             }

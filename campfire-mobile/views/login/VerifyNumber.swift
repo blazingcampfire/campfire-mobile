@@ -49,14 +49,19 @@ struct VerifyNumber: View {
                         // MARK: - NavLink to EnterEmail screen
                         
                         VStack {
-                            NavigationLink(destination: EnterEmail(), label: {
+                            NavigationLink(destination: EnterEmail(), isActive: $model.validVerificationCode, label: {
                                 LFButton(text: "verify")
                             }
                             )
+                            // verify user code on tap of link
+                            .simultaneousGesture(TapGesture().onEnded{
+                                model.verifyVerificationCode()
+                            })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validVerificationCode)
+                        .disabled(!model.validVerificationCodeLength)
                     }
+                    .alert(model.errorMessage, isPresented: $model.showError){}
                     .padding(.bottom, 200)
                 }
             )
@@ -66,7 +71,7 @@ struct VerifyNumber: View {
 
 extension VerifyNumber {
     var buttonOpacity: Double {
-        return model.validVerificationCode ? 1 : 0.5
+        return model.validVerificationCodeLength ? 1 : 0.5
     }
 }
 

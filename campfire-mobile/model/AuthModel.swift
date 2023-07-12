@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 import Firebase
+import GoogleSignIn
+import SwiftUI
 
 final class authModel: ObservableObject {
     
@@ -21,6 +23,7 @@ final class authModel: ObservableObject {
     // Validity booleans
     @Published var validUser: Bool = false
     @Published var validPhoneNumber: Bool = false
+    @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
     @Published var validEmail: Bool = false
     @Published var validUsername: Bool = false
@@ -47,7 +50,7 @@ final class authModel: ObservableObject {
             .store(in: &publishers)
         isVerificationCodeValidPublisher
             .receive(on: RunLoop.main)
-            .assign(to: \.validVerificationCode, on: self)
+            .assign(to: \.validVerificationCodeLength, on: self)
             .store(in: &publishers)
         isEmailValidPublisher
             .receive(on: RunLoop.main)
@@ -86,7 +89,6 @@ private extension authModel {
             .eraseToAnyPublisher()
 
     }
-    
     
     var isEmailValidPublisher: AnyPublisher<Bool, Never> {
         $email
@@ -159,6 +161,7 @@ extension authModel {
                 
                 // MARK: User phone number authenticated successfully
                 print("Success!")
+                // validVerificationCode = true
             }
             catch {
                 await handleError(error: error)
@@ -173,11 +176,40 @@ extension authModel {
         })
     }
     
+   /* func loginGoogleUser(user: GIDGoogleUser) {
+        Task {
+            do {
+                guard let idToken = user.authentication.idToken else { return }
+                let accessToken = user.authentication.accessToken
+                
+                let credential = OAuthProvider.credential(withProviderID: idToken, accessToken: accessToken)
+                
+                try await Auth.auth().signIn(with: credential)
+                
+                print("Google Sign In Success!")
+                await MainActor.run(body: {
+                    withAnimation(.easeInOut)
+                })
+            } catch {
+                await handleError(error: error)
+            }
+        }
+    }
+    */
+    
 }
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function
 extension UIApplication {
     func closeKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    // Root Controller
+    func rootController() -> UIViewController {
+        guard let window = connectedScenes.first as? UIWindowScene else { return .init()}
+        guard let viewController = window.windows.last?.rootViewController else { return .init() }
+        
+        return viewController
     }
 }

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen

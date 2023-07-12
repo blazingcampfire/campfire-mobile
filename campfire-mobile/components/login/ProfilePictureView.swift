@@ -16,7 +16,7 @@ struct ProfilePictureView: View {
     var body: some View {
         VStack {
             Button {
-                isPickerShowing = true
+                isPickerShowing.toggle()
             } label: {
                 ZStack(alignment: .bottomTrailing) {
                     selectedImage!
@@ -36,9 +36,10 @@ struct ProfilePictureView: View {
                         .clipShape(Circle())
                 }
             }
+            .sheet(isPresented: $isPickerShowing) {
+                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
         }
-        .sheet(isPresented: $isPickerShowing) {
-            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+       
         }
     }
 }

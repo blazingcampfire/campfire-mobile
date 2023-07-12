@@ -7,17 +7,17 @@
 
 import SwiftUI
 struct NavigationBar: View {
-    @Binding var selectedTabIndex: Int?
+    
 
     var body: some View {
         NavigationView {
-        TabView(selection: $selectedTabIndex) {
+        TabView() {
             TheFeed()
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")
                 }
-                .tag(0)
+              
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
@@ -25,7 +25,7 @@ struct NavigationBar: View {
                 .tabItem {
                     Label("Map", systemImage: "map")
                 }
-                .tag(1)
+            
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
@@ -37,7 +37,7 @@ struct NavigationBar: View {
                         .frame(width: 30, height: 30)
                     Text("Camera")
                 }
-                .tag(2)
+           
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
@@ -45,7 +45,7 @@ struct NavigationBar: View {
                 .tabItem {
                     Label("Tent", systemImage: "tent.fill")
                 }
-                .tag(3)
+             
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
@@ -53,17 +53,18 @@ struct NavigationBar: View {
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
-                .tag(4)
+            
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
     }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(selectedTabIndex: .constant(nil))
+        NavigationBar()
     }
 }

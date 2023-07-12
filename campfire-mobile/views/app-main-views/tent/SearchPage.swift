@@ -23,6 +23,7 @@ struct SearchPage: View {
 
 struct FriendsList: View {
     let range: ClosedRange<Int>
+    @State private var addedTapped: Bool = false
     var body: some View {
         List {
             ForEach(range, id: \.self) { _ in
@@ -45,9 +46,9 @@ struct FriendsList: View {
                     Spacer()
 
                     Button {
-                        print("add friend")
+                        self.addedTapped.toggle()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
+                        Image(systemName: self.addedTapped == false ? "plus.circle.fill" : "minus.circle.fill" )
                             .font(.system(size: 30))
                             .foregroundColor(Theme.Peach)
                     }

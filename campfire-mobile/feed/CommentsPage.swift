@@ -75,16 +75,32 @@ struct CommentsPage: View {
 
 
 struct CommentsList: View {
-    let diffComments = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, numReplies: 5, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, numReplies: 92, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, numReplies: 2, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, numReplies: 0, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, numReplies: 2, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, numReplies: 0, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, numReplies: 10, commenttime: "3w")]
+//    let diffComments = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, numReplies: 5, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, numReplies: 92, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, numReplies: 2, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, numReplies: 0, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, numReplies: 2, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, numReplies: 0, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, numReplies: 10, commenttime: "3w")]
     
+    let diffComments: [CommentView] = []
+    
+        
     var body: some View {
         ScrollView {
-            ForEach(0..<diffComments.count, id: \.self) { index in
-                diffComments[index]
+            if diffComments.isEmpty {
+                VStack(spacing: 10) {
+                    Text("be the first to comment!")
+                        .foregroundColor(Theme.TextColor)
+                        .font(.custom("LexendDeca-Regular", size: 18))
+                    Image(systemName: "flame.fill")
+                        .foregroundColor(Theme.Peach)
+                        .font(.system(size: 35))
+                }
+                .padding(.top, 170)
+            }
+            else {
+                ForEach(0..<diffComments.count, id: \.self) { index in
+                    diffComments[index]
+                }
+                
             }
            
         }
-        
     }
 }
       

@@ -6,8 +6,7 @@ struct FormTextField: View {
     @Binding var text: String
 
     var placeholderText: String
-    var textContentType: String?
-    var keyboardType: String?
+    @FocusState var isEnabled: Bool
 
     var body: some View {
         VStack {
@@ -15,12 +14,19 @@ struct FormTextField: View {
                 .font(.custom("LexendDeca-Bold", size: 20))
                 .foregroundColor(Color.white)
                 .padding(.horizontal)
+                .focused($isEnabled)
 
-
-            Divider()
-                .background(Color.white)
-                .frame(height: 3)
-                .overlay(.white)
+            ZStack {
+                Rectangle()
+                    .fill(.white.opacity(0.5))
+                
+                Rectangle()
+                    .fill(.white)
+                    .frame(width: isEnabled ? nil : 0)
+                    .animation(.easeInOut( duration: 0.3), value: isEnabled)
+                    
+            }
+            .frame(height: 3)
         }
         .frame(height: 50)
         .padding(.horizontal)

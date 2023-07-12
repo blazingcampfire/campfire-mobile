@@ -7,31 +7,38 @@
 
 import Foundation
 import Combine
+import Firebase
+import GoogleSignIn
+import SwiftUI
 
 final class authModel: ObservableObject {
     
-    // input values from Views
+    // Input values from Views
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
     @Published var username: String = ""
     @Published var profilePic: String = ""
     
-    // validity booleans
+    // Validity booleans
     @Published var validUser: Bool = false
     @Published var validPhoneNumber: Bool = false
+    @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
     @Published var validEmail: Bool = false
     @Published var validUsername: Bool = false
     @Published var validProfilePic: Bool = false
-   
     
-    // verificationCode from firebase
-    var firebaseVerificationCode: String = "123456"
+    // Error Properties
+    @Published var showError: Bool = false
+    @Published var errorMessage: String = ""
+    
+    // VerificationCode from firebase
+    var firebaseVerificationCode: String = ""
     
     private var publishers = Set<AnyCancellable>()
     
-    // initializing validity publishers
+    // Initializing validity publishers
     init() {
         isUserValidPublisher
             .receive(on: RunLoop.main)
@@ -43,7 +50,7 @@ final class authModel: ObservableObject {
             .store(in: &publishers)
         isVerificationCodeValidPublisher
             .receive(on: RunLoop.main)
-            .assign(to: \.validVerificationCode, on: self)
+            .assign(to: \.validVerificationCodeLength, on: self)
             .store(in: &publishers)
         isEmailValidPublisher
             .receive(on: RunLoop.main)
@@ -61,14 +68,14 @@ final class authModel: ObservableObject {
     
 }
 
-// MARK: - Validation setup
+// MARK: - Extension: Validation setup
 private extension authModel {
     
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
         $phoneNumber
             .map {
                 number in
-                return number.count == 10
+                return number.count == 11
             }
             .eraseToAnyPublisher()
     }
@@ -77,12 +84,11 @@ private extension authModel {
         $verificationCode
             .map {
                 code in
-                return code == self.firebaseVerificationCode
+                return code.count == 6
             }
             .eraseToAnyPublisher()
 
     }
-    
     
     var isEmailValidPublisher: AnyPublisher<Bool, Never> {
         $email
@@ -122,4 +128,64 @@ private extension authModel {
     
     
     
+}
+
+// MARK: - Extension: All Firebase API Authentication logic for the login views
+extension authModel {
+    
+    func getVerificationCode() {
+        UIApplication.shared.closeKeyboard()
+        Task {
+            do {
+                // MARK: - Disable when testing with real device
+                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+                
+                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(phoneNumber)", uiDelegate: nil)
+                await MainActor.run(body: {
+                    firebaseVerificationCode = code
+                })
+            }
+            catch {
+                await handleError(error: error)
+            }
+        }
+    }
+    
+    func verifyVerificationCode() {
+        UIApplication.shared.closeKeyboard()
+        Task {
+            do {
+                let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)
+                
+                try await Auth.auth().signIn(with: credential)
+                
+                // MARK: User phone number authenticated successfully
+                print("Success!")
+                // validVerificationCode = true
+            }
+            catch {
+                await handleError(error: error)
+            }
+        }
+    }
+    // MARK: Handling Errors
+    func handleError(error: Error) async {
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
+    }
+    
+    func loginGoogleUser(user: GIDGoogleUser) {
+        Task {
+            
+        }
+    }
+}
+
+// MARK: - Extension to UIApplication for setup of closeKeyboard function
+private extension UIApplication {
+    func closeKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

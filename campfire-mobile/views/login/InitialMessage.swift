@@ -33,6 +33,7 @@ struct InitialMessage: View {
             .font(.custom("LexendDeca-SemiBold", size: 16))
             .multilineTextAlignment(.leading)
             .padding(.leading, 7)
+            .frame(width: 350, alignment: .center)
         }
         
     }

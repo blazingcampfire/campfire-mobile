@@ -9,14 +9,14 @@ import SwiftUI
 
 
 struct CommentsPage: View {
-    let feedinfo = FeedInfo()
+    var comments: [CommentView]
     @State private var commentText: String = ""
     @Environment(\.dismiss) var dismiss
   
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList()
+                CommentsList(listcomments: comments)
                 Divider()
                 VStack {
                     HStack {
@@ -52,7 +52,7 @@ struct CommentsPage: View {
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                      
-                        Text("\(diffComments.count)")
+                        Text("\(comments.count)")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
                     }
@@ -76,14 +76,14 @@ var diffComments: [CommentView] = [CommentView(profilepic: "darsh", username: "r
 
 
 struct CommentsList: View {
-   
+    var listcomments: [CommentView]
     
 //    let diffComments: [CommentView] = []
     
         
     var body: some View {
         ScrollView {
-            if diffComments.isEmpty {
+            if listcomments.isEmpty {
                 VStack(spacing: 10) {
                     Text("be the first to comment!")
                         .foregroundColor(Theme.TextColor)
@@ -95,8 +95,8 @@ struct CommentsList: View {
                 .padding(.top, 170)
             }
             else {
-                ForEach(0..<diffComments.count, id: \.self) { index in
-                        diffComments[index]
+                ForEach(0..<listcomments.count, id: \.self) { index in
+                        listcomments[index]
                 }
                 
             }
@@ -108,6 +108,6 @@ struct CommentsList: View {
 
 struct CommentsPage_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsPage()
+        CommentsPage(comments: diffComments)
     }
 }

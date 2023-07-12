@@ -7,63 +7,34 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    @State private var searchText = ""
+    @State var searchText = ""
     var body: some View {
-        NavigationView {
-            ListRequests(range: 1 ... 12)
-                .listStyle(PlainListStyle())
+        NavigationStack {
+            // Text("Search for users") // users collection query
+            ListRequests()
         }
         .searchable(text: $searchText)
         .background(Color.white)
+        .listStyle(PlainListStyle())
         .padding(.top, -10)
     }
 }
 
 struct ListRequests: View {
-    let range: ClosedRange<Int>
-
+    
+    let requestList = [
+        RequestsListView(profilepic: info.profilepic, name: info.name, username: info.username),
+        RequestsListView(profilepic: "darsh", name: "Toni", username: "ton_bizzle"),
+        RequestsListView(profilepic: "adarsh", name: "Adarsh", username: "geekslayer_21")
+    ]
+    
     var body: some View {
         List {
-            ForEach(range, id: \.self) { _ in
-                HStack {
-                    // user image is passed in
-                    Image(info.profilepic)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-
-                    VStack(alignment: .leading) {
-                        Button(action: {
-                        }) {
-                            Text(info.name)
-                                .font(.custom("LexendDeca-Bold", size: 18))
-                                .foregroundColor(Theme.TextColor)
-                        }
-
-                        Text("@\(info.username)")
-                            .font(.custom("LexendDeca-Regular", size: 12))
-                            .foregroundColor(.gray)
-                    }
-
-                    Spacer()
-
-                    Button(action: {
-                    }) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Theme.Peach)
-                            .font(.custom("LexendDeca-Regular", size: 30))
-                    }
-                    Button(action: {
-                    }) {
-                        Image(systemName: "x.circle")
-                            .foregroundColor(Theme.Peach)
-                            .font(.custom("LexendDeca-Regular", size: 30))
-                    }
-                }
-                .listRowBackground(Theme.ScreenColor)
-                .listRowSeparator(.hidden)
+            ForEach(0..<requestList.count, id: \.self) { index in
+                requestList[index]
             }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Theme.ScreenColor)
         }
         .listStyle(PlainListStyle())
     }

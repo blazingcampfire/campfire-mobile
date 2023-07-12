@@ -120,6 +120,9 @@
 		F86695162A40F78300D9471C /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* ProfilePage.swift */; };
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
+		F89402132A5E64F30049410E /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402122A5E64F30049410E /* FriendsListView.swift */; };
+		F89402152A5E68480049410E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402142A5E68480049410E /* SearchListView.swift */; };
+		F89402192A5E6A150049410E /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402182A5E6A150049410E /* RequestsListView.swift */; };
 		F8950DC62A48002800C13075 /* adarsh.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8950DC52A48002800C13075 /* adarsh.mp4 */; };
 		F8950DC82A48003B00C13075 /* david.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F8950DC72A48003B00C13075 /* david.mp4 */; };
 		F8950DCA2A48008A00C13075 /* Vid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8950DC92A48008A00C13075 /* Vid.swift */; };
@@ -254,6 +257,9 @@
 		F86695152A40F78300D9471C /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F86D83A72A4BC54100223F9A /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		F89402122A5E64F30049410E /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
+		F89402142A5E68480049410E /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
+		F89402182A5E6A150049410E /* RequestsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListView.swift; sourceTree = "<group>"; };
 		F8950DC52A48002800C13075 /* adarsh.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = adarsh.mp4; sourceTree = "<group>"; };
 		F8950DC72A48003B00C13075 /* david.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = david.mp4; sourceTree = "<group>"; };
 		F8950DC92A48008A00C13075 /* Vid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vid.swift; sourceTree = "<group>"; };
@@ -512,6 +518,9 @@
 				B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */,
 				E280A9E22A4FCF5D00410B34 /* Notification.swift */,
 				B14AF3442A5CE64800BDE1A4 /* CommentView.swift */,
+				F89402122A5E64F30049410E /* FriendsListView.swift */,
+				F89402142A5E68480049410E /* SearchListView.swift */,
+				F89402182A5E6A150049410E /* RequestsListView.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -806,6 +815,7 @@
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
 				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
 				F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */,
+				F89402192A5E6A150049410E /* RequestsListView.swift in Sources */,
 				E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
 				B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */,
@@ -818,6 +828,7 @@
 				B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */,
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
 				F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */,
+				F89402132A5E64F30049410E /* FriendsListView.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
 				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
@@ -834,6 +845,7 @@
 				F8A371D92A4BEE4B0076F1C1 /* EditPost.swift in Sources */,
 				B1B5EFD82A4F56D700FA79CE /* UserProfile.swift in Sources */,
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,
+				F89402152A5E68480049410E /* SearchListView.swift in Sources */,
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
 				B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */,
 				B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */,

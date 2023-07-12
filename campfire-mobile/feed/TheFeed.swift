@@ -253,7 +253,7 @@ struct VidsPlayer: View {
                         .font(.custom("LexendDeca-Regular", size: 16))
                         .sheet(isPresented: $commentsTapped) {
                             CommentsPage()
-                                .presentationDetents([.medium])
+                                .presentationDetents([.fraction(0.85)])
                                 .presentationDragIndicator(.visible)
                         }
                 }

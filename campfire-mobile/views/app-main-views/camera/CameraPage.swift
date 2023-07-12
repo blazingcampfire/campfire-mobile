@@ -10,6 +10,8 @@ import SwiftUI
 struct CameraPage: View {
     @State private var flashTapped: Bool = false
     @State var initialMessageShow = false
+    @State var photoAlbumShow = false
+    @State var selectedImage: Image?
 
     var body: some View {
         ZStack {
@@ -60,16 +62,15 @@ struct CameraPage: View {
                     
             //-MARK: Upload pictures button
                     Button(action: {
-                        initialMessageShow.toggle()
+                        photoAlbumShow.toggle()
                     }) {
                         Image(systemName: "photo.on.rectangle.angled")
                             .font(.system(size: 25))
                             .foregroundColor(.white)
                     }
-                    .sheet(isPresented: $initialMessageShow) {
-                        InitialMessage()
+                    .sheet(isPresented: $photoAlbumShow) {
+                        ImagePicker(selectedImage: $selectedImage, isPickerShowing: $photoAlbumShow)
                             .presentationDragIndicator(.visible)
-                            .presentationDetents([.medium])
                     }
                 }
                 .padding(.leading, 55)

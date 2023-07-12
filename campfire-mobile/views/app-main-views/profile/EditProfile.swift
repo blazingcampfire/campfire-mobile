@@ -9,6 +9,9 @@ import SwiftUI
 
 struct EditProfile: View {
     @State private var userinfo = UserInfo()
+    @State var showPhotos: Bool = false
+    @State var selectedImage: Image?
+    
 
     var postImages: [[String]] = [
         ["ragrboard", "1"],
@@ -30,7 +33,7 @@ struct EditProfile: View {
                             UserProfilePic()
                             
                             Button(action: {
-                                // go to camera roll
+                                showPhotos.toggle()
                             }) {
                                 Image(systemName: "camera")
                                     .font(.system(size: 30))
@@ -38,6 +41,9 @@ struct EditProfile: View {
                                     .frame(width: 150, height: 150)
                                     .background(Color.black.opacity(0.5))
                                     .clipShape(Circle())
+                            }
+                            .sheet(isPresented: $showPhotos) {
+                                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $showPhotos)
                             }
                         }
                         

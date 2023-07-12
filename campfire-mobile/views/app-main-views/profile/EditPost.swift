@@ -10,6 +10,7 @@ import SwiftUI
 struct EditPost: View {
     var post: String
     var prompt: String?
+    
 
     var body: some View {
         ZStack {
@@ -21,7 +22,7 @@ struct EditPost: View {
 
                     if prompt != nil {
                         Button(action: {
-                            // open camera roll
+                          
                         }) {
                             Image(systemName: "camera")
                                 .font(.system(size: 100))
@@ -31,9 +32,10 @@ struct EditPost: View {
                                 .clipShape(Circle())
                                 .offset(x: 0, y: 23)
                         }
+                        
                     } else {
                         Button(action: {
-                            // open camera roll
+                           
                         }) {
                             Image(systemName: "camera")
                                 .font(.system(size: 100))

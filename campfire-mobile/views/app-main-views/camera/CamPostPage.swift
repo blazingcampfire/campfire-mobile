@@ -128,7 +128,7 @@ struct CamPostPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Image(userInfo.profilepic)
+                                    Image(vid.mediafile.posterProfilePic)
                                         .resizable()
                                         .frame(width: 35, height: 35)
                                         .clipShape(Circle())
@@ -139,7 +139,7 @@ struct CamPostPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Text(userInfo.username)
+                                    Text("@\(vid.mediafile.posterUsername)")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                 }
                             }
@@ -157,7 +157,7 @@ struct CamPostPlayer: View {
                                     // lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text(userInfo.location)
+                                        Text("📍" + "\(vid.mediafile.postLocation)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                                     .padding(.trailing, 240)

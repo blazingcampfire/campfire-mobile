@@ -12,7 +12,6 @@ struct CommentView: View {
     var username: String
     var comment: String
     var commentLikeNum: Int
- //   var numReplies: Int
     var commenttime: String
     @State private var commentLiked: Bool = false
     @State private var showingReplies: Bool = false

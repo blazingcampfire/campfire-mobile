@@ -21,6 +21,12 @@ struct MediaFile: Identifiable {   //This separates the url from the initial Vid
     var url: String
     var mediaType: MediaType
     var isExpanded: Bool = false
+    var posterUsername: String
+    var posterProfilePic: String
+    var postcaption: String  //going to grab the text from the caption text field
+    var postLocation: String
+    var postLikeCount: Int
+    var commentCount: Int = diffComments.count
 }
 
 enum MediaType: String, Codable {  //Allows a case to be setup to handle different Mediatypes
@@ -28,16 +34,28 @@ enum MediaType: String, Codable {  //Allows a case to be setup to handle differe
     case image
 }
 
+struct PostsInfo {    //Connects each posts its own unique object so to keep track of each diff posts properties
+    var id = UUID().uuidString
+    var file: MediaFile
+    var posterUsername: String
+    var posterProfilePic: String
+    var postcaption: String  //going to grab the text from the caption text field
+    var postLocation: String
+    var postLikeCount: Int
+    var commentCount: Int = diffComments.count
+}
+
+
+
+
+
+//This array represents posts
 let MediaFileJSON = [
-    MediaFile(url: "sofrat", mediaType: .video),
-    MediaFile(url: "blonde", mediaType: .image),
-    MediaFile(url: "happen", mediaType: .video),
-    MediaFile(url: "hot", mediaType: .image),  
-    MediaFile(url: "talkin", mediaType: .video),
-    MediaFile(url: "gunna", mediaType: .video)
+    MediaFile(url: "sofrat", mediaType: .video, posterUsername: "ayowttf", posterProfilePic: "ragrboard6", postcaption: "bro's a dog", postLocation: "37 High St", postLikeCount: 12),
+    MediaFile(url: "blonde", mediaType: .image, posterUsername: "sosexy", posterProfilePic: "ragrboard5", postcaption: "im so hot", postLocation: "88 Crown St", postLikeCount: 92)
 ]
 
 let PostFileJSON = [
-    MediaFile(url: "cute", mediaType: .image)
+    MediaFile(url: "cute", mediaType: .image, posterUsername: "sosexy", posterProfilePic: "ragrboard5", postcaption: "im so hot", postLocation: "88 Crown St", postLikeCount: 92)
 ]
 //

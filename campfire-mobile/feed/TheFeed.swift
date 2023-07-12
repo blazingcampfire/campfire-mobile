@@ -170,7 +170,7 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Image(userInfo.profilepic)
+                                    Image(vid.mediafile.posterProfilePic)
                                         .resizable()
                                         .frame(width: 35, height: 35)
                                         .clipShape(Circle())
@@ -181,7 +181,7 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
-                                    Text(userInfo.username)
+                                    Text("@\(vid.mediafile.posterUsername)")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                 }
                             }
@@ -189,7 +189,7 @@ struct VidsPlayer: View {
                             //- MARK: Caption/Location buttons Vstack
                             VStack(spacing: 5) {
                                 HStack {
-                                    Text(feedinfo.postcaption)
+                                    Text(vid.mediafile.postcaption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
                                 }
                                 .padding(.leading, -30)
@@ -198,7 +198,7 @@ struct VidsPlayer: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍37 High Street")
+                                        Text("📍" + "\(vid.mediafile.postLocation)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -231,7 +231,7 @@ struct VidsPlayer: View {
                             }
                             .padding(.leading, -15)
                         }
-                        Text("\(feedinfo.likecount)")
+                        Text("\(vid.mediafile.postLikeCount)")
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
@@ -248,7 +248,7 @@ struct VidsPlayer: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    Text("\(feedinfo.commentnum)")
+                        Text("\(vid.mediafile.commentCount)")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                         .sheet(isPresented: $commentsTapped) {

@@ -61,7 +61,7 @@ final class authModel: ObservableObject {
     
 }
 
-// MARK: - Validation setup
+// MARK: - Extension: Validation setup
 private extension authModel {
     
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
@@ -121,5 +121,14 @@ private extension authModel {
     }
     
     
+    
+}
+
+// MARK: - Extension: All Firebase Authentication logic for the login views
+extension authModel {
+    
+    func getVerificationCode() {
+        
+    }
     
 }

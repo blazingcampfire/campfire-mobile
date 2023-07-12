@@ -53,7 +53,10 @@ struct EnterPhoneNumber: View {
                         VStack {
                             NavigationLink(destination: VerifyNumber(), label: {
                                 LFButton(text: "next")
-                    
+                            })
+                            // on tap, navLink gets user verification code
+                            .simultaneousGesture(TapGesture().onEnded{
+                                model.getVerificationCode()
                             })
                         }
                         .opacity(buttonOpacity)

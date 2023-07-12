@@ -104,6 +104,8 @@
 		E29095F12A3E4741001BEDDE /* campfire_mobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095F02A3E4741001BEDDE /* campfire_mobileTests.swift */; };
 		E29095FB2A3E4741001BEDDE /* campfire_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */; };
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
+		E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AA2A5E38770012D328 /* GoogleSignIn */; };
+		E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */; };
 		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
 		E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */; };
 		E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446862A4E82C20032CF34 /* TopNavBar.swift */; };
@@ -274,10 +276,12 @@
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
+				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
 				E272A01F2A5BA36B008D2D78 /* FirebaseFirestore in Frameworks */,
 				E272A0272A5BA36B008D2D78 /* FirebaseStorageCombine-Community in Frameworks */,
 				E280A9E82A4FDEA500410B34 /* SlidingTabView in Frameworks */,
+				E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +641,8 @@
 				E272A0222A5BA36B008D2D78 /* FirebaseMessaging */,
 				E272A0242A5BA36B008D2D78 /* FirebaseStorage */,
 				E272A0262A5BA36B008D2D78 /* FirebaseStorageCombine-Community */,
+				E2BDE6AA2A5E38770012D328 /* GoogleSignIn */,
+				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -713,6 +719,7 @@
 			packageReferences = (
 				E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1215,6 +1222,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1262,6 +1277,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
+		};
+		E2BDE6AA2A5E38770012D328 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

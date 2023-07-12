@@ -23,9 +23,9 @@ struct RequestsPage: View {
 struct ListRequests: View {
     
     let requestList = [
-        RequestsListView(profilepic: info.profilepic, name: info.name, username: info.username),
-        RequestsListView(profilepic: "darsh", name: "Toni", username: "ton_bizzle"),
-        RequestsListView(profilepic: "adarsh", name: "Adarsh", username: "geekslayer_21")
+        RequestsListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        RequestsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        RequestsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
     ]
     
     var body: some View {

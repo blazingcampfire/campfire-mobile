@@ -8,11 +8,10 @@
 import SwiftUI
 import MapKit
 
-let posterInfo = UserInfo()
 
 struct FeedInfo {
-   var postername = UserInfo().username
-   var posterpic = UserInfo().profilepic
+   var postername = David.username
+   var posterpic = David.profilepic
    var postcaption: String = "yoooooooo"
    var likecount: Int = 10
    var commentnum: Int = 19

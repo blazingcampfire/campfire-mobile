@@ -23,9 +23,9 @@ struct FriendsPage: View {
 struct ListFriends: View {
     
     let friendsList = [
-        FriendsListView(profilepic: info.profilepic, name: info.name, username: info.username),
-        FriendsListView(profilepic: "darsh", name: "Toni", username: "ton_bizzle"),
-        FriendsListView(profilepic: "adarsh", name: "Adarsh", username: "geekslayer_21"),
+        FriendsListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        FriendsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        FriendsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
     ]
 
     var body: some View {

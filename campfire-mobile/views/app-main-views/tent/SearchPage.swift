@@ -23,9 +23,9 @@ struct SearchPage: View {
 
 struct SearchList: View {
     let searchList = [
-        SearchListView(profilepic: info.profilepic, name: info.name, username: info.username),
-        SearchListView(profilepic: "darsh", name: "Toni", username: "ton_bizzle"),
-        SearchListView(profilepic: "adarsh", name: "Adarsh", username: "geekslayer_21")
+        SearchListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        SearchListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        SearchListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
     ]
     
     @State private var addedTapped: Bool = false

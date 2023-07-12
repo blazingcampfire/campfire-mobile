@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct UserProfilePic: View {
-    let userinfo = UserInfo()
+    
+    let pfp: String
 
     var body: some View {
-        Image(userinfo.profilepic)
+        Image(pfp)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 150, height: 150)
@@ -25,6 +26,6 @@ struct UserProfilePic: View {
 
 struct UserProfilePic_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfilePic()
+        UserProfilePic(pfp: David.profilepic)
     }
 }

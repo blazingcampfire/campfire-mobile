@@ -176,40 +176,16 @@ extension authModel {
         })
     }
     
-   /* func loginGoogleUser(user: GIDGoogleUser) {
+    func loginGoogleUser(user: GIDGoogleUser) {
         Task {
-            do {
-                guard let idToken = user.authentication.idToken else { return }
-                let accessToken = user.authentication.accessToken
-                
-                let credential = OAuthProvider.credential(withProviderID: idToken, accessToken: accessToken)
-                
-                try await Auth.auth().signIn(with: credential)
-                
-                print("Google Sign In Success!")
-                await MainActor.run(body: {
-                    withAnimation(.easeInOut)
-                })
-            } catch {
-                await handleError(error: error)
-            }
+            
         }
     }
-    */
-    
 }
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function
-extension UIApplication {
+private extension UIApplication {
     func closeKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-    
-    // Root Controller
-    func rootController() -> UIViewController {
-        guard let window = connectedScenes.first as? UIWindowScene else { return .init()}
-        guard let viewController = window.windows.last?.rootViewController else { return .init() }
-        
-        return viewController
     }
 }

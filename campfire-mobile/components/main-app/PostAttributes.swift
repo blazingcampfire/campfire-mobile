@@ -40,9 +40,9 @@ struct PostAttributes_Previews: PreviewProvider {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 PostAttributes(post: "ragrboard4", prompt: "for the dogs")
-
-                PostAttributes(post: "ragrboard5", width: 350)
             }
         }
     }
 }
+
+

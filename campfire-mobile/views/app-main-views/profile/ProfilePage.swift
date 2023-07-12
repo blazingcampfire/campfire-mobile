@@ -34,7 +34,7 @@ struct ProfilePage: View {
                     VStack {
                         ZStack {
                             VStack {
-                                UserProfile()
+                                UserProfile(currentUser: David)
                                     .padding(.top)
                                 HStack {
                                     NavigationLink(destination: EditProfile()) { // use NavigationLink to navigate to the EditProfile view

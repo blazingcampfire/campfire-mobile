@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditProfile: View {
-    @State private var userinfo = UserInfo()
+    @State private var david = UserInfo()
     @State var showPhotos: Bool = false
     @State var selectedImage: Image?
     
@@ -30,7 +30,7 @@ struct EditProfile: View {
                 ScrollView {
                     VStack(spacing: 10) {
                         ZStack {
-                            UserProfilePic()
+                            UserProfilePic(pfp: David.profilepic )
                             
                             Button(action: {
                                 showPhotos.toggle()
@@ -53,11 +53,11 @@ struct EditProfile: View {
                         
                         HStack {
                             VStack(alignment: .leading, spacing: 20) {
-                                Text(userinfo.name)
+                                Text(David.name)
                                     .font(.custom("LexendDeca-Bold", size: 15))
-                                Text(userinfo.username)
+                                Text(David.username)
                                     .font(.custom("LexendDeca-Bold", size: 15))
-                                Text(userinfo.bio)
+                                Text(David.bio)
                                     .font(.custom("LexendDeca-Bold", size: 15))
                             }
                             .padding(.leading, 20)
@@ -65,19 +65,19 @@ struct EditProfile: View {
                             Spacer()
                             
                             VStack(alignment: .trailing, spacing: 20) {
-                                NavigationLink(destination: EditFieldPage(field: "name", currentfield: userinfo.name)) {
+                                NavigationLink(destination: EditFieldPage(field: "name", currentfield: David.name)) {
                                     Text("edit name")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)
                                 }
                                 
-                                NavigationLink(destination: EditFieldPage(field: "username", currentfield: userinfo.username)) {
+                                NavigationLink(destination: EditFieldPage(field: "username", currentfield: David.username)) {
                                     Text("edit username")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)
                                 }
                                 
-                                NavigationLink(destination: EditFieldPage(field: "bio", currentfield: userinfo.bio)) {
+                                NavigationLink(destination: EditFieldPage(field: "bio", currentfield: David.bio)) {
                                     Text("edit bio")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)

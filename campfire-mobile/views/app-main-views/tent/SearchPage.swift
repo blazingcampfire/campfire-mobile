@@ -12,7 +12,7 @@ struct SearchPage: View {
     var body: some View {
         NavigationStack {
             // Text("Search for users") // users collection query
-            FriendsList(range: 1 ... 12)
+            SearchList()
         }
         .searchable(text: $searchText)
         .background(Color.white)
@@ -21,41 +21,21 @@ struct SearchPage: View {
     }
 }
 
-struct FriendsList: View {
-    let range: ClosedRange<Int>
+struct SearchList: View {
+    let searchList = [
+        SearchListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        SearchListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        SearchListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
+    ]
+    
     @State private var addedTapped: Bool = false
     var body: some View {
         List {
-            ForEach(range, id: \.self) { _ in
-                HStack {
-                    Image(info.profilepic)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-
-                    VStack(alignment: .leading) {
-                        Text(info.name)
-                            .font(.custom("LexendDeca-Bold", size: 18))
-                            .foregroundColor(Theme.TextColor)
-                        Text("@\(info.username)")
-                            .font(.custom("LexendDeca-Regular", size: 12))
-                            .foregroundColor(.gray)
-                    }
-
-                    Spacer()
-
-                    Button {
-                        self.addedTapped.toggle()
-                    } label: {
-                        Image(systemName: self.addedTapped == false ? "plus.circle.fill" : "minus.circle.fill" )
-                            .font(.system(size: 30))
-                            .foregroundColor(Theme.Peach)
-                    }
-                }
-                .listRowBackground(Theme.ScreenColor)
-                .listRowSeparator(.hidden)
+            ForEach(0..<searchList.count, id: \.self) { index in
+                searchList[index]
             }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Theme.ScreenColor)
         }
         .listStyle(PlainListStyle())
     }

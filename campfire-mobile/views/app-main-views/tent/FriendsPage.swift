@@ -11,7 +11,7 @@ struct FriendsPage: View {
     @State private var searchText = ""
     var body: some View {
             NavigationView {
-                ListFriends(range: 1...12)
+                ListFriends()
                     .listStyle(PlainListStyle())
             }
             .searchable(text: $searchText)
@@ -21,35 +21,20 @@ struct FriendsPage: View {
 }
 
 struct ListFriends: View {
-    let range: ClosedRange<Int>
+    
+    let friendsList = [
+        FriendsListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        FriendsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        FriendsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
+    ]
 
     var body: some View {
         List {
-            ForEach(range, id: \.self) { _ in
-                HStack {
-                    // user image is passed in
-                    Image(info.profilepic)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
-
-                    VStack(alignment: .leading) {
-                        Button(action: {
-                        }) {
-                            Text(info.name)
-                                .font(.custom("LexendDeca-Bold", size: 18))
-                                .foregroundColor(Theme.TextColor)
-                        }
-
-                        Text("@\(info.username)")
-                            .font(.custom("LexendDeca-Regular", size: 12))
-                            .foregroundColor(.gray)
-                    }
-                }
-                .listRowBackground(Theme.ScreenColor)
-                .listRowSeparator(.hidden)
+            ForEach(0..<friendsList.count, id: \.self) { index in
+                friendsList[index]
             }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Theme.ScreenColor)
         }
         .listStyle(PlainListStyle())
     }

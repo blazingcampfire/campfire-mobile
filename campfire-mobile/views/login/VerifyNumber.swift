@@ -53,10 +53,14 @@ struct VerifyNumber: View {
                                 LFButton(text: "verify")
                             }
                             )
+                            .simultaneousGesture(TapGesture().onEnded{
+                                model.verifyVerificationCode()
+                            })
                         }
                         .opacity(buttonOpacity)
                         .disabled(!model.validVerificationCode)
                     }
+                    .alert(model.errorMessage, isPresented: $model.showError){}
                     .padding(.bottom, 200)
                 }
             )

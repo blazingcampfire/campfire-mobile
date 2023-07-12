@@ -8,10 +8,15 @@
 import SwiftUI
 import FirebaseCore
 
+// MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         return true
+    }
+    // MARK: - Phone Auth Initialization of Remote Notifications
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+        return .noData
     }
 }
 

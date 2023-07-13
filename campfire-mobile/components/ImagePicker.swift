@@ -32,13 +32,13 @@ struct ImagePicker: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
     }
     
-    func makeCoordinator() -> Coordinator {
+    func makeCoordinator() -> ImageCoordinator {
         Coordinator(self)
     }
 }
 
 
-class Coordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
+class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
     
     var parent: ImagePicker
     

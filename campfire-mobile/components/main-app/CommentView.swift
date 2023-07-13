@@ -94,7 +94,8 @@ struct CommentView: View {
                 }) {
                     Image(commentLiked == false ? "noteaten" : "eaten")
                         .resizable()
-                        .frame(width: 90, height: 90)
+                        .frame(width: 75, height: 90)
+                        .aspectRatio(contentMode: .fit)
                         .offset(x: -4)
                 }
                 Text("\(commentLikeNum)")

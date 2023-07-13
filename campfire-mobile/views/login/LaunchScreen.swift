@@ -13,22 +13,31 @@ struct LaunchScreen: View {
     @State var splashShow: Bool = false
     
     var body: some View {
-        
-        
-                    GradientBackground()
-                    .overlay(
-        VStack {
-// MARK: - App logo
-            VStack {
-                Image("newlogo")
-                    .resizable()
-                    .frame(width: 300, height: 300, alignment: .center)
-                    .offset(x:-8, y: -70)
-                
-                
+    
+        if splashShow {
+            AccountSetUp()
+        } else {
+            GradientBackground()
+            .overlay(
+                VStack {
+        // MARK: - App logo
+                    VStack {
+                        Image("newlogo")
+                            .resizable()
+                            .frame(width: 300, height: 300, alignment: .center)
+                            .offset(x:-8, y: -70)
+                    }
+                })
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    splashShow = true
+                }
             }
-            
-        })
+        }
+        
+        
+        
+  
     }
     
 }

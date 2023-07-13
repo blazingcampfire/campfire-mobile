@@ -62,8 +62,7 @@ struct CamPostPlayer: View {
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
     @State private var HotSelected = true
-    let feedinfo = FeedInfo()
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+    
     
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case

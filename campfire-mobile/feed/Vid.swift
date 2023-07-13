@@ -57,7 +57,6 @@ struct PostFile: Identifiable {   //This separates the url from the initial Vid 
 }
 
 
-
 enum MediaType: String, Codable {  //Allows a case to be setup to handle different Mediatypes
     case video
     case image
@@ -71,7 +70,7 @@ enum MediaType: String, Codable {  //Allows a case to be setup to handle differe
 
 //This array represents posts
 let MediaFileJSON = [
-    MediaFile(url: "sofrat", mediaType: .video, posterUsername: "ayowttf", posterProfilePic: "ragrboard6", postcaption: "bro's a dog", postLocation: "37 High St", postLikeCount: 12, commentSection: [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr")]),
+    MediaFile(url: "tyler", mediaType: .video, posterUsername: "ayowttf", posterProfilePic: "ragrboard6", postcaption: "bro's a dog", postLocation: "37 High St", postLikeCount: 12, commentSection: [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr")]),
     MediaFile(url: "blonde", mediaType: .image, posterUsername: "sosexy", posterProfilePic: "ragrboard5", postcaption: "im so hot", postLocation: "88 Crown St", postLikeCount: 92, commentSection: [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr"),CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr")]),
 ]
 

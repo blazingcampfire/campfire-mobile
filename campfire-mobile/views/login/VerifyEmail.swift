@@ -8,6 +8,8 @@
 import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
+import FirebaseCore
+import FirebaseAuth
 
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
@@ -54,7 +56,6 @@ struct VerifyEmail: View {
                             NavigationLink(destination: CreateUsername(), label: {
                                 LFButton(text: "Google", icon: Image("glogo2"))
                             })
-                            
                         }
                         .padding(.bottom, 200)
                     }

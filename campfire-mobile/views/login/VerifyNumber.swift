@@ -40,11 +40,17 @@ struct VerifyNumber: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
-                            .keyboardType(.numberPad)                        
-                        Text("code sent to \(model.phoneNumber)")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
+                            .keyboardType(.numberPad)
+                        VStack{
+                            Text("code sent to \(model.phoneNumber)")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(-20)
+                            Text("sms data rates may apply")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(-5)
+                        }
                         
                         // MARK: - NavLink to EnterEmail screen
                         

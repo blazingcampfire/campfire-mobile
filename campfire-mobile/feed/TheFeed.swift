@@ -64,9 +64,7 @@ struct VidsPlayer: View {
     @State var leaderboardPageShow = false
     @State var commentsTapped = false
     
-    let feedinfo = FeedInfo()
-    
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+
     
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
@@ -158,10 +156,10 @@ struct VidsPlayer: View {
                 
                 
                 //-MARK: User information
-                VStack {
+                 VStack {
                     HStack(alignment: .bottom) {
                         
-                        VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment: .leading, spacing: -5) {
                             
                             
                             //- MARK: Profile pic/username buttons Hstack
@@ -172,7 +170,7 @@ struct VidsPlayer: View {
                                 }) {
                                     Image(vid.mediafile.posterProfilePic)
                                         .resizable()
-                                        .frame(width: 35, height: 35)
+                                        .frame(width: 40, height: 40)
                                         .clipShape(Circle())
                                 }
                                 .padding(.bottom, 5)
@@ -182,7 +180,7 @@ struct VidsPlayer: View {
                                     //lead to profile page
                                 }) {
                                     Text("@\(vid.mediafile.posterUsername)")
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 16))
                                 }
                             }
                             
@@ -190,9 +188,9 @@ struct VidsPlayer: View {
                             VStack(spacing: 5) {
                                 HStack {
                                     Text(vid.mediafile.postcaption)
-                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                        .font(.custom("LexendDeca-Regular", size: 16))
                                 }
-                                .padding(.leading, -30)
+                             
                                 
                                 Button(action: {
                                     //lead to map and where location is
@@ -205,6 +203,7 @@ struct VidsPlayer: View {
                                 }
                                 .frame(alignment: .trailing)
                             }
+                            .padding(.leading, 40)
                         }
                     }
                     .padding(.leading, 40)

@@ -29,5 +29,7 @@
 		<string>LexendDeca-Light.ttf</string>
 		<string>LexendDeca-Medium.ttf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
 </dict>
 </plist>

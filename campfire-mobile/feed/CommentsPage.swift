@@ -78,9 +78,7 @@ var diffComments: [CommentView] = [CommentView(profilepic: "darsh", username: "r
 struct CommentsList: View {
     var listcomments: [CommentView]
     
-//    let diffComments: [CommentView] = []
-    
-        
+
     var body: some View {
         ScrollView {
             if listcomments.isEmpty {

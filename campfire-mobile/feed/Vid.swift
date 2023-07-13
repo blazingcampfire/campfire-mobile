@@ -57,7 +57,6 @@ struct PostFile: Identifiable {   //This separates the url from the initial Vid 
 }
 
 
-
 enum MediaType: String, Codable {  //Allows a case to be setup to handle different Mediatypes
     case video
     case image

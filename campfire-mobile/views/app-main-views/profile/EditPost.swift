@@ -13,6 +13,8 @@ struct EditPost: View {
     var post: String
     var prompt: String?
     
+    @State private var promptScreen = false
+    
     var body: some View {
         ZStack {
             Theme.ScreenColor

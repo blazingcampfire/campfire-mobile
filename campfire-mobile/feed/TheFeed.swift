@@ -171,6 +171,7 @@ struct VidsPlayer: View {
                                 }) {
                                     Image(vid.mediafile.posterProfilePic)
                                         .resizable()
+                                        .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
                                         .clipShape(Circle())
                                 }

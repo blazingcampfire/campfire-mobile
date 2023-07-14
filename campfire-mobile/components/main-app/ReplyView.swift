@@ -26,7 +26,7 @@ struct ReplyView: View, Identifiable {
                     Image(profilepic)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 30, height: 30)
+                        .frame(width: 40, height: 40)
                         .clipShape(Circle())
                 }
                 .padding(.trailing, 5)
@@ -36,12 +36,12 @@ struct ReplyView: View, Identifiable {
                         // navigate to profile
                     }) {
                         Text("@\(username)")
-                            .font(.custom("LexendDeca-Bold", size: 12))
+                            .font(.custom("LexendDeca-Bold", size: 14))
                             .foregroundColor(Theme.TextColor)
                     }
                     
                     Text(reply)
-                        .font(.custom("LexendDeca-Light", size: 13))
+                        .font(.custom("LexendDeca-Light", size: 15))
                         .foregroundColor(Theme.TextColor)
                     
                     Text(replytime)  // time variable
@@ -54,19 +54,20 @@ struct ReplyView: View, Identifiable {
             
             Spacer()
 
-            VStack(spacing: -10) {
+            VStack(spacing: -20) {
                 Button(action: {
                     self.replyLiked.toggle()
                 }) {
                     Image(replyLiked == false ? "noteaten" : "eaten")
                         .resizable()
-                        .frame(width: 70, height: 70)
+                        .frame(width: 75, height: 90)
+                        .aspectRatio(contentMode: .fit)
                         .offset(x: -2)
                 }
                 
                 Text("\(replyLikeNum)")
                     .foregroundColor(Theme.TextColor)
-                    .font(.custom("LexendDeca-SemiBold", size: 13))
+                    .font(.custom("LexendDeca-SemiBold", size: 16))
             }
         }
         

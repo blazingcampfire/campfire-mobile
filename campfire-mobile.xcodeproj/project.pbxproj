@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
 		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
@@ -289,6 +290,7 @@
 			files = (
 				E272A0192A5BA36B008D2D78 /* FirebaseAnalytics in Frameworks */,
 				E272A01B2A5BA36B008D2D78 /* FirebaseAuth in Frameworks */,
+				B140BA592A60F39400819203 /* SwiftUICam in Frameworks */,
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
@@ -667,6 +669,7 @@
 				E272A0262A5BA36B008D2D78 /* FirebaseStorageCombine-Community */,
 				E2BDE6AA2A5E38770012D328 /* GoogleSignIn */,
 				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
+				B140BA582A60F39400819203 /* SwiftUICam */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -744,6 +747,7 @@
 				E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1067,6 +1071,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
@@ -1098,6 +1104,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
@@ -1242,6 +1250,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pierreveron/SwiftUICam";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1269,6 +1285,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B140BA582A60F39400819203 /* SwiftUICam */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */;
+			productName = SwiftUICam;
+		};
 		E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

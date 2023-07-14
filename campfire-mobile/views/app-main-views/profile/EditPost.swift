@@ -11,6 +11,9 @@ struct EditPost: View {
     var post: String
     var prompt: String?
     
+    @State var promptScreen = false
+    @State private var photoAlbum = false
+    @State private var selectedImage: Image?
 
     var body: some View {
         ZStack {
@@ -35,7 +38,7 @@ struct EditPost: View {
                         
                     } else {
                         Button(action: {
-                           
+                            photoAlbum.toggle()
                         }) {
                             Image(systemName: "camera")
                                 .font(.system(size: 100))
@@ -45,15 +48,26 @@ struct EditPost: View {
                                 .clipShape(Circle())
                                 .offset(x: 0, y: 0)
                         }
+                        .sheet(isPresented: $photoAlbum) {
+                            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $photoAlbum)
+                        }
                     }
                 }
 
                 Button(action: {
+                    self.promptScreen.toggle()
                 }) {
                     Text(prompt != nil ? "Change Prompt" : "Add Prompt")
                         .font(.custom("LexendDeca-Bold", size: 20))
                         .foregroundColor(Theme.Peach)
                 }
+                .sheet(isPresented: $promptScreen) {
+                    PromptsPage()
+                        .presentationDetents([.fraction(0.7)])
+                        .presentationDragIndicator(.visible)
+                        .presentationCornerRadius(30)
+                }
+                
             }
             .padding(.bottom, 100)
         }

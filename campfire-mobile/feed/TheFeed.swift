@@ -144,6 +144,7 @@ struct VidsPlayer: View {
                     .sheet(isPresented: $leaderboardPageShow) {
                         LeaderboardPage()
                             .presentationDragIndicator(.visible)
+                            .presentationCornerRadius(30)
                     }
                 }
                 .padding(.top, 65)

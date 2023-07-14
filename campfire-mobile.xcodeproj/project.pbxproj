@@ -44,6 +44,7 @@
 		B18B19AB2A46977200309256 /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19782A46974200309256 /* LexendDeca-SemiBold.ttf */; };
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
 		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
+		B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */; };
 		B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7D92A57293C00E30064 /* tiger.mp4 */; };
 		B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DD2A572B8100E30064 /* davo.mp4 */; };
 		B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DF2A572D7200E30064 /* me.jpeg */; };
@@ -193,6 +194,7 @@
 		B18B198F2A46974300309256 /* JosefinSans-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-ExtraLight.ttf"; sourceTree = "<group>"; };
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
 		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
+		B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsPage.swift; sourceTree = "<group>"; };
 		B1B5D7D92A57293C00E30064 /* tiger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiger.mp4; sourceTree = "<group>"; };
 		B1B5D7DD2A572B8100E30064 /* davo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = davo.mp4; sourceTree = "<group>"; };
 		B1B5D7DF2A572D7200E30064 /* me.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpeg; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
 				F86695152A40F78300D9471C /* ProfilePage.swift */,
 				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
+				B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
+				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,

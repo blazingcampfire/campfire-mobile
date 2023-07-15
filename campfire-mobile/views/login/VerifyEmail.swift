@@ -5,11 +5,9 @@
 //  Created by Toni on 6/18/23.
 //
 
-import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
-import FirebaseCore
-import FirebaseAuth
+import SwiftUI
 
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
@@ -19,7 +17,8 @@ struct VerifyEmail: View {
     var body: some View {
         GradientBackground()
             .overlay(
-// MARK: - Back button
+                // MARK: - Back button
+
                 VStack {
                     HStack {
                         Button {
@@ -30,7 +29,9 @@ struct VerifyEmail: View {
                     }
                     .padding(.leading, 15)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-// MARK: - Graduation icon & school email
+
+                    // MARK: - Graduation icon & school email
+
                     VStack {
                         VStack {
                             Image(systemName: "graduationcap.circle.fill")
@@ -48,14 +49,26 @@ struct VerifyEmail: View {
                                 .foregroundColor(.white)
                                 .accentColor(.white).multilineTextAlignment(.center)
                                 .padding(.bottom, 30)
-                            
-// MARK: - Buttons redirecting to email verification
+
+                            // MARK: - Buttons redirecting to email verification
+
                             LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                 .padding(5)
 
-                            NavigationLink(destination: CreateUsername(), label: {
+                            NavigationLink(destination: CreateUsername(), isActive: $model.emailSuccess, label: {
                                 LFButton(text: "Google", icon: Image("glogo2"))
                             })
+                            .onTapGesture {
+                                model.emailSuccess = false
+                                Task {
+                                    do {
+                                        try await model.signInGoogle()
+                                    model.emailSuccess = true
+                                    } catch {
+                                        print(error)
+                                    }
+                                }
+                            }
                         }
                         .padding(.bottom, 200)
                     }
@@ -64,7 +77,6 @@ struct VerifyEmail: View {
             .navigationBarBackButtonHidden(true)
     }
 }
-
 
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {

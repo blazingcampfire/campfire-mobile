@@ -18,7 +18,6 @@ struct VerifyEmail: View {
         GradientBackground()
             .overlay(
                 // MARK: - Back button
-
                 VStack {
                     HStack {
                         Button {
@@ -55,15 +54,13 @@ struct VerifyEmail: View {
                             LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                 .padding(5)
 
-                            NavigationLink(destination: CreateUsername(), isActive: $model.emailSuccess, label: {
-                                LFButton(text: "Google", icon: Image("glogo2"))
-                            })
+                            LFButton(text: "Google", icon: Image("glogo2"))
                             .onTapGesture {
                                 model.emailSuccess = false
                                 Task {
                                     do {
-                                        try await model.signInGoogle()
-                                    model.emailSuccess = true
+                                        try await model.signUpGoogle()
+                                        model.emailSuccess = true
                                     } catch {
                                         print(error)
                                     }

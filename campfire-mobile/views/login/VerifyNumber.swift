@@ -46,7 +46,7 @@ struct VerifyNumber: View {
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)
-                            Text("sms data rates may apply")
+                            Text("(sms data rates may apply)")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-5)

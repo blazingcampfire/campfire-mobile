@@ -41,10 +41,6 @@ struct EnterEmail: View {
                         
                         FormTextField(text: $model.email, placeholderText: "email")
                         
-                        Text("check your email for a magic link!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {

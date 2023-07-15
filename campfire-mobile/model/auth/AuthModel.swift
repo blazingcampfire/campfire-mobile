@@ -5,16 +5,13 @@
 //  Created by Toni on 7/9/23.
 //
 
+import SwiftUI
 import Combine
 import FirebaseAuth
 import Foundation
 import GoogleSignIn
-import SwiftUI
+import GoogleSignInSwift
 
-struct GoogleSignInResultModel {
-    let idToken: String
-    let accessToken: String
-}
 
 @MainActor
 final class authModel: ObservableObject {
@@ -175,22 +172,17 @@ extension authModel {
 
 extension authModel {
     func signInGoogle() async throws {
-        guard let topVC = Utilities.shared.topViewController()
-        else {
-            throw URLError(.cannotFindHost)
-        }
-
-        let gidSignInResult = try await GIDSignIn.sharedInstance.signIn(withPresenting: topVC)
-
-        guard let idToken: String = gidSignInResult.user.idToken?.tokenString
-        else {
-            throw URLError(.badServerResponse)
-        }
-        let accessToken = gidSignInResult.user.accessToken.tokenString
-
-        let tokens = GoogleSignInResultModel(idToken: idToken, accessToken: accessToken)
+        let helper = SignInGoogleHelper()
+        let tokens = try await helper.signIn()
         try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
     }
+    
+    func signUpGoogle() async throws {
+        let helper = SignInGoogleHelper()
+        let tokens = try await helper.signIn()
+        try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+    }
+    
 
     // MARK: - Handling errors
 
@@ -203,9 +195,30 @@ extension authModel {
 }
 
 // MARK: - Microsoft auth
+
 extension authModel {
-   
+    /*
+     func signInWithMicrosoft() async throws {
+         let auth = Auth.auth()
+
+         let provider = OAuthProvider(providerID: "microsoft.com", auth: auth)
+
+         provider.getCredentialWith(nil) { credential, error in
+             if error != nil {
+                 return
+             }
+             if credential != nil {
+                 Auth().signIn(with: credential!) { authResult, error in
+                     if error != nil {
+                         return
+                     }
+                     print("Success!")
+                 }
+             }
+         }
+     } */
 }
+
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function
 

@@ -19,13 +19,14 @@ struct ProfilePictureView: View {
                 isPickerShowing.toggle()
             } label: {
                 ZStack(alignment: .bottomTrailing) {
+                    // have to fix placeholder
                     selectedImage!
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .foregroundColor(Theme.Peach)
                         .frame(width: 120, height: 120)
                         .clipShape(Circle())
-                        .scaleEffect(0.9)
-                    
+                        
                         .background(Color.white)
                         .clipShape(Circle())
                     

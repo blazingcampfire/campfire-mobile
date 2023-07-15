@@ -76,10 +76,11 @@ struct ProfilePage: View {
                                     .font(.system(size: 30))
                                     .foregroundColor(Theme.Peach)
                             }
-                            .offset(x: 145, y: -130)
+                            .offset(x: 155, y: -140)
                             .sheet(isPresented: $settingsPageShow) {
                                 SettingsPage()
                                     .presentationDragIndicator(.visible)
+                                    .presentationCornerRadius(30)
                             }
                         }
                         

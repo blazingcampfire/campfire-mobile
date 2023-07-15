@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -18,6 +19,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         return .noData
     }
+    //MARK: Google SignIn Auth
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
+    }
+    
+    
 }
 
 @main
@@ -29,7 +38,7 @@ struct campfire_mobileApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+                ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

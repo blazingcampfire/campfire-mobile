@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     @StateObject var model = authModel()
     var body: some View {
-        AccountSetUp()
+        LaunchScreen()
             .environmentObject(model)
     }
     

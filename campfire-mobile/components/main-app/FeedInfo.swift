@@ -20,3 +20,5 @@ struct FeedInfo {
    var comlikecount: Int = 10
    var feedpost: String = "darsh"
 }
+
+

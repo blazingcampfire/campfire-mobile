@@ -11,6 +11,7 @@ import SwiftUI
 struct LFButton: View {
     var text: String
     var icon: Image?
+    var action: (() -> Void)?
     
     var body: some View {
                 HStack {

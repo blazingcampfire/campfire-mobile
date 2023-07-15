@@ -64,9 +64,7 @@ struct VidsPlayer: View {
     @State var leaderboardPageShow = false
     @State var commentsTapped = false
     
-    let feedinfo = FeedInfo()
-    
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+
     
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
@@ -146,6 +144,7 @@ struct VidsPlayer: View {
                     .sheet(isPresented: $leaderboardPageShow) {
                         LeaderboardPage()
                             .presentationDragIndicator(.visible)
+                            .presentationCornerRadius(30)
                     }
                 }
                 .padding(.top, 65)
@@ -158,10 +157,10 @@ struct VidsPlayer: View {
                 
                 
                 //-MARK: User information
-                VStack {
+                 VStack {
                     HStack(alignment: .bottom) {
                         
-                        VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment: .leading, spacing: -5) {
                             
                             
                             //- MARK: Profile pic/username buttons Hstack
@@ -170,9 +169,10 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Image(userInfo.profilepic)
+                                    Image(vid.mediafile.posterProfilePic)
                                         .resizable()
-                                        .frame(width: 35, height: 35)
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
                                         .clipShape(Circle())
                                 }
                                 .padding(.bottom, 5)
@@ -181,30 +181,31 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
-                                    Text(userInfo.username)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                    Text("@\(vid.mediafile.posterUsername)")
+                                        .font(.custom("LexendDeca-Bold", size: 16))
                                 }
                             }
                             
                             //- MARK: Caption/Location buttons Vstack
                             VStack(spacing: 5) {
                                 HStack {
-                                    Text(feedinfo.postcaption)
-                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                    Text(vid.mediafile.postcaption)
+                                        .font(.custom("LexendDeca-Regular", size: 16))
                                 }
-                                .padding(.leading, -30)
+                             
                                 
                                 Button(action: {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍37 High Street")
+                                        Text("📍" + "\(vid.mediafile.postLocation)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
                                 }
                                 .frame(alignment: .trailing)
                             }
+                            .padding(.leading, 40)
                         }
                     }
                     .padding(.leading, 40)
@@ -231,7 +232,7 @@ struct VidsPlayer: View {
                             }
                             .padding(.leading, -15)
                         }
-                        Text("\(feedinfo.likecount)")
+                        Text("\(vid.mediafile.postLikeCount)")
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
@@ -248,11 +249,11 @@ struct VidsPlayer: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    Text("\(feedinfo.commentnum)")
+                        Text("\(vid.mediafile.commentCount)")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                         .sheet(isPresented: $commentsTapped) {
-                            CommentsPage()
+                            CommentsPage(comments: vid.mediafile.commentSection)
                                 .presentationDetents([.fraction(0.85)])
                                 .presentationDragIndicator(.visible)
                         }

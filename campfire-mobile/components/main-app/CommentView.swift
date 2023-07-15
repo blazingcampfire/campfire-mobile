@@ -12,13 +12,12 @@ struct CommentView: View {
     var username: String
     var comment: String
     var commentLikeNum: Int
-    var numReplies: Int 
     var commenttime: String
     @State private var commentLiked: Bool = false
     @State private var showingReplies: Bool = false
     
     
-    var replies = [ReplyView(profilepic: "ragrboard6", username: "lowkeyme", reply: "hahaha", replyLikeNum: 2, replytime: "10m"), ReplyView(profilepic: "toni", username: "notthatguy", reply: "lol wtf", replyLikeNum: 4, replytime: "10m")]
+    var replies: [ReplyView] = [ReplyView(profilepic: "ragrboard6", username: "lowkeyme", reply: "hahaha", replyLikeNum: 2, replytime: "10m"), ReplyView(profilepic: "toni", username: "notthatguy", reply: "lol wtf", replyLikeNum: 4, replytime: "10m")]
     
     
     var body: some View {
@@ -68,9 +67,9 @@ struct CommentView: View {
                         self.showingReplies.toggle()
                     }) {
                         
-                        if numReplies != 0 {
+                        if replies.count != 0 {
                             HStack(spacing: 2){
-                                Text("View \(numReplies) replies")
+                                Text("View \(replies.count) replies")
                                     .foregroundColor(Theme.TextColor)
                                     .font(.custom("LexendDeca-Light", size: 13))
                                 Image(systemName: "chevron.down")
@@ -95,7 +94,8 @@ struct CommentView: View {
                 }) {
                     Image(commentLiked == false ? "noteaten" : "eaten")
                         .resizable()
-                        .frame(width: 90, height: 90)
+                        .frame(width: 75, height: 90)
+                        .aspectRatio(contentMode: .fit)
                         .offset(x: -4)
                 }
                 Text("\(commentLikeNum)")
@@ -113,7 +113,8 @@ struct CommentView: View {
     }
 struct CommentView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 15, numReplies: 1, commenttime: "2d")
+        CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 15, commenttime: "2d")
+        CommentView(profilepic: "ragrboard", username: "fefe", comment: "fefe", commentLikeNum: 10, commenttime: "3m", replies: [ReplyView(profilepic: "toni", username: "notthatguy", reply: "lol wtf", replyLikeNum: 4, replytime: "10m"), ReplyView(profilepic: "toni", username: "notthatguy", reply: "lol wtf", replyLikeNum: 4, replytime: "10m"), ReplyView(profilepic: "toni", username: "notthatguy", reply: "lol wtf", replyLikeNum: 4, replytime: "10m")])
     }
 }
 

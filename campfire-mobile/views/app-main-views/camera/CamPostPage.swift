@@ -13,9 +13,9 @@ struct CamPostPage: View {
         case .video:
             let url = Bundle.main.path(forResource: item.url, ofType: "mov") ?? ""
             let player = AVPlayer(url: URL(fileURLWithPath: url))
-            return Vid(player: player, mediafile: item)
+            return PostVid(player: player, postfile: item)
         case .image:
-            return Vid(player: nil, mediafile: item)
+            return PostVid(player: nil, postfile: item)
         }
     }
         //The vids sets up a switch statement that reads the mediaType of Vid struct
@@ -58,18 +58,17 @@ struct CamPostPage_Previews: PreviewProvider {
 }
     
 struct CamPostPlayer: View {
-    @Binding var vid: Vid
+    @Binding var vid: PostVid
     @Binding var currentVid: String
     @State private var likeTapped: Bool = false
     @State private var HotSelected = true
-    let feedinfo = FeedInfo()
-    var userInfo = UserInfo(name: "David", username: "@david_adegangbanger", profilepic: "ragrboard", chocs: 100)
+    
     
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
         ZStack {
-                    switch vid.mediafile.mediaType {
+                    switch vid.postfile.mediaType {
                     case .video:
                         if let player = vid.player {
                             CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
@@ -90,7 +89,7 @@ struct CamPostPlayer: View {
                 
             case .image:
                 // Construct the file path
-                if let imagePath = Bundle.main.path(forResource: vid.mediafile.url, ofType: "jpeg"),
+                if let imagePath = Bundle.main.path(forResource: vid.postfile.url, ofType: "jpeg"),
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
@@ -128,7 +127,7 @@ struct CamPostPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Image(userInfo.profilepic)
+                                    Image(vid.postfile.posterProfilePic)
                                         .resizable()
                                         .frame(width: 35, height: 35)
                                         .clipShape(Circle())
@@ -139,7 +138,7 @@ struct CamPostPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Text(userInfo.username)
+                                    Text("@\(vid.postfile.posterUsername)")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                 }
                             }
@@ -157,7 +156,7 @@ struct CamPostPlayer: View {
                                     // lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text(userInfo.location)
+                                        Text("📍" + "\(vid.postfile.postLocation)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                                     .padding(.trailing, 240)

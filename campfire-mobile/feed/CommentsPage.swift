@@ -9,14 +9,14 @@ import SwiftUI
 
 
 struct CommentsPage: View {
-    let feedinfo = FeedInfo()
+    var comments: [CommentView]
     @State private var commentText: String = ""
     @Environment(\.dismiss) var dismiss
   
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList()
+                CommentsList(listcomments: comments)
                 Divider()
                 VStack {
                     HStack {
@@ -35,7 +35,7 @@ struct CommentsPage: View {
                                      )
                         if commentText != "" {
                             Button(action: {
-                                // button to add comment
+                                // button to add comment, will append array of diffComments with info
                             }) {
                                 Image(systemName: "paperplane.fill")
                                     .foregroundColor(Theme.Peach)
@@ -52,7 +52,7 @@ struct CommentsPage: View {
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                      
-                        Text("\(feedinfo.commentnum)")
+                        Text("\(comments.count)")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
                     }
@@ -71,19 +71,17 @@ struct CommentsPage: View {
         }
     }
 }
-    
-
+    //Global comments variable
+var diffComments: [CommentView] = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, commenttime: "3w")]
 
 
 struct CommentsList: View {
-    let diffComments = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, numReplies: 5, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, numReplies: 92, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, numReplies: 2, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, numReplies: 0, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, numReplies: 2, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, numReplies: 0, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, numReplies: 10, commenttime: "3w")]
+    var listcomments: [CommentView]
     
-//    let diffComments: [CommentView] = []
-    
-        
+
     var body: some View {
         ScrollView {
-            if diffComments.isEmpty {
+            if listcomments.isEmpty {
                 VStack(spacing: 10) {
                     Text("be the first to comment!")
                         .foregroundColor(Theme.TextColor)
@@ -95,8 +93,8 @@ struct CommentsList: View {
                 .padding(.top, 170)
             }
             else {
-                ForEach(0..<diffComments.count, id: \.self) { index in
-                        diffComments[index]
+                ForEach(0..<listcomments.count, id: \.self) { index in
+                        listcomments[index]
                 }
                 
             }
@@ -108,6 +106,6 @@ struct CommentsList: View {
 
 struct CommentsPage_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsPage()
+        CommentsPage(comments: diffComments)
     }
 }

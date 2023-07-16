@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountSetUp: View {
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             GradientBackground()
                 .overlay(
                     VStack {

@@ -15,11 +15,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         return true
     }
-    // MARK: - Phone Auth Initialization of Remote Notifications
+    // MARK: - Phone auth initialization of remote notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         return .noData
     }
-    //MARK: Google SignIn Auth
+    //MARK: Google signIn auth
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {

@@ -116,6 +116,7 @@
 		E2CBD5E42A6211D2000F3547 /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CBD5E32A6211D2000F3547 /* utilities.swift */; };
 		E2CBD5E72A6216E1000F3547 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CBD5E62A6216E1000F3547 /* AuthenticationManager.swift */; };
 		E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */; };
+		E2CBD5EB2A63A43F000F3547 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CBD5EA2A63A43F000F3547 /* TestView.swift */; };
 		E2E342612A5B3B110027D72F /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E342602A5B3B110027D72F /* AuthModel.swift */; };
 		E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E355432A58F6A300EE16C6 /* BackButton.swift */; };
 		F81E80542A5F5A6100E73548 /* VidOrImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81E80532A5F5A6100E73548 /* VidOrImagePicker.swift */; };
@@ -260,6 +261,7 @@
 		E2CBD5E32A6211D2000F3547 /* utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		E2CBD5E62A6216E1000F3547 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
+		E2CBD5EA2A63A43F000F3547 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		E2E342602A5B3B110027D72F /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		E2E355432A58F6A300EE16C6 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				E2434C4C2A5A412C000A70DB /* GradientBackground.swift */,
 				B164A9F22A5B89150033586F /* InitialMessage.swift */,
 				B1F6B5402A5F74140037D857 /* GoogleViewController.swift */,
+				E2CBD5EA2A63A43F000F3547 /* TestView.swift */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */,
 				B1562CDF2A5E501B00E8C5FD /* ReplyView.swift in Sources */,
 				B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */,
+				E2CBD5EB2A63A43F000F3547 /* TestView.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,

@@ -50,21 +50,26 @@ final class AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
+    
     func signUpWithGoogle(tokens: GoogleSignInResultModel) async throws -> AuthDataResultModel {
         let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
+        linkUserCredentials(credential: credential)
+        return try await signIn(credential: credential)
+    }
+    
+    func linkUserCredentials(credential: AuthCredential) {
         if let user = Auth.auth().currentUser {
             user.link(with: credential) {_, error in
                 
+                
                 if let error = error {
-                    print("Google did not link to account")
+                    print(error)
                     return
                 }
             }
            
         }
-        return try await signIn(credential: credential)
     }
-    
 
 
 }

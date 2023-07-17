@@ -55,14 +55,28 @@ struct VerifyNumber: View {
                         // MARK: - NavLink to EnterEmail screen
                         
                         VStack {
-                            NavigationLink(destination: EnterEmail(), isActive: $model.validVerificationCode, label: {
-                                LFButton(text: "verify")
+                            // if user is creating account, navigate to email set up
+                            if model.createAccount {
+                                NavigationLink(destination: EnterEmail(), isActive: $model.validVerificationCode, label: {
+                                    LFButton(text: "verify")
+                                }
+                                )
+                                // verify user code on tap of link
+                                .simultaneousGesture(TapGesture().onEnded{
+                                    model.verifyVerificationCode()
+                                })
                             }
-                            )
-                            // verify user code on tap of link
-                            .simultaneousGesture(TapGesture().onEnded{
-                                model.verifyVerificationCode()
-                            })
+                            // otherwise log them into the main app
+                            else if model.login {
+                                NavigationLink(destination: NavigationBar(), isActive: $model.validVerificationCode, label: {
+                                    LFButton(text: "verify")
+                                }
+                                )
+                                // verify user code on tap of link
+                                .simultaneousGesture(TapGesture().onEnded{
+                                    model.verifyVerificationCode()
+                                })
+                            }
                         }
                         .opacity(buttonOpacity)
                         .disabled(!model.validVerificationCodeLength)

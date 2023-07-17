@@ -51,6 +51,7 @@ struct EnterPhoneNumber: View {
                         // MARK: - NavLink to VerifyNumber screen
 
                         VStack {
+                            
                             NavigationLink(destination: VerifyNumber(), label: {
                                 LFButton(text: "next")
                             })

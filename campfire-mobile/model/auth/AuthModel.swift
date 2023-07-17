@@ -28,9 +28,13 @@ final class authModel: ObservableObject {
     @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
     @Published var validEmail: Bool = false
-    @Published var emailSuccess: Bool = false
+    @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
     @Published var validProfilePic: Bool = false
+    
+    // Bools for whether user is creating account or logging in
+    @Published var login: Bool = false
+    @Published var createAccount: Bool = false
 
     // Error Properties
     @Published var showError: Bool = false

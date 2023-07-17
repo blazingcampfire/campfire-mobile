@@ -7,17 +7,24 @@
 
 import SwiftUI
 import CoreData
+import FirebaseAuth
 
 struct ContentView: View {
     @StateObject var model = authModel()
     var body: some View {
-        LaunchScreen()
-            .environmentObject(model)
+        if Auth.auth().currentUser?.uid != nil {
+            AccountSetUp()
+                .environmentObject(model)
+        }
+        else {
+            LaunchScreen()
+        }
+        
     }
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            AccountSetUp()
+            LaunchScreen()
                 .environmentObject(authModel())
         }
     }

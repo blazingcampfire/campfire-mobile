@@ -18,8 +18,11 @@ struct VerifyEmail: View {
 
     var body: some View {
         
-        if validEmail {
+        if (validEmail && model.createAccount) {
             CreateUsername()
+        }
+        else if (validEmail && model.login) {
+            NavigationBar()
         }
         else {
             GradientBackground()
@@ -61,17 +64,32 @@ struct VerifyEmail: View {
                                 LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
                                     .padding(5)
                                 
-                                LFButton(text: "Google", icon: Image("glogo2"))
-                                    .onTapGesture {
-                                        Task {
-                                            do {
-                                                try await model.signUpGoogle()
-                                                validEmail = true
-                                            } catch {
-                                                print(error)
+                                if model.createAccount {
+                                    LFButton(text: "Google", icon: Image("glogo2"))
+                                        .onTapGesture {
+                                            Task {
+                                                do {
+                                                    try await model.signUpGoogle()
+                                                    validEmail = true
+                                                } catch {
+                                                    print(error)
+                                                }
                                             }
                                         }
-                                    }
+                                }
+                                else if model.login {
+                                    LFButton(text: "Google", icon: Image("glogo2"))
+                                        .onTapGesture {
+                                            Task {
+                                                do {
+                                                    try await model.signInGoogle()
+                                                    validEmail = true
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            }
+                                        }
+                                }
                             }
                             .padding(.bottom, 200)
                         }

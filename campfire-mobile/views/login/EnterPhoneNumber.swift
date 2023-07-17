@@ -42,6 +42,12 @@ struct EnterPhoneNumber: View {
 
                         FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
                             .keyboardType(.numberPad)
+                        if !model.validPhoneNumber {
+                            Text("phone number must be 10 digits with no spaces")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .padding(.top, -40)
+                        }
 
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)

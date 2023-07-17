@@ -41,6 +41,13 @@ struct EnterEmail: View {
                         
                         FormTextField(text: $model.email, placeholderText: "email")
                         
+                        if !model.validEmail {
+                            Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, -40)
+                        }
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {

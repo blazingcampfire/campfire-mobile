@@ -21,6 +21,7 @@ struct NotificationsPage: View {
             .listRowSeparator(.hidden)
         }
         .listStyle(PlainListStyle())
+        
     }
 }
 

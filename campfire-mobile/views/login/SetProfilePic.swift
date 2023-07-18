@@ -56,6 +56,9 @@ struct SetProfilePic: View {
                         }
                         .opacity(buttonOpacity)
                         .disabled(!model.validUser)
+                        .onTapGesture {
+                    
+                        }
                     }
                     .padding(.bottom, 200)
                 }

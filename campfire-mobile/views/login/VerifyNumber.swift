@@ -10,12 +10,19 @@ import SwiftUI
 struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
     
     // setting up verification code & advancing as view state
-    @State private var canAdvance: Bool = false
     
     var body: some View {
+        
+        if model.createAccount && model.validVerificationCode {
+            EnterEmail()
+        }
+        else if model.login && model.validVerificationCode {
+            NavigationBar()
+        }
+        else {
         GradientBackground()
             .overlay(
                 VStack {
@@ -41,6 +48,7 @@ struct VerifyNumber: View {
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
                             .keyboardType(.numberPad)
+                        
                         VStack{
                             Text("code sent to \(model.phoneNumber)")
                                 .foregroundColor(Color.white)
@@ -56,28 +64,16 @@ struct VerifyNumber: View {
                         
                         VStack {
                             // if user is creating account, navigate to email set up
-                            if model.createAccount {
-                                NavigationLink(destination: EnterEmail(), isActive: $model.validVerificationCode, label: {
-                                    LFButton(text: "verify")
-                                }
-                                )
+        
+                                LFButton(text: "verify")
+
                                 // verify user code on tap of link
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
                                 })
-                            }
                             // otherwise log them into the main app
-                            else if model.login {
-                                NavigationLink(destination: NavigationBar(), isActive: $model.validVerificationCode, label: {
-                                    LFButton(text: "verify")
-                                }
-                                )
-                                // verify user code on tap of link
-                                .simultaneousGesture(TapGesture().onEnded{
-                                    model.verifyVerificationCode()
-                                })
+
                             }
-                        }
                         .opacity(buttonOpacity)
                         .disabled(!model.validVerificationCodeLength)
                     }
@@ -86,6 +82,7 @@ struct VerifyNumber: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+        }
     }
 }
 
@@ -98,6 +95,6 @@ extension VerifyNumber {
 struct VerifyAccount_Previews: PreviewProvider {
     static var previews: some View {
         VerifyNumber()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

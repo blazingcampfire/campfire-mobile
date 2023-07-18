@@ -11,7 +11,7 @@ struct EnterEmail: View {
     
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
     
     // setting up user email as view state
     @State var email: String = ""
@@ -41,6 +41,13 @@ struct EnterEmail: View {
                         
                         FormTextField(text: $model.email, placeholderText: "email")
                         
+                        if !model.validEmail {
+                            Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, -40)
+                        }
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {
@@ -49,7 +56,7 @@ struct EnterEmail: View {
                             })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validEmail)
+                        .disabled(!model.validEmailString)
                     }
                     .padding(.bottom, 200)
                 }
@@ -67,6 +74,6 @@ extension EnterEmail {
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

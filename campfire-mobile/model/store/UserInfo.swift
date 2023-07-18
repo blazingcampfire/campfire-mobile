@@ -27,5 +27,5 @@ struct UserInfo {
     var bio: String = "I'm him hahwugehfurgfuhiwgfuhfwe"
     var posts: [String] = ["fefef", "jfewjfje", "fjewfjewjf"]
     var email: String = "memellord@hustleruniversity.edu"
-    var location: String = "📍 37 High Street"   //likely will have to have some get location function to have a string
+    var location: String = "📍 37 High Street"   // likely will have to have some get location function to have a string
 }

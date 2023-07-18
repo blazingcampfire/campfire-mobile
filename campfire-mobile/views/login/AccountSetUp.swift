@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountSetUp: View {
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
 
     var body: some View {
         NavigationView {
@@ -58,6 +58,6 @@ struct AccountSetUp: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

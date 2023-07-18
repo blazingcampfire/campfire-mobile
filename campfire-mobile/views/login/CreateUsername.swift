@@ -10,7 +10,7 @@ import SwiftUI
 struct CreateUsername: View {
     // setting up environmental variables
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
     
     // setting up user phoneNumber & advance as view state
     @State var username: String = ""
@@ -72,6 +72,6 @@ extension CreateUsername {
 struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
         CreateUsername()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

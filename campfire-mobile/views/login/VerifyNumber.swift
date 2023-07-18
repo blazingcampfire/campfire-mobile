@@ -10,7 +10,7 @@ import SwiftUI
 struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
     
     // setting up verification code & advancing as view state
     
@@ -94,6 +94,6 @@ extension VerifyNumber {
 struct VerifyAccount_Previews: PreviewProvider {
     static var previews: some View {
         VerifyNumber()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

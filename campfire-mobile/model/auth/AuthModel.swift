@@ -8,13 +8,14 @@
 import SwiftUI
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 import Foundation
 import GoogleSignIn
 import GoogleSignInSwift
 
 
 @MainActor
-final class authModel: ObservableObject {
+final class AuthModel: ObservableObject {
     // Input values from Views
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
@@ -77,7 +78,7 @@ final class authModel: ObservableObject {
 
 // MARK: - Extension: Validation setup
 
-private extension authModel {
+private extension AuthModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
         $phoneNumber
             .map {
@@ -101,7 +102,7 @@ private extension authModel {
             .map { email in
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                var validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu")
+                var validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
                 return validEmail
             }
             .eraseToAnyPublisher()
@@ -136,7 +137,7 @@ private extension authModel {
 
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
-extension authModel {
+extension AuthModel {
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -176,7 +177,7 @@ extension authModel {
 
 // MARK: - Google auth
 
-extension authModel {
+extension AuthModel {
     func signInGoogle() async throws {
         do {
             let helper = SignInGoogleHelper()
@@ -210,29 +211,23 @@ extension authModel {
     }
 }
 
-// MARK: - Microsoft auth
+// MARK: - Create user function
 
-extension authModel {
-    /*
-     func signInWithMicrosoft() async throws {
-         let auth = Auth.auth()
+extension AuthModel {
+    
+    func createUser() {
+        
+        var user = ["phoneNumber": self.phoneNumber, "email": self.email, "username": self.username, "chocs": 0] as [String : Any]
 
-         let provider = OAuthProvider(providerID: "microsoft.com", auth: auth)
-
-         provider.getCredentialWith(nil) { credential, error in
-             if error != nil {
-                 return
-             }
-             if credential != nil {
-                 Auth().signIn(with: credential!) { authResult, error in
-                     if error != nil {
-                         return
-                     }
-                     print("Success!")
-                 }
-             }
-         }
-     } */
+        ndProfiles.document("Adarsh").setData(user) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
 }
 
 

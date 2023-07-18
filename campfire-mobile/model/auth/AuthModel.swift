@@ -27,6 +27,7 @@ final class authModel: ObservableObject {
     @Published var validPhoneNumber: Bool = false
     @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
+    @Published var validEmailString: Bool = false
     @Published var validEmail: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
@@ -59,9 +60,9 @@ final class authModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.validVerificationCodeLength, on: self)
             .store(in: &publishers)
-        isEmailValidPublisher
+        isEmailStringValidPublisher
             .receive(on: RunLoop.main)
-            .assign(to: \.validEmail, on: self)
+            .assign(to: \.validEmailString, on: self)
             .store(in: &publishers)
         isUserNameValidPublisher
             .receive(on: RunLoop.main)
@@ -95,12 +96,13 @@ private extension authModel {
             .eraseToAnyPublisher()
     }
 
-    var isEmailValidPublisher: AnyPublisher<Bool, Never> {
+    var isEmailStringValidPublisher: AnyPublisher<Bool, Never> {
         $email
             .map { email in
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                return emailPredicate.evaluate(with: email)
+                var validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu")
+                return validEmail
             }
             .eraseToAnyPublisher()
     }
@@ -124,7 +126,7 @@ private extension authModel {
     }
 
     var isUserValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest4(isPhoneNumberValidPublisher, isVerificationCodeValidPublisher, isUserNameValidPublisher, isEmailValidPublisher)
+        Publishers.CombineLatest4(isPhoneNumberValidPublisher, isVerificationCodeValidPublisher, isUserNameValidPublisher, isEmailStringValidPublisher)
             .map { isPhoneNumberValid, isVerificationCodeValid, isUsernameValid, isEmailValid in
                 isPhoneNumberValid && isVerificationCodeValid && isUsernameValid && isEmailValid
             }
@@ -180,7 +182,7 @@ extension authModel {
         let tokens = try await helper.signIn()
         try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
     }
-    
+
     func signUpGoogle() async throws {
         let helper = SignInGoogleHelper()
         let tokens = try await helper.signIn()

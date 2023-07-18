@@ -15,6 +15,9 @@ struct Prompts {
     "my party face",
     "top study spot",
     "weekend outing",
-    "just another day at the office"
+    "just another day at the office",
+    "my proudest moment",
+    "my hidden talent",
+    "moments before disaster..."
     ]
 }

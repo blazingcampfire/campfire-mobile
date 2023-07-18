@@ -78,6 +78,8 @@
 		B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B5402A5F74140037D857 /* GoogleViewController.swift */; };
 		B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */; };
 		E2163E492A660AA8005A20BE /* Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E482A660AA8005A20BE /* Collections.swift */; };
+		E2163E4C2A6633D2005A20BE /* authFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4B2A6633D2005A20BE /* authFunctions.swift */; };
+		E2163E4E2A663501005A20BE /* schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4D2A663501005A20BE /* schools.swift */; };
 		E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2434C4C2A5A412C000A70DB /* GradientBackground.swift */; };
 		E272A0142A5BA192008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
 		E272A0152A5BA1B8008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
@@ -234,6 +236,8 @@
 		B1F6B5402A5F74140037D857 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
 		B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPage.swift; sourceTree = "<group>"; };
 		E2163E482A660AA8005A20BE /* Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collections.swift; sourceTree = "<group>"; };
+		E2163E4B2A6633D2005A20BE /* authFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authFunctions.swift; sourceTree = "<group>"; };
+		E2163E4D2A663501005A20BE /* schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schools.swift; sourceTree = "<group>"; };
 		E2434C4C2A5A412C000A70DB /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -388,6 +392,14 @@
 			path = firebase;
 			sourceTree = "<group>";
 		};
+		E2163E4A2A6633BA005A20BE /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				E2163E4B2A6633D2005A20BE /* authFunctions.swift */,
+			);
+			path = functions;
+			sourceTree = "<group>";
+		};
 		E2434C472A5A349B000A70DB /* store */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +462,7 @@
 				B18B19AE2A469D1D00309256 /* customfonts */,
 				E28D3A642A3EB52400B1EEE9 /* colors.swift */,
 				F86D83A52A4BC37900223F9A /* prompts.swift */,
+				E2163E4D2A663501005A20BE /* schools.swift */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -661,6 +674,7 @@
 		F83B0EB72A4D367B00F98CFA /* model */ = {
 			isa = PBXGroup;
 			children = (
+				E2163E4A2A6633BA005A20BE /* functions */,
 				E2CBD5E52A6216C9000F3547 /* auth */,
 				E2434C472A5A349B000A70DB /* store */,
 			);
@@ -878,6 +892,7 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
+				E2163E4C2A6633D2005A20BE /* authFunctions.swift in Sources */,
 				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
 				F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */,
 				F89402192A5E6A150049410E /* RequestsListView.swift in Sources */,
@@ -926,6 +941,7 @@
 				B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */,
 				E2CBD5EB2A63A43F000F3547 /* TestView.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
+				E2163E4E2A663501005A20BE /* schools.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,

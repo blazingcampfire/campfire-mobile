@@ -262,10 +262,11 @@ struct VidsPlayer: View {
                     
                     Button(action: {
                         //report post
+                        //delete post if user's post
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 30, height: 8)
+                            .frame(width: 30, height: 7)
                             .foregroundColor(.white)
                     }
                     .padding(.top, 15)

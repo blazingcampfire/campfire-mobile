@@ -37,7 +37,9 @@ struct ProfilePage: View {
                                 UserProfile(currentUser: David)
                                     .padding(.top)
                                 HStack {
-                                    NavigationLink(destination: EditProfile()) { // use NavigationLink to navigate to the EditProfile view
+                                    
+                                    // if user is looking at own profile
+                                    NavigationLink(destination: EditProfile()) {
                                         Text("Edit Profile")
                                             .font(.custom("LexendDeca-Bold", size: 15))
                                             .foregroundColor(Theme.Peach)
@@ -51,6 +53,45 @@ struct ProfilePage: View {
                                                     )
                                             )
                                     }
+                                    // MARK: -  if user is looking at a non friend's profile
+                                    
+                                    // if user is looking at a non friend's profile
+//                                    Button(action: {
+///                                    SEND FRIEND REQUEST TO USER OF THE VIEWING PROFILE
+//                                    }) {
+//                                        Text("add friend !")
+//                                            .font(.custom("LexendDeca-Bold", size: 15))
+//                                            .foregroundColor(Theme.Peach)
+//                                            .padding()
+//                                            .background(
+//                                                RoundedRectangle(cornerRadius: 10)
+//                                                    .fill(.white)
+//                                                    .overlay(
+//                                                        RoundedRectangle(cornerRadius: 10)
+//                                                            .stroke(Color.black, lineWidth: 0.3)
+//                                                                                                )
+//                                                )
+//                                    }
+                                    // MARK: -  if user is looking at friends profile
+//
+//                                    Button(action: {
+///                                       SEND ALERT TO UNFRIEND
+//                                     }) {
+//                                        Text("Friends")
+//                                            .font(.custom("LexendDeca-Bold", size: 15))
+//                                            .foregroundColor(Theme.Peach)
+//                                            .padding()
+//                                            .background(
+//                                                RoundedRectangle(cornerRadius: 10)
+//                                                    .fill(.white)
+//                                                    .overlay(
+//                                                        RoundedRectangle(cornerRadius: 10)
+//                                                            .stroke(Color.black, lineWidth: 0.3)
+//                                                    )
+//                                            )
+//                                    }
+                                    
+                                    
                                     
                                     NavigationLink(destination: FriendsPage()){
                                         Image(systemName: "person.3.fill")

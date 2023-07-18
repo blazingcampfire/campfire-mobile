@@ -8,13 +8,14 @@
 import SwiftUI
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 import Foundation
 import GoogleSignIn
 import GoogleSignInSwift
 
 
 @MainActor
-final class authModel: ObservableObject {
+final class AuthModel: ObservableObject {
     // Input values from Views
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
@@ -27,6 +28,7 @@ final class authModel: ObservableObject {
     @Published var validPhoneNumber: Bool = false
     @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
+    @Published var validEmailString: Bool = false
     @Published var validEmail: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
@@ -59,9 +61,9 @@ final class authModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.validVerificationCodeLength, on: self)
             .store(in: &publishers)
-        isEmailValidPublisher
+        isEmailStringValidPublisher
             .receive(on: RunLoop.main)
-            .assign(to: \.validEmail, on: self)
+            .assign(to: \.validEmailString, on: self)
             .store(in: &publishers)
         isUserNameValidPublisher
             .receive(on: RunLoop.main)
@@ -76,7 +78,7 @@ final class authModel: ObservableObject {
 
 // MARK: - Extension: Validation setup
 
-private extension authModel {
+private extension AuthModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
         $phoneNumber
             .map {
@@ -95,12 +97,13 @@ private extension authModel {
             .eraseToAnyPublisher()
     }
 
-    var isEmailValidPublisher: AnyPublisher<Bool, Never> {
+    var isEmailStringValidPublisher: AnyPublisher<Bool, Never> {
         $email
             .map { email in
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                return emailPredicate.evaluate(with: email)
+                var validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
+                return validEmail
             }
             .eraseToAnyPublisher()
     }
@@ -124,7 +127,7 @@ private extension authModel {
     }
 
     var isUserValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest4(isPhoneNumberValidPublisher, isVerificationCodeValidPublisher, isUserNameValidPublisher, isEmailValidPublisher)
+        Publishers.CombineLatest4(isPhoneNumberValidPublisher, isVerificationCodeValidPublisher, isUserNameValidPublisher, isEmailStringValidPublisher)
             .map { isPhoneNumberValid, isVerificationCodeValid, isUsernameValid, isEmailValid in
                 isPhoneNumberValid && isVerificationCodeValid && isUsernameValid && isEmailValid
             }
@@ -134,7 +137,7 @@ private extension authModel {
 
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
-extension authModel {
+extension AuthModel {
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -164,7 +167,7 @@ extension authModel {
                 // MARK: User phone number authenticated successfully
 
                 print("Success!")
-                // validVerificationCode = true
+                self.validVerificationCode = true
             } catch {
                 await handleError(error: error)
             }
@@ -174,17 +177,27 @@ extension authModel {
 
 // MARK: - Google auth
 
-extension authModel {
+extension AuthModel {
     func signInGoogle() async throws {
-        let helper = SignInGoogleHelper()
-        let tokens = try await helper.signIn()
-        try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+        do {
+            let helper = SignInGoogleHelper()
+            let tokens = try await helper.signIn()
+            try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+        }
+        catch {
+            await handleError(error: error)
+        }
     }
-    
+
     func signUpGoogle() async throws {
-        let helper = SignInGoogleHelper()
-        let tokens = try await helper.signIn()
-        try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+        do {
+            let helper = SignInGoogleHelper()
+            let tokens = try await helper.signIn()
+            try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+        }
+        catch {
+            await handleError(error: error)
+        }
     }
     
 
@@ -198,29 +211,23 @@ extension authModel {
     }
 }
 
-// MARK: - Microsoft auth
+// MARK: - Create user function
 
-extension authModel {
-    /*
-     func signInWithMicrosoft() async throws {
-         let auth = Auth.auth()
+extension AuthModel {
+    
+    func createUser() {
+        
+        var user = ["phoneNumber": self.phoneNumber, "email": self.email, "username": self.username, "chocs": 0] as [String : Any]
 
-         let provider = OAuthProvider(providerID: "microsoft.com", auth: auth)
-
-         provider.getCredentialWith(nil) { credential, error in
-             if error != nil {
-                 return
-             }
-             if credential != nil {
-                 Auth().signIn(with: credential!) { authResult, error in
-                     if error != nil {
-                         return
-                     }
-                     print("Success!")
-                 }
-             }
-         }
-     } */
+        ndProfiles.document("Adarsh").setData(user) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
 }
 
 

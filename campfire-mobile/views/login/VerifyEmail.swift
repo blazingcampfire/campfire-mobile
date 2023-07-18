@@ -12,7 +12,7 @@ import SwiftUI
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
     @State private var validEmail: Bool = false
     
 
@@ -103,6 +103,6 @@ struct VerifyEmail: View {
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {
         VerifyEmail()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

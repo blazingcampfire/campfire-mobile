@@ -56,6 +56,7 @@ final class AuthenticationManager {
         if let user = Auth.auth().currentUser {
             try await user.link(with: credential)
         }
+
         
         return try await signIn(credential: credential)
     }

@@ -11,7 +11,7 @@ import PhotosUI
 struct SetProfilePic: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
 
 
     var body: some View {
@@ -50,12 +50,12 @@ struct SetProfilePic: View {
 
                         VStack {
                             // set destination to AccountSetUp screen temporarily
-                            NavigationLink(destination: NavigationBar(), label: {
                                 LFButton(text: "finish")
-                            })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validUser)
+                        .onTapGesture {
+                            model.createUser()
+                        }
                     }
                     .padding(.bottom, 200)
                 }
@@ -73,6 +73,6 @@ extension SetProfilePic {
 struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {
         SetProfilePic()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

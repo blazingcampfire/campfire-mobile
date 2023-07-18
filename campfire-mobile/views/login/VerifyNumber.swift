@@ -13,9 +13,16 @@ struct VerifyNumber: View {
     @EnvironmentObject var model: authModel
     
     // setting up verification code & advancing as view state
-    @State private var canAdvance: Bool = false
     
     var body: some View {
+        
+        if model.createAccount && model.validVerificationCode {
+            EnterEmail()
+        }
+        else if model.login && model.validVerificationCode {
+            NavigationBar()
+        }
+        else {
         GradientBackground()
             .overlay(
                 VStack {
@@ -56,28 +63,16 @@ struct VerifyNumber: View {
                         
                         VStack {
                             // if user is creating account, navigate to email set up
-                            if model.createAccount {
-                                NavigationLink(destination: EnterEmail(), isActive: $model.validVerificationCode, label: {
-                                    LFButton(text: "verify")
-                                }
-                                )
+        
+                                LFButton(text: "verify")
+
                                 // verify user code on tap of link
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
                                 })
-                            }
                             // otherwise log them into the main app
-                            else if model.login {
-                                NavigationLink(destination: NavigationBar(), isActive: $model.validVerificationCode, label: {
-                                    LFButton(text: "verify")
-                                }
-                                )
-                                // verify user code on tap of link
-                                .simultaneousGesture(TapGesture().onEnded{
-                                    model.verifyVerificationCode()
-                                })
+
                             }
-                        }
                         .opacity(buttonOpacity)
                         .disabled(!model.validVerificationCodeLength)
                     }
@@ -86,6 +81,7 @@ struct VerifyNumber: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+        }
     }
 }
 

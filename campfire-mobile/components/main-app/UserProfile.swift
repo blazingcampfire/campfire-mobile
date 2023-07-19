@@ -6,30 +6,46 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct UserProfile: View {
-    
-    let currentUser: UserInfo
+
+    var id = "123949"
+    @ObservedObject var profileModel: ProfileModel
+ 
+
+    init(id: String) {
+        self.id = id
+        self.profileModel = ProfileModel(userID: id)
+        self.profileModel.fetchProfileData()
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            UserProfilePic(pfp: currentUser.profilepic)
+            
+            UserProfilePic(pfp: "ragrboard")
             Spacer()
-            Text(currentUser.name)
-                .font(.custom("LexendDeca-Bold", size: 20))
-
-            HStack {
-                Text(currentUser.username)
-                    .font(.custom("LexendDeca-SemiBold", size: 15))
-                Circle()
-                    .frame(width: 4, height: 4)
-                    .foregroundColor(Theme.TextColor)
-                Text(String(currentUser.chocs) + "🍫")
-                    .font(.custom("LexendDeca-SemiBold", size: 15))
+            if let profile = profileModel.profileData {
+                
+                Text(profile.name!)
+                    .font(.custom("LexendDeca-Bold", size: 20))
+                
+                HStack {
+                    Text(profile.username)
+                        .font(.custom("LexendDeca-SemiBold", size: 15))
+                    Circle()
+                        .frame(width: 4, height: 4)
+                        .foregroundColor(Theme.TextColor)
+                    Text(String(profile.chocs) + "🍫")
+                        .font(.custom("LexendDeca-SemiBold", size: 15))
+                }
+                Text(profile.bio)
+                    .font(.custom("LexendDeca-Regular", size: 13))
+                    .padding(8)
             }
-            Text(currentUser.bio)
-                .font(.custom("LexendDeca-Regular", size: 13))
-                .padding(8)
+            else {
+                Text("loading")
+            }
             
 //            HStack {
 //                Button(action: {
@@ -73,6 +89,6 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(currentUser: David)
+        UserProfile(id: "1923")
     }
 }

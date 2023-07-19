@@ -38,6 +38,10 @@ struct SetProfilePic: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
+                        Text("(optional)")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(.top, -40)
 
                         ProfilePictureView()
 
@@ -50,11 +54,12 @@ struct SetProfilePic: View {
 
                         VStack {
                             // set destination to AccountSetUp screen temporarily
+                            Button(action: {
+                                model.createProfile()
+                            }, label:  {
                                 LFButton(text: "finish")
-                        }
-                        .opacity(buttonOpacity)
-                        .onTapGesture {
-                            model.createUser()
+                                
+                            })
                         }
                     }
                     .padding(.bottom, 200)
@@ -64,11 +69,7 @@ struct SetProfilePic: View {
     }
 }
 
-extension SetProfilePic {
-    var buttonOpacity: Double {
-        return model.validProfilePic ? 1 : 0.5
-    }
-}
+
 
 struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {

@@ -15,6 +15,7 @@ struct ContentView: View {
         if Auth.auth().currentUser?.uid != nil {
             AccountSetUp()
                 .environmentObject(model)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         else {
             LaunchScreen()

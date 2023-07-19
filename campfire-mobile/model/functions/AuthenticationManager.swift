@@ -50,15 +50,20 @@ final class AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
-    @discardableResult
-    func signUpWithGoogle(tokens: GoogleSignInResultModel) async throws -> AuthDataResultModel {
+    // logic still in progress
+    func signUpWithGoogle(tokens: GoogleSignInResultModel) async throws {
         let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)
         if let user = Auth.auth().currentUser {
             try await user.link(with: credential)
+            let email = Auth.auth().currentUser?.email!
+            print(email)
+            if !schoolValidator(email: email!)
+            {
+                print("The email you are trying to sign up with either does not match the one you input earlier, or it is associated with a school that we do not yet support.")
+                try await Auth.auth().currentUser?.delete()
+            }
         }
-
         
-        return try await signIn(credential: credential)
     }
     
 

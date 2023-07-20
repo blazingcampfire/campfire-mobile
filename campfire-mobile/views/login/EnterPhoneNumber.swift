@@ -21,7 +21,6 @@ struct EnterPhoneNumber: View {
             .overlay(
                 VStack {
                     // MARK: - Back button
-
                     HStack {
                         Button {
                             dismiss()
@@ -73,6 +72,7 @@ struct EnterPhoneNumber: View {
                 .padding(.bottom, 200)
             )
             .navigationBarBackButtonHidden(true)
+
     }
 }
 

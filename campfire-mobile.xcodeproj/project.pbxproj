@@ -397,6 +397,7 @@
 		E2163E4A2A6633BA005A20BE /* functions */ = {
 			isa = PBXGroup;
 			children = (
+				E2CBD5E62A6216E1000F3547 /* AuthenticationManager.swift */,
 				E2163E4B2A6633D2005A20BE /* authFunctions.swift */,
 			);
 			path = functions;
@@ -664,7 +665,6 @@
 			isa = PBXGroup;
 			children = (
 				E2E342602A5B3B110027D72F /* AuthModel.swift */,
-				E2CBD5E62A6216E1000F3547 /* AuthenticationManager.swift */,
 				E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */,
 			);
 			path = auth;

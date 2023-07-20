@@ -13,7 +13,7 @@ func schoolValidator(email: String) -> Bool {
     let schools = globalSchools
     
     for school in schools {
-        if email.contains(school)
+        if email.hasSuffix("@\(school).edu")
         {
             return true
         }

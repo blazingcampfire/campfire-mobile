@@ -12,7 +12,7 @@ import FirebaseAuth
 struct ContentView: View {
     @StateObject var model = AuthModel()
     var body: some View {
-        if Auth.auth().currentUser?.uid != nil {
+        if Auth.auth().currentUser?.uid == nil {
             AccountSetUp()
                 .environmentObject(model)
                 .ignoresSafeArea(.keyboard, edges: .bottom)

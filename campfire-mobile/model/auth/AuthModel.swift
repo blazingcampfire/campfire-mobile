@@ -219,18 +219,6 @@ extension AuthModel {
     
     func createUser() {
         
-       
-//        struct Profile: Codable {
-//            var firstName: String?
-//            var phoneNumber: String
-//            var email: String
-//            var username: String
-//            var friends: [Profile]?
-//            var posts: [Post]?
-//            var chocs: Int
-//            var profilePicURL: String?
-//        }
-//
         userID = Auth.auth().currentUser!.uid
         
         var userData = ["phoneNumber": self.phoneNumber, "email": self.phoneNumber, "username": self.username, "chocs": 0, "userID": userID] as [String : Any]

@@ -10,7 +10,8 @@ import FirebaseFirestore
 
 struct UserProfile: View {
 
-    var id = "123949"
+    var id = "Adarsh"
+    
     @ObservedObject var profileModel: ProfileModel
  
 

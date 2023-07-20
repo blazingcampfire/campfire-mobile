@@ -16,7 +16,6 @@ struct AccountSetUp: View {
                 .overlay(
                     VStack {
                         // MARK: - App logo & title
-
                         VStack {
                             Image("newlogo")
                                 .resizable()

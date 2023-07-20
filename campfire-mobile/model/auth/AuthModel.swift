@@ -34,7 +34,6 @@ final class AuthModel: ObservableObject {
     @Published var validEmail: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
-    @Published var validProfilePic: Bool = false
     
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
@@ -70,10 +69,6 @@ final class AuthModel: ObservableObject {
         isUserNameValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validUsername, on: self)
-            .store(in: &publishers)
-        isProfilePicValidPublisher
-            .receive(on: RunLoop.main)
-            .assign(to: \.validProfilePic, on: self)
             .store(in: &publishers)
     }
 }
@@ -217,7 +212,7 @@ extension AuthModel {
 
 extension AuthModel {
     
-    func createUser() {
+    func createProfile() {
         
         userID = Auth.auth().currentUser!.uid
         

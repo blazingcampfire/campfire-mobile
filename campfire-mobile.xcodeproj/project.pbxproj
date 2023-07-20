@@ -136,6 +136,8 @@
 		F86695162A40F78300D9471C /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* ProfilePage.swift */; };
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
+		F87DA9CD2A6783BB00CBAA98 /* profileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */; };
+		F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */; };
 		F89402132A5E64F30049410E /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402122A5E64F30049410E /* FriendsListView.swift */; };
 		F89402152A5E68480049410E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402142A5E68480049410E /* SearchListView.swift */; };
 		F89402192A5E6A150049410E /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402182A5E6A150049410E /* RequestsListView.swift */; };
@@ -287,6 +289,7 @@
 		F86695152A40F78300D9471C /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F86D83A72A4BC54100223F9A /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileModel.swift; sourceTree = "<group>"; };
 		F89402122A5E64F30049410E /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		F89402142A5E68480049410E /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
 		F89402182A5E6A150049410E /* RequestsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListView.swift; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
+				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
 				E272A01F2A5BA36B008D2D78 /* FirebaseFirestore in Frameworks */,
 				E272A0272A5BA36B008D2D78 /* FirebaseStorageCombine-Community in Frameworks */,
@@ -487,6 +491,7 @@
 				E29095EF2A3E4741001BEDDE /* campfire-mobileTests */,
 				E29095F92A3E4741001BEDDE /* campfire-mobileUITests */,
 				E29095D82A3E473E001BEDDE /* Products */,
+				F891B3582A6907A000BDA845 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -688,11 +693,27 @@
 		F83B0EB72A4D367B00F98CFA /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F87DA9CB2A6783A400CBAA98 /* main-app */,
 				E2163E4A2A6633BA005A20BE /* functions */,
 				E2CBD5E52A6216C9000F3547 /* auth */,
 				E2434C472A5A349B000A70DB /* store */,
 			);
 			path = model;
+			sourceTree = "<group>";
+		};
+		F87DA9CB2A6783A400CBAA98 /* main-app */ = {
+			isa = PBXGroup;
+			children = (
+				F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */,
+			);
+			path = "main-app";
+			sourceTree = "<group>";
+		};
+		F891B3582A6907A000BDA845 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F8950DC42A48000100C13075 /* feed */ = {
@@ -737,6 +758,7 @@
 				E2BDE6AA2A5E38770012D328 /* GoogleSignIn */,
 				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
 				B140BA582A60F39400819203 /* SwiftUICam */,
+				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -980,6 +1002,7 @@
 				E21F79C42A68DF98004B3DCC /* SearchPageView.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,
 				E2163E542A663DE5005A20BE /* content.swift in Sources */,
+				F87DA9CD2A6783BB00CBAA98 /* profileModel.swift in Sources */,
 				B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */,
 				E280A9EA2A4FDEEA00410B34 /* TentTabView.swift in Sources */,
 			);
@@ -1143,7 +1166,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = P898RXX9FS;
+				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
@@ -1159,7 +1182,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfibjreco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1176,7 +1199,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = P898RXX9FS;
+				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
@@ -1192,7 +1215,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfibjreco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1420,6 +1443,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

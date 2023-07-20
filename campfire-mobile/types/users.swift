@@ -8,8 +8,8 @@
 import Foundation
 
 // every user profile should conform to this schema
-struct Profile: Codable {
-    var firstName: String?
+public struct Profile: Codable {
+    var name: String?
     var phoneNumber: String
     var email: String
     var username: String
@@ -17,5 +17,37 @@ struct Profile: Codable {
     var posts: [Post]?
     var chocs: Int
     var profilePicURL: String?
+    var userID: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case phoneNumber
+        case email
+        case username
+        case friends
+        case posts
+        case chocs
+        case profilePicURL
+        case userID
+    }
 }
 
+
+//Firebase example
+//public struct City: Codable {
+//
+//    let name: String
+//    let state: String?
+//    let country: String?
+//    let isCapital: Bool?
+//    let population: Int64?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case name
+//        case state
+//        case country
+//        case isCapital = "capital"
+//        case population
+//    }
+//
+//}

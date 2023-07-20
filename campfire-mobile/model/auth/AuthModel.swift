@@ -14,6 +14,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 
+
 @MainActor
 final class AuthModel: ObservableObject {
     // Input values from Views
@@ -22,6 +23,7 @@ final class AuthModel: ObservableObject {
     @Published var email: String = ""
     @Published var username: String = ""
     @Published var profilePic: String = ""
+    @Published var userID: String = ""
 
     // Validity booleans
     @Published var validUser: Bool = false
@@ -212,9 +214,12 @@ extension AuthModel {
     
     func createProfile() {
         
-        var user = ["phoneNumber": self.phoneNumber, "email": self.email, "username": self.username, "chocs": 0] as [String : Any]
-
-        ndProfiles.document("Adarsh").setData(user) { err in
+        userID = Auth.auth().currentUser!.uid
+        
+        var userData = ["phoneNumber": self.phoneNumber, "email": self.phoneNumber, "username": self.username, "chocs": 0, "userID": userID] as [String : Any]
+        
+        
+        ndProfiles.document("\(userID)").setData(userData) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

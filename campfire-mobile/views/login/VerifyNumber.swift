@@ -48,6 +48,7 @@ struct VerifyNumber: View {
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
                             .keyboardType(.numberPad)
+                        
                         VStack{
                             Text("code sent to \(model.phoneNumber)")
                                 .foregroundColor(Color.white)

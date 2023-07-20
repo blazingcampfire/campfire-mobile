@@ -22,12 +22,12 @@ struct EditPost: View {
             VStack(spacing: 20) {
                 ZStack {
                     if let image = selectedImage {
-                        image // we must pass image thru PostAttributes instead of hardcoding it, but currently PostAttributes takes in a string for the post for test reasons so we have to change it once we're done local testing
+                        image 
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 350, height: 350)
                             .clipShape(RoundedRectangle(cornerRadius: 30))
-//                            .offset(x: 0, y: selectedImage != nil ? 23 : 0)
+                            .offset(x: 0, y: selectedImage != nil ? 23 : 0)
                             .overlay(
                                 PostAttributes(post: "", prompt: prompt)
                             )

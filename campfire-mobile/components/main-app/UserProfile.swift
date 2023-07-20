@@ -9,24 +9,25 @@ import SwiftUI
 import FirebaseFirestore
 
 struct UserProfile: View {
-
-    var id = "Adarsh"
     
-    @ObservedObject var profileModel: ProfileModel
- 
-
-    init(id: String) {
-        self.id = id
-        self.profileModel = ProfileModel(userID: id)
+    @StateObject var profileModel = ProfileModel()
+    
+    var userID = "Adarsh"
+    
+    init(userID: String) {
+        self.profileModel.userID = userID
         self.profileModel.fetchProfileData()
     }
+    
+    
+
 
     var body: some View {
         VStack(spacing: 0) {
             
             UserProfilePic(pfp: "ragrboard")
             Spacer()
-            if let profile = profileModel.profileData {
+            if let profile = self.profileModel.profileData {
                 
                 Text(profile.name!)
                     .font(.custom("LexendDeca-Bold", size: 20))
@@ -90,6 +91,6 @@ struct UserProfile: View {
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(id: "1923")
+        UserProfile(userID: "Adarsh")
     }
 }

@@ -14,18 +14,14 @@ import FirebaseFirestore
 
 class ProfileModel: ObservableObject {
 
-    let userID: String
-    var profileData: Profile?
+    @Published var userID: String = "Adarsh"
+    @Published var profileData: Profile?
     
-    init(userID: String) {
-        self.userID = userID
-    }
-
+  
     func fetchProfileData() {
-        let profileModel = ProfileModel(userID: userID)
         Task {
             do {
-                let profile = try await profileModel.getProfile()
+                let profile = try await self.getProfile()
                 DispatchQueue.main.async {
                     self.profileData = profile
                 }

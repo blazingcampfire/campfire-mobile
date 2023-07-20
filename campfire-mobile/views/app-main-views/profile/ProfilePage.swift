@@ -34,7 +34,7 @@ struct ProfilePage: View {
                     VStack {
                         ZStack {
                             VStack {
-                                UserProfile(userID: "Adarsh")
+                                UserProfile()
                                     .padding(.top)
                                 HStack {
                                     

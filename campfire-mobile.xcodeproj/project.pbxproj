@@ -136,6 +136,7 @@
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
 		F87DA9CD2A6783BB00CBAA98 /* profileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */; };
+		F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */; };
 		F89402132A5E64F30049410E /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402122A5E64F30049410E /* FriendsListView.swift */; };
 		F89402152A5E68480049410E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402142A5E68480049410E /* SearchListView.swift */; };
 		F89402192A5E6A150049410E /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402182A5E6A150049410E /* RequestsListView.swift */; };
@@ -313,6 +314,7 @@
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
+				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
 				E272A01F2A5BA36B008D2D78 /* FirebaseFirestore in Frameworks */,
 				E272A0272A5BA36B008D2D78 /* FirebaseStorageCombine-Community in Frameworks */,
@@ -487,6 +489,7 @@
 				E29095EF2A3E4741001BEDDE /* campfire-mobileTests */,
 				E29095F92A3E4741001BEDDE /* campfire-mobileUITests */,
 				E29095D82A3E473E001BEDDE /* Products */,
+				F891B3582A6907A000BDA845 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -703,6 +706,13 @@
 			path = "main-app";
 			sourceTree = "<group>";
 		};
+		F891B3582A6907A000BDA845 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F8950DC42A48000100C13075 /* feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +755,7 @@
 				E2BDE6AA2A5E38770012D328 /* GoogleSignIn */,
 				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
 				B140BA582A60F39400819203 /* SwiftUICam */,
+				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -1428,6 +1439,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

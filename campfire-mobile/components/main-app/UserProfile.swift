@@ -11,44 +11,34 @@ import FirebaseFirestore
 struct UserProfile: View {
     
     @StateObject var profileModel = ProfileModel()
-    
-    var userID = "Adarsh"
-    
-    init(userID: String) {
-        self.profileModel.userID = userID
-        self.profileModel.fetchProfileData()
-    }
-    
-    
-
 
     var body: some View {
         VStack(spacing: 0) {
             
             UserProfilePic(pfp: "ragrboard")
             Spacer()
-            if let profile = self.profileModel.profileData {
-                
-                Text(profile.name!)
-                    .font(.custom("LexendDeca-Bold", size: 20))
-                
-                HStack {
-                    Text(profile.username)
-                        .font(.custom("LexendDeca-SemiBold", size: 15))
-                    Circle()
-                        .frame(width: 4, height: 4)
-                        .foregroundColor(Theme.TextColor)
-                    Text(String(profile.chocs) + "🍫")
-                        .font(.custom("LexendDeca-SemiBold", size: 15))
-                }
-                Text(profile.bio)
-                    .font(.custom("LexendDeca-Regular", size: 13))
-                    .padding(8)
-            }
-            else {
-                Text("loading")
-            }
-            
+            if let profile = profileModel.profile {
+                            Text("A")
+                                .font(.custom("LexendDeca-Bold", size: 20))
+
+                            HStack {
+                                Text(profile.username)
+                                    .font(.custom("LexendDeca-SemiBold", size: 15))
+                                Circle()
+                                    .frame(width: 4, height: 4)
+                                    .foregroundColor(Theme.TextColor)
+                                Text("\(profile.chocs )🍫")
+                                    .font(.custom("LexendDeca-SemiBold", size: 15))
+                            }
+                Text("bio")
+                                .font(.custom("LexendDeca-Regular", size: 13))
+                                .padding(8)
+                        }
+                    }
+                    .onAppear {
+                        // Fetch the profile with ID "Adarsh" when the view appears
+                        profileModel.getProfile(id: "Adarsh")
+                    }
 //            HStack {
 //                Button(action: {
 //                    // Go to Edit Profile
@@ -87,10 +77,10 @@ struct UserProfile: View {
 //            }
         }
     }
-}
+
 
 struct UserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfile(userID: "Adarsh")
+        UserProfile()
     }
 }

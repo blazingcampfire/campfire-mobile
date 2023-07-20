@@ -21,3 +21,18 @@ func schoolValidator(email: String) -> Bool {
     
     return false
 }
+// similar to schoolValidator, this function returns a user's school based on their email
+func schoolParser(email: String) -> String {
+    
+    let schools = globalSchools
+    
+    for school in schools {
+        if email.hasSuffix("@\(school).edu")
+        {
+            return school
+        }
+    }
+    
+   return "Does not belong to a supported school"
+}
+

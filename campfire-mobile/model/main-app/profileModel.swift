@@ -7,7 +7,7 @@ import FirebaseFirestoreSwift
 class ProfileModel: ObservableObject {
     
     var profile: Profile?
-    var id: String = ""
+    var id: String = "YN9kGX0TYaRQBbtQUdJb7ODwjYt1"
 
     func getProfile(id: String) {
         let docRef = ndProfiles.document(id)

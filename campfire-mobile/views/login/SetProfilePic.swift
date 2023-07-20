@@ -64,6 +64,7 @@ struct SetProfilePic: View {
                             // set destination to AccountSetUp screen temporarily
                             Button(action: {
                                 model.createProfile()
+                                setUpFinished = true
                             }, label:  {
                                 LFButton(text: "finish")
                                 

@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import FirebaseAuth
+import FirebaseFirestoreSwift
 import FirebaseFirestore
 import Foundation
 import GoogleSignIn
@@ -215,16 +216,44 @@ extension AuthModel {
     func createProfile() {
         
         userID = Auth.auth().currentUser!.uid
+        email = Auth.auth().currentUser?.email ?? self.email
+        phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
         
-        var userData = ["phoneNumber": self.phoneNumber, "email": self.phoneNumber, "username": self.username, "chocs": 0, "userID": userID] as [String : Any]
+        var profileData = Profile(phoneNumber: phoneNumber , email: email, username: self.username, chocs: 0, userID: userID)
+        
+        var userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID)
         
         
-        ndProfiles.document("\(userID)").setData(userData) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
+        var school: String = schoolParser(email: email)
+        
+        var userRef: CollectionReference
+        var profileRef: CollectionReference
+        
+        // based on the user's school, their profile document is sorted into the appropriate school document
+        if school == "nd" {
+            userRef = ndUsers
+            profileRef = ndProfiles
+        }
+        else if school == "yale" {
+            userRef = yaleUsers
+            profileRef = yaleUsers
+        }
+        else if school == "rice" {
+            userRef = riceUsers
+            profileRef = riceUsers
+        }
+        else {
+            return
+        }
+        
+        
+        do {
+            try userRef.document("\(userID)").setData(from: userData)
+            try profileRef.document("\(userID)").setData(from: profileData)
+            print("Documents successfully written!")
+        }
+        catch {
+            print("Error writing profile or user to firestore \(error)")
         }
     }
     

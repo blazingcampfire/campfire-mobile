@@ -16,7 +16,6 @@ class ProfileModel: ObservableObject {
 
     @Published var userID: String = "Adarsh"
     @Published var profileData: Profile?
-    
   
     func fetchProfileData() {
         Task {
@@ -34,6 +33,7 @@ class ProfileModel: ObservableObject {
     private func getProfile() async throws -> Profile {
         let snapshot = try await ndProfiles.document(userID).getDocument()
 
+        print(snapshot.data())
         guard let data = snapshot.data(),
               let userID = data["userID"] as? String,
               let phoneNumber = data["phoneNumber"] as? String,

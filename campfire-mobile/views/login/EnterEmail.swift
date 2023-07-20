@@ -67,7 +67,7 @@ struct EnterEmail: View {
 
 extension EnterEmail {
     var buttonOpacity: Double {
-        return model.validEmail ? 1 : 0.5
+        return model.validEmailString ? 1 : 0.5
     }
 }
 

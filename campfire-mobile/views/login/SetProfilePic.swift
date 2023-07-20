@@ -13,10 +13,18 @@ struct SetProfilePic: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
 
-
+    @State var setUpFinished: Bool = false
     var body: some View {
+        if setUpFinished {
+            NavigationBar()
+        }
+        else {
+            
+       
         GradientBackground()
             .overlay(
+                
+                
                 VStack {
                     // MARK: - Back button
 
@@ -66,6 +74,7 @@ struct SetProfilePic: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+        }
     }
 }
 

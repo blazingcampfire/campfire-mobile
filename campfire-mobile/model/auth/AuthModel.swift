@@ -219,7 +219,6 @@ extension AuthModel {
         var userData = ["phoneNumber": self.phoneNumber, "email": self.phoneNumber, "username": self.username, "chocs": 0, "userID": userID] as [String : Any]
         
         
-        
         ndProfiles.document("\(userID)").setData(userData) { err in
             if let err = err {
                 print("Error writing document: \(err)")

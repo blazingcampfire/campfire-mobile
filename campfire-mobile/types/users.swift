@@ -17,7 +17,7 @@ public struct Profile: Codable {
     var posts: [Post]?
     var chocs: Int
     var profilePicURL: String?
-    var userID: String?
+    var userID: String
     
     enum CodingKeys: String, CodingKey {
         case name

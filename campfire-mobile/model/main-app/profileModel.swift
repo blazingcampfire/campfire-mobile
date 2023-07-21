@@ -3,11 +3,14 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-
 class ProfileModel: ObservableObject {
-    
-    var profile: Profile?
-    var id: String = ""
+    @Published var profile: Profile?  
+    var id: String = "s8SB7xYlJ4hbja3B8ajsLY76nV63"
+
+    init() {
+        // Initialize the profile with an empty Profile object when the class is created.
+        self.profile = Profile(phoneNumber: "", email: "", username: "", chocs: 0, userID: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
+    }
 
     func getProfile(id: String) {
         let docRef = ndProfiles.document(id)
@@ -22,12 +25,11 @@ class ProfileModel: ObservableObject {
             case .success(let profile):
                 // A `Profile` value was successfully initialized from the DocumentSnapshot.
                 print("Profile: \(profile)")
+                self.profile = profile // Update the profile property with the fetched profile.
             case .failure(let error):
                 // A `Profile` value could not be initialized from the DocumentSnapshot.
-                print("Error decoding city: \(error)")
+                print("Error decoding profile: \(error)")
             }
         }
     }
 }
-
-

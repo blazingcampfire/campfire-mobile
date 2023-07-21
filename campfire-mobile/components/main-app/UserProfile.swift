@@ -9,74 +9,40 @@ import SwiftUI
 import FirebaseFirestore
 
 struct UserProfile: View {
-    
     @StateObject var profileModel = ProfileModel()
 
     var body: some View {
         VStack(spacing: 0) {
-            
             UserProfilePic(pfp: "ragrboard")
             Spacer()
-            if let profile = profileModel.profile {
-                            Text("A")
-                                .font(.custom("LexendDeca-Bold", size: 20))
 
-                            HStack {
-                                Text(profile.username)
-                                    .font(.custom("LexendDeca-SemiBold", size: 15))
-                                Circle()
-                                    .frame(width: 4, height: 4)
-                                    .foregroundColor(Theme.TextColor)
-                                Text("\(profile.chocs )🍫")
-                                    .font(.custom("LexendDeca-SemiBold", size: 15))
-                            }
-                Text("bio")
-                                .font(.custom("LexendDeca-Regular", size: 13))
-                                .padding(8)
-                        }
-                    }
-                    .onAppear {
-                        // Fetch the profile with ID "Adarsh" when the view appears
-                        profileModel.getProfile(id: "Adarsh")
-                    }
-//            HStack {
-//                Button(action: {
-//                    // Go to Edit Profile
-//                }) {
-//                    Text("Edit Profile") //conditional visibility, if viewing another user, show Add Friend instead
-//                        .font(.custom("LexendDeca-Bold", size: 15))
-//                        .foregroundColor(Theme.Peach)
-//                        .padding()
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 10)
-//                                .fill(.white)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(Color.black, lineWidth: 0.3)
-//                                )
-//                        )
-//                }
-//
-//                Button(action: {
-//                    // Go to Edit Profile
-//                }) {
-//                    Image(systemName: "person.3.fill")
-//                        .font(.system(size: 20))
-//                        .foregroundColor(Theme.Peach)
-//                        .padding()
-//                        .background(
-//                            RoundedRectangle(cornerRadius: 10)
-//                                .fill(.white)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(Color.black, lineWidth: 0.3)
-//
-//                                )
-//                        )
-//                }
-//            }
+            if let profile = profileModel.profile {
+                Text(profile.username) // Display the fetched username
+                    .font(.custom("LexendDeca-Bold", size: 20))
+
+                HStack {
+                    Text(profile.username) // Display the fetched username again (just an example)
+                        .font(.custom("LexendDeca-SemiBold", size: 15))
+                    Circle()
+                        .frame(width: 4, height: 4)
+                        .foregroundColor(Theme.TextColor)
+                    Text("\(profile.chocs)🍫") // Display the fetched number of chocs
+                        .font(.custom("LexendDeca-SemiBold", size: 15))
+                }
+
+                Text("bio") // Display the fetched bio
+                    .font(.custom("LexendDeca-Regular", size: 13))
+                    .padding(8)
+            } else {
+                Text("Bitch")
+            }
+        }
+        .onAppear {
+            // Fetch the profile with ID "s8SB7xYlJ4hbja3B8ajsLY76nV63" when the view appears
+            profileModel.getProfile(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
         }
     }
+}
 
 
 struct UserProfile_Previews: PreviewProvider {

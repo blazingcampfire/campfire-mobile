@@ -18,8 +18,9 @@ public class Profile: Codable {
     var chocs: Int
     var profilePicURL: String?
     var userID: String?
+    var school: String
     
-    init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String? = nil) {
+    init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String? = nil, school: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
@@ -29,6 +30,7 @@ public class Profile: Codable {
         self.chocs = chocs
         self.profilePicURL = profilePicURL
         self.userID = userID
+        self.school = school
     }
     
     enum CodingKeys: String, CodingKey {
@@ -41,6 +43,7 @@ public class Profile: Codable {
         case chocs
         case profilePicURL
         case userID
+        case school
     }
 }
 

@@ -219,17 +219,11 @@ extension AuthModel {
         email = Auth.auth().currentUser?.email ?? self.email
         phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
         
-        var profileData = Profile(phoneNumber: phoneNumber , email: email, username: self.username, chocs: 0, userID: userID)
-        
-        var userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID)
-        
-        
-        var school: String = schoolParser(email: email)
+        let school: String = schoolParser(email: email)
         
         var userRef: CollectionReference
         var profileRef: CollectionReference
         
-        // based on the user's school, their profile document is sorted into the appropriate school document
         if school == "nd" {
             userRef = ndUsers
             profileRef = ndProfiles
@@ -246,6 +240,12 @@ extension AuthModel {
             return
         }
         
+        let profileData = Profile(phoneNumber: phoneNumber , email: email, username: self.username, chocs: 0, userID: userID, school: school)
+        
+        let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID)
+       
+        
+        // based on the user's school, their profile document is sorted into the appropriate school document
         
         do {
             try userRef.document("\(userID)").setData(from: userData)

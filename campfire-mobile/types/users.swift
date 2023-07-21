@@ -17,7 +17,7 @@ public class Profile: Codable {
     var posts: [Post]?
     var chocs: Int
     var profilePicURL: String?
-    var userID: String?
+    var userID: String
     
     init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String? = nil) {
         self.name = name

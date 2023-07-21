@@ -11,9 +11,9 @@ struct SearchPage: View {
     @State var searchText = ""
     @StateObject var model = SearchPageModel()
     var body: some View {
-        NavigationStack {
-            // Text("Search for users") // users collection query
+        NavigationView {
             SearchList()
+                .environmentObject(model)
         }
         .searchable(text: $model.username)
         .background(Color.white)
@@ -23,6 +23,8 @@ struct SearchPage: View {
 }
 
 struct SearchList: View {
+@EnvironmentObject var model: SearchPageModel
+    
     let searchList = [
         SearchListView(profilepic: David.profilepic, name: David.name, username: David.username),
         SearchListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),

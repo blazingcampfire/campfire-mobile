@@ -6,13 +6,30 @@
 //
 
 import Foundation
-import Firebase
-
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import Combine
 class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
-    @Published var username: String = ""
+    @Published var username: String = "" {
+        didSet {
+            search(matching: username)
+        }
+    }
     
-    func fetchProfiles(username: String) {
+    func search(matching: String) {
+        ndProfiles.whereField("username", isGreaterThan: username).whereField("username", isLessThan: username+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
+            if let err = err {
+                print("Error querying profiles: \(err)")
+            }
+            else {
+                for document in QuerySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    print(self.profiles)
+                }
+            }
+        }
         
         
     }

@@ -18,8 +18,7 @@ struct ContentView: View {
                 .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         else {
-            LaunchScreen()
-                .environmentObject(model)
+            NavigationBar()
         }
         
     }

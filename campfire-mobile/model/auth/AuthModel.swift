@@ -219,7 +219,8 @@ extension AuthModel {
         email = Auth.auth().currentUser?.email ?? self.email
         phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
         
-        var profileData = Profile(phoneNumber: phoneNumber , email: email, username: self.username, chocs: 0, userID: userID)
+        
+        var profileData = Profile(phoneNumber: phoneNumber, email: email, username: self.username, posts: [], chocs: 0, profilePicURL: "ragrboard", userID: userID)
         
         var userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID)
         

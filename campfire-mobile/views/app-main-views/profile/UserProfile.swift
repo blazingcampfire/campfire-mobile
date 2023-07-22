@@ -30,7 +30,7 @@ struct UserProfile: View {
                         .font(.custom("LexendDeca-SemiBold", size: 15))
                 }
 
-                Text("bio") // Display the fetched bio
+                Text("bio")
                     .font(.custom("LexendDeca-Regular", size: 13))
                     .padding(8)
             } else {
@@ -38,7 +38,6 @@ struct UserProfile: View {
             }
         }
         .onAppear {
-            // Fetch the profile with ID "s8SB7xYlJ4hbja3B8ajsLY76nV63" when the view appears
             profileModel.getProfile(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
         }
     }

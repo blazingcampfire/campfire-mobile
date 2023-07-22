@@ -14,12 +14,12 @@ public class Profile: Codable {
     var email: String
     var username: String
     var friends: [Profile]?
-    var posts: [Post]?
+    var posts: [Post]
     var chocs: Int
-    var profilePicURL: String?
+    var profilePicURL: String
     var userID: String
     
-    init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String? = nil) {
+    init(name: String? = "", phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String, userID: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email

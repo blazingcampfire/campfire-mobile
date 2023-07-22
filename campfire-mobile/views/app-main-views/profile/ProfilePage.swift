@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ProfilePage: View {
-    let userInfo = UserInfo()
-    
     
     let postImages: [[String]] = [
         ["ragrboard", "1"],

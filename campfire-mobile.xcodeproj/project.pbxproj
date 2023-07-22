@@ -585,7 +585,6 @@
 				B1B5EFD22A4F56D700FA79CE /* FeedInfo.swift */,
 				B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */,
 				B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */,
-				B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */,
 				B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */,
 				E280A9E22A4FCF5D00410B34 /* Notification.swift */,
 				B14AF3442A5CE64800BDE1A4 /* CommentView.swift */,
@@ -634,6 +633,7 @@
 				B18B19712A46059700309256 /* SettingsPage.swift */,
 				F86D83A72A4BC54100223F9A /* EditProfile.swift */,
 				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
+				B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */,
 				F86695152A40F78300D9471C /* ProfilePage.swift */,
 				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
 				B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */,
@@ -1091,7 +1091,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1146,7 +1146,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -1169,7 +1169,7 @@
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1202,7 +1202,7 @@
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1233,7 +1233,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1255,7 +1255,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1275,7 +1275,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1295,7 +1295,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";

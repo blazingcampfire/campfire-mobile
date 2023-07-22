@@ -25,6 +25,12 @@ class SearchPageModel: ObservableObject {
             }
             else {
                 for document in QuerySnapshot!.documents {
+                    do {
+                        let profile = try document.data(as: Profile.self)
+                        self.profiles.append(profile)
+                    } catch {
+                        print("\(document.documentID) => \(document.data())")
+                    }
                     print("\(document.documentID) => \(document.data())")
                     print(self.profiles)
                 }

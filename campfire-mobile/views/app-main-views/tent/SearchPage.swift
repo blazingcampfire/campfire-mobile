@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchPage: View {
     @State var searchText = ""
     @StateObject var model = SearchPageModel()
+   
     var body: some View {
         NavigationView {
             SearchList()
@@ -24,7 +25,6 @@ struct SearchPage: View {
 
 struct SearchList: View {
 @EnvironmentObject var model: SearchPageModel
-    
     let searchList = [
         SearchListView(profilepic: David.profilepic, name: David.name, username: David.username),
         SearchListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
@@ -34,8 +34,8 @@ struct SearchList: View {
     @State private var addedTapped: Bool = false
     var body: some View {
         List {
-            ForEach(0..<searchList.count, id: \.self) { index in
-                searchList[index]
+            ForEach(model.profiles, id: \.self) { profile in
+                SearchListView(profilepic: Toni.profilepic, name: profile.name ?? "LeMans", username: profile.username)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

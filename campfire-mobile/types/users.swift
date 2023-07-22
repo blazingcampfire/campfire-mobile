@@ -8,7 +8,9 @@
 import Foundation
 
 // every user profile should conform to this schema
-public class Profile: Codable {
+public class Profile: Codable, Hashable {
+    
+    
     var name: String?
     var phoneNumber: String
     var email: String
@@ -17,10 +19,18 @@ public class Profile: Codable {
     var posts: [Post]?
     var chocs: Int
     var profilePicURL: String?
-    var userID: String?
+    var userID: String
     var school: String
     
-    init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String? = nil, school: String) {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+    
+    public static func == (lhs: Profile, rhs: Profile) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init(name: String? = nil, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post]? = nil, chocs: Int, profilePicURL: String? = nil, userID: String = "", school: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
@@ -51,11 +61,13 @@ public class privateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
+    var school: String
     
-    init(phoneNumber: String, email: String, userID: String) {
+    init(phoneNumber: String, email: String, userID: String, school: String) {
         self.phoneNumber = phoneNumber
         self.email = email
         self.userID = userID
+        self.school = school
     }
 }
 

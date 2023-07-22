@@ -17,7 +17,7 @@ struct UserProfile: View {
             Spacer()
 
             if let profile = profileModel.profile {
-                Text(profile.username) // Display the fetched username
+                Text(profile.name) // Display the fetched username
                     .font(.custom("LexendDeca-Bold", size: 20))
 
                 HStack {

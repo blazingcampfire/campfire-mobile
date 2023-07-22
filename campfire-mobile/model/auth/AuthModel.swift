@@ -22,6 +22,7 @@ final class AuthModel: ObservableObject {
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
+    @Published var name: String = ""
     @Published var username: String = ""
     @Published var profilePic: String = ""
     @Published var userID: String = ""
@@ -33,6 +34,7 @@ final class AuthModel: ObservableObject {
     @Published var validVerificationCode: Bool = false
     @Published var validEmailString: Bool = false
     @Published var validEmail: Bool = false
+    @Published var validName: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
     
@@ -51,10 +53,6 @@ final class AuthModel: ObservableObject {
 
     // Initializing validity publishers
     init() {
-        isUserValidPublisher
-            .receive(on: RunLoop.main)
-            .assign(to: \.validUser, on: self)
-            .store(in: &publishers)
         isPhoneNumberValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validPhoneNumber, on: self)
@@ -66,6 +64,10 @@ final class AuthModel: ObservableObject {
         isEmailStringValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validEmailString, on: self)
+            .store(in: &publishers)
+        isNameValidPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.validName, on: self)
             .store(in: &publishers)
         isUserNameValidPublisher
             .receive(on: RunLoop.main)
@@ -105,6 +107,15 @@ private extension AuthModel {
             }
             .eraseToAnyPublisher()
     }
+    
+    var isNameValidPublisher: AnyPublisher<Bool, Never> {
+        $name
+            .map {
+                name in
+                name.count >= 2
+            }
+            .eraseToAnyPublisher()
+    }
 
     var isUserNameValidPublisher: AnyPublisher<Bool, Never> {
         $username
@@ -124,13 +135,6 @@ private extension AuthModel {
             .eraseToAnyPublisher()
     }
 
-    var isUserValidPublisher: AnyPublisher<Bool, Never> {
-        Publishers.CombineLatest4(isPhoneNumberValidPublisher, isVerificationCodeValidPublisher, isUserNameValidPublisher, isEmailStringValidPublisher)
-            .map { isPhoneNumberValid, isVerificationCodeValid, isUsernameValid, isEmailValid in
-                isPhoneNumberValid && isVerificationCodeValid && isUsernameValid && isEmailValid
-            }
-            .eraseToAnyPublisher()
-    }
 }
 
 // MARK: - Extension: All Firebase API Authentication logic for the login views
@@ -219,18 +223,11 @@ extension AuthModel {
         email = Auth.auth().currentUser?.email ?? self.email
         phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
         
-        
-        var profileData = Profile(phoneNumber: phoneNumber, email: email, username: self.username, posts: [], chocs: 0, profilePicURL: "ragrboard", userID: userID)
-        
-        var userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID)
-        
-        
-        var school: String = schoolParser(email: email)
+        let school: String = schoolParser(email: email)
         
         var userRef: CollectionReference
         var profileRef: CollectionReference
         
-        // based on the user's school, their profile document is sorted into the appropriate school document
         if school == "nd" {
             userRef = ndUsers
             profileRef = ndProfiles
@@ -247,6 +244,12 @@ extension AuthModel {
             return
         }
         
+        let profileData = Profile(phoneNumber: phoneNumber , email: email, username: self.username, chocs: 0, userID: userID, school: school)
+        
+        let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
+       
+        
+        // based on the user's school, their profile document is sorted into the appropriate school document
         
         do {
             try userRef.document("\(userID)").setData(from: userData)

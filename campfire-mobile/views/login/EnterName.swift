@@ -1,14 +1,13 @@
 //
-//  EnterEmail.swift
+//  EnterName.swift
 //  campfire-mobile
 //
-//  Created by Toni on 6/18/23.
+//  Created by Toni on 7/21/23.
 //
 
 import SwiftUI
 
-struct EnterEmail: View {
-    
+struct EnterName: View {
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
@@ -31,19 +30,12 @@ struct EnterEmail: View {
                     
 // MARK: - Email form & prompts
                     VStack(spacing: 60) {
-                        Text("enter your '.edu' email")
+                        Text("enter your first name")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.email, placeholderText: "email")
+                        FormTextField(text: $model.name, placeholderText: "name")
                         
-                        if !model.validEmail {
-                            Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 13))
-                                .multilineTextAlignment(.center)
-                                .padding(.top, -40)
-                        }
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {
@@ -61,15 +53,15 @@ struct EnterEmail: View {
         }
 }
 
-extension EnterEmail {
+extension EnterName {
     var buttonOpacity: Double {
         return model.validEmailString ? 1 : 0.5
     }
 }
 
-struct EnterEmail_Previews: PreviewProvider {
+struct EnterName_Previews: PreviewProvider {
     static var previews: some View {
-        EnterEmail()
+        EnterName()
             .environmentObject(AuthModel())
     }
 }

@@ -20,6 +20,7 @@ class SearchPageModel: ObservableObject {
     }
     
     func search(matching: String) {
+        let username = username.lowercased()
         if username == "" {
             return
         }

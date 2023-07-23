@@ -15,6 +15,7 @@ public class Profile: Codable, Hashable {
     var phoneNumber: String
     var email: String
     var username: String
+    var usernameInsensitive: String
     var friends: [Profile]?
     var posts: [Post]
     var chocs: Int
@@ -30,11 +31,12 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
     
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String? = nil, userID: String = "", school: String) {
+    init(name: String, phoneNumber: String, email: String, username: String, usernameInsensitive: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String? = nil, userID: String = "", school: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
         self.username = username
+        self.usernameInsensitive = usernameInsensitive
         self.friends = friends
         self.posts = posts
         self.chocs = chocs
@@ -48,6 +50,7 @@ public class Profile: Codable, Hashable {
         case phoneNumber
         case email
         case username
+        case usernameInsensitive
         case friends
         case posts
         case chocs

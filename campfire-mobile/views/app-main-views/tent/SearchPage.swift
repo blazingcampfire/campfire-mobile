@@ -35,7 +35,7 @@ struct SearchList: View {
     var body: some View {
         List {
             ForEach(model.profiles, id: \.self) { profile in
-                SearchListView(profilepic: Toni.profilepic, name: profile.name ?? "LeMans", username: profile.username)
+                SearchListView(profilepic: Toni.profilepic, name: profile.name, username: profile.username)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

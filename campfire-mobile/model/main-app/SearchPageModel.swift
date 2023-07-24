@@ -20,11 +20,12 @@ class SearchPageModel: ObservableObject {
     }
     
     func search(matching: String) {
+        // username is lowercased to make it case insensitive
         let username = username.lowercased()
         if username == "" {
             return
         }
-        ndProfiles.whereField("username", isGreaterThan: username).whereField("username", isLessThan: username+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
+        ndProfiles.whereField("usernameInsensitive", isGreaterThan: username).whereField("usernameInsensitive", isLessThan: username+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
             if let err = err {
                 print("Error querying profiles: \(err)")
             }

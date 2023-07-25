@@ -12,20 +12,20 @@ import FirebaseFirestoreSwift
 import Combine
 class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
-    @Published var username: String = "" {
+    @Published var name: String = "" {
         didSet {
             self.profiles = []
-            search(matching: username)
+            search(matching: name)
         }
     }
     
     func search(matching: String) {
-        // username is lowercased to make it case insensitive
-        let username = username.lowercased()
-        if username == "" {
+        // name is lowercased to make it case insensitive
+        let name = name.lowercased()
+        if name == "" {
             return
         }
-        ndProfiles.whereField("usernameInsensitive", isGreaterThan: username).whereField("usernameInsensitive", isLessThan: username+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
+        ndProfiles.whereField("nameInsensitive", isGreaterThan: name).whereField("nameInsensitive", isLessThan: name+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
             if let err = err {
                 print("Error querying profiles: \(err)")
             }
@@ -33,7 +33,7 @@ class SearchPageModel: ObservableObject {
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)
-                        print(profile.username)
+                        print(profile.name)
                         self.profiles.append(profile)
                     } catch {
                         print("Error retrieving profile")

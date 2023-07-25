@@ -9,7 +9,7 @@ class ProfileModel: ObservableObject {
 
     init() {
         // Initialize the profile with an empty Profile object when the class is created.
-        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", usernameInsensitive: "", posts: [], chocs: 0,  profilePicURL: "", userID: id, school: "")
+        self.profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], chocs: 0,  profilePicURL: "", userID: id, school: "")
     }
 
     func getProfile(id: String) {

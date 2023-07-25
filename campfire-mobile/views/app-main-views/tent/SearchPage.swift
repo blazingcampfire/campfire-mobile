@@ -16,7 +16,7 @@ struct SearchPage: View {
             SearchList()
                 .environmentObject(model)
         }
-        .searchable(text: $model.username)
+        .searchable(text: $model.name)
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)

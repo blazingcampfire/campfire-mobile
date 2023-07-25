@@ -5,14 +5,15 @@ import FirebaseFirestoreSwift
 
 class ProfileModel: ObservableObject {
     @Published var profile: Profile?  
-    var id: String = "s8SB7xYlJ4hbja3B8ajsLY76nV63"
+    var id: String
 
-    init() {
-        // Initialize the profile with an empty Profile object when the class is created.
-        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [], chocs: 0,  profilePicURL: "", userID: id, school: "")
+    init(id: String) {
+        // Initialize the profile with an empty Profile object and id variable when the class is created.
+        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [], chocs: 0,  profilePicURL: "", userID: id, school: "", bio: "")
+        self.id = id
     }
 
-    func getProfile(id: String) {
+    func getProfile() {
         let docRef = ndProfiles.document(id)
         docRef.getDocument(as: Profile.self) { result in
             // The Result type encapsulates deserialization errors or

@@ -44,7 +44,7 @@ struct NavBar: View {
                     }
                 case 4:
                     NavigationView {
-                        ProfilePage()
+                        OwnProfilePage()
                     }
 
                 default:

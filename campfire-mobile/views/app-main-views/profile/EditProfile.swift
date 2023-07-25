@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct EditProfile: View {
-    @State private var david = UserInfo()
     @State var showPhotos: Bool = false
-    @State var selectedImage: Image?
+    @State var selectedImage: UIImage?
     
 
     var postImages: [[String]] = [
-        ["ragrboard", "1"],
-        ["ragrboard2"],
-        ["ragrboard3", "3"],
-        ["ragrboard4"],
-        ["ragrboard5", "5"],
-        ["ragrboard6"],
+//        ["ragrboard", "1"],
+//        ["ragrboard2"],
+//        ["ragrboard3", "3"],
+//        ["ragrboard4"],
+//        ["ragrboard5", "5"],
+//        ["ragrboard6"]
     ]
 
     var body: some View {
@@ -47,9 +46,36 @@ struct EditProfile: View {
                             }
                         }
                         
-                        Text("change profile pic")
-                            .font(.custom("LexendDeca-Bold", size: 20))
-                            .foregroundColor(Theme.Peach)
+                        Button(action: {
+                            showPhotos.toggle()
+                        }) {
+                            Text("change profile pic")
+                                .font(.custom("LexendDeca-Bold", size: 20))
+                                .foregroundColor(Theme.Peach)
+                        }
+                        .sheet(isPresented: $showPhotos) {
+                            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $showPhotos)
+                        }
+                        
+                        if postImages.count < 6 {
+                            NavigationLink(destination: AddPost())
+                                {
+                                    Text("add post")
+                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .foregroundColor(Theme.Peach)
+                                        .padding()
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(.white)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Theme.Peach, lineWidth: 1)
+                                                                                            )
+                                            )
+                            }
+                                .padding(.top, 20)
+                        }
+                        
                         
                         HStack {
                             VStack(alignment: .leading, spacing: 20) {

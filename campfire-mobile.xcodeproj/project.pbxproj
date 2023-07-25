@@ -60,7 +60,6 @@
 		B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFCB2A4F56B000FA79CE /* LFButton.swift */; };
 		B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFCF2A4F56C200FA79CE /* FormTextField.swift */; };
 		B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD22A4F56D700FA79CE /* FeedInfo.swift */; };
-		B1B5EFD82A4F56D700FA79CE /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */; };
 		B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */; };
 		B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */; };
 		B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */; };
@@ -132,10 +131,11 @@
 		F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */; };
 		F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */; };
 		F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */; };
+		F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */; };
 		F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */; };
 		F85F03982A3F9A89000DCBEF /* VerifyNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */; };
 		F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */; };
-		F86695162A40F78300D9471C /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* ProfilePage.swift */; };
+		F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* OwnProfilePage.swift */; };
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
 		F87DA9CD2A6783BB00CBAA98 /* profileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */; };
@@ -152,6 +152,11 @@
 		F8B2C5182A5E6D3A00E11503 /* testUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5172A5E6D3A00E11503 /* testUsers.swift */; };
 		F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */; };
 		F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EC241F2A5C89AD0010D46E /* ImagePicker.swift */; };
+		F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE7B5C2A6B8E91004B41A5 /* OtherProfilePage.swift */; };
+		F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE7B5E2A6B9705004B41A5 /* FireGIF.swift */; };
+		F8FE7B622A6B998C004B41A5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */; };
+		F8FE7B642A6B9D55004B41A5 /* icons8-fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = F8FE7B632A6B9D55004B41A5 /* icons8-fire.gif */; };
+		F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE7B652A6BA09F004B41A5 /* AddPost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,7 +229,6 @@
 		B1B5EFCB2A4F56B000FA79CE /* LFButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFButton.swift; sourceTree = "<group>"; };
 		B1B5EFCF2A4F56C200FA79CE /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
 		B1B5EFD22A4F56D700FA79CE /* FeedInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedInfo.swift; sourceTree = "<group>"; };
-		B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfilePic.swift; sourceTree = "<group>"; };
 		B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHotspots.swift; sourceTree = "<group>"; };
 		B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttributes.swift; sourceTree = "<group>"; };
@@ -287,10 +291,11 @@
 		F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostPage.swift; sourceTree = "<group>"; };
 		F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
 		F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotsFeedPage.swift; sourceTree = "<group>"; };
+		F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumber.swift; sourceTree = "<group>"; };
 		F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumber.swift; sourceTree = "<group>"; };
 		F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrNumber.swift; sourceTree = "<group>"; };
-		F86695152A40F78300D9471C /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		F86695152A40F78300D9471C /* OwnProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnProfilePage.swift; sourceTree = "<group>"; };
 		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F86D83A72A4BC54100223F9A /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileModel.swift; sourceTree = "<group>"; };
@@ -306,6 +311,10 @@
 		F8B2C5172A5E6D3A00E11503 /* testUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testUsers.swift; sourceTree = "<group>"; };
 		F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTypeFunc.swift; sourceTree = "<group>"; };
 		F8EC241F2A5C89AD0010D46E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		F8FE7B5C2A6B8E91004B41A5 /* OtherProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfilePage.swift; sourceTree = "<group>"; };
+		F8FE7B5E2A6B9705004B41A5 /* FireGIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireGIF.swift; sourceTree = "<group>"; };
+		F8FE7B632A6B9D55004B41A5 /* icons8-fire.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "icons8-fire.gif"; sourceTree = "<group>"; };
+		F8FE7B652A6BA09F004B41A5 /* AddPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8FE7B622A6B998C004B41A5 /* SDWebImageSwiftUI in Frameworks */,
 				E272A0192A5BA36B008D2D78 /* FirebaseAnalytics in Frameworks */,
 				E272A01B2A5BA36B008D2D78 /* FirebaseAuth in Frameworks */,
 				B140BA592A60F39400819203 /* SwiftUICam in Frameworks */,
@@ -427,6 +437,7 @@
 				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
 				F8B2C5172A5E6D3A00E11503 /* testUsers.swift */,
 				B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */,
+				F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */,
 			);
 			path = store;
 			sourceTree = "<group>";
@@ -464,6 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				B164A9F02A5B729F0033586F /* CommentTextField.swift */,
+				F8FE7B5E2A6B9705004B41A5 /* FireGIF.swift */,
 				B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */,
 				B1B5EFC72A4F569A00FA79CE /* UserBio.swift */,
 				B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */,
@@ -524,6 +536,7 @@
 				F83B0EB72A4D367B00F98CFA /* model */,
 				E29095DC2A3E473E001BEDDE /* ContentView.swift */,
 				E29095DE2A3E4741001BEDDE /* Assets.xcassets */,
+				F8FE7B632A6B9D55004B41A5 /* icons8-fire.gif */,
 				E29095E32A3E4741001BEDDE /* Persistence.swift */,
 				E29095E52A3E4741001BEDDE /* campfire_mobile.xcdatamodeld */,
 				E29095E02A3E4741001BEDDE /* Preview Content */,
@@ -638,9 +651,10 @@
 				B18B19712A46059700309256 /* SettingsPage.swift */,
 				F86D83A72A4BC54100223F9A /* EditProfile.swift */,
 				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
-				B1B5EFD32A4F56D700FA79CE /* UserProfile.swift */,
-				F86695152A40F78300D9471C /* ProfilePage.swift */,
+				F86695152A40F78300D9471C /* OwnProfilePage.swift */,
+				F8FE7B5C2A6B8E91004B41A5 /* OtherProfilePage.swift */,
 				F8A371D82A4BEE4B0076F1C1 /* EditPost.swift */,
+				F8FE7B652A6BA09F004B41A5 /* AddPost.swift */,
 				B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */,
 			);
 			path = profile;
@@ -765,6 +779,7 @@
 				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
 				B140BA582A60F39400819203 /* SwiftUICam */,
 				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
+				F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -843,6 +858,7 @@
 				E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
+				F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -901,6 +917,7 @@
 				B18B19A52A46976700309256 /* LexendDeca-Bold.ttf in Resources */,
 				B1B5D7EA2A573F6400E30064 /* animal.jpeg in Resources */,
 				B18B19A62A46976700309256 /* LexendDeca-ExtraBold.ttf in Resources */,
+				F8FE7B642A6B9D55004B41A5 /* icons8-fire.gif in Resources */,
 				B1B5D7E42A5730F000E30064 /* tyler.mov in Resources */,
 				B18B19A72A46976700309256 /* LexendDeca-ExtraLight.ttf in Resources */,
 				B18B19A82A46976700309256 /* LexendDeca-Regular.ttf in Resources */,
@@ -935,7 +952,7 @@
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
 				E2163E4C2A6633D2005A20BE /* authFunctions.swift in Sources */,
-				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
+				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
 				E241D0E32A6A2A8C00C12B3A /* currentUserModel.swift in Sources */,
 				F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */,
 				F89402192A5E6A150049410E /* RequestsListView.swift in Sources */,
@@ -951,8 +968,10 @@
 				B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */,
 				F81E80542A5F5A6100E73548 /* VidOrImagePicker.swift in Sources */,
 				B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */,
+				F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */,
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
 				F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */,
+				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
 				F89402132A5E64F30049410E /* FriendsListView.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
@@ -968,7 +987,6 @@
 				B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */,
 				B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */,
 				F8A371D92A4BEE4B0076F1C1 /* EditPost.swift in Sources */,
-				B1B5EFD82A4F56D700FA79CE /* UserProfile.swift in Sources */,
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,
 				F89402152A5E68480049410E /* SearchListView.swift in Sources */,
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
@@ -1003,6 +1021,8 @@
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
 				E2CBD5E72A6216E1000F3547 /* AuthenticationManager.swift in Sources */,
+				F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */,
+				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
@@ -1389,6 +1409,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1456,6 +1484,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

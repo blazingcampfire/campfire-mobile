@@ -13,6 +13,7 @@ import FirebaseFirestore
 import Foundation
 import GoogleSignIn
 import GoogleSignInSwift
+import FirebaseStorage
 
 
 
@@ -244,7 +245,7 @@ extension AuthModel {
             return
         }
         
-        let profileData = Profile(name: name, phoneNumber: phoneNumber , email: email, username: self.username, posts: [], chocs: 0, userID: userID, school: school)
+        let profileData = Profile(name: name, phoneNumber: phoneNumber , email: email, username: self.username, posts: [], chocs: 0, userID: userID, school: school, bio: "")
         
         let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
        
@@ -260,7 +261,6 @@ extension AuthModel {
             print("Error writing profile or user to firestore \(error)")
         }
     }
-    
 }
 
 

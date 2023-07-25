@@ -49,7 +49,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-            ProfilePage()
+            OwnProfilePage()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }

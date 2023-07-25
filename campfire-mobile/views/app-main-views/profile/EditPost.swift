@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditPost: View {
-    @State private var selectedImage: Image?
+    @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     var post: String
     var prompt: String?
@@ -22,7 +22,7 @@ struct EditPost: View {
             VStack(spacing: 20) {
                 ZStack {
                     if let image = selectedImage {
-                        image 
+                        Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 350, height: 350)
@@ -40,7 +40,7 @@ struct EditPost: View {
                     }) {
                         Image(systemName: "camera")
                             .font(.system(size: 100))
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.Peach)
                             .frame(width: 350, height: 350)
                             .background(Color.black.opacity(0.5))
                             .clipShape(Circle())

@@ -21,6 +21,7 @@ public class Profile: Codable, Hashable {
     var profilePicURL: String?
     var userID: String
     var school: String
+    var bio: String
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(userID)
@@ -30,7 +31,7 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
     
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String? = nil, userID: String = "", school: String) {
+    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
@@ -41,6 +42,7 @@ public class Profile: Codable, Hashable {
         self.profilePicURL = profilePicURL
         self.userID = userID
         self.school = school
+        self.bio = bio
     }
     
     enum CodingKeys: String, CodingKey {
@@ -54,6 +56,7 @@ public class Profile: Codable, Hashable {
         case profilePicURL
         case userID
         case school
+        case bio
     }
 }
 

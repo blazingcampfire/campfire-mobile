@@ -29,6 +29,6 @@ let riceProfiles = rice.collection("profiles")
 //MARK: - Relationships (Collection)
 let ndRelationships = notreDame.collection("relationships")
 let yaleRelationships = yale.collection("relationships")
-let riceProfiles = rice.collection("relationships")
+let riceRelationships = rice.collection("relationships")
 
 

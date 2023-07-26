@@ -12,7 +12,8 @@ struct SearchListView: View {
     var profilepic: String
     var name: String
     var username: String
-    @State private var addedTapped: Bool = false
+    @State private var added: Bool = false
+    @EnvironmentObject var model: SearchPageModel
     
     var body: some View {
         HStack {
@@ -34,9 +35,9 @@ struct SearchListView: View {
             Spacer()
 
             Button {
-                self.addedTapped.toggle()
+                self.added.toggle()
             } label: {
-                Image(systemName: self.addedTapped == false ? "plus.circle.fill" : "minus.circle.fill" )
+                Image(systemName: self.added == false ? "plus.circle.fill" : "minus.circle.fill" )
                     .font(.system(size: 30))
                     .foregroundColor(Theme.Peach)
             }

@@ -597,9 +597,6 @@
 				B1B5EFD42A4F56D700FA79CE /* UserProfilePic.swift */,
 				E280A9E22A4FCF5D00410B34 /* Notification.swift */,
 				B14AF3442A5CE64800BDE1A4 /* CommentView.swift */,
-				F89402122A5E64F30049410E /* FriendsListView.swift */,
-				F89402142A5E68480049410E /* SearchListView.swift */,
-				F89402182A5E6A150049410E /* RequestsListView.swift */,
 				B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */,
 			);
 			path = "main-app";
@@ -622,6 +619,9 @@
 				B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */,
 				E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */,
 				E280A9E92A4FDEEA00410B34 /* TentTabView.swift */,
+				F89402122A5E64F30049410E /* FriendsListView.swift */,
+				F89402142A5E68480049410E /* SearchListView.swift */,
+				F89402182A5E6A150049410E /* RequestsListView.swift */,
 				B140DB692A53C6EC002FFA65 /* RequestsPage.swift */,
 			);
 			path = tent;

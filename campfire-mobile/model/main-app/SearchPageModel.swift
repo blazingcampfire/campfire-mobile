@@ -44,6 +44,10 @@ class SearchPageModel: ObservableObject {
             }
         }
         
+        func addFriend() {
+        
+        }
+        
         
     }
 }

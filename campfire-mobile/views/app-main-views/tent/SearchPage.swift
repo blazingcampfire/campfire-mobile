@@ -25,17 +25,14 @@ struct SearchPage: View {
 
 struct SearchList: View {
 @EnvironmentObject var model: SearchPageModel
-    let searchList = [
-        SearchListView(profilepic: David.profilepic, name: David.name, username: David.username),
-        SearchListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
-        SearchListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
-    ]
+    
     
     @State private var addedTapped: Bool = false
     var body: some View {
         List {
             ForEach(model.profiles, id: \.self) { profile in
                 SearchListView(profilepic: Toni.profilepic, name: profile.name, username: profile.username)
+                    .environmentObject(model)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

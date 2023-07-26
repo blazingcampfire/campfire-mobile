@@ -43,9 +43,9 @@ class SearchPageModel: ObservableObject {
                 }
             }
         }
-        
-        func addFriend() {
-        
+        // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
+        func addFriend(userID: String, friendID: String) {
+            ndRelationships.document(userID).setData(<#T##documentData: [String : Any]##[String : Any]#>)
         }
         
         

@@ -10,8 +10,7 @@ import SwiftUI
 struct SearchListView: View {
     
     var profilepic: String
-    var name: String
-    var username: String
+    var profile: Profile
     @State private var added: Bool = false
     @EnvironmentObject var model: SearchPageModel
     
@@ -24,10 +23,10 @@ struct SearchListView: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading) {
-                Text(name)
+                Text(profile.name)
                     .font(.custom("LexendDeca-Bold", size: 18))
                     .foregroundColor(Theme.TextColor)
-                Text("@\(username)")
+                Text("@\(profile.username)")
                     .font(.custom("LexendDeca-Regular", size: 12))
                     .foregroundColor(.gray)
             }
@@ -45,10 +44,10 @@ struct SearchListView: View {
     }
 }
 
-struct SearchListView_Previews: PreviewProvider {
-    static var previews: some View {
-       SearchListView(profilepic: info.profilepic, name: info.name, username: info.username)
-    }
-}
+//struct SearchListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//       SearchListView()
+//    }
+//}
 
 

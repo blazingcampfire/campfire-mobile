@@ -31,7 +31,7 @@ struct SearchList: View {
     var body: some View {
         List {
             ForEach(model.profiles, id: \.self) { profile in
-                SearchListView(profilepic: Toni.profilepic, name: profile.name, username: profile.username)
+                SearchListView(profile: profile)
                     .environmentObject(model)
             }
             .listRowSeparator(.hidden)

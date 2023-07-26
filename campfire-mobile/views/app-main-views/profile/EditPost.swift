@@ -10,7 +10,7 @@ import SwiftUI
 struct EditPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
-    var post: String
+    var postImage: Data
     var prompt: String?
     
     @State private var promptScreen = false
@@ -29,10 +29,10 @@ struct EditPost: View {
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .offset(x: 0, y: selectedImage != nil ? 23 : 0)
                             .overlay(
-                                PostAttributes(post: "", prompt: prompt)
+                                PostAttributes(image: postImage, prompt: prompt)
                             )
                     } else {
-                        PostAttributes(post: post, prompt: prompt)
+                        PostAttributes(image: postImage, prompt: prompt)
                     }
                     
                     Button(action: {
@@ -74,6 +74,7 @@ struct EditPost: View {
 
 struct EditPost_Previews: PreviewProvider {
     static var previews: some View {
-        EditPost(post: "ragrboard")
+        Text("yo")
+//        EditPost(postImage: <#Data#>, post: "ragrboard")
     }
 }

@@ -8,24 +8,11 @@
 import SwiftUI
 
 struct OwnProfilePage: View {
-    
-    let postImages: [[String]] = [
-//        ["ragrboard", "1"],
-//        ["ragrboard2"],
-//        ["ragrboard3", "3"],
-//        ["ragrboard4"],
-//        ["ragrboard5", "5"],
-//        ["ragrboard6"]
-    ] //url strings in firebase
-    
     @State var settingsPageShow = false
     @StateObject var profileModel = ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
-
-    
     
     var body: some View {
-        
-        NavigationView { // Wrap the content in a NavigationView
+        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
@@ -37,21 +24,21 @@ struct OwnProfilePage: View {
                                 VStack(spacing: 0) {
                                     UserProfilePic(pfp: "ragrboard")
                                     Spacer()
-
+                                    
                                     if let profile = profileModel.profile {
-                                        Text(profile.name) // display the fetched username
+                                        Text(profile.name)
                                             .font(.custom("LexendDeca-Bold", size: 20))
-
+                                        
                                         HStack {
                                             Text(profile.username)
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(profile.chocs)🍫") // display the fetched number of chocs
+                                            Text("\(profile.chocs)🍫")
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
                                         }
-
+                                        
                                         Text(profile.bio)
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                             .padding(8)
@@ -59,11 +46,9 @@ struct OwnProfilePage: View {
                                         Text("Bitch")
                                     }
                                 }
-                                    .padding(.top)
+                                .padding(.top)
                                 HStack {
-                                    
-                                    // if user is looking at own profile
-                                    NavigationLink(destination: EditProfile()) {
+                                    NavigationLink(destination: EditProfile(profileModel: profileModel, postImages: profileModel.profile?.posts ?? [], prompts: profileModel.profile?.prompts ?? [])) {
                                         Text("Edit Profile")
                                             .font(.custom("LexendDeca-Bold", size: 15))
                                             .foregroundColor(Theme.Peach)
@@ -76,9 +61,9 @@ struct OwnProfilePage: View {
                                                             .stroke(Color.black, lineWidth: 0.3)
                                                     )
                                             )
-                                    }         
+                                    }
                                     
-                                    NavigationLink(destination: FriendsPage()){
+                                    NavigationLink(destination: FriendsPage()) {
                                         Image(systemName: "person.3.fill")
                                             .font(.system(size: 20))
                                             .foregroundColor(Theme.Peach)
@@ -89,7 +74,6 @@ struct OwnProfilePage: View {
                                                     .overlay(
                                                         RoundedRectangle(cornerRadius: 10)
                                                             .stroke(Color.black, lineWidth: 0.3)
-                                                        
                                                     )
                                             )
                                     }
@@ -109,27 +93,24 @@ struct OwnProfilePage: View {
                                     .presentationCornerRadius(30)
                             }
                         }
-                        if postImages.count == 0 {
-                            Text("Post sum bruh")
-                        } else {
-                            VStack(spacing: 20) { // Added spacing between elements
+                        if let posts = profileModel.profile?.posts {
+                            VStack(spacing: 20) {
                                 Spacer()
-                                
                                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                                    ForEach(0..<postImages.count, id: \.self) { index in
-                                        VStack(spacing: 20) {
-                                            if postImages[index].count == 2 {
-                                                PostAttributes(post: postImages[index][0], prompt: postImages[index][1])
-                                                    .frame(width: 350)
-                                            } else {
-                                                PostAttributes(post: postImages[index][0], prompt: nil)
+                                    ForEach(posts.indices, id: \.self) { index in
+                                        if let imageData = posts[index] as? Data,
+                                           let prompts = profileModel.profile?.prompts, prompts.indices.contains(index) {
+                                            VStack(spacing: 20) {
+                                                PostAttributes(image: imageData, prompt: prompts[index])
                                                     .frame(width: 350)
                                             }
                                         }
                                     }
                                 }
+                                .padding(.horizontal)
                             }
-                            .padding(.horizontal)
+                        } else {
+                            Text("No posts yet.")
                         }
                     }
                 }

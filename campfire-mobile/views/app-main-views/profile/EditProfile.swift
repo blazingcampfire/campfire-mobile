@@ -10,16 +10,10 @@ import SwiftUI
 struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
-    
+    @State var profileModel: ProfileModel
+    @State var postImages: [Data]
+    @State var prompts: [String]
 
-    var postImages: [[String]] = [
-//        ["ragrboard", "1"],
-//        ["ragrboard2"],
-//        ["ragrboard3", "3"],
-//        ["ragrboard4"],
-//        ["ragrboard5", "5"],
-//        ["ragrboard6"]
-    ]
 
     var body: some View {
             ZStack {
@@ -58,7 +52,7 @@ struct EditProfile: View {
                         }
                         
                         if postImages.count < 6 {
-                            NavigationLink(destination: AddPost())
+                            NavigationLink(destination: AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")))
                                 {
                                     Text("add post")
                                         .font(.custom("LexendDeca-Bold", size: 15))
@@ -112,50 +106,56 @@ struct EditProfile: View {
                             .padding(.trailing, 20)
                         }
                         
-                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
-                            ForEach(0..<postImages.count, id: \.self) { index in
-                                VStack(spacing: 20) {
-                                    ZStack(alignment: .topTrailing) {
-                                        if postImages[index].count == 2 {
-                                            PostAttributes(post: postImages[index][0], prompt: postImages[index][1], width: 300)
-                                                .frame(width: 250)
-                                        } else {
-                                            PostAttributes(post: postImages[index][0], prompt: nil, width: 300)
-                                                .frame(width: 250)
-                                        }
-                                        
-                                        Circle()
-                                            .foregroundColor(.white)
-                                            .frame(width: 50, height: 50)
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(.gray, lineWidth: 0.5)
-                                                    .frame(width: 50, height: 50)
-                                            )
-                                            .overlay(
-                                                // need to include prompt in this
-                                                NavigationLink(destination: EditPost(post: postImages[index][0])) {
-                                                    Image(systemName: "pencil")
-                                                        .font(.system(size: 30))
-                                                        .foregroundColor(Theme.Peach)
+                        if let posts = profileModel.profile?.posts {
+                            VStack(spacing: 20) {
+                                Spacer()
+
+                                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
+                                    ForEach(posts.indices, id: \.self) { index in
+                                        if index < prompts.count { // Ensure that the prompts array has enough elements
+                                            let post = posts[index]
+                                            let imageData = post 
+                                            let prompt = prompts[index] // Access the corresponding prompt using the index
+
+                                            VStack(spacing: 20) {
+                                                ZStack(alignment: .topTrailing) {
+                                                    PostAttributes(image: imageData, prompt: prompt)
+                                                        .frame(width: 250)
+
+                                                    Circle()
+                                                        .foregroundColor(.white)
+                                                        .frame(width: 50, height: 50)
+                                                        .overlay(
+                                                            Circle()
+                                                                .stroke(.gray, lineWidth: 0.5)
+                                                                .frame(width: 50, height: 50)
+                                                        )
+                                                        .overlay(
+                                                            NavigationLink(destination: EditPost(postImage: imageData, prompt: prompt)) {
+                                                                Image(systemName: "pencil")
+                                                                    .font(.system(size: 30))
+                                                                    .foregroundColor(Theme.Peach)
+                                                            }
+                                                        )
+                                                        .padding(EdgeInsets(top: -10, leading: 10, bottom: 0, trailing: -40))
                                                 }
-                                            )
-                                            .padding(EdgeInsets(top: -10, leading: 10, bottom: 0, trailing: -40))
+                                            }
+                                        }
                                     }
                                 }
+                                .padding(.horizontal, 10)
+                                .padding(.top, 30)
                             }
                         }
-                        .padding(.horizontal, 10)
-                        .padding(.top, 30)
                     }
-                    .padding(.vertical, 10)
                 }
             }
         }
-}
+    }
 
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfile()
+        Text("yo")
+//        EditProfile(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"), postImages: <#[Post]#>)
     }
 }

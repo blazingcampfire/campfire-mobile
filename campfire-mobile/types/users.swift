@@ -6,17 +6,19 @@
 //
 
 import Foundation
+import UIKit
 
 // every user profile should conform to this schema
 public class Profile: Codable, Hashable {
     
-    
+
     var name: String
     var phoneNumber: String
     var email: String
     var username: String
     var friends: [Profile]?
-    var posts: [Post]
+    var posts: [Data]
+    var prompts: [String]
     var chocs: Int
     var profilePicURL: String?
     var userID: String
@@ -31,13 +33,14 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
     
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Post], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
+    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [Data], prompts: [String], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
         self.username = username
         self.friends = friends
         self.posts = posts
+        self.prompts = prompts
         self.chocs = chocs
         self.profilePicURL = profilePicURL
         self.userID = userID
@@ -52,6 +55,7 @@ public class Profile: Codable, Hashable {
         case username
         case friends
         case posts
+        case prompts
         case chocs
         case profilePicURL
         case userID

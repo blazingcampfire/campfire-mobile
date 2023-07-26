@@ -7,14 +7,16 @@
 
 import SwiftUI
 import FirebaseStorage
+import FirebaseFirestore
 
 struct AddPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     @State private var promptScreen = false
     @Environment(\.presentationMode) var presentationMode
+    @State var retrievedPosts = [Data]()
+    @State var profileModel: ProfileModel
     
-
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -32,7 +34,7 @@ struct AddPost: View {
                                     .offset(x: 0, y: 0)
                                     .background(Color.black.opacity(0.5))
                                     .clipShape(RoundedRectangle(cornerRadius: 30))
-
+                                
                                 Button(action: {
                                     isPickerShowing = true
                                 }) {
@@ -59,7 +61,8 @@ struct AddPost: View {
                                     .presentationCornerRadius(30)
                             }
                             Button(action: {
-                                confirmPost()
+                                confirmPost(userID: profileModel.profile!.userID)
+                                // confirmPost function with current userID
                                 presentationMode.wrappedValue.dismiss()
                             })  {
                                 HStack {
@@ -94,8 +97,8 @@ struct AddPost: View {
         }
     }
     
-    func confirmPost() {
-
+    func confirmPost(userID: String) {
+        
         guard selectedImage != nil else {
             print ("no image")
             return
@@ -103,22 +106,99 @@ struct AddPost: View {
         
         let storageRef = Storage.storage().reference()
         
+        // convert type Image to type Data for storage
         let imageData = selectedImage!.jpegData(compressionQuality: 0.5)
         
         guard imageData != nil else {
             print("image cannot be converted to data")
             return
         }
-        let fileRef = storageRef.child("images/\(UUID().uuidString).jpg")
-        let uploadTask = fileRef.putData(imageData!) { metadata, error in
-            if error == nil && metadata != nil {
+        
+        let path = "images/\(UUID().uuidString).jpg"
+        
+        // path is string URL for database
+        let fileRef = storageRef.child(path)
+        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
+            if error == nil, metadata != nil {
+                // file uploaded successfully, now update Firestore document
+                
+                let docRef = ndProfiles.document(userID)
+                
+                // fetch existing data and update firebase "posts" field
+                docRef.getDocument { document, error in
+                    if let document = document, document.exists {
+                        var data = document.data()!
+                        
+                        // fetch posts field from current user as an array of strings
+                        if var posts = data["posts"] as? [String] {
+                            
+                            // add new post URL to that array
+                            posts.append(path)
+                            data["posts"] = posts
+                            // update the profile information with added post
+                            docRef.setData(data)
+                            // fetch from Firebase Storage
+                            retrievePosts(userID: userID)
+                            print("successfully retrieved posts")
+                        } else {
+                            data["posts"] = [path]
+                            docRef.setData(data)
+                        }
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+            } else {
+                print("Error up loading file: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }
+    }
+    
+    func retrievePosts(userID: String) {
+        // Same user document reference
+        let docRef = ndProfiles.document(userID)
+        docRef.getDocument { document, error in
+            if let document = document, document.exists {
+                if let postPaths = document.data()?["posts"] as? [String] {
+                    // postPaths is an array of post URLs from firebase 'posts' field.
+                    var fetchedPostsData = [Data]()
+                    let dispatchGroup = DispatchGroup()
+                    
+                    for path in postPaths {
+                        let storageRef = Storage.storage().reference()
+                        let fileRef = storageRef.child(path)
+                        // creates a fileReference from each URL
+                        dispatchGroup.enter()
+                        fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                            // converts fileReference to data
+                            if let data = data, error == nil {
+                                // adds data to fetchedPostsData array
+                                fetchedPostsData.append(data)
+                                print("successfully grabbed imageData from Storage")
+                            }
+                            dispatchGroup.leave()
+                        }
+                    }
+                    
+                    dispatchGroup.notify(queue: .main) {
+                        // all image data has been fetched, update 'profileModel.profile!.posts'
+                        profileModel.profile!.posts = fetchedPostsData
+                        print("Retrieved data into 'profileModel.profile!.posts' array")
+                    }
+                } else {
+                    print("No 'posts' field or data is not of expected type.")
+                }
+            } else {
+                print("Document does not exist or there was an error: \(String(describing: error))")
             }
         }
     }
 }
 
-struct AddPost_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPost()
+    
+    
+    struct AddPost_Previews: PreviewProvider {
+        static var previews: some View {
+            AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"))
+        }
     }
-}

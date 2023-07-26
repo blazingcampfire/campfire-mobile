@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostAttributes: View {
-    var post: String
+    var image: Data
     var prompt: String?
     var width: CGFloat? = 350
 
@@ -25,7 +25,7 @@ struct PostAttributes: View {
                     )
             }
 
-            Image(post)
+            Image(uiImage: UIImage(data: image)!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: width, height: width)
@@ -39,7 +39,7 @@ struct PostAttributes_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                PostAttributes(post: "ragrboard4", prompt: "for the dogs")
+//                PostAttributes(post: "ragrboard4", prompt: "for the dogs")
             }
         }
     }

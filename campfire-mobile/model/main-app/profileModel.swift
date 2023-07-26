@@ -9,7 +9,7 @@ class ProfileModel: ObservableObject {
 
     init(id: String) {
         // Initialize the profile with an empty Profile object and id variable when the class is created.
-        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [], chocs: 0,  profilePicURL: "", userID: id, school: "", bio: "")
+        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [], prompts: [], chocs: 0, profilePicURL: "", userID: id, school: "", bio: "")
         self.id = id
     }
 
@@ -29,7 +29,19 @@ class ProfileModel: ObservableObject {
                 self.profile = profile // Update the profile property with the fetched profile.
             case .failure(let error):
                 // A `Profile` value could not be initialized from the DocumentSnapshot.
-                print("Error decoding profile: \(error)")
+                print("Error decoding profile in profileModel: \(error)")
+                if let profile = self.profile {
+                        // Use Mirror to introspect the properties of the profile and print their names and types
+                        let profileMirror = Mirror(reflecting: profile)
+                        print("Profile properties and types:")
+                        for (name, value) in profileMirror.children {
+                            if let propertyName = name {
+                                print("\(propertyName): \(type(of: value))")
+                            }
+                        }
+                    } else {
+                        print("Profile is nil.")
+                    }
             }
         }
     }

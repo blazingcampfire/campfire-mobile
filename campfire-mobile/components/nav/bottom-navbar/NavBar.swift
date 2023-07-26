@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICam
 
 struct NavBar: View {
     @State var selectedIndex = 0
@@ -36,7 +37,7 @@ struct NavBar: View {
                     }
                 case 2:
                     NavigationView {
-                        CameraPage()
+                        CameraPage(events: UserEvents())
                     }
                 case 3:
                     NavigationView {

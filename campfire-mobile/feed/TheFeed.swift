@@ -95,7 +95,7 @@ struct VidsPlayer: View {
                    let uiImage = UIImage(contentsOfFile: imagePath) {
                     Image(uiImage: uiImage)
                         .resizable()
-                       .scaledToFit()
+                        .scaledToFit()
                 } else {
                     // Handle image not found case
                     Text("Image not found")

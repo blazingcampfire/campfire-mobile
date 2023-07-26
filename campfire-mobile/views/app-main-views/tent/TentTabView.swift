@@ -19,7 +19,7 @@ struct TentTabView: View {
             
             
             
-            Spacer()
+     //       Spacer()
 
             // conditional setup navigates to a different page depending on tab selection
             if tabIndex == 0 {

@@ -50,6 +50,7 @@ final class AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
+    
     // logic still in progress
     func signUpWithGoogle(tokens: GoogleSignInResultModel) async throws {
         let credential = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)

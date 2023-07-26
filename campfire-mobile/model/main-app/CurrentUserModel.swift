@@ -9,6 +9,6 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseAuth
 
-class currentUserModel: ObservableObject {
+class CurrentUserModel: ObservableObject {
     
 }

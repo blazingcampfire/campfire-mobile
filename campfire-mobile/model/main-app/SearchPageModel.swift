@@ -15,11 +15,11 @@ class SearchPageModel: ObservableObject {
     @Published var name: String = "" {
         didSet {
             self.profiles = []
-            search(matching: name)
+            searchName(matching: name)
         }
     }
     
-    func search(matching: String) {
+    func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {

@@ -48,7 +48,7 @@ struct OwnProfilePage: View {
                                 }
                                 .padding(.top)
                                 HStack {
-                                    NavigationLink(destination: EditProfile(profileModel: profileModel, postImages: profileModel.profile?.posts ?? [], prompts: profileModel.profile?.prompts ?? [])) {
+                                    NavigationLink(destination: EditProfile(profileModel: profileModel, postImages: profileModel.profile?.postData ?? [], prompts: profileModel.profile?.prompts ?? [])) {
                                         Text("Edit Profile")
                                             .font(.custom("LexendDeca-Bold", size: 15))
                                             .foregroundColor(Theme.Peach)

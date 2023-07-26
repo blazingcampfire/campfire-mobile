@@ -63,6 +63,7 @@ struct AddPost: View {
                             Button(action: {
                                 confirmPost(userID: profileModel.profile!.userID)
                                 // confirmPost function with current userID
+                                // CHECK FUNC BELOW TONI
                                 presentationMode.wrappedValue.dismiss()
                             })  {
                                 HStack {
@@ -99,6 +100,7 @@ struct AddPost: View {
     
     func confirmPost(userID: String) {
         
+        // confirms that there is image
         guard selectedImage != nil else {
             print ("no image")
             return
@@ -114,14 +116,17 @@ struct AddPost: View {
             return
         }
         
+        // string URL for database
         let path = "images/\(UUID().uuidString).jpg"
         
-        // path is string URL for database
+        // use path to create file reference for Firebase Storage
         let fileRef = storageRef.child(path)
+        
+        // put the converted imageData into the appropriate file reference
         let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if error == nil, metadata != nil {
-                // file uploaded successfully, now update Firestore document
                 
+                // file uploaded successfully, now update Firestore document
                 let docRef = ndProfiles.document(userID)
                 
                 // fetch existing data and update firebase "posts" field
@@ -135,11 +140,14 @@ struct AddPost: View {
                             // add new post URL to that array
                             posts.append(path)
                             data["posts"] = posts
+                            
                             // update the profile information with added post
                             docRef.setData(data)
+                            
                             // fetch from Firebase Storage
                             retrievePosts(userID: userID)
                             print("successfully retrieved posts")
+                            
                         } else {
                             data["posts"] = [path]
                             docRef.setData(data)
@@ -161,17 +169,24 @@ struct AddPost: View {
             if let document = document, document.exists {
                 if let postPaths = document.data()?["posts"] as? [String] {
                     // postPaths is an array of post URLs from firebase 'posts' field.
+                    
                     var fetchedPostsData = [Data]()
                     let dispatchGroup = DispatchGroup()
                     
                     for path in postPaths {
+                        
+                        // uses the paths to refer to the right files in the Storage
                         let storageRef = Storage.storage().reference()
                         let fileRef = storageRef.child(path)
-                        // creates a fileReference from each URL
+                        
                         dispatchGroup.enter()
+                        
+                        // converts fileReference to data
                         fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                            // converts fileReference to data
+                            
+                            
                             if let data = data, error == nil {
+                                
                                 // adds data to fetchedPostsData array
                                 fetchedPostsData.append(data)
                                 print("successfully grabbed imageData from Storage")
@@ -182,8 +197,11 @@ struct AddPost: View {
                     
                     dispatchGroup.notify(queue: .main) {
                         // all image data has been fetched, update 'profileModel.profile!.posts'
-                        profileModel.profile!.posts = fetchedPostsData
+
+                        profileModel.profile!.postData = fetchedPostsData
                         print("Retrieved data into 'profileModel.profile!.posts' array")
+                        print(profileModel.profile!) // this is currently printing campfire_mobile.Profile, but it must print a real object
+                        
                     }
                 } else {
                     print("No 'posts' field or data is not of expected type.")

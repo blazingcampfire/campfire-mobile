@@ -106,7 +106,7 @@ struct EditProfile: View {
                             .padding(.trailing, 20)
                         }
                         
-                        if let posts = profileModel.profile?.posts {
+                        if let posts = profileModel.profile?.postData {
                             VStack(spacing: 20) {
                                 Spacer()
 

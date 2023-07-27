@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AccountSetUp: View {
-    
+    @EnvironmentObject var model: AuthModel
+
     var body: some View {
-        NavigationStack {
+        NavigationView {
             GradientBackground()
                 .overlay(
                     VStack {
                         // MARK: - App logo & title
-
                         VStack {
                             Image("newlogo")
                                 .resizable()
@@ -35,14 +35,18 @@ struct AccountSetUp: View {
                                 LFButton(text: "create account")
                                     .padding(5)
                             })
+                            .simultaneousGesture(TapGesture().onEnded({ model.createAccount = true
+                                model.login = false
+                            }))
 
                             NavigationLink(destination: EmailOrNumber(), label: {
                                 LFButton(text: "login")
                                     .padding(5)
                             })
-                           
+                            .simultaneousGesture(TapGesture().onEnded({ model.login = true
+                                model.createAccount = false
+                            }))
                         }
-
                     }
                     .padding(.bottom, 100)
                 )
@@ -53,6 +57,6 @@ struct AccountSetUp: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

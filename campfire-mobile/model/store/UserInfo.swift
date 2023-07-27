@@ -6,6 +6,18 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestore
+
+
+let db = Firestore.firestore()
+let users = db.collection("users")
+let college = users.document("rice")
+let profiles = college.collection("profiles")
+
+
+
+
 
 struct UserInfo {
     var name: String = "David"
@@ -15,5 +27,5 @@ struct UserInfo {
     var bio: String = "I'm him hahwugehfurgfuhiwgfuhfwe"
     var posts: [String] = ["fefef", "jfewjfje", "fjewfjewjf"]
     var email: String = "memellord@hustleruniversity.edu"
-    var location: String = "📍 37 High Street"   //likely will have to have some get location function to have a string
+    var location: String = "📍 37 High Street"   // likely will have to have some get location function to have a string
 }

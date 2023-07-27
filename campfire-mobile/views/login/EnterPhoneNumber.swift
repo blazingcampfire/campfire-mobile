@@ -10,7 +10,7 @@ import SwiftUI
 struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
 
 
     // setting up user phoneNumber & advancing as view state
@@ -21,7 +21,6 @@ struct EnterPhoneNumber: View {
             .overlay(
                 VStack {
                     // MARK: - Back button
-
                     HStack {
                         Button {
                             dismiss()
@@ -42,6 +41,12 @@ struct EnterPhoneNumber: View {
 
                         FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
                             .keyboardType(.numberPad)
+                        if !model.validPhoneNumber {
+                            Text("phone number must be 10 digits with no spaces")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .padding(.top, -40)
+                        }
 
                         Text("check your messages for a verification code!")
                             .foregroundColor(Color.white)
@@ -51,6 +56,7 @@ struct EnterPhoneNumber: View {
                         // MARK: - NavLink to VerifyNumber screen
 
                         VStack {
+                            
                             NavigationLink(destination: VerifyNumber(), label: {
                                 LFButton(text: "next")
                             })
@@ -66,6 +72,7 @@ struct EnterPhoneNumber: View {
                 .padding(.bottom, 200)
             )
             .navigationBarBackButtonHidden(true)
+
     }
 }
 
@@ -78,6 +85,6 @@ extension EnterPhoneNumber {
 struct EnterPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
         EnterPhoneNumber()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

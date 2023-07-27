@@ -1,76 +1,66 @@
-////
-////  VidOrImagePicker.swift
-////  campfire-mobile
-////
-////  Created by Adarsh G on 7/12/23.
-////
 //
-//import SwiftUI
-//import Foundation
-//import UIKit
-//import PhotosUI
+//  VidOrImagePicker.swift
+//  campfire-mobile
 //
-//struct VidOrImagePicker: UIViewControllerRepresentable {
-//    
-//    @Binding var selectedImage: Image?
-//    @Binding var isPickerShowing: Bool
-//    
-//    func makeUIViewController(context: Context) -> PHPickerViewController {
-//        
-//        // this function initializes a PHPickerVC object that can be used for users to choose photo library images
-//        
-//        var configuration = PHPickerConfiguration()
-//        configuration.filter = .images
-//        configuration.selectionLimit = 1
-//        
-//        let picker = PHPickerViewController(configuration: configuration)
-//        picker.delegate = context.coordinator
-//        
-//        return picker
-//    }
-//    
-//    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-//    }
-//    
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//}
+//  Created by Adarsh G on 7/15/23.
 //
-//
-//class Coordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
-//    
-//    var parent: VidOrImagePicker
-//    
-//    init(_ picker: VidOrImagePicker) {
-//        self.parent = picker
-//    }
-//    
-//    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//        picker.dismiss(animated: true)
-//        
-//        guard let result = results.first else {
-//            parent.isPickerShowing = false
-//            return
-//        }
-//        
-//        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-//            if let error = error {
-//                print("Error loading image: \(error.localizedDescription)")
-//            } else if let image = image as? UIImage {
-//                DispatchQueue.main.async {
-//                    self?.parent.selectedImage = Image(uiImage: image)
-//                    self?.parent.isPickerShowing = false
-//                }
-//            } else {
-//                print("Unable to load image.")
-//            }
-//        }
-//    }
-//    
-//    func pickerDidCancel(_ picker: PHPickerViewController) {
-//        picker.dismiss(animated: true)
-//        parent.isPickerShowing = false
-//    }
-//    
-//}
+
+import SwiftUI
+import PhotosUI
+
+
+struct MediaPickerView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIViewController
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        let picker = PHPickerViewController(configuration: configurePicker())
+        picker.delegate = context.coordinator
+        
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        // No update needed
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+    
+    private func configurePicker() -> PHPickerConfiguration {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        
+        return configuration
+    }
+    
+    class Coordinator: PHPickerViewControllerDelegate {
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            picker.dismiss(animated: true, completion: nil)
+            
+            guard let itemProvider = results.first?.itemProvider else {
+                return
+            }
+            
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                    if let selectedImage = image as? UIImage {
+                        // Do something with the selected image
+                        print("Selected image: \(selectedImage)")
+                    } else if let error = error {
+                        print("Failed to load image: \(error.localizedDescription)")
+                    }
+                }
+            } else if itemProvider.canLoadObject(ofClass: URL.self) {
+                itemProvider.loadObject(ofClass: URL.self) { url, error in
+                    if let selectedURL = url {
+                        // Do something with the selected URL (video)
+                        print("Selected video URL: \(selectedURL)")
+                    } else if let error = error {
+                        print("Failed to load video URL: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    }
+}

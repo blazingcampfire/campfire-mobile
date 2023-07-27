@@ -11,11 +11,7 @@ struct EnterEmail: View {
     
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
-    
-    // setting up user email as view state
-    @State var email: String = ""
-    @State private var canAdvance: Bool = false
+    @EnvironmentObject var model: AuthModel
     
     var body: some View {
             GradientBackground()
@@ -41,10 +37,13 @@ struct EnterEmail: View {
                         
                         FormTextField(text: $model.email, placeholderText: "email")
                         
-                        Text("check your email for a magic link!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
+                        if !model.validEmail {
+                            Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, -40)
+                        }
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {
@@ -53,7 +52,7 @@ struct EnterEmail: View {
                             })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validEmail)
+                        .disabled(!model.validEmailString)
                     }
                     .padding(.bottom, 200)
                 }
@@ -64,13 +63,13 @@ struct EnterEmail: View {
 
 extension EnterEmail {
     var buttonOpacity: Double {
-        return model.validEmail ? 1 : 0.5
+        return model.validEmailString ? 1 : 0.5
     }
 }
 
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

@@ -7,19 +7,25 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseFirestore
 import GoogleSignIn
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
         FirebaseApp.configure()
+        let db = Firestore.firestore()
+        
         return true
+        
+        
     }
-    // MARK: - Phone Auth Initialization of Remote Notifications
+    // MARK: - Phone auth initialization of remote notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         return .noData
     }
-    //MARK: Google SignIn Auth
+    //MARK: Google signIn auth
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {

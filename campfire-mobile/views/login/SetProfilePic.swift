@@ -11,12 +11,20 @@ import PhotosUI
 struct SetProfilePic: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: authModel
+    @EnvironmentObject var model: AuthModel
 
-
+    @State var setUpFinished: Bool = false
     var body: some View {
+        if setUpFinished {
+            NavigationBar()
+        }
+        else {
+            
+       
         GradientBackground()
             .overlay(
+                
+                
                 VStack {
                     // MARK: - Back button
 
@@ -38,6 +46,10 @@ struct SetProfilePic: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                             .padding(.top, 100)
+                        Text("(optional)")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(.top, -40)
 
                         ProfilePictureView()
 
@@ -50,29 +62,28 @@ struct SetProfilePic: View {
 
                         VStack {
                             // set destination to AccountSetUp screen temporarily
-                            NavigationLink(destination: NavigationBar(), label: {
+                            Button(action: {
+                                model.createProfile()
+                                setUpFinished = true
+                            }, label:  {
                                 LFButton(text: "finish")
+                                
                             })
                         }
-                        .opacity(buttonOpacity)
-                        .disabled(!model.validUser)
                     }
                     .padding(.bottom, 200)
                 }
             )
             .navigationBarBackButtonHidden(true)
+        }
     }
 }
 
-extension SetProfilePic {
-    var buttonOpacity: Double {
-        return model.validProfilePic ? 1 : 0.5
-    }
-}
+
 
 struct SetProfilePic_Previews: PreviewProvider {
     static var previews: some View {
         SetProfilePic()
-            .environmentObject(authModel())
+            .environmentObject(AuthModel())
     }
 }

@@ -1,27 +1,22 @@
 //
-//  CreateUsername.swift
+//  EnterName.swift
 //  campfire-mobile
 //
-//  Created by Toni on 6/19/23.
+//  Created by Toni on 7/21/23.
 //
 
 import SwiftUI
 
-struct CreateUsername: View {
+struct EnterName: View {
     // setting up environmental variables
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     
-    // setting up user phoneNumber & advance as view state
-    @State var username: String = ""
-    @State private var canAdvance: Bool = false
-    
     var body: some View {
-        GradientBackground()
+            GradientBackground()
             .overlay(
                 VStack {
-                    // MARK: - Back button
-
+// MARK: - Back button
                     HStack {
                         Button {
                             dismiss()
@@ -30,48 +25,43 @@ struct CreateUsername: View {
                         }
                     }
                     .padding(.leading, 15)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
-
-                    // MARK: - Username form & prompts
-
+                    
+// MARK: - Email form & prompts
                     VStack(spacing: 60) {
-                        Text("enter a campfire username")
+                        Text("enter your first name")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.username, placeholderText: "username")
+                        FormTextField(text: $model.name, placeholderText: "name")
                         
-                        Text("almost there!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
                         
-                        // MARK: - NavLink to SetProfilePic screen
+                        // MARK: - NavLink to VerifyEmail screen
                         VStack {
-                            NavigationLink(destination: SetProfilePic(), label: {
+                            NavigationLink(destination: VerifyEmail(), label: {
                                 LFButton(text: "next")
                             })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validUsername)
+                        .disabled(!model.validEmailString)
                     }
                     .padding(.bottom, 200)
                 }
             )
             .navigationBarBackButtonHidden(true)
-    }
+        }
 }
 
-extension CreateUsername {
+extension EnterName {
     var buttonOpacity: Double {
-        return model.validUsername ? 1 : 0.5
+        return model.validEmailString ? 1 : 0.5
     }
 }
 
-struct CreateUsername_Previews: PreviewProvider {
+struct EnterName_Previews: PreviewProvider {
     static var previews: some View {
-        CreateUsername()
+        EnterName()
             .environmentObject(AuthModel())
     }
 }

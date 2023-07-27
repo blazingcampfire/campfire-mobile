@@ -29,10 +29,11 @@ struct PreviewPostInfo: View {
                 CaptionTextField(placeholderText: "enter your caption")
                 Text("📍Location")
                 .font(.custom("LexendDeca-Regular", size: 16))
-                .padding(.leading, 20)
+                .padding(.leading, 15)
             }
         }
         .padding(.bottom, 100)
+        .padding(.top, 500)
     }
 }
 
@@ -59,6 +60,52 @@ struct PostButton: View {
         .padding(.leading, 250)
     }
 }
+
+struct SaveButton: View {
+    @ObservedObject var camera: CameraModel
+    var body: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+            Button(action: {
+                if !camera.isSaved{camera.savePic()}
+            }) {
+                Circle()
+                .overlay(
+                Image(systemName: self.camera.isSaved ? "checkmark.circle.fill" : "arrow.down.circle.fill")
+                    .foregroundColor(.white)
+                    .background(Theme.Peach)
+                    .font(.system(size: 30))
+                    .clipShape(Circle())
+                )
+                .frame(width: 50, height: 50)
+            }
+        }
+        .padding(.bottom, 30)
+        .padding(.trailing, 315)
+    }
+}
+
+struct RetakeButton: View {
+    @ObservedObject var camera: CameraModel
+    var body: some View {
+        VStack {
+            Button(action: {
+                camera.reTake()
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(Theme.Peach)
+                    .fontWeight(.bold)
+                    .font(.system(size: 45))
+            }
+            Spacer()
+        }
+        .padding(.top, 20)
+        .padding(.leading, 330)
+    }
+}
+
+
+
 
 struct PreviewPostInfo_Previews: PreviewProvider {
     static var previews: some View {

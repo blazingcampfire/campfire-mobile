@@ -10,7 +10,7 @@ import SwiftUI
 struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
-    @State var profileModel: ProfileModel
+    @EnvironmentObject var profileModel: ProfileModel
     @State var postImages: [Data]
     @State var prompts: [String]
 
@@ -52,7 +52,8 @@ struct EditProfile: View {
                         }
                         
                         if postImages.count < 6 {
-                            NavigationLink(destination: AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")))
+                            NavigationLink(destination: AddPost()
+                                .environmentObject(profileModel))
                                 {
                                     Text("add post")
                                         .font(.custom("LexendDeca-Bold", size: 15))
@@ -119,7 +120,7 @@ struct EditProfile: View {
 
                                             VStack(spacing: 20) {
                                                 ZStack(alignment: .topTrailing) {
-                                                    PostAttributes(image: imageData, prompt: prompt)
+                                                    PostAttributes(data: imageData)
                                                         .frame(width: 250)
 
                                                     Circle()

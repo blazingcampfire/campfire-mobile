@@ -29,10 +29,10 @@ struct EditPost: View {
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .offset(x: 0, y: selectedImage != nil ? 23 : 0)
                             .overlay(
-                                PostAttributes(image: postImage, prompt: prompt)
+                                PostAttributes(data: postImage)
                             )
                     } else {
-                        PostAttributes(image: postImage, prompt: prompt)
+                        PostAttributes(data: postImage)
                     }
                     
                     Button(action: {

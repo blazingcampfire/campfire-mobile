@@ -16,7 +16,8 @@ public class Profile: Codable, Hashable {
     var email: String
     var username: String
     var friends: [Profile]?
-    var posts: [String] // Changed to an array of strings
+    var posts: [String]
+    var postData: [Data]
     var prompts: [String]
     var chocs: Int
     var profilePicURL: String?
@@ -32,13 +33,14 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [String], prompts: [String], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
+    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [String], postData: [Data], prompts: [String], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
         self.username = username
         self.friends = friends
         self.posts = posts
+        self.postData = postData
         self.prompts = prompts
         self.chocs = chocs
         self.profilePicURL = profilePicURL
@@ -47,36 +49,27 @@ public class Profile: Codable, Hashable {
         self.bio = bio
     }
 
-    // computed property to convert the array of strings (postString) to an array of data (posts)
-    // posts get retrieved from fireBase as strings, so we convert it to data in this class so we can display post as data
-    var postData: [Data] {
-            get {
-                return posts.compactMap { stringData -> Data? in
-                    return Data(base64Encoded: stringData)
-                }
-            }
-            set(newPosts) {
-                posts = newPosts.map { data -> String in
-                    return data.base64EncodedString()
-                }
-            }
-        }
+    // custom initializer to manually decode the Profile object
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
+        email = try container.decode(String.self, forKey: .email)
+        username = try container.decode(String.self, forKey: .username)
+        friends = try container.decodeIfPresent([Profile].self, forKey: .friends)
+        posts = try container.decode([String].self, forKey: .posts)
+        prompts = try container.decode([String].self, forKey: .prompts)
+        chocs = try container.decode(Int.self, forKey: .chocs)
+        profilePicURL = try container.decodeIfPresent(String.self, forKey: .profilePicURL)
+        userID = try container.decode(String.self, forKey: .userID)
+        school = try container.decode(String.self, forKey: .school)
+        bio = try container.decode(String.self, forKey: .bio)
 
-    enum CodingKeys: String, CodingKey {
-        case name
-        case phoneNumber
-        case email
-        case username
-        case friends
-        case posts
-        case prompts
-        case chocs
-        case profilePicURL
-        case userID
-        case school
-        case bio
+        // since Firebase doesn't store the `postData`, we'll initialize it as an empty array
+        postData = []
     }
 }
+
 
 public class privateUser: Codable {
     var phoneNumber: String

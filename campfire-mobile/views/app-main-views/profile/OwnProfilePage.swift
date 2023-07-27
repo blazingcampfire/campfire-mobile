@@ -48,20 +48,21 @@ struct OwnProfilePage: View {
                                 }
                                 .padding(.top)
                                 HStack {
-                                    NavigationLink(destination: EditProfile(profileModel: profileModel, postImages: profileModel.profile?.postData ?? [], prompts: profileModel.profile?.prompts ?? [])) {
-                                        Text("Edit Profile")
-                                            .font(.custom("LexendDeca-Bold", size: 15))
-                                            .foregroundColor(Theme.Peach)
-                                            .padding()
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .fill(.white)
-                                                    .overlay(
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .stroke(Color.black, lineWidth: 0.3)
-                                                    )
-                                            )
-                                    }
+                                    NavigationLink(destination: EditProfile(postImages: profileModel.profile?.postData ?? [], prompts: profileModel.profile?.prompts ?? [])
+                                        .environmentObject(profileModel)) {
+                                            Text("Edit Profile")
+                                                .font(.custom("LexendDeca-Bold", size: 15))
+                                                .foregroundColor(Theme.Peach)
+                                                .padding()
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.white)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.black, lineWidth: 0.3)
+                                                        )
+                                                )
+                                        }
                                     
                                     NavigationLink(destination: FriendsPage()) {
                                         Image(systemName: "person.3.fill")
@@ -93,32 +94,37 @@ struct OwnProfilePage: View {
                                     .presentationCornerRadius(30)
                             }
                         }
-                        if let posts = profileModel.profile?.posts {
-                            VStack(spacing: 20) {
-                                Spacer()
-                                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                                    ForEach(posts.indices, id: \.self) { index in
-                                        if let imageData = posts[index] as? Data,
-                                           let prompts = profileModel.profile?.prompts, prompts.indices.contains(index) {
-                                            VStack(spacing: 20) {
-                                                PostAttributes(image: imageData, prompt: prompts[index])
-                                                    .frame(width: 350)
+                        if let posts = profileModel.profile?.postData {
+                            
+                            VStack {
+                                VStack(spacing: 20) {
+                                    Spacer()
+                                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
+                                        ForEach(posts, id: \.self) { post in
+                                            if let imageData = post as? Data {
+                                                VStack(spacing: 20) {
+                                                    PostAttributes(data: imageData)
+                                                        .frame(width: 350)
+                                                }
                                             }
                                         }
                                     }
+                                    .padding(.horizontal)
                                 }
-                                .padding(.horizontal)
                             }
-                        } else {
-                            Text("No posts yet.")
                         }
                     }
+                    .padding()
                 }
-                .padding()
             }
-        }
-        .onAppear {
-            profileModel.getProfile()
+            .onAppear {
+                profileModel.getProfile()
+                if let postData = profileModel.profile?.postData {
+                    print("postData onAppear: \(postData)")
+                } else {
+                    print("postData onAppear is nil or empty.")
+                }
+            }
         }
     }
 }

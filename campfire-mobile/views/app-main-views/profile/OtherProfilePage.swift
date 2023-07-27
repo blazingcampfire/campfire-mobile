@@ -115,15 +115,14 @@ struct OtherProfilePage: View {
                                     .presentationCornerRadius(30)
                             }
                         }
-                        if let posts = profileModel.profile?.posts {
+                        if let posts = profileModel.profile?.postData {
                             VStack(spacing: 20) {
                                 Spacer()
                                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                                    ForEach(posts.indices, id: \.self) { index in
-                                        if let imageData = posts[index] as? Data,
-                                           let prompts = profileModel.profile?.prompts, prompts.indices.contains(index) {
+                                    ForEach(posts, id: \.self) { post in
+                                        if let imageData = post as? Data {
                                             VStack(spacing: 20) {
-                                                PostAttributes(image: imageData, prompt: prompts[index])
+                                                PostAttributes(data: imageData)
                                                     .frame(width: 350)
                                             }
                                         }
@@ -134,6 +133,7 @@ struct OtherProfilePage: View {
                         } else {
                             Text("No posts yet.")
                         }
+
                     }
                 }
                 .padding()

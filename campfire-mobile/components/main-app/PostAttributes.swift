@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostAttributes: View {
-    var image: Data
+    var data: Data
     var prompt: String?
     var width: CGFloat? = 350
 
@@ -25,7 +25,7 @@ struct PostAttributes: View {
                     )
             }
 
-            Image(uiImage: UIImage(data: image)!)
+            Image(uiImage: UIImage(data: data)!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: width, height: width)

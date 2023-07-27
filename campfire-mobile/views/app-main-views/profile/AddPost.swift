@@ -15,7 +15,8 @@ struct AddPost: View {
     @State private var promptScreen = false
     @Environment(\.presentationMode) var presentationMode
     @State var retrievedPosts = [Data]()
-    @State var profileModel: ProfileModel
+    
+    @EnvironmentObject var profileModel: ProfileModel
     
     var body: some View {
         ZStack {
@@ -117,7 +118,7 @@ struct AddPost: View {
         }
         
         // string URL for database
-        let path = "images/\(UUID().uuidString).jpg"
+        let path = "postImages/\(UUID().uuidString).jpg"
         
         // use path to create file reference for Firebase Storage
         let fileRef = storageRef.child(path)
@@ -199,9 +200,9 @@ struct AddPost: View {
                         // all image data has been fetched, update 'profileModel.profile!.posts'
 
                         profileModel.profile!.postData = fetchedPostsData
-                        print("Retrieved data into 'profileModel.profile!.posts' array")
-                        print(profileModel.profile!) // this is currently printing campfire_mobile.Profile, but it must print a real object
-                        
+                        print("postData object is correct!")
+                        print(profileModel.profile!.postData)
+
                     }
                 } else {
                     print("No 'posts' field or data is not of expected type.")
@@ -214,9 +215,9 @@ struct AddPost: View {
 }
 
     
-    
-    struct AddPost_Previews: PreviewProvider {
-        static var previews: some View {
-            AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"))
-        }
-    }
+//
+//    struct AddPost_Previews: PreviewProvider {
+//        static var previews: some View {
+//            AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"))
+//        }
+//    }

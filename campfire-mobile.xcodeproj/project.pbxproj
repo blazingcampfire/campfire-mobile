@@ -70,6 +70,9 @@
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
 		B1B8E68F2A626BC7008720E0 /* TestCamPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B8E68E2A626BC7008720E0 /* TestCamPage.swift */; };
+		B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA42A71E709008E6C69 /* CameraModel.swift */; };
+		B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA62A71E770008E6C69 /* CameraView.swift */; };
+		B1C51EA92A71E7A3008E6C69 /* CameraMediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA82A71E7A3008E6C69 /* CameraMediaPicker.swift */; };
 		B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */; };
 		B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04A2A57D7B800BA5554 /* cute.jpeg */; };
 		B1CAD04D2A57D83B00BA5554 /* blonde.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */; };
@@ -222,6 +225,9 @@
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B1B8E68E2A626BC7008720E0 /* TestCamPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCamPage.swift; sourceTree = "<group>"; };
+		B1C51EA42A71E709008E6C69 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		B1C51EA62A71E770008E6C69 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		B1C51EA82A71E7A3008E6C69 /* CameraMediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMediaPicker.swift; sourceTree = "<group>"; };
 		B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAuth.swift; sourceTree = "<group>"; };
 		B1CAD04A2A57D7B800BA5554 /* cute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute.jpeg; sourceTree = "<group>"; };
 		B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blonde.jpeg; sourceTree = "<group>"; };
@@ -575,6 +581,9 @@
 				F83B0EB12A4D2CBE00F98CFA /* CamPostPage.swift */,
 				B1EF99882A4289540001E8CC /* CameraPage.swift */,
 				B1B8E68E2A626BC7008720E0 /* TestCamPage.swift */,
+				B1C51EA42A71E709008E6C69 /* CameraModel.swift */,
+				B1C51EA62A71E770008E6C69 /* CameraView.swift */,
+				B1C51EA82A71E7A3008E6C69 /* CameraMediaPicker.swift */,
 			);
 			path = camera;
 			sourceTree = "<group>";
@@ -844,9 +853,11 @@
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
 				B1B8E68F2A626BC7008720E0 /* TestCamPage.swift in Sources */,
 				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
+				B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */,
 				F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */,
 				F89402192A5E6A150049410E /* RequestsListView.swift in Sources */,
 				E280A9E52A4FD3FB00410B34 /* NotificationsPage.swift in Sources */,
+				B1C51EA92A71E7A3008E6C69 /* CameraMediaPicker.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
 				B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */,
 				B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */,
@@ -878,6 +889,7 @@
 				B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */,
 				F89402152A5E68480049410E /* SearchListView.swift in Sources */,
 				E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */,
+				B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */,
 				B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */,
 				B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
@@ -1077,6 +1089,7 @@
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
@@ -1110,6 +1123,7 @@
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";

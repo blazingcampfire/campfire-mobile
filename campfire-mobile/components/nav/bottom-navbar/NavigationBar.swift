@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICam
 
 struct NavigationBar: View {
-
+    @StateObject var cameraModel = CameraModel()
     var body: some View {
         NavigationView {
         TabView() {
@@ -30,7 +30,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-           TestCamPage()
+           CameraView(camera: cameraModel)
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()

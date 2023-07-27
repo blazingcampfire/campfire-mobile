@@ -12,23 +12,24 @@ import FirebaseAuth
 struct ContentView: View {
     @StateObject var model = AuthModel()
     var body: some View {
-        if Auth.auth().currentUser?.email == nil {
-            AccountSetUp()
-                .environmentObject(model)
-                .ignoresSafeArea(.keyboard, edges: .bottom)
-        }
-        else {
-            NavigationBar()
-        }
+        //        if Auth.auth().currentUser?.email == nil {
+        //            AccountSetUp()
+        //                .environmentObject(model)
+        //                .ignoresSafeArea(.keyboard, edges: .bottom)
+        //        }
+        //        else {
+        //            NavigationBar()
+        //        }
+        //
+        //    }
+        NavigationBar()
         
-    }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            LaunchScreen()
-                .environmentObject(AuthModel())
-        }
+        //        struct ContentView_Previews: PreviewProvider {
+        //            static var previews: some View {
+        //                LaunchScreen()
+        //                    .environmentObject(AuthModel())
+        //            }
+        //        }
+        //    }
     }
 }
-
-

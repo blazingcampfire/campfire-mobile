@@ -23,8 +23,8 @@ final class AuthModel: ObservableObject {
     @Published var verificationCode: String = ""
     @Published var email: String = ""
     @Published var name: String = ""
-    @Published var username: String = ""
-    @Published var profilePic: String = ""
+    @Published var username: String = "davooo"
+    @Published var profilePic: String = "ragrboard5"
     @Published var userID: String = ""
 
     // Validity booleans

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct EditPost: View {
-    @State private var selectedImage: Image?
+    @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
-    var post: String
+    var postImage: Data
     var prompt: String?
     
     @State private var promptScreen = false
@@ -22,17 +22,17 @@ struct EditPost: View {
             VStack(spacing: 20) {
                 ZStack {
                     if let image = selectedImage {
-                        image 
+                        Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 350, height: 350)
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .offset(x: 0, y: selectedImage != nil ? 23 : 0)
                             .overlay(
-                                PostAttributes(post: "", prompt: prompt)
+                                PostAttributes(data: postImage)
                             )
                     } else {
-                        PostAttributes(post: post, prompt: prompt)
+                        PostAttributes(data: postImage)
                     }
                     
                     Button(action: {
@@ -40,7 +40,7 @@ struct EditPost: View {
                     }) {
                         Image(systemName: "camera")
                             .font(.system(size: 100))
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.Peach)
                             .frame(width: 350, height: 350)
                             .background(Color.black.opacity(0.5))
                             .clipShape(Circle())
@@ -74,6 +74,7 @@ struct EditPost: View {
 
 struct EditPost_Previews: PreviewProvider {
     static var previews: some View {
-        EditPost(post: "ragrboard")
+        Text("yo")
+//        EditPost(postImage: <#Data#>, post: "ragrboard")
     }
 }

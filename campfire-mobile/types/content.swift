@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct Post: Codable {
-    let post: [String: String]
+struct Post: Codable, Hashable, Identifiable {
+    var id = UUID()
+    let post: [Data: String]
 }

@@ -14,7 +14,6 @@ class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
         didSet {
-            self.profiles = []
             searchName(matching: name)
         }
     }
@@ -43,11 +42,20 @@ class SearchPageModel: ObservableObject {
                 }
             }
         }
+    }
         // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
-        func addFriend(userID: String, friendID: String) {
-            ndRelationships.document(userID).setData(<#T##documentData: [String : Any]##[String : Any]#>)
+        func addFriend(friendID: String) {
+            guard let userID = Auth.auth().currentUser?.uid else {
+                print("You are not currently authenticated.")
+                return
+            }
+            let relationshipRef =  ndRelationships.document(userID)
+                
+                relationshipRef.setData([
+                "ownRequests": friendID
+            ])
+            relationshipRef.updateData(["friends": FieldValue.arrayUnion([userID])])
         }
         
         
     }
-}

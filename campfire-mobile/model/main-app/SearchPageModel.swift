@@ -5,11 +5,11 @@
 //  Created by Toni on 7/19/23.
 //
 
-import Foundation
+import Combine
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Combine
+import Foundation
 class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
@@ -17,18 +17,17 @@ class SearchPageModel: ObservableObject {
             searchName(matching: name)
         }
     }
-    
+
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
             return
         }
-        ndProfiles.whereField("nameInsensitive", isGreaterThan: name).whereField("nameInsensitive", isLessThan: name+"\u{F7FF}").limit(to: 8).getDocuments() { (QuerySnapshot, err) in
+        ndProfiles.whereField("nameInsensitive", isGreaterThan: name).whereField("nameInsensitive", isLessThan: name + "\u{F7FF}").limit(to: 8).getDocuments { QuerySnapshot, err in
             if let err = err {
                 print("Error querying profiles: \(err)")
-            }
-            else {
+            } else {
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)
@@ -43,19 +42,18 @@ class SearchPageModel: ObservableObject {
             }
         }
     }
-        // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
-        func addFriend(friendID: String) {
-            guard let userID = Auth.auth().currentUser?.uid else {
-                print("You are not currently authenticated.")
-                return
-            }
-            let relationshipRef =  ndRelationships.document(userID)
-                
-                relationshipRef.setData([
-                "ownRequests": friendID
-            ])
-            relationshipRef.updateData(["friends": FieldValue.arrayUnion([userID])])
+
+    // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
+    func requestFriend(friendID: String) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return
         }
+        let relationshipRef = ndRelationships.document(friendID)
         
-        
+        relationshipRef.updateData([
+            "ownRequests": friendID,
+        ])
     }
+    
+}

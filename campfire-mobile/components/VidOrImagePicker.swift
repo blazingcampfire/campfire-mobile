@@ -1,9 +1,15 @@
+////
+////  VidOrImagePicker.swift
+////  campfire-mobile
+////
+////  Created by Adarsh G on 7/15/23.
+////
 //
-//  VidOrImagePicker.swift
-//  campfire-mobile
+//import SwiftUI
+//import PhotosUI
 //
-//  Created by Adarsh G on 7/15/23.
 //
+<<<<<<< HEAD
 
 import SwiftUI
 import PhotosUI
@@ -42,6 +48,41 @@ import PhotosUI
 //                return
 //            }
 //            
+=======
+//struct MediaPickerView: UIViewControllerRepresentable {
+//    typealias UIViewControllerType = UIViewController
+//
+//    func makeUIViewController(context: Context) -> UIViewController {
+//        let picker = PHPickerViewController(configuration: configurePicker())
+//        picker.delegate = context.coordinator
+//
+//        return picker
+//    }
+//
+//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//        // No update needed
+//    }
+//
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator()
+//    }
+//
+//    private func configurePicker() -> PHPickerConfiguration {
+//        var configuration = PHPickerConfiguration()
+//        configuration.selectionLimit = 1
+//
+//        return configuration
+//    }
+//
+//    class Coordinator: PHPickerViewControllerDelegate {
+//        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+//            picker.dismiss(animated: true, completion: nil)
+//
+//            guard let itemProvider = results.first?.itemProvider else {
+//                return
+//            }
+//
+>>>>>>> 0af1081a9e13932505a259c53939dd3cf1707b25
 //            if itemProvider.canLoadObject(ofClass: UIImage.self) {
 //                itemProvider.loadObject(ofClass: UIImage.self) { image, error in
 //                    if let selectedImage = image as? UIImage {

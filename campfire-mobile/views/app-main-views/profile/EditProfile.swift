@@ -20,7 +20,7 @@ struct EditProfile: View {
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
-                        UserProfilePic(pfp: David.profilepic )
+                        UserProfilePic(pfp: profileModel.profile?.pfpData )
 
                         Button(action: {
                             showPhotos.toggle()
@@ -48,33 +48,13 @@ struct EditProfile: View {
                         ImagePicker(selectedImage: $selectedImage, isPickerShowing: $showPhotos)
                     }
 
-//                    if let postData = profileModel.profile?.postData {
-//                        if postData.count < 6 {
-//                            NavigationLink(destination: AddPost().environmentObject(profileModel)) {
-//                                Text("add post")
-//                                    .font(.custom("LexendDeca-Bold", size: 15))
-//                                    .foregroundColor(Theme.Peach)
-//                                    .padding()
-//                                    .background(
-//                                        RoundedRectangle(cornerRadius: 10)
-//                                            .fill(.white)
-//                                            .overlay(
-//                                                RoundedRectangle(cornerRadius: 10)
-//                                                    .stroke(Theme.Peach, lineWidth: 1)
-//                                            )
-//                                    )
-//                            }
-//                            .padding(.top, 20)
-//                        }
-//                    }
-
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {
-                            Text(David.name)
+                            Text(profileModel.profile!.name)
                                 .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(David.username)
+                            Text(profileModel.profile!.username)
                                 .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(David.bio)
+                            Text(profileModel.profile!.bio)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                         }
                         .padding(.leading, 20)
@@ -82,20 +62,23 @@ struct EditProfile: View {
                         Spacer()
 
                         VStack(alignment: .trailing, spacing: 20) {
-                            NavigationLink(destination: EditFieldPage(field: "name", currentfield: David.name)) {
-                                Text("edit name")
+                            NavigationLink(destination: EditFieldPage(field: "name", currentfield: profileModel.profile!.name)
+                                .environmentObject(profileModel)) {
+                                Label("edit name", systemImage: "pencil")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.Peach)
                             }
 
-                            NavigationLink(destination: EditFieldPage(field: "username", currentfield: David.username)) {
-                                Text("edit username")
+                            NavigationLink(destination: EditFieldPage(field: "username", currentfield: profileModel.profile!.username)
+                                .environmentObject(profileModel)) {
+                                Label("edit username", systemImage: "pencil")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.Peach)
                             }
 
-                            NavigationLink(destination: EditFieldPage(field: "bio", currentfield: David.bio)) {
-                                Text("edit bio")
+                            NavigationLink(destination: EditFieldPage(field: "bio", currentfield: profileModel.profile!.bio)
+                                .environmentObject(profileModel)) {
+                                Label("edit bio", systemImage: "pencil")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.Peach)
                             }

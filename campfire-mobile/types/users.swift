@@ -33,7 +33,7 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
+    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
         self.name = name
         self.nameInsensitive = nameInsensitive
         self.phoneNumber = phoneNumber

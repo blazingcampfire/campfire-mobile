@@ -16,8 +16,6 @@
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
 		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
 		B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */; };
-		B17E77CA2A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */; };
-		B17E77CC2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
 		B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19732A4613A200309256 /* LeaderboardPage.swift */; };
 		B18B19912A46976700309256 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */; };
@@ -193,8 +191,6 @@
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
 		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
 		B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostModel.swift; sourceTree = "<group>"; };
-		B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov"; path = "../../../../../../../var/folders/pw/hj8b595d6630wbmy2m_fggch0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=6B8DD952-F908-4314-91C5-0567D663C139&mode=compatible&noloc=0.mov/cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov"; sourceTree = "<group>"; };
-		B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov"; path = "../../../../../../../var/folders/pw/hj8b595d6630wbmy2m_fggch0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=8102B9AF-2BA7-487E-AEC8-90C92850EBAD&mode=compatible&noloc=0.mov/cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov"; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -375,8 +371,6 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
-				B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */,
-				B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */,
 				B14D3A002A5B8AFA00056EAA /* sofrat.mov */,
 				B1EDD2AE2A5915CE0096F335 /* talkin.mov */,
 				B1EDD2B02A5915CE0096F335 /* gunna.mov */,
@@ -921,11 +915,9 @@
 				B18B19962A46976700309256 /* JosefinSans-Bold.ttf in Resources */,
 				B18B19972A46976700309256 /* JosefinSans-BoldItalic.ttf in Resources */,
 				B18B19982A46976700309256 /* JosefinSans-ExtraLight.ttf in Resources */,
-				B17E77CC2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov in Resources */,
 				B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */,
 				B18B19992A46976700309256 /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				B18B199A2A46976700309256 /* JosefinSans-Italic.ttf in Resources */,
-				B17E77CA2A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov in Resources */,
 				B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */,
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
@@ -1233,6 +1225,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
@@ -1267,6 +1260,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
@@ -1299,6 +1293,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1321,6 +1316,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1341,6 +1337,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1361,6 +1358,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";

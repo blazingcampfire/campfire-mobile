@@ -12,6 +12,8 @@ import FirebaseStorage
 
 class FeedPostModel: ObservableObject {
     
+    @Published var posts = [PostItem]()
+    
     func createPost(data: [String: Any]) {    // This function creates the document and it passes in the variables set the field data
         let docRef = ndPosts.document()
         docRef.setData(data) { error in
@@ -27,7 +29,7 @@ class FeedPostModel: ObservableObject {
         let storageRef = Storage.storage().reference()
         let path = "feedimages/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
-
+        
         let photoDocData: [String: Any] = [
             "username": "davooo",
             "name": "David Adebogun",
@@ -37,7 +39,9 @@ class FeedPostModel: ObservableObject {
             "numLikes": 0,
             "location": "",  //some string creation of location
             "comments": [""],
+            "postType": "image"
         ]
+        
         guard imageData != nil else {
             return
         }
@@ -68,6 +72,7 @@ class FeedPostModel: ObservableObject {
             "numLikes": 0,
             "location": "",  //some string creation of location
             "comments": [""],
+            "postType": "video"
         ]
         videoRef.putData(videoData) { metadata, error in
             guard let metadata = metadata, error == nil else {
@@ -78,6 +83,25 @@ class FeedPostModel: ObservableObject {
             self.createPost(data: videoDocData)
             print("upload successful")
             completion(true)
+        }
+    }
+    
+    func getPosts() {
+       let docRef = ndPosts
+        docRef.getDocuments { snapshot, error in
+
+            if error == nil {
+
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        self.posts = snapshot.documents.map { doc in
+                            return PostItem(id: doc.documentID, username: doc["username"] as? String ?? "", name: doc["name"] as? String ?? "", caption: doc["caption"] as? String ?? "", profilepic: doc["profilepic"] as? String ?? "", url: doc["url"] as? String ?? "", numLikes: doc["numLikes"] as? Int ?? 0, location: doc["location"] as? String ?? "", comments: doc["comments"] as? [String] ?? [""], postType: doc["postType"] as? String ?? "" )
+                        }
+                        print("success")
+                    }
+                }
+            }
+
         }
     }
     

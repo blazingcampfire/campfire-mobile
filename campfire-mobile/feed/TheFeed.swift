@@ -5,31 +5,29 @@
 //
 import SwiftUI
 import AVKit
+import Kingfisher
 
 struct TheFeed: View {
-    @State var currentVid = ""
-    @State var vids = MediaFileJSON.map { item in
-        switch item.mediaType {
-        case .video:
-            let url = Bundle.main.path(forResource: item.url, ofType: "mov") ?? ""
-            let player = AVPlayer(url: URL(fileURLWithPath: url))
-            return Vid(player: player, mediafile: item)
-        case .image:
-            return Vid(player: nil, mediafile: item)
-        }
-    }
-        
+  
+    @ObservedObject var postModel = FeedPostModel()
+    @State var currentPost: String = ""
+    @State var items: [PostPlayer?] = []
     
+    init() {
+        postModel.getPosts()
+    }
     
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
-            TabView(selection: $currentVid) {
-                ForEach($vids){$vids in
-                    VidsPlayer(vid: $vids, currentVid: $currentVid)
-                        .frame(width: size.width)
-                        .rotationEffect(.init(degrees: -90))
-                        .ignoresSafeArea(.all, edges: .top)
+            TabView(selection: $currentPost) {
+                ForEach(items.indices, id: \.self){ index in
+                    if let player = items[index] {
+                        PostPlayerView(player: player, isCurrentPost: $currentPost)
+                            .frame(width: size.width)
+                            .rotationEffect(.init(degrees: -90))
+                            .ignoresSafeArea(.all, edges: .top)
+                    }
                 }
             }
             .rotationEffect(.init(degrees: 90))
@@ -39,12 +37,19 @@ struct TheFeed: View {
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-//        .onAppear {
-//            if let firstVid = vids.first {
-//                currentVid = firstVid.id
-//                vids[0].isPlaying = true
-//            }
-//        }
+        .onAppear {
+            items = postModel.posts.map { post in
+                if post.postType == "image" {
+                return PostPlayer(player: nil, postItem: post)
+                } else if post.postType == "video" {
+                    guard let url = URL(string: post.url) else { return nil }
+                    let player = AVPlayer(url: url)
+                    return PostPlayer(player: player, postItem: post)
+                } else {
+                    return nil
+                }
+            }
+        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
@@ -56,54 +61,43 @@ struct TheFeed_Previews: PreviewProvider {
     }
 }
     
-struct VidsPlayer: View {
-    @Binding var vid: Vid
-    @Binding var currentVid: String
+struct PostPlayerView: View {
+    var player: PostPlayer
+    @Binding var isCurrentPost: String
     @State private var likeTapped: Bool = false
     @State private var HotSelected = true
     @State var leaderboardPageShow = false
     @State var commentsTapped = false
+    @State private var isPlaying = true
     
 
-    
-    
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
              ZStack {
-                switch vid.mediafile.mediaType {
-                case .video:
-                if let player = vid.player {
-                    CustomVideoPlayer(player: player, isPlaying: $vid.isPlaying)
-                        .onTapGesture {
-                        vid.isPlaying.toggle()
-                        vid.manuallyPaused.toggle()
-                        }
-                        .onChange(of: currentVid) { value in
-                        vid.isPlaying = vid.id == value
-                        if !vid.isPlaying {
-                        player.seek(to: CMTime.zero)
-                        }
-                        if vid.isPlaying {
-                        player.play()
-                        }
-                    }
-                }
-                
-            case .image:
-                // Construct the file path
-                if let imagePath = Bundle.main.path(forResource: vid.mediafile.url, ofType: "jpeg"),
-                   let uiImage = UIImage(contentsOfFile: imagePath) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFit()
-                } else {
-                    // Handle image not found case
-                    Text("Image not found")
-                }
-            }
-               
-                
-                
+                 if player.postItem.postType == "video" {
+                     if let urlPlayer = self.player.player {
+                         CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
+                             .onTapGesture {
+                                 isPlaying.toggle()
+                             }
+                     } else {
+                         Text("Error Loading Post")
+                        .font(.custom("LexendDeca-Regular", size: 25))
+                        .foregroundColor(.white)
+                     }
+                     
+                 } else if player.postItem.postType == "image" {
+                     let imageURL = player.postItem.url
+                         KFImage(URL(string: imageURL))
+                             .resizable()
+                             .scaledToFit()
+                 } else {
+                         Text("Error Loading Post")
+                             .font(.custom("LexendDeca-Regular", size: 25))
+                             .foregroundColor(.white)
+                     }
+                 
+            
                 
                //- MARK: Hot/New button
                 VStack {
@@ -169,7 +163,7 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    Image(vid.mediafile.posterProfilePic)
+                                    KFImage(URL(string: player.postItem.profilepic))
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
@@ -181,7 +175,7 @@ struct VidsPlayer: View {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
-                                    Text("@\(vid.mediafile.posterUsername)")
+                                    Text("@\(player.postItem.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
                                 }
                             }
@@ -189,7 +183,7 @@ struct VidsPlayer: View {
                             //- MARK: Caption/Location buttons Vstack
                             VStack(spacing: 5) {
                                 HStack {
-                                    Text(vid.mediafile.postcaption)
+                                    Text(player.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 16))
                                 }
                              
@@ -198,7 +192,7 @@ struct VidsPlayer: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍" + "\(vid.mediafile.postLocation)")
+                                        Text("📍" + "\(player.postItem.location)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -232,33 +226,33 @@ struct VidsPlayer: View {
                             }
                             .padding(.leading, -15)
                         }
-                        Text("\(vid.mediafile.postLikeCount)")
+                        Text("\(player.postItem.numLikes)")
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
                     
                     
-                    VStack {
-                    Button(action: {
-                        commentsTapped.toggle()
-                    }) {
-                        VStack {
-                            Image(systemName: "text.bubble.fill")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.white)
-                        }
-                    }
-                        Text("\(vid.mediafile.commentCount)")
-                        .foregroundColor(.white)
-                        .font(.custom("LexendDeca-Regular", size: 16))
-                        .sheet(isPresented: $commentsTapped) {
-                            CommentsPage(comments: vid.mediafile.commentSection)
-                                .presentationDetents([.fraction(0.85)])
-                                .presentationDragIndicator(.visible)
-                        }
-                }
-                    .padding(.top, 20)
+//                    VStack {
+//                    Button(action: {
+//                        commentsTapped.toggle()
+//                    }) {
+//                        VStack {
+//                            Image(systemName: "text.bubble.fill")
+//                                .resizable()
+//                                .frame(width: 35, height: 35)
+//                                .foregroundColor(.white)
+//                        }
+//                    }
+//                        Text("\(vid.mediafile.commentCount)")
+//                        .foregroundColor(.white)
+//                        .font(.custom("LexendDeca-Regular", size: 16))
+//                        .sheet(isPresented: $commentsTapped) {
+//                            CommentsPage(comments: vid.mediafile.commentSection)
+//                                .presentationDetents([.fraction(0.85)])
+//                                .presentationDragIndicator(.visible)
+//                        }
+//                }
+//                    .padding(.top, 20)
                     
                     Button(action: {
                         //report post

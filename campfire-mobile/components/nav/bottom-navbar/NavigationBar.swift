@@ -10,7 +10,7 @@ import SwiftUICam
 
 struct NavigationBar: View {
     @StateObject var cameraModel = CameraModel()
-    @ObservedObject var userData = AuthModel()
+    @StateObject var userData = AuthModel()
     var body: some View {
         NavigationView {
         TabView() {

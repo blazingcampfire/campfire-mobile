@@ -39,12 +39,12 @@ struct EnterName: View {
                         
                         // MARK: - NavLink to VerifyEmail screen
                         VStack {
-                            NavigationLink(destination: VerifyEmail(), label: {
+                            NavigationLink(destination: SetProfilePic(), label: {
                                 LFButton(text: "next")
                             })
                         }
                         .opacity(buttonOpacity)
-                        .disabled(!model.validEmailString)
+                        .disabled(!model.validName)
                     }
                     .padding(.bottom, 200)
                 }
@@ -55,7 +55,7 @@ struct EnterName: View {
 
 extension EnterName {
     var buttonOpacity: Double {
-        return model.validEmailString ? 1 : 0.5
+        return model.validName ? 1 : 0.5
     }
 }
 

@@ -10,7 +10,7 @@ class ProfileModel: ObservableObject {
     
     init(id: String) {
         // Initialize the profile with an empty Profile object and id variable when the class is created.
-        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", pfpData: Data(), userID: id, school: "", bio: "")
+        self.profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", userID: id, school: "", bio: "")
         self.id = id
     }
     

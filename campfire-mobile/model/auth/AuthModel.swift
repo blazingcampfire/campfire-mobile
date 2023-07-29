@@ -225,6 +225,7 @@ extension AuthModel {
         phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
         
         let school: String = schoolParser(email: email)
+        let nameInsensitive: String = name.lowercased()
         
         var userRef: CollectionReference
         var profileRef: CollectionReference
@@ -245,7 +246,7 @@ extension AuthModel {
             return
         }
         
-        let profileData = Profile(name: name, phoneNumber: phoneNumber , email: email, username: username, posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", pfpData: Data(), userID: userID, school: school, bio: "")
+        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber , email: email, username: self.username, posts: [[:]], postData: [[:]], chocs: 0, userID: userID, school: school, bio: "")
         
         let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
        

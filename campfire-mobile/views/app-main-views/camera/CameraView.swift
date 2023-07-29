@@ -23,8 +23,6 @@ struct CameraView: View {
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
-    @State private var showSelectedPhoto: Bool = false
-    @State private var showSelectedVideo: Bool = false
     @State private var isPlaying: Bool = true
     @State private var isLoading = true
     @State var isRecording = false
@@ -42,18 +40,19 @@ struct CameraView: View {
                             isPlaying.toggle()
                         }
                         .edgesIgnoringSafeArea(.all)
-                } else {
+                }
+                else {
                     Text("Error Loading Recorded Video")
-                    .font(.system(size: 25))
+                    .font(.custom("LexendDeca-Regular", size: 25))
                     .foregroundColor(.white)
                 }
                  
                 PreviewPostInfo(userData: userData)
-                PostButton()
-                SaveButton(camera: camera)
+                VideoPostButton(camera: camera)
+                VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
                 
-            } else if showSelectedPhoto {
+            } else if camera.showSelectPhoto {
                     Color.black
                     .ignoresSafeArea(.all)
                 if let selectedImageData = camera.selectedImageData,
@@ -61,18 +60,18 @@ struct CameraView: View {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                } else {
+                }
+                else {
                     Text("Error Loading Selected Image")
-                        .font(.system(size: 25))
+                        .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
                 PreviewPostInfo(userData: userData)
-                PostButton()
+                PhotoPostButton(camera: camera)
                 
                 VStack {
                     Button(action: {
                         camera.reTake()
-                        self.showSelectedPhoto = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(Theme.Peach)
@@ -84,44 +83,41 @@ struct CameraView: View {
                 .padding(.top, 20)
                 .padding(.leading, 330)
 
-            } else if showSelectedVideo {
+            } else if camera.showSelectVideo {
                 if let selectedVideoURL = camera.selectedVideoURL {
-                Group {
-                    if isLoading {
-                        ProgressView("Loading Video...")
-                            .font(.system(size: 25))
-                            .foregroundColor(.white)
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                    isLoading = false
+                    Group {
+                        if isLoading {
+                            ProgressView("Loading Video...")
+                                .font(.custom("LexendDeca-Regular", size: 25))
+                                .foregroundColor(.white)
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        isLoading = false
+                                    }
                                 }
-                            }
+                        }
+                        else {
+                            CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
+                                .onTapGesture {
+                                    isPlaying.toggle()
+                                }
+                                .edgesIgnoringSafeArea(.all)
+                                .aspectRatio(9/16, contentMode: .fill)
+                        }
+                    }
                 }
                 else {
-                        CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
-                            .onTapGesture {
-                                isPlaying.toggle()
-                            }
-                            .onAppear {
-                                isPlaying = true
-                            }
-                            .edgesIgnoringSafeArea(.all)
-                            .aspectRatio(9/16, contentMode: .fill)
-                    }
-                    }
-                } else {
                     Text("Error Loading Selected Video")
-                        .font(.system(size: 25))
+                        .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
                 
                 PreviewPostInfo(userData: userData)
-                PostButton()
+                VideoPostButton(camera: camera)
                 VStack {
                     Button(action: {
                         camera.reTake()
-                        self.showSelectedVideo = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(Theme.Peach)
@@ -141,9 +137,9 @@ struct CameraView: View {
                        .scaledToFill()
                        .edgesIgnoringSafeArea(.all)
                 }
-                SaveButton(camera: camera)
+                PhotoSaveButton(camera: camera)
                 PreviewPostInfo(userData: userData)
-                PostButton()
+                PhotoPostButton(camera: camera)
                 RetakeButton(camera: camera)
                 
             } else {
@@ -185,12 +181,12 @@ struct CameraView: View {
                         }
                         .onChange(of: camera.selectedImageData) { newImageData in
                             if let _ = newImageData {
-                                self.showSelectedPhoto = true
+                                camera.showSelectPhoto = true
                             }
                         }
                         .onChange(of: camera.selectedVideoURL) { newVideoURL in
                             if let _ = newVideoURL {
-                                self.showSelectedVideo = true
+                                camera.showSelectVideo = true
                             }
                         }
                         ZStack {
@@ -261,10 +257,6 @@ struct CameraView: View {
             )
             }
         }
-       
-    
-        
-
     }
     var tapGesture: some Gesture {
             TapGesture()
@@ -274,13 +266,14 @@ struct CameraView: View {
                 }
         }
     var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .local)
-            .onEnded { _ in
-                camera.stopRecording()
-            }
-    }
+            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onEnded { _ in
+                    camera.stopRecording()
+                }
+        }
+
     var longPressGesture: some Gesture {
-        LongPressGesture(minimumDuration: 0.7)
+        LongPressGesture(minimumDuration: 0.5)
             .onEnded { _ in
                 camera.startRecording()
             }

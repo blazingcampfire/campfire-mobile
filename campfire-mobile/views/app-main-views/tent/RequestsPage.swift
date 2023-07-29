@@ -9,11 +9,10 @@ import SwiftUI
 struct RequestsPage: View {
     @State var searchText = ""
     var body: some View {
-        NavigationStack {
+        NavigationView {
             // Text("Search for users") // users collection query
             ListRequests()
         }
-        .searchable(text: $searchText)
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)

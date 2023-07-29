@@ -17,16 +17,10 @@ struct Vid: Identifiable {    // This sets up the properties of the image or vid
     
 }
 
-struct PostVid: Identifiable {    // This sets up the properties of the image or video that is displayed
-    var id = UUID().uuidString
-    var player: AVPlayer?
-    var postfile: PostFile
-    var isPlaying: Bool = false
-    var manuallyPaused: Bool = false
-
+enum MediaType: String, Codable {  // Allows a case to be setup to handle different Mediatypes
+    case video
+    case image
 }
-
-
 
 //MediaFile represents one post in the feed and all its properties
 struct MediaFile: Identifiable {   // This separates the url from the initial Vid item, further simplifies what Vid has to handle
@@ -56,15 +50,14 @@ struct PostFile: Identifiable {   // This separates the url from the initial Vid
  
 }
 
-
-enum MediaType: String, Codable {  // Allows a case to be setup to handle different Mediatypes
-    case video
-    case image
-}
-
-
-
-
+//struct PostVid: Identifiable {    // This sets up the properties of the image or video that is displayed
+//    var id = UUID().uuidString
+//    var player: AVPlayer?
+//    var postfile: PostFile
+//    var isPlaying: Bool = false
+//    var manuallyPaused: Bool = false
+//
+//}
 
 
 

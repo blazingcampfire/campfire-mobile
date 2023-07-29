@@ -49,7 +49,7 @@ struct CreateUsername: View {
                         
                         // MARK: - NavLink to SetProfilePic screen
                         VStack {
-                            NavigationLink(destination: SetProfilePic(), label: {
+                            NavigationLink(destination: EnterName(), label: {
                                 LFButton(text: "next")
                             })
                         }

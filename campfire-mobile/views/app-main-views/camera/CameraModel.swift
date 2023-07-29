@@ -137,7 +137,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
    
 
     
-    //-MARK: Set's up the camera feed/session
+    //-MARK: Sets up the camera feed/session
     func setUp() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {

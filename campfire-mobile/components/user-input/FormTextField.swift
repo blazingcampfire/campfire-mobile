@@ -15,6 +15,7 @@ struct FormTextField: View {
                 .foregroundColor(Color.white)
                 .padding(.horizontal)
                 .focused($isEnabled)
+                .autocapitalization(.none)
 
             ZStack {
                 Rectangle()

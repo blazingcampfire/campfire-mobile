@@ -25,7 +25,7 @@ struct SettingsPage: View {
 }
     
     struct SettingsForm: View {
-        
+        var accountModel: SettingsModel = SettingsModel()
         var body: some View {
                 Form {
                     Section(header: Text("Display")) {
@@ -90,20 +90,37 @@ struct SettingsPage: View {
                     .font(.custom("LexendDeca-Regular", size: 16))
                     
                     Section(header: Text("Account")) {
-                        NavigationLink(destination: AccountSetUp()) {
-                            Label {
-                                Text("Log Out")
-                            } icon: {
-                                Image(systemName: "lock.fill")
-                                    .foregroundColor(Theme.Peach)
-                            }
+                        VStack {
+                            Button(action: {
+                                do {
+                                    try accountModel.signOut()
+                                }
+                                catch {
+                                    print(error)
+                                }
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "lock.fill")
+                                        .foregroundColor(Theme.Peach)
+                                    Text("Log Out")
+                                        .foregroundColor(.black)
+                                }
+                            })
                         }
-                        Label {
-                            Text("Delete Account")
-                        } icon: {
-                            Image(systemName: "delete.right")
-                                .foregroundColor(Theme.Peach)
-                        }
+//                        NavigationLink(destination: AccountSetUp()) {
+//                            Label {
+//                                Text("Log Out")
+//                            } icon: {
+//                                Image(systemName: "lock.fill")
+//                                    .foregroundColor(Theme.Peach)
+//                            }
+//                        }
+//                        Label {
+//                            Text("Delete Account")
+//                        } icon: {
+//                            Image(systemName: "delete.right")
+//                                .foregroundColor(Theme.Peach)
+//                        }
                     }
                     .font(.custom("LexendDeca-Regular", size: 16))
                 }

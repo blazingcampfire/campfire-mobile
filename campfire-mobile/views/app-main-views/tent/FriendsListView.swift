@@ -38,10 +38,10 @@ struct FriendsListView: View {
     }
 }
 
-struct FriendsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        FriendsListView(profilepic: info.profilepic, name: info.name, username: info.username)
-    }
-}
+//struct FriendsListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FriendsListView(profilepic: info.profilepic, name: info.name, username: info.username)
+//    }
+//}
 
 

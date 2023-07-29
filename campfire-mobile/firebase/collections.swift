@@ -31,3 +31,5 @@ let yaleRelationships = yale.collection("relationships")
 let riceRelationships = rice.collection("relationships")
 
 
+
+//db.collection("users").document("notreDame").collection("profiles")

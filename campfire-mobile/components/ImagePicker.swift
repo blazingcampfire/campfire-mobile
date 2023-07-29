@@ -12,7 +12,7 @@ import PhotosUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var selectedImage: Image?
+    @Binding var selectedImage: UIImage?
     @Binding var isPickerShowing: Bool
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
@@ -54,13 +54,13 @@ class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationCo
             return
         }
         
-        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
             if let error = error {
                 print("Error loading image: \(error.localizedDescription)")
-            } else if let image = image as? UIImage {
+            } else if let image = object as? UIImage { // Check if object is a UIImage
                 DispatchQueue.main.async {
-                    self?.parent.selectedImage = Image(uiImage: image)
                     self?.parent.isPickerShowing = false
+                    self?.parent.selectedImage = image
                 }
             } else {
                 print("Unable to load image.")

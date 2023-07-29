@@ -26,4 +26,7 @@ let ndProfiles = notreDame.collection("profiles")
 let yaleProfiles = yale.collection("profiles")
 let riceProfiles = rice.collection("profiles")
 
-
+// MARK: - Feed Posts
+let ndPosts = notreDame.collection("posts")
+let yalePosts = yale.collection("posts")
+let ricePosts = rice.collection("posts")

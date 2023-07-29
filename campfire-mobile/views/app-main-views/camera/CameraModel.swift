@@ -42,11 +42,14 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var needtoShowAlert = false
     @Published var sessionInterrupted: Bool = false
     @Published var capturedPic: UIImage?
+    @Published var showSelectPhoto: Bool = false
+    @Published var showSelectVideo: Bool = false
     
     
     var timer: AnyCancellable?
     var temporaryPhotoURL: URL?
     var isUsingFrontCam: Bool
+    private var captureDevice: AVCaptureDevice?
     
     //-MARK: Alerts
     enum AlertType: Identifiable {
@@ -74,7 +77,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @objc func sessionWasInterrupted(notification: NSNotification) {
         print("Session was interrupted")
         DispatchQueue.main.async {
-            self.sessionInterrupted = true
+            self.alertType = .sessionInterrupted
         }
     }
 
@@ -90,7 +93,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     }
     @objc func handleSessionRuntimeError(notification: NSNotification) {
         DispatchQueue.main.async {
-            self.sessionInterrupted = true
+            self.alertType = .sessionInterrupted
         }
     }
     deinit {
@@ -372,6 +375,8 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         self.selectedImageData = nil
                         self.selectedVideoURL = nil
                         self.capturedPic = nil
+                        self.showSelectPhoto = false
+                        self.showSelectVideo = false
                     }
                 }
             }
@@ -381,10 +386,9 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     
     func startRecording() {
         print("called startrecord")
-        
         let maxDuration = CMTimeMakeWithSeconds(15, preferredTimescale: 30) // Max duration = 15 seconds
         self.movieOutput.maxRecordedDuration = maxDuration
-
+        
         // Get the camera device and check if it supports video recording.
         guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
             print("Could not find a suitable input device for video recording")
@@ -676,32 +680,29 @@ struct CameraPreview: UIViewRepresentable {
                 }
         
         @objc func handlePan(_ sender: UIPanGestureRecognizer) {
-            if sender.state == .changed {
-                let velocity = sender.velocity(in: sender.view)
-
-                // only take action on vertical movement
-                if abs(velocity.y) > abs(velocity.x) {
-                    adjustZoom(for: velocity.y)
+                    if sender.state == .changed {
+                        let velocity = sender.velocity(in: sender.view)
+                        // only take action on vertical movement
+                        if abs(velocity.y) > abs(velocity.x) {
+                            adjustZoom(for: velocity.y)
+                        }
+                    }
                 }
-            }
-        }
-        func adjustZoom(for velocity: CGFloat) {
-            guard let device = (self.camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
-                return
-            }
-            do {
-                try device.lockForConfiguration()
-                defer { device.unlockForConfiguration() }
+                func adjustZoom(for velocity: CGFloat) {
+                     guard let device = (self.camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
+                         return
+                     }
+                     do {
+                         try device.lockForConfiguration()
+                         defer { device.unlockForConfiguration() }
+                         // velocity is inverted so downswipe increases the zoom
+                         let zoomFactor = min(max(1.0, device.videoZoomFactor - velocity / 2000.0), device.activeFormat.videoMaxZoomFactor)
+                         device.videoZoomFactor = zoomFactor
+                     } catch {
+                         print("Error while trying to zoom: \(error.localizedDescription)")
+                     }
+                 }
 
-                // velocity is inverted so downswipe increases the zoom
-                let zoomFactor = min(max(1.0, device.videoZoomFactor - velocity / 2000.0), device.activeFormat.videoMaxZoomFactor)
-                device.videoZoomFactor = zoomFactor
-            } catch {
-                print("Error while trying to zoom: \(error.localizedDescription)")
-            }
-        }
-        
-        
         @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
             if sender.state == .ended {
                 self.camera.rotateCamera()

@@ -11,9 +11,13 @@
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
 		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
+		B14D678A2A748A030035B0CE /* FeedPostStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D67892A748A030035B0CE /* FeedPostStructure.swift */; };
 		B1562CDF2A5E501B00E8C5FD /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */; };
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
 		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
+		B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */; };
+		B17E77CA2A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */; };
+		B17E77CC2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov in Resources */ = {isa = PBXBuildFile; fileRef = B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
 		B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19732A4613A200309256 /* LeaderboardPage.swift */; };
 		B18B19912A46976700309256 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */; };
@@ -182,9 +186,13 @@
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
+		B14D67892A748A030035B0CE /* FeedPostStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostStructure.swift; sourceTree = "<group>"; };
 		B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
 		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
+		B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostModel.swift; sourceTree = "<group>"; };
+		B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov"; path = "../../../../../../../var/folders/pw/hj8b595d6630wbmy2m_fggch0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=6B8DD952-F908-4314-91C5-0567D663C139&mode=compatible&noloc=0.mov/cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov"; sourceTree = "<group>"; };
+		B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov"; path = "../../../../../../../var/folders/pw/hj8b595d6630wbmy2m_fggch0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=8102B9AF-2BA7-487E-AEC8-90C92850EBAD&mode=compatible&noloc=0.mov/cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov"; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -363,6 +371,8 @@
 		B18B19AE2A469D1D00309256 /* customfonts */ = {
 			isa = PBXGroup;
 			children = (
+				B17E77CB2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov */,
+				B17E77C92A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov */,
 				B14D3A002A5B8AFA00056EAA /* sofrat.mov */,
 				B1EDD2AE2A5915CE0096F335 /* talkin.mov */,
 				B1EDD2B02A5915CE0096F335 /* gunna.mov */,
@@ -731,6 +741,8 @@
 				F87DA9CC2A6783BB00CBAA98 /* profileModel.swift */,
 				E21F79C32A68DF98004B3DCC /* SearchPageModel.swift */,
 				E241D0E22A6A2A8C00C12B3A /* currentUserModel.swift */,
+				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
+				B14D67892A748A030035B0CE /* FeedPostStructure.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -902,9 +914,11 @@
 				B18B19962A46976700309256 /* JosefinSans-Bold.ttf in Resources */,
 				B18B19972A46976700309256 /* JosefinSans-BoldItalic.ttf in Resources */,
 				B18B19982A46976700309256 /* JosefinSans-ExtraLight.ttf in Resources */,
+				B17E77CC2A7405C500F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:855:0:0.mov in Resources */,
 				B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */,
 				B18B19992A46976700309256 /* JosefinSans-ExtraLightItalic.ttf in Resources */,
 				B18B199A2A46976700309256 /* JosefinSans-Italic.ttf in Resources */,
+				B17E77CA2A74015200F3C892 /* cm-chat-media-video-1:830bbb84-b041-4adf-930a-54c5fbb4d7da:406:0:0.mov in Resources */,
 				B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */,
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
@@ -957,7 +971,7 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
-				F86695162A40F78300D9471C /* ProfilePage.swift in Sources */,
+				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
 				B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */,
 				E2163E4C2A6633D2005A20BE /* authFunctions.swift in Sources */,
 				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
@@ -979,7 +993,6 @@
 				B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */,
 				F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */,
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
-				F83B0EB22A4D2CBE00F98CFA /* CamPostPage.swift in Sources */,
 				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
 				F89402132A5E64F30049410E /* FriendsListView.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
@@ -1037,11 +1050,13 @@
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
+				B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */,
 				E21F79C42A68DF98004B3DCC /* SearchPageModel.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,
 				E2163E542A663DE5005A20BE /* content.swift in Sources */,
 				F87DA9CD2A6783BB00CBAA98 /* profileModel.swift in Sources */,
 				B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */,
+				B14D678A2A748A030035B0CE /* FeedPostStructure.swift in Sources */,
 				E280A9EA2A4FDEEA00410B34 /* TentTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

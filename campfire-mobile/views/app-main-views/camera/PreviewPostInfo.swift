@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseStorage
+import AVKit
+
 
 struct PreviewPostInfo: View {
     @ObservedObject var userData: AuthModel
@@ -37,12 +40,24 @@ struct PreviewPostInfo: View {
     }
 }
 
-struct PostButton: View {
+struct PhotoPostButton: View {
+    @ObservedObject var camera: CameraModel
+    @ObservedObject var createPost = FeedPostModel()
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
-                //post button
+                if camera.capturedPic != nil {
+                    let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8)
+                    createPost.postPhoto(imageData: imageData)
+                    camera.reTake()
+                    print("success")
+                } else if camera.selectedImageData != nil {
+                    let imageData = camera.selectedImageData
+                    createPost.postPhoto(imageData: imageData)
+                    camera.reTake()
+                    print("success")
+                }
             }) {
                 HStack(spacing: 7) {
                 Text("post")
@@ -61,13 +76,86 @@ struct PostButton: View {
     }
 }
 
-struct SaveButton: View {
+struct VideoPostButton: View {
+    @ObservedObject var camera: CameraModel
+    @ObservedObject var createPost = FeedPostModel()
+    var body: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+            Button(action: {
+                if camera.selectedVideoURL != nil {
+                    createPost.postVideo(videoURL: camera.selectedVideoURL!) { success in
+                        if success {
+                            print("nice")
+                            camera.reTake()
+                        } else {
+                            print("nope yoo")
+                        }
+                    }
+                } else if camera.isVideoRecorded {
+                    if let currentItem = camera.videoPlayback?.currentItem,
+                       let asset = currentItem.asset as? AVURLAsset {
+                        let url = asset.url
+                        createPost.postVideo(videoURL: url) { success in
+                            if success {
+                                print("nice")
+                                camera.reTake()
+                            } else {
+                                print("nope yoo")
+                            }
+                        }
+                    }
+                }
+            }) {
+                HStack(spacing: 7) {
+                Text("post")
+                .foregroundColor(.white)
+                .font(.custom("LexendDeca-SemiBold", size: 22))
+                Image(systemName: "arrowshape.right.fill")
+                .font(.system(size: 20))
+                .foregroundColor(.white)
+                }
+                .padding(15)
+                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
+            }
+        }
+        .padding(.bottom, 30)
+        .padding(.leading, 250)
+    }
+}
+
+
+struct PhotoSaveButton: View {
     @ObservedObject var camera: CameraModel
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
                 if !camera.isSaved{camera.savePic()}
+            }) {
+                Circle()
+                .overlay(
+                Image(systemName: self.camera.isSaved ? "checkmark.circle.fill" : "arrow.down.circle.fill")
+                    .foregroundColor(.white)
+                    .background(Theme.Peach)
+                    .font(.system(size: 30))
+                    .clipShape(Circle())
+                )
+                .frame(width: 50, height: 50)
+            }
+        }
+        .padding(.bottom, 30)
+        .padding(.trailing, 315)
+    }
+}
+
+struct VideoSaveButton: View {
+    @ObservedObject var camera: CameraModel
+    var body: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+            Button(action: {
+                if !camera.isSaved{camera.saveVideo()}
             }) {
                 Circle()
                 .overlay(

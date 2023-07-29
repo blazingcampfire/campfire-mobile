@@ -27,3 +27,5 @@ let yaleProfiles = yale.collection("profiles")
 let riceProfiles = rice.collection("profiles")
 
 
+
+//db.collection("users").document("notreDame").collection("profiles")

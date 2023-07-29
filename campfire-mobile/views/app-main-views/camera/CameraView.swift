@@ -19,6 +19,7 @@ import PhotosUI
 struct CameraView: View {
     
     @ObservedObject var camera: CameraModel
+    @ObservedObject var userData: AuthModel
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
@@ -46,36 +47,11 @@ struct CameraView: View {
                     .font(.system(size: 25))
                     .foregroundColor(.white)
                 }
-                VStack(alignment: .leading) {
-                    Spacer()
-                    Button(action: {
-                        if !camera.isSaved{camera.saveVideo()}
-                    }) {
-                        Text(camera.isSaved ? "Saved" : "Save")
-                            .foregroundColor(.black)
-                            .fontWeight(.semibold)
-                            .padding(.vertical,10)
-                            .padding(.horizontal,20)
-                            .background(Color.white)
-                            .clipShape(Capsule())
-                    }
-                }
-                .padding(.bottom, 60)
-                .padding(.trailing, 300)
-        
-                VStack{
-                    Button(action: {
-                        camera.reTake()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 40))
-                    }
-                    Spacer()
-                }
-                .padding(.top, 20)
-                .padding(.trailing, 330)
+                 
+                PreviewPostInfo(userData: userData)
+                PostButton()
+                SaveButton(camera: camera)
+                RetakeButton(camera: camera)
                 
             } else if showSelectedPhoto {
                     Color.black
@@ -90,20 +66,23 @@ struct CameraView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                 }
+                PreviewPostInfo(userData: userData)
+                PostButton()
+                
                 VStack {
                     Button(action: {
                         camera.reTake()
                         self.showSelectedPhoto = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.Peach)
                             .fontWeight(.bold)
-                            .font(.system(size: 40))
+                            .font(.system(size: 45))
                     }
                     Spacer()
                 }
                 .padding(.top, 20)
-                .padding(.trailing, 330)
+                .padding(.leading, 330)
 
             } else if showSelectedVideo {
                 if let selectedVideoURL = camera.selectedVideoURL {
@@ -118,9 +97,8 @@ struct CameraView: View {
                                     isLoading = false
                                 }
                             }
-                    
                 }
-                    else {
+                else {
                         CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
                             .onTapGesture {
                                 isPlaying.toggle()
@@ -137,61 +115,36 @@ struct CameraView: View {
                         .font(.system(size: 25))
                         .foregroundColor(.white)
                 }
-            
+                
+                PreviewPostInfo(userData: userData)
+                PostButton()
                 VStack {
                     Button(action: {
                         camera.reTake()
                         self.showSelectedVideo = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.Peach)
                             .fontWeight(.bold)
-                            .font(.system(size: 40))
+                            .font(.system(size: 45))
                     }
                     Spacer()
                 }
                 .padding(.top, 20)
-                .padding(.trailing, 330)
+                .padding(.leading, 330)
             }
             
             else if camera.isTaken  {
-                
                 if let uiImage = camera.capturedPic {
                     Image(uiImage: uiImage)
                        .resizable()
                        .scaledToFill()
                        .edgesIgnoringSafeArea(.all)
                 }
-                VStack(alignment: .leading) {
-                    Spacer()
-                    Button(action: {
-                        if !camera.isSaved{camera.savePic()}
-                    }) {
-                        Text(camera.isSaved ? "Saved" : "Save")
-                            .foregroundColor(.black)
-                            .fontWeight(.semibold)
-                            .padding(.vertical,10)
-                            .padding(.horizontal,20)
-                            .background(Color.white)
-                            .clipShape(Capsule())
-                    }
-                }
-                .padding(.bottom, 60)
-                .padding(.trailing, 300)
-                
-                VStack {
-                    Button(action: {
-                        camera.reTake()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .font(.system(size: 40))
-                    }
-                    Spacer()
-                }
-                .padding(.top, 20)
-                .padding(.trailing, 330)
+                SaveButton(camera: camera)
+                PreviewPostInfo(userData: userData)
+                PostButton()
+                RetakeButton(camera: camera)
                 
             } else {
                 ZStack() {
@@ -335,8 +288,8 @@ struct CameraView: View {
     
 }
 
-//struct CameraView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CameraView()
-//    }
-//}
+struct CameraView_Previews: PreviewProvider {
+    static var previews: some View {
+        CameraView(camera: CameraModel(), userData: AuthModel())
+    }
+}

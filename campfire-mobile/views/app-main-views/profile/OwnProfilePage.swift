@@ -48,7 +48,7 @@ struct OwnProfilePage: View {
                                 }
                                 .padding(.top)
                                 HStack {
-                                    NavigationLink(destination: EditProfile(postImages: profileModel.profile?.postData ?? [], prompts: profileModel.profile?.prompts ?? [])
+                                    NavigationLink(destination: EditProfile()
                                         .environmentObject(profileModel)) {
                                             Text("Edit Profile")
                                                 .font(.custom("LexendDeca-Bold", size: 15))
@@ -95,26 +95,46 @@ struct OwnProfilePage: View {
                             }
                         }
                         if let posts = profileModel.profile?.postData {
-                            
-                            VStack {
-                                VStack(spacing: 20) {
-                                    Spacer()
-                                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                                        ForEach(posts, id: \.self) { post in
-                                            if let imageData = post as? Data {
-                                                VStack(spacing: 20) {
-                                                    PostAttributes(data: imageData)
-                                                        .frame(width: 350)
+                                    VStack {
+                                        VStack(spacing: 20) {
+                                            Spacer()
+                                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
+                                                ForEach(posts, id: \.self) { post in
+                                                    if let (imageData, prompt) = post.first {
+                                                        VStack(spacing: 20) {
+                                                            PostAttributes(data: imageData, prompt: prompt)
+                                                                .frame(width: 350)
+                                                        }
+                                                    }
                                                 }
                                             }
-                                        }
-                                    }
-                                    .padding(.horizontal)
+                                            .padding(.horizontal)
+                                }
+                                        if posts.count < 6 {
+                                            Spacer()
+                                            NavigationLink(destination: AddPost().environmentObject(profileModel)) {
+                                                ZStack {
+                                                    Rectangle()
+                                                        .foregroundColor(.clear)
+                                                        .frame(width: 350, height: 350)
+                                                    VStack {
+                                                        Image(systemName: "plus.circle")
+                                                            .font(.system(size: 75))
+                                                            .foregroundColor(Theme.Peach)
+                                                        Text("add post!")
+                                                            .font(.custom("LexendDeca-SemiBold", size: 25))
+                                                            .foregroundColor(Theme.Peach)
+                                                    }
+                                                }
+                                            }
                                 }
                             }
                         }
                     }
                     .padding()
+                }
+                .refreshable {
+                    profileModel.getProfile()
                 }
             }
             .onAppear {

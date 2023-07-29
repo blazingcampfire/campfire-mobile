@@ -16,9 +16,8 @@ public class Profile: Codable, Hashable {
     var email: String
     var username: String
     var friends: [Profile]?
-    var posts: [String]
-    var postData: [Data]
-    var prompts: [String]
+    var posts: [[String : String]]
+    var postData: [[Data : String]]
     var chocs: Int
     var profilePicURL: String?
     var userID: String
@@ -33,7 +32,7 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [String], postData: [Data], prompts: [String], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
+    init(name: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String? = nil, userID: String, school: String, bio: String) {
         self.name = name
         self.phoneNumber = phoneNumber
         self.email = email
@@ -41,7 +40,6 @@ public class Profile: Codable, Hashable {
         self.friends = friends
         self.posts = posts
         self.postData = postData
-        self.prompts = prompts
         self.chocs = chocs
         self.profilePicURL = profilePicURL
         self.userID = userID
@@ -57,8 +55,7 @@ public class Profile: Codable, Hashable {
         email = try container.decode(String.self, forKey: .email)
         username = try container.decode(String.self, forKey: .username)
         friends = try container.decodeIfPresent([Profile].self, forKey: .friends)
-        posts = try container.decode([String].self, forKey: .posts)
-        prompts = try container.decode([String].self, forKey: .prompts)
+        posts = try container.decode([[String : String]].self, forKey: .posts)
         chocs = try container.decode(Int.self, forKey: .chocs)
         profilePicURL = try container.decodeIfPresent(String.self, forKey: .profilePicURL)
         userID = try container.decode(String.self, forKey: .userID)
@@ -66,7 +63,7 @@ public class Profile: Codable, Hashable {
         bio = try container.decode(String.self, forKey: .bio)
 
         // since Firebase doesn't store the `postData`, we'll initialize it as an empty array
-        postData = []
+        postData = [[ : ]]
     }
 }
 

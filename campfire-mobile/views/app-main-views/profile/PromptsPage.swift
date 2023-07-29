@@ -8,34 +8,35 @@
 import SwiftUI
 
 struct PromptsPage: View {
+    @Binding var prompt: String
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
             Text("choose your prompt")
                 .font(.custom("LexendDeca-Bold", size: 20))
                 .padding(.top, 20)
-            ChoosePrompt()
+            ChoosePrompt(prompt: $prompt, dismissPromptPage: {
+                            presentationMode.wrappedValue.dismiss() // dismiss the prompt page
+                        })
         }
     }
 }
 
 
 struct ChoosePrompt: View {
-
     let promptList = ["my school moment", "my party face", "top study spot", "weekend outing", "just another day at the office", "work hard play hard!", "one thing you didn't know about me", "welcome to my TedTalk", "mondays are so...", "im totally sober", "cheers🥂"]
-
-    @State private var selectedPromptIndex: Int?
+    @State private var showConfirmButton: Bool?
+    
+    @Binding var prompt: String
+    var dismissPromptPage: () -> Void
 
     var body: some View {
-             
         ScrollView {
             ForEach(0..<promptList.count, id: \.self) { index in
                 Button(action: {
-                    if self.selectedPromptIndex == index {
-                        self.selectedPromptIndex = nil
-                        } else {
-                            self.selectedPromptIndex = index
-                        }
+                    self.prompt = promptList[index]
+                    dismissPromptPage()
                 }) {
                     HStack {
                         Text(promptList[index])
@@ -43,10 +44,10 @@ struct ChoosePrompt: View {
                             .font(.custom("LexendDeca-Regular", size: 17))
                             .padding(.leading, 40)
                             .multilineTextAlignment(.leading)
-                        
+
                         Spacer()
 
-                        if selectedPromptIndex == index {
+                        if prompt == promptList[index] {
                             Image(systemName: "checkmark")
                                 .foregroundColor(Theme.Peach)
                                 .bold()
@@ -66,10 +67,10 @@ struct ChoosePrompt: View {
 
 
 
-
-
-struct PromptsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        PromptsPage()
-    }
-}
+//
+//
+//struct PromptsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PromptsPage(prompt: <#Binding<String>#>)
+//    }
+//}

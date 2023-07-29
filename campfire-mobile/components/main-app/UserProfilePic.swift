@@ -15,7 +15,7 @@ struct UserProfilePic: View {
         Image(pfp)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
+            .frame(width: 125, height: 125)
             .clipShape(Circle())
             .overlay(
                 Circle()

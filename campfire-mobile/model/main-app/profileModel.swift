@@ -10,7 +10,7 @@ class ProfileModel: ObservableObject {
     
     init(id: String) {
         // Initialize the profile with an empty Profile object and id variable when the class is created.
-        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [], postData: [], prompts: [], chocs: 0, profilePicURL: "", userID: id, school: "", bio: "")
+        self.profile = Profile(name: "", phoneNumber: "", email: "", username: "", posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", userID: id, school: "", bio: "")
         self.id = id
     }
     
@@ -30,28 +30,36 @@ class ProfileModel: ObservableObject {
                 print("Profile ID: \(profile.userID)")
                 print("Posts: \(profile.posts)")
                 var postPaths = profile.posts
-                var fetchedImages = [Data]()
+                var fetchedImages = [[Data : String]]()
                 
                 for path in postPaths {
-                    // uses the paths to refer to the right files in the Storage
-                    let storageRef = Storage.storage().reference()
-                    let fileRef = storageRef.child(path)
-                 
-                    // converts fileReference to data
-                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                    if let (imageData, prompt) = path.first {
+                        // 'imageData' is the key and 'prompt' is the value
+                        print("Image Data: \(imageData)")
+                        print("Prompt: \(prompt)")
+                        let storageRef = Storage.storage().reference()
+                        let fileRef = storageRef.child(imageData)
                         
-                        if error == nil && data != nil {
-                            
-                            DispatchQueue.main.async {
-                                print(fetchedImages)
-                                print(data!)
-                                fetchedImages.append(data!)
-                                profile.postData = fetchedImages
-                                self.profile = profile
-                                print("yooo \(profile.postData)")
-                            }
-                        }
+                         // converts fileReference to data
+                         fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                             
+                             if error == nil && data != nil {
+                                 
+                                 DispatchQueue.main.async {
+                                     print(fetchedImages)
+                                     print(data!)
+                                     
+                                     fetchedImages.append([data! : prompt])
+                                     profile.postData = fetchedImages
+                                     self.profile = profile
+                                     print("yooo \(profile.postData)")
+                                 }
+                             }
+                         }
+                    } else {
+                        print("The 'path' dictionary is empty.")
                     }
+                    
                 }
                 
 
@@ -122,3 +130,5 @@ class ProfileModel: ObservableObject {
 //}
 //}
 //}
+
+

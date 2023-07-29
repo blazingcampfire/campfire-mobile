@@ -135,7 +135,7 @@ struct NavBar: View {
                     }
                 case 2:
                     NavigationView {
-                        CameraPage()
+//                        CameraPage()
                     }
                 case 3:
                     NavigationView {
@@ -143,7 +143,7 @@ struct NavBar: View {
                     }
                 case 4:
                     NavigationView {
-                        ProfilePage()
+                        OwnProfilePage()
                     }
 
                 default:

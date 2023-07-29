@@ -15,6 +15,7 @@ struct AddPost: View {
     @State private var promptScreen = false
     @Environment(\.presentationMode) var presentationMode
     @State var retrievedPosts = [Data]()
+    @State var prompt: String = "no prompt"
     
     @EnvironmentObject var profileModel: ProfileModel
     
@@ -51,18 +52,42 @@ struct AddPost: View {
                             Button(action: {
                                 self.promptScreen.toggle()
                             }) {
-                                Text("add prompt")
+                                Text(prompt != "no prompt" ? "Change Prompt" : "Add Prompt")
                                     .font(.custom("LexendDeca-Bold", size: 20))
                                     .foregroundColor(Theme.Peach)
                             }
                             .sheet(isPresented: $promptScreen) {
-                                PromptsPage()
+                                PromptsPage(prompt: $prompt)
                                     .presentationDetents([.fraction(0.7)])
                                     .presentationDragIndicator(.visible)
                                     .presentationCornerRadius(30)
                             }
+                            
+                            if prompt != "no prompt" {
+                                Spacer()
+                                VStack {
+                                    VStack {
+                                        Text("prompt: ")
+                                            .font(.custom("LexendDeca-SemiBold", size: 15))
+                                            .foregroundColor(Theme.TextColor)
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .fill(Theme.Peach)
+                                                .frame(height: 50)
+                                            
+                                            Text(prompt)
+                                                .font(.custom("LexendDeca-Bold", size: 15))
+                                                .foregroundColor(.white)
+                                        }
+                                        .shadow(color: Color.black.opacity(0.7), radius: 5, x: 2, y: 2)
+                                        .padding(.horizontal)
+                                        .padding(.bottom, 20)
+                                    }
+                                }
+                                .padding(.top, -30)
+                            }
                             Button(action: {
-                                confirmPost(userID: profileModel.profile!.userID)
+                                confirmPost(userID: profileModel.profile!.userID, prompt: prompt)
                                 // confirmPost function with current userID
                                 // CHECK FUNC BELOW TONI
                                 presentationMode.wrappedValue.dismiss()
@@ -99,7 +124,7 @@ struct AddPost: View {
         }
     }
     
-    func confirmPost(userID: String) {
+    func confirmPost(userID: String, prompt: String) {
         
         // confirms that there is image
         guard selectedImage != nil else {
@@ -136,10 +161,10 @@ struct AddPost: View {
                         var data = document.data()!
                         
                         // fetch posts field from current user as an array of strings
-                        if var posts = data["posts"] as? [String] {
+                        if var posts = data["posts"] as? [[String : String]] {
                             
                             // add new post URL to that array
-                            posts.append(path)
+                            posts.append([path: prompt])
                             data["posts"] = posts
                             
                             // update the profile information with added post
@@ -150,7 +175,7 @@ struct AddPost: View {
                             print("successfully retrieved posts")
                             
                         } else {
-                            data["posts"] = [path]
+                            data["posts"] = [[path : prompt]]
                             docRef.setData(data)
                         }
                     } else {
@@ -168,31 +193,35 @@ struct AddPost: View {
         let docRef = ndProfiles.document(userID)
         docRef.getDocument { document, error in
             if let document = document, document.exists {
-                if let postPaths = document.data()?["posts"] as? [String] {
+                if let posts = document.data()?["posts"] as? [[String : String]] {
                     // postPaths is an array of post URLs from firebase 'posts' field.
                     
-                    var fetchedPostsData = [Data]()
+                    var fetchedPostsData = [[Data: String]]()
                     let dispatchGroup = DispatchGroup()
                     
-                    for path in postPaths {
+                    for post in posts {
                         
-                        // uses the paths to refer to the right files in the Storage
-                        let storageRef = Storage.storage().reference()
-                        let fileRef = storageRef.child(path)
-                        
-                        dispatchGroup.enter()
-                        
-                        // converts fileReference to data
-                        fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                        if let postPath = post.keys.first, let prompt = post[postPath] {
                             
+                            // uses the paths to refer to the right files in the Storage
+                            let storageRef = Storage.storage().reference()
+                            let fileRef = storageRef.child(postPath)
                             
-                            if let data = data, error == nil {
+                            dispatchGroup.enter()
+                            
+                            // converts fileReference to data
+                            fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
                                 
-                                // adds data to fetchedPostsData array
-                                fetchedPostsData.append(data)
-                                print("successfully grabbed imageData from Storage")
+                                
+                                if let data = data, error == nil {
+                                    
+                                    let newPost = [data : prompt]
+                                    // adds data to fetchedPostsData array
+                                    fetchedPostsData.append(newPost)
+                                    print("successfully grabbed imageData from Storage")
+                                }
+                                dispatchGroup.leave()
                             }
-                            dispatchGroup.leave()
                         }
                     }
                     

@@ -14,7 +14,7 @@ struct PostAttributes: View {
 
     var body: some View {
         VStack(spacing: 1) {
-            if let prompt = prompt {
+            if let prompt = prompt, prompt != "no prompt" {
                 Rectangle()
                     .fill(Theme.Peach)
                     .frame(width: width, height: 325 / 7)

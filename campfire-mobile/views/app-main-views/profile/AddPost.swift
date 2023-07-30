@@ -88,7 +88,7 @@ struct AddPost: View {
                             }
                             Button(action: {
                                 confirmPost(userID: profileModel.profile!.userID, prompt: prompt)
-                                
+                                print(profileModel.profile!.userID)
                                 presentationMode.wrappedValue.dismiss()
                             })  {
                                 HStack {
@@ -128,17 +128,24 @@ struct AddPost: View {
                 print("No image")
                 return
             }
-
+        
+            print("check 1")
+            print(profileModel.profile!.userID)
+        
             let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
             guard let imageData = imageData else {
                 print("Image cannot be converted to data")
                 return
             }
+            print("check 2")
+            print(profileModel.profile!.userID)
 
             uploadPictureToStorage(imageData: imageData) { photoURL in
                 if let photoURL = photoURL {
-                    let docRef = Firestore.firestore().collection("profiles").document(userID)
-
+                    let docRef = ndProfiles.document(userID)
+                    print("check 3")
+                    print(profileModel.profile!.userID)
+    
                     docRef.getDocument { document, error in
                         if let document = document, document.exists {
                             var data = document.data()!

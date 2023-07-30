@@ -1,13 +1,29 @@
 //
-//  content.swift
+//  FeedPostStructure.swift
 //  campfire-mobile
 //
-//  Created by Toni on 7/17/23.
+//  Created by Femi Adebogun on 7/28/23.
 //
 
-import Foundation
+import SwiftUI
+import AVKit
 
-struct Post: Codable, Hashable, Identifiable {
-    var id = UUID()
-    let post: [Data: String]
+struct PostItem: Identifiable {
+    var id: String
+    var username: String
+    var name: String
+    var caption: String
+    var profilepic: String
+    var url: String
+    var numLikes: Int
+    var location: String
+    var comments: [String]
+    var postType: String
 }
+
+struct PostPlayer: Identifiable {
+    var id = UUID().uuidString
+    var player: AVPlayer?
+    var postItem: PostItem
+}
+

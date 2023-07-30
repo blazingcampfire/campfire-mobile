@@ -11,8 +11,8 @@ import FirebaseFirestoreSwift
 struct EditPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
-    let initialImage: Data
-    @State var postImage: Data
+    let initialImage: String
+    @State var postImage: String
     @State var prompt: String
     let initialPrompt: String
     @State var index: Int
@@ -33,7 +33,7 @@ struct EditPost: View {
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .offset(x: 0, y: selectedImage != nil ? 23 : 0)
                     } else {
-                        PostAttributes(data: postImage)
+                        PostAttributes(url: postImage)
                     }
                     
                     Button(action: {

@@ -24,7 +24,7 @@ struct OtherProfilePage: View {
                                 VStack(spacing: 0) {
                                     if let profile = profileModel.profile {
                                         
-                                        UserProfilePic(pfp: profileModel.profile?.pfpData)
+                                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
                                         
                                         Spacer()
                                    
@@ -117,14 +117,14 @@ struct OtherProfilePage: View {
                                     .presentationCornerRadius(30)
                             }
                         }
-                        if let posts = profileModel.profile?.postData {
+                        if let posts = profileModel.profile?.posts {
                             VStack(spacing: 20) {
                                 Spacer()
                                 LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                                     ForEach(posts, id: \.self) { post in
-                                        if let imageData = post as? Data {
+                                        if let (imageURL, prompt) = post.first {
                                             VStack(spacing: 20) {
-                                                PostAttributes(data: imageData)
+                                                PostAttributes(url: imageURL, prompt: prompt)
                                                     .frame(width: 350)
                                             }
                                         }

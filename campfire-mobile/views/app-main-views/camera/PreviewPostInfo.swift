@@ -42,21 +42,21 @@ struct PreviewPostInfo: View {
 
 struct PhotoPostButton: View {
     @ObservedObject var camera: CameraModel
-    @ObservedObject var createPost = FeedPostModel()
+    @ObservedObject var makePost = FeedPostModel()
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
-                if camera.capturedPic != nil {
-                    let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8)
-                    createPost.postPhoto(imageData: imageData)
-                    camera.reTake()
-                    print("success")
-                } else if camera.selectedImageData != nil {
-                    let imageData = camera.selectedImageData
-                    createPost.postPhoto(imageData: imageData)
-                    camera.reTake()
-                    print("success")
+                if let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8) ?? camera.selectedImageData {
+                    Task {
+                        do {
+                            try await makePost.createPhotoPost(imageData: imageData)
+                            camera.reTake()
+                            print("success")
+                        } catch {
+                            print(error)
+                        }
+                    }
                 }
             }) {
                 HStack(spacing: 7) {
@@ -78,31 +78,19 @@ struct PhotoPostButton: View {
 
 struct VideoPostButton: View {
     @ObservedObject var camera: CameraModel
-    @ObservedObject var createPost = FeedPostModel()
+    @ObservedObject var makePost = FeedPostModel()
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
-                if camera.selectedVideoURL != nil {
-                    createPost.postVideo(videoURL: camera.selectedVideoURL!) { success in
-                        if success {
-                            print("nice")
+                if let videoURL = camera.selectedVideoURL ?? (camera.videoPlayback?.currentItem?.asset as? AVURLAsset)?.url {
+                    Task {
+                        do {
+                            try await makePost.createVideoPost(videoURL: videoURL)
                             camera.reTake()
-                        } else {
-                            print("nope yoo")
-                        }
-                    }
-                } else if camera.isVideoRecorded {
-                    if let currentItem = camera.videoPlayback?.currentItem,
-                       let asset = currentItem.asset as? AVURLAsset {
-                        let url = asset.url
-                        createPost.postVideo(videoURL: url) { success in
-                            if success {
-                                print("nice")
-                                camera.reTake()
-                            } else {
-                                print("nope yoo")
-                            }
+                            print("Video post created.")
+                        } catch {
+                            print(error)
                         }
                     }
                 }

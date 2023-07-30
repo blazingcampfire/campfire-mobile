@@ -7,83 +7,113 @@
 
 import SwiftUI
 import PhotosUI
+import FirebaseStorage
 
 struct SetProfilePic: View {
-    // setting up view dismiss == going back to previous screen
+    // setting up view dismiss == going back to the previous screen
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
-
+    var selectedImage: UIImage?
+    
     @State var setUpFinished: Bool = false
     var body: some View {
         if setUpFinished {
             NavigationBar()
         }
         else {
-            
-       
-        GradientBackground()
-            .overlay(
-                
-                
-                VStack {
-                    // MARK: - Back button
-
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            BackButton()
+            GradientBackground()
+                .overlay(
+                    VStack {
+                        // MARK: - Back button
+                        
+                        HStack {
+                            Button {
+                                dismiss()
+                            } label: {
+                                BackButton()
+                            }
                         }
-                    }
-                    .padding(.leading, 15)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    Spacer()
-
-                    // MARK: - Profile picture upload button & prompts
-
-                    VStack(spacing: 60) {
-                        Text("upload a profile picture")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 25))
-                            .padding(.top, 100)
-                        Text("(optional)")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(.top, -40)
-
-                        ProfilePictureView()
-
-                        Text("you're ready!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
-
-                        // MARK: - Button redirecting to main app
-
-                        VStack {
-                            // set destination to AccountSetUp screen temporarily
-                            Button(action: {
-                                model.createProfile()
-                                setUpFinished = true
-                            }, label:  {
-                                LFButton(text: "finish")
-                                
-                            })
+                        .padding(.leading, 15)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        Spacer()
+                        
+                        // MARK: - Profile picture upload button & prompts
+                        
+                        VStack(spacing: 60) {
+                            Text("upload a profile picture")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 25))
+                                .padding(.top, 100)
+                            Text("(optional)")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(.top, -40)
+                            
+                            ProfilePictureView(selectedImage: selectedImage)
+                            
+                            Text("you're ready!")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(-20)
+                            
+                            // MARK: - Button redirecting to the main app
+                            
+                            VStack {
+                                // set destination to AccountSetUp screen temporarily
+                                Button(action: {
+                                    Task {
+                                        await processUploadPFP()
+                                    }
+                                    model.presentMainApp()
+                                }) {
+                                    LFButton(text: "finish")
+                                }
+                            }
                         }
+                        .padding(.bottom, 200)
                     }
-                    .padding(.bottom, 200)
-                }
-            )
-            .navigationBarBackButtonHidden(true)
+                )
+                .navigationBarBackButtonHidden(true)
         }
     }
-}
+    
+    func processUploadPFP() async {
+        guard let selectedImage = selectedImage else {
+            print("No image")
+            return
+        }
 
+        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
+        if let imageData = imageData {
+            do {
+                let photoURL = try await uploadPFPtoStorage(imageData: imageData)
+                if let photoURL = photoURL {
+                    model.profilePic = photoURL
+                    model.createProfile()
+                    setUpFinished = true
+                } else {
+                    print("Error uploading profile picture")
+                }
+            } catch {
+                print("Error uploading profile picture: \(error.localizedDescription)")
+            }
+        } else {
+            print("Error converting image to data")
+        }
+    }
 
+    func uploadPFPtoStorage(imageData: Data) async -> String? {
+        do {
+            let storageRef = Storage.storage().reference()
+            let path = "feedimages/\(UUID().uuidString).jpg"
+            let fileRef = storageRef.child(path)
 
-struct SetProfilePic_Previews: PreviewProvider {
-    static var previews: some View {
-        SetProfilePic()
-            .environmentObject(AuthModel())
+            try await fileRef.putData(imageData)
+            let photoURL = try await fileRef.downloadURL()
+            return photoURL.absoluteString
+        } catch {
+            print("Error upload photo to storage: \(error.localizedDescription)")
+            return nil
+        }
     }
 }

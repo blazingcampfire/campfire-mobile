@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PostAttributes: View {
-    var data: Data
+    var url: String
     var prompt: String?
     var width: CGFloat? = 350
 
@@ -25,7 +26,7 @@ struct PostAttributes: View {
                     )
             }
 
-            Image(uiImage: UIImage(data: data)!)
+            KFImage(URL(string: url))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: width, height: width)

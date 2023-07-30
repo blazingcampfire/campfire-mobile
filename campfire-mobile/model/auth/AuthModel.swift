@@ -38,6 +38,7 @@ final class AuthModel: ObservableObject {
     @Published var validName: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
+    @Published var isMainAppPresented: Bool = false
     
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
@@ -158,7 +159,7 @@ extension AuthModel {
             }
         }
     }
-
+    
     func verifyVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -218,6 +219,10 @@ extension AuthModel {
 
 extension AuthModel {
     
+    func presentMainApp() {
+        isMainAppPresented = true
+    }
+    
     func createProfile() {
         
         userID = Auth.auth().currentUser!.uid
@@ -246,7 +251,7 @@ extension AuthModel {
             return
         }
         
-        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber , email: email, username: self.username, posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: profilePic, pfpData: Data(), userID: userID, school: school, bio: "")
+        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber , email: email, username: username, posts: [["" : "" ]], postData: [[ : ]], chocs: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
         
         let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
        

@@ -20,7 +20,7 @@ struct EditProfile: View {
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
-                        UserProfilePic(pfp: profileModel.profile?.pfpData )
+                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
 
                         Button(action: {
                             showPhotos.toggle()
@@ -86,7 +86,7 @@ struct EditProfile: View {
                         .padding(.trailing, 20)
                     }
 
-                    if let postData = profileModel.profile?.postData {
+                    if let postData = profileModel.profile?.posts {
                         VStack(spacing: 20) {
                             Spacer()
 
@@ -96,7 +96,7 @@ struct EditProfile: View {
                                             
                                             VStack(spacing: 20) {
                                                 ZStack(alignment: .topTrailing) {
-                                                    PostAttributes(data: imageData, width: 300)
+                                                    PostAttributes(url: imageData, width: 300)
 
                                                 Circle()
                                                     .foregroundColor(.white)

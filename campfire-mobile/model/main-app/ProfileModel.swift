@@ -10,64 +10,78 @@ class ProfileModel: ObservableObject {
     
     init(id: String) {
         // Initialize the profile with an empty Profile object and id variable when the class is created.
-        self.profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", pfpData: Data(), userID: id, school: "", bio: "")
+        self.profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [[:]], postData: [[:]], chocs: 0, profilePicURL: "", userID: id, school: "", bio: "")
         self.id = id
     }
     
     func getProfile() {
         let docRef = ndProfiles.document(id)
-        docRef.getDocument(as: Profile.self) { result in
-            // The Result type encapsulates deserialization errors or
-            // successful deserialization, and can be handled as follows:
-            //
-            //      Result
-            //        /\
-            //   Error  Profile
-            switch result {
-            case .success(let profile):
-                // A `Profile` value was successfully initialized from the DocumentSnapshot.
-                print("Profile: \(profile)")
-                print("Profile ID: \(profile.userID)")
-                print("Posts: \(profile.posts)")
-                var postPaths = profile.posts
-                var fetchedImages = [[Data : String]]()
-                
-                for path in postPaths {
-                    if let (imageData, prompt) = path.first {
-                        // 'imageData' is the key and 'prompt' is the value
-                        print("Image Data: \(imageData)")
-                        print("Prompt: \(prompt)")
-                        let storageRef = Storage.storage().reference()
-                        let fileRef = storageRef.child(imageData)
+        docRef.getDocument { documentSnapshot, error in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                return
+            }
+            
+            guard let document = documentSnapshot, document.exists else {
+                print("Document does not exist or there was an error.")
+                return
+            }
+            
+            
+            docRef.getDocument(as: Profile.self) { result in
+                // The Result type encapsulates deserialization errors or
+                // successful deserialization, and can be handled as follows:
+                //
+                //      Result
+                //        /\
+                //   Error  Profile
+                switch result {
+                case .success(let profile):
+                    // A `Profile` value was successfully initialized from the DocumentSnapshot.
+                    let postPaths = profile.posts
+                    var fetchedImages = [[Data : String]]()
+                    
+                    if postPaths.isEmpty {
+                        DispatchQueue.main.async {
+                            print(profile.username)
+                            self.profile = profile
+                        }
+                    }
+                  
+                    for path in postPaths {
+                        if let (imageData, prompt) = path.first {
+                            // 'imageData' is the key and 'prompt' is the value
+                            let storageRef = Storage.storage().reference()
+                            let fileRef = storageRef.child(imageData)
+                            
+                            // converts fileReference to data
+                            fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                                
+                                if error == nil && data != nil {
+                                    
+                                    DispatchQueue.main.async {
+                                        print(fetchedImages)
+                                        print(data!)
+                                        
+                                        fetchedImages.append([data! : prompt])
+                                        profile.postData = fetchedImages
+                                        self.profile = profile
+                                        print("yooo \(profile.postData)")
+                                    }
+                                }
+                            }
+                        } else {
+                            
+                        }
                         
-                         // converts fileReference to data
-                         fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                             
-                             if error == nil && data != nil {
-                                 
-                                 DispatchQueue.main.async {
-                                     print(fetchedImages)
-                                     print(data!)
-                                     
-                                     fetchedImages.append([data! : prompt])
-                                     profile.postData = fetchedImages
-                                     self.profile = profile
-                                     print("yooo \(profile.postData)")
-                                 }
-                             }
-                         }
-                    } else {
-                        print("The 'path' dictionary is empty.")
                     }
                     
-                }
-                
-
-                 // Update the profile property with the fetched profile.
-            case .failure(let error):
-                // A `Profile` value could not be initialized from the DocumentSnapshot.
-                print("Error decoding profile in profileModel: \(error)")
-                if let profile = self.profile {
+                    
+                    // Update the profile property with the fetched profile.
+                case .failure(let error):
+                    // A `Profile` value could not be initialized from the DocumentSnapshot.
+                    print("Error decoding profile in profileModel: \(error)")
+                    if let profile = self.profile {
                         // Use Mirror to introspect the properties of the profile and print their names and types
                         let profileMirror = Mirror(reflecting: profile)
                         print("Profile properties and types:")
@@ -79,6 +93,7 @@ class ProfileModel: ObservableObject {
                     } else {
                         print("Profile is nil.")
                     }
+                }
             }
         }
     }

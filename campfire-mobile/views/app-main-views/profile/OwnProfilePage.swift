@@ -24,7 +24,7 @@ struct OwnProfilePage: View {
                                 VStack(spacing: 0) {
                                     if let profile = profileModel.profile {
                                         
-                                        UserProfilePic(pfp: profileModel.profile?.pfpData)
+                                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
                                         
                                         Spacer()
                                         
@@ -141,11 +141,6 @@ struct OwnProfilePage: View {
             }
             .onAppear {
                 profileModel.getProfile()
-                if let postData = profileModel.profile?.postData {
-                    print("postData onAppear: \(postData)")
-                } else {
-                    print("postData onAppear is nil or empty.")
-                }
             }
         }
     }

@@ -24,7 +24,7 @@ struct OtherProfilePage: View {
                                 VStack(spacing: 0) {
                                     if let profile = profileModel.profile {
                                         
-                                        UserProfilePic(pfp: profileModel.profile?.pfpData)
+                                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
                                         
                                         Spacer()
                                    

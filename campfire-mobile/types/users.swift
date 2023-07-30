@@ -21,7 +21,6 @@ public class Profile: Codable, Hashable {
     var postData: [[Data : String]]
     var chocs: Int
     var profilePicURL: String
-    var pfpData: Data
     var userID: String
     var school: String
     var bio: String
@@ -34,7 +33,7 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String, pfpData: Data, userID: String, school: String, bio: String) {
+    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String, userID: String, school: String, bio: String) {
         self.name = name
         self.nameInsensitive = nameInsensitive
         self.phoneNumber = phoneNumber
@@ -45,7 +44,6 @@ public class Profile: Codable, Hashable {
         self.postData = postData
         self.chocs = chocs
         self.profilePicURL = profilePicURL
-        self.pfpData = pfpData
         self.userID = userID
         self.school = school
         self.bio = bio
@@ -69,7 +67,6 @@ public class Profile: Codable, Hashable {
 
         // since Firebase doesn't store the `postData`, we'll initialize it as an empty array
         postData = [[ : ]]
-        pfpData = Data()
     }
 }
 

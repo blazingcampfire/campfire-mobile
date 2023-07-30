@@ -20,7 +20,7 @@ struct EditProfile: View {
             ScrollView {
                 VStack(spacing: 10) {
                     ZStack {
-                        UserProfilePic(pfp: profileModel.profile?.pfpData )
+                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
 
                         Button(action: {
                             showPhotos.toggle()

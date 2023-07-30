@@ -55,6 +55,7 @@ class FeedPostModel: ObservableObject {
             "location": "",  //some string creation of location
             "comments": [""],
             "postType": "image"
+    
         ]
         self.createPost(data: photoDocData)
     }
@@ -83,6 +84,8 @@ class FeedPostModel: ObservableObject {
     
     func createVideoPost(videoURL: URL) async throws {
         guard let downloadedvidURL = try await uploadVideoToStorage(videoURL: videoURL) else{return}
+        
+//        let videoDocData: PostItem = PostItem(id: <#T##String#>, username: <#T##String#>, name: <#T##String#>, caption: <#T##String#>, profilepic: <#T##String#>, url: <#T##String#>, numLikes: <#T##Int#>, location: <#T##String#>, comments: <#T##[String]#>, postType: <#T##String#>)
         
         let videoDocData: [String: Any] = [
             "username": "davooo",

@@ -17,16 +17,13 @@ class RequestsPageModel: ObservableObject {
     }
     
     func readRequests() -> Void {
-        let userRelationships = ndRelationships.document(id)
-        
-        userRelationships.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let requests = document.data()
-                print(requests)
+        let userRelationships = ndRelationships.document(id).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("error fetching document: \(error!)")
                 return
             }
-            else {
-                print("Document does not exist")
+            guard let data = document.get("ownRequests") else {
+                print("Document data was empty.")
                 return
             }
         }

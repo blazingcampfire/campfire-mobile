@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    @StateObject var model = RequestsPageModel(profiles: [], id: "M7vMoek6euPASORqzLSFbKq08ZI2")
+    @StateObject var model = RequestsPageModel(profiles: [], id: "U4Mdb2cbrzeZa7Qq57vT3vDgkdw2")
     var body: some View {
         NavigationView {
             ListRequests()

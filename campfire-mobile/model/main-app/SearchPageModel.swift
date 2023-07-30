@@ -51,9 +51,22 @@ class SearchPageModel: ObservableObject {
         }
         let relationshipRef = ndRelationships.document(friendID)
         
-        relationshipRef.updateData([
-            "ownRequests": friendID,
-        ])
+        relationshipRef.setData([
+            "ownRequests": userID,
+        ], merge: true)
+        print(relationshipRef.documentID)
+    }
+    
+    func unrequestFriend(friendID: String) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return
+        }
+        let relationshipRef = ndRelationships.document(friendID)
+        
+//        relationshipRef.updateData([
+//            "ownRequests": FieldValue.arrayRemove(userID)
+//        ])
     }
     
 }

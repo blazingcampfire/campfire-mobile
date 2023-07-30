@@ -5,6 +5,7 @@
 //  Created by Adarsh G on 6/27/23.
 //
 
+
 import SwiftUI
 import FirebaseStorage
 
@@ -132,6 +133,9 @@ struct EditProfile: View {
                             .padding(.top, 30)
                         }
                     }
+                }
+                .onAppear {
+                    profileModel.getProfile()
                 }
             }
         }

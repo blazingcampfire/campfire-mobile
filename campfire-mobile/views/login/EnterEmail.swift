@@ -56,6 +56,9 @@ struct EnterEmail: View {
                     }
                     .padding(.bottom, 200)
                 }
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
             )
             .navigationBarBackButtonHidden(true)
         }

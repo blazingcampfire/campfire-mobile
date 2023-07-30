@@ -39,6 +39,7 @@ struct EditFieldPage: View {
                 if newName != currentfield && newName != "" {
                     Button(action: {
                         saveName()
+                        profileModel.profile!.name = newName
                     }) {
                         HStack {
                             Image(systemName: "checkmark")

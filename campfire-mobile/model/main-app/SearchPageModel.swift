@@ -51,7 +51,7 @@ class SearchPageModel: ObservableObject {
         }
         let relationshipRef = ndRelationships.document(friendID)
         
-        relationshipRef.setData([
+        relationshipRef.collection("ownRequests").document(friendID).setData([
             "ownRequests": userID,
         ], merge: true)
         print(relationshipRef.documentID)

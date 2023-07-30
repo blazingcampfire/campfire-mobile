@@ -69,7 +69,7 @@ final class AuthenticationManager {
             if !schoolValidator(email: email!)
             {
                 print("The email you are trying to sign up with either does not match the one you input earlier, or it is associated with a school that we do not yet support.")
-                try await Auth.auth().currentUser?.delete()
+                try deleteUser()
                 
             }
         }

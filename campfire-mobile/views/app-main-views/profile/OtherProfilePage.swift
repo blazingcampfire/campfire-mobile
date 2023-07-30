@@ -22,10 +22,12 @@ struct OtherProfilePage: View {
                         ZStack {
                             VStack {
                                 VStack(spacing: 0) {
-                                    UserProfilePic(pfp: "ragrboard")
-                                    Spacer()
-                                    
                                     if let profile = profileModel.profile {
+                                        
+                                        UserProfilePic(pfp: profileModel.profile?.pfpData)
+                                        
+                                        Spacer()
+                                   
                                         Text(profile.name)
                                             .font(.custom("LexendDeca-Bold", size: 20))
                                         

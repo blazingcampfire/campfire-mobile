@@ -19,7 +19,7 @@ public class Profile: Codable, Hashable {
     var friends: [Profile]?
     var posts: [[String : String]]
     var postData: [[Data : String]]
-    var chocs: Int
+    var smores: Int
     var profilePicURL: String
     var userID: String
     var school: String
@@ -33,7 +33,7 @@ public class Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], chocs: Int, profilePicURL: String, userID: String, school: String, bio: String) {
+    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], postData: [[Data : String]], smores: Int, profilePicURL: String, userID: String, school: String, bio: String) {
         self.name = name
         self.nameInsensitive = nameInsensitive
         self.phoneNumber = phoneNumber
@@ -42,7 +42,7 @@ public class Profile: Codable, Hashable {
         self.friends = friends
         self.posts = posts
         self.postData = postData
-        self.chocs = chocs
+        self.smores = smores
         self.profilePicURL = profilePicURL
         self.userID = userID
         self.school = school
@@ -59,7 +59,7 @@ public class Profile: Codable, Hashable {
         username = try container.decode(String.self, forKey: .username)
         friends = try container.decodeIfPresent([Profile].self, forKey: .friends)
         posts = try container.decode([[String : String]].self, forKey: .posts)
-        chocs = try container.decode(Int.self, forKey: .chocs)
+        smores = try container.decode(Int.self, forKey: .smores)
         profilePicURL = try container.decode(String.self, forKey: .profilePicURL)
         userID = try container.decode(String.self, forKey: .userID)
         school = try container.decode(String.self, forKey: .school)
@@ -71,7 +71,7 @@ public class Profile: Codable, Hashable {
 }
 
 
-public class privateUser: Codable {
+public class PrivateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String

@@ -7,15 +7,17 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    @State var searchText = ""
+    @StateObject var model = RequestsPageModel(profiles: [], id: "M7vMoek6euPASORqzLSFbKq08ZI2")
     var body: some View {
         NavigationView {
-            // Text("Search for users") // users collection query
             ListRequests()
         }
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)
+        .onAppear { 
+            model.readRequests()
+        }
     }
 }
 

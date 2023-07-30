@@ -37,7 +37,7 @@ struct OtherProfilePage: View {
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(profile.chocs)🍫")
+                                            Text("\(profile.smores)🍫")
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
                                         }
                                         

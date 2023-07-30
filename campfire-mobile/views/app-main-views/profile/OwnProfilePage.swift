@@ -37,7 +37,7 @@ struct OwnProfilePage: View {
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(profile.chocs)🍫")
+                                            Text("\(profile.smores)🍫")
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
                                         }
                                         
@@ -45,7 +45,7 @@ struct OwnProfilePage: View {
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                             .padding(8)
                                     } else {
-                                        Text("Bitch")
+                                        Text("chill out")
                                     }
                                 }
                                 .padding(.top)

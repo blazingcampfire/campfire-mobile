@@ -108,6 +108,7 @@ struct EditProfile: View {
                                                 Circle()
                                                     .foregroundColor(.white)
                                                     .frame(width: 50, height: 50)
+                                                    .shadow(color: Color.black.opacity(0.9), radius: 5, x: 2, y: 2)
                                                     .overlay(
                                                         Circle()
                                                             .stroke(.gray, lineWidth: 0.5)

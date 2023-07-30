@@ -17,7 +17,7 @@ class RequestsPageModel: ObservableObject {
     }
     
     func readRequests() -> Void {
-        let userRelationships = ndRelationships.document(id).collection("ownRequests").addSnapshotListener { documentSnapshot, error in
+        let userRelationships = ndRelationships.document(id).addSnapshotListener { documentSnapshot, error in
             guard let collection = documentSnapshot else {
                 print("error fetching document: \(error!)")
                 return

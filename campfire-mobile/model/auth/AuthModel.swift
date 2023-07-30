@@ -170,7 +170,6 @@ extension AuthModel {
 
                 // MARK: User phone number authenticated successfully
 
-                print("Success!")
                 self.validVerificationCode = true
             } catch {
                 await handleError(error: error)
@@ -220,7 +219,12 @@ extension AuthModel {
 extension AuthModel {
     
     func presentMainApp() {
-        isMainAppPresented = true
+        if Auth.auth().currentUser?.email == nil || Auth.auth().currentUser?.phoneNumber == nil {
+            return
+        }
+        else {
+            isMainAppPresented = true
+        }
     }
     
     func createProfile() {
@@ -251,9 +255,9 @@ extension AuthModel {
             return
         }
         
-        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber , email: email, username: username, posts: [["" : "" ]], postData: [[ : ]], chocs: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
+        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
         
-        let userData = privateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
+        let userData = PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
        
         
         // based on the user's school, their profile document is sorted into the appropriate school document

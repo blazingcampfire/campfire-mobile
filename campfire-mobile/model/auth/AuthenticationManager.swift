@@ -50,6 +50,14 @@ final class AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
+    func deleteUser() throws {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        try Auth.auth().currentUser?.delete()
+        ndUsers.document(userID).delete()
+    }
+    
     
     // logic still in progress
     func signUpWithGoogle(tokens: GoogleSignInResultModel) async throws {
@@ -62,6 +70,7 @@ final class AuthenticationManager {
             {
                 print("The email you are trying to sign up with either does not match the one you input earlier, or it is associated with a school that we do not yet support.")
                 try await Auth.auth().currentUser?.delete()
+                
             }
         }
         

@@ -170,7 +170,6 @@ extension AuthModel {
 
                 // MARK: User phone number authenticated successfully
 
-                print("Success!")
                 self.validVerificationCode = true
             } catch {
                 await handleError(error: error)

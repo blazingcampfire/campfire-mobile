@@ -141,6 +141,7 @@ struct OwnProfilePage: View {
             }
             .onAppear {
                 profileModel.getProfile()
+                print(profileModel.profile?.username)
             }
         }
     }

@@ -41,41 +41,25 @@ class ProfileModel: ObservableObject {
                     let postPaths = profile.posts
                     var fetchedImages = [[Data : String]]()
                     
+                    
                     if postPaths.isEmpty {
                         DispatchQueue.main.async {
-                            print(profile.username)
                             self.profile = profile
                         }
-                    }
-                  
-                    for path in postPaths {
-                        if let (imageData, prompt) = path.first {
-                            // 'imageData' is the key and 'prompt' is the value
-                            let storageRef = Storage.storage().reference()
-                            let fileRef = storageRef.child(imageData)
+                    } else {
+                        
+                        for path in postPaths {
                             
-                            // converts fileReference to data
-                            fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+                            if let (imageData, prompt) = path.first {
                                 
-                                if error == nil && data != nil {
+                                DispatchQueue.main.async {
                                     
-                                    DispatchQueue.main.async {
-                                        print(fetchedImages)
-                                        print(data!)
-                                        
-                                        fetchedImages.append([data! : prompt])
-                                        profile.postData = fetchedImages
-                                        self.profile = profile
-                                        print("yooo \(profile.postData)")
-                                    }
+                                    self.profile = profile
+                        
                                 }
                             }
-                        } else {
-                            
                         }
-                        
                     }
-                    
                     
                     // Update the profile property with the fetched profile.
                 case .failure(let error):

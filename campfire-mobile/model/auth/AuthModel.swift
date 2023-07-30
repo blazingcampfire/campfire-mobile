@@ -256,7 +256,7 @@ extension AuthModel {
             return
         }
         
-        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [["" : "" ]], postData: [[ : ]], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
+        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
         
         let userData = PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
        

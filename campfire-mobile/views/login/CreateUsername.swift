@@ -10,11 +10,7 @@ import SwiftUI
 struct CreateUsername: View {
     // setting up environmental variables
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var model: AuthModel
-    
-    // setting up user phoneNumber & advance as view state
-    @State var username: String = ""
-    @State private var canAdvance: Bool = false
+    @EnvironmentObject var model: CurrentUserModel
     
     var body: some View {
         GradientBackground()
@@ -40,7 +36,7 @@ struct CreateUsername: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.username, placeholderText: "username")
+                        FormTextField(text: $model.profile.username, placeholderText: "username")
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
@@ -72,6 +68,5 @@ extension CreateUsername {
 struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
         CreateUsername()
-            .environmentObject(AuthModel())
     }
 }

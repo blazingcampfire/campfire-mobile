@@ -11,7 +11,7 @@ import AVKit
 
 
 struct PreviewPostInfo: View {
-    @ObservedObject var userData: AuthModel
+    @ObservedObject var userData: CurrentUserModel
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             HStack {

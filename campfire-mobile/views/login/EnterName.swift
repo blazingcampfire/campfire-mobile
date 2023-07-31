@@ -10,7 +10,7 @@ import SwiftUI
 struct EnterName: View {
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var model: CurrentUserModel
     
     var body: some View {
             GradientBackground()
@@ -34,7 +34,7 @@ struct EnterName: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.name, placeholderText: "name")
+                        FormTextField(text: $model.profile.name, placeholderText: "name")
                         
                         
                         // MARK: - NavLink to VerifyEmail screen
@@ -62,6 +62,5 @@ extension EnterName {
 struct EnterName_Previews: PreviewProvider {
     static var previews: some View {
         EnterName()
-            .environmentObject(AuthModel())
     }
 }

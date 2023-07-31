@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-import CoreData
 import FirebaseAuth
 
 struct ContentView: View {
-    @StateObject var model = AuthModel()
+    @StateObject var model = CurrentUserModel(privateUserData: PrivateUser(phoneNumber: "", email: "", userID: "", school: ""), profile: Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: ""))
+    
     var body: some View {
         if Auth.auth().currentUser?.email == nil || !model.isMainAppPresented {
                     AccountSetUp()
@@ -19,6 +19,7 @@ struct ContentView: View {
                 }
                 else {
                     NavigationBar()
+                        .environmentObject(model)
                 }
         
             }
@@ -26,7 +27,6 @@ struct ContentView: View {
             struct ContentView_Previews: PreviewProvider {
                 static var previews: some View {
                     LaunchScreen()
-                        .environmentObject(AuthModel())
                 }
             }
     }

@@ -12,7 +12,7 @@ import SwiftUI
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var model: CurrentUserModel
     @State private var validEmail: Bool = false
     
 
@@ -52,7 +52,7 @@ struct VerifyEmail: View {
                                     .frame(alignment: .center)
                                     .foregroundColor(Color.white).padding(10).multilineTextAlignment(.center)
                                 
-                                Text(model.email) // email variable
+                                Text(model.profile.email) // email variable
                                     .font(.custom("LexendDeca-Bold", size: 20))
                                     .frame(width: 380, height: 10, alignment: .center)
                                     .foregroundColor(.white)
@@ -103,6 +103,5 @@ struct VerifyEmail: View {
 struct VerifyEmail_Previews: PreviewProvider {
     static var previews: some View {
         VerifyEmail()
-            .environmentObject(AuthModel())
     }
 }

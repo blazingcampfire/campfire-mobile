@@ -18,8 +18,10 @@ import FirebaseStorage
 
 
 @MainActor
-final class AuthModel: ObservableObject {
+final class CurrentUserModel: ObservableObject {
     // Input values from Views
+    @Published var profile: Profile 
+    @Published var privateUserData: PrivateUser
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
@@ -53,8 +55,10 @@ final class AuthModel: ObservableObject {
 
     private var publishers = Set<AnyCancellable>()
 
-    // Initializing validity publishers
-    init() {
+    // Initializing user & profile structs & validity publishers
+    init(privateUserData: PrivateUser, profile: Profile) {
+        self.privateUserData = privateUserData
+        self.profile = profile
         isPhoneNumberValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validPhoneNumber, on: self)
@@ -75,12 +79,13 @@ final class AuthModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.validUsername, on: self)
             .store(in: &publishers)
+        
     }
 }
 
 // MARK: - Extension: Validation setup
 
-private extension AuthModel {
+private extension CurrentUserModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
         $phoneNumber
             .map {
@@ -141,7 +146,7 @@ private extension AuthModel {
 
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
-extension AuthModel {
+extension CurrentUserModel {
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -180,7 +185,7 @@ extension AuthModel {
 
 // MARK: - Google auth
 
-extension AuthModel {
+extension CurrentUserModel {
     func signInGoogle() async throws {
         do {
             let helper = SignInGoogleHelper()
@@ -216,7 +221,7 @@ extension AuthModel {
 
 // MARK: - Create user function
 
-extension AuthModel {
+extension CurrentUserModel {
     
     func presentMainApp() {
         if Auth.auth().currentUser?.email == nil || Auth.auth().currentUser?.phoneNumber == nil {

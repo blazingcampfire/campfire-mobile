@@ -11,7 +11,7 @@ struct EnterEmail: View {
     
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var model: CurrentUserModel
     
     var body: some View {
             GradientBackground()
@@ -35,7 +35,7 @@ struct EnterEmail: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.email, placeholderText: "email")
+                        FormTextField(text: $model.profile.email, placeholderText: "email")
                         
                         if !model.validEmail {
                             Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
@@ -70,6 +70,5 @@ extension EnterEmail {
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(AuthModel())
     }
 }

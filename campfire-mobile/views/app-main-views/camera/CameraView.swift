@@ -19,7 +19,7 @@ import PhotosUI
 struct CameraView: View {
     
     @ObservedObject var camera: CameraModel
-    @ObservedObject var userData: AuthModel
+    @ObservedObject var userData: CurrentUserModel
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
@@ -283,6 +283,6 @@ struct CameraView: View {
 
 struct CameraView_Previews: PreviewProvider {
     static var previews: some View {
-        CameraView(camera: CameraModel(), userData: AuthModel())
+        CameraView(camera: CameraModel(), userData: CurrentUserModel())
     }
 }

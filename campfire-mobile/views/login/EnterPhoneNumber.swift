@@ -10,11 +10,7 @@ import SwiftUI
 struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var model: AuthModel
-
-
-    // setting up user phoneNumber & advancing as view state
-    @State private var canAdvance: Bool = false
+    @EnvironmentObject var model: CurrentUserModel
     
     var body: some View {
         GradientBackground()
@@ -39,7 +35,7 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-                        FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
+                        FormTextField(text: $model.profile.phoneNumber, placeholderText: "phone number" )
                             .keyboardType(.numberPad)
                         if !model.validPhoneNumber {
                             Text("phone number must be 10 digits with no spaces")
@@ -85,6 +81,5 @@ extension EnterPhoneNumber {
 struct EnterPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
         EnterPhoneNumber()
-            .environmentObject(AuthModel())
     }
 }

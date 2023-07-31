@@ -10,7 +10,7 @@ import SwiftUI
 struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var model: CurrentUserModel
     
     // setting up verification code & advancing as view state
     
@@ -50,7 +50,7 @@ struct VerifyNumber: View {
                             .keyboardType(.numberPad)
                         
                         VStack{
-                            Text("code sent to \(model.phoneNumber)")
+                            Text("code sent to \(model.profile.phoneNumber)")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)
@@ -95,6 +95,5 @@ extension VerifyNumber {
 struct VerifyAccount_Previews: PreviewProvider {
     static var previews: some View {
         VerifyNumber()
-            .environmentObject(AuthModel())
     }
 }

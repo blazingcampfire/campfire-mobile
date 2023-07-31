@@ -34,7 +34,7 @@ struct EnterName: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.profile.name, placeholderText: "name")
+                        FormTextField(text: $model.name, placeholderText: "name")
                         
                         
                         // MARK: - NavLink to VerifyEmail screen

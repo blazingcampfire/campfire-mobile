@@ -17,61 +17,58 @@ struct SetProfilePic: View {
     @State var setUpFinished: Bool = false
     
     var body: some View {
-        if setUpFinished {
-            NavigationBar()
-        } else {
-            GradientBackground()
-                .overlay(
-                    VStack {
-                        // MARK: - Back button
-                        
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                BackButton()
-                            }
+        GradientBackground()
+            .overlay(
+                VStack {
+                    // MARK: - Back button
+                    
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            BackButton()
                         }
-                        .padding(.leading, 15)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        Spacer()
-                        
-                        // MARK: - Profile picture upload button & prompts
-                        
-                        VStack(spacing: 60) {
-                            Text("upload a profile picture")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 25))
-                                .padding(.top, 100)
-                            Text("(optional)")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding(.top, -40)
-                            
-                            ProfilePictureView(selectedImage: selectedImage)
-                            
-                            Text("you're ready!")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding(-20)
-                            
-                            // MARK: - Button redirecting to the main app
-                            
-                            VStack {
-                                Button(action: {
-                                    model.createProfile()
-                                    model.presentMainApp()
-                                    setUpFinished = true
-                                }) {
-                                    LFButton(text: "finish")
-                                }
-                            }
-                        }
-                        .padding(.bottom, 200)
                     }
-                )
-                .navigationBarBackButtonHidden(true)
-        }
+                    .padding(.leading, 15)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    Spacer()
+                    
+                    // MARK: - Profile picture upload button & prompts
+                    
+                    VStack(spacing: 60) {
+                        Text("upload a profile picture")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 25))
+                            .padding(.top, 100)
+                        Text("(optional)")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(.top, -40)
+                        
+                        ProfilePictureView(selectedImage: selectedImage)
+                        
+                        Text("you're ready!")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
+                        
+                        // MARK: - Button redirecting to the main app
+                        
+                        VStack {
+                            Button(action: {
+                                model.createProfile()
+                                model.presentMainApp()
+                            }) {
+                                LFButton(text: "finish")
+                            }
+                        }
+                    }
+                    .padding(.bottom, 200)
+                }
+            )
+            .navigationBarBackButtonHidden(true)
+    }
+}
         
         //    func processUploadPFP() async {
         //        guard let selectedImage = selectedImage else {
@@ -104,5 +101,3 @@ struct SetProfilePic: View {
         //            return nil
         //        }
         //    }
-    }
-}

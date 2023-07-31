@@ -35,7 +35,7 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-                        FormTextField(text: $model.profile.phoneNumber, placeholderText: "phone number" )
+                        FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
                             .keyboardType(.numberPad)
                         if !model.validPhoneNumber {
                             Text("phone number must be 10 digits with no spaces")

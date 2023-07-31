@@ -35,7 +35,7 @@ struct EnterEmail: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.profile.email, placeholderText: "email")
+                        FormTextField(text: $model.email, placeholderText: "email")
                         
                         if !model.validEmail {
                             Text("at this time, campfire is only at Yale, Rice, and Notre Dame")

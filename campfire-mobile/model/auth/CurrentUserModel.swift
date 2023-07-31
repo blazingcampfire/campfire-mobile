@@ -261,15 +261,17 @@ extension CurrentUserModel {
         }
         
         let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
-        
         let userData = PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
+        
+        self.profile = profileData
+        self.privateUserData = userData
        
         
         // based on the user's school, their profile document is sorted into the appropriate school document
         
         do {
-            try userRef.document("\(userID)").setData(from: userData)
-            try profileRef.document("\(userID)").setData(from: profileData)
+            try userRef.document("\(userID)").setData(from: profile)
+            try profileRef.document("\(userID)").setData(from: privateUserData)
             print("Documents successfully written!")
         }
         catch {

@@ -52,7 +52,7 @@ struct VerifyEmail: View {
                                     .frame(alignment: .center)
                                     .foregroundColor(Color.white).padding(10).multilineTextAlignment(.center)
                                 
-                                Text(model.profile.email) // email variable
+                                Text(model.email) // email variable
                                     .font(.custom("LexendDeca-Bold", size: 20))
                                     .frame(width: 380, height: 10, alignment: .center)
                                     .foregroundColor(.white)

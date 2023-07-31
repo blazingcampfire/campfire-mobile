@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import FirebaseFirestore
 // function verifies whether a given users email belongs to Yale, ND, or Rice
 func schoolValidator(email: String) -> Bool {
     
@@ -32,7 +32,11 @@ func schoolParser(email: String) -> String {
             return school
         }
     }
-    
    return "Does not belong to a supported school"
+}
+
+func profileParser(school: String) -> CollectionReference? {
+    guard let profileCollection = profilesMap[school] else { return nil }
+    return profileCollection
 }
 

@@ -50,7 +50,7 @@ struct VerifyNumber: View {
                             .keyboardType(.numberPad)
                         
                         VStack{
-                            Text("code sent to \(model.profile.phoneNumber)")
+                            Text("code sent to \(model.phoneNumber)")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)

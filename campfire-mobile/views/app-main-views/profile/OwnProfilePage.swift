@@ -10,7 +10,8 @@ import SwiftUI
 struct OwnProfilePage: View {
     @State var settingsPageShow = false
     @StateObject var profileModel = ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
-    
+    @State private var showAddPost = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -114,7 +115,7 @@ struct OwnProfilePage: View {
                                 }
                                         if posts.count < 6 {
                                             Spacer()
-                                            NavigationLink(destination: AddPost().environmentObject(profileModel)) {
+                                            NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(profileModel)) {
                                                 ZStack {
                                                     Rectangle()
                                                         .foregroundColor(.clear)

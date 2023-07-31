@@ -116,7 +116,7 @@ struct EditProfile: View {
                                                             .frame(width: 50, height: 50)
                                                     )
                                                     .overlay(
-                                                        NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index)
+                                                        NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index, post: post)
                                                             .environmentObject(profileModel)){
                                                                 Image(systemName: "pencil")
                                                                     .font(.system(size: 30))

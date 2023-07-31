@@ -13,9 +13,11 @@ struct AddPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     @State private var promptScreen = false
-    @Environment(\.presentationMode) var presentationMode
     @State var retrievedPosts = [Data]()
     @State var prompt: String = "no prompt"
+    
+    @Binding var showAddPost: Bool
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> 
     
     @EnvironmentObject var profileModel: ProfileModel
     

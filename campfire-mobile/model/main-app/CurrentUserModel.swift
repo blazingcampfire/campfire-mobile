@@ -13,10 +13,14 @@ import Foundation
 class CurrentUserModel: ObservableObject {
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
+    var profileRef: CollectionReference
+    var userRef: CollectionReference
 
-    init(privateUserData: PrivateUser, profile: Profile) {
+    init(privateUserData: PrivateUser, profile: Profile, profileRef: CollectionReference, userRef: CollectionReference) {
         self.privateUserData = privateUserData
         self.profile = profile
+        self.profileRef = profileRef
+        self.userRef = userRef
     }
 
     func getProfile() {
@@ -24,9 +28,10 @@ class CurrentUserModel: ObservableObject {
             return
         } else {
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
-            guard let profileRef: CollectionReference = profileParser(school: school) else {
+            guard let guardedProfileRef = profileParser(school: school) else {
                 return
             }
+            profileRef = guardedProfileRef
             let userID = Auth.auth().currentUser!.uid
             profileRef.document(userID).getDocument(as: Profile.self) { [self] result in
                 switch result {
@@ -45,9 +50,10 @@ class CurrentUserModel: ObservableObject {
             return
         } else {
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
-            guard let userRef: CollectionReference = userParser(school: school) else {
+            guard let guardedUserRef: CollectionReference = userParser(school: school) else {
                 return
             }
+            userRef = guardedUserRef
             let userID = Auth.auth().currentUser!.uid
             userRef.document(userID).getDocument(as: PrivateUser.self) { [self] result in
                 switch result {

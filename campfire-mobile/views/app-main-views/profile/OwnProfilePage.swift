@@ -24,7 +24,7 @@ struct OwnProfilePage: View {
                                 VStack(spacing: 0) {
                                     if let profile = profileModel.profile {
                                         
-                                        UserProfilePic(pfp: profileModel.profile?.pfpData)
+                                        UserProfilePic(pfp: profileModel.profile?.profilePicURL)
                                         
                                         Spacer()
                                         
@@ -37,7 +37,7 @@ struct OwnProfilePage: View {
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(profile.chocs)🍫")
+                                            Text("\(profile.smores)🍫")
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
                                         }
                                         
@@ -45,7 +45,7 @@ struct OwnProfilePage: View {
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                             .padding(8)
                                     } else {
-                                        Text("Bitch")
+                                        Text("chill out")
                                     }
                                 }
                                 .padding(.top)
@@ -96,15 +96,15 @@ struct OwnProfilePage: View {
                                     .presentationCornerRadius(30)
                             }
                         }
-                        if let posts = profileModel.profile?.postData {
+                        if let posts = profileModel.profile?.posts {
                                     VStack {
                                         VStack(spacing: 20) {
                                             Spacer()
                                             LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
                                                 ForEach(posts, id: \.self) { post in
-                                                    if let (imageData, prompt) = post.first {
+                                                    if let (imageURL, prompt) = post.first {
                                                         VStack(spacing: 20) {
-                                                            PostAttributes(data: imageData, prompt: prompt)
+                                                            PostAttributes(url: imageURL, prompt: prompt)
                                                                 .frame(width: 350)
                                                         }
                                                     }
@@ -141,11 +141,7 @@ struct OwnProfilePage: View {
             }
             .onAppear {
                 profileModel.getProfile()
-                if let postData = profileModel.profile?.postData {
-                    print("postData onAppear: \(postData)")
-                } else {
-                    print("postData onAppear is nil or empty.")
-                }
+                print(profileModel.profile?.username)
             }
         }
     }

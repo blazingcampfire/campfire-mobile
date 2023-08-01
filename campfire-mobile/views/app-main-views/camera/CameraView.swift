@@ -19,7 +19,7 @@ import PhotosUI
 struct CameraView: View {
     
     @ObservedObject var camera: CameraModel
-    @ObservedObject var userData: AuthModel
+    @ObservedObject var currentUser: CurrentUserModel
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
@@ -47,7 +47,7 @@ struct CameraView: View {
                     .foregroundColor(.white)
                 }
                  
-                PreviewPostInfo(userData: userData)
+                PreviewPostInfo(currentUser: currentUser)
                 VideoPostButton(camera: camera)
                 VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
@@ -66,7 +66,7 @@ struct CameraView: View {
                         .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
-                PreviewPostInfo(userData: userData)
+                PreviewPostInfo(currentUser: currentUser)
                 PhotoPostButton(camera: camera)
                 
                 VStack {
@@ -113,7 +113,7 @@ struct CameraView: View {
                         .foregroundColor(.white)
                 }
                 
-                PreviewPostInfo(userData: userData)
+                PreviewPostInfo(currentUser: currentUser)
                 VideoPostButton(camera: camera)
                 VStack {
                     Button(action: {
@@ -138,7 +138,7 @@ struct CameraView: View {
                        .edgesIgnoringSafeArea(.all)
                 }
                 PhotoSaveButton(camera: camera)
-                PreviewPostInfo(userData: userData)
+                PreviewPostInfo(currentUser: currentUser)
                 PhotoPostButton(camera: camera)
                 RetakeButton(camera: camera)
                 
@@ -281,8 +281,8 @@ struct CameraView: View {
     
 }
 
-struct CameraView_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraView(camera: CameraModel(), userData: AuthModel())
-    }
-}
+//struct CameraView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CameraView(camera: CameraModel(), currentUser: CurrentUserModel())
+//    }
+//}

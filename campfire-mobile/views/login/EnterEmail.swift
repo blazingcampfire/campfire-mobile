@@ -70,6 +70,5 @@ extension EnterEmail {
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(AuthModel())
     }
 }

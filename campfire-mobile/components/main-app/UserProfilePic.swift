@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct UserProfilePic: View {
     
-    let pfp: Data?
+    let pfp: String?
     
     var body: some View {
         if let pfp = pfp {
-            Image(uiImage: UIImage(data: pfp)!)
+            KFImage(URL(string: pfp))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 125, height: 125)

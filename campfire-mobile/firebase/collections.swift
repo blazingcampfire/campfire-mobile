@@ -9,8 +9,6 @@ import Foundation
 import FirebaseCore
 import FirebaseFirestore
 
-//let db = Firestore.firestore()
-
 // MARK: - Schools (Document)
 let notreDame = db.collection("users").document("notreDame")
 let yale = db.collection("users").document("yale")
@@ -27,11 +25,11 @@ let yaleProfiles = yale.collection("profiles")
 let riceProfiles = rice.collection("profiles")
 
 //MARK: - Relationships (Collection)
-let ndRelationships = notreDame.collection("relationships")
-let yaleRelationships = yale.collection("relationships")
-let riceRelationships = rice.collection("relationships")
+let ndRelationships = db.collection("relationships").document("notreDame").collection("relationships")
+let yaleRelationships = db.collection("relationships").document("yale").collection("relationships")
+let riceRelationships = db.collection("relationships").document("rice").collection("relationships")
 
-// MARK: - Feed Posts
+// MARK: - Feed Posts (Collection)
 let ndPosts = notreDame.collection("posts")
 let yalePosts = yale.collection("posts")
 let ricePosts = rice.collection("posts")

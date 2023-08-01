@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @State var searchText = ""
-    @StateObject var model = SearchPageModel()
-   
+    
+    @StateObject var model: SearchPageModel
+    
     var body: some View {
         NavigationView {
             SearchList()
@@ -24,8 +24,8 @@ struct SearchPage: View {
 }
 
 struct SearchList: View {
-@EnvironmentObject var model: SearchPageModel
     
+@EnvironmentObject var model: SearchPageModel
     
     @State private var addedTapped: Bool = false
     var body: some View {
@@ -41,8 +41,8 @@ struct SearchList: View {
     }
 }
 
-struct SearchPage_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchPage()
-    }
-}
+//struct SearchPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchPage()
+//    }
+//}

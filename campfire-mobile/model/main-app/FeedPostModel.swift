@@ -14,6 +14,7 @@ class FeedPostModel: ObservableObject {
     
     @Published var posts = [PostItem]()
     
+  
     func createPost(data: [String: Any]) {    // This function creates the document and it passes in the variables set the field data
         let docRef = ndPosts.document()
         docRef.setData(data) { error in
@@ -25,66 +26,86 @@ class FeedPostModel: ObservableObject {
         }
     }
     
-    func postPhoto(imageData: Data?) {
+    func uploadPhotoToStorage(imageData: Data) async throws -> String? {
         let storageRef = Storage.storage().reference()
         let path = "feedimages/\(UUID().uuidString).jpg"
         let fileRef = storageRef.child(path)
+        
+        do {
+            let _ = try await fileRef.putDataAsync(imageData)
+            let photoURL = try await fileRef.downloadURL()
+            return photoURL.absoluteString
+        } catch {
+            print("Error upload photo to storage: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    
+    func createPhotoPost(imageData: Data) async throws {
+        guard let photoURL = try await uploadPhotoToStorage(imageData: imageData) else { return }
         
         let photoDocData: [String: Any] = [
             "username": "davooo",
             "name": "David Adebogun",
             "caption": "yoo",    //pass captiontextfield text into here
             "profilepic": "", // some path to the user's profile pic
-            "url": path,
+            "url": photoURL,
             "numLikes": 0,
             "location": "",  //some string creation of location
             "comments": [""],
             "postType": "image"
+    
         ]
-        
-        guard imageData != nil else {
-            return
-        }
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            if error == nil && metadata != nil {
-                self.createPost(data: photoDocData)
-            }
-        }
+        self.createPost(data: photoDocData)
     }
     
-    func postVideo(videoURL: URL, completion: @escaping (Bool) -> Void) {
+    
+    
+    func uploadVideoToStorage(videoURL: URL) async throws -> String? {
         guard let videoData = try? Data(contentsOf: videoURL) else {
             print("couldnt create video data")
-            return
+            return nil
         }
         let storageRef = Storage.storage().reference()
         let fileName = videoURL.lastPathComponent
         let path = "feedvideos/\(fileName)"
         let videoRef = storageRef.child(path)
-       
+        
+        do {
+            let _ = try await videoRef.putDataAsync(videoData)
+            let vidURL = try await videoRef.downloadURL()
+            return vidURL.absoluteString
+        } catch {
+            print("Error upload photo to storage: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func createVideoPost(videoURL: URL) async throws {
+        guard let downloadedvidURL = try await uploadVideoToStorage(videoURL: videoURL) else{return}
+        
+//        let videoDocData: PostItem = PostItem(id: <#T##String#>, username: <#T##String#>, name: <#T##String#>, caption: <#T##String#>, profilepic: <#T##String#>, url: <#T##String#>, numLikes: <#T##Int#>, location: <#T##String#>, comments: <#T##[String]#>, postType: <#T##String#>)
         
         let videoDocData: [String: Any] = [
             "username": "davooo",
             "name": "David Adebogun",
             "caption": "yoo",    //pass captiontextfield text into here
             "profilepic": "", // some path to the user's profile pic
-            "url": path,
+            "url": downloadedvidURL,
             "numLikes": 0,
             "location": "",  //some string creation of location
             "comments": [""],
             "postType": "video"
         ]
-        videoRef.putData(videoData) { metadata, error in
-            guard let metadata = metadata, error == nil else {
-                print("error upload to firebase")
-                completion(false)
-                return
-            }
-            self.createPost(data: videoDocData)
-            print("upload successful")
-            completion(true)
-        }
+        self.createPost(data: videoDocData)
     }
+    
+    
+    
+    
+    
+    
     
     func getPosts() {
        let docRef = ndPosts

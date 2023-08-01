@@ -90,7 +90,8 @@ struct PostPlayerView: View {
                      let imageURL = player.postItem.url
                          KFImage(URL(string: imageURL))
                              .resizable()
-                             .scaledToFit()
+                             .edgesIgnoringSafeArea(.all)
+                           //  .aspectRatio(9/16, contentMode: .fill)
                  } else {
                          Text("Error Loading Post")
                              .font(.custom("LexendDeca-Regular", size: 25))
@@ -106,7 +107,7 @@ struct PostPlayerView: View {
                             HotSelected = true
                         }) {
                             Text("Hot")
-                                .font(.custom("LexendDeca-Bold",                 size:35))
+                                .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(HotSelected ? 1.0 : 0.5)
                         }
                         

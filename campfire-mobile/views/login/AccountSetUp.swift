@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AccountSetUp: View {
     @EnvironmentObject var model: AuthModel
-
     var body: some View {
         NavigationView {
             GradientBackground()
@@ -57,6 +56,5 @@ struct AccountSetUp: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         AccountSetUp()
-            .environmentObject(AuthModel())
     }
 }

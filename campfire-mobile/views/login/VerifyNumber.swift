@@ -72,6 +72,10 @@ struct VerifyNumber: View {
                                 // verify user code on tap of link
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
+                                    if model.login {
+                                        currentUser.getProfile()
+                                        currentUser.getUser()
+                                    }
                                 })
                             // otherwise log them into the main app
 

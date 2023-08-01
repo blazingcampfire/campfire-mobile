@@ -262,6 +262,28 @@ extension AuthModel {
         }
     }
     
+    func getProfile() {
+        
+        if Auth.auth().currentUser?.uid == nil {
+            return
+        }
+        else {
+            let school: String = schoolParser(email:(Auth.auth().currentUser?.email)!)
+            guard let profileRef: CollectionReference = profileParser(school: school) else {
+                return
+            }
+            let userID = Auth.auth().currentUser!.uid
+            profileRef.document(userID).getDocument(as: Profile.self) { [self] result in
+                switch result {
+                case .success(let profileData):
+                    self.profile = profileData
+                    print("Profile Email: \(self.profile.email)")
+                case .failure(let error):
+                    print("Error decoding profile: \(error)")
+                }
+            }
+        }
+    }
     
 }
 

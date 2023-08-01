@@ -62,8 +62,8 @@ struct VerifyEmail: View {
                                 
                                 // MARK: - Buttons redirecting to email verification
                                 
-                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
-                                    .padding(5)
+//                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
+//                                    .padding(5)
                                 
                                 if model.createAccount {
                                     LFButton(text: "Google", icon: Image("glogo2"))
@@ -84,6 +84,7 @@ struct VerifyEmail: View {
                                             Task {
                                                 do {
                                                     try await model.signInGoogle()
+                                                    currentUser.getProfile()
                                                     currentUser.getProfile()
                                                     validEmail = true
                                                 } catch {

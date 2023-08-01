@@ -73,6 +73,7 @@ struct VerifyNumber: View {
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
                                     if model.login {
+                                        currentUser.setCollectionRefs()
                                         currentUser.getProfile()
                                         currentUser.getUser()
                                     }

@@ -7,10 +7,11 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    @StateObject var model = RequestsPageModel(profiles: [], id: "U4Mdb2cbrzeZa7Qq57vT3vDgkdw2")
+    @StateObject var model: RequestsPageModel
     var body: some View {
         NavigationView {
             ListRequests()
+                .environmentObject(model)
         }
         .background(Color.white)
         .listStyle(PlainListStyle())
@@ -22,17 +23,13 @@ struct RequestsPage: View {
 }
 
 struct ListRequests: View {
-    
-    let requestList = [
-        RequestsListView(profilepic: David.profilepic, name: David.name, username: David.username),
-        RequestsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
-        RequestsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
-    ]
+    @EnvironmentObject var model: RequestsPageModel
     
     var body: some View {
         List {
-            ForEach(0..<requestList.count, id: \.self) { index in
-                requestList[index]
+            ForEach(model.profiles, id: \.self) { profile in
+                RequestsListView(profile: profile)
+                    .environmentObject(model)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)
@@ -41,8 +38,8 @@ struct ListRequests: View {
     }
 }
 
-struct RequestsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        RequestsPage()
-    }
-}
+//struct RequestsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RequestsPage()
+//    }
+//}

@@ -57,12 +57,16 @@ class SearchPageModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        let relationshipRef = ndRelationships.document(friendID)
+        let friendRelationshipRef = ndRelationships.document(friendID)
+        let userRelationshipRef = ndRelationships.document(userID)
         
-        relationshipRef.setData([
-            "ownRequests": userID,
+        friendRelationshipRef.setData([
+            "friendRequests": userID
         ], merge: true)
-        print(relationshipRef.documentID)
+        print(friendRelationshipRef.documentID)
+        userRelationshipRef.setData([
+            "ownRequests": friendID
+        ])
     }
     
     func unrequestFriend(friendID: String) {
@@ -70,11 +74,15 @@ class SearchPageModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        let relationshipRef = ndRelationships.document(friendID)
+        let friendRelationshipRef = ndRelationships.document(friendID)
+        let userRelationshipRef = ndRelationships.document(userID)
         
-//        relationshipRef.updateData([
-//            "ownRequests": FieldValue.arrayRemove(userID)
-//        ])
+        friendRelationshipRef.updateData([
+            "friendRequests": FieldValue.arrayRemove([userID])
+        ])
+        userRelationshipRef.updateData([
+            "ownRequests": FieldValue.arrayRemove([friendID])
+        ])
     }
     
 }

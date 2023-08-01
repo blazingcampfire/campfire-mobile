@@ -25,7 +25,7 @@ struct TentTabView: View {
             } else if tabIndex == 1 {
                 SearchPage(model: SearchPageModel(currentUser: currentUser))
             } else if tabIndex == 2 {
-                RequestsPage()
+                RequestsPage(model: RequestsPageModel(currentUser: currentUser))
             }
             Spacer()
         }

@@ -58,6 +58,7 @@ struct SetProfilePic: View {
                         VStack {
                             Button(action: {
                                 model.createProfile()
+                                currentUser.setCollectionRefs()
                                 currentUser.getProfile()
                                 currentUser.getUser()
                                 model.presentMainApp()

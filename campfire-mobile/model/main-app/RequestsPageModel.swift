@@ -9,20 +9,19 @@ import Foundation
 
 class RequestsPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
-    var id: String
+    @Published var currentUser: CurrentUserModel
     
-    init(profiles: [Profile], id: String) {
-        self.profiles = profiles
-        self.id = id
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
     }
     
     func readRequests() -> Void {
-        let userRelationships = ndRelationships.document(id).addSnapshotListener { documentSnapshot, error in
-            guard let collection = documentSnapshot else {
+        let userRelationships = ndRelationships.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+            guard let snapshot = documentSnapshot else {
                 print("error fetching document: \(error!)")
                 return
             }
-            print(collection)
+            print(snapshot.documentID)
         }
     }
 }

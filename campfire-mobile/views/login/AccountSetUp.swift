@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountSetUp: View {
-    @EnvironmentObject var model: CurrentUserModel
+    @EnvironmentObject var model: AuthModel
     var body: some View {
         NavigationView {
             GradientBackground()

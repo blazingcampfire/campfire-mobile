@@ -10,14 +10,21 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
+
 class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
         didSet {
+            self.profiles = []
             searchName(matching: name)
         }
     }
-
+    @Published var currentUser: CurrentUserModel
+    
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
+    
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
@@ -33,6 +40,7 @@ class SearchPageModel: ObservableObject {
                         let profile = try document.data(as: Profile.self)
                         print(profile.name)
                         self.profiles.append(profile)
+                        print(self.currentUser.profile.email)
                     } catch {
                         print("Error retrieving profile")
                         print("\(document.documentID) => \(document.data())")

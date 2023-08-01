@@ -12,7 +12,7 @@ import SwiftUI
 struct SetProfilePic: View {
     // setting up view dismiss == going back to the previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: CurrentUserModel
+    @EnvironmentObject var model: AuthModel
     var selectedImage: UIImage?
     @State var setUpFinished: Bool = false
     

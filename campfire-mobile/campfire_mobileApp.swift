@@ -41,7 +41,7 @@ struct campfire_mobileApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
                 ContentView()

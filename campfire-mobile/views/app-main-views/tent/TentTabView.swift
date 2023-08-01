@@ -6,16 +6,15 @@
 //
 
 import SwiftUI
-
-// sliding tab view dependency from GitHub
 import SlidingTabView
+
 struct TentTabView: View {
     // this variable represents the index of each tab
     @State private var tabIndex = 0
-
+    @EnvironmentObject var currentUser: CurrentUserModel
     var body: some View {
         VStack {
-            SlidingTabView(selection: $tabIndex, tabs: ["Notifications", "Search", "Requests"], font: .custom("LexendDeca-Regular", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach,inactiveAccentColor: .gray ,selectionBarColor: Theme.Peach)
+            SlidingTabView(selection: $tabIndex, tabs: ["notifications", "search", "requests"], font: .custom("LexendDeca-Regular", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach,inactiveAccentColor: .gray ,selectionBarColor: Theme.Peach)
             
 
             Spacer()
@@ -24,7 +23,7 @@ struct TentTabView: View {
             if tabIndex == 0 {
                 NotificationsPage(range: 1 ... 12)
             } else if tabIndex == 1 {
-                SearchPage()
+                SearchPage(model: SearchPageModel(currentUser: currentUser))
             } else if tabIndex == 2 {
                 RequestsPage()
             }

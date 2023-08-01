@@ -12,9 +12,9 @@ import SwiftUI
 struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: CurrentUserModel
+    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @State private var validEmail: Bool = false
-    
 
     var body: some View {
         
@@ -23,6 +23,7 @@ struct VerifyEmail: View {
         }
         else if (validEmail && model.login) {
             NavigationBar()
+                .environmentObject(currentUser)
         }
         else {
             GradientBackground()
@@ -83,6 +84,7 @@ struct VerifyEmail: View {
                                             Task {
                                                 do {
                                                     try await model.signInGoogle()
+                                                    currentUser.getProfile()
                                                     validEmail = true
                                                 } catch {
                                                     print(error)
@@ -100,8 +102,8 @@ struct VerifyEmail: View {
     }
 }
 
-struct VerifyEmail_Previews: PreviewProvider {
-    static var previews: some View {
-        VerifyEmail()
-    }
-}
+//struct VerifyEmail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VerifyEmail()
+//    }
+//}

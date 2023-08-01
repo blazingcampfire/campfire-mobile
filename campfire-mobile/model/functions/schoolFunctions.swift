@@ -34,9 +34,25 @@ func schoolParser(email: String) -> String {
     }
    return "Does not belong to a supported school"
 }
+func userParser(school: String) -> CollectionReference? {
+    guard let profileCollection = usersMap[school] else { return nil }
+    return profileCollection
+}
 
 func profileParser(school: String) -> CollectionReference? {
     guard let profileCollection = profilesMap[school] else { return nil }
     return profileCollection
 }
+
+func relationshipsParser(school: String) -> CollectionReference? {
+    guard let profileCollection = relationshipsMap[school] else { return nil }
+    return profileCollection
+}
+
+func postParser(school: String) -> CollectionReference? {
+    guard let profileCollection = postsMap[school] else { return nil }
+    return profileCollection
+}
+
+
 

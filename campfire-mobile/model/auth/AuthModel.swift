@@ -5,23 +5,21 @@
 //  Created by Toni on 7/9/23.
 //
 
-import SwiftUI
 import Combine
 import FirebaseAuth
-import FirebaseFirestoreSwift
 import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
 import Foundation
 import GoogleSignIn
 import GoogleSignInSwift
-import FirebaseStorage
-
-
+import SwiftUI
 
 @MainActor
-final class CurrentUserModel: ObservableObject {
+final class AuthModel: ObservableObject {
     // Input values from Views
-    @Published var profile: Profile 
-    @Published var privateUserData: PrivateUser
+   @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
+   @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
@@ -41,7 +39,7 @@ final class CurrentUserModel: ObservableObject {
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
     @Published var isMainAppPresented: Bool = false
-    
+
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
     @Published var createAccount: Bool = false
@@ -56,9 +54,7 @@ final class CurrentUserModel: ObservableObject {
     private var publishers = Set<AnyCancellable>()
 
     // Initializing user & profile structs & validity publishers
-    init(privateUserData: PrivateUser, profile: Profile) {
-        self.privateUserData = privateUserData
-        self.profile = profile
+    init() {
         isPhoneNumberValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validPhoneNumber, on: self)
@@ -79,13 +75,12 @@ final class CurrentUserModel: ObservableObject {
             .receive(on: RunLoop.main)
             .assign(to: \.validUsername, on: self)
             .store(in: &publishers)
-        
     }
 }
 
 // MARK: - Extension: Validation setup
 
-private extension CurrentUserModel {
+extension AuthModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
         $phoneNumber
             .map {
@@ -109,12 +104,12 @@ private extension CurrentUserModel {
             .map { email in
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                var validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
+                let validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
                 return validEmail
             }
             .eraseToAnyPublisher()
     }
-    
+
     var isNameValidPublisher: AnyPublisher<Bool, Never> {
         $name
             .map {
@@ -141,12 +136,11 @@ private extension CurrentUserModel {
             }
             .eraseToAnyPublisher()
     }
-
 }
 
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
-extension CurrentUserModel {
+extension AuthModel {
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -164,7 +158,7 @@ extension CurrentUserModel {
             }
         }
     }
-    
+
     func verifyVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -185,14 +179,13 @@ extension CurrentUserModel {
 
 // MARK: - Google auth
 
-extension CurrentUserModel {
+extension AuthModel {
     func signInGoogle() async throws {
         do {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
-        }
-        catch {
+        } catch {
             await handleError(error: error)
         }
     }
@@ -202,12 +195,10 @@ extension CurrentUserModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
-        }
-        catch {
+        } catch {
             await handleError(error: error)
         }
     }
-    
 
     // MARK: - Handling errors
 
@@ -221,65 +212,58 @@ extension CurrentUserModel {
 
 // MARK: - Create user function
 
-extension CurrentUserModel {
-    
+extension AuthModel {
     func presentMainApp() {
         if Auth.auth().currentUser?.email == nil || Auth.auth().currentUser?.phoneNumber == nil {
             return
-        }
-        else {
+        } else {
             isMainAppPresented = true
         }
     }
-    
+
     func createProfile() {
-        
         userID = Auth.auth().currentUser!.uid
-        email = Auth.auth().currentUser?.email ?? self.email
-        phoneNumber = Auth.auth().currentUser?.phoneNumber ?? self.phoneNumber
-        
+        email = Auth.auth().currentUser?.email ?? email
+        phoneNumber = Auth.auth().currentUser?.phoneNumber ?? phoneNumber
+
         let school: String = schoolParser(email: email)
         let nameInsensitive: String = name.lowercased()
-        
+
         var userRef: CollectionReference
         var profileRef: CollectionReference
-        
+
         if school == "nd" {
             userRef = ndUsers
             profileRef = ndProfiles
-        }
-        else if school == "yale" {
+        } else if school == "yale" {
             userRef = yaleUsers
             profileRef = yaleUsers
-        }
-        else if school == "rice" {
+        } else if school == "rice" {
             userRef = riceUsers
             profileRef = riceUsers
-        }
-        else {
+        } else {
             return
         }
-        
+
         let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
         let userData = PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
-        
-        self.profile = profileData
-        self.privateUserData = userData
-       
-        
+
+        profile = profileData
+        privateUserData = userData
+
         // based on the user's school, their profile document is sorted into the appropriate school document
-        
+
         do {
             try userRef.document("\(userID)").setData(from: profile)
             try profileRef.document("\(userID)").setData(from: privateUserData)
             print("Documents successfully written!")
-        }
-        catch {
+        } catch {
             print("Error writing profile or user to firestore \(error)")
         }
     }
+    
+    
 }
-
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function
 

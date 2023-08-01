@@ -11,7 +11,7 @@ struct EnterEmail: View {
     
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: CurrentUserModel
+    @EnvironmentObject var model: AuthModel
     
     var body: some View {
             GradientBackground()

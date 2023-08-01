@@ -10,7 +10,8 @@ import SwiftUI
 struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject var model: CurrentUserModel
+    @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     // setting up verification code & advancing as view state
     
@@ -21,6 +22,7 @@ struct VerifyNumber: View {
         }
         else if model.login && model.validVerificationCode {
             NavigationBar()
+                .environmentObject(currentUser)
         }
         else {
         GradientBackground()

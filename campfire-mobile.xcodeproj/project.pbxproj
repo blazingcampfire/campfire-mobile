@@ -120,6 +120,7 @@
 		E29095FB2A3E4741001BEDDE /* campfire_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */; };
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
 		E2A37EF62A7622DD001A4306 /* RequestsPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */; };
+		E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */; };
 		E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AA2A5E38770012D328 /* GoogleSignIn */; };
 		E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */; };
 		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
@@ -130,7 +131,7 @@
 		E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */; };
 		E2DA6CFC2A709C24002D7660 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA6CFB2A709C24002D7660 /* NotificationsManager.swift */; };
 		E2DA6CFE2A7165E8002D7660 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */; };
-		E2E342612A5B3B110027D72F /* CurrentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E342602A5B3B110027D72F /* CurrentUserModel.swift */; };
+		E2E342612A5B3B110027D72F /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E342602A5B3B110027D72F /* AuthModel.swift */; };
 		E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E355432A58F6A300EE16C6 /* BackButton.swift */; };
 		F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82C10A92A42A74200864FBD /* TheFeed.swift */; };
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
@@ -285,6 +286,7 @@
 		E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITests.swift; sourceTree = "<group>"; };
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPageModel.swift; sourceTree = "<group>"; };
+		E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2C446862A4E82C20032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
@@ -293,7 +295,7 @@
 		E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
 		E2DA6CFB2A709C24002D7660 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
-		E2E342602A5B3B110027D72F /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
+		E2E342602A5B3B110027D72F /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		E2E355432A58F6A300EE16C6 /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		E2E997B12A41459700EBBDD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F82C10A92A42A74200864FBD /* TheFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheFeed.swift; sourceTree = "<group>"; };
@@ -700,7 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				E2CBD5E62A6216E1000F3547 /* AuthenticationManager.swift */,
-				E2E342602A5B3B110027D72F /* CurrentUserModel.swift */,
+				E2E342602A5B3B110027D72F /* AuthModel.swift */,
 				E2CBD5E82A633EBC000F3547 /* SignInGoogleHelper.swift */,
 				E2DA6CFB2A709C24002D7660 /* NotificationsManager.swift */,
 			);
@@ -739,6 +741,7 @@
 				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
 				E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */,
+				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -978,6 +981,7 @@
 				B1C51EA92A71E7A3008E6C69 /* CameraMediaPicker.swift in Sources */,
 				F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */,
 				B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */,
+				E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */,
 				E2578DA22A6B6429004C65DC /* EnterName.swift in Sources */,
 				B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */,
 				B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */,
@@ -1034,7 +1038,7 @@
 				B1B5EFC82A4F569A00FA79CE /* EditPosts.swift in Sources */,
 				B1C51EAB2A722522008E6C69 /* PreviewPostInfo.swift in Sources */,
 				E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */,
-				E2E342612A5B3B110027D72F /* CurrentUserModel.swift in Sources */,
+				E2E342612A5B3B110027D72F /* AuthModel.swift in Sources */,
 				F8950DCA2A48008A00C13075 /* Vid.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
 				E2163E522A663C4D005A20BE /* users.swift in Sources */,

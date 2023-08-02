@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    @StateObject var model: RequestsPageModel
+    @StateObject var model: RequestsModel
     var body: some View {
         NavigationView {
             ListRequests()
@@ -23,7 +23,7 @@ struct RequestsPage: View {
 }
 
 struct ListRequests: View {
-    @EnvironmentObject var model: RequestsPageModel
+    @EnvironmentObject var model: RequestsModel
     
     var body: some View {
         List {

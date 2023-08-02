@@ -52,7 +52,7 @@ class SearchModel: ObservableObject {
     }
 
     // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
-    func requestFriend(friendID: String) {
+    func requestFriend(friendID: String, profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return
@@ -61,15 +61,15 @@ class SearchModel: ObservableObject {
         let userRelationshipRef = ndRelationships.document(userID)
         
         friendRelationshipRef.setData([
-            "friendRequests": userID
+            "friendRequests": [currentUser.profile.userID: Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)]
         ], merge: true)
         print(friendRelationshipRef.documentID)
         userRelationshipRef.setData([
-            "ownRequests": friendID
+            "ownRequests": [ profile.userID: Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL)]
         ])
     }
     
-    func unrequestFriend(friendID: String) {
+    func unrequestFriend(friendID: String, profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return
@@ -78,10 +78,10 @@ class SearchModel: ObservableObject {
         let userRelationshipRef = ndRelationships.document(userID)
         
         friendRelationshipRef.updateData([
-            "friendRequests": FieldValue.arrayRemove([userID])
+            "friendRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
         ])
         userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([friendID])
+            "ownRequests": FieldValue.arrayRemove([profile])
         ])
     }
     

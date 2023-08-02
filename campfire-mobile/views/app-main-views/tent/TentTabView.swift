@@ -23,9 +23,9 @@ struct TentTabView: View {
             if tabIndex == 0 {
                 NotificationsPage(range: 1 ... 12)
             } else if tabIndex == 1 {
-                SearchPage(model: SearchPageModel(currentUser: currentUser))
+                SearchPage(model: SearchModel(currentUser: currentUser))
             } else if tabIndex == 2 {
-                RequestsPage(model: RequestsPageModel(currentUser: currentUser))
+                RequestsPage(model: RequestsModel(currentUser: currentUser))
             }
             Spacer()
         }

@@ -11,17 +11,17 @@ import AVKit
 
 
 struct PreviewPostInfo: View {
-    @ObservedObject var userData: AuthModel
+    @ObservedObject var currentUser: CurrentUserModel
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             HStack {
-                Image(userData.profilePic)
+                Image(currentUser.profile.profilePicURL)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40)
                     .clipShape(Circle())
                 VStack {
-                    Text("@\(userData.username)")
+                    Text("@\(currentUser.profile.username)")
                         .font(.custom("LexendDeca-Bold", size: 14))
                         .foregroundColor(Theme.TextColor)
                 }
@@ -183,8 +183,8 @@ struct RetakeButton: View {
 
 
 
-struct PreviewPostInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        PreviewPostInfo(userData: AuthModel())
-    }
-}
+//struct PreviewPostInfo_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PreviewPostInfo(currentUser: CurrentUserModel())
+//    }
+//}

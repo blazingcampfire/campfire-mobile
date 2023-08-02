@@ -62,6 +62,5 @@ extension EnterName {
 struct EnterName_Previews: PreviewProvider {
     static var previews: some View {
         EnterName()
-            .environmentObject(AuthModel())
     }
 }

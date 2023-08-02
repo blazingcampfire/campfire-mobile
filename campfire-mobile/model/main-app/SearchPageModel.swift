@@ -10,21 +10,29 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
+
 class SearchPageModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
         didSet {
+            self.profiles = []
             searchName(matching: name)
+            print("Email: \(self.currentUser.profile.email). Collection: \(self.currentUser.profileRef.path)")
         }
     }
-
+    @Published var currentUser: CurrentUserModel
+    
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
+    
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
             return
         }
-        ndProfiles.whereField("nameInsensitive", isGreaterThan: name).whereField("nameInsensitive", isLessThan: name + "\u{F7FF}").limit(to: 8).getDocuments { QuerySnapshot, err in
+        currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
             if let err = err {
                 print("Error querying profiles: \(err)")
             } else {
@@ -49,12 +57,16 @@ class SearchPageModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        let relationshipRef = ndRelationships.document(friendID)
+        let friendRelationshipRef = ndRelationships.document(friendID)
+        let userRelationshipRef = ndRelationships.document(userID)
         
-        relationshipRef.setData([
-            "ownRequests": userID,
+        friendRelationshipRef.setData([
+            "friendRequests": userID
         ], merge: true)
-        print(relationshipRef.documentID)
+        print(friendRelationshipRef.documentID)
+        userRelationshipRef.setData([
+            "ownRequests": friendID
+        ])
     }
     
     func unrequestFriend(friendID: String) {
@@ -62,11 +74,15 @@ class SearchPageModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        let relationshipRef = ndRelationships.document(friendID)
+        let friendRelationshipRef = ndRelationships.document(friendID)
+        let userRelationshipRef = ndRelationships.document(userID)
         
-//        relationshipRef.updateData([
-//            "ownRequests": FieldValue.arrayRemove(userID)
-//        ])
+        friendRelationshipRef.updateData([
+            "friendRequests": FieldValue.arrayRemove([userID])
+        ])
+        userRelationshipRef.updateData([
+            "ownRequests": FieldValue.arrayRemove([friendID])
+        ])
     }
     
 }

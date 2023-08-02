@@ -9,9 +9,8 @@ import SwiftUI
 
 struct RequestsListView: View {
     
-    var profilepic: String
-    var name: String
-    var username: String
+    var profilepic: String = info.profilepic
+    var profile: Profile
     
     var body: some View {
         
@@ -26,12 +25,12 @@ struct RequestsListView: View {
             VStack(alignment: .leading) {
                 Button(action: {
                 }) {
-                    Text(name)
+                    Text(profile.name)
                         .font(.custom("LexendDeca-Bold", size: 18))
                         .foregroundColor(Theme.TextColor)
                 }
 
-                Text("@\(username)")
+                Text("@\(profile.username)")
                     .font(.custom("LexendDeca-Regular", size: 12))
                     .foregroundColor(.gray)
             }
@@ -54,8 +53,8 @@ struct RequestsListView: View {
     }
 }
 
-struct RequestsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        RequestsListView(profilepic: info.profilepic, name: info.name, username: info.username)
-    }
-}
+//struct RequestsListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RequestsListView(profile: profile, info.profilepic)
+//    }
+//}

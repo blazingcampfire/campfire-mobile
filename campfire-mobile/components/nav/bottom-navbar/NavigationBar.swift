@@ -10,7 +10,7 @@ import SwiftUICam
 
 struct NavigationBar: View {
     @StateObject var cameraModel = CameraModel()
-    @StateObject var userData = AuthModel()
+    @EnvironmentObject var currentUser: CurrentUserModel
     var body: some View {
         NavigationView {
         TabView() {
@@ -31,7 +31,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-           CameraView(camera: cameraModel, userData: userData)
+           CameraView(camera: cameraModel, currentUser: currentUser)
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()
@@ -44,6 +44,7 @@ struct NavigationBar: View {
                 .toolbarBackground(Color.black, for: .tabBar)
             
             TentTabView()
+                .environmentObject(currentUser)
                 .tabItem {
                     Label("Tent", systemImage: "tent.fill")
                 }
@@ -65,8 +66,8 @@ struct NavigationBar: View {
     }
 }
 
-struct NavigationBar_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationBar()
-    }
-}
+//struct NavigationBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationBar()
+//    }
+//}

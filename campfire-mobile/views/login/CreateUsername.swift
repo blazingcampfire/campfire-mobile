@@ -12,10 +12,6 @@ struct CreateUsername: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
     
-    // setting up user phoneNumber & advance as view state
-    @State var username: String = ""
-    @State private var canAdvance: Bool = false
-    
     var body: some View {
         GradientBackground()
             .overlay(
@@ -72,6 +68,5 @@ extension CreateUsername {
 struct CreateUsername_Previews: PreviewProvider {
     static var previews: some View {
         CreateUsername()
-            .environmentObject(AuthModel())
     }
 }

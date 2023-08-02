@@ -7,29 +7,29 @@
 
 import SwiftUI
 
-struct HotspotsFeedPage: View {
-    var body: some View {
-        ZStack {
-            TheFeed()
+//struct HotspotsFeedPage: View {
+//    var body: some View {
+//        ZStack {
+//            TheFeed()
+//
+//            VStack {
+//                Button(action: {
+//                    // go back to map page
+//                }) {
+//                    Image(systemName: "xmark")
+//                        .foregroundColor(.white)
+//                        .font(.system(size: 30, weight: .bold))
+//                }
+//            }
+//            .padding(.bottom, 700)
+//            .padding(.trailing, 320)
+//
+//        }
+//    }
+//}
 
-            VStack {
-                Button(action: {
-                    // go back to map page
-                }) {
-                    Image(systemName: "xmark")
-                        .foregroundColor(.white)
-                        .font(.system(size: 30, weight: .bold))
-                }
-            }
-            .padding(.bottom, 700)
-            .padding(.trailing, 320)
-    
-        }
-    }
-}
-
-struct HotspotsFeedPage_Previews: PreviewProvider {
-    static var previews: some View {
-        HotspotsFeedPage()
-    }
-}
+//struct HotspotsFeedPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HotspotsFeedPage()
+//    }
+//}

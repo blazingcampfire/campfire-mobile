@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-struct ReplyView: View, Identifiable {
-    var id = UUID() //so the program can differentiate between each element
-    var profilepic: String
-    var username: String
-    var reply: String
-    var replyLikeNum: Int
-    var replytime: String
+struct ReplyView: View {
+    var eachreply: Reply
     @State private var replyLiked: Bool = false
-
     var body: some View {
         HStack() {
            
@@ -23,7 +17,7 @@ struct ReplyView: View, Identifiable {
                 Button(action: {
                     // navigate to profile
                 }) {
-                    Image(profilepic)
+                    Image("ragrboard5")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -35,16 +29,16 @@ struct ReplyView: View, Identifiable {
                     Button(action: {
                         // navigate to profile
                     }) {
-                        Text("@\(username)")
+                        Text("@\(eachreply.username)")
                             .font(.custom("LexendDeca-Bold", size: 14))
                             .foregroundColor(Theme.TextColor)
                     }
                     
-                    Text(reply)
+                    Text(eachreply.reply)
                         .font(.custom("LexendDeca-Light", size: 15))
                         .foregroundColor(Theme.TextColor)
                     
-                    Text(replytime)  // time variable
+                    Text(eachreply.date)  // time variable
                         .font(.custom("LexendDeca-Light", size: 13))
                         .foregroundColor(Theme.TextColor)
                 }
@@ -61,11 +55,11 @@ struct ReplyView: View, Identifiable {
                     Image(replyLiked == false ? "noteaten" : "eaten")
                         .resizable()
                         .frame(width: 75, height: 90)
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .offset(x: -2)
                 }
                 
-                Text("\(replyLikeNum)")
+                Text("\(eachreply.numLikes)")
                     .foregroundColor(Theme.TextColor)
                     .font(.custom("LexendDeca-SemiBold", size: 16))
             }
@@ -74,8 +68,8 @@ struct ReplyView: View, Identifiable {
     }
 }
 
-struct ReplyView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReplyView(profilepic: "ragrboard6", username: "lowkeyme", reply: "hahaha", replyLikeNum: 2, replytime: "10m")
-    }
-}
+//struct ReplyView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReplyView(profilepic: "ragrboard6", username: "lowkeyme", reply: "hahaha", replyLikeNum: 2, replytime: "10m")
+//    }
+//}

@@ -11,6 +11,8 @@ struct EmailOrNumber: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    
+    
     var body: some View {
                 GradientBackground()
                 .overlay(

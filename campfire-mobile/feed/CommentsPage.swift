@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
+import UIKit
 
 
 struct CommentsPage: View {
-    var comments: [CommentView]
-    @State private var commentText: String = ""
+    var postId: String
+    @State private var isEditing: Bool = false
     @Environment(\.dismiss) var dismiss
-  
+    @EnvironmentObject var commentModel: CommentsModel
+    @State private var replyingToCommentId: String?
+    
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList(listcomments: comments)
+                CommentsList(replyingToCommentId: $replyingToCommentId, postID: postId)
+                    .environmentObject(commentModel)
                 Divider()
                 VStack {
                     HStack {
@@ -26,16 +30,45 @@ struct CommentsPage: View {
                             .frame(width: 40, height: 40)
                             .clipShape(Circle())
                         
-                        TextField("", text: $commentText, prompt: Text("add comment!").font(.custom("LexendDeca-Regular", size: 15)))
-                            .font(.custom("LexendDeca-Regular", size: 15))
+                        if !commentModel.isLoading {
+                            TextField(
+                                "",
+                                text: Binding<String>(
+                                    get: {
+                                        // Depending on whether you're replying to a comment or not assign the text
+                                        if replyingToCommentId != nil {
+                                            return commentModel.replytext
+                                        } else {
+                                            return commentModel.commenttext
+                                        }
+                                    },
+                                    set: {
+                                        // Dont't set if comments are loading
+                                        guard !commentModel.isLoading else { return }
+                                        
+                                        // Set the replytext or commenttext depending on whether you're replying to a comment or not
+                                        if replyingToCommentId != nil {
+                                            commentModel.replytext = $0
+                                        } else {
+                                            commentModel.commenttext = $0
+                                        }
+                                    }
+                                ),
+                                prompt: Text(replyingToCommentId != nil ? "add reply!" : " add comment!").font(.custom("LexendDeca-Regular", size: 15))
+                            )
+                            .onTapGesture {
+                                isEditing = true
+                            }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 2)
-                            .foregroundColor(Theme.Peach)
-                                     )
-                        if commentText != "" {
+                            .foregroundColor(Theme.Peach))
+                        }
+                           
+                                     
+                        if (isEditing && commentModel.commenttext != "") || (isEditing && commentModel.replytext != "") {
                             Button(action: {
-                                // button to add comment, will append array of diffComments with info
+                            createContent()
                             }) {
                                 Image(systemName: "paperplane.fill")
                                     .foregroundColor(Theme.Peach)
@@ -45,6 +78,10 @@ struct CommentsPage: View {
                     .padding()
                 }
             }
+            .onTapGesture {
+                isEditing = false
+                UIApplication.shared.dismissKeyboard()
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {
@@ -52,7 +89,7 @@ struct CommentsPage: View {
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                      
-                        Text("\(comments.count)")
+                        Text("\(commentModel.comments.count)")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
                     }
@@ -69,19 +106,47 @@ struct CommentsPage: View {
                 }
             }
         }
+        .onAppear {
+            self.commentModel.isLoading = true
+            self.commentModel.getComments(postId: postId)
+            self.commentModel.isLoading = false
+        }
+        .onReceive(commentModel.$comments) { _ in
+            commentModel.comments.forEach { comment in
+                commentModel.isLoading = true
+                commentModel.getReplies(postId: postId, commentId: comment.id)
+                commentModel.isLoading = false
+            }
+        }
+    }
+    func createContent() {
+        if let replyingId = replyingToCommentId {
+            commentModel.createReply(commentId: replyingId, postId: postId) {
+                commentModel.getReplies(postId: postId, commentId: replyingId)
+                commentModel.replytext = ""  // Reset here
+                replyingToCommentId = nil
+            }
+        } else {
+            commentModel.createComment(postId: postId) {
+                commentModel.getComments(postId: postId)
+                commentModel.commenttext = ""
+            }
+        }
+        UIApplication.shared.dismissKeyboard()
     }
 }
-    //Global comments variable
-var diffComments: [CommentView] = [CommentView(profilepic: "darsh", username: "reallyhim", comment: "i wanna lick his neck", commentLikeNum: 35, commenttime: "1m"), CommentView(profilepic: "ragrboard", username: "davoo", comment: "eat shit kid!", commentLikeNum: 520, commenttime: "1hr"), CommentView(profilepic: "toni", username: "bizzletonster", comment: "if he wanted to he would", commentLikeNum: 15, commenttime: "1d"), CommentView(profilepic: "ragrboard2", username: "urmom122", comment: "fw the kid", commentLikeNum: 10, commenttime: "2d"), CommentView(profilepic: "ragrboard3", username: "heynowdarshie", comment: "i love fruit loops", commentLikeNum: 90, commenttime: "3m"), CommentView(profilepic: "ragrboard4", username: "yaliebalie", comment: "yayyy", commentLikeNum: 12, commenttime: "2w"), CommentView(profilepic: "ragrboard5", username: "shelovewede", comment: "me personally...", commentLikeNum: 55, commenttime: "3w")]
-
 
 struct CommentsList: View {
-    var listcomments: [CommentView]
+    @EnvironmentObject var commentModel: CommentsModel
+    @Binding var replyingToCommentId: String?
     
-
+    var postID: String
     var body: some View {
         ScrollView {
-            if listcomments.isEmpty {
+            if commentModel.isLoading {
+                ProgressView()
+            }
+            else if commentModel.comments.count == 0 {
                 VStack(spacing: 10) {
                     Text("be the first to comment!")
                         .foregroundColor(Theme.TextColor)
@@ -93,19 +158,24 @@ struct CommentsList: View {
                 .padding(.top, 170)
             }
             else {
-                ForEach(0..<listcomments.count, id: \.self) { index in
-                        listcomments[index]
+                ForEach(commentModel.comments, id: \.id) { comment in
+                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, replyingToCommentId: $replyingToCommentId)
+                        .environmentObject(commentModel)
                 }
                 
             }
-           
         }
     }
 }
       
-
-struct CommentsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentsPage(comments: diffComments)
+extension UIApplication {
+    func dismissKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+
+//struct CommentsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommentsPage(comments: diffComments)
+//    }
+//}

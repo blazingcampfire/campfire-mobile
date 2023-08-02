@@ -18,8 +18,9 @@ import PhotosUI
 
 struct CameraView: View {
     
-    @ObservedObject var camera: CameraModel
+    @StateObject var camera = CameraModel()
     @ObservedObject var currentUser: CurrentUserModel
+    @StateObject var post = CamPostModel()
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
@@ -47,8 +48,8 @@ struct CameraView: View {
                     .foregroundColor(.white)
                 }
                  
-                PreviewPostInfo(currentUser: currentUser)
-                VideoPostButton(camera: camera)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                VideoPostButton(camera: camera, makePost: post)
                 VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
                 
@@ -66,8 +67,8 @@ struct CameraView: View {
                         .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
-                PreviewPostInfo(currentUser: currentUser)
-                PhotoPostButton(camera: camera)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                PhotoPostButton(camera: camera, makePost: post)
                 
                 VStack {
                     Button(action: {
@@ -113,8 +114,8 @@ struct CameraView: View {
                         .foregroundColor(.white)
                 }
                 
-                PreviewPostInfo(currentUser: currentUser)
-                VideoPostButton(camera: camera)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                VideoPostButton(camera: camera, makePost: post)
                 VStack {
                     Button(action: {
                         camera.reTake()
@@ -138,8 +139,8 @@ struct CameraView: View {
                        .edgesIgnoringSafeArea(.all)
                 }
                 PhotoSaveButton(camera: camera)
-                PreviewPostInfo(currentUser: currentUser)
-                PhotoPostButton(camera: camera)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                PhotoPostButton(camera: camera, makePost: post)
                 RetakeButton(camera: camera)
                 
             } else {

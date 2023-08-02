@@ -14,6 +14,8 @@ struct VerifyNumber: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     @State var validPhoneNumber: Bool = false
     
+
+    
     // setting up verification code & advancing as view state
     
     var body: some View {

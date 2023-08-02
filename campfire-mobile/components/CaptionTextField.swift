@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CaptionTextField: View {
-    @State private var text: String = ""
+   @Binding var text: String
 
     var placeholderText: String
 
@@ -39,6 +39,6 @@ struct CaptionTextField: View {
 
 struct CaptionTextField_Previews: PreviewProvider {
     static var previews: some View {
-        CaptionTextField(placeholderText: "enter your caption")
+        CaptionTextField(text: .constant("now what's the word captain"), placeholderText: "enter your caption")
     }
 }

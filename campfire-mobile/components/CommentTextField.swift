@@ -10,12 +10,10 @@ import SwiftUI
 
 
 struct CommentTextField: View {
-    @State private var text: String = ""
+    @Binding var text: String
     var placeholderText: String
 
     var body: some View {
-        VStack {
-            
             HStack(spacing: 0){
             Image(info.profilepic)
                 .resizable()
@@ -35,14 +33,11 @@ struct CommentTextField: View {
             }
             
         }
-        }
-        .frame(height: 50)
-        .padding(.horizontal)
     }
 }
 
-struct CommentTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        CommentTextField(placeholderText: "add comment...")
-    }
-}
+//struct CommentTextField_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommentTextField(text: "yooo", placeholderText: "add comment...")
+//    }
+//}

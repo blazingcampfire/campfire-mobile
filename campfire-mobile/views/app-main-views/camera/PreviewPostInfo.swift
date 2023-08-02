@@ -12,6 +12,7 @@ import AVKit
 
 struct PreviewPostInfo: View {
     @ObservedObject var userData: AuthModel
+    @ObservedObject var postModel: CamPostModel
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             HStack {
@@ -29,7 +30,7 @@ struct PreviewPostInfo: View {
             }
             .padding(.leading, 20)
             VStack(alignment: .leading, spacing: 10) {
-                CaptionTextField(placeholderText: "enter your caption")
+                CaptionTextField(text: $postModel.caption, placeholderText: "enter your caption")
                 Text("📍Location")
                 .font(.custom("LexendDeca-Regular", size: 16))
                 .padding(.leading, 15)
@@ -42,7 +43,7 @@ struct PreviewPostInfo: View {
 
 struct PhotoPostButton: View {
     @ObservedObject var camera: CameraModel
-    @ObservedObject var makePost = FeedPostModel()
+    @ObservedObject var makePost: CamPostModel
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
@@ -78,7 +79,7 @@ struct PhotoPostButton: View {
 
 struct VideoPostButton: View {
     @ObservedObject var camera: CameraModel
-    @ObservedObject var makePost = FeedPostModel()
+    @ObservedObject var makePost: CamPostModel
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
@@ -185,6 +186,6 @@ struct RetakeButton: View {
 
 struct PreviewPostInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewPostInfo(userData: AuthModel())
+        PreviewPostInfo(userData: AuthModel(), postModel: CamPostModel())
     }
 }

@@ -12,6 +12,8 @@ struct LaunchScreen: View {
     
     @State var splashShow: Bool = false
     
+    
+    
     var body: some View {
     
         if splashShow {

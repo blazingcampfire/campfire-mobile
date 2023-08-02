@@ -11,7 +11,8 @@ struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
-
+    
+    
 
     // setting up user phoneNumber & advancing as view state
     @State private var canAdvance: Bool = false

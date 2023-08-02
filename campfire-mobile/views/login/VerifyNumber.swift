@@ -12,6 +12,8 @@ struct VerifyNumber: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     
+
+    
     // setting up verification code & advancing as view state
     
     var body: some View {

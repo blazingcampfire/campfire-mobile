@@ -27,14 +27,20 @@ struct PostPlayer: Identifiable {
     var postItem: PostItem
 }
 
+struct Comment: Identifiable {
+    var id: String
+    var profilepic: String
+    var username: String
+    var comment: String
+    var numLikes: Int
+    var date: String
+}
 
-//let photoDocData: [String: Any] = [
-//    "username": "davooo",
-//    "name": "David Adebogun",
-//    "caption": "yoo",    //pass captiontextfield text into here
-//    "profilepic": "", // some path to the user's profile pic
-//    "url": path,
-//    "numLikes": 0,
-//    "location": "",  //some string creation of location
-//    "comments": [""],
-//]
+struct Reply: Identifiable, Hashable {
+    var id: String
+    var profilepic: String
+    var username: String
+    var reply: String
+    var numLikes: Int
+    var date: String
+}

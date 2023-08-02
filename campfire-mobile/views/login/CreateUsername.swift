@@ -12,6 +12,8 @@ struct CreateUsername: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
     
+    
+    
     // setting up user phoneNumber & advance as view state
     @State var username: String = ""
     @State private var canAdvance: Bool = false

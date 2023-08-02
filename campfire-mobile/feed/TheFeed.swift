@@ -9,13 +9,11 @@ import Kingfisher
 
 struct TheFeed: View {
   
-    @ObservedObject var postModel = FeedPostModel()
+    @ObservedObject var postModel: FeedPostModel
     @State var currentPost: String = ""
     @State var items: [PostPlayer?] = []
-    
-    init() {
-        postModel.getPosts()
-    }
+    @StateObject var handlecomments = CommentsModel()
+   
     
     var body: some View {
         GeometryReader { proxy in
@@ -24,6 +22,7 @@ struct TheFeed: View {
                 ForEach(items.indices, id: \.self){ index in
                     if let player = items[index] {
                         PostPlayerView(player: player, isCurrentPost: $currentPost)
+                            .environmentObject(handlecomments)
                             .frame(width: size.width)
                             .rotationEffect(.init(degrees: -90))
                             .ignoresSafeArea(.all, edges: .top)
@@ -34,6 +33,9 @@ struct TheFeed: View {
             .frame(width: size.height)
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(width: size.width)
+        }
+        .refreshable {
+            postModel.getPosts()
         }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
@@ -50,6 +52,9 @@ struct TheFeed: View {
                 }
             }
         }
+        .onAppear {
+            postModel.getPosts()
+        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
@@ -57,7 +62,7 @@ struct TheFeed: View {
 
 struct TheFeed_Previews: PreviewProvider {
     static var previews: some View {
-        TheFeed()
+        TheFeed(postModel: FeedPostModel(), handlecomments: CommentsModel())
     }
 }
     
@@ -69,7 +74,8 @@ struct PostPlayerView: View {
     @State var leaderboardPageShow = false
     @State var commentsTapped = false
     @State private var isPlaying = true
-    
+    @EnvironmentObject var handleComments: CommentsModel
+
 
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
@@ -79,6 +85,9 @@ struct PostPlayerView: View {
                          CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
                              .onTapGesture {
                                  isPlaying.toggle()
+                             }
+                             .onDisappear {
+                                 isPlaying = false
                              }
                      } else {
                          Text("Error Loading Post")
@@ -90,8 +99,9 @@ struct PostPlayerView: View {
                      let imageURL = player.postItem.url
                          KFImage(URL(string: imageURL))
                              .resizable()
-                             .edgesIgnoringSafeArea(.all)
-                           //  .aspectRatio(9/16, contentMode: .fill)
+                             .scaledToFit()
+                            .edgesIgnoringSafeArea(.all)
+                            
                  } else {
                          Text("Error Loading Post")
                              .font(.custom("LexendDeca-Regular", size: 25))
@@ -231,29 +241,29 @@ struct PostPlayerView: View {
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
-                    
-                    
-//                    VStack {
-//                    Button(action: {
-//                        commentsTapped.toggle()
-//                    }) {
-//                        VStack {
-//                            Image(systemName: "text.bubble.fill")
-//                                .resizable()
-//                                .frame(width: 35, height: 35)
-//                                .foregroundColor(.white)
-//                        }
-//                    }
-//                        Text("\(vid.mediafile.commentCount)")
-//                        .foregroundColor(.white)
-//                        .font(.custom("LexendDeca-Regular", size: 16))
-//                        .sheet(isPresented: $commentsTapped) {
-//                            CommentsPage(comments: vid.mediafile.commentSection)
-//                                .presentationDetents([.fraction(0.85)])
-//                                .presentationDragIndicator(.visible)
-//                        }
-//                }
-//                    .padding(.top, 20)
+                    VStack {
+                    Button(action: {
+                        commentsTapped.toggle()
+                    }) {
+                        VStack {
+                            Image(systemName: "text.bubble.fill")
+                                .resizable()
+                                .frame(width: 35, height: 35)
+                                .foregroundColor(.white)
+                        }
+                    }
+                        Text("\(handleComments.comments.count)")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-Regular", size: 16))
+                        .sheet(isPresented: $commentsTapped) {
+                            CommentsPage(postId: player.postItem.id)
+                                .environmentObject(handleComments)
+                                .presentationDetents([.fraction(0.85)])
+                                .presentationDragIndicator(.visible)
+                        }
+                }
+                    .padding(.top, 20)
+              
                     
                     Button(action: {
                         //report post
@@ -271,5 +281,15 @@ struct PostPlayerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         .background(Color.black.ignoresSafeArea())
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.handleComments.isLoading = true
+                self.handleComments.getComments(postId: player.postItem.id)
+                self.handleComments.isLoading = false
+            }
+        }
+        .onReceive(handleComments.$comments) { _ in
+           
+        }
     }
 }

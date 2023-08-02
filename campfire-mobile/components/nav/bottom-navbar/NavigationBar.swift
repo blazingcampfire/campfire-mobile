@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftUICam
 
 struct NavigationBar: View {
-    @StateObject var cameraModel = CameraModel()
     @StateObject var userData = AuthModel()
+    @StateObject var feedModel = FeedPostModel()
     var body: some View {
         NavigationView {
         TabView() {
-            TheFeed()
+            TheFeed(postModel: feedModel)
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")
@@ -31,7 +31,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-           CameraView(camera: cameraModel, userData: userData)
+           CameraView(userData: userData)
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()
@@ -60,6 +60,9 @@ struct NavigationBar: View {
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
+        .onAppear {
+            feedModel.getPosts()
+        }
     }
         .navigationBarBackButtonHidden(true)
     }

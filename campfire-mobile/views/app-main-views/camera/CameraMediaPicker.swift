@@ -65,7 +65,7 @@ struct MediaPickerView: UIViewControllerRepresentable {
                     if let selectedImage = image as? UIImage {
                         DispatchQueue.main.async {
                             let adjustedImage = self.camera.fixImageOrientation(for: selectedImage)
-                            self.camera.selectedImageData = adjustedImage.pngData()
+                            self.camera.selectedImageData = adjustedImage.jpegData(compressionQuality: 0.8)
                         }
                     } else if let error = error {
                         print("Failed to load image: \(error.localizedDescription)")

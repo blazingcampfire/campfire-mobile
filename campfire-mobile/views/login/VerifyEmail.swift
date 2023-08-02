@@ -15,7 +15,8 @@ struct VerifyEmail: View {
     @EnvironmentObject var model: AuthModel
     @State private var validEmail: Bool = false
     
-
+    
+    
     var body: some View {
         
         if (validEmail && model.createAccount) {

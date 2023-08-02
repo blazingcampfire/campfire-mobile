@@ -27,3 +27,20 @@ struct PostPlayer: Identifiable {
     var postItem: PostItem
 }
 
+struct Comment: Identifiable {
+    var id: String
+    var profilepic: String
+    var username: String
+    var comment: String
+    var numLikes: Int
+    var date: String
+}
+
+struct Reply: Identifiable, Hashable {
+    var id: String
+    var profilepic: String
+    var username: String
+    var reply: String
+    var numLikes: Int
+    var date: String
+}

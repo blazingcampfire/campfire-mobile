@@ -58,6 +58,9 @@ struct EnterEmail: View {
                     }
                     .padding(.bottom, 200)
                 }
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
             )
             .navigationBarBackButtonHidden(true)
         }
@@ -72,6 +75,5 @@ extension EnterEmail {
 struct EnterEmail_Previews: PreviewProvider {
     static var previews: some View {
         EnterEmail()
-            .environmentObject(AuthModel())
     }
 }

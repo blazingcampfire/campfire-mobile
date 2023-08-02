@@ -19,7 +19,7 @@ import PhotosUI
 struct CameraView: View {
     
     @StateObject var camera = CameraModel()
-    @ObservedObject var userData: AuthModel
+    @ObservedObject var currentUser: CurrentUserModel
     @StateObject var post = CamPostModel()
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
@@ -48,7 +48,7 @@ struct CameraView: View {
                     .foregroundColor(.white)
                 }
                  
-                PreviewPostInfo(userData: userData, postModel: post)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
                 VideoPostButton(camera: camera, makePost: post)
                 VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
@@ -67,7 +67,7 @@ struct CameraView: View {
                         .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
-                PreviewPostInfo(userData: userData, postModel: post)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
                 
                 VStack {
@@ -114,7 +114,7 @@ struct CameraView: View {
                         .foregroundColor(.white)
                 }
                 
-                PreviewPostInfo(userData: userData, postModel: post)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
                 VideoPostButton(camera: camera, makePost: post)
                 VStack {
                     Button(action: {
@@ -139,7 +139,7 @@ struct CameraView: View {
                        .edgesIgnoringSafeArea(.all)
                 }
                 PhotoSaveButton(camera: camera)
-                PreviewPostInfo(userData: userData, postModel: post)
+                PreviewPostInfo(currentUser: currentUser, postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
                 RetakeButton(camera: camera)
                 
@@ -282,8 +282,8 @@ struct CameraView: View {
     
 }
 
-struct CameraView_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraView(camera: CameraModel(), userData: AuthModel(), post: CamPostModel())
-    }
-}
+//struct CameraView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CameraView(camera: CameraModel(), currentUser: CurrentUserModel())
+//    }
+//}

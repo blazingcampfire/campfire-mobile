@@ -13,10 +13,9 @@ struct VerifyEmail: View {
     // setting up view dismiss == going back to previous screen
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @State private var validEmail: Bool = false
-    
-    
-    
+
     var body: some View {
         
         if (validEmail && model.createAccount) {
@@ -24,6 +23,7 @@ struct VerifyEmail: View {
         }
         else if (validEmail && model.login) {
             NavigationBar()
+                .environmentObject(currentUser)
         }
         else {
             GradientBackground()
@@ -62,8 +62,8 @@ struct VerifyEmail: View {
                                 
                                 // MARK: - Buttons redirecting to email verification
                                 
-                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
-                                    .padding(5)
+//                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
+//                                    .padding(5)
                                 
                                 if model.createAccount {
                                     LFButton(text: "Google", icon: Image("glogo2"))
@@ -84,6 +84,9 @@ struct VerifyEmail: View {
                                             Task {
                                                 do {
                                                     try await model.signInGoogle()
+                                                    currentUser.setCollectionRefs()
+                                                    currentUser.getProfile()
+                                                    currentUser.getUser()
                                                     validEmail = true
                                                 } catch {
                                                     print(error)
@@ -101,9 +104,8 @@ struct VerifyEmail: View {
     }
 }
 
-struct VerifyEmail_Previews: PreviewProvider {
-    static var previews: some View {
-        VerifyEmail()
-            .environmentObject(AuthModel())
-    }
-}
+//struct VerifyEmail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VerifyEmail()
+//    }
+//}

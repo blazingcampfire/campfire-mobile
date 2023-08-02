@@ -13,9 +13,11 @@ struct AddPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     @State private var promptScreen = false
-    @Environment(\.presentationMode) var presentationMode
     @State var retrievedPosts = [Data]()
     @State var prompt: String = "no prompt"
+    
+    @Binding var showAddPost: Bool
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> 
     
     @EnvironmentObject var profileModel: ProfileModel
     
@@ -88,8 +90,7 @@ struct AddPost: View {
                             }
                             Button(action: {
                                 confirmPost(userID: profileModel.profile!.userID, prompt: prompt)
-                                // confirmPost function with current userID
-                                // CHECK FUNC BELOW TONI
+                                print(profileModel.profile!.userID)
                                 presentationMode.wrappedValue.dismiss()
                             })  {
                                 HStack {
@@ -125,128 +126,79 @@ struct AddPost: View {
     }
     
     func confirmPost(userID: String, prompt: String) {
+            guard selectedImage != nil else {
+                print("No image")
+                return
+            }
         
-        // confirms that there is image
-        guard selectedImage != nil else {
-            print ("no image")
-            return
-        }
+            print("check 1")
+            print(profileModel.profile!.userID)
         
-        let storageRef = Storage.storage().reference()
-        
-        // convert type Image to type Data for storage
-        let imageData = selectedImage!.jpegData(compressionQuality: 0.5)
-        
-        guard imageData != nil else {
-            print("image cannot be converted to data")
-            return
-        }
-        
-        // string URL for database
-        let path = "postImages/\(UUID().uuidString).jpg"
-        
-        // use path to create file reference for Firebase Storage
-        let fileRef = storageRef.child(path)
-        
-        // put the converted imageData into the appropriate file reference
-        let uploadTask = fileRef.putData(imageData!, metadata: nil) { metadata, error in
-            if error == nil, metadata != nil {
-                
-                // file uploaded successfully, now update Firestore document
-                let docRef = ndProfiles.document(userID)
-                
-                // fetch existing data and update firebase "posts" field
-                docRef.getDocument { document, error in
-                    if let document = document, document.exists {
-                        var data = document.data()!
-                        
-                        // fetch posts field from current user as an array of strings
-                        if var posts = data["posts"] as? [[String : String]] {
-                            
-                            // add new post URL to that array
-                            posts.append([path: prompt])
-                            data["posts"] = posts
-                            
-                            // update the profile information with added post
-                            docRef.setData(data)
-                            
-                            // fetch from Firebase Storage
-                            retrievePosts(userID: userID)
-                            print("successfully retrieved posts")
-                            
+            let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+            guard let imageData = imageData else {
+                print("Image cannot be converted to data")
+                return
+            }
+            print("check 2")
+            print(profileModel.profile!.userID)
+
+            uploadPictureToStorage(imageData: imageData) { photoURL in
+                if let photoURL = photoURL {
+                    let docRef = ndProfiles.document(userID)
+                    print("check 3")
+                    print(profileModel.profile!.userID)
+    
+                    docRef.getDocument { document, error in
+                        if let document = document, document.exists {
+                            var data = document.data()!
+
+                            if var posts = data["posts"] as? [[String: String]] {
+                                posts.append([photoURL: prompt])
+                                data["posts"] = posts
+                            } else {
+                                data["posts"] = [[photoURL: prompt]]
+                            }
+
+                            docRef.setData(data) { error in
+                                if let error = error {
+                                    print("Error updating document: \(error)")
+                                } else {
+                                    print("Successfully updated document")
+                                    var posts = profileModel.profile!.posts
+                                    posts.append([photoURL: prompt])
+                                    profileModel.profile!.posts = posts
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }
                         } else {
-                            data["posts"] = [[path : prompt]]
-                            docRef.setData(data)
+                            print("Document does not exist")
                         }
-                    } else {
-                        print("Document does not exist")
                     }
+                } else {
+                    print("Error uploading picture to storage")
                 }
-            } else {
-                print("Error up loading file: \(error?.localizedDescription ?? "Unknown error")")
             }
         }
     }
     
-    func retrievePosts(userID: String) {
-        // Same user document reference
-        let docRef = ndProfiles.document(userID)
-        docRef.getDocument { document, error in
-            if let document = document, document.exists {
-                if let posts = document.data()?["posts"] as? [[String : String]] {
-                    // postPaths is an array of post URLs from firebase 'posts' field.
-                    
-                    var fetchedPostsData = [[Data: String]]()
-                    let dispatchGroup = DispatchGroup()
-                    
-                    for post in posts {
-                        
-                        if let postPath = post.keys.first, let prompt = post[postPath] {
-                            
-                            // uses the paths to refer to the right files in the Storage
-                            let storageRef = Storage.storage().reference()
-                            let fileRef = storageRef.child(postPath)
-                            
-                            dispatchGroup.enter()
-                            
-                            // converts fileReference to data
-                            fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-                                
-                                
-                                if let data = data, error == nil {
-                                    
-                                    let newPost = [data : prompt]
-                                    // adds data to fetchedPostsData array
-                                    fetchedPostsData.append(newPost)
-                                    print("successfully grabbed imageData from Storage")
-                                }
-                                dispatchGroup.leave()
-                            }
-                        }
-                    }
-                    
-                    dispatchGroup.notify(queue: .main) {
-                        // all image data has been fetched, update 'profileModel.profile!.posts'
+func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
+    let storageRef = Storage.storage().reference()
+    let path = "profilepostimages/\(UUID().uuidString).jpg"
+    let fileRef = storageRef.child(path)
 
-                        profileModel.profile!.postData = fetchedPostsData
-                        print("postData object is correct!")
-                        print(profileModel.profile!.postData)
-
-                    }
+    fileRef.putData(imageData, metadata: nil) { _, error in
+        if let error = error {
+            print("Error upload photo to storage: \(error.localizedDescription)")
+            completion(nil)
+        } else {
+            fileRef.downloadURL { url, error in
+                if let url = url {
+                    completion(url.absoluteString)
                 } else {
-                    print("No 'posts' field or data is not of expected type.")
+                    print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                    completion(nil)
                 }
-            } else {
-                print("Document does not exist or there was an error: \(String(describing: error))")
             }
         }
     }
 }
-
-    
-//
-//    struct AddPost_Previews: PreviewProvider {
-//        static var previews: some View {
-//            AddPost(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"))
-//        }
-//    }

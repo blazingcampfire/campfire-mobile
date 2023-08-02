@@ -63,6 +63,5 @@ struct EmailOrNumber: View {
 struct EmailOrNumber_Previews: PreviewProvider {
     static var previews: some View {
         EmailOrNumber()
-            .environmentObject(AuthModel())
     }
 }

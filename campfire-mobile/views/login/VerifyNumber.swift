@@ -11,6 +11,7 @@ struct VerifyNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     
 
     
@@ -23,6 +24,7 @@ struct VerifyNumber: View {
         }
         else if model.login && model.validVerificationCode {
             NavigationBar()
+                .environmentObject(currentUser)
         }
         else {
         GradientBackground()
@@ -72,6 +74,11 @@ struct VerifyNumber: View {
                                 // verify user code on tap of link
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
+                                    if model.login {
+                                        currentUser.setCollectionRefs()
+                                        currentUser.getProfile()
+                                        currentUser.getUser()
+                                    }
                                 })
                             // otherwise log them into the main app
 
@@ -97,6 +104,5 @@ extension VerifyNumber {
 struct VerifyAccount_Previews: PreviewProvider {
     static var previews: some View {
         VerifyNumber()
-            .environmentObject(AuthModel())
     }
 }

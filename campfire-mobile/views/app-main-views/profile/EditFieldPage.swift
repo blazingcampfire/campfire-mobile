@@ -39,6 +39,7 @@ struct EditFieldPage: View {
                 if newName != currentfield && newName != "" {
                     Button(action: {
                         saveName()
+                        profileModel.profile!.name = newName
                     }) {
                         HStack {
                             Image(systemName: "checkmark")
@@ -62,12 +63,12 @@ struct EditFieldPage: View {
         let docRef = ndProfiles.document(profileModel.profile!.userID)
         
         docRef.setData([field: newName], merge: true) { error in
-                    if let error = error {
-                        print("Error updating document: \(error.localizedDescription)")
-                    } else {
-                        print("Document updated!")
-                    }
-                }
+            if let error = error {
+                print("Error updating document: \(error.localizedDescription)")
+            } else {
+                print("Document updated!")
+            }
+        }
     }
 
     private func saveName() {

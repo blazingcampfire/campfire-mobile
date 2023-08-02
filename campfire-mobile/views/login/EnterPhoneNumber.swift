@@ -12,11 +12,6 @@ struct EnterPhoneNumber: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
     
-    
-
-    // setting up user phoneNumber & advancing as view state
-    @State private var canAdvance: Bool = false
-    
     var body: some View {
         GradientBackground()
             .overlay(
@@ -71,6 +66,9 @@ struct EnterPhoneNumber: View {
                     }
                 }
                 .padding(.bottom, 200)
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
             )
             .navigationBarBackButtonHidden(true)
 
@@ -86,6 +84,5 @@ extension EnterPhoneNumber {
 struct EnterPhoneNumber_Previews: PreviewProvider {
     static var previews: some View {
         EnterPhoneNumber()
-            .environmentObject(AuthModel())
     }
 }

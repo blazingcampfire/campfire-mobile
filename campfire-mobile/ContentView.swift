@@ -5,33 +5,22 @@
 //  Created by Toni on 6/17/23.
 //
 
-import SwiftUI
-import CoreData
 import FirebaseAuth
+import SwiftUI
 
 struct ContentView: View {
-    @StateObject var model = AuthModel()
+    @StateObject var authModel: AuthModel = AuthModel()
+    @StateObject var currentUser: CurrentUserModel = CurrentUserModel(privateUserData: PrivateUser(phoneNumber: "", email: "", userID: "", school: ""), profile: Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: ""), userRef: ndUsers, profileRef: ndProfiles, relationshipsRef: ndRelationships, postsRef: ndPosts)
     var body: some View {
-        //        if Auth.auth().currentUser?.email == nil {
-        //            AccountSetUp()
-        //                .environmentObject(model)
-        //                .ignoresSafeArea(.keyboard, edges: .bottom)
-        //        }
-        //        else {
-        //            NavigationBar()
-        //        }
-        //
-        //    }
-        //
-        //    struct ContentView_Previews: PreviewProvider {
-        //        static var previews: some View {
-        //            LaunchScreen()
-        //                .environmentObject(AuthModel())
-        //        }
-        //    }
-        NavigationBar()
+        AccountSetUp()
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+            .environmentObject(authModel)
+            .environmentObject(currentUser)
+    }
+
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            LaunchScreen()
+        }
     }
 }
-    
-
-

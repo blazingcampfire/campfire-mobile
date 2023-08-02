@@ -99,6 +99,7 @@ struct OwnProfilePage: View {
                                 }
                             }
                         }
+                        .padding(.bottom, 40)
                         
                         if let posts = profileModel.profile?.posts {
                             VStack {

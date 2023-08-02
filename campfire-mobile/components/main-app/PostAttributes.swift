@@ -14,25 +14,29 @@ struct PostAttributes: View {
     var width: CGFloat? = 350
 
     var body: some View {
-        VStack(spacing: 1) {
-            if let prompt = prompt, prompt != "no prompt" {
-                Rectangle()
-                    .fill(Theme.Peach)
-                    .frame(width: width, height: 325 / 7)
-                    .overlay(
-                        Text(prompt)
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                    )
+            VStack(spacing: 1) {
+                if let prompt = prompt, prompt != "no prompt" {
+                    Rectangle()
+                        .fill(Theme.Peach)
+                        .frame(width: width, height: 325 / 7)
+                        .overlay(
+                            Text(prompt)
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                        )
+                }
+                
+                Button(action: {
+                    print("ok")
+                }) {
+                    KFImage(URL(string: url))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: width, height: width)
+                        .clipped()
+                }
             }
-
-            KFImage(URL(string: url))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: width, height: width)
-                .clipped()
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 30))
+            .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 

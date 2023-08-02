@@ -17,7 +17,7 @@ public class Profile: Codable, Hashable {
     var email: String
     var username: String
     var friends: [Profile]?
-    var posts: [[String : String]]
+    var posts: [[String : String]] // posts: [[postImage: Prompt]]
     var smores: Int
     var profilePicURL: String
     var userID: String

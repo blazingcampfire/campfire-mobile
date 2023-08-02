@@ -21,6 +21,7 @@ struct EditPost: View {
     @State var showAlert = false
     @State var post: [String : String]
     @State var changePic = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack {
@@ -143,7 +144,6 @@ struct EditPost: View {
                         if initialPrompt != prompt || changePic {
                             HStack(spacing: 20) {
                                 Button(action: {
-                                
                                     if changePic && initialPrompt != prompt {
                                         changeBoth(profileModel.profile!.userID)
                                     } else if changePic {
@@ -151,6 +151,7 @@ struct EditPost: View {
                                     } else if initialPrompt != prompt {
                                         changePrompt(profileModel.profile!.userID)
                                     }
+                                    presentationMode.wrappedValue.dismiss()
                                     
                                 }) {
                                     Text("confirm change")
@@ -267,6 +268,7 @@ struct EditPost: View {
         uploadPictureToStorage(imageData: imageData) { photoURL in
             if let photoURL = photoURL {
                 postImage = photoURL
+               
                 let docRef = ndProfiles.document(userID)
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
@@ -277,6 +279,7 @@ struct EditPost: View {
                             if let index = posts.firstIndex(where: { $0 == post }) {
                                 posts[index] = [photoURL: prompt]
                             }
+                            
                             data["posts"] = posts
                         } else {
             
@@ -289,12 +292,12 @@ struct EditPost: View {
                             } else {
                                 print("Successfully updated document")
                                 
-                                if var posts = profileModel.profile?.posts {
-                                    if let index = posts.firstIndex(where: { $0 == post }) {
-                                        posts[index] = [photoURL: prompt]
-                                        profileModel.profile?.posts = posts
+                                    if let index = profileModel.profile!.posts.firstIndex(where: { $0 == post }) {
+                                        print(profileModel.profile?.posts)
+                                        profileModel.profile?.posts[index] = [photoURL: prompt]
+                                        print(profileModel.profile?.posts)
+                                        print("bruh")
                                     }
-                                }
                             }
                         }
                     } else {

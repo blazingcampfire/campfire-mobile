@@ -145,6 +145,8 @@
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
 		F87DA9CD2A6783BB00CBAA98 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */; };
+		F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5152A7A1E1200E6E663 /* CropViewController */; };
+		F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5172A7A1E1200E6E663 /* TOCropViewController */; };
 		F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */; };
 		F89402132A5E64F30049410E /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402122A5E64F30049410E /* FriendsListView.swift */; };
 		F89402152A5E68480049410E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402142A5E68480049410E /* SearchListView.swift */; };
@@ -338,9 +340,11 @@
 				E272A01B2A5BA36B008D2D78 /* FirebaseAuth in Frameworks */,
 				B140BA592A60F39400819203 /* SwiftUICam in Frameworks */,
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
+				F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
+				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
 				B1EA23BA2A74E0790021F0D1 /* Kingfisher in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
@@ -798,6 +802,8 @@
 				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
 				F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */,
 				B1EA23B92A74E0790021F0D1 /* Kingfisher */,
+				F881D5152A7A1E1200E6E663 /* CropViewController */,
+				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -878,6 +884,7 @@
 				B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
 				F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1445,6 +1452,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -1520,6 +1535,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		F881D5152A7A1E1200E6E663 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		F881D5172A7A1E1200E6E663 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

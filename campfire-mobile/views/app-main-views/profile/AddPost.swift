@@ -13,9 +13,11 @@ struct AddPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     @State private var promptScreen = false
-    @Environment(\.presentationMode) var presentationMode
     @State var retrievedPosts = [Data]()
     @State var prompt: String = "no prompt"
+    
+    @Binding var showAddPost: Bool
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> 
     
     @EnvironmentObject var profileModel: ProfileModel
     
@@ -162,6 +164,9 @@ struct AddPost: View {
                                     print("Error updating document: \(error)")
                                 } else {
                                     print("Successfully updated document")
+                                    var posts = profileModel.profile!.posts
+                                    posts.append([photoURL: prompt])
+                                    profileModel.profile!.posts = posts
                                     presentationMode.wrappedValue.dismiss()
                                 }
                             }
@@ -174,27 +179,26 @@ struct AddPost: View {
                 }
             }
         }
+    }
+    
+func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
+    let storageRef = Storage.storage().reference()
+    let path = "profilepostimages/\(UUID().uuidString).jpg"
+    let fileRef = storageRef.child(path)
 
-        func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
-            let storageRef = Storage.storage().reference()
-            let path = "profilepostimages/\(UUID().uuidString).jpg"
-            let fileRef = storageRef.child(path)
-
-            fileRef.putData(imageData, metadata: nil) { _, error in
-                if let error = error {
-                    print("Error upload photo to storage: \(error.localizedDescription)")
-                    completion(nil)
+    fileRef.putData(imageData, metadata: nil) { _, error in
+        if let error = error {
+            print("Error upload photo to storage: \(error.localizedDescription)")
+            completion(nil)
+        } else {
+            fileRef.downloadURL { url, error in
+                if let url = url {
+                    completion(url.absoluteString)
                 } else {
-                    fileRef.downloadURL { url, error in
-                        if let url = url {
-                            completion(url.absoluteString)
-                        } else {
-                            print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
-                            completion(nil)
-                        }
-                    }
+                    print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                    completion(nil)
                 }
             }
         }
     }
-    
+}

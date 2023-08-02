@@ -39,7 +39,6 @@ class ProfileModel: ObservableObject {
                 case .success(let profile):
                     // A `Profile` value was successfully initialized from the DocumentSnapshot.
                     let postPaths = profile.posts
-                    var fetchedImages = [[Data : String]]()
                     
                     
                     if postPaths.isEmpty {

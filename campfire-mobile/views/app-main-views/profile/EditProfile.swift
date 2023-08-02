@@ -5,6 +5,7 @@
 //  Created by Adarsh G on 6/27/23.
 //
 
+
 import SwiftUI
 import FirebaseStorage
 
@@ -108,13 +109,14 @@ struct EditProfile: View {
                                                 Circle()
                                                     .foregroundColor(.white)
                                                     .frame(width: 50, height: 50)
+                                                    .shadow(color: Color.black.opacity(0.9), radius: 5, x: 2, y: 2)
                                                     .overlay(
                                                         Circle()
                                                             .stroke(.gray, lineWidth: 0.5)
                                                             .frame(width: 50, height: 50)
                                                     )
                                                     .overlay(
-                                                        NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index)
+                                                        NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index, post: post)
                                                             .environmentObject(profileModel)){
                                                                 Image(systemName: "pencil")
                                                                     .font(.system(size: 30))
@@ -131,6 +133,9 @@ struct EditProfile: View {
                             .padding(.top, 30)
                         }
                     }
+                }
+                .onAppear {
+                    profileModel.getProfile()
                 }
             }
         }

@@ -12,7 +12,7 @@ struct SearchListView: View {
     var profilepic: String = info.profilepic
     var profile: Profile
     @State private var added: Bool = false
-    @EnvironmentObject var model: SearchPageModel
+    @EnvironmentObject var model: SearchModel
     
     var body: some View {
         HStack {
@@ -35,7 +35,7 @@ struct SearchListView: View {
 
             Button {
                 self.added.toggle()
-                model.requestFriend(friendID: profile.userID)
+                model.requestFriend(friendID: profile.userID, profile: profile)
             } label: {
                 Image(systemName: self.added == false ? "plus.circle.fill" : "minus.circle.fill" )
                     .font(.system(size: 30))

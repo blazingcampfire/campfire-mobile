@@ -12,6 +12,7 @@ struct VerifyNumber: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @State var validPhoneNumber: Bool = false
     
     // setting up verification code & advancing as view state
     
@@ -20,7 +21,7 @@ struct VerifyNumber: View {
         if model.createAccount && model.validVerificationCode {
             EnterEmail()
         }
-        else if model.login && model.validVerificationCode {
+        else if model.login && validPhoneNumber {
             NavigationBar()
                 .environmentObject(currentUser)
         }
@@ -76,6 +77,7 @@ struct VerifyNumber: View {
                                         currentUser.setCollectionRefs()
                                         currentUser.getProfile()
                                         currentUser.getUser()
+                                        validPhoneNumber = true
                                     }
                                 })
                             // otherwise log them into the main app

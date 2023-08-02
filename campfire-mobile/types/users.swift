@@ -80,3 +80,15 @@ public class PrivateUser: Codable {
         self.school = school
     }
 }
+
+public class Request: Codable {
+    var name: String
+    var username: String
+    var profilePicURL: String
+    
+    init(name: String, username: String, profilePicURL: String) {
+        self.name = name
+        self.username = username
+        self.profilePicURL = profilePicURL
+    }
+}

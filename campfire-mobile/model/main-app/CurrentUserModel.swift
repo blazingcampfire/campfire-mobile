@@ -78,4 +78,17 @@ class CurrentUserModel: ObservableObject {
             }
         }
     }
+    
+    func makeTestProfiles(testProfiles: [Profile]) {
+        for testProfile in testProfiles {
+           let testUser = PrivateUser(phoneNumber: testProfile.phoneNumber, email: testProfile.email, userID: testProfile.userID, school: testProfile.school)
+            do {
+                try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
+                try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
+                print("Documents successfully written!")
+            } catch {
+                print("Error writing profile or user to firestore \(error)")
+            }
+        }
+    }
 }

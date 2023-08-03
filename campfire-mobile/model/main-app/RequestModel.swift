@@ -23,7 +23,8 @@ class RequestsModel: ObservableObject {
                 return
             }
             print(snapshot)
-//            self.userIDs = snapshot as! [String]
+            self.userIDs = snapshot as? [String] ?? []
+            print(self.userIDs)
         }
     }
 }

@@ -23,7 +23,7 @@ class FriendsModel: ObservableObject {
                 return
             }
             print(snapshot)
-//            self.userIDs = snapshot as! [String]
+            self.userIDs = snapshot as? [String] ?? []
         }
     }
 }

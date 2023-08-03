@@ -11,7 +11,7 @@ struct RequestsListView: View {
     
     var profilepic: String = info.profilepic
     var profile: Profile
-    
+    @EnvironmentObject var model: RequestsModel
     var body: some View {
         
         HStack {

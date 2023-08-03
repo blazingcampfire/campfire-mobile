@@ -90,6 +90,7 @@
 		E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2434C4C2A5A412C000A70DB /* GradientBackground.swift */; };
 		E2578DA22A6B6429004C65DC /* EnterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2578DA12A6B6429004C65DC /* EnterName.swift */; };
 		E267A9C62A7A1BB500489B8E /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267A9C52A7A1BB500489B8E /* FriendsModel.swift */; };
+		E267A9C82A7AA58300489B8E /* tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267A9C72A7AA58300489B8E /* tests.swift */; };
 		E272A0142A5BA192008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
 		E272A0152A5BA1B8008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
 		E272A0162A5BA1B9008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
@@ -267,6 +268,7 @@
 		E2434C4C2A5A412C000A70DB /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		E2578DA12A6B6429004C65DC /* EnterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterName.swift; sourceTree = "<group>"; };
 		E267A9C52A7A1BB500489B8E /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		E267A9C72A7AA58300489B8E /* tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tests.swift; sourceTree = "<group>"; };
 		E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 				E28D3A642A3EB52400B1EEE9 /* colors.swift */,
 				F86D83A52A4BC37900223F9A /* prompts.swift */,
 				E2163E4D2A663501005A20BE /* schools.swift */,
+				E267A9C72A7AA58300489B8E /* tests.swift */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -1061,6 +1064,7 @@
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
+				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
 				B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */,

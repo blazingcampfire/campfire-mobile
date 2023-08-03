@@ -59,14 +59,26 @@ class SearchModel: ObservableObject {
         }
         let friendRelationshipRef = ndRelationships.document(friendID)
         let userRelationshipRef = ndRelationships.document(userID)
+        var friendRequestField: [String: Any]
+        var userRequestField: [String: Any]
         
-        friendRelationshipRef.setData([
-            "friendRequests": [currentUser.profile.userID: Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)]
-        ], merge: true)
+        do {
+            friendRequestField = try Firestore.Encoder().encode(Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
+            userRequestField = try Firestore.Encoder().encode(Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
+        }
+        catch {
+            print("Could not encode requestFields.")
+            return
+        }
+        
         print(friendRelationshipRef.documentID)
+        friendRelationshipRef.setData([
+            "friendRequests": [userID: userRequestField]
+        ], merge: true)
+    
         userRelationshipRef.setData([
-            "ownRequests": [ profile.userID: Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL)]
-        ])
+            "ownRequests": [friendID: friendRequestField]
+        ], merge: true)
     }
     
     func unrequestFriend(friendID: String, profile: Profile) {
@@ -81,7 +93,7 @@ class SearchModel: ObservableObject {
             "friendRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
         ])
         userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([profile])
+            "ownRequests": FieldValue.arrayRemove([Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL)])
         ])
     }
     

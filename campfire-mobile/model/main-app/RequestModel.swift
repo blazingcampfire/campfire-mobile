@@ -10,7 +10,7 @@ import Foundation
 class RequestsModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var currentUser: CurrentUserModel
-    var userIDs: [String] = []
+    var requests = [Request]()
     
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
@@ -22,9 +22,11 @@ class RequestsModel: ObservableObject {
                 print("error fetching document: \(String(describing: error))")
                 return
             }
-            print(snapshot)
-            self.userIDs = snapshot as? [String] ?? []
-            print(self.userIDs)
+            print(documentSnapshot?.data())
+            requests = documentSnapshot?.data().map{ documentItem -> Request in
+                return try? documentItem(as: Request.self)
+            }
+            print(requests)
         }
     }
 }

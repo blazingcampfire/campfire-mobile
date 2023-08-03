@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestoreSwift
 
 // every user profile should conform to this schema
-public class Profile: Codable, Hashable {
+struct Profile: Codable, Hashable {
 
     var name: String
     var nameInsensitive: String
@@ -48,7 +49,7 @@ public class Profile: Codable, Hashable {
     }
 
     // custom initializer to manually decode the Profile object
-    public required init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         nameInsensitive = try container.decode(String.self, forKey: .nameInsensitive)
@@ -67,7 +68,7 @@ public class Profile: Codable, Hashable {
 }
 
 
-public class PrivateUser: Codable {
+struct PrivateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
@@ -81,10 +82,19 @@ public class PrivateUser: Codable {
     }
 }
 
-public class Request: Codable {
+struct Request: Codable, Hashable {
+    @DocumentID var id: String?
     var name: String
     var username: String
     var profilePicURL: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    public static func == (lhs: Request, rhs: Request) -> Bool {
+        return lhs.id == rhs.id && rhs.id == lhs.id
+    }
     
     init(name: String, username: String, profilePicURL: String) {
         self.name = name
@@ -92,3 +102,4 @@ public class Request: Codable {
         self.profilePicURL = profilePicURL
     }
 }
+

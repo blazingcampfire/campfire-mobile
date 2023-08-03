@@ -83,17 +83,17 @@ struct PrivateUser: Codable {
 }
 
 struct Request: Codable, Hashable {
-    @DocumentID var id: String?
+    @DocumentID var userID: String?
     var name: String
     var username: String
     var profilePicURL: String
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(userID)
     }
 
     public static func == (lhs: Request, rhs: Request) -> Bool {
-        return lhs.id == rhs.id && rhs.id == lhs.id
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
     
     init(name: String, username: String, profilePicURL: String) {

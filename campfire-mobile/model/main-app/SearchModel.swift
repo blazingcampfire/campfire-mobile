@@ -92,6 +92,7 @@ class SearchModel: ObservableObject {
         friendRelationshipRef.updateData([
             "friendRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
         ])
+        
         userRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL)])
         ])

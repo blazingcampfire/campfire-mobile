@@ -58,8 +58,8 @@ class SearchModel: ObservableObject {
             return
         }
         let friendID = profile.userID
-        let friendRelationshipRef = ndRelationships.document(friendID)
-        let userRelationshipRef = ndRelationships.document(userID)
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
         
@@ -91,8 +91,8 @@ class SearchModel: ObservableObject {
             print("No request ID")
             return
         }
-        let friendRelationshipRef = ndRelationships.document(friendID)
-        let userRelationshipRef = ndRelationships.document(userID)
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         
         friendRelationshipRef.updateData([
             "sentRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])

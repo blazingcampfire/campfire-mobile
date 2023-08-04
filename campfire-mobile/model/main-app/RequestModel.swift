@@ -95,14 +95,13 @@ class RequestsModel: ObservableObject {
             print("Could not encode requestFields.")
             return
         }
-        
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([userRequestField])
+            "friends": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([friendRequestField])
+            "friends": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     }
 }

@@ -41,5 +41,35 @@ class FriendsModel: ObservableObject {
             
         }
     }
+    
+    func removeFriend(request: RequestFirestore) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return
+        }
+        guard let friendID = request.userID else {
+            return
+        }
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
+        var friendRequestField: [String: Any]
+        var userRequestField: [String: Any]
+        
+        do {
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
+            userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
+        }
+        catch {
+            print("Could not encode requestFields.")
+            return
+        }
+        friendRelationshipRef.updateData([
+            "friends": FieldValue.arrayRemove([userRequestField])
+        ])
+        
+        userRelationshipRef.updateData([
+            "friends": FieldValue.arrayRemove([friendRequestField])
+        ])
+    }
 }
 

@@ -11,6 +11,7 @@ struct FriendsListView: View {
     
     var profilepic: String
     var request: RequestFirestore
+    @EnvironmentObject var model: FriendsModel
     
     var body: some View {
         HStack {
@@ -32,6 +33,15 @@ struct FriendsListView: View {
                 Text("@\(request.username)")
                     .font(.custom("LexendDeca-Regular", size: 12))
                     .foregroundColor(.gray)
+            }
+            Spacer()
+
+            Button(action: {
+                model.removeFriend(request: request)
+            }) {
+                Image(systemName: "minus.circle.fill")
+                    .foregroundColor(Theme.Peach)
+                    .font(.custom("LexendDeca-Regular", size: 30))
             }
         }
     }

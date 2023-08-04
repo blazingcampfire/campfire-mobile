@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 import GoogleSignIn
+import AVKit
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -16,10 +17,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         FirebaseApp.configure()
         let db = Firestore.firestore()
-        
+        //Audio Handler
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch (let error) {
+            print(error.localizedDescription)
+        }
         return true
-        
-        
     }
     // MARK: - Phone auth initialization of remote notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
@@ -31,6 +35,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
       return GIDSignIn.sharedInstance.handle(url)
     }
+   
     
     
 }

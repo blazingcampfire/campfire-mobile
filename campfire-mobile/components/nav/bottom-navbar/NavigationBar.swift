@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
-import SwiftUICam
+
 
 struct NavigationBar: View {
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var feedModel = FeedPostModel()
     var body: some View {
         NavigationView {
         TabView() {
-            TheFeed(postModel: feedModel)
+                TheFeed()
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")
@@ -61,9 +60,6 @@ struct NavigationBar: View {
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
-        .onAppear {
-            feedModel.getPosts()
-        }
     }
         .navigationBarBackButtonHidden(true)
     }

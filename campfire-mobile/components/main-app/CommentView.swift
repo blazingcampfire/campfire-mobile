@@ -14,8 +14,11 @@ struct CommentView: View {
     @State private var commentLiked: Bool = false
     @State private var showingReplies: Bool = false
     @State private var replyTapped: Bool = false
-    @EnvironmentObject var commentsModel: CommentsModel
-    @Binding var replyingToCommentId: String?
+    @ObservedObject var commentsModel: CommentsModel
+    @Binding var replyingToComId: String?
+    @Binding var replyingToUserId: String?
+    var usernameId: String
+    
     
     var body: some View {
         ZStack {
@@ -53,7 +56,8 @@ struct CommentView: View {
                                         .foregroundColor(Theme.TextColor)
                                     
                                     Button(action: {
-                                        replyingToCommentId = comId
+                                       replyingToComId = comId
+                                        replyingToUserId = usernameId
                                     }) {
                                         Text("Reply")
                                             .font(.custom("LexendDeca-SemiBold", size: 13))
@@ -104,9 +108,10 @@ struct CommentView: View {
                     }
                 }
         }
-            .background(replyingToCommentId == comId ? Color.red : Color.clear)
-    }
-    
+        }
+        .onAppear {
+            commentsModel.commentId = comId
+        }
     }
     }
 //struct CommentView_Previews: PreviewProvider {

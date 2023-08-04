@@ -7,26 +7,19 @@ import SwiftUI
 import AVKit
 import Kingfisher
 
+
 struct TheFeed: View {
-  
-    @ObservedObject var postModel: FeedPostModel
-    @State var currentPost: String = ""
-    @State var items: [PostPlayer?] = []
-    @StateObject var handlecomments = CommentsModel()
-   
+    @StateObject var postModel = FeedPostModel()
     
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
-            TabView(selection: $currentPost) {
-                ForEach(items.indices, id: \.self){ index in
-                    if let player = items[index] {
-                        PostPlayerView(player: player, isCurrentPost: $currentPost)
-                            .environmentObject(handlecomments)
+            TabView {
+                ForEach(postModel.postPlayers.compactMap {$0}){ player in
+                    PostPlayerView(postPlayer: player)
                             .frame(width: size.width)
                             .rotationEffect(.init(degrees: -90))
                             .ignoresSafeArea(.all, edges: .top)
-                    }
                 }
             }
             .rotationEffect(.init(degrees: 90))
@@ -34,54 +27,35 @@ struct TheFeed: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .frame(width: size.width)
         }
-        .refreshable {
-            postModel.getPosts()
-        }
         .ignoresSafeArea(.all, edges: .top)
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            items = postModel.posts.map { post in
-                if post.postType == "image" {
-                return PostPlayer(player: nil, postItem: post)
-                } else if post.postType == "video" {
-                    guard let url = URL(string: post.url) else { return nil }
-                    let player = AVPlayer(url: url)
-                    return PostPlayer(player: player, postItem: post)
-                } else {
-                    return nil
-                }
-            }
-        }
-        .onAppear {
-            postModel.getPosts()
-        }
     }
 }
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
 //VidsPlayer handles the specific actions of what each case should look like
 
-struct TheFeed_Previews: PreviewProvider {
-    static var previews: some View {
-        TheFeed(postModel: FeedPostModel(), handlecomments: CommentsModel())
-    }
-}
+//struct TheFeed_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TheFeed(postModel: FeedPostModel(), handlecomments: CommentsModel())
+//    }
+//}
     
 struct PostPlayerView: View {
-    var player: PostPlayer
-    @Binding var isCurrentPost: String
+    var postPlayer: PostPlayer
     @State private var likeTapped: Bool = false
     @State private var HotSelected = true
     @State var leaderboardPageShow = false
-    @State var commentsTapped = false
+    @State private var commentsTapped = false
     @State private var isPlaying = true
-    @EnvironmentObject var handleComments: CommentsModel
+    @StateObject var commentCounter = CommentCounter()
+    
 
-
+    
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
              ZStack {
-                 if player.postItem.postType == "video" {
-                     if let urlPlayer = self.player.player {
+                 if postPlayer.postItem.postType == "video" {
+                     if let urlPlayer = self.postPlayer.player {
                          CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
                              .onTapGesture {
                                  isPlaying.toggle()
@@ -91,25 +65,25 @@ struct PostPlayerView: View {
                              }
                      } else {
                          Text("Error Loading Post")
-                        .font(.custom("LexendDeca-Regular", size: 25))
-                        .foregroundColor(.white)
-                     }
-                     
-                 } else if player.postItem.postType == "image" {
-                     let imageURL = player.postItem.url
-                         KFImage(URL(string: imageURL))
-                             .resizable()
-                             .scaledToFit()
-                            .edgesIgnoringSafeArea(.all)
-                            
-                 } else {
-                         Text("Error Loading Post")
                              .font(.custom("LexendDeca-Regular", size: 25))
                              .foregroundColor(.white)
                      }
+                     
+                 } else if postPlayer.postItem.postType == "image" {
+                     let imageURL = postPlayer.postItem.url
+                     KFImage(URL(string: imageURL))
+                         .resizable()
+                         .scaledToFit()
+                         .edgesIgnoringSafeArea(.all)
+                     
+                 } else {
+                     Text("Error Loading Post")
+                         .font(.custom("LexendDeca-Regular", size: 25))
+                         .foregroundColor(.white)
+                 }
                  
-            
-                
+                 
+                 
                //- MARK: Hot/New button
                 VStack {
                     HStack {
@@ -158,9 +132,6 @@ struct PostPlayerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             
             
-            
-                
-                
                 //-MARK: User information
                  VStack {
                     HStack(alignment: .bottom) {
@@ -174,7 +145,7 @@ struct PostPlayerView: View {
                                 Button(action: {
                                     // lead to profile page
                                 }) {
-                                    KFImage(URL(string: player.postItem.profilepic))
+                                    KFImage(URL(string: postPlayer.postItem.profilepic))
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
@@ -186,7 +157,7 @@ struct PostPlayerView: View {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
-                                    Text("@\(player.postItem.username)")
+                                    Text("@\(postPlayer.postItem.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
                                 }
                             }
@@ -194,7 +165,7 @@ struct PostPlayerView: View {
                             //- MARK: Caption/Location buttons Vstack
                             VStack(spacing: 5) {
                                 HStack {
-                                    Text(player.postItem.caption)
+                                    Text(postPlayer.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 16))
                                 }
                              
@@ -203,7 +174,7 @@ struct PostPlayerView: View {
                                     //lead to map and where location is
                                 }) {
                                     HStack {
-                                        Text("📍" + "\(player.postItem.location)")
+                                        Text("📍" + "\(postPlayer.postItem.location)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                              
@@ -237,32 +208,32 @@ struct PostPlayerView: View {
                             }
                             .padding(.leading, -15)
                         }
-                        Text("\(player.postItem.numLikes)")
+                        Text("\(postPlayer.postItem.numLikes)")
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
+                    
                     VStack {
-                    Button(action: {
-                        commentsTapped.toggle()
-                    }) {
-                        VStack {
-                            Image(systemName: "text.bubble.fill")
+                        Button(action: {
+                            self.commentsTapped.toggle()
+                            }) {
+                            VStack {
+                                Image(systemName: "text.bubble.fill")
                                 .resizable()
                                 .frame(width: 35, height: 35)
                                 .foregroundColor(.white)
-                        }
-                    }
-                        Text("\(handleComments.comments.count)")
-                        .foregroundColor(.white)
-                        .font(.custom("LexendDeca-Regular", size: 16))
-                        .sheet(isPresented: $commentsTapped) {
-                            CommentsPage(postId: player.postItem.id)
-                                .environmentObject(handleComments)
-                                .presentationDetents([.fraction(0.85)])
-                                .presentationDragIndicator(.visible)
-                        }
-                }
-                    .padding(.top, 20)
+                                }
+                            }
+                        Text("\(commentCounter.commentcount)")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Regular", size: 16))
+                            .sheet(isPresented: $commentsTapped) {
+                                CommentsPage(postId: postPlayer.postItem.id, commentCount: commentCounter)
+                            .presentationDetents([.fraction(0.85)])
+                            .presentationDragIndicator(.visible)
+                                }
+                            }
+                            .padding(.top, 20)
               
                     
                     Button(action: {
@@ -281,15 +252,5 @@ struct PostPlayerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         .background(Color.black.ignoresSafeArea())
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.handleComments.isLoading = true
-                self.handleComments.getComments(postId: player.postItem.id)
-                self.handleComments.isLoading = false
-            }
-        }
-        .onReceive(handleComments.$comments) { _ in
-           
-        }
     }
 }

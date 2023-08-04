@@ -13,60 +13,73 @@ struct CommentsPage: View {
     var postId: String
     @State private var isEditing: Bool = false
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var commentModel: CommentsModel
+    @StateObject var commentModel = CommentsModel()
     @State private var replyingToCommentId: String?
+    @State private var comment: String = ""
+    @State private var reply: String = ""
+    @State private var replyingToUserId: String?
+    @ObservedObject var commentCount: CommentCounter
     
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList(replyingToCommentId: $replyingToCommentId, postID: postId)
-                    .environmentObject(commentModel)
+                CommentsList(commentModel: commentModel, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId, postID: postId)
                 Divider()
                 VStack {
                     HStack {
-                        Image(info.profilepic)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .clipShape(Circle())
-                        
-                        if !commentModel.isLoading {
+
+                        if replyingToUserId != nil {
+                            
+                            Image(info.profilepic)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                            
+                            VStack {
+                                Text("Replying to: @\(replyingToUserId!)")
+                                    .font(.custom("LexendDeca-Regular", size: 13))
+                                    .padding(.leading, 20)
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding(.trailing, 50)
+                                
+                                TextField(
+                                    "",
+                                    text: replyingToCommentId != nil ? $reply : $comment,
+                                    prompt: Text(replyingToCommentId != nil ? "add reply" : "add comment!").font(.custom("LexendDeca-Regular", size: 15))
+                                )
+                                .onTapGesture {
+                                    isEditing = true
+                                }
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                    .stroke(lineWidth: 2)
+                                    .foregroundColor(Theme.Peach))
+                            }
+                            .padding(.bottom, 15)
+                        }  else {
+                            
+                            Image(info.profilepic)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .clipShape(Circle())
+                            
                             TextField(
                                 "",
-                                text: Binding<String>(
-                                    get: {
-                                        // Depending on whether you're replying to a comment or not assign the text
-                                        if replyingToCommentId != nil {
-                                            return commentModel.replytext
-                                        } else {
-                                            return commentModel.commenttext
-                                        }
-                                    },
-                                    set: {
-                                        // Dont't set if comments are loading
-                                        guard !commentModel.isLoading else { return }
-                                        
-                                        // Set the replytext or commenttext depending on whether you're replying to a comment or not
-                                        if replyingToCommentId != nil {
-                                            commentModel.replytext = $0
-                                        } else {
-                                            commentModel.commenttext = $0
-                                        }
-                                    }
-                                ),
-                                prompt: Text(replyingToCommentId != nil ? "add reply!" : " add comment!").font(.custom("LexendDeca-Regular", size: 15))
+                                text: replyingToCommentId != nil ? $reply : $comment,
+                                prompt: Text(replyingToCommentId != nil ? "add reply" : "add comment!").font(.custom("LexendDeca-Regular", size: 15))
                             )
                             .onTapGesture {
                                 isEditing = true
                             }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 2)
-                            .foregroundColor(Theme.Peach))
+                                .stroke(lineWidth: 2)
+                                .foregroundColor(Theme.Peach))
                         }
-                           
-                                     
-                        if (isEditing && commentModel.commenttext != "") || (isEditing && commentModel.replytext != "") {
+                        
+                        if (isEditing && comment != "") || (isEditing && reply != "") {
                             Button(action: {
                             createContent()
                             }) {
@@ -76,11 +89,15 @@ struct CommentsPage: View {
                         }
                     }
                     .padding()
+                    
+                    
                 }
             }
             .onTapGesture {
                 isEditing = false
                 UIApplication.shared.dismissKeyboard()
+                replyingToCommentId = nil
+                replyingToUserId = nil
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -95,7 +112,7 @@ struct CommentsPage: View {
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing){
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         dismiss()
                     }) {
@@ -107,29 +124,21 @@ struct CommentsPage: View {
             }
         }
         .onAppear {
-            self.commentModel.isLoading = true
-            self.commentModel.getComments(postId: postId)
-            self.commentModel.isLoading = false
-        }
-        .onReceive(commentModel.$comments) { _ in
-            commentModel.comments.forEach { comment in
-                commentModel.isLoading = true
-                commentModel.getReplies(postId: postId, commentId: comment.id)
-                commentModel.isLoading = false
-            }
+            commentModel.postId = postId
         }
     }
     func createContent() {
         if let replyingId = replyingToCommentId {
-            commentModel.createReply(commentId: replyingId, postId: postId) {
-                commentModel.getReplies(postId: postId, commentId: replyingId)
-                commentModel.replytext = ""  // Reset here
+            commentModel.createReply(postId: postId, commentId: replyingId, replytext: reply) {
+                reply = ""  // Reset here
                 replyingToCommentId = nil
+                replyingToUserId = nil
+                commentCount.commentcount += 1
             }
         } else {
-            commentModel.createComment(postId: postId) {
-                commentModel.getComments(postId: postId)
-                commentModel.commenttext = ""
+            commentModel.createComment(postId: postId, commenttext: comment) {
+                comment = ""
+                commentCount.commentcount += 1
             }
         }
         UIApplication.shared.dismissKeyboard()
@@ -137,16 +146,13 @@ struct CommentsPage: View {
 }
 
 struct CommentsList: View {
-    @EnvironmentObject var commentModel: CommentsModel
-    @Binding var replyingToCommentId: String?
-    
+    @ObservedObject var commentModel: CommentsModel
+    @Binding var replyingToComId: String?
+    @Binding var replyingToUserId: String?
     var postID: String
     var body: some View {
         ScrollView {
-            if commentModel.isLoading {
-                ProgressView()
-            }
-            else if commentModel.comments.count == 0 {
+            if commentModel.comments.isEmpty {
                 VStack(spacing: 10) {
                     Text("be the first to comment!")
                         .foregroundColor(Theme.TextColor)
@@ -159,8 +165,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, replyingToCommentId: $replyingToCommentId)
-                        .environmentObject(commentModel)
+                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, commentsModel: commentModel, replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
                 }
                 
             }

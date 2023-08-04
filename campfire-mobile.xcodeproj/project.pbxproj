@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
+		B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12352342A7B612E00D9BBC7 /* NewFeed.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14375312A7771F100904C52 /* ReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14375302A7771F100904C52 /* ReplyModel.swift */; };
@@ -187,6 +188,7 @@
 
 /* Begin PBXFileReference section */
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
+		B12352342A7B612E00D9BBC7 /* NewFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeed.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14375302A7771F100904C52 /* ReplyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyModel.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
@@ -770,6 +772,7 @@
 				F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */,
 				F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */,
 				B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */,
+				B12352342A7B612E00D9BBC7 /* NewFeed.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -1060,6 +1063,7 @@
 				E2CBD5E72A6216E1000F3547 /* AuthenticationManager.swift in Sources */,
 				F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */,
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
+				B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,

@@ -11,7 +11,6 @@ import Kingfisher
 struct TheFeed: View {
    @StateObject var postModel = FeedPostModel()
 
-    
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
@@ -61,6 +60,9 @@ struct PostPlayerView: View {
                          CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
                              .onTapGesture {
                                  isPlaying.toggle()
+                             }
+                             .onAppear {
+                                 isPlaying = true
                              }
                              .onDisappear {
                                  isPlaying = false

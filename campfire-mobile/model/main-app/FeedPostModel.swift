@@ -15,10 +15,13 @@ class FeedPostModel: ObservableObject {
     
     @Published var posts = [PostItem]()
     @Published var postPlayers = [PostPlayer?]()
-    
+    private var listener: ListenerRegistration?
     
     init() {
         self.listenForPosts()
+    }
+    deinit {
+        listener?.remove()
     }
         
     func listenForPosts() {

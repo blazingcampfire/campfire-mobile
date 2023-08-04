@@ -144,10 +144,6 @@ struct OwnProfilePage: View {
                     profileModel.getProfile()
                 }
             }
-            .onAppear {
-                    profileModel.getProfile()
-
-            }
         }
     }
 }

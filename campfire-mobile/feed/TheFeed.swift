@@ -61,9 +61,6 @@ struct PostPlayerView: View {
                              .onTapGesture {
                                  isPlaying.toggle()
                              }
-                             .onAppear {
-                                 isPlaying = true
-                             }
                              .onDisappear {
                                  isPlaying = false
                              }

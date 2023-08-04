@@ -44,11 +44,12 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var capturedPic: UIImage?
     @Published var showSelectPhoto: Bool = false
     @Published var showSelectVideo: Bool = false
+    @Published var videoTooLarge: Bool = false
+    @Published var videoSizeAlert: Bool = false
     
     
     var timer: AnyCancellable?
     var temporaryPhotoURL: URL?
-    var isUsingFrontCam: Bool
     private var captureDevice: AVCaptureDevice?
     
     //-MARK: Alerts
@@ -68,8 +69,8 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
   
 //-MARK: To Deal With Session Interuptions ex: Facetime calls
     override init() {
-    self.isUsingFrontCam = false
        super.init()
+        checkCameraPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: NSNotification.Name.AVCaptureSessionInterruptionEnded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionRuntimeError), name: .AVCaptureSessionRuntimeError, object: nil)
@@ -254,10 +255,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                 
                 self.session.commitConfiguration()
                 
-                // Update the isUsingFrontCamera
-                if let newDevice = newCameraDevice {
-                    self.isUsingFrontCam = (newDevice.position == .front)
-                }
             }
         }
     }

@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import GoogleSignIn
 import AVKit
+import Firebase
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -17,6 +18,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         FirebaseApp.configure()
         let db = Firestore.firestore()
+        
+        Database.database().isPersistenceEnabled = true
+        
         //Audio Handler
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
@@ -46,6 +50,7 @@ struct campfire_mobileApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let persistenceController = PersistenceController.shared
+    
     
     var body: some Scene {
         WindowGroup {

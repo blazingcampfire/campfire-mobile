@@ -18,7 +18,7 @@ struct NavigationBar: View {
                     Text("Feed")
                     Image(systemName: "fireplace")
                 }
-              
+
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             

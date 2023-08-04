@@ -9,14 +9,15 @@ import Kingfisher
 
 
 struct TheFeed: View {
-    @StateObject var postModel = FeedPostModel()
+   @StateObject var postModel = FeedPostModel()
+
     
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
             TabView {
                 ForEach(postModel.postPlayers.compactMap {$0}){ player in
-                    PostPlayerView(postPlayer: player)
+                    PostPlayerView(postPlayer: player, feedmodel: postModel)
                             .frame(width: size.width)
                             .rotationEffect(.init(degrees: -90))
                             .ignoresSafeArea(.all, edges: .top)
@@ -42,14 +43,15 @@ struct TheFeed: View {
     
 struct PostPlayerView: View {
     var postPlayer: PostPlayer
-    @State private var likeTapped: Bool = false
     @State private var HotSelected = true
-    @State var leaderboardPageShow = false
+    @State private var leaderboardPageShow = false
     @State private var commentsTapped = false
+    @State private var likedTapped: Bool = false
     @State private var isPlaying = true
-    @StateObject var commentCounter = CommentCounter()
+    @ObservedObject var feedmodel: FeedPostModel
+    @StateObject var commentModel = CommentsModel()
     
-
+    
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
@@ -200,11 +202,11 @@ struct PostPlayerView: View {
                     
                     VStack(spacing: -60) {
                         Button(action: {
-                            //like post
-                            self.likeTapped.toggle()
+                        self.likedTapped.toggle()
+                        feedmodel.updateLikeCount(postId: postPlayer.postItem.id)
                         }) {
                             VStack {
-                                Image(self.likeTapped == true ? "eaten" : "noteaten")
+                                Image(self.likedTapped == true ? "eaten" : "noteaten")
                             }
                             .padding(.leading, -15)
                         }
@@ -224,11 +226,11 @@ struct PostPlayerView: View {
                                 .foregroundColor(.white)
                                 }
                             }
-                        Text("\(commentCounter.commentcount)")
+                        Text("\(commentModel.comments.count)")
                             .foregroundColor(.white)
                             .font(.custom("LexendDeca-Regular", size: 16))
                             .sheet(isPresented: $commentsTapped) {
-                                CommentsPage(postId: postPlayer.postItem.id, commentCount: commentCounter)
+                                CommentsPage(postId: postPlayer.postItem.id, commentModel: commentModel)
                             .presentationDetents([.fraction(0.85)])
                             .presentationDragIndicator(.visible)
                                 }
@@ -251,6 +253,9 @@ struct PostPlayerView: View {
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
+             .onAppear {
+                 commentModel.postId = postPlayer.postItem.id
+             }
         .background(Color.black.ignoresSafeArea())
     }
 }

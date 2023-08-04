@@ -13,16 +13,17 @@ import FirebaseStorage
 class CommentsModel: ObservableObject {
     @Published var comments = [Comment]()
     @Published var repliesByComment = [String: [Reply]]()
+    @Published var replies = [Reply]()
     @Published var isLoading: Bool = false
     private var isCommentsLoaded = false
     @Published var postId: String? = nil {
         didSet {
-            getComments()
+            listenForComments()
         }
     }
     @Published var commentId: String? = nil {
         didSet {
-            getReplies()
+            listenForReplies()
         }
     }
     
@@ -41,10 +42,6 @@ class CommentsModel: ObservableObject {
                 print("Error writing document \(error)")
             } else {
                 print("success creation")
-                let newComment = Comment(id: docRef.documentID, profilepic: "",username: "bizzle", comment: commenttext, numLikes: 0, date: "")
-                DispatchQueue.main.async {
-                    self.comments.append(newComment)
-                }
                 completion()
             }
         }
@@ -65,57 +62,82 @@ class CommentsModel: ObservableObject {
                 print("Error writing document \(error)")
             } else {
                 print("success creation")
-                let newReply = Reply(id: docRef.documentID, profilepic: "", username: "bizzle", reply: replytext, numLikes: 0, date: "10m")
-                            DispatchQueue.main.async {
-                                if self.repliesByComment[commentId] != nil {
-                                    self.repliesByComment[commentId]?.append(newReply)
-                                } else {
-                                    self.repliesByComment[commentId] = [newReply]
-                                }
-                            }
                 completion()
             }
         }
     }
     
-    func getComments() {
+    func listenForComments() {
         guard let postId = postId else {
             return
         }
-          let docRef = ndPosts.document(postId).collection("comments")
-          docRef.getDocuments { snapshot, error in
-              if error == nil {
-                  if let snapshot = snapshot {
-                      DispatchQueue.main.async {
-                          self.comments = snapshot.documents.map { doc in
-                              return Comment(id: doc["id"] as? String ?? "", profilepic: doc["profilepic"] as? String ?? "", username: doc["username"] as? String ?? "", comment: doc["comment"] as? String ?? "", numLikes: doc["numLikes"] as? Int ?? 0, date: doc["date"] as? String ?? "")
-                          }
-                      }
-                  }
-              }
-          }
-      }
+        let docRef = ndPosts.document(postId).collection("comments")
+        docRef.addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            self.comments = documents.map { queryDocumentSnapshot -> Comment in
+                let data = queryDocumentSnapshot.data()
+                
+                let id = data["id"] as? String ?? ""
+                let profilepic = data["profilepic"] as? String ?? ""
+                let username = data["username"] as? String ?? ""
+                let comment = data["comment"] as? String ?? ""
+                let numLikes = data["numLikes"] as? Int ?? 0
+                let date = data["date"] as? String ?? ""
+                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, numLikes: numLikes, date: date)
+            }
+        }
+    }
     
-    func getReplies() {
+    func listenForReplies() {
         guard let postId = postId else {
             return
         }
         guard let commentId = commentId else {
             return
         }
-        
         let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies")
-        docRef.getDocuments { snapshot, error in
-            if error == nil {
-                if let snapshot = snapshot {
-                    DispatchQueue.main.async {
-                        self.repliesByComment[commentId] = snapshot.documents.map { doc in
-                            return Reply(id: doc["id"] as? String ?? "", profilepic: doc["profilepic"] as? String ?? "", username: doc["username"] as? String ?? "", reply: doc["reply"] as? String ?? "", numLikes: doc["numLikes"] as? Int ?? 0, date: doc["date"] as? String ?? "")
-                        }
-                        
-                    }
-                }
+        docRef.addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
             }
+            self.replies = documents.map { queryDocumentSnapshot -> Reply in
+                let data = queryDocumentSnapshot.data()
+                
+                let id = data["id"] as? String ?? ""
+                let profilepic = data["profilepic"] as? String ?? ""
+                let username = data["username"] as? String ?? ""
+                let reply = data["reply"] as? String ?? ""
+                let numLikes = data["numLikes"] as? Int ?? 0
+                let date = data["date"] as? String ?? ""
+                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, numLikes: numLikes, date: date)
+            }
+        }
+    }
+    
+    
+    
+    func updateCommentLikeCount(postId: String, commentId: String) {
+        let docRef = ndPosts.document(postId).collection("comments").document(commentId)
+        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
+            if let error = error {
+           print("Error updating document: \(error)")
+           } else {
+           print("Document successfully updated!")
+           }
+        }
+   }
+    func updateReplyLikeCount(postId: String, commentId: String, replyId: String) {
+        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyId)
+        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
+            if let error = error {
+           print("Error updating document: \(error)")
+           } else {
+           print("Document successfully updated!")
+           }
         }
     }
 

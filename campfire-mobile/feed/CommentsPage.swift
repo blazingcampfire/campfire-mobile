@@ -13,12 +13,11 @@ struct CommentsPage: View {
     var postId: String
     @State private var isEditing: Bool = false
     @Environment(\.dismiss) var dismiss
-    @StateObject var commentModel = CommentsModel()
+    @ObservedObject var commentModel: CommentsModel
     @State private var replyingToCommentId: String?
     @State private var comment: String = ""
     @State private var reply: String = ""
     @State private var replyingToUserId: String?
-    @ObservedObject var commentCount: CommentCounter
     
     var body: some View {
         NavigationView {
@@ -38,7 +37,7 @@ struct CommentsPage: View {
                             
                             VStack {
                                 Text("Replying to: @\(replyingToUserId!)")
-                                    .font(.custom("LexendDeca-Regular", size: 13))
+                                    .font(.custom("LexendDeca-Bold", size: 13))
                                     .padding(.leading, 20)
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.trailing, 50)
@@ -123,9 +122,6 @@ struct CommentsPage: View {
                 }
             }
         }
-        .onAppear {
-            commentModel.postId = postId
-        }
     }
     func createContent() {
         if let replyingId = replyingToCommentId {
@@ -133,12 +129,10 @@ struct CommentsPage: View {
                 reply = ""  // Reset here
                 replyingToCommentId = nil
                 replyingToUserId = nil
-                commentCount.commentcount += 1
             }
         } else {
             commentModel.createComment(postId: postId, commenttext: comment) {
                 comment = ""
-                commentCount.commentcount += 1
             }
         }
         UIApplication.shared.dismissKeyboard()

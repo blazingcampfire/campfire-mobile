@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchPage: View {
     
-    @StateObject var model: SearchPageModel
+    @StateObject var model: SearchModel
     
     var body: some View {
         NavigationView {
@@ -25,14 +25,13 @@ struct SearchPage: View {
 
 struct SearchList: View {
     
-@EnvironmentObject var model: SearchPageModel
+@EnvironmentObject var model: SearchModel
     
     @State private var addedTapped: Bool = false
     var body: some View {
         List {
             ForEach(model.profiles, id: \.self) { profile in
                 SearchListView(profile: profile)
-                    .environmentObject(model)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

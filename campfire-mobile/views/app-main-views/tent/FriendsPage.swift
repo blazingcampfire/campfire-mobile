@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct FriendsPage: View {
-    @State private var searchText = ""
+    
+    @StateObject var model: FriendsModel
+    
     var body: some View {
             NavigationView {
                 ListFriends()
+                    .environmentObject(model)
                     .listStyle(PlainListStyle())
             }
-            .searchable(text: $searchText)
             .background(Color.white)
             .padding(-10)
     }
@@ -22,16 +24,12 @@ struct FriendsPage: View {
 
 struct ListFriends: View {
     
-    let friendsList = [
-        FriendsListView(profilepic: David.profilepic, name: David.name, username: David.username),
-        FriendsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
-        FriendsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
-    ]
-
+    @EnvironmentObject var model: FriendsModel
+    
     var body: some View {
         List {
-            ForEach(0..<friendsList.count, id: \.self) { index in
-                friendsList[index]
+            ForEach(model.friends, id: \.self) { request in
+                FriendsListView(profilepic: info.profilepic, request: request)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)
@@ -40,8 +38,8 @@ struct ListFriends: View {
     }
 }
 
-struct FriendsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        FriendsPage()
-    }
-}
+//struct FriendsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FriendsPage()
+//    }
+//}

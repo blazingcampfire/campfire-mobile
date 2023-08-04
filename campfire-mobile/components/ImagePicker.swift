@@ -1,24 +1,14 @@
-//
-//  ImagePicker.swift
-//  campfire-mobile
-//
-//  Created by Adarsh G on 7/10/23.
-//
-
 import SwiftUI
 import Foundation
 import UIKit
 import PhotosUI
+import TOCropViewController // Import the TOCropViewController module
 
 struct ImagePicker: UIViewControllerRepresentable {
-    
     @Binding var selectedImage: UIImage?
     @Binding var isPickerShowing: Bool
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
-        
-        // this function initializes a PHPickerVC object that can be used for users to choose photo library images
-        
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
         configuration.selectionLimit = 1
@@ -37,10 +27,10 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
-
 class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
     
     var parent: ImagePicker
+    var parentViewController: UIViewController? // Add a reference to the parent view controller
     
     init(_ picker: ImagePicker) {
         self.parent = picker
@@ -59,8 +49,7 @@ class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationCo
                 print("Error loading image: \(error.localizedDescription)")
             } else if let image = object as? UIImage { // Check if object is a UIImage
                 DispatchQueue.main.async {
-                    self?.parent.isPickerShowing = false
-                    self?.parent.selectedImage = image
+                    self?.showCropViewController(with: image)
                 }
             } else {
                 print("Unable to load image.")
@@ -73,4 +62,17 @@ class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationCo
         parent.isPickerShowing = false
     }
     
+    private func showCropViewController(with image: UIImage) {
+        let cropViewController = TOCropViewController(image: image)
+        cropViewController.delegate = self
+        parentViewController?.present(cropViewController, animated: true, completion: nil) // Use the parentViewController to present the crop view controller
+    }
+}
+
+extension ImageCoordinator: TOCropViewControllerDelegate {
+    func cropViewController(_ cropViewController: TOCropViewController, didCropTo image: UIImage, with cropRect: CGRect, angle: Int) {
+        parent.selectedImage = image
+        parent.isPickerShowing = false
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
 }

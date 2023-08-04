@@ -86,7 +86,7 @@ class CamPostModel: ObservableObject {
         let videoDocData: [String: Any] = [
             "username": "davooo",
             "name": "David Adebogun",
-            "caption": "yoo",    //pass captiontextfield text into here
+            "caption": caption,    //pass captiontextfield text into here
             "profilepic": "", // some path to the user's profile pic
             "url": downloadedvidURL,
             "numLikes": 0,

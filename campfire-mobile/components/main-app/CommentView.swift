@@ -14,8 +14,11 @@ struct CommentView: View {
     @State private var commentLiked: Bool = false
     @State private var showingReplies: Bool = false
     @State private var replyTapped: Bool = false
-    @EnvironmentObject var commentsModel: CommentsModel
-    @Binding var replyingToCommentId: String?
+    @ObservedObject var commentsModel: CommentsModel
+    @Binding var replyingToComId: String?
+    @Binding var replyingToUserId: String?
+    var usernameId: String
+    
     
     var body: some View {
         ZStack {
@@ -53,19 +56,20 @@ struct CommentView: View {
                                         .foregroundColor(Theme.TextColor)
                                     
                                     Button(action: {
-                                        replyingToCommentId = comId
+                                       replyingToComId = comId
+                                        replyingToUserId = usernameId
                                     }) {
                                         Text("Reply")
                                             .font(.custom("LexendDeca-SemiBold", size: 13))
                                             .foregroundColor(Theme.TextColor)
                                     }
                                 }
-                                if commentsModel.repliesByComment[comId]?.count ?? 0 > 0 {
+                                if commentsModel.replies.count > 0 {
                                 Button(action:{
                                     self.showingReplies.toggle()
                                 }) {
                                     HStack(spacing: 2){
-                                        Text("View \(commentsModel.repliesByComment[comId]?.count ?? 0) replies")
+                                        Text("View \(commentsModel.replies.count) replies")
                                             .foregroundColor(Theme.TextColor)
                                             .font(.custom("LexendDeca-Light", size: 13))
                                         Image(systemName: "chevron.down")
@@ -86,8 +90,9 @@ struct CommentView: View {
                         VStack(spacing: -20) {
                             Button(action: {
                                 self.commentLiked.toggle()
+                                commentsModel.updateCommentLikeCount(postId: postID, commentId: comId)
                             }) {
-                                Image(commentLiked == false ? "noteaten" : "eaten")
+                                Image(commentLiked == true ? "eaten" : "noteaten")
                                     .resizable()
                                     .frame(width: 75, height: 90)
                                     .aspectRatio(contentMode: .fit)
@@ -99,14 +104,15 @@ struct CommentView: View {
                         }
                     }
                 if showingReplies {
-                    ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
-                        ReplyView(eachreply: reply)
+                    ForEach(commentsModel.replies, id: \.id) { reply in
+                        ReplyView(eachreply: reply, comId: comId, postId: postID, commentModel: commentsModel)
                     }
                 }
         }
-            .background(replyingToCommentId == comId ? Color.red : Color.clear)
-    }
-    
+        }
+        .onAppear {
+            commentsModel.commentId = comId
+        }
     }
     }
 //struct CommentView_Previews: PreviewProvider {

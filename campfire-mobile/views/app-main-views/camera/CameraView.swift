@@ -85,51 +85,54 @@ struct CameraView: View {
                 .padding(.leading, 330)
 
             } else if camera.showSelectVideo {
-                if let selectedVideoURL = camera.selectedVideoURL {
-                    Group {
-                        if isLoading {
-                            ProgressView("Loading Video...")
-                                .font(.custom("LexendDeca-Regular", size: 25))
-                                .foregroundColor(.white)
-                                .progressViewStyle(CircularProgressViewStyle())
-                                .onAppear {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        isLoading = false
+                    if let selectedVideoURL = camera.selectedVideoURL {
+                        Group {
+                            if isLoading {
+                                ProgressView("Loading Video...")
+                                    .font(.custom("LexendDeca-Regular", size: 25))
+                                    .foregroundColor(.white)
+                                    .progressViewStyle(CircularProgressViewStyle())
+                                    .onAppear {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            isLoading = false
+                                        }
                                     }
-                                }
-                        }
-                        else {
-                            CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
-                                .onTapGesture {
-                                    isPlaying.toggle()
-                                }
-                                .edgesIgnoringSafeArea(.all)
-                                .aspectRatio(9/16, contentMode: .fill)
+                            }
+                            else {
+                                CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
+                                    .onTapGesture {
+                                        isPlaying.toggle()
+                                    }
+                                    .edgesIgnoringSafeArea(.all)
+                                    .aspectRatio(9/16, contentMode: .fill)
+                            }
                         }
                     }
-                }
-                else {
-                    Text("Error Loading Selected Video")
-                        .font(.custom("LexendDeca-Regular", size: 25))
-                        .foregroundColor(.white)
-                }
-                
-                PreviewPostInfo(currentUser: currentUser, postModel: post)
-                VideoPostButton(camera: camera, makePost: post)
-                VStack {
-                    Button(action: {
-                        camera.reTake()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(Theme.Peach)
-                            .fontWeight(.bold)
-                            .font(.system(size: 45))
+                    else {
+                        Text("Error Loading Selected Video")
+                            .font(.custom("LexendDeca-Regular", size: 25))
+                            .foregroundColor(.white)
                     }
-                    Spacer()
-                }
-                .padding(.top, 20)
-                .padding(.leading, 330)
+                    
+                    PreviewPostInfo(currentUser: currentUser, postModel: post)
+                if !camera.videoTooLarge && !camera.videoSizeAlert {
+                        VideoPostButton(camera: camera, makePost: post)
+                    }
+                    VStack {
+                        Button(action: {
+                            camera.reTake()
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(Theme.Peach)
+                                .fontWeight(.bold)
+                                .font(.system(size: 45))
+                        }
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                    .padding(.leading, 330)
             }
+
             
             else if camera.isTaken  {
                 if let uiImage = camera.capturedPic {
@@ -214,12 +217,6 @@ struct CameraView: View {
             }
 
         }
-        .onAppear {
-            self.camera.checkCameraPermission()
-        }
-        .onDisappear {
-            self.camera.tearDown()
-        }
         .alert(item: $camera.alertType) { alertType in
             switch alertType {
             case .accessDenied:
@@ -257,6 +254,9 @@ struct CameraView: View {
                 dismissButton: .default(Text("Okay"))
             )
             }
+        }
+        .alert(isPresented: $camera.videoTooLarge) {
+            Alert(title: Text("Video File Too Large"), message: Text("Consider Cropping Video"), dismissButton: .default(Text("OK")))
         }
     }
     var tapGesture: some Gesture {

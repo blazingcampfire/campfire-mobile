@@ -27,6 +27,7 @@ struct PostPlayer: Identifiable {
     var postItem: PostItem
 }
 
+
 struct Comment: Identifiable {
     var id: String
     var profilepic: String
@@ -43,4 +44,8 @@ struct Reply: Identifiable, Hashable {
     var reply: String
     var numLikes: Int
     var date: String
+}
+
+class CommentCounter: ObservableObject {
+    @Published var commentcount: Int = 0
 }

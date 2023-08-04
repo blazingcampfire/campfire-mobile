@@ -48,23 +48,6 @@ struct Profile: Codable, Hashable {
         self.bio = bio
     }
 
-    // custom initializer to manually decode the Profile object
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        nameInsensitive = try container.decode(String.self, forKey: .nameInsensitive)
-        phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
-        email = try container.decode(String.self, forKey: .email)
-        username = try container.decode(String.self, forKey: .username)
-        friends = try container.decodeIfPresent([Profile].self, forKey: .friends)
-        posts = try container.decode([[String : String]].self, forKey: .posts)
-        smores = try container.decode(Int.self, forKey: .smores)
-        profilePicURL = try container.decode(String.self, forKey: .profilePicURL)
-        userID = try container.decode(String.self, forKey: .userID)
-        school = try container.decode(String.self, forKey: .school)
-        bio = try container.decode(String.self, forKey: .bio)
-
-    }
 }
 
 

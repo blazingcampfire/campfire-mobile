@@ -21,6 +21,7 @@ class RequestsModel: ObservableObject {
     }
     
     func readRequests() {
+        self.requests = []
         let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)

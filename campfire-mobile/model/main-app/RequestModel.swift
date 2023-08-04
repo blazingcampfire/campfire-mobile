@@ -70,6 +70,7 @@ class RequestsModel: ObservableObject {
         userRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([friendRequestField])
         ])
+        self.requests = []
     }
     func acceptFriend(request: RequestFirestore) {
         self.removeRequest(request: request)

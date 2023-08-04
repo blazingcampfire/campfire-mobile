@@ -52,11 +52,12 @@ class SearchModel: ObservableObject {
     }
 
     // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
-    func requestFriend(friendID: String, profile: Profile) {
+    func requestFriend(profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return
         }
+        let friendID = profile.userID
         let friendRelationshipRef = ndRelationships.document(friendID)
         let userRelationshipRef = ndRelationships.document(userID)
         var friendRequestField: [String: Any]

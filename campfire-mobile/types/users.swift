@@ -83,7 +83,7 @@ struct PrivateUser: Codable {
 }
 
 struct Request: Codable, Hashable {
-    @DocumentID var userID: String?
+    var userID: String?
     var name: String
     var username: String
     var profilePicURL: String
@@ -96,7 +96,38 @@ struct Request: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
     
-    init(name: String, username: String, profilePicURL: String) {
+    init(userID: String? = nil, name: String, username: String, profilePicURL: String) {
+        self.userID = userID
+        self.name = name
+        self.username = username
+        self.profilePicURL = profilePicURL
+    }
+    
+    
+}
+
+struct RequestFirestore: Codable, Hashable {
+    var userID: String?
+    var name: String
+    var username: String
+    var profilePicURL: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+
+    public static func == (lhs: RequestFirestore, rhs: RequestFirestore) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init?(data: [String: Any]) {
+        guard let userID = data["userID"] as? String,
+              let name = data["name"] as? String,
+              let username = data["username"] as? String,
+              let profilePicURL = data["profilePicURL"] as? String else {
+            return nil
+        }
+        self.userID = userID
         self.name = name
         self.username = username
         self.profilePicURL = profilePicURL

@@ -7,7 +7,9 @@
 import SwiftUI
 
 struct RequestsPage: View {
+    
     @StateObject var model: RequestsModel
+    
     var body: some View {
         NavigationView {
             ListRequests()
@@ -16,20 +18,22 @@ struct RequestsPage: View {
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)
-        .onAppear { 
-            model.readRequests()
-        }
     }
 }
 
 struct ListRequests: View {
     @EnvironmentObject var model: RequestsModel
     
+    let friendsList = [
+        FriendsListView(profilepic: David.profilepic, name: David.name, username: David.username),
+        FriendsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
+        FriendsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
+    ]
+    
     var body: some View {
         List {
-            ForEach(model.profiles, id: \.self) { profile in
-                RequestsListView(profile: profile)
-                    .environmentObject(model)
+            ForEach(0..<friendsList.count, id: \.self) { index in
+                friendsList[index]
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

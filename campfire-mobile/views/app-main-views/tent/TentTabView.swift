@@ -12,6 +12,7 @@ struct TentTabView: View {
     // this variable represents the index of each tab
     @State private var tabIndex = 0
     @EnvironmentObject var currentUser: CurrentUserModel
+    
     var body: some View {
         VStack {
             SlidingTabView(selection: $tabIndex, tabs: ["notifications", "search", "requests"], font: .custom("LexendDeca-Regular", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach,inactiveAccentColor: .gray ,selectionBarColor: Theme.Peach)
@@ -25,7 +26,7 @@ struct TentTabView: View {
             } else if tabIndex == 1 {
                 SearchPage(model: SearchModel(currentUser: currentUser))
             } else if tabIndex == 2 {
-                RequestsPage(model: RequestsModel(currentUser: currentUser))
+                RequestsPage(model: RequestsModel(currentUser: currentUser, requests: []))
             }
             Spacer()
         }

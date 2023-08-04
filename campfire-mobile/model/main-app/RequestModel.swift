@@ -6,25 +6,34 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class RequestsModel: ObservableObject {
-    @Published var profiles: [Profile] = []
     @Published var currentUser: CurrentUserModel
-    var requests: [Request] = []
+    @Published var requests: [RequestFirestore]
     
-    init(currentUser: CurrentUserModel) {
+    init(currentUser: CurrentUserModel, requests: [RequestFirestore]) {
         self.currentUser = currentUser
+        self.requests = requests
     }
     
     func readRequests() -> Void {
         let userRelationships = ndRelationships.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
-            guard let snapshot = documentSnapshot?.get("ownRequests") else {
-                print("error fetching document: \(String(describing: error))")
-                return
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                if let documentSnapshot = documentSnapshot {
+                    print("Request Data got")
+                    let reqs = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
+                    for req in reqs {
+                        guard let n = RequestFirestore(data: req) else {
+                            continue
+                        }
+                        print(n)
+                    }
+                }
             }
-            let r = documentSnapshot?.data()?.values
-            self.requests = snapshot as? [Request] ?? []
-            print(self.requests)
             
         }
     }

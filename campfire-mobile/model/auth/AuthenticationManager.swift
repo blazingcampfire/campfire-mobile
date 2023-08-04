@@ -54,7 +54,7 @@ final class AuthenticationManager {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        try Auth.auth().currentUser?.delete()
+        Auth.auth().currentUser?.delete()
         ndUsers.document(userID).delete()
     }
     

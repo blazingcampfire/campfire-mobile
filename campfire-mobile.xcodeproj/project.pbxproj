@@ -91,9 +91,11 @@
 		E2163E4C2A6633D2005A20BE /* schoolFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4B2A6633D2005A20BE /* schoolFunctions.swift */; };
 		E2163E4E2A663501005A20BE /* schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4D2A663501005A20BE /* schools.swift */; };
 		E2163E522A663C4D005A20BE /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E512A663C4D005A20BE /* users.swift */; };
-		E21F79C42A68DF98004B3DCC /* SearchPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F79C32A68DF98004B3DCC /* SearchPageModel.swift */; };
+		E21F79C42A68DF98004B3DCC /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21F79C32A68DF98004B3DCC /* SearchModel.swift */; };
 		E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2434C4C2A5A412C000A70DB /* GradientBackground.swift */; };
 		E2578DA22A6B6429004C65DC /* EnterName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2578DA12A6B6429004C65DC /* EnterName.swift */; };
+		E267A9C62A7A1BB500489B8E /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267A9C52A7A1BB500489B8E /* FriendsModel.swift */; };
+		E267A9C82A7AA58300489B8E /* tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E267A9C72A7AA58300489B8E /* tests.swift */; };
 		E272A0142A5BA192008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
 		E272A0152A5BA1B8008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
 		E272A0162A5BA1B9008D2D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */; };
@@ -124,7 +126,7 @@
 		E29095F12A3E4741001BEDDE /* campfire_mobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095F02A3E4741001BEDDE /* campfire_mobileTests.swift */; };
 		E29095FB2A3E4741001BEDDE /* campfire_mobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */; };
 		E29095FD2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */; };
-		E2A37EF62A7622DD001A4306 /* RequestsPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */; };
+		E2A37EF62A7622DD001A4306 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF52A7622DD001A4306 /* RequestModel.swift */; };
 		E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */; };
 		E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AA2A5E38770012D328 /* GoogleSignIn */; };
 		E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */; };
@@ -150,6 +152,8 @@
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
 		F87DA9CD2A6783BB00CBAA98 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */; };
+		F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5152A7A1E1200E6E663 /* CropViewController */; };
+		F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5172A7A1E1200E6E663 /* TOCropViewController */; };
 		F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */; };
 		F89402132A5E64F30049410E /* FriendsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402122A5E64F30049410E /* FriendsListView.swift */; };
 		F89402152A5E68480049410E /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89402142A5E68480049410E /* SearchListView.swift */; };
@@ -270,9 +274,11 @@
 		E2163E4B2A6633D2005A20BE /* schoolFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schoolFunctions.swift; sourceTree = "<group>"; };
 		E2163E4D2A663501005A20BE /* schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schools.swift; sourceTree = "<group>"; };
 		E2163E512A663C4D005A20BE /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
-		E21F79C32A68DF98004B3DCC /* SearchPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageModel.swift; sourceTree = "<group>"; };
+		E21F79C32A68DF98004B3DCC /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		E2434C4C2A5A412C000A70DB /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
 		E2578DA12A6B6429004C65DC /* EnterName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterName.swift; sourceTree = "<group>"; };
+		E267A9C52A7A1BB500489B8E /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
+		E267A9C72A7AA58300489B8E /* tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tests.swift; sourceTree = "<group>"; };
 		E272A0132A5BA192008D2D78 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E280A9E22A4FCF5D00410B34 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		E280A9E42A4FD3FB00410B34 /* NotificationsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPage.swift; sourceTree = "<group>"; };
@@ -295,7 +301,7 @@
 		E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "campfire-mobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITests.swift; sourceTree = "<group>"; };
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPageModel.swift; sourceTree = "<group>"; };
+		E2A37EF52A7622DD001A4306 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
@@ -348,9 +354,11 @@
 				E272A01B2A5BA36B008D2D78 /* FirebaseAuth in Frameworks */,
 				B140BA592A60F39400819203 /* SwiftUICam in Frameworks */,
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
+				F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
+				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
 				B1EA23BA2A74E0790021F0D1 /* Kingfisher in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
@@ -517,6 +525,7 @@
 				E28D3A642A3EB52400B1EEE9 /* colors.swift */,
 				F86D83A52A4BC37900223F9A /* prompts.swift */,
 				E2163E4D2A663501005A20BE /* schools.swift */,
+				E267A9C72A7AA58300489B8E /* tests.swift */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -747,15 +756,17 @@
 			children = (
 				B1C51EA42A71E709008E6C69 /* CameraModel.swift */,
 				F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */,
-				E21F79C32A68DF98004B3DCC /* SearchPageModel.swift */,
+				E21F79C32A68DF98004B3DCC /* SearchModel.swift */,
 				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
 				E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */,
 				B1E044D62A762E4900DC767D /* CommentsModel.swift */,
 				B14375302A7771F100904C52 /* ReplyModel.swift */,
 				B11371A62A7A06A200417923 /* CamPostModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */,
+				E2A37EF52A7622DD001A4306 /* RequestModel.swift */,
 				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 				B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */,
+				E267A9C52A7A1BB500489B8E /* FriendsModel.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -813,6 +824,8 @@
 				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
 				F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */,
 				B1EA23B92A74E0790021F0D1 /* Kingfisher */,
+				F881D5152A7A1E1200E6E663 /* CropViewController */,
+				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -893,6 +906,7 @@
 				B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
 				F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1044,6 +1058,7 @@
 				B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */,
 				B1562CDF2A5E501B00E8C5FD /* ReplyView.swift in Sources */,
 				B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */,
+				E267A9C62A7A1BB500489B8E /* FriendsModel.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
 				E2163E4E2A663501005A20BE /* schools.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
@@ -1053,7 +1068,7 @@
 				E2CBD5E42A6211D2000F3547 /* utilities.swift in Sources */,
 				E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */,
 				E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */,
-				E2A37EF62A7622DD001A4306 /* RequestsPageModel.swift in Sources */,
+				E2A37EF62A7622DD001A4306 /* RequestModel.swift in Sources */,
 				B1B5EFC82A4F569A00FA79CE /* EditPosts.swift in Sources */,
 				B1C51EAB2A722522008E6C69 /* PreviewPostInfo.swift in Sources */,
 				E2C446872A4E82C20032CF34 /* TopNavBar.swift in Sources */,
@@ -1070,10 +1085,11 @@
 				B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
+				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
 				B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */,
-				E21F79C42A68DF98004B3DCC /* SearchPageModel.swift in Sources */,
+				E21F79C42A68DF98004B3DCC /* SearchModel.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,
 				F87DA9CD2A6783BB00CBAA98 /* ProfileModel.swift in Sources */,
 				B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */,
@@ -1244,6 +1260,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
@@ -1278,6 +1295,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
@@ -1310,6 +1328,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1332,6 +1351,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1352,6 +1372,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1372,6 +1393,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1465,6 +1487,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -1540,6 +1570,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		F881D5152A7A1E1200E6E663 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		F881D5172A7A1E1200E6E663 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
 		};
 		F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;

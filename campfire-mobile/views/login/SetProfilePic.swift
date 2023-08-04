@@ -57,6 +57,7 @@ struct SetProfilePic: View {
                         
                         VStack {
                             Button(action: {
+                                confirmProfilePic()
                                 model.createProfile()
                                 currentUser.setCollectionRefs()
                                 currentUser.getProfile()
@@ -72,6 +73,29 @@ struct SetProfilePic: View {
             )
             .navigationBarBackButtonHidden(true)
     }
+    
+    func confirmProfilePic() {
+            guard selectedImage != nil else {
+                print("No image")
+                return
+            }
+        
+            let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+            guard let imageData = imageData else {
+                print("Image cannot be converted to data")
+                return
+            }
+            
+
+            uploadPictureToStorage(imageData: imageData) { photoURL in
+                if let photoURL = photoURL {
+                    model.profilePic = photoURL
+                } else {
+                    print("Error uploading picture to storage")
+                }
+            }
+        }
+
 }
         
         //    func processUploadPFP() async {

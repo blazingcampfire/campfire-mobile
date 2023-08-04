@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestoreSwift
 
 // every user profile should conform to this schema
-public class Profile: Codable, Hashable {
+struct Profile: Codable, Hashable {
 
     var name: String
     var nameInsensitive: String
@@ -47,27 +48,10 @@ public class Profile: Codable, Hashable {
         self.bio = bio
     }
 
-    // custom initializer to manually decode the Profile object
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        nameInsensitive = try container.decode(String.self, forKey: .nameInsensitive)
-        phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
-        email = try container.decode(String.self, forKey: .email)
-        username = try container.decode(String.self, forKey: .username)
-        friends = try container.decodeIfPresent([Profile].self, forKey: .friends)
-        posts = try container.decode([[String : String]].self, forKey: .posts)
-        smores = try container.decode(Int.self, forKey: .smores)
-        profilePicURL = try container.decode(String.self, forKey: .profilePicURL)
-        userID = try container.decode(String.self, forKey: .userID)
-        school = try container.decode(String.self, forKey: .school)
-        bio = try container.decode(String.self, forKey: .bio)
-
-    }
 }
 
 
-public class PrivateUser: Codable {
+struct PrivateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
@@ -80,3 +64,56 @@ public class PrivateUser: Codable {
         self.school = school
     }
 }
+
+struct Request: Codable, Hashable {
+    var userID: String?
+    var name: String
+    var username: String
+    var profilePicURL: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+
+    public static func == (lhs: Request, rhs: Request) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init(userID: String? = nil, name: String, username: String, profilePicURL: String) {
+        self.userID = userID
+        self.name = name
+        self.username = username
+        self.profilePicURL = profilePicURL
+    }
+    
+    
+}
+
+struct RequestFirestore: Codable, Hashable {
+    var userID: String?
+    var name: String
+    var username: String
+    var profilePicURL: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+
+    public static func == (lhs: RequestFirestore, rhs: RequestFirestore) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init?(data: [String: Any]) {
+        guard let userID = data["userID"] as? String,
+              let name = data["name"] as? String,
+              let username = data["username"] as? String,
+              let profilePicURL = data["profilePicURL"] as? String else {
+            return nil
+        }
+        self.userID = userID
+        self.name = name
+        self.username = username
+        self.profilePicURL = profilePicURL
+    }
+}
+

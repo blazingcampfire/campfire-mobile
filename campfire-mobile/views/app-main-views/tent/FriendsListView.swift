@@ -10,8 +10,7 @@ import SwiftUI
 struct FriendsListView: View {
     
     var profilepic: String
-    var name: String
-    var username: String
+    var request: RequestFirestore
     
     var body: some View {
         HStack {
@@ -25,12 +24,12 @@ struct FriendsListView: View {
             VStack(alignment: .leading) {
                 Button(action: {
                 }) {
-                    Text(name)
+                    Text(request.name)
                         .font(.custom("LexendDeca-Bold", size: 18))
                         .foregroundColor(Theme.TextColor)
                 }
 
-                Text("@\(username)")
+                Text("@\(request.username)")
                     .font(.custom("LexendDeca-Regular", size: 12))
                     .foregroundColor(.gray)
             }

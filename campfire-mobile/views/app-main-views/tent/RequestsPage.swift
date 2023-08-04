@@ -22,18 +22,13 @@ struct RequestsPage: View {
 }
 
 struct ListRequests: View {
-    @EnvironmentObject var model: RequestsModel
     
-    let friendsList = [
-        FriendsListView(profilepic: David.profilepic, name: David.name, username: David.username),
-        FriendsListView(profilepic: Toni.profilepic, name: Toni.name, username: Toni.username),
-        FriendsListView(profilepic: Adarsh.profilepic, name: Adarsh.name, username: Adarsh.username)
-    ]
+    @EnvironmentObject var model: RequestsModel
     
     var body: some View {
         List {
-            ForEach(0..<friendsList.count, id: \.self) { index in
-                friendsList[index]
+            ForEach(model.requests, id: \.self) { request in
+                RequestsListView(request: request)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

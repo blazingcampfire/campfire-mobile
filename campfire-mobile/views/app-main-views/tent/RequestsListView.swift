@@ -12,6 +12,7 @@ struct RequestsListView: View {
     var profilepic: String = info.profilepic
     var request: RequestFirestore
     @EnvironmentObject var model: RequestsModel
+    
     var body: some View {
         
         HStack {
@@ -38,12 +39,14 @@ struct RequestsListView: View {
             Spacer()
 
             Button(action: {
+                model.acceptFriend(request: request)
             }) {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(Theme.Peach)
                     .font(.custom("LexendDeca-Regular", size: 30))
             }
             Button(action: {
+                model.removeRequest(request: request)
             }) {
                 Image(systemName: "x.circle")
                     .foregroundColor(Theme.Peach)

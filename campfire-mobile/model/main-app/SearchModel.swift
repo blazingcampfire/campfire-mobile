@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 import Foundation
 
 class SearchModel: ObservableObject {
+    @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
         didSet {
@@ -20,7 +21,6 @@ class SearchModel: ObservableObject {
             print("Email: \(self.currentUser.profile.email). Collection: \(self.currentUser.profileRef.path)")
         }
     }
-    @Published var currentUser: CurrentUserModel
     
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
@@ -64,8 +64,8 @@ class SearchModel: ObservableObject {
         var userRequestField: [String: Any]
         
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
-            userRequestField = try Firestore.Encoder().encode(Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
+            userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
             print("Could not encode requestFields.")
@@ -74,28 +74,32 @@ class SearchModel: ObservableObject {
         
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "friendRequests": FieldValue.arrayUnion([userRequestField])
+            "sentRequests": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([friendRequestField])
+            "ownRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     }
     
-    func unrequestFriend(friendID: String, profile: Profile) {
+    func unrequestFriend(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
+            return
+        }
+        guard let friendID = request.userID else {
+            print("No request ID")
             return
         }
         let friendRelationshipRef = ndRelationships.document(friendID)
         let userRelationshipRef = ndRelationships.document(userID)
         
         friendRelationshipRef.updateData([
-            "friendRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
+            "sentRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
         ])
         
         userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([Request(name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL)])
+            "ownRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)])
         ])
     }
     

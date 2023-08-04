@@ -13,7 +13,6 @@ import FirebaseStorage
 class FeedPostModel: ObservableObject {
     
     @Published var posts = [PostItem]()
-    
   
     func createPost(data: [String: Any]) {    // This function creates the document and it passes in the variables set the field data
         let docRef = ndPosts.document()

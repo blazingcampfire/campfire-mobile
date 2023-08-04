@@ -10,7 +10,8 @@ import SwiftUI
 struct RequestsListView: View {
     
     var profilepic: String = info.profilepic
-    var profile: Profile
+    var request: RequestFirestore
+    @EnvironmentObject var model: RequestsModel
     
     var body: some View {
         
@@ -25,12 +26,12 @@ struct RequestsListView: View {
             VStack(alignment: .leading) {
                 Button(action: {
                 }) {
-                    Text(profile.name)
+                    Text(request.name)
                         .font(.custom("LexendDeca-Bold", size: 18))
                         .foregroundColor(Theme.TextColor)
                 }
 
-                Text("@\(profile.username)")
+                Text("@\(request.username)")
                     .font(.custom("LexendDeca-Regular", size: 12))
                     .foregroundColor(.gray)
             }
@@ -38,12 +39,14 @@ struct RequestsListView: View {
             Spacer()
 
             Button(action: {
+                model.acceptFriend(request: request)
             }) {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(Theme.Peach)
                     .font(.custom("LexendDeca-Regular", size: 30))
             }
             Button(action: {
+                model.removeRequest(request: request)
             }) {
                 Image(systemName: "x.circle")
                     .foregroundColor(Theme.Peach)

@@ -6,25 +6,70 @@
 //
 
 import Foundation
+import Combine
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class FriendsModel: ObservableObject {
-    @Published var profiles: [Profile] = []
+    @Published var friends: [RequestFirestore] = []
     @Published var currentUser: CurrentUserModel
-    var userIDs: [String] = []
     
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
+        self.readFriends()
     }
     
-    func readFriends() -> Void {
-        let userRelationships = ndRelationships.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
-            guard let snapshot = documentSnapshot?.get("friends") else {
-                print("error fetching document: \(String(describing: error))")
-                return
+    func readFriends() {
+        let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+            if error != nil {
+                print(error?.localizedDescription)
+            } else {
+                if let documentSnapshot = documentSnapshot {
+                    print("Request Data got")
+                    print(documentSnapshot.data())
+                    let requests = documentSnapshot.get("friends") as? [[String: Any]] ?? []
+                    for request in requests {
+                        guard let requestObject = RequestFirestore(data: request) else {
+                            return
+                        }
+                        print(requestObject)
+                        self.friends.append(requestObject)
+                    }
+                }
             }
-            print(snapshot)
-//            self.userIDs = snapshot as! [String]
+            
         }
+    }
+    
+    func removeFriend(request: RequestFirestore) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return
+        }
+        guard let friendID = request.userID else {
+            return
+        }
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
+        var friendRequestField: [String: Any]
+        var userRequestField: [String: Any]
+        
+        do {
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
+            userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
+        }
+        catch {
+            print("Could not encode requestFields.")
+            return
+        }
+        friendRelationshipRef.updateData([
+            "friends": FieldValue.arrayRemove([userRequestField])
+        ])
+        
+        userRelationshipRef.updateData([
+            "friends": FieldValue.arrayRemove([friendRequestField])
+        ])
     }
 }
 

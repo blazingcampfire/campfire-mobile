@@ -10,6 +10,7 @@ import SwiftUI
 struct OwnProfilePage: View {
     @State var settingsPageShow = false
     @StateObject var profileModel = ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
+    @EnvironmentObject var currentUser: CurrentUserModel
     @State private var showAddPost = false
     
     var body: some View {
@@ -68,7 +69,7 @@ struct OwnProfilePage: View {
                                                     )
                                             }
                                         
-                                        NavigationLink(destination: FriendsPage()) {
+                                        NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser))) {
                                             Image(systemName: "person.3.fill")
                                                 .font(.system(size: 20))
                                                 .foregroundColor(Theme.Peach)

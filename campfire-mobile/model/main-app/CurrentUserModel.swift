@@ -70,11 +70,24 @@ class CurrentUserModel: ObservableObject {
             userRef.document(userID).getDocument(as: PrivateUser.self) { [self] result in
                 switch result {
                 case let .success(user):
-                    privateUserData = user
+                    self.privateUserData = user
                     print("Profile Email: \(privateUserData.email)")
                 case let .failure(error):
                     print("Error decoding profile: \(error)")
                 }
+            }
+        }
+    }
+    
+    func makeTestProfiles(testProfiles: [Profile]) {
+        for testProfile in testProfiles {
+           let testUser = PrivateUser(phoneNumber: testProfile.phoneNumber, email: testProfile.email, userID: testProfile.userID, school: testProfile.school)
+            do {
+                try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
+                try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
+                print("Documents successfully written!")
+            } catch {
+                print("Error writing profile or user to firestore \(error)")
             }
         }
     }

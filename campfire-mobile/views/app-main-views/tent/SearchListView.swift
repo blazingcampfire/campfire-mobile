@@ -35,7 +35,7 @@ struct SearchListView: View {
 
             Button {
                 self.added.toggle()
-                model.requestFriend(friendID: profile.userID, profile: profile)
+                model.requestFriend(profile: profile)
             } label: {
                 Image(systemName: self.added == false ? "plus.circle.fill" : "minus.circle.fill" )
                     .font(.system(size: 30))

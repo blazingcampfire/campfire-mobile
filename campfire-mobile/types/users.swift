@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestoreSwift
 
 // every user profile should conform to this schema
-public class Profile: Codable, Hashable {
+struct Profile: Codable, Hashable {
 
     var name: String
     var nameInsensitive: String
@@ -46,10 +47,11 @@ public class Profile: Codable, Hashable {
         self.school = school
         self.bio = bio
     }
+
 }
 
 
-public class PrivateUser: Codable {
+struct PrivateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
@@ -63,14 +65,55 @@ public class PrivateUser: Codable {
     }
 }
 
-public class Request: Codable {
+struct Request: Codable, Hashable {
+    var userID: String?
     var name: String
     var username: String
     var profilePicURL: String
     
-    init(name: String, username: String, profilePicURL: String) {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+
+    public static func == (lhs: Request, rhs: Request) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init(userID: String? = nil, name: String, username: String, profilePicURL: String) {
+        self.userID = userID
+        self.name = name
+        self.username = username
+        self.profilePicURL = profilePicURL
+    }
+    
+    
+}
+
+struct RequestFirestore: Codable, Hashable {
+    var userID: String?
+    var name: String
+    var username: String
+    var profilePicURL: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+
+    public static func == (lhs: RequestFirestore, rhs: RequestFirestore) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init?(data: [String: Any]) {
+        guard let userID = data["userID"] as? String,
+              let name = data["name"] as? String,
+              let username = data["username"] as? String,
+              let profilePicURL = data["profilePicURL"] as? String else {
+            return nil
+        }
+        self.userID = userID
         self.name = name
         self.username = username
         self.profilePicURL = profilePicURL
     }
 }
+

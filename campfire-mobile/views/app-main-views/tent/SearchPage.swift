@@ -32,7 +32,6 @@ struct SearchList: View {
         List {
             ForEach(model.profiles, id: \.self) { profile in
                 SearchListView(profile: profile)
-                    .environmentObject(model)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

@@ -16,7 +16,7 @@ struct EmailOrNumber: View {
     var body: some View {
                 GradientBackground()
                 .overlay(
-                    VStack {
+                    VStack (spacing: 0) {
 // MARK: - Back button
                         HStack {
                             Button {
@@ -33,27 +33,31 @@ struct EmailOrNumber: View {
                             Image("newlogo")
                                 .resizable()
                                 .frame(width: 300, height: 300)
-                            
+
                             Text("campfire")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 60))
                                 .padding(.top, -30)
                         }
                         .padding(.bottom, 30)
-                        
-//MARK: - NavLinks to EnterPhoneNumber & EnterEmail screens
-                        
-                        NavigationLink(destination: EnterPhoneNumber(), label: {
-                            LFButton(text: "phone number")})
-                        .padding(5)
-                         
-                        
-                        NavigationLink(destination: EnterEmail(), label: {
-                            LFButton(text: "email")})
-                        .padding(5)
+
+                        // MARK: - NavLinks to EnterPhoneNumber & EmailOrNumber screens
+
+                        VStack {
+                            NavigationLink(destination: EnterPhoneNumber(), label: {
+                                LFButton(text: "phone number")
+                                    .padding(5)
+                            })
+                            
+
+                            NavigationLink(destination: EnterEmail(), label: {
+                                LFButton(text: "email")
+                                    .padding(5)
+                            })
+                        }
                         
                     }
-                        .padding(.bottom, 100)
+                        .padding(.bottom, 160)
                 )
                 .navigationBarBackButtonHidden(true)
     

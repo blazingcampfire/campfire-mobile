@@ -25,9 +25,9 @@ struct OwnProfilePage: View {
                             ZStack {
                                 VStack {
                                     VStack(spacing: 0) {
-                                        if let profile = profileModel.profile {
+                                        let profile = currentUser.profile
                                             
-                                            UserProfilePic(pfp: profileModel.profile?.profilePicURL)
+                                            UserProfilePic(pfp: profile.profilePicURL)
                                             
                                             Spacer()
                                             
@@ -47,9 +47,7 @@ struct OwnProfilePage: View {
                                             Text(profile.bio)
                                                 .font(.custom("LexendDeca-Regular", size: 13))
                                                 .padding(8)
-                                        } else {
-                                            Text("chill out")
-                                        }
+                                        
                                     }
                                     .padding(.top)
                                     HStack {

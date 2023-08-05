@@ -13,7 +13,7 @@ struct AccountSetUp: View {
         NavigationView {
             GradientBackground()
                 .overlay(
-                    VStack {
+                    VStack (spacing: 0) {
                         // MARK: - App logo & title
                         VStack {
                             Image("newlogo")

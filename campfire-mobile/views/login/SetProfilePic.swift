@@ -14,8 +14,8 @@ struct SetProfilePic: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    var selectedImage: UIImage?
     @State var setUpFinished: Bool = false
+    @State var selectedPFP: UIImage?
     
     var body: some View {
         if model.isMainAppPresented {
@@ -51,7 +51,7 @@ struct SetProfilePic: View {
                             .font(.custom("LexendDeca-Bold", size: 15))
                             .padding(.top, -40)
                         
-                        ProfilePictureView(selectedImage: selectedImage)
+                        ProfilePictureView(selectedPFP: $selectedPFP)
                         
                         Text("you're ready!")
                             .foregroundColor(Color.white)
@@ -62,12 +62,14 @@ struct SetProfilePic: View {
                         
                         VStack {
                             Button(action: {
-                                confirmProfilePic()
-                                currentUser.setCollectionRefs()
-                                model.createProfile()
-                                currentUser.getProfile()
-                                currentUser.getUser()
-                                model.presentMainApp()
+                                do {
+                                    confirmProfilePic()
+                                    currentUser.setCollectionRefs()
+                                    model.createProfile()
+                                    currentUser.getProfile()
+                                    currentUser.getUser()
+                                    model.presentMainApp()
+                                }
                             }) {
                                 LFButton(text: "finish")
                             }
@@ -81,12 +83,12 @@ struct SetProfilePic: View {
     }
     
     func confirmProfilePic() {
-            guard selectedImage != nil else {
+            guard selectedPFP != nil else {
                 print("No image")
                 return
             }
         
-            let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+            let imageData = selectedPFP!.jpegData(compressionQuality: 0.8)
             guard let imageData = imageData else {
                 print("Image cannot be converted to data")
                 return
@@ -95,7 +97,9 @@ struct SetProfilePic: View {
 
             uploadPictureToStorage(imageData: imageData) { photoURL in
                 if let photoURL = photoURL {
+                    print(photoURL)
                     model.profilePic = photoURL
+                    print(model)
                 } else {
                     print("Error uploading picture to storage")
                 }

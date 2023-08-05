@@ -37,7 +37,7 @@ struct CommentsPage: View {
                             
                             VStack {
                                 Text("Replying to: @\(replyingToUserId!)")
-                                    .font(.custom("LexendDeca-Bold", size: 13))
+                                    .font(.custom("LexendDeca-Bold", size: 15))
                                     .padding(.leading, 20)
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.trailing, 50)

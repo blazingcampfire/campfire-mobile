@@ -258,6 +258,9 @@ struct CameraView: View {
         .alert(isPresented: $camera.videoTooLarge) {
             Alert(title: Text("Video File Too Large"), message: Text("Consider Cropping Video"), dismissButton: .default(Text("OK")))
         }
+        .onTapGesture {
+            UIApplication.shared.dismissKeyboard()
+        }
     }
     var tapGesture: some Gesture {
             TapGesture()

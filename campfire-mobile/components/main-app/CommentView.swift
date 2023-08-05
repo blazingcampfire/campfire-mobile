@@ -51,7 +51,7 @@ struct CommentView: View {
                                     .foregroundColor(Theme.TextColor)
                                 
                                 HStack(spacing: 15){
-                                    Text(eachcomment.date)  //time variable
+                                    Text(timeAgoSinceDate(eachcomment.date.dateValue()))  //time variable
                                         .font(.custom("LexendDeca-Light", size: 13))
                                         .foregroundColor(Theme.TextColor)
                                     
@@ -64,12 +64,12 @@ struct CommentView: View {
                                             .foregroundColor(Theme.TextColor)
                                     }
                                 }
-                                if commentsModel.replies.count > 0 {
+                                if commentsModel.repliesByComment[comId]?.count ?? 0 > 0 {
                                 Button(action:{
                                     self.showingReplies.toggle()
                                 }) {
                                     HStack(spacing: 2){
-                                        Text("View \(commentsModel.replies.count) replies")
+                                        Text("View \(commentsModel.repliesByComment[comId]?.count ?? 0) replies")
                                             .foregroundColor(Theme.TextColor)
                                             .font(.custom("LexendDeca-Light", size: 13))
                                         Image(systemName: "chevron.down")
@@ -108,7 +108,7 @@ struct CommentView: View {
                         }
                     }
                 if showingReplies {
-                    ForEach(commentsModel.replies, id: \.id) { reply in
+                    ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
                         ReplyView(eachreply: reply, comId: comId, postId: postID, commentModel: commentsModel)
                     }
                 }

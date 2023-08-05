@@ -41,7 +41,7 @@ struct ReplyView: View {
                         .font(.custom("LexendDeca-Light", size: 15))
                         .foregroundColor(Theme.TextColor)
                     
-                    Text(eachreply.date)  // time variable
+                    Text(timeAgoSinceDate(eachreply.date.dateValue()))  // time variable
                         .font(.custom("LexendDeca-Light", size: 13))
                         .foregroundColor(Theme.TextColor)
                 }

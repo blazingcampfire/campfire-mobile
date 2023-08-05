@@ -35,5 +35,14 @@
 		<string>LexendDeca-Light.ttf</string>
 		<string>LexendDeca-Medium.ttf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>Peach</string>
+		<key>UIImageName</key>
+		<string>logoColor</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
+	</dict>
 </dict>
 </plist>

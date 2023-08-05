@@ -21,12 +21,13 @@ class RequestsModel: ObservableObject {
     }
     
     func readRequests() {
-        self.requests = []
+        print("Read Requests fired")
         let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)
             } else {
                 if let documentSnapshot = documentSnapshot {
+                    var requestsArray: [RequestFirestore] = []
                     print("Request Data got")
                     print(documentSnapshot.data())
                     let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
@@ -35,8 +36,9 @@ class RequestsModel: ObservableObject {
                             return
                         }
                         print(requestObject)
-                        self.requests.append(requestObject)
+                        requestsArray.append(requestObject)
                     }
+                    self.requests = requestsArray
                 }
             }
             
@@ -71,7 +73,6 @@ class RequestsModel: ObservableObject {
         userRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([friendRequestField])
         ])
-        self.requests = []
     }
     func acceptFriend(request: RequestFirestore) {
         self.removeRequest(request: request)

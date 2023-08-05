@@ -12,14 +12,14 @@ import FirebaseStorage
 import AVKit
 
 class FeedPostModel: ObservableObject {
-    
     @Published var posts = [PostItem]()
     @Published var postPlayers = [PostPlayer?]()
     private var listener: ListenerRegistration?
     
     init() {
-        self.listenForPosts()
+       self.listenForPosts()
     }
+    
     deinit {
         listener?.remove()
     }
@@ -31,7 +31,6 @@ class FeedPostModel: ObservableObject {
                 print("No documents")
                 return
             }
-
             // map documents to PostItem
             self.posts = documents.map { queryDocumentSnapshot -> PostItem in
                 let data = queryDocumentSnapshot.data()
@@ -49,7 +48,7 @@ class FeedPostModel: ObservableObject {
                 return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, comments: comments, postType: postType)
             }
 
-            // update postPlayers accordingly...
+            // update postPlayers accordingly
             self.postPlayers = self.posts.compactMap { post in
                 if post.postType == "image" {
                     return PostPlayer(player: nil, postItem: post)
@@ -62,22 +61,28 @@ class FeedPostModel: ObservableObject {
             }
         }
     }
-    func updateLikeCount(postId: String) {
+    
+    func increaseLikeCount(postId: String) {
         let docRef = ndPosts.document(postId)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
                 print("Error updating document: \(error)")
             } else {
                 print("Document successfully updated!")
-                DispatchQueue.main.async {
-                    // Find the index of the post being liked
-                    if let index = self.posts.firstIndex(where: { $0.id == postId }) {
-                        // Increment the numLikes field of the post at the given index
-                        self.posts[index].numLikes += 1
-                    }
-                }
             }
         }
     }
+    
+    func decreaseLikeCount(postId: String) {
+        let docRef = ndPosts.document(postId)
+        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated!")
+                }
+            }
+        }
+    
     
 }

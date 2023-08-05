@@ -18,7 +18,7 @@ import SwiftUI
 @MainActor
 final class AuthModel: ObservableObject {
     // Input values from Views
-   @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
+    @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
    @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
     @Published var phoneNumber: String = ""
     @Published var verificationCode: String = ""
@@ -244,22 +244,24 @@ extension AuthModel {
         } else {
             return
         }
+        var profileData: [String: Any]
+        var userData: [String: Any]
+        
+        do {
+            profileData = try Firestore.Encoder().encode(Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: ""))
+            userData = try Firestore.Encoder().encode(PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school))
+        }
+        catch {
+            print("Could not encode requestFields.")
+            return
+        }
 
-        let profileData = Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: "")
-        let userData = PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school)
-
-        profile = profileData
-        privateUserData = userData
 
         // based on the user's school, their profile document is sorted into the appropriate school document
 
-        do {
-            try userRef.document("\(userID)").setData(from: profile)
-            try profileRef.document("\(userID)").setData(from: privateUserData)
-            print("Documents successfully written!")
-        } catch {
-            print("Error writing profile or user to firestore \(error)")
-        }
+        profileRef.document(userID).setData(profileData)
+        userRef.document(userID).setData(userData)
+        print("Documents successfully written!")
     }
     
     func getProfile() {

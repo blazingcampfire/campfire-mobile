@@ -23,9 +23,10 @@ class FriendsModel: ObservableObject {
     func readFriends() {
         let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             } else {
                 if let documentSnapshot = documentSnapshot {
+                    var friendsArray: [RequestFirestore] = []
                     print("Request Data got")
                     print(documentSnapshot.data())
                     let requests = documentSnapshot.get("friends") as? [[String: Any]] ?? []
@@ -34,8 +35,9 @@ class FriendsModel: ObservableObject {
                             return
                         }
                         print(requestObject)
-                        self.friends.append(requestObject)
+                        friendsArray.append(requestObject)
                     }
+                    self.friends = friendsArray
                 }
             }
             

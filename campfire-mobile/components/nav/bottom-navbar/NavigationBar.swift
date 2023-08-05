@@ -61,9 +61,6 @@ struct NavigationBar: View {
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
         .accentColor(Theme.Peach)
-        .onAppear {
-            feedModel.getPosts()
-        }
     }
         .navigationBarBackButtonHidden(true)
     }

@@ -17,7 +17,6 @@ struct Profile: Codable, Hashable {
     var phoneNumber: String
     var email: String
     var username: String
-    var friends: [Profile]?
     var posts: [[String : String]] // posts: [[postImage: Prompt]]
     var smores: Int
     var profilePicURL: String
@@ -33,13 +32,12 @@ struct Profile: Codable, Hashable {
         return lhs.userID == rhs.userID && rhs.userID == lhs.userID
     }
 
-    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, friends: [Profile]? = nil, posts: [[String: String]], smores: Int, profilePicURL: String, userID: String, school: String, bio: String) {
+    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String,  posts: [[String: String]], smores: Int, profilePicURL: String, userID: String, school: String, bio: String) {
         self.name = name
         self.nameInsensitive = nameInsensitive
         self.phoneNumber = phoneNumber
         self.email = email
         self.username = username
-        self.friends = friends
         self.posts = posts
         self.smores = smores
         self.profilePicURL = profilePicURL

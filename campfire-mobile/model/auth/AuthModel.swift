@@ -254,8 +254,8 @@ extension AuthModel {
         // based on the user's school, their profile document is sorted into the appropriate school document
 
         do {
-            try userRef.document("\(userID)").setData(from: profile)
-            try profileRef.document("\(userID)").setData(from: privateUserData)
+            try userRef.document(userID).setData(from: profile)
+            try profileRef.document(userID).setData(from: privateUserData)
             print("Documents successfully written!")
         } catch {
             print("Error writing profile or user to firestore \(error)")

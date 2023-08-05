@@ -18,6 +18,11 @@ struct SetProfilePic: View {
     @State var setUpFinished: Bool = false
     
     var body: some View {
+        if model.isMainAppPresented {
+            NavigationBar()
+                .environmentObject(currentUser)
+        }
+        else {
         GradientBackground()
             .overlay(
                 VStack {
@@ -58,8 +63,8 @@ struct SetProfilePic: View {
                         VStack {
                             Button(action: {
                                 confirmProfilePic()
-                                model.createProfile()
                                 currentUser.setCollectionRefs()
+                                model.createProfile()
                                 currentUser.getProfile()
                                 currentUser.getUser()
                                 model.presentMainApp()
@@ -72,6 +77,7 @@ struct SetProfilePic: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+        }
     }
     
     func confirmProfilePic() {

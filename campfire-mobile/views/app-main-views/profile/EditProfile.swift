@@ -147,16 +147,20 @@ struct EditProfile: View {
     func updateProfilePic(selectedImage: UIImage, id: String) {
         Task {
             do {
-                let imageData = selectedImage.jpegData(compressionQuality: 0.8)
+                guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                    print("Error converting image to data")
+                    return
+                }
+                
                 let storageRef = Storage.storage().reference()
                 let path = "pfpImages/\(UUID().uuidString).jpg"
                 let fileRef = storageRef.child(path)
                 
-                let _ = try await fileRef.putDataAsync(imageData!)
+                let _ = try await fileRef.putDataAsync(imageData)
                 let link = try await fileRef.downloadURL()
                 let photoURL = link.absoluteString
                 
-                let docRef = ndProfiles.document(id)
+                let docRef = currentUser.profileRef.document(id)
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
                         var data = document.data()!
@@ -178,6 +182,7 @@ struct EditProfile: View {
             }
         }
     }
+
 }
 
 struct EditProfile_Previews: PreviewProvider {

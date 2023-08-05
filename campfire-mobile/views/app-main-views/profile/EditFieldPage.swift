@@ -60,7 +60,7 @@ struct EditFieldPage: View {
     }
     
     func saveToFireBase() {
-        let docRef = ndProfiles.document(currentUser.profile.userID)
+        let docRef = currentUser.profileRef.document(currentUser.profile.userID)
         
         docRef.setData([field: newName], merge: true) { error in
             if let error = error {

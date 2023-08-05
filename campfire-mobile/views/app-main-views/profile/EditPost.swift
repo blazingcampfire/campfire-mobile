@@ -433,7 +433,7 @@ struct EditPost: View {
         
         func deletePost(id: String) {
             
-            let docRef = ndProfiles.document(id)
+            let docRef = currentUser.profileRef.document(id)
             docRef.getDocument { document, error in
                 if let error = error {
                     print("Error fetching user document: \(error)")

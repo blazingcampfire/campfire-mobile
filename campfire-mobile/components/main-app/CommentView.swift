@@ -90,7 +90,11 @@ struct CommentView: View {
                         VStack(spacing: -20) {
                             Button(action: {
                                 self.commentLiked.toggle()
-                                commentsModel.updateCommentLikeCount(postId: postID, commentId: comId)
+                                if self.commentLiked {
+                                    commentsModel.increaseCommentLikeCount(postId: postID, commentId: comId)
+                                } else {
+                                    commentsModel.decreaseComLikeCount(postId: postID, commentId: comId)
+                                }
                             }) {
                                 Image(commentLiked == true ? "eaten" : "noteaten")
                                     .resizable()

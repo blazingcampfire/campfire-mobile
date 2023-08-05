@@ -22,79 +22,83 @@ struct EditProfile: View {
             ScrollView {
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
-                        ZStack {
-                            if let image = selectedImage {
+                        VStack {
+                            ZStack {
+                                if let image = selectedImage {
+                                    
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 125, height: 125)
+                                        .clipShape(Circle())
+                                    
+                                    
+                                } else {
+                                    
+                                    UserProfilePic(pfp: currentUser.profile.profilePicURL)}
                                 
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 125, height: 125)
-                                    .clipShape(Circle())
-                                
-                                
-                            } else {
-                                
-                                UserProfilePic(pfp: currentUser.profile.profilePicURL)}
-                            
-                            Button(action: {
-                                showPhotos.toggle()
-                            }) {
-                                Image(systemName: "camera")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(.white)
-                                    .frame(width: 125, height: 125)
-                                    .background(Color.black.opacity(0.5))
-                                    .clipShape(Circle())
+                                Button(action: {
+                                    showPhotos.toggle()
+                                }) {
+                                    Image(systemName: "camera")
+                                        .font(.system(size: 30))
+                                        .foregroundColor(.white)
+                                        .frame(width: 125, height: 125)
+                                        .background(Color.black.opacity(0.5))
+                                        .clipShape(Circle())
+                                }
+                                .sheet(isPresented: $showPhotos) {
+                                    ImagePicker(sourceType:.photoLibrary) { image in
+                                        self.selectedImage = image
+                                    }
+                                    
+                                }
                             }
-                            .sheet(isPresented: $showPhotos) {
-                                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $showPhotos)
+                            Text("change profile pic")
+                                .font(.custom("LexendDeca-Bold", size: 20))
+                                .foregroundColor(Theme.Peach)
+                        }
+                        
+                        
+                        HStack {
+                            VStack(alignment: .leading, spacing: 20) {
+                                Text(currentUser.profile.name)
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                Text(currentUser.profile.username)
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                Text(currentUser.profile.bio)
+                                    .font(.custom("LexendDeca-Bold", size: 15))
                             }
-                        }
-                        Text("change profile pic")
-                            .font(.custom("LexendDeca-Bold", size: 20))
-                            .foregroundColor(Theme.Peach)
-                    }
-                    
-                    
-                    HStack {
-                        VStack(alignment: .leading, spacing: 20) {
-                            Text(currentUser.profile.name)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(currentUser.profile.username)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(currentUser.profile.bio)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                        }
-                        .padding(.leading, 20)
-                        
-                        Spacer()
-                        
-                        VStack(alignment: .trailing, spacing: 20) {
-                            NavigationLink(destination: EditFieldPage(field: "name", currentfield: currentUser.profile.name)
-                                .environmentObject(currentUser)) {
-                                    Label("edit name", systemImage: "pencil")
-                                        .font(.custom("LexendDeca-Bold", size: 15))
-                                        .foregroundColor(Theme.Peach)
-                                }
+                            .padding(.leading, 20)
                             
-                            NavigationLink(destination: EditFieldPage(field: "username", currentfield: currentUser.profile.username)
-                                .environmentObject(currentUser)) {
-                                    Label("edit username", systemImage: "pencil")
-                                        .font(.custom("LexendDeca-Bold", size: 15))
-                                        .foregroundColor(Theme.Peach)
-                                }
+                            Spacer()
                             
-                            NavigationLink(destination: EditFieldPage(field: "bio", currentfield: currentUser.profile.bio)
-                                .environmentObject(currentUser)) {
-                                    Label("edit bio", systemImage: "pencil")
-                                        .font(.custom("LexendDeca-Bold", size: 15))
-                                        .foregroundColor(Theme.Peach)
-                                }
+                            VStack(alignment: .trailing, spacing: 20) {
+                                NavigationLink(destination: EditFieldPage(field: "name", currentfield: currentUser.profile.name)
+                                    .environmentObject(currentUser)) {
+                                        Label("edit name", systemImage: "pencil")
+                                            .font(.custom("LexendDeca-Bold", size: 15))
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                                
+                                NavigationLink(destination: EditFieldPage(field: "username", currentfield: currentUser.profile.username)
+                                    .environmentObject(currentUser)) {
+                                        Label("edit username", systemImage: "pencil")
+                                            .font(.custom("LexendDeca-Bold", size: 15))
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                                
+                                NavigationLink(destination: EditFieldPage(field: "bio", currentfield: currentUser.profile.bio)
+                                    .environmentObject(currentUser)) {
+                                        Label("edit bio", systemImage: "pencil")
+                                            .font(.custom("LexendDeca-Bold", size: 15))
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                            }
+                            .padding(.trailing, 20)
                         }
-                        .padding(.trailing, 20)
-                    }
-                    
-                    let postData = currentUser.profile.posts
+                        
+                        let postData = currentUser.profile.posts
                         VStack(spacing: 20) {
                             Spacer()
                             
@@ -132,58 +136,57 @@ struct EditProfile: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                         }
-                    
-                }
-            }
-        }
-        .onChange(of: selectedImage) { newImage in
-            if let image = newImage {
-                updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
-            }
-        }
-    }
-    
-    
-    func updateProfilePic(selectedImage: UIImage, id: String) {
-        Task {
-            do {
-                guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-                    print("Error converting image to data")
-                    return
-                }
-                
-                let storageRef = Storage.storage().reference()
-                let path = "pfpImages/\(UUID().uuidString).jpg"
-                let fileRef = storageRef.child(path)
-                
-                let _ = try await fileRef.putDataAsync(imageData)
-                let link = try await fileRef.downloadURL()
-                let photoURL = link.absoluteString
-                
-                let docRef = currentUser.profileRef.document(id)
-                docRef.getDocument { document, error in
-                    if let document = document, document.exists {
-                        var data = document.data()!
-                        data["profilePicURL"] = photoURL
                         
-                        docRef.setData(data) { error in
-                            if let error = error {
-                                print("Error updating document: \(error)")
-                            } else {
-                                print("Successfully updated document")
-                            }
-                        }
-                    } else {
-                        print("Document does not exist")
                     }
                 }
-            } catch {
-                print("Error updating profile picture: \(error)")
+            }
+            .onChange(of: selectedImage) { newImage in
+                if let image = newImage {
+                    updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
+                }
             }
         }
     }
-
-}
+        
+        func updateProfilePic(selectedImage: UIImage, id: String) {
+            Task {
+                do {
+                    guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                        print("Error converting image to data")
+                        return
+                    }
+                    
+                    let storageRef = Storage.storage().reference()
+                    let path = "pfpImages/\(UUID().uuidString).jpg"
+                    let fileRef = storageRef.child(path)
+                    
+                    let _ = try await fileRef.putDataAsync(imageData)
+                    let link = try await fileRef.downloadURL()
+                    let photoURL = link.absoluteString
+                    
+                    let docRef = currentUser.profileRef.document(id)
+                    docRef.getDocument { document, error in
+                        if let document = document, document.exists {
+                            var data = document.data()!
+                            data["profilePicURL"] = photoURL
+                            
+                            docRef.setData(data) { error in
+                                if let error = error {
+                                    print("Error updating document: \(error)")
+                                } else {
+                                    print("Successfully updated document")
+                                }
+                            }
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
+                } catch {
+                    print("Error updating profile picture: \(error)")
+                }
+            }
+        }
+    }
 
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {

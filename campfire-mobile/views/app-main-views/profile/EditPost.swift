@@ -210,8 +210,9 @@ struct EditPost: View {
             }
         }
         .sheet(isPresented: $isPickerShowing) {
-            ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
-            
+            ImagePicker(sourceType: .photoLibrary) { image in
+                self.selectedImage = image
+            }
         }
         .onChange(of: selectedImage) { newImage in
             

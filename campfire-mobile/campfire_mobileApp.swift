@@ -51,7 +51,6 @@ struct campfire_mobileApp: App {
     
     let persistenceController = PersistenceController.shared
     
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

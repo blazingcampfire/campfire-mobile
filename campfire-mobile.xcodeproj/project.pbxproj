@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
+		B121336C2A7EEE9B00A9A93F /* newlaunchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */; };
 		B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12352342A7B612E00D9BBC7 /* NewFeed.swift */; };
 		B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
@@ -195,6 +196,7 @@
 /* Begin PBXFileReference section */
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
 		B12133672A7EBE3C00A9A93F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = newlaunchscreen.storyboard; sourceTree = "<group>"; };
 		B12352342A7B612E00D9BBC7 /* NewFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeed.swift; sourceTree = "<group>"; };
 		B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostUpdateModel.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 			children = (
 				B1B5EFCB2A4F56B000FA79CE /* LFButton.swift */,
 				B1B5EFCA2A4F56B000FA79CE /* ProfilePictureView.swift */,
+				B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				B18B199A2A46976700309256 /* JosefinSans-Italic.ttf in Resources */,
 				B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */,
 				B18B199B2A46976700309256 /* JosefinSans-Light.ttf in Resources */,
+				B121336C2A7EEE9B00A9A93F /* newlaunchscreen.storyboard in Resources */,
 				B18B199C2A46976700309256 /* JosefinSans-LightItalic.ttf in Resources */,
 				B18B199D2A46976700309256 /* JosefinSans-Medium.ttf in Resources */,
 				B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */,
@@ -1259,16 +1263,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = newlaunchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1276,7 +1282,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.camphhhho.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.camphhhho.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1293,16 +1299,18 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = newlaunchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1310,7 +1318,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.camphhhho.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.camphhhho.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1329,6 +1337,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1351,6 +1360,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1371,6 +1381,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1391,6 +1402,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";

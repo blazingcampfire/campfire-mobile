@@ -99,11 +99,11 @@ class RequestsModel: ObservableObject {
         }
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([friendRequestField])
+            "friends": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([userRequestField])
+            "friends": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     }
 }

@@ -17,7 +17,7 @@ struct EditPost: View {
     let initialPrompt: String
     @State var index: Int
     @State private var promptScreen = false
-    @EnvironmentObject var profileModel: ProfileModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @State var showAlert = false
     @State var post: [String : String]
     @State var changePic = false
@@ -145,11 +145,11 @@ struct EditPost: View {
                             HStack(spacing: 20) {
                                 Button(action: {
                                     if changePic && initialPrompt != prompt {
-                                        changeBoth(profileModel.profile!.userID)
+                                        changeBoth(currentUser.profile.userID)
                                     } else if changePic {
-                                        changePost(profileModel.profile!.userID)
+                                        changePost(currentUser.profile.userID)
                                     } else if initialPrompt != prompt {
-                                        changePrompt(profileModel.profile!.userID)
+                                        changePrompt(currentUser.profile.userID)
                                     }
                                     presentationMode.wrappedValue.dismiss()
                                     
@@ -192,7 +192,7 @@ struct EditPost: View {
                 
                 GeometryReader{_ in
                     
-                    DeletePostAlert(showAlert: $showAlert, post: $post).environmentObject(profileModel)
+                    DeletePostAlert(showAlert: $showAlert, post: $post).environmentObject(currentUser)
                     
                 }.background(
                     
@@ -292,11 +292,10 @@ struct EditPost: View {
                             } else {
                                 print("Successfully updated document")
                                 
-                                    if let index = profileModel.profile!.posts.firstIndex(where: { $0 == post }) {
-                                        print(profileModel.profile?.posts)
-                                        profileModel.profile?.posts[index] = [photoURL: prompt]
-                                        print(profileModel.profile?.posts)
-                                        print("bruh")
+                                    if let index = currentUser.profile.posts.firstIndex(where: { $0 == post }) {
+             
+                                        currentUser.profile.posts[index] = [photoURL: prompt]
+                                      
                                     }
                             }
                         }
@@ -346,12 +345,12 @@ struct EditPost: View {
                             } else {
                                 print("Successfully updated document")
                                 
-                                if var posts = profileModel.profile?.posts {
+                                var posts = currentUser.profile.posts 
                                     if let index = posts.firstIndex(where: { $0 == post }) {
                                         posts[index] = newPost
-                                        profileModel.profile?.posts = posts
+                                        currentUser.profile.posts = posts
                                     }
-                                }
+                                
                             }
                         }
                     } else {

@@ -120,7 +120,7 @@ class CommentsModel: ObservableObject {
     
     
     
-    func updateCommentLikeCount(postId: String, commentId: String) {
+    func increaseCommentLikeCount(postId: String, commentId: String) {
         let docRef = ndPosts.document(postId).collection("comments").document(commentId)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
@@ -130,9 +130,32 @@ class CommentsModel: ObservableObject {
            }
         }
    }
-    func updateReplyLikeCount(postId: String, commentId: String, replyId: String) {
+    func decreaseComLikeCount(postId: String, commentId: String) {
+    let docRef = ndPosts.document(postId).collection("comments").document(commentId)
+        docRef.updateData(["numLikes" : FieldValue.increment(Int64(-1))]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+                } else {
+                print("Document successfully updated!")
+                }
+        }
+    }
+    
+    
+    func increaseReplyLikeCount(postId: String, commentId: String, replyId: String) {
         let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyId)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
+            if let error = error {
+           print("Error updating document: \(error)")
+           } else {
+           print("Document successfully updated!")
+           }
+        }
+    }
+    
+    func decreaseReplyLikeCount(postId: String, commentId: String, replyId: String) {
+        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyId)
+        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
            print("Error updating document: \(error)")
            } else {

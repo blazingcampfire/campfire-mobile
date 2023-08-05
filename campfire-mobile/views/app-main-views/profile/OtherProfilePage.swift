@@ -30,7 +30,7 @@ struct OtherProfilePage: View {
                                         
                                         Spacer()
                                    
-                                        Text(profile.name)
+                                        Text((profile.name))
                                             .font(.custom("LexendDeca-Bold", size: 20))
                                         
                                         HStack {

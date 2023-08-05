@@ -54,7 +54,11 @@ struct ReplyView: View {
             VStack(spacing: -20) {
                 Button(action: {
                     self.replyLiked.toggle()
-                    commentModel.updateReplyLikeCount(postId: postId , commentId: comId, replyId: eachreply.id)
+                    if self.replyLiked {
+                        commentModel.increaseReplyLikeCount(postId: postId , commentId: comId, replyId: eachreply.id)
+                    } else {
+                        commentModel.decreaseReplyLikeCount(postId: postId, commentId: comId, replyId: eachreply.id)
+                    }
                 }) {
                     Image(replyLiked == false ? "noteaten" : "eaten")
                         .resizable()

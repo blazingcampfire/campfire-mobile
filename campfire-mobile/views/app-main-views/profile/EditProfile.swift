@@ -12,7 +12,7 @@ import FirebaseStorage
 struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
-    @EnvironmentObject var profileModel: ProfileModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
         ZStack {
@@ -34,7 +34,7 @@ struct EditProfile: View {
                                 
                             } else {
                                 
-                                UserProfilePic(pfp: profileModel.profile?.profilePicURL)}
+                                UserProfilePic(pfp: currentUser.profile.profilePicURL)}
                             
                             Button(action: {
                                 showPhotos.toggle()
@@ -58,11 +58,11 @@ struct EditProfile: View {
                     
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {
-                            Text(profileModel.profile!.name)
+                            Text(currentUser.profile.name)
                                 .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(profileModel.profile!.username)
+                            Text(currentUser.profile.username)
                                 .font(.custom("LexendDeca-Bold", size: 15))
-                            Text(profileModel.profile!.bio)
+                            Text(currentUser.profile.bio)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                         }
                         .padding(.leading, 20)
@@ -70,22 +70,22 @@ struct EditProfile: View {
                         Spacer()
                         
                         VStack(alignment: .trailing, spacing: 20) {
-                            NavigationLink(destination: EditFieldPage(field: "name", currentfield: profileModel.profile!.name)
-                                .environmentObject(profileModel)) {
+                            NavigationLink(destination: EditFieldPage(field: "name", currentfield: currentUser.profile.name)
+                                .environmentObject(currentUser)) {
                                     Label("edit name", systemImage: "pencil")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)
                                 }
                             
-                            NavigationLink(destination: EditFieldPage(field: "username", currentfield: profileModel.profile!.username)
-                                .environmentObject(profileModel)) {
+                            NavigationLink(destination: EditFieldPage(field: "username", currentfield: currentUser.profile.username)
+                                .environmentObject(currentUser)) {
                                     Label("edit username", systemImage: "pencil")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)
                                 }
                             
-                            NavigationLink(destination: EditFieldPage(field: "bio", currentfield: profileModel.profile!.bio)
-                                .environmentObject(profileModel)) {
+                            NavigationLink(destination: EditFieldPage(field: "bio", currentfield: currentUser.profile.bio)
+                                .environmentObject(currentUser)) {
                                     Label("edit bio", systemImage: "pencil")
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                         .foregroundColor(Theme.Peach)
@@ -94,7 +94,7 @@ struct EditProfile: View {
                         .padding(.trailing, 20)
                     }
                     
-                    if let postData = profileModel.profile?.posts {
+                    let postData = currentUser.profile.posts
                         VStack(spacing: 20) {
                             Spacer()
                             
@@ -117,7 +117,7 @@ struct EditProfile: View {
                                                     )
                                                     .overlay(
                                                         NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index, post: post)
-                                                            .environmentObject(profileModel)){
+                                                            .environmentObject(currentUser)){
                                                                 Image(systemName: "pencil")
                                                                     .font(.system(size: 30))
                                                                     .foregroundColor(Theme.Peach)
@@ -132,16 +132,13 @@ struct EditProfile: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                         }
-                    }
-                }
-                .onAppear {
-                    profileModel.getProfile()
+                    
                 }
             }
         }
         .onChange(of: selectedImage) { newImage in
             if let image = newImage {
-                updateProfilePic(selectedImage: image, id: profileModel.profile?.userID ?? "")
+                updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
             }
         }
     }

@@ -10,16 +10,20 @@ import Kingfisher
 
 struct TheFeed: View {
    @StateObject var postModel = FeedPostModel()
-
+    @State private var selectedTab = 0
+    
     var body: some View {
         GeometryReader { proxy in
             let size = proxy.size
-            TabView {
-                ForEach(postModel.postPlayers.compactMap {$0}){ player in
-                    PostPlayerView(postPlayer: player, feedmodel: postModel)
+            TabView(selection: $selectedTab) {  // Use this line instead of the former TabView
+                ForEach(postModel.postPlayers.indices, id: \.self) { index in
+                    if let player = postModel.postPlayers[index] {
+                        PostPlayerView(postPlayer: player, feedmodel: postModel)
                             .frame(width: size.width)
                             .rotationEffect(.init(degrees: -90))
                             .ignoresSafeArea(.all, edges: .top)
+                            .tag(index)  // Add this line
+                    }
                 }
             }
             .rotationEffect(.init(degrees: 90))
@@ -47,6 +51,9 @@ struct PostPlayerView: View {
     @State private var commentsTapped = false
     @State private var likedTapped: Bool = false
     @State private var isPlaying = true
+    @State private var doubleTapped: Bool = false
+    @State private var scale: CGFloat = 0
+    @State private var showLikedImage = false
     @ObservedObject var feedmodel: FeedPostModel
     @StateObject var commentModel = CommentsModel()
     
@@ -112,6 +119,22 @@ struct PostPlayerView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .foregroundColor(.white)
             
+                 if self.showLikedImage {
+                     Image("eaten")
+                         .resizable()
+                         .frame(width: 450, height: 450)
+                         .padding()
+                         .scaleEffect(scale)
+                         .animation(.easeOut(duration: 1.0), value: scale)
+                         .onAppear {
+                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                 self.showLikedImage = false
+                             }
+                         }
+                 }
+                 
+                 
+                 
             VStack {
                 HStack {
                     Button(action: {
@@ -197,23 +220,31 @@ struct PostPlayerView: View {
                 
                 
                 //-MARK: Three buttons on side
-                VStack(spacing: 7.5) {
+                 VStack(spacing: 7.5) {
+                     
+                     VStack(spacing: -60) {
+                         Button(action: {
+                             self.likedTapped.toggle()
+                             if likedTapped {
+                                 if !doubleTapped {
+                                     feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
+                                 }
+                             } else {
+                                 feedmodel.decreaseLikeCount(postId: postPlayer.postItem.id)
+                             }
+                             self.doubleTapped = self.likedTapped
+                         }) {
+                             VStack {
+                                 Image(self.likedTapped || self.doubleTapped == true ? "eaten" : "noteaten")
+                             }
+                             .padding(.leading, -15)
+                         }
+                         Text("\(postPlayer.postItem.numLikes)")
+                             .foregroundColor(.white)
+                             .font(.custom("LexendDeca-Regular", size: 16))
+                     }
                     
-                    VStack(spacing: -60) {
-                        Button(action: {
-                        self.likedTapped.toggle()
-                        feedmodel.updateLikeCount(postId: postPlayer.postItem.id)
-                        }) {
-                            VStack {
-                                Image(self.likedTapped == true ? "eaten" : "noteaten")
-                            }
-                            .padding(.leading, -15)
-                        }
-                        Text("\(postPlayer.postItem.numLikes)")
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Regular", size: 16))
-                    }
-                    
+                 
                     VStack {
                         Button(action: {
                             self.commentsTapped.toggle()
@@ -254,6 +285,18 @@ struct PostPlayerView: View {
             }
              .onAppear {
                  commentModel.postId = postPlayer.postItem.id
+             }
+             .onTapGesture(count: 2) {
+                 if !self.likedTapped {
+                     self.likedTapped = true
+                     feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
+                     self.doubleTapped = self.likedTapped
+                 }
+               scale = 1
+                 withAnimation {
+                     scale = 1.3
+                 }
+                 self.showLikedImage = true
              }
         .background(Color.black.ignoresSafeArea())
     }

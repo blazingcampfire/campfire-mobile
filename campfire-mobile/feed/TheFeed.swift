@@ -189,26 +189,17 @@ struct PostPlayerView: View {
                             }
                             
                             //- MARK: Caption/Location buttons Vstack
-                            VStack(spacing: 5) {
-                                HStack {
+                                VStack {
                                     Text(postPlayer.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 16))
-                                }
-                                .frame(alignment: .trailing)
-                             
-                                
-                                Button(action: {
-                                    //lead to map and where location is
-                                }) {
-                                    HStack {
+                                    if postPlayer.postItem.location == "" {
+                                        Text("")
+                                    } else {
                                         Text("📍" + "\(postPlayer.postItem.location)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
-                             
                                 }
-                                .frame(alignment: .trailing)
-                            }
-                            .padding(.leading, 40)
+                                .padding(.leading, 40)
                         }
                     }
                     .padding(.leading, 40)

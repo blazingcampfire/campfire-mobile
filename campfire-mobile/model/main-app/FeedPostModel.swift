@@ -43,9 +43,9 @@ class FeedPostModel: ObservableObject {
                 let url = data["url"] as? String ?? ""
                 let numLikes = data["numLikes"] as? Int ?? 0
                 let location = data["location"] as? String ?? ""
-                let comments = data["comments"] as? [String] ?? [""]
                 let postType = data["postType"] as? String ?? ""
-                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, comments: comments, postType: postType)
+                let date = data["date"] as? Timestamp ?? Timestamp()
+                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, postType: postType, date: date)
             }
 
             // update postPlayers accordingly

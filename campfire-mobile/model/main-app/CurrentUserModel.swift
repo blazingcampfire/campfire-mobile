@@ -50,15 +50,40 @@ class CurrentUserModel: ObservableObject {
             guard let userID = Auth.auth().currentUser?.uid else {
                 return
             }
-            profileRef.document(userID).getDocument(as: Profile.self) { [self] result in
-                switch result {
-                case let .success(profileData):
-                    self.profile = profileData
-                    print("Profile Email: \(self.profile.email)")
-                case let .failure(error):
-                    print("Error decoding profile: \(error)")
+            let docRef = profileRef.document(userID)
+            docRef.addSnapshotListener { documentSnapshot, error in
+                if let error = error {
+                    print("Error fetching document: \(error)")
+                    return
+                }
+                
+                guard let document = documentSnapshot, document.exists else {
+                    print("Document does not exist or there was an error.")
+                    return
+                }
+                
+                guard let profile = try? document.data(as: Profile.self) else {
+                    print("Error decoding profile in profileModel.")
+                    return
+                }
+                
+                let postPaths = profile.posts
+                
+                if postPaths.isEmpty {
+                    DispatchQueue.main.async {
+                        self.profile = profile
+                    }
+                } else {
+                    for path in postPaths {
+                        if let (imageData, prompt) = path.first {
+                            DispatchQueue.main.async {
+                                self.profile = profile
+                            }
+                        }
+                    }
                 }
             }
+
         }
     }
 
@@ -92,3 +117,5 @@ class CurrentUserModel: ObservableObject {
         }
     }
 }
+
+

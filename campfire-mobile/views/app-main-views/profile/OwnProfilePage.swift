@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OwnProfilePage: View {
     @State var settingsPageShow = false
-    @StateObject var profileModel = ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
     @EnvironmentObject var currentUser: CurrentUserModel
     @State private var showAddPost = false
     
@@ -52,7 +51,7 @@ struct OwnProfilePage: View {
                                     .padding(.top)
                                     HStack {
                                         NavigationLink(destination: EditProfile()
-                                            .environmentObject(profileModel)) {
+                                            .environmentObject(currentUser)) {
                                                 Text("Edit Profile")
                                                     .font(.custom("LexendDeca-Bold", size: 15))
                                                     .foregroundColor(Theme.Peach)
@@ -100,7 +99,7 @@ struct OwnProfilePage: View {
                         }
                         .padding(.bottom, 40)
                         
-                        if let posts = profileModel.profile?.posts {
+                        let posts = currentUser.profile.posts
                             VStack {
                                 VStack(spacing: 20) {
                                     Spacer()
@@ -118,7 +117,7 @@ struct OwnProfilePage: View {
                                 }
                                 if posts.count < 6 {
                                     Spacer()
-                                    NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(profileModel)) {
+                                    NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
                                         ZStack {
                                             Rectangle()
                                                 .foregroundColor(.clear)
@@ -135,12 +134,11 @@ struct OwnProfilePage: View {
                                     }
                                 }
                             }
-                        }
+                        
                     }
                     .padding()
                 }
                 .refreshable {
-                    profileModel.getProfile()
                 }
             }
         }

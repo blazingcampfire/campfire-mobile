@@ -222,7 +222,7 @@ struct EditPost: View {
     }
     
     func changePrompt(_ userID: String) {
-        let docRef = ndProfiles.document(userID)
+        let docRef = currentUser.profileRef.document(userID)
         docRef.getDocument { document, error in
             if let document = document, document.exists {
                 var data = document.data()!
@@ -269,7 +269,7 @@ struct EditPost: View {
             if let photoURL = photoURL {
                 postImage = photoURL
                
-                let docRef = ndProfiles.document(userID)
+                let docRef = currentUser.profileRef.document(userID)
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
                         var data = document.data()!
@@ -323,7 +323,7 @@ struct EditPost: View {
 
         uploadPictureToStorage(imageData: imageData) { photoURL in
             if let photoURL = photoURL {
-                let docRef = ndProfiles.document(userID)
+                let docRef = currentUser.profileRef.document(userID)
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
                         var data = document.data()!
@@ -368,7 +368,7 @@ struct EditPost: View {
     struct DeletePostAlert: View {
         
         @Binding var showAlert: Bool
-        @EnvironmentObject var profileModel: ProfileModel
+        @EnvironmentObject var currentUser: CurrentUserModel
         @Binding var post: [String: String]
         
         
@@ -404,7 +404,7 @@ struct EditPost: View {
                                         .frame(height: 49)
                                         .offset(y: -8)
                                     Button(action: {
-                                        deletePost(id: profileModel.profile!.userID)
+                                        deletePost(id: currentUser.profile.userID)
                                         showAlert.toggle()
                                     }) {
                                         Text("delete")
@@ -433,7 +433,7 @@ struct EditPost: View {
         
         func deletePost(id: String) {
             
-            let docRef = ndProfiles.document(id)
+            let docRef = currentUser.profileRef.document(id)
             docRef.getDocument { document, error in
                 if let error = error {
                     print("Error fetching user document: \(error)")

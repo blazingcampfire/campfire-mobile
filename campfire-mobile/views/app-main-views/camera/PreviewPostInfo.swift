@@ -31,9 +31,6 @@ struct PreviewPostInfo: View {
             .padding(.leading, 20)
             VStack(alignment: .leading, spacing: 10) {
                 CaptionTextField(text: $postModel.caption, placeholderText: "enter your caption")
-                Text("📍Location")
-                .font(.custom("LexendDeca-Regular", size: 16))
-                .padding(.leading, 15)
             }
         }
         .padding(.bottom, 100)
@@ -44,32 +41,42 @@ struct PreviewPostInfo: View {
 struct PhotoPostButton: View {
     @ObservedObject var camera: CameraModel
     @ObservedObject var makePost: CamPostModel
+    @State private var isPosting: Bool = false
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            Button(action: {
-                if let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8) ?? camera.selectedImageData {
-                    Task {
-                        do {
-                            try await makePost.createPhotoPost(imageData: imageData)
-                            camera.reTake()
-                            print("success")
-                        } catch {
-                            print(error)
+            if isPosting {
+                ProgressView("Posting...")
+                    .font(.custom("LexendDeca-Regular", size: 20))
+                    .foregroundColor(.white)
+            }
+            else {
+                Button(action: {
+                    if let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8) ?? camera.selectedImageData {
+                        isPosting = true
+                        Task {
+                            do {
+                                try await makePost.createPhotoPost(imageData: imageData)
+                                camera.reTake()
+                                isPosting = false
+                                print("success")
+                            } catch {
+                                print(error)
+                            }
                         }
                     }
+                }) {
+                    HStack(spacing: 7) {
+                        Text("post")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-SemiBold", size: 22))
+                        Image(systemName: "arrowshape.right.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                    }
+                    .padding(15)
+                    .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
                 }
-            }) {
-                HStack(spacing: 7) {
-                Text("post")
-                .foregroundColor(.white)
-                .font(.custom("LexendDeca-SemiBold", size: 22))
-                Image(systemName: "arrowshape.right.fill")
-                .font(.system(size: 20))
-                .foregroundColor(.white)
-                }
-                .padding(15)
-                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
             }
         }
         .padding(.bottom, 30)
@@ -80,32 +87,41 @@ struct PhotoPostButton: View {
 struct VideoPostButton: View {
     @ObservedObject var camera: CameraModel
     @ObservedObject var makePost: CamPostModel
+    @State private var isPosting: Bool = false
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            Button(action: {
-                if let videoURL = camera.selectedVideoURL ?? (camera.videoPlayback?.currentItem?.asset as? AVURLAsset)?.url {
-                    Task {
-                        do {
-                            try await makePost.createVideoPost(videoURL: videoURL)
-                            camera.reTake()
-                            print("Video post created.")
-                        } catch {
-                            print(error)
+            if isPosting {
+                ProgressView("Posting...")
+                .font(.custom("LexendDeca-Regular", size: 20))
+                .foregroundColor(.white)
+            } else {
+                Button(action: {
+                    if let videoURL = camera.selectedVideoURL ?? (camera.videoPlayback?.currentItem?.asset as? AVURLAsset)?.url {
+                        isPosting = true
+                        Task {
+                            do {
+                                try await makePost.createVideoPost(videoURL: videoURL)
+                                camera.reTake()
+                                isPosting = false
+                                print("Video post created.")
+                            } catch {
+                                print(error)
+                            }
                         }
                     }
+                }) {
+                    HStack(spacing: 7) {
+                        Text("post")
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-SemiBold", size: 22))
+                        Image(systemName: "arrowshape.right.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                    }
+                    .padding(15)
+                    .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
                 }
-            }) {
-                HStack(spacing: 7) {
-                Text("post")
-                .foregroundColor(.white)
-                .font(.custom("LexendDeca-SemiBold", size: 22))
-                Image(systemName: "arrowshape.right.fill")
-                .font(.system(size: 20))
-                .foregroundColor(.white)
-                }
-                .padding(15)
-                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
             }
         }
         .padding(.bottom, 30)

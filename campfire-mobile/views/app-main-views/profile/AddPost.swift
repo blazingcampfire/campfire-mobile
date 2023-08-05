@@ -17,7 +17,7 @@ struct AddPost: View {
     @State var prompt: String = "no prompt"
     
     @Binding var showAddPost: Bool
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> 
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @EnvironmentObject var currentUser: CurrentUserModel
     
@@ -120,7 +120,9 @@ struct AddPost: View {
                 .padding(.bottom, 100)
             }
             .sheet(isPresented: $isPickerShowing) {
-                ImagePicker(selectedImage: $selectedImage, isPickerShowing: $isPickerShowing)
+                ImagePicker(sourceType: .photoLibrary) { image in
+                    self.selectedImage = image
+                }
             }
         }
     }

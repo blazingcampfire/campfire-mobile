@@ -54,7 +54,9 @@ struct ProfilePictureView: View {
             }
               }
         .sheet(isPresented: $isPickerShowing) {
-            ImagePicker(selectedImage: $selectedPFP, isPickerShowing: $isPickerShowing)
+                ImagePicker(sourceType: .photoLibrary) { image in
+                self.selectedPFP = image
+            }
         }
     }
 }

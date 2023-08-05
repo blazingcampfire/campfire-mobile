@@ -5,72 +5,61 @@
 //  Created by Adarsh G on 7/10/23.
 //
 
-import SwiftUI
 import Foundation
-import UIKit
-import PhotosUI
+import SwiftUI
 
-struct ImagePicker: UIViewControllerRepresentable {
-    
-    @Binding var selectedImage: UIImage?
-    @Binding var isPickerShowing: Bool
-    
-    func makeUIViewController(context: Context) -> PHPickerViewController {
-        
-        // this function initializes a PHPickerVC object that can be used for users to choose photo library images
-        
-        var configuration = PHPickerConfiguration()
-        configuration.filter = .images
-        configuration.selectionLimit = 1
-        
-        let picker = PHPickerViewController(configuration: configuration)
+public struct ImagePicker: UIViewControllerRepresentable {
+
+    private let sourceType: UIImagePickerController.SourceType
+    private let onImagePicked: (UIImage) -> Void
+    @Environment(\.presentationMode) private var presentationMode
+
+    public init(sourceType: UIImagePickerController.SourceType, onImagePicked: @escaping (UIImage) -> Void) {
+        self.sourceType = sourceType
+        self.onImagePicked = onImagePicked
+    }
+
+    public func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = self.sourceType
         picker.delegate = context.coordinator
-        
+        picker.allowsEditing = true
         return picker
     }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-    }
-    
-    func makeCoordinator() -> ImageCoordinator {
-        Coordinator(self)
-    }
-}
 
+    public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 
-class ImageCoordinator: NSObject, PHPickerViewControllerDelegate, UINavigationControllerDelegate {
-    
-    var parent: ImagePicker
-    
-    init(_ picker: ImagePicker) {
-        self.parent = picker
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(
+            onDismiss: { self.presentationMode.wrappedValue.dismiss() },
+            onImagePicked: self.onImagePicked
+        )
     }
-    
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        
-        guard let result = results.first else {
-            parent.isPickerShowing = false
-            return
+
+    final public class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+        private let onDismiss: () -> Void
+        private let onImagePicked: (UIImage) -> Void
+
+        init(onDismiss: @escaping () -> Void, onImagePicked: @escaping (UIImage) -> Void) {
+            self.onDismiss = onDismiss
+            self.onImagePicked = onImagePicked
         }
-        
-        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
-            if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
-            } else if let image = object as? UIImage { // Check if object is a UIImage
-                DispatchQueue.main.async {
-                    self?.parent.isPickerShowing = false
-                    self?.parent.selectedImage = image
-                }
-            } else {
-                print("Unable to load image.")
+
+        public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            
+            if let img = info[.editedImage] as? UIImage {
+                
+                self.onImagePicked(img)
+                
+            } else if let image = info[.originalImage] as? UIImage {
+                self.onImagePicked(image)
             }
+            self.onDismiss()
+        }
+
+        public func imagePickerControllerDidCancel(_: UIImagePickerController) {
+            self.onDismiss()
         }
     }
-    
-    func pickerDidCancel(_ picker: PHPickerViewController) {
-        picker.dismiss(animated: true)
-        parent.isPickerShowing = false
-    }
-    
 }

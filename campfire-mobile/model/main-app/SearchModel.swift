@@ -16,7 +16,6 @@ class SearchModel: ObservableObject {
     @Published var profiles: [Profile] = []
     @Published var name: String = "" {
         didSet {
-            self.profiles = []
             searchName(matching: name)
             print("Email: \(self.currentUser.profile.email). Collection: \(self.currentUser.profileRef.path)")
         }
@@ -36,6 +35,7 @@ class SearchModel: ObservableObject {
             if let err = err {
                 print("Error querying profiles: \(err)")
             } else {
+                self.profiles = []
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)

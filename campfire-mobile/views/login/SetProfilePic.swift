@@ -62,13 +62,14 @@ struct SetProfilePic: View {
                         
                         VStack {
                             Button(action: {
-                                confirmProfilePic()
-                                currentUser.setCollectionRefs()
-                                model.createProfile()
-                                currentUser.getProfile()
-                                print(currentUser.profile)
-                                currentUser.getUser()
-                                model.presentMainApp()
+                                do {
+                                    confirmProfilePic()
+                                    currentUser.setCollectionRefs()
+                                    model.createProfile()
+                                    currentUser.getProfile()
+                                    currentUser.getUser()
+                                    model.presentMainApp()
+                                }
                             }) {
                                 LFButton(text: "finish")
                             }

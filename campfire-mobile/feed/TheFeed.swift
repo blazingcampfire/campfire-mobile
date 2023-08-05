@@ -38,11 +38,11 @@ struct TheFeed: View {
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
 //VidsPlayer handles the specific actions of what each case should look like
 
-//struct TheFeed_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TheFeed(postModel: FeedPostModel(), handlecomments: CommentsModel())
-//    }
-//}
+struct TheFeed_Previews: PreviewProvider {
+    static var previews: some View {
+        TheFeed(postModel: FeedPostModel())
+    }
+}
     
 struct PostPlayerView: View {
     var postPlayer: PostPlayer
@@ -187,25 +187,17 @@ struct PostPlayerView: View {
                             }
                             
                             //- MARK: Caption/Location buttons Vstack
-                            VStack(spacing: 5) {
-                                HStack {
+                                VStack {
                                     Text(postPlayer.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 16))
-                                }
-                             
-                                
-                                Button(action: {
-                                    //lead to map and where location is
-                                }) {
-                                    HStack {
+                                    if postPlayer.postItem.location == "" {
+                                        Text("")
+                                    } else {
                                         Text("📍" + "\(postPlayer.postItem.location)")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
-                             
                                 }
-                                .frame(alignment: .trailing)
-                            }
-                            .padding(.leading, 40)
+                                .padding(.leading, 40)
                         }
                     }
                     .padding(.leading, 40)

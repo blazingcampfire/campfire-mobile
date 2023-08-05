@@ -139,7 +139,7 @@ struct AddPost: View {
 
             uploadPictureToStorage(imageData: imageData) { photoURL in
                 if let photoURL = photoURL {
-                    let docRef = ndProfiles.document(userID)
+                    let docRef = currentUser.profileRef.document(userID)
 
                     docRef.getDocument { document, error in
                         if let document = document, document.exists {
@@ -160,6 +160,7 @@ struct AddPost: View {
                                     var posts = currentUser.profile.posts 
                                     posts.append([photoURL: prompt])
                                     currentUser.profile.posts = posts
+                                    print(currentUser.profile.posts)
                                 }
                             }
                         } else {

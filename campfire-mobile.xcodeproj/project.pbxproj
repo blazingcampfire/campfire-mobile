@@ -756,6 +756,7 @@
 			children = (
 				B1C51EA42A71E709008E6C69 /* CameraModel.swift */,
 				F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */,
+				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 				E21F79C32A68DF98004B3DCC /* SearchModel.swift */,
 				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
 				E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */,
@@ -763,7 +764,6 @@
 				B14375302A7771F100904C52 /* ReplyModel.swift */,
 				B11371A62A7A06A200417923 /* CamPostModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestModel.swift */,
-				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 				B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */,
 				E267A9C52A7A1BB500489B8E /* FriendsModel.swift */,
 			);

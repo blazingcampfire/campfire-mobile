@@ -220,6 +220,7 @@ extension AuthModel {
             isMainAppPresented = true
         }
     }
+    
 
     func createProfile() {
         userID = Auth.auth().currentUser!.uid
@@ -237,10 +238,10 @@ extension AuthModel {
             profileRef = ndProfiles
         } else if school == "yale" {
             userRef = yaleUsers
-            profileRef = yaleUsers
+            profileRef = yaleProfiles
         } else if school == "rice" {
             userRef = riceUsers
-            profileRef = riceUsers
+            profileRef = riceProfiles
         } else {
             return
         }

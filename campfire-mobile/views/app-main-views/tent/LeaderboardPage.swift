@@ -51,9 +51,9 @@ struct LeaderboardList: View {
 
     var body: some View {
         List {
-            ForEach(model.profiles, id: \.self) { profile in
+            ForEach(model.profiles.indices, id: \.self) { index in
                 HStack {
-                    Text("1")
+                    Text("\(index + 1)")
                         .frame(width: 30, alignment: .leading)
                         .font(.custom("LexendDeca-Bold", size: 18))
                         .padding(.trailing, -10)
@@ -65,17 +65,17 @@ struct LeaderboardList: View {
                         .clipShape(Circle())
 
                     VStack(alignment: .leading) {
-                        Text(profile.name)
+                        Text(model.profiles[index].name)
                             .font(.custom("LexendDeca-Bold", size: 18))
                             .foregroundColor(Theme.TextColor)
-                        Text("@\(profile.username)")
+                        Text("@\(model.profiles[index].username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
 
                     Spacer()
 
-                    Text("\(profile.smores) 🍫")
+                    Text("\(model.profiles[index].smores) 🍫")
                         .font(.custom("LexendDeca-Bold", size: 23))
                 }
                 .listRowBackground(Theme.ScreenColor)

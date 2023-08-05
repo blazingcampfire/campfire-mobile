@@ -38,11 +38,11 @@ struct TheFeed: View {
 //In this view a Tabview is iterating over the VidsPlayer View and setting up the vertical scroll ui component
 //VidsPlayer handles the specific actions of what each case should look like
 
-//struct TheFeed_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TheFeed(postModel: FeedPostModel(), handlecomments: CommentsModel())
-//    }
-//}
+struct TheFeed_Previews: PreviewProvider {
+    static var previews: some View {
+        TheFeed(postModel: FeedPostModel())
+    }
+}
     
 struct PostPlayerView: View {
     var postPlayer: PostPlayer

@@ -11,7 +11,7 @@ struct EditFieldPage: View {
     
     @State private var newName: String = ""
     @State private var isEditing: Bool = false
-    @EnvironmentObject var profileModel: ProfileModel
+    @EnvironmentObject var currentUser: CurrentUserModel
 
     var field: String
     @State var currentfield: String
@@ -39,7 +39,7 @@ struct EditFieldPage: View {
                 if newName != currentfield && newName != "" {
                     Button(action: {
                         saveName()
-                        profileModel.profile!.name = newName
+                        currentUser.profile.name = newName
                     }) {
                         HStack {
                             Image(systemName: "checkmark")
@@ -60,7 +60,7 @@ struct EditFieldPage: View {
     }
     
     func saveToFireBase() {
-        let docRef = ndProfiles.document(profileModel.profile!.userID)
+        let docRef = ndProfiles.document(currentUser.profile.userID)
         
         docRef.setData([field: newName], merge: true) { error in
             if let error = error {

@@ -19,7 +19,7 @@ struct AddPost: View {
     @Binding var showAddPost: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> 
     
-    @EnvironmentObject var profileModel: ProfileModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
         ZStack {
@@ -89,8 +89,8 @@ struct AddPost: View {
                                 .padding(.top, -30)
                             }
                             Button(action: {
-                                confirmPost(userID: profileModel.profile!.userID, prompt: prompt)
-                                print(profileModel.profile!.userID)
+                                confirmPost(userID: currentUser.profile.userID, prompt: prompt)
+                                
                                 presentationMode.wrappedValue.dismiss()
                             })  {
                                 HStack {
@@ -126,28 +126,21 @@ struct AddPost: View {
     }
     
     func confirmPost(userID: String, prompt: String) {
-            guard selectedImage != nil else {
+            guard let selectedImage = selectedImage else {
                 print("No image")
                 return
             }
-        
-            print("check 1")
-            print(profileModel.profile!.userID)
-        
-            let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+
+            let imageData = selectedImage.jpegData(compressionQuality: 0.8)
             guard let imageData = imageData else {
                 print("Image cannot be converted to data")
                 return
             }
-            print("check 2")
-            print(profileModel.profile!.userID)
 
             uploadPictureToStorage(imageData: imageData) { photoURL in
                 if let photoURL = photoURL {
                     let docRef = ndProfiles.document(userID)
-                    print("check 3")
-                    print(profileModel.profile!.userID)
-    
+
                     docRef.getDocument { document, error in
                         if let document = document, document.exists {
                             var data = document.data()!
@@ -164,10 +157,9 @@ struct AddPost: View {
                                     print("Error updating document: \(error)")
                                 } else {
                                     print("Successfully updated document")
-                                    var posts = profileModel.profile!.posts
+                                    var posts = currentUser.profile.posts 
                                     posts.append([photoURL: prompt])
-                                    profileModel.profile!.posts = posts
-                                    presentationMode.wrappedValue.dismiss()
+                                    currentUser.profile.posts = posts
                                 }
                             }
                         } else {
@@ -180,26 +172,25 @@ struct AddPost: View {
             }
         }
     }
-    
-func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
-    let storageRef = Storage.storage().reference()
-    let path = "profilepostimages/\(UUID().uuidString).jpg"
-    let fileRef = storageRef.child(path)
 
-    fileRef.putData(imageData, metadata: nil) { _, error in
-        if let error = error {
-            print("Error upload photo to storage: \(error.localizedDescription)")
-            completion(nil)
-        } else {
-            fileRef.downloadURL { url, error in
-                if let url = url {
-                    completion(url.absoluteString)
-                } else {
-                    print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
-                    completion(nil)
+    func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
+        let storageRef = Storage.storage().reference()
+        let path = "profilepostimages/\(UUID().uuidString).jpg"
+        let fileRef = storageRef.child(path)
+
+        fileRef.putData(imageData, metadata: nil) { _, error in
+            if let error = error {
+                print("Error upload photo to storage: \(error.localizedDescription)")
+                completion(nil)
+            } else {
+                fileRef.downloadURL { url, error in
+                    if let url = url {
+                        completion(url.absoluteString)
+                    } else {
+                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+                        completion(nil)
+                    }
                 }
             }
         }
     }
-}
-

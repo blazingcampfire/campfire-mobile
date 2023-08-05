@@ -48,6 +48,57 @@ struct Profile: Codable, Hashable {
 
 }
 
+struct ProfileFirestore: Codable, Hashable {
+    
+    var name: String
+    var nameInsensitive: String
+    var phoneNumber: String
+    var email: String
+    var username: String
+//    var posts: [[String : String]] // posts: [[postImage: Prompt]]
+    var smores: Int
+    var profilePicURL: String
+    var userID: String
+    var school: String
+    var bio: String
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(userID)
+    }
+    
+    public static func == (lhs: ProfileFirestore, rhs: ProfileFirestore) -> Bool {
+        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    }
+    
+    init?(data: [String: Any]) {
+        guard let name = data["name"] as? String,
+              let nameInsensitive = data["nameInsensitive"] as? String,
+              let phoneNumber = data["phoneNumber"] as? String,
+              let email = data["email"] as? String,
+              let username = data["username"] as? String,
+//              let posts = data["posts"] as? [[String: String]],
+              let smores = data["smores"] as? Int,
+              let profilePicURL = data["profilePicURL"] as? String,
+              let userID = data["userID"] as? String,
+              let school = data["school"] as? String,
+              let bio = data["bio"] as? String
+        else {
+            return nil
+        }
+        self.name = name
+        self.nameInsensitive = nameInsensitive
+        self.phoneNumber = phoneNumber
+        self.email = email
+        self.username = username
+        self.smores = smores
+        self.profilePicURL = profilePicURL
+        self.userID = userID
+        self.school = school
+        self.bio = bio
+        
+    }
+}
+
 
 struct PrivateUser: Codable {
     var phoneNumber: String
@@ -62,6 +113,27 @@ struct PrivateUser: Codable {
         self.school = school
     }
 }
+
+struct PrivateUserFirestore: Codable {
+    var phoneNumber: String
+    var email: String
+    var userID: String
+    var school: String
+    
+    init?(data: [String: Any]) {
+        guard let phoneNumber = data["phoneNumber"] as? String,
+              let email = data["email"] as? String,
+              let userID = data["userID"] as? String,
+              let school = data["school"] as? String else {
+            return nil
+        }
+        self.phoneNumber = phoneNumber
+        self.email = email
+        self.userID = userID
+        self.school = school
+    }
+}
+
 
 struct Request: Codable, Hashable {
     var userID: String?

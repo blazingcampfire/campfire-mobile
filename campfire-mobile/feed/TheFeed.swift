@@ -56,6 +56,7 @@ struct PostPlayerView: View {
     @State private var showLikedImage = false
     @ObservedObject var feedmodel: FeedPostModel
     @StateObject var commentModel = CommentsModel()
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     
     
@@ -145,7 +146,7 @@ struct PostPlayerView: View {
                             .font(.system(size: 30))
                     }
                     .sheet(isPresented: $leaderboardPageShow) {
-                        LeaderboardPage()
+                        LeaderboardPage(model: LeaderboardModel(currentUser: currentUser))
                             .presentationDragIndicator(.visible)
                             .presentationCornerRadius(30)
                     }
@@ -184,6 +185,7 @@ struct PostPlayerView: View {
                                     Text("@\(postPlayer.postItem.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
                                 }
+                                
                             }
                             
                             //- MARK: Caption/Location buttons Vstack
@@ -192,6 +194,7 @@ struct PostPlayerView: View {
                                     Text(postPlayer.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 16))
                                 }
+                                .frame(alignment: .trailing)
                              
                                 
                                 Button(action: {

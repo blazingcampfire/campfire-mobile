@@ -10,6 +10,7 @@ import SwiftUI
 let info = UserInfo()
 
 struct LeaderboardPage: View {
+    @StateObject var model: LeaderboardModel
     @State private var selectedOption = 5
     var body: some View {
         VStack(spacing: 0) {
@@ -31,9 +32,11 @@ struct LeaderboardPage: View {
 
             if selectedOption == 5 {
                 LeaderboardList(range: 1 ... 10)
+                    .environmentObject(model)
                     .listStyle(InsetListStyle())
             } else if selectedOption == 6 {
                 LeaderboardList(range: 1 ... 10)
+                    .environmentObject(model)
                     .listStyle(InsetListStyle())
             }
         }
@@ -41,13 +44,16 @@ struct LeaderboardPage: View {
 }
 
 struct LeaderboardList: View {
+    
+    @EnvironmentObject var model: LeaderboardModel
+    
     let range: ClosedRange<Int>
 
     var body: some View {
         List {
-            ForEach(range, id: \.self) { number in
+            ForEach(model.profiles, id: \.self) { profile in
                 HStack {
-                    Text("\(number)")
+                    Text("1")
                         .frame(width: 30, alignment: .leading)
                         .font(.custom("LexendDeca-Bold", size: 18))
                         .padding(.trailing, -10)
@@ -59,17 +65,17 @@ struct LeaderboardList: View {
                         .clipShape(Circle())
 
                     VStack(alignment: .leading) {
-                        Text(info.name)
+                        Text(profile.name)
                             .font(.custom("LexendDeca-Bold", size: 18))
                             .foregroundColor(Theme.TextColor)
-                        Text("@\(info.username)")
+                        Text("@\(profile.username)")
                             .font(.custom("LexendDeca-Regular", size: 12))
                             .foregroundColor(.gray)
                     }
 
                     Spacer()
 
-                    Text("\(info.chocs) 🍫")
+                    Text("\(profile.smores) 🍫")
                         .font(.custom("LexendDeca-Bold", size: 23))
                 }
                 .listRowBackground(Theme.ScreenColor)
@@ -81,8 +87,8 @@ struct LeaderboardList: View {
     }
 }
 
-struct LeaderboardPage_Previews: PreviewProvider {
-    static var previews: some View {
-        LeaderboardPage()
-    }
-}
+//struct LeaderboardPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LeaderboardPage(model: LeaderboardModel())
+//    }
+//}

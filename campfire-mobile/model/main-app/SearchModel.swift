@@ -31,7 +31,7 @@ class SearchModel: ObservableObject {
         if name == "" {
             return
         }
-        currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
+        currentUser.profileRef.order(by: "nameInsensitive", descending: true).start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
             if let err = err {
                 print("Error querying profiles: \(err)")
             } else {

@@ -9,6 +9,8 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 import GoogleSignIn
+import AVKit
+import Firebase
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -17,9 +19,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         let db = Firestore.firestore()
         
+        Database.database().isPersistenceEnabled = true
+        
+        //Audio Handler
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+        } catch (let error) {
+            print(error.localizedDescription)
+        }
         return true
-        
-        
     }
     // MARK: - Phone auth initialization of remote notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
@@ -31,6 +39,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
       return GIDSignIn.sharedInstance.handle(url)
     }
+   
     
     
 }
@@ -41,6 +50,7 @@ struct campfire_mobileApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     let persistenceController = PersistenceController.shared
+    
     
     var body: some Scene {
         WindowGroup {

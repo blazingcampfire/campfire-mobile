@@ -9,118 +9,75 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import AVKit
 
 class FeedPostModel: ObservableObject {
     
     @Published var posts = [PostItem]()
-  
-    func createPost(data: [String: Any]) {    // This function creates the document and it passes in the variables set the field data
-        let docRef = ndPosts.document()
-        docRef.setData(data) { error in
-            if let error = error {
-                print("Error writing document \(error)")
-            } else {
-                print("success creation")
+    @Published var postPlayers = [PostPlayer?]()
+    private var listener: ListenerRegistration?
+    
+    init() {
+        self.listenForPosts()
+    }
+    deinit {
+        listener?.remove()
+    }
+        
+    func listenForPosts() {
+        let docRef = ndPosts
+        docRef.addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+
+            // map documents to PostItem
+            self.posts = documents.map { queryDocumentSnapshot -> PostItem in
+                let data = queryDocumentSnapshot.data()
+                // extract properties from data and construct PostItem
+                let id = data["id"] as? String ?? ""
+                let username = data["username"] as? String ?? ""
+                let name = data["name"] as? String ?? ""
+                let caption = data["caption"] as? String ?? ""
+                let profilepic = data["profilepic"] as? String ?? ""
+                let url = data["url"] as? String ?? ""
+                let numLikes = data["numLikes"] as? Int ?? 0
+                let location = data["location"] as? String ?? ""
+                let comments = data["comments"] as? [String] ?? [""]
+                let postType = data["postType"] as? String ?? ""
+                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, comments: comments, postType: postType)
+            }
+
+            // update postPlayers accordingly...
+            self.postPlayers = self.posts.compactMap { post in
+                if post.postType == "image" {
+                    return PostPlayer(player: nil, postItem: post)
+                } else if post.postType == "video", let url = URL(string: post.url) {
+                    let player = AVPlayer(url: url)
+                    return PostPlayer(player: player, postItem: post)
+                } else {
+                    return nil
+                }
             }
         }
     }
-    
-    func uploadPhotoToStorage(imageData: Data) async throws -> String? {
-        let storageRef = Storage.storage().reference()
-        let path = "feedimages/\(UUID().uuidString).jpg"
-        let fileRef = storageRef.child(path)
-        
-        do {
-            let _ = try await fileRef.putDataAsync(imageData)
-            let photoURL = try await fileRef.downloadURL()
-            return photoURL.absoluteString
-        } catch {
-            print("Error upload photo to storage: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    
-    func createPhotoPost(imageData: Data) async throws {
-        guard let photoURL = try await uploadPhotoToStorage(imageData: imageData) else { return }
-        
-        let photoDocData: [String: Any] = [
-            "username": "davooo",
-            "name": "David Adebogun",
-            "caption": "yoo",    //pass captiontextfield text into here
-            "profilepic": "", // some path to the user's profile pic
-            "url": photoURL,
-            "numLikes": 0,
-            "location": "",  //some string creation of location
-            "comments": [""],
-            "postType": "image"
-    
-        ]
-        self.createPost(data: photoDocData)
-    }
-    
-    
-    
-    func uploadVideoToStorage(videoURL: URL) async throws -> String? {
-        guard let videoData = try? Data(contentsOf: videoURL) else {
-            print("couldnt create video data")
-            return nil
-        }
-        let storageRef = Storage.storage().reference()
-        let fileName = videoURL.lastPathComponent
-        let path = "feedvideos/\(fileName)"
-        let videoRef = storageRef.child(path)
-        
-        do {
-            let _ = try await videoRef.putDataAsync(videoData)
-            let vidURL = try await videoRef.downloadURL()
-            return vidURL.absoluteString
-        } catch {
-            print("Error upload photo to storage: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    func createVideoPost(videoURL: URL) async throws {
-        guard let downloadedvidURL = try await uploadVideoToStorage(videoURL: videoURL) else{return}
-        
-//        let videoDocData: PostItem = PostItem(id: <#T##String#>, username: <#T##String#>, name: <#T##String#>, caption: <#T##String#>, profilepic: <#T##String#>, url: <#T##String#>, numLikes: <#T##Int#>, location: <#T##String#>, comments: <#T##[String]#>, postType: <#T##String#>)
-        
-        let videoDocData: [String: Any] = [
-            "username": "davooo",
-            "name": "David Adebogun",
-            "caption": "yoo",    //pass captiontextfield text into here
-            "profilepic": "", // some path to the user's profile pic
-            "url": downloadedvidURL,
-            "numLikes": 0,
-            "location": "",  //some string creation of location
-            "comments": [""],
-            "postType": "video"
-        ]
-        self.createPost(data: videoDocData)
-    }
-    
-    
-    
-    
-    
-    
-    
-    func getPosts() {
-       let docRef = ndPosts
-        docRef.getDocuments { snapshot, error in
-            if error == nil {
-                if let snapshot = snapshot {
-                    DispatchQueue.main.async {
-                        self.posts = snapshot.documents.map { doc in
-                            return PostItem(id: doc["id"] as? String ?? "", username: doc["username"] as? String ?? "", name: doc["name"] as? String ?? "", caption: doc["caption"] as? String ?? "", profilepic: doc["profilepic"] as? String ?? "", url: doc["url"] as? String ?? "", numLikes: doc["numLikes"] as? Int ?? 0, location: doc["location"] as? String ?? "", comments: doc["comments"] as? [String] ?? [""], postType: doc["postType"] as? String ?? "" )
-                        }
-                        print("success")
+    func updateLikeCount(postId: String) {
+        let docRef = ndPosts.document(postId)
+        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated!")
+                DispatchQueue.main.async {
+                    // Find the index of the post being liked
+                    if let index = self.posts.firstIndex(where: { $0.id == postId }) {
+                        // Increment the numLikes field of the post at the given index
+                        self.posts[index].numLikes += 1
                     }
                 }
             }
         }
     }
-    
     
 }

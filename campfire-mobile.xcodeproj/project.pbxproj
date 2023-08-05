@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
+		B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12352342A7B612E00D9BBC7 /* NewFeed.swift */; };
+		B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14375312A7771F100904C52 /* ReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14375302A7771F100904C52 /* ReplyModel.swift */; };
@@ -191,6 +193,8 @@
 
 /* Begin PBXFileReference section */
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
+		B12352342A7B612E00D9BBC7 /* NewFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeed.swift; sourceTree = "<group>"; };
+		B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostUpdateModel.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14375302A7771F100904C52 /* ReplyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyModel.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
@@ -761,6 +765,7 @@
 				E2A37EF52A7622DD001A4306 /* RequestsPageModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestModel.swift */,
 				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
+				B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */,
 				E267A9C52A7A1BB500489B8E /* FriendsModel.swift */,
 			);
 			path = "main-app";
@@ -781,6 +786,7 @@
 				F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */,
 				F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */,
 				B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */,
+				B12352342A7B612E00D9BBC7 /* NewFeed.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -993,6 +999,7 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
+				B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */,
 				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
 				B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */,
 				B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */,
@@ -1075,6 +1082,7 @@
 				E2CBD5E72A6216E1000F3547 /* AuthenticationManager.swift in Sources */,
 				F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */,
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
+				B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,
@@ -1251,6 +1259,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
@@ -1286,6 +1295,7 @@
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
@@ -1319,6 +1329,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1342,6 +1353,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1363,6 +1375,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1384,6 +1397,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;

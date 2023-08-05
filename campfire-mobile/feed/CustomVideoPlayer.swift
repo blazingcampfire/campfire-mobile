@@ -32,9 +32,7 @@ struct CustomVideoPlayer: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
         if isPlaying {
-            player.seek(to: CMTime.zero, completionHandler: { _ in
-                self.player.play()
-            })
+            player.play()
         } else {
             player.pause()
         }
@@ -48,9 +46,8 @@ struct CustomVideoPlayer: UIViewControllerRepresentable {
         }
 
         @objc func restartPlayback() {
-            parent.player.seek(to: CMTime.zero, completionHandler: { _ in
-                self.parent.player.play()
-            })
+            parent.player.seek(to: CMTime.zero)
+            parent.player.play()
         }
     }
 }

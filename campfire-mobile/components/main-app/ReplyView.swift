@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ReplyView: View {
     var eachreply: Reply
+    var comId: String
+    var postId: String
     @State private var replyLiked: Bool = false
+    @ObservedObject var commentModel: CommentsModel
     var body: some View {
         HStack() {
            
@@ -51,6 +54,7 @@ struct ReplyView: View {
             VStack(spacing: -20) {
                 Button(action: {
                     self.replyLiked.toggle()
+                    commentModel.updateReplyLikeCount(postId: postId , commentId: comId, replyId: eachreply.id)
                 }) {
                     Image(replyLiked == false ? "noteaten" : "eaten")
                         .resizable()

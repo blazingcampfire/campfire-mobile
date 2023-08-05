@@ -13,30 +13,12 @@ import FirebaseStorage
 class ReplyModel: ObservableObject {
     
     @Published var replies = [Reply]()
-    @Published var replytext = ""
+//    @Published var postId: String? = nil {
+//        didSet {
+//            getComments()
+//        }
+//    }
     
-    //Think of these functions like an upload/download
-    
-    //This uploads the object to firebase/creates the document
-    func createReply(commentId: String, postId: String, completion: @escaping () -> Void) {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document()
-        let replyData: [String: Any] = [
-            "id": docRef.documentID,
-            "username": "bizzle",
-            "profilepic": "",
-            "reply": replytext,
-            "numLikes": 0,
-            "date": "10m",
-        ]
-        docRef.setData(replyData) { error in
-            if let error = error {
-                print("Error writing document \(error)")
-            } else {
-                print("success creation")
-                completion()
-            }
-        }
-    }
     
     //This downloads the document from firebase/decodes the document into the object
     func getReplies(postId: String, commentId: String) {

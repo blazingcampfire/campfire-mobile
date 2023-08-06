@@ -24,7 +24,7 @@ struct EnterEmail: View {
                         Button {
                             dismiss()
                         } label: {
-                            BackButton()
+                            BackButton(color: .white)
                         }
                     }
                     .padding(.leading, 15)

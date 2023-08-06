@@ -37,7 +37,7 @@ struct VerifyNumber: View {
                         Button {
                             dismiss()
                         } label: {
-                            BackButton()
+                            BackButton(color: .white)
                         }
                     }
                     .padding(.leading, 15)

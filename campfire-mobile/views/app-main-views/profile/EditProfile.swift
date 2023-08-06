@@ -13,6 +13,7 @@ struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
     @EnvironmentObject var currentUser: CurrentUserModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
@@ -20,6 +21,16 @@ struct EditProfile: View {
                 .ignoresSafeArea(.all)
             
             ScrollView {
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        BackButton(color: Theme.Peach)
+                    }
+                }
+                .padding(.leading, 15)
+                .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
                         VStack {
@@ -136,18 +147,18 @@ struct EditProfile: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                         }
-                        
-                    }
-                }
-            }
-            .onChange(of: selectedImage) { newImage in
-                if let image = newImage {
-                    updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
+                    
                 }
             }
         }
+        .onChange(of: selectedImage) { newImage in
+            if let image = newImage {
+                updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
+            }
+        }
     }
-        
+    
+    
     func updateProfilePic(selectedImage: UIImage, id: String) {
         Task {
             do {
@@ -191,7 +202,7 @@ struct EditProfile: View {
         }
     }
     }
-
+}
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         Text("yo")

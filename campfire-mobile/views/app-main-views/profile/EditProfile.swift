@@ -244,12 +244,8 @@ struct EditProfile: View {
             }
         }
     }
-<<<<<<< HEAD
-
-=======
     }
 }
->>>>>>> dev
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         Text("yo")

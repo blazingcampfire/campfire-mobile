@@ -139,45 +139,6 @@ struct AddPost: View {
     }
     
     func confirmPost(userID: String, prompt: String) {
-<<<<<<< HEAD
-            guard let selectedImage = selectedImage else {
-                print("No image")
-                return
-            }
-
-            let imageData = selectedImage.jpegData(compressionQuality: 0.8)
-            guard let imageData = imageData else {
-                print("Image cannot be converted to data")
-                return
-            }
-
-            uploadPictureToStorage(imageData: imageData) { photoURL in
-                if let photoURL = photoURL {
-                    let docRef = currentUser.profileRef.document(userID)
-
-                    docRef.getDocument { document, error in
-                        if let document = document, document.exists {
-                            var data = document.data()!
-
-                            if var posts = data["posts"] as? [[String: String]] {
-                                posts.append([photoURL: prompt])
-                                data["posts"] = posts
-                            } else {
-                                data["posts"] = [[photoURL: prompt]]
-                            }
-
-                            docRef.setData(data) { error in
-                                if let error = error {
-                                    print("Error updating document: \(error)")
-                                } else {
-                                    print("Successfully updated document")
-                                    var posts = currentUser.profile.posts 
-                                    posts.append([photoURL: prompt])
-                                    currentUser.profile.posts = posts
-                                    print(currentUser.profile.posts)
-                                }
-                            }
-=======
         guard let selectedImage = selectedImage else {
             print("No image")
             return
@@ -205,7 +166,6 @@ struct AddPost: View {
                         if var posts = data["posts"] as? [[String: String]] {
                             posts.append([photoURL: prompt])
                             data["posts"] = posts
->>>>>>> dev
                         } else {
                             data["posts"] = [[photoURL: prompt]]
                         }

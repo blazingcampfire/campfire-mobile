@@ -22,7 +22,7 @@ struct CreateUsername: View {
                         Button {
                             dismiss()
                         } label: {
-                            BackButton()
+                            BackButton(color: .white)
                         }
                     }
                     .padding(.leading, 15)

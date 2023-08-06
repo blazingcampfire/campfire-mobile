@@ -10,14 +10,15 @@ import SwiftUI
 
 struct BackButton: View {
     
+    var color: Color
     
     var body: some View {
             Image(systemName: "arrowshape.backward.fill")
-                .foregroundColor(.white)
+                .foregroundColor(color)
                 .font(.system(size: 20))
             Text("back")
                 .font(.custom("LexendDeca-Bold", size: 20))
-                .foregroundColor(.white)
+                .foregroundColor(color)
         }
     }
 

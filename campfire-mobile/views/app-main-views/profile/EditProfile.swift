@@ -13,6 +13,7 @@ struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
     @EnvironmentObject var currentUser: CurrentUserModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
@@ -20,6 +21,16 @@ struct EditProfile: View {
                 .ignoresSafeArea(.all)
             
             ScrollView {
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        BackButton(color: Theme.Peach)
+                    }
+                }
+                .padding(.leading, 15)
+                .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
                         ZStack {
@@ -136,6 +147,7 @@ struct EditProfile: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .onChange(of: selectedImage) { newImage in
             if let image = newImage {
                 updateProfilePic(selectedImage: image, id: currentUser.profile.userID )

@@ -44,6 +44,7 @@ class CamPostModel: ObservableObject {
         }
     }
     
+    //Edit this function to take in userId which passes currentUser.profile.id as a field on creation
     func createPhotoPost(imageData: Data) async throws {
         guard let photoURL = try await uploadPhotoToStorage(imageData: imageData) else { return }
         let docRef = ndPosts.document()

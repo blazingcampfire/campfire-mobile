@@ -9,7 +9,7 @@ import SwiftUI
 import AVKit
 import Firebase
 
-
+//Update to have user id field
 struct PostItem: Identifiable {
     var id: String
     var username: String
@@ -29,6 +29,7 @@ struct PostPlayer: Identifiable {
     var postItem: PostItem
 }
 
+//Update to have user id field
 struct Comment: Identifiable {
     var id: String
     var profilepic: String
@@ -37,7 +38,7 @@ struct Comment: Identifiable {
     var numLikes: Int
     var date: Timestamp
 }
-
+//Update to have user id field
 struct Reply: Identifiable, Hashable {
     var id: String
     var profilepic: String

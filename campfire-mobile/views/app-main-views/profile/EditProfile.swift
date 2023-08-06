@@ -147,9 +147,6 @@ struct EditProfile: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                         }
-<<<<<<< HEAD
-                        
-=======
                     
                 }
             }
@@ -197,7 +194,6 @@ struct EditProfile: View {
                         }
                     } else {
                         print("Error uploading picture to storage")
->>>>>>> dev
                     }
                 }
             }

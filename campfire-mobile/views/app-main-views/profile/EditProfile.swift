@@ -143,13 +143,13 @@ struct EditProfile: View {
                 }
             }
         }
-        .onChange(of: selectedImage) { newImage in
-            if let image = newImage {
-                updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
-            }
         }
-    }
-    
+                .onChange(of: selectedImage) { newImage in
+                    if let image = newImage {
+                        updateProfilePic(selectedImage: image, id: currentUser.profile.userID)
+                    }
+                }
+            }
     
     func updateProfilePic(selectedImage: UIImage, id: String) {
         Task {
@@ -194,7 +194,7 @@ struct EditProfile: View {
         }
     }
     }
-}
+
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         Text("yo")

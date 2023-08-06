@@ -99,7 +99,7 @@ struct PostPlayerView: View {
                            // HotSelected = true
                             feedmodel.isNewFeedSelected = false
                         }) {
-                            Text("hot")
+                            Text("Hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
                         }
@@ -110,7 +110,7 @@ struct PostPlayerView: View {
                           //  HotSelected = false
                             feedmodel.isNewFeedSelected = true
                         }) {
-                            Text("new")
+                            Text("New")
                                 .font(.custom("LexendDeca-Bold", size: 35))
                                 .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
                         }
@@ -229,7 +229,7 @@ struct PostPlayerView: View {
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 60)
+                .padding(.bottom, 40)
                 
                 
                 //-MARK: End of profile info

@@ -38,19 +38,23 @@ struct RequestsListView: View {
 
             Spacer()
 
-            Button(action: {
-                model.acceptFriend(request: request)
-            }) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(Theme.Peach)
-                    .font(.custom("LexendDeca-Regular", size: 30))
-            }
-            Button(action: {
-                model.removeRequest(request: request)
-            }) {
-                Image(systemName: "x.circle")
-                    .foregroundColor(Theme.Peach)
-                    .font(.custom("LexendDeca-Regular", size: 30))
+            HStack (spacing: 30) {
+                Button(action: {
+                    model.acceptFriend(request: request)
+                }) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(Theme.Peach)
+                        .font(.custom("LexendDeca-Regular", size: 30))
+                }
+                .frame(width: 30)
+                Button(action: {
+                    model.removeRequest(request: request)
+                }) {
+                    Image(systemName: "x.circle")
+                        .foregroundColor(Theme.Peach)
+                        .font(.custom("LexendDeca-Regular", size: 30))
+                }
+                .frame(width: 30, height: 30)
             }
         }
     }

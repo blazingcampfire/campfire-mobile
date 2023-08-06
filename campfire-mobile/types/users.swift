@@ -55,7 +55,7 @@ struct ProfileFirestore: Codable, Hashable {
     var phoneNumber: String
     var email: String
     var username: String
-//    var posts: [[String : String]] // posts: [[postImage: Prompt]]
+    var posts: [[String : String]] // posts: [[postImage: Prompt]]
     var smores: Int
     var profilePicURL: String
     var userID: String
@@ -76,7 +76,7 @@ struct ProfileFirestore: Codable, Hashable {
               let phoneNumber = data["phoneNumber"] as? String,
               let email = data["email"] as? String,
               let username = data["username"] as? String,
-//              let posts = data["posts"] as? [[String: String]],
+              let posts = data["posts"] as? [[String: String]],
               let smores = data["smores"] as? Int,
               let profilePicURL = data["profilePicURL"] as? String,
               let userID = data["userID"] as? String,
@@ -90,6 +90,7 @@ struct ProfileFirestore: Codable, Hashable {
         self.phoneNumber = phoneNumber
         self.email = email
         self.username = username
+        self.posts = posts
         self.smores = smores
         self.profilePicURL = profilePicURL
         self.userID = userID

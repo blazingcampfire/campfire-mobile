@@ -14,7 +14,7 @@ struct SettingsPage: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack {
-                            Text("settings")
+                            Text("Settings")
                                 .font(.custom("LexendDeca-SemiBold", size: 30))
                                 .foregroundColor(Theme.TextColor)
                         }

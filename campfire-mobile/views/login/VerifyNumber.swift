@@ -90,6 +90,9 @@ struct VerifyNumber: View {
                     }
                     .alert(model.errorMessage, isPresented: $model.showError){}
                     .padding(.bottom, 200)
+                    .onTapGesture {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    }
                 }
             )
             .navigationBarBackButtonHidden(true)

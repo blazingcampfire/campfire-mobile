@@ -56,6 +56,7 @@ struct PostPlayerView: View {
     @State private var showLikedImage = false
     @ObservedObject var feedmodel: FeedPostModel
     @StateObject var commentModel = CommentsModel()
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     
     
@@ -98,7 +99,7 @@ struct PostPlayerView: View {
                            // HotSelected = true
                             feedmodel.isNewFeedSelected = false
                         }) {
-                            Text("Hot")
+                            Text("hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
                         }
@@ -109,7 +110,7 @@ struct PostPlayerView: View {
                           //  HotSelected = false
                             feedmodel.isNewFeedSelected = true
                         }) {
-                            Text("New")
+                            Text("new")
                                 .font(.custom("LexendDeca-Bold", size: 35))
                                 .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
                         }
@@ -145,7 +146,7 @@ struct PostPlayerView: View {
                             .font(.system(size: 30))
                     }
                     .sheet(isPresented: $leaderboardPageShow) {
-                        LeaderboardPage()
+                        LeaderboardPage(model: LeaderboardModel(currentUser: currentUser))
                             .presentationDragIndicator(.visible)
                             .presentationCornerRadius(30)
                     }
@@ -160,8 +161,7 @@ struct PostPlayerView: View {
                  VStack {
                     HStack(alignment: .bottom) {
                         
-                        VStack(alignment: .leading, spacing: -5) {
-                            
+                        VStack(alignment: .leading) {
                             
                             //- MARK: Profile pic/username buttons Hstack
                             HStack(spacing: 10) {
@@ -177,6 +177,7 @@ struct PostPlayerView: View {
                                 }
                                 .padding(.bottom, 5)
                                 
+<<<<<<< HEAD
                                 
                                 Button(action: {
                                     //lead to profile page
@@ -198,14 +199,37 @@ struct PostPlayerView: View {
                                     }
                                 }
                                 .padding(.leading, 40)
+=======
+                                VStack(alignment: .leading, spacing: 5) {
+                                    Button(action: {
+                                        //lead to profile page
+                                    }) {
+                                        Text("@\(postPlayer.postItem.username)")
+                                            .font(.custom("LexendDeca-Bold", size: 16))
+                                    }
+                                    
+                                    Text(postPlayer.postItem.caption)
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                    if postPlayer.postItem.location == "" {
+                                        Text("")
+                                    } else {
+                                        Text( "\(postPlayer.postItem.location)" + "📍")
+                                            .font(.custom("LexendDeca-Regular", size: 15))
+                                    }
+                                }
+                                .padding(.leading, 10)
+                                
+                                
+                            }
+                            
                         }
-                    }
-                    .padding(.leading, 40)
+                                
+>>>>>>> dev
+                        }
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 30)
-                .padding(.leading, -20)
+                .padding(.bottom, 60)
                 
                 
                 //-MARK: End of profile info

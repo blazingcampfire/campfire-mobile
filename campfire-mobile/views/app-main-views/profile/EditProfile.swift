@@ -13,6 +13,7 @@ struct EditProfile: View {
     @State var showPhotos: Bool = false
     @State var selectedImage: UIImage?
     @EnvironmentObject var currentUser: CurrentUserModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
@@ -20,6 +21,16 @@ struct EditProfile: View {
                 .ignoresSafeArea(.all)
             
             ScrollView {
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        BackButton(color: Theme.Peach)
+                    }
+                }
+                .padding(.leading, 15)
+                .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
                         VStack {
@@ -136,7 +147,57 @@ struct EditProfile: View {
                             .padding(.horizontal, 10)
                             .padding(.top, 30)
                         }
+<<<<<<< HEAD
                         
+=======
+                    
+                }
+            }
+        }
+        .onChange(of: selectedImage) { newImage in
+            if let image = newImage {
+                updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
+            }
+        }
+    }
+    
+    
+    func updateProfilePic(selectedImage: UIImage, id: String) {
+        Task {
+            do {
+                guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                    print("Error converting image to data")
+                    return
+                }
+                
+                // Generate the UUID for the image path
+                let imagePath = "pfpImages/\(UUID().uuidString).jpg"
+                
+                // Upload the image to BunnyCDN storage
+                uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
+                    if let photoURL = photoURL {
+                        let docRef = currentUser.profileRef.document(id)
+                        
+                        docRef.getDocument { document, error in
+                            if let document = document, document.exists {
+                                var data = document.data()!
+                                data["profilePicURL"] = photoURL
+                                
+                                docRef.setData(data) { error in
+                                    if let error = error {
+                                        print("Error updating document: \(error)")
+                                    } else {
+                                        print("Successfully updated document")
+                                        currentUser.profile.profilePicURL = photoURL
+                                    }
+                                }
+                            } else {
+                                print("Document does not exist")
+                            }
+                        }
+                    } else {
+                        print("Error uploading picture to storage")
+>>>>>>> dev
                     }
                 }
             }
@@ -187,7 +248,12 @@ struct EditProfile: View {
             }
         }
     }
+<<<<<<< HEAD
 
+=======
+    }
+}
+>>>>>>> dev
 struct EditProfile_Previews: PreviewProvider {
     static var previews: some View {
         Text("yo")

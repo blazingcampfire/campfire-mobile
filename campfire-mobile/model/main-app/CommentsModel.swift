@@ -75,7 +75,11 @@ class CommentsModel: ObservableObject {
         guard let postId = postId else {
             return
         }
+<<<<<<< HEAD
         let docRef = ndPosts.document(postId).collection("comments").order(by: "date", descending: false)
+=======
+        let docRef = ndPosts.document(postId).collection("comments").order(by: "date")
+>>>>>>> dev
         docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
@@ -91,7 +95,11 @@ class CommentsModel: ObservableObject {
                 let numLikes = data["numLikes"] as? Int ?? 0
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 return Comment(id: id, profilepic: profilepic, username: username, comment: comment, numLikes: numLikes, date: date)
+<<<<<<< HEAD
             } 
+=======
+            } .sorted { $0.date.dateValue() < $1.date.dateValue() }
+>>>>>>> dev
         }
     }
     

@@ -12,7 +12,6 @@ struct EmailOrNumber: View {
     @Environment(\.dismiss) private var dismiss
     
     
-    
     var body: some View {
                 GradientBackground()
                 .overlay(
@@ -22,7 +21,7 @@ struct EmailOrNumber: View {
                             Button {
                                 dismiss()
                             } label: {
-                                BackButton()
+                                BackButton(color: .white)
                             }
                         }
                         .padding(.leading, 15)

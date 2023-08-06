@@ -266,7 +266,9 @@ struct EditPost: View {
             return
         }
         
-        uploadPictureToStorage(imageData: imageData) { photoURL in
+        let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
+        
+        uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 postImage = photoURL
                
@@ -322,7 +324,9 @@ struct EditPost: View {
             return
         }
 
-        uploadPictureToStorage(imageData: imageData) { photoURL in
+        let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
+        
+        uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 let docRef = currentUser.profileRef.document(userID)
                 docRef.getDocument { document, error in

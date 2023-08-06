@@ -31,9 +31,8 @@ struct VerifyNumber: View {
         GradientBackground()
             .overlay(
                 VStack {
-
+                    Spacer()
                     // MARK: - Verification code form & prompts
-
                     VStack(spacing: 60) {
                         Text("enter verification code")
                             .foregroundColor(Color.white)
@@ -76,13 +75,12 @@ struct VerifyNumber: View {
                         .opacity(buttonOpacity)
                         .disabled(!model.validVerificationCodeLength)
                     }
-                    .alert(model.errorMessage, isPresented: $model.showError){}
-                    .padding(.bottom, 200)
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
+                    Spacer()
                 }
+                    .alert(model.errorMessage, isPresented: $model.showError){}
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             )
+            
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

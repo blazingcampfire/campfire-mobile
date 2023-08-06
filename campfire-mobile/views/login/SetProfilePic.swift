@@ -26,9 +26,8 @@ struct SetProfilePic: View {
         GradientBackground()
             .overlay(
                 VStack {
-                    
+                    Spacer()
                     // MARK: - Profile picture upload button & prompts
-                    
                     VStack(spacing: 60) {
                         Text("upload a profile picture")
                             .foregroundColor(Color.white)
@@ -63,8 +62,9 @@ struct SetProfilePic: View {
                             }
                         }
                     }
-                    .padding(.bottom, 200)
+                    Spacer()
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))

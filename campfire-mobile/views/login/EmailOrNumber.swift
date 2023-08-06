@@ -15,9 +15,8 @@ struct EmailOrNumber: View {
     var body: some View {
                 GradientBackground()
                 .overlay(
-                    VStack (spacing: 0) {
+                    VStack {
 // MARK: - App logo & title
-                        
                         VStack {
                             Image("newlogo")
                                 .resizable()

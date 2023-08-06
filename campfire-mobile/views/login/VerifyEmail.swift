@@ -29,9 +29,7 @@ struct VerifyEmail: View {
             GradientBackground()
                 .overlay(
                     VStack {
-                    
-                        // MARK: - Graduation icon & school email
-                        
+                        Spacer()                        
                         VStack {
                             VStack {
                                 Image(systemName: "graduationcap.circle.fill")
@@ -85,7 +83,7 @@ struct VerifyEmail: View {
                                         }
                                 }
                             }
-                            .padding(.bottom, 200)
+                            Spacer()
                         }
                         
                     })

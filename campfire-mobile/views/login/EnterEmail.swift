@@ -19,7 +19,7 @@ struct EnterEmail: View {
             GradientBackground()
             .overlay(
                 VStack {
-                    
+                    Spacer()
 // MARK: - Email form & prompts
                     VStack(spacing: 60) {
                         Text("enter your '.edu' email")
@@ -27,6 +27,7 @@ struct EnterEmail: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(text: $model.email, placeholderText: "email")
+                        
                         
                         if !model.validEmail {
                             Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
@@ -45,13 +46,15 @@ struct EnterEmail: View {
                         .opacity(buttonOpacity)
                         .disabled(!model.validEmailString)
                     }
-                    .padding(.bottom, 200)
+                    Spacer()
                 }
                     .ignoresSafeArea(.keyboard, edges: .bottom)
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
+                    
+                
             )
+            .onTapGesture {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

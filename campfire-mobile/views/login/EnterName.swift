@@ -18,7 +18,7 @@ struct EnterName: View {
             GradientBackground()
             .overlay(
                 VStack {
-                    
+                    Spacer()
 // MARK: - Email form & prompts
                     VStack(spacing: 60) {
                         Text("enter your first name")
@@ -37,8 +37,9 @@ struct EnterName: View {
                         .opacity(buttonOpacity)
                         .disabled(!model.validName)
                     }
-                    .padding(.bottom, 200)
+                    Spacer()
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))

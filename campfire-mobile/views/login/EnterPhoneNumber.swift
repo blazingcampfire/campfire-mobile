@@ -22,21 +22,8 @@ struct EnterPhoneNumber: View {
         GradientBackground()
             .overlay(
                     VStack {
-                        // MARK: - Back button
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                BackButton(color: .white)
-                            }
-                        }
-                        .padding(.leading, 15)
-                        .padding(.top, 10)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         Spacer()
-                        
                         // MARK: - Form & text prompts
-                        
                         VStack(spacing: 60) {
                             Text("enter your phone number")
                                 .foregroundColor(Color.white)
@@ -47,6 +34,7 @@ struct EnterPhoneNumber: View {
                             PhoneNumberField(text: $model.phoneNumber)
                                 .keyboardType(.numberPad)
                                 .background(Color.clear)
+                            
                                 
                             if !model.validPhoneNumber {
                                 Text("phone number must be 10 digits with no spaces")
@@ -77,13 +65,17 @@ struct EnterPhoneNumber: View {
                             .opacity(buttonOpacity)
                             .disabled(!model.validPhoneNumber)
                         }
+                        Spacer()
                     }
-                    .padding(.bottom, 200)
-                    .onTapGesture {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    }
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+                    
                     )
+                    .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
                     .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
+                    
                 }
 
     }

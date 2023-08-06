@@ -16,9 +16,8 @@ struct CreateUsername: View {
         GradientBackground()
             .overlay(
                 VStack {
-            
+                    Spacer()
                     // MARK: - Username form & prompts
-
                     VStack(spacing: 60) {
                         Text("enter a campfire username")
                             .foregroundColor(Color.white)
@@ -40,8 +39,9 @@ struct CreateUsername: View {
                         .opacity(buttonOpacity)
                         .disabled(!model.validUsername)
                     }
-                    .padding(.bottom, 200)
+                    Spacer()
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))

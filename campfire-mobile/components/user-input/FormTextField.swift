@@ -29,7 +29,7 @@ struct FormTextField: View {
             }
             .frame(height: 3)
         }
-        .frame(height: 50)
+        .frame(height: 80)
         .padding(.horizontal)
     }
 }

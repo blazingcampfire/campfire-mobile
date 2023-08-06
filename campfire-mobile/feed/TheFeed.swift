@@ -46,7 +46,7 @@ struct TheFeed_Previews: PreviewProvider {
     
 struct PostPlayerView: View {
     var postPlayer: PostPlayer
-    @State private var HotSelected = true
+    @State var HotSelected: Bool = true
     @State private var leaderboardPageShow = false
     @State private var commentsTapped = false
     @State private var likedTapped: Bool = false
@@ -91,27 +91,27 @@ struct PostPlayerView: View {
                  }
                  
                  
-                 
                //- MARK: Hot/New button
                 VStack {
                     HStack {
                         Button(action: {
-                            HotSelected = true
+                           // HotSelected = true
+                            feedmodel.isNewFeedSelected = false
                         }) {
                             Text("Hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
-                                .opacity(HotSelected ? 1.0 : 0.5)
+                                .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
                         }
-                        
                         Rectangle()
                             .frame(width: 2, height: 30)
                             .opacity(0.75)
                         Button(action: {
-                            HotSelected = false
+                          //  HotSelected = false
+                            feedmodel.isNewFeedSelected = true
                         }) {
                             Text("New")
                                 .font(.custom("LexendDeca-Bold", size: 35))
-                                .opacity(HotSelected ? 0.5 : 1.0)
+                                .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
                         }
                     }
                     .padding(.top, 60)

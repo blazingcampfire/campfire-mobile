@@ -72,15 +72,26 @@ struct AddPost: View {
                                         Text("prompt: ")
                                             .font(.custom("LexendDeca-SemiBold", size: 15))
                                             .foregroundColor(Theme.TextColor)
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(Theme.Peach)
-                                                .frame(height: 50)
-                                            
-                                            Text(prompt)
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(.white)
-                                        }
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Theme.Peach)
+                                            .frame(height: 50)
+                                            .overlay(
+                                                HStack {
+                                                    Text(prompt)
+                                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                                        .foregroundColor(.white)
+                                                        .padding(.leading)
+                                                    Spacer()
+                                                    Button(action: {
+                                                        prompt = "no prompt"
+                                                    }) {
+                                                        Image(systemName: "xmark.circle")
+                                                            .font(.system(size: 25))
+                                                            .foregroundColor(Color.white)
+                                                    }
+                                                    .padding(.trailing)
+                                                }
+                                            )
                                         .shadow(color: Color.black.opacity(0.7), radius: 5, x: 2, y: 2)
                                         .padding(.horizontal)
                                         .padding(.bottom, 20)
@@ -128,72 +139,111 @@ struct AddPost: View {
     }
     
     func confirmPost(userID: String, prompt: String) {
-            guard let selectedImage = selectedImage else {
-                print("No image")
-                return
-            }
-
-            let imageData = selectedImage.jpegData(compressionQuality: 0.8)
-            guard let imageData = imageData else {
-                print("Image cannot be converted to data")
-                return
-            }
-
-            uploadPictureToStorage(imageData: imageData) { photoURL in
-                if let photoURL = photoURL {
-                    let docRef = currentUser.profileRef.document(userID)
-
-                    docRef.getDocument { document, error in
-                        if let document = document, document.exists {
-                            var data = document.data()!
-
-                            if var posts = data["posts"] as? [[String: String]] {
-                                posts.append([photoURL: prompt])
-                                data["posts"] = posts
-                            } else {
-                                data["posts"] = [[photoURL: prompt]]
-                            }
-
-                            docRef.setData(data) { error in
-                                if let error = error {
-                                    print("Error updating document: \(error)")
-                                } else {
-                                    print("Successfully updated document")
-                                    var posts = currentUser.profile.posts 
-                                    posts.append([photoURL: prompt])
-                                    currentUser.profile.posts = posts
-                                    print(currentUser.profile.posts)
-                                }
-                            }
+        guard let selectedImage = selectedImage else {
+            print("No image")
+            return
+        }
+        
+        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
+        guard let imageData = imageData else {
+            print("Image cannot be converted to data")
+            return
+        }
+        
+        // Generate the UUID for the image path
+        let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
+        
+        // Upload the image to BunnyCDN storage
+        uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
+            if let photoURL = photoURL {
+                let docRef = currentUser.profileRef.document(userID)
+                print(photoURL)
+                
+                docRef.getDocument { document, error in
+                    if let document = document, document.exists {
+                        var data = document.data()!
+                        
+                        if var posts = data["posts"] as? [[String: String]] {
+                            posts.append([photoURL: prompt])
+                            data["posts"] = posts
                         } else {
-                            print("Document does not exist")
+                            data["posts"] = [[photoURL: prompt]]
                         }
-                    }
-                } else {
-                    print("Error uploading picture to storage")
-                }
-            }
-        }
-    }
-
-    func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
-        let storageRef = Storage.storage().reference()
-        let path = "profilepostimages/\(UUID().uuidString).jpg"
-        let fileRef = storageRef.child(path)
-
-        fileRef.putData(imageData, metadata: nil) { _, error in
-            if let error = error {
-                print("Error upload photo to storage: \(error.localizedDescription)")
-                completion(nil)
-            } else {
-                fileRef.downloadURL { url, error in
-                    if let url = url {
-                        completion(url.absoluteString)
+                        
+                        docRef.setData(data) { error in
+                            if let error = error {
+                                print("Error updating document: \(error)")
+                            } else {
+                                print("Successfully updated document")
+                                var posts = currentUser.profile.posts
+                                posts.append([photoURL: prompt])
+                                currentUser.profile.posts = posts
+                                print(currentUser.profile.posts)
+                            }
+                        }
                     } else {
-                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
-                        completion(nil)
+                        print("Document does not exist")
                     }
                 }
+            } else {
+                print("Error uploading picture to storage")
             }
         }
     }
+}
+
+//    func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
+//        let storageRef = Storage.storage().reference()
+//        let path = "profilepostimages/\(UUID().uuidString).jpg"
+//        let fileRef = storageRef.child(path)
+//
+//        fileRef.putData(imageData, metadata: nil) { _, error in
+//            if let error = error {
+//                print("Error upload photo to storage: \(error.localizedDescription)")
+//                completion(nil)
+//            } else {
+//                fileRef.downloadURL { url, error in
+//                    if let url = url {
+//                        completion(url.absoluteString)
+//                    } else {
+//                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
+//                        completion(nil)
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
+    let storageZone = "campfireco-storage"
+    let apiKey = "c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a"
+
+    let urlString = "https://storage.bunnycdn.com/\(storageZone)/\(imagePath)"
+    if let url = URL(string: urlString) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.addValue(apiKey, forHTTPHeaderField: "AccessKey")
+
+        let task = URLSession.shared.uploadTask(with: request, from: imageData) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode == 201 {
+                   
+                    let downloadURL = "https://campfirepullzone.b-cdn.net/\(imagePath)"
+                    completion(downloadURL)
+                } else {
+                    print("Error uploading image: HTTP Status Code:", response.statusCode)
+                    completion(nil)
+                }
+            } else {
+                print("Error uploading image:", error?.localizedDescription ?? "Unknown error")
+                completion(nil)
+            }
+        }
+
+        task.resume()
+    } else {
+        print("Error: Invalid URL")
+        completion(nil)
+    }
+}
+

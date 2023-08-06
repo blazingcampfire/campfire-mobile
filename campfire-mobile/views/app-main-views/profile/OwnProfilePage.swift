@@ -115,7 +115,7 @@ struct OwnProfilePage: View {
                                     }
                                     .padding(.horizontal)
                                 }
-                                if posts.count < 6 {
+                                if posts.count < 7 {
                                     Spacer()
                                     NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
                                         ZStack {

@@ -148,44 +148,48 @@ struct EditProfile: View {
         }
     }
         
-        func updateProfilePic(selectedImage: UIImage, id: String) {
-            Task {
-                do {
-                    guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-                        print("Error converting image to data")
-                        return
-                    }
-                    
-                    let storageRef = Storage.storage().reference()
-                    let path = "pfpImages/\(UUID().uuidString).jpg"
-                    let fileRef = storageRef.child(path)
-                    
-                    let _ = try await fileRef.putDataAsync(imageData)
-                    let link = try await fileRef.downloadURL()
-                    let photoURL = link.absoluteString
-                    
-                    let docRef = currentUser.profileRef.document(id)
-                    docRef.getDocument { document, error in
-                        if let document = document, document.exists {
-                            var data = document.data()!
-                            data["profilePicURL"] = photoURL
-                            
-                            docRef.setData(data) { error in
-                                if let error = error {
-                                    print("Error updating document: \(error)")
-                                } else {
-                                    print("Successfully updated document")
-                                }
-                            }
-                        } else {
-                            print("Document does not exist")
-                        }
-                    }
-                } catch {
-                    print("Error updating profile picture: \(error)")
+    func updateProfilePic(selectedImage: UIImage, id: String) {
+        Task {
+            do {
+                guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+                    print("Error converting image to data")
+                    return
                 }
+                
+                // Generate the UUID for the image path
+                let imagePath = "pfpImages/\(UUID().uuidString).jpg"
+                
+                // Upload the image to BunnyCDN storage
+                uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
+                    if let photoURL = photoURL {
+                        let docRef = currentUser.profileRef.document(id)
+                        
+                        docRef.getDocument { document, error in
+                            if let document = document, document.exists {
+                                var data = document.data()!
+                                data["profilePicURL"] = photoURL
+                                
+                                docRef.setData(data) { error in
+                                    if let error = error {
+                                        print("Error updating document: \(error)")
+                                    } else {
+                                        print("Successfully updated document")
+                                        currentUser.profile.profilePicURL = photoURL
+                                    }
+                                }
+                            } else {
+                                print("Document does not exist")
+                            }
+                        }
+                    } else {
+                        print("Error uploading picture to storage")
+                    }
+                }
+            } catch {
+                print("Error updating profile picture: \(error)")
             }
         }
+    }
     }
 
 struct EditProfile_Previews: PreviewProvider {

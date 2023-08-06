@@ -95,7 +95,9 @@ struct SetProfilePic: View {
             }
             
 
-            uploadPictureToStorage(imageData: imageData) { photoURL in
+        let imagePath = "profilepictures/\(UUID().uuidString).jpg"
+        
+        uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
                 if let photoURL = photoURL {
                     print(photoURL)
                     model.profilePic = photoURL

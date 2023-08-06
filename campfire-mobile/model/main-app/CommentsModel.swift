@@ -28,7 +28,7 @@ class CommentsModel: ObservableObject {
         }
     }
     
-    
+    //Create UserId field on each comment 
     func createComment(postId: String, commenttext: String ,completion: @escaping () -> Void) {
         let docRef = ndPosts.document(postId).collection("comments").document()
         let now = Timestamp(date: Date())
@@ -49,6 +49,17 @@ class CommentsModel: ObservableObject {
             }
         }
     }
+    // func updateUserLikesFromComments(userId: String) {
+    // let docRef = ndProfiles.document(userId)
+    // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
+    // if let error = error {
+    // print("error updating document: \(error)")
+    // } else {
+    // print("Document successfully updated!")
+    // }
+    // }
+    // }
+    
     
     func createReply(postId: String, commentId: String, replytext: String ,completion: @escaping () -> Void) {
         let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document()
@@ -70,16 +81,26 @@ class CommentsModel: ObservableObject {
             }
         }
     }
+    // func updateUserLikesFromReplies(userId: String) {
+    // let docRef = ndProfiles.document(userId)
+    // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
+    // if let error = error {
+    // print("error updating document: \(error)")
+    // } else {
+    // print("Document successfully updated!")
+    // }
+    // }
+    // }
+    
+    
     
     func listenForComments() {
         guard let postId = postId else {
             return
         }
-<<<<<<< HEAD
+
         let docRef = ndPosts.document(postId).collection("comments").order(by: "date", descending: false)
-=======
-        let docRef = ndPosts.document(postId).collection("comments").order(by: "date")
->>>>>>> dev
+
         docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
@@ -95,13 +116,11 @@ class CommentsModel: ObservableObject {
                 let numLikes = data["numLikes"] as? Int ?? 0
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 return Comment(id: id, profilepic: profilepic, username: username, comment: comment, numLikes: numLikes, date: date)
-<<<<<<< HEAD
             } 
-=======
-            } .sorted { $0.date.dateValue() < $1.date.dateValue() }
->>>>>>> dev
+
+            }
         }
-    }
+    
     
     func listenForReplies() {
         guard let postId = postId else {
@@ -110,7 +129,7 @@ class CommentsModel: ObservableObject {
         guard let commentId = commentId else {
             return
         }
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").order(by: "date")
+        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").order(by: "date", descending: false)
         docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
@@ -126,7 +145,7 @@ class CommentsModel: ObservableObject {
                 let numLikes = data["numLikes"] as? Int ?? 0
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 return Reply(id: id, profilepic: profilepic, username: username, reply: reply, numLikes: numLikes, date: date)
-            } .sorted { $0.date.dateValue() < $1.date.dateValue() }
+            }
         }
     }
     

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
-		B121336E2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */; };
 		B121336C2A7EEE9B00A9A93F /* newlaunchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */; };
+		B121336E2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */; };
 		B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12352342A7B612E00D9BBC7 /* NewFeed.swift */; };
 		B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
@@ -198,8 +198,8 @@
 /* Begin PBXFileReference section */
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
 		B12133672A7EBE3C00A9A93F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
-		B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = gradientLaunchScreen.storyboard; sourceTree = "<group>"; };
 		B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = newlaunchscreen.storyboard; sourceTree = "<group>"; };
+		B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = gradientLaunchScreen.storyboard; sourceTree = "<group>"; };
 		B12352342A7B612E00D9BBC7 /* NewFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeed.swift; sourceTree = "<group>"; };
 		B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostUpdateModel.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
@@ -1272,7 +1272,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = P898RXX9FS;
-				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
@@ -1282,7 +1281,6 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = gradientLaunchScreen.storyboard;
 				INFOPLIST_KEY_UILaunchStoryboardName = newlaunchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1309,7 +1307,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
 				DEVELOPMENT_TEAM = P898RXX9FS;
-				DEVELOPMENT_TEAM = N2H2HQA8ZA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
@@ -1319,7 +1316,6 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = gradientLaunchScreen.storyboard;
 				INFOPLIST_KEY_UILaunchStoryboardName = newlaunchscreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Prompts {
     let prompts = [
-    "my school moment",
+    "so collegeee",
     "my party face",
     "top study spot",
     "weekend outing",

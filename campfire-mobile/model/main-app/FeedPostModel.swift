@@ -35,7 +35,7 @@ class FeedPostModel: ObservableObject {
         
     func listenForNewFeedPosts() {
             let docRef = ndPosts.order(by: "date", descending: true)
-            docRef.addSnapshotListener { (querySnapshot, error) in
+        self.listener = docRef.addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
                     return
@@ -73,7 +73,7 @@ class FeedPostModel: ObservableObject {
     func listenForHotFeedPosts() {
         let docRef = ndPosts.order(by: "numLikes", descending: true).order(by: "date", descending: true)
         
-        docRef.addSnapshotListener { (querySnapshot, error) in
+        self.listener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -133,7 +133,7 @@ class FeedPostModel: ObservableObject {
             }
         }
     
-    // func updateUserLikes(userId: String) {
+    // func updateUserLikesFromPost(userId: String) {
     // let docRef = ndProfiles.document(userId)
     // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
     // if let error = error {

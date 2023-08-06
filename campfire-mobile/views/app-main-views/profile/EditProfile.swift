@@ -1,11 +1,3 @@
-//
-//  EditProfile.swift
-//  campfire-mobile
-//
-//  Created by Adarsh G on 6/27/23.
-//
-
-
 import SwiftUI
 import FirebaseStorage
 
@@ -196,51 +188,8 @@ struct EditProfile: View {
                         print("Error uploading picture to storage")
                     }
                 }
-            }
-            .onChange(of: selectedImage) { newImage in
-                if let image = newImage {
-                    updateProfilePic(selectedImage: image, id: currentUser.profile.userID )
-                }
-            }
-        }
-    }
-        
-        func updateProfilePic(selectedImage: UIImage, id: String) {
-            Task {
-                do {
-                    guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-                        print("Error converting image to data")
-                        return
-                    }
-                    
-                    let storageRef = Storage.storage().reference()
-                    let path = "pfpImages/\(UUID().uuidString).jpg"
-                    let fileRef = storageRef.child(path)
-                    
-                    let _ = try await fileRef.putDataAsync(imageData)
-                    let link = try await fileRef.downloadURL()
-                    let photoURL = link.absoluteString
-                    
-                    let docRef = currentUser.profileRef.document(id)
-                    docRef.getDocument { document, error in
-                        if let document = document, document.exists {
-                            var data = document.data()!
-                            data["profilePicURL"] = photoURL
-                            
-                            docRef.setData(data) { error in
-                                if let error = error {
-                                    print("Error updating document: \(error)")
-                                } else {
-                                    print("Successfully updated document")
-                                }
-                            }
-                        } else {
-                            print("Document does not exist")
-                        }
-                    }
-                } catch {
-                    print("Error updating profile picture: \(error)")
-                }
+            } catch {
+                print("Error updating profile picture: \(error)")
             }
         }
     }

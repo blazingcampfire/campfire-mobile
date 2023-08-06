@@ -52,8 +52,8 @@ class RequestsModel: ObservableObject {
         guard let friendID = request.userID else {
             return
         }
-        let friendRelationshipRef = ndRelationships.document(friendID)
-        let userRelationshipRef = ndRelationships.document(userID)
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
         
@@ -84,8 +84,8 @@ class RequestsModel: ObservableObject {
             return
         }
         
-        let friendRelationshipRef = ndRelationships.document(friendID)
-        let userRelationshipRef = ndRelationships.document(userID)
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
         

@@ -27,7 +27,7 @@ struct FriendsPage: View {
                             }
                             .padding(.bottom, 10)
                             
-                            Text("friends")
+                            Text("Friends")
                                 .font(.custom("LexendDeca-SemiBold", size: 30))
                                 .foregroundColor(Theme.TextColor)
                                 .padding(.leading, 15)

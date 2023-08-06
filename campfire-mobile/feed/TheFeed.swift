@@ -99,7 +99,7 @@ struct PostPlayerView: View {
                         Button(action: {
                             HotSelected = true
                         }) {
-                            Text("hot")
+                            Text("Hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(HotSelected ? 1.0 : 0.5)
                         }
@@ -110,7 +110,7 @@ struct PostPlayerView: View {
                         Button(action: {
                             HotSelected = false
                         }) {
-                            Text("new")
+                            Text("New")
                                 .font(.custom("LexendDeca-Bold", size: 35))
                                 .opacity(HotSelected ? 0.5 : 1.0)
                         }
@@ -205,7 +205,7 @@ struct PostPlayerView: View {
                 }
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 60)
+                .padding(.bottom, 40)
                 
                 
                 //-MARK: End of profile info

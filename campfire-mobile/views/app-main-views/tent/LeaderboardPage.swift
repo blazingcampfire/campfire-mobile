@@ -15,15 +15,15 @@ struct LeaderboardPage: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            Text("leaderboard 👑")
+            Text("Leaderboard 👑")
                 .font(.custom("LexendDeca-SemiBold", size: 20))
                 .padding(.top, 15)
             
             Picker(selection: $selectedOption, label: Text("")) {
-                Text("all-Time")
+                Text("All-Time")
                 .font(.custom("LexendDeca-SemiBold", size: 15))
                 .tag(5)
-                Text("weekly")
+                Text("Weekly")
                 .font(.custom("LexendDeca-SemiBold", size: 15))
                 .tag(6)
             }

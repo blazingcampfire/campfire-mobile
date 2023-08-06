@@ -15,7 +15,7 @@ struct TentTabView: View {
     
     var body: some View {
         VStack {
-            SlidingTabView(selection: $tabIndex, tabs: ["notifications", "search", "requests"], font: .custom("LexendDeca-SemiBold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
+            SlidingTabView(selection: $tabIndex, tabs: ["Notifications", "Search", "Requests"], font: .custom("LexendDeca-SemiBold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
             
             Spacer()
 

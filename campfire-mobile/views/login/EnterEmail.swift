@@ -19,17 +19,6 @@ struct EnterEmail: View {
             GradientBackground()
             .overlay(
                 VStack {
-// MARK: - Back button
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            BackButton(color: .white)
-                        }
-                    }
-                    .padding(.leading, 15)
-                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
-                    Spacer()
                     
 // MARK: - Email form & prompts
                     VStack(spacing: 60) {
@@ -58,11 +47,13 @@ struct EnterEmail: View {
                     }
                     .padding(.bottom, 200)
                 }
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
                     .onTapGesture {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }
             )
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
 }
 

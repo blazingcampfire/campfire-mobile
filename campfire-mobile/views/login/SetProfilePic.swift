@@ -26,18 +26,6 @@ struct SetProfilePic: View {
         GradientBackground()
             .overlay(
                 VStack {
-                    // MARK: - Back button
-                    
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            BackButton(color: .white)
-                        }
-                    }
-                    .padding(.leading, 15)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    Spacer()
                     
                     // MARK: - Profile picture upload button & prompts
                     
@@ -79,6 +67,7 @@ struct SetProfilePic: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
     }
     

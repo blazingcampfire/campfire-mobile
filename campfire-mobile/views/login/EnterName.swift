@@ -18,17 +18,6 @@ struct EnterName: View {
             GradientBackground()
             .overlay(
                 VStack {
-// MARK: - Back button
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            BackButton(color: .white)
-                        }
-                    }
-                    .padding(.leading, 15)
-                    .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
-                    Spacer()
                     
 // MARK: - Email form & prompts
                     VStack(spacing: 60) {
@@ -52,6 +41,7 @@ struct EnterName: View {
                 }
             )
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
 }
 

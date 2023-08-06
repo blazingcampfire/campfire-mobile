@@ -131,6 +131,8 @@
 		E2A37EF62A7622DD001A4306 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF52A7622DD001A4306 /* RequestModel.swift */; };
 		E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */; };
 		E2B248CF2A7EDDAF0004A757 /* LeaderboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B248CE2A7EDDAF0004A757 /* LeaderboardModel.swift */; };
+		E2B248D22A800BD40004A757 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = E2B248D12A800BD40004A757 /* iPhoneNumberField */; };
+		E2B248D62A800D750004A757 /* PhoneNumberField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B248D52A800D750004A757 /* PhoneNumberField.swift */; };
 		E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AA2A5E38770012D328 /* GoogleSignIn */; };
 		E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */; };
 		E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */; };
@@ -309,6 +311,7 @@
 		E2A37EF52A7622DD001A4306 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
 		E2B248CE2A7EDDAF0004A757 /* LeaderboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
+		E2B248D52A800D750004A757 /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2C446862A4E82C20032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
@@ -366,6 +369,7 @@
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
+				E2B248D22A800BD40004A757 /* iPhoneNumberField in Frameworks */,
 				B1EA23BA2A74E0790021F0D1 /* Kingfisher in Frameworks */,
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
 				E272A01F2A5BA36B008D2D78 /* FirebaseFirestore in Frameworks */,
@@ -630,6 +634,7 @@
 			isa = PBXGroup;
 			children = (
 				B1B5EFCF2A4F56C200FA79CE /* FormTextField.swift */,
+				E2B248D52A800D750004A757 /* PhoneNumberField.swift */,
 			);
 			path = "user-input";
 			sourceTree = "<group>";
@@ -834,6 +839,7 @@
 				B1EA23B92A74E0790021F0D1 /* Kingfisher */,
 				F881D5152A7A1E1200E6E663 /* CropViewController */,
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
+				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -915,6 +921,7 @@
 				F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1062,6 +1069,7 @@
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
 				E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */,
 				E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */,
+				E2B248D62A800D750004A757 /* PhoneNumberField.swift in Sources */,
 				B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */,
 				E2163E492A660AA8005A20BE /* collections.swift in Sources */,
 				E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */,
@@ -1267,9 +1275,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = P898RXX9FS;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
@@ -1304,9 +1310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = P898RXX9FS;
 				DEVELOPMENT_TEAM = N2H2HQA8ZA;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
@@ -1490,6 +1494,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.1;
+			};
+		};
 		E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1571,6 +1583,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
 			productName = SlidingTabView;
+		};
+		E2B248D12A800BD40004A757 /* iPhoneNumberField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			productName = iPhoneNumberField;
 		};
 		E2BDE6AA2A5E38770012D328 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

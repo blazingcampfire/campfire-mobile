@@ -18,15 +18,6 @@ struct FriendsPage: View {
                 if model.friends.isEmpty {
                     VStack {
                         VStack {
-                            HStack {
-                                Button {
-                                    dismiss()
-                                } label: {
-                                    BackButton(color: Theme.Peach)
-                                }
-                            }
-                            .padding(.bottom, 10)
-                            
                             Text("Friends")
                                 .font(.custom("LexendDeca-SemiBold", size: 30))
                                 .foregroundColor(Theme.TextColor)
@@ -55,9 +46,11 @@ struct FriendsPage: View {
                     .environmentObject(model)
                     .listStyle(PlainListStyle())
                     .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
             .background(Color.white)
             .padding(-10)
     }

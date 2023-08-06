@@ -16,16 +16,6 @@ struct EmailOrNumber: View {
                 GradientBackground()
                 .overlay(
                     VStack (spacing: 0) {
-// MARK: - Back button
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                BackButton(color: .white)
-                            }
-                        }
-                        .padding(.leading, 15)
-                        .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
 // MARK: - App logo & title
                         
                         VStack {
@@ -59,6 +49,7 @@ struct EmailOrNumber: View {
                         .padding(.bottom, 160)
                 )
                 .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
     
     }
 }

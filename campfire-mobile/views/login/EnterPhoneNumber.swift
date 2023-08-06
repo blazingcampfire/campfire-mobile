@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import iPhoneNumberField
 
 struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
@@ -30,6 +31,7 @@ struct EnterPhoneNumber: View {
                             }
                         }
                         .padding(.leading, 15)
+                        .padding(.top, 10)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         Spacer()
                         
@@ -40,8 +42,12 @@ struct EnterPhoneNumber: View {
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 25))
                             
-                            FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
+//                            FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
+//                                .keyboardType(.numberPad)
+                            PhoneNumberField(text: $model.phoneNumber)
                                 .keyboardType(.numberPad)
+                                .background(Color.clear)
+                                
                             if !model.validPhoneNumber {
                                 Text("phone number must be 10 digits with no spaces")
                                     .foregroundColor(Color.white)
@@ -64,6 +70,7 @@ struct EnterPhoneNumber: View {
                                 // on tap, navLink gets user verification code
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.getVerificationCode()
+                                    print(model.phoneNumber)
                                     canAdvance = true
                                 })
                             }

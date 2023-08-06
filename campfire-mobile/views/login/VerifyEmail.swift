@@ -28,18 +28,8 @@ struct VerifyEmail: View {
         else {
             GradientBackground()
                 .overlay(
-                    // MARK: - Back button
                     VStack {
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                BackButton(color: .white)
-                            }
-                        }
-                        .padding(.leading, 15)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        
+                    
                         // MARK: - Graduation icon & school email
                         
                         VStack {
@@ -100,6 +90,7 @@ struct VerifyEmail: View {
                         
                     })
                 .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
     }
 }

@@ -21,15 +21,6 @@ struct EditProfile: View {
                 .ignoresSafeArea(.all)
             
             ScrollView {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        BackButton(color: Theme.Peach)
-                    }
-                }
-                .padding(.leading, 15)
-                .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                 
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
@@ -152,6 +143,7 @@ struct EditProfile: View {
             }
         }
         }
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
                 .onChange(of: selectedImage) { newImage in
                     if let image = newImage {
                         updateProfilePic(selectedImage: image, id: currentUser.profile.userID)

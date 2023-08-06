@@ -149,7 +149,7 @@ extension AuthModel {
 
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
 
-                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(phoneNumber)", uiDelegate: nil)
+                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil)
                 await MainActor.run(body: {
                     firebaseVerificationCode = code
                 })
@@ -225,7 +225,7 @@ extension AuthModel {
     func createProfile() {
         userID = Auth.auth().currentUser!.uid
         email = Auth.auth().currentUser?.email ?? email
-        phoneNumber = Auth.auth().currentUser?.phoneNumber ?? phoneNumber
+        phoneNumber = Auth.auth().currentUser?.phoneNumber ?? "+1\(phoneNumber)"
 
         let school: String = schoolParser(email: email)
         let nameInsensitive: String = name.lowercased()

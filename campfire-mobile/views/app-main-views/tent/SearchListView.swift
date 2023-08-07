@@ -12,7 +12,7 @@ struct SearchListView: View {
     var profile: Profile
     @State private var added: Bool = false
     @EnvironmentObject var model: SearchModel
-    
+    @EnvironmentObject var currentUser: CurrentUserModel
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -25,7 +25,7 @@ struct SearchListView: View {
                     .clipShape(Circle())
                     .frame(width: 40, height: 40)
                     .overlay (
-                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID)) },
+                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser)) },
                                        label: { EmptyView() })
                         .opacity(0)
                         .frame(width: 10, height: 10)

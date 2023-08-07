@@ -67,7 +67,7 @@ class ProfileModel: ObservableObject {
         var userRequestField: [String: Any]
         
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile!.name, username: profile!.username, profilePicURL: profile!.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
@@ -99,7 +99,7 @@ class ProfileModel: ObservableObject {
         var userRequestField: [String: Any]
         
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(profile.userID: friendID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile!.name, username: profile!.username, profilePicURL: profile!.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {

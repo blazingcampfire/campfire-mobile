@@ -39,7 +39,7 @@ struct OwnProfilePage: View {
                                                 Circle()
                                                     .frame(width: 4, height: 4)
                                                     .foregroundColor(Theme.TextColor)
-                                                Text("\(profile.smores)🍫")
+                                                Text("\(formatNumber(profile.smores))🍫")
                                                     .font(.custom("LexendDeca-SemiBold", size: 15))
                                             }
                                             
@@ -145,6 +145,16 @@ struct OwnProfilePage: View {
         }
     }
 }
+
+func formatNumber(_ number: Int) -> String {
+    if number >= 1000 {
+        let numberInK = Double(number) / 1000.0
+        return String(format: "%.1fk", numberInK)
+    } else {
+        return String(number)
+    }
+}
+
 
 struct ProfilePage_Previews: PreviewProvider {
     static var previews: some View {

@@ -227,7 +227,7 @@ struct PostPlayerView: View {
                         }
                         .padding(.leading, -15)
                     }
-                    Text("\(postPlayer.postItem.numLikes)")
+                    Text("\(formatNumber(postPlayer.postItem.numLikes))")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }

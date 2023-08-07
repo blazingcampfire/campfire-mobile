@@ -25,7 +25,7 @@ struct EnterName: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.name, placeholderText: "name")
+                        FormTextField(text: $model.name, placeholderText: "name", characterLimit: 20)
                         
                         
                         // MARK: - NavLink to VerifyEmail screen

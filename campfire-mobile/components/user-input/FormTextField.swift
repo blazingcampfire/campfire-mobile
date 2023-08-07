@@ -4,9 +4,10 @@ import SwiftUI
 
 struct FormTextField: View {
     @Binding var text: String
-
     var placeholderText: String
     @FocusState var isEnabled: Bool
+
+    var characterLimit: Int? 
 
     var body: some View {
         VStack {
@@ -16,6 +17,11 @@ struct FormTextField: View {
                 .padding(.horizontal)
                 .focused($isEnabled)
                 .autocapitalization(.none)
+                .onChange(of: text) { newValue in
+                    if let limit = characterLimit, newValue.count > limit {
+                        text = String(newValue.prefix(limit))
+                    }
+                }
 
             ZStack {
                 Rectangle()
@@ -24,18 +30,12 @@ struct FormTextField: View {
                 Rectangle()
                     .fill(.white)
                     .frame(width: isEnabled ? nil : 0)
-                    .animation(.easeInOut( duration: 0.3), value: isEnabled)
+                    .animation(.easeInOut(duration: 0.3), value: isEnabled)
                     
             }
             .frame(height: 3)
         }
         .frame(height: 80)
         .padding(.horizontal)
-    }
-}
-
-struct FormTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        FormTextField(text: .constant("now what's the word captain"), placeholderText: "yo")
     }
 }

@@ -45,6 +45,7 @@ struct OwnProfilePage: View {
                                             
                                             Text(profile.bio)
                                                 .font(.custom("LexendDeca-Regular", size: 13))
+                                                .multilineTextAlignment(.center)
                                                 .padding(8)
                                         
                                     }

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseFirestoreSwift
 
 // every user profile should conform to this schema
-struct Profile: Codable, Hashable {
+class Profile: Codable, Hashable {
 
     var name: String
     var nameInsensitive: String
@@ -47,61 +47,23 @@ struct Profile: Codable, Hashable {
     }
 
 }
-
-struct ProfileFirestore: Codable, Hashable {
+// extends profile search by adding a bool which indicates whether the current user has requested a friendship with a given user returned from a search
+class ProfileSearch: Profile {
+    var requested: Bool
     
-    var name: String
-    var nameInsensitive: String
-    var phoneNumber: String
-    var email: String
-    var username: String
-    var posts: [[String : String]] // posts: [[postImage: Prompt]]
-    var smores: Int
-    var profilePicURL: String
-    var userID: String
-    var school: String
-    var bio: String
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(userID)
+    init(name: String, nameInsensitive: String, phoneNumber: String, email: String, username: String, posts: [[String : String]], smores: Int, profilePicURL: String, userID: String, school: String, bio: String, requested: Bool) {
+        self.requested = requested
+        super.init(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: posts, smores: smores, profilePicURL: profilePicURL, userID: userID, school: school, bio: bio)
     }
     
-    public static func == (lhs: ProfileFirestore, rhs: ProfileFirestore) -> Bool {
-        return lhs.userID == rhs.userID && rhs.userID == lhs.userID
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
     
-    init?(data: [String: Any]) {
-        guard let name = data["name"] as? String,
-              let nameInsensitive = data["nameInsensitive"] as? String,
-              let phoneNumber = data["phoneNumber"] as? String,
-              let email = data["email"] as? String,
-              let username = data["username"] as? String,
-              let posts = data["posts"] as? [[String: String]],
-              let smores = data["smores"] as? Int,
-              let profilePicURL = data["profilePicURL"] as? String,
-              let userID = data["userID"] as? String,
-              let school = data["school"] as? String,
-              let bio = data["bio"] as? String
-        else {
-            return nil
-        }
-        self.name = name
-        self.nameInsensitive = nameInsensitive
-        self.phoneNumber = phoneNumber
-        self.email = email
-        self.username = username
-        self.posts = posts
-        self.smores = smores
-        self.profilePicURL = profilePicURL
-        self.userID = userID
-        self.school = school
-        self.bio = bio
-        
-    }
 }
 
 
-struct PrivateUser: Codable {
+class PrivateUser: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
@@ -115,7 +77,7 @@ struct PrivateUser: Codable {
     }
 }
 
-struct PrivateUserFirestore: Codable {
+class PrivateUserFirestore: Codable {
     var phoneNumber: String
     var email: String
     var userID: String
@@ -136,7 +98,7 @@ struct PrivateUserFirestore: Codable {
 }
 
 
-struct Request: Codable, Hashable {
+class Request: Codable, Hashable {
     var userID: String?
     var name: String
     var username: String
@@ -160,7 +122,7 @@ struct Request: Codable, Hashable {
     
 }
 
-struct RequestFirestore: Codable, Hashable {
+class RequestFirestore: Codable, Hashable {
     var userID: String?
     var name: String
     var username: String

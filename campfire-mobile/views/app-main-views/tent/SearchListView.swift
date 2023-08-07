@@ -19,7 +19,6 @@ struct SearchListView: View {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
             HStack {
-                NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser))) {
                     HStack {
                         Image(profilepic)
                             .resizable()
@@ -36,7 +35,14 @@ struct SearchListView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                }
+                    .overlay (
+                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser)) },
+                                                           label: { EmptyView() })
+                                            .opacity(0)
+                                            .frame(width: 10, height: 10)
+                                        )
+                    
+                
                     
                     Spacer()
                     

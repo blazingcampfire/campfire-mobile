@@ -262,8 +262,6 @@ extension AuthModel {
         do {
             
             profileData = try Firestore.Encoder().encode(Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: ""))
-            print("2")
-            print(profileData)
             userData = try Firestore.Encoder().encode(PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school))
         }
         catch {

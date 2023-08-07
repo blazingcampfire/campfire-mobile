@@ -12,10 +12,19 @@ struct ContentView: View {
     @StateObject var authModel: AuthModel = AuthModel()
     @StateObject var currentUser: CurrentUserModel = CurrentUserModel(privateUserData: PrivateUser(phoneNumber: "", email: "", userID: "", school: ""), profile: Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: ""), userRef: ndUsers, profileRef: ndProfiles, relationshipsRef: ndRelationships, postsRef: ndPosts)
     var body: some View {
-        AccountSetUp()
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .environmentObject(authModel)
-            .environmentObject(currentUser)
+        if Auth.auth().currentUser?.uid == nil {
+            AccountSetUp()
+                .environmentObject(authModel)
+                .environmentObject(currentUser)
+        }
+        else {
+            NavigationBar()
+                .environmentObject(currentUser)
+                .onAppear {
+                    currentUser.getProfile()
+                    currentUser.getUser()
+                }
+        }
     }
 
     struct ContentView_Previews: PreviewProvider {

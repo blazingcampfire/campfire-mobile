@@ -28,20 +28,8 @@ struct VerifyEmail: View {
         else {
             GradientBackground()
                 .overlay(
-                    // MARK: - Back button
                     VStack {
-                        HStack {
-                            Button {
-                                dismiss()
-                            } label: {
-                                BackButton(color: .white)
-                            }
-                        }
-                        .padding(.leading, 15)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        
-                        // MARK: - Graduation icon & school email
-                        
+                        Spacer()                        
                         VStack {
                             VStack {
                                 Image(systemName: "graduationcap.circle.fill")
@@ -95,11 +83,12 @@ struct VerifyEmail: View {
                                         }
                                 }
                             }
-                            .padding(.bottom, 200)
+                            Spacer()
                         }
                         
                     })
                 .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
     }
 }

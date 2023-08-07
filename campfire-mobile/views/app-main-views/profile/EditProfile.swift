@@ -1,11 +1,3 @@
-//
-//  EditProfile.swift
-//  campfire-mobile
-//
-//  Created by Adarsh G on 6/27/23.
-//
-
-
 import SwiftUI
 import FirebaseStorage
 
@@ -21,15 +13,6 @@ struct EditProfile: View {
                 .ignoresSafeArea(.all)
             
             ScrollView {
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        BackButton(color: Theme.Peach)
-                    }
-                }
-                .padding(.leading, 15)
-                .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
                 
                 VStack(spacing: 10) {
                     VStack(spacing: 10) {
@@ -152,6 +135,8 @@ struct EditProfile: View {
             }
         }
         }
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
                 .onChange(of: selectedImage) { newImage in
                     if let image = newImage {
                         updateProfilePic(selectedImage: image, id: currentUser.profile.userID)

@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseStorage
 import AVKit
-
+import Kingfisher
 
 struct PreviewPostInfo: View {
     @ObservedObject var currentUser: CurrentUserModel
@@ -16,7 +16,7 @@ struct PreviewPostInfo: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             HStack {
-                Image(currentUser.profile.profilePicURL)
+                KFImage(URL(string: currentUser.profile.profilePicURL))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40)

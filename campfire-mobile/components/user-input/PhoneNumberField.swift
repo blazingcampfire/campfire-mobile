@@ -1,21 +1,29 @@
-
+//
+//  PhoneNumberField.swift
+//  campfire-mobile
+//
+//  Created by Toni on 8/6/23.
+//
 
 import SwiftUI
+import iPhoneNumberField
 
-struct FormTextField: View {
+struct PhoneNumberField: View {
     @Binding var text: String
 
-    var placeholderText: String
     @FocusState var isEnabled: Bool
-
+    var placeholderText: String
+    
     var body: some View {
         VStack {
-            TextField(placeholderText, text: $text)
-                .font(.custom("LexendDeca-Bold", size: 20))
+            iPhoneNumberField(placeholderText, text: $text)
+                .font(UIFont(name: "LexendDeca-SemiBold", size: 20))
+                .clearsOnEditingBegan(true)
+                .accentColor(Color.white)
                 .foregroundColor(Color.white)
                 .padding(.horizontal)
                 .focused($isEnabled)
-                .autocapitalization(.none)
+             
 
             ZStack {
                 Rectangle()
@@ -29,13 +37,13 @@ struct FormTextField: View {
             }
             .frame(height: 3)
         }
-        .frame(height: 80)
+        .frame(height: 50)
         .padding(.horizontal)
     }
 }
 
-struct FormTextField_Previews: PreviewProvider {
+struct PhoneNumberField_Previews: PreviewProvider {
     static var previews: some View {
-        FormTextField(text: .constant("now what's the word captain"), placeholderText: "yo")
+        PhoneNumberField(text: .constant("now what's the word captain"), placeholderText: "I think I caught you lacking")
     }
 }

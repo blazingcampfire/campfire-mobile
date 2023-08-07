@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-
 struct BackButton: View {
-    
+    let dismiss: DismissAction
     var color: Color
-    
+
     var body: some View {
+        Button {
+            dismiss()
+        } label: {
             Image(systemName: "arrowshape.backward.fill")
                 .foregroundColor(color)
                 .font(.system(size: 20))
@@ -21,6 +23,7 @@ struct BackButton: View {
                 .foregroundColor(color)
         }
     }
+}
 
 struct BackButton_Previews: PreviewProvider {
     static var previews: some View {

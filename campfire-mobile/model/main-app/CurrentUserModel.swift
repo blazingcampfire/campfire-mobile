@@ -13,6 +13,7 @@ import Foundation
 class CurrentUserModel: ObservableObject {
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
+
     var userRef: CollectionReference
     var profileRef: CollectionReference
     var relationshipsRef: CollectionReference
@@ -44,6 +45,7 @@ class CurrentUserModel: ObservableObject {
     }
 
     func getProfile() {
+        print("fired getProfile")
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {
@@ -88,6 +90,7 @@ class CurrentUserModel: ObservableObject {
     }
 
     func getUser() {
+        print("fired getUser")
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {

@@ -16,21 +16,8 @@ struct CreateUsername: View {
         GradientBackground()
             .overlay(
                 VStack {
-                    // MARK: - Back button
-
-                    HStack {
-                        Button {
-                            dismiss()
-                        } label: {
-                            BackButton(color: .white)
-                        }
-                    }
-                    .padding(.leading, 15)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     Spacer()
-
                     // MARK: - Username form & prompts
-
                     VStack(spacing: 60) {
                         Text("enter a campfire username")
                             .foregroundColor(Color.white)
@@ -52,10 +39,15 @@ struct CreateUsername: View {
                         .opacity(buttonOpacity)
                         .disabled(!model.validUsername)
                     }
-                    .padding(.bottom, 200)
+                    Spacer()
                 }
+                .ignoresSafeArea(.keyboard, edges: .bottom)
             )
+            .onTapGesture {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
     }
 }
 

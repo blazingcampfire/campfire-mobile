@@ -10,11 +10,11 @@ import SwiftUI
 struct OtherProfilePage: View {
     
     @State var settingsPageShow = false
-    @StateObject var profileModel = ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63")
+    @StateObject var profileModel: ProfileModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
@@ -141,16 +141,17 @@ struct OtherProfilePage: View {
                     }
                 }
                 .padding()
-            }
         }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
         .onAppear {
             profileModel.getProfile()
         }
     }
 }
 
-struct OtherProfilePage_Previews: PreviewProvider {
-    static var previews: some View {
-        OtherProfilePage()
-    }
-}
+//struct OtherProfilePage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OtherProfilePage()
+//    }
+//}

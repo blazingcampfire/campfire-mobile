@@ -46,7 +46,7 @@ struct TheFeed_Previews: PreviewProvider {
     
 struct PostPlayerView: View {
     var postPlayer: PostPlayer
-    @State private var HotSelected = true
+    @State var HotSelected: Bool = true
     @State private var leaderboardPageShow = false
     @State private var commentsTapped = false
     @State private var likedTapped: Bool = false
@@ -62,80 +62,80 @@ struct PostPlayerView: View {
     
     //-MARK: Sets up the VideoPlayer for the video case and the creates the image url and handles image case
     var body: some View {
-             ZStack {
-                 if postPlayer.postItem.postType == "video" {
-                     if let urlPlayer = self.postPlayer.player {
-                         CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
-                             .onTapGesture {
-                                 isPlaying.toggle()
-                             }
-                             .onDisappear {
-                                 isPlaying = false
-                             }
-                     } else {
-                         Text("Error Loading Post")
-                             .font(.custom("LexendDeca-Regular", size: 25))
-                             .foregroundColor(.white)
-                     }
-                     
-                 } else if postPlayer.postItem.postType == "image" {
-                     let imageURL = postPlayer.postItem.url
-                     KFImage(URL(string: imageURL))
-                         .resizable()
-                         .scaledToFit()
-                         .edgesIgnoringSafeArea(.all)
-                     
-                 } else {
-                     Text("Error Loading Post")
-                         .font(.custom("LexendDeca-Regular", size: 25))
-                         .foregroundColor(.white)
-                 }
-                 
-                 
-                 
-               //- MARK: Hot/New button
-                VStack {
-                    HStack {
-                        Button(action: {
-                            HotSelected = true
-                        }) {
-                            Text("Hot")
-                                .font(.custom("LexendDeca-Bold", size:35))
-                                .opacity(HotSelected ? 1.0 : 0.5)
+        ZStack {
+            if postPlayer.postItem.postType == "video" {
+                if let urlPlayer = self.postPlayer.player {
+                    CustomVideoPlayer(player: urlPlayer, isPlaying: $isPlaying)
+                        .onTapGesture {
+                            isPlaying.toggle()
                         }
-                        
-                        Rectangle()
-                            .frame(width: 2, height: 30)
-                            .opacity(0.75)
-                        Button(action: {
-                            HotSelected = false
-                        }) {
-                            Text("New")
-                                .font(.custom("LexendDeca-Bold", size: 35))
-                                .opacity(HotSelected ? 0.5 : 1.0)
+                        .onDisappear {
+                            isPlaying = false
+                        }
+                } else {
+                    Text("Error Loading Post")
+                        .font(.custom("LexendDeca-Regular", size: 25))
+                        .foregroundColor(.white)
+                }
+                
+            } else if postPlayer.postItem.postType == "image" {
+                let imageURL = postPlayer.postItem.url
+                KFImage(URL(string: imageURL))
+                    .resizable()
+                    .scaledToFit()
+                    .edgesIgnoringSafeArea(.all)
+                
+            } else {
+                Text("Error Loading Post")
+                    .font(.custom("LexendDeca-Regular", size: 25))
+                    .foregroundColor(.white)
+            }
+            
+            
+            //- MARK: Hot/New button
+            VStack {
+                HStack {
+                    Button(action: {
+                        // HotSelected = true
+                        feedmodel.isNewFeedSelected = false
+                    }) {
+                        Text("Hot")
+                            .font(.custom("LexendDeca-Bold", size:35))
+                            .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
+                    }
+                    Rectangle()
+                        .frame(width: 2, height: 30)
+                        .opacity(0.75)
+                    Button(action: {
+                        //  HotSelected = false
+                        feedmodel.isNewFeedSelected = true
+                    }) {
+                        Text("New")
+                            .font(.custom("LexendDeca-Bold", size: 35))
+                            .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
+                    }
+                }
+                .padding(.top, 60)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .foregroundColor(.white)
+            
+            if self.showLikedImage {
+                Image("eaten")
+                    .resizable()
+                    .frame(width: 450, height: 450)
+                    .padding()
+                    .scaleEffect(scale)
+                    .animation(.easeOut(duration: 1.0), value: scale)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            self.showLikedImage = false
                         }
                     }
-                    .padding(.top, 60)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .foregroundColor(.white)
+            }
             
-                 if self.showLikedImage {
-                     Image("eaten")
-                         .resizable()
-                         .frame(width: 450, height: 450)
-                         .padding()
-                         .scaleEffect(scale)
-                         .animation(.easeOut(duration: 1.0), value: scale)
-                         .onAppear {
-                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                 self.showLikedImage = false
-                             }
-                         }
-                 }
-                 
-                 
-                 
+            
+            
             VStack {
                 HStack {
                     Button(action: {
@@ -157,139 +157,143 @@ struct PostPlayerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             
             
-                //-MARK: User information
-                 VStack {
-                    HStack(alignment: .bottom) {
-                        
-                        VStack(alignment: .leading) {
-                            
-                            //- MARK: Profile pic/username buttons Hstack
-                            HStack(spacing: 10) {
-                                
-                                Button(action: {
-                                    // lead to profile page
-                                }) {
-                                    KFImage(URL(string: postPlayer.postItem.profilepic))
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-                                }
-                                .padding(.bottom, 5)
-                                
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Button(action: {
-                                        //lead to profile page
-                                    }) {
-                                        Text("@\(postPlayer.postItem.username)")
-                                            .font(.custom("LexendDeca-Bold", size: 16))
-                                    }
-                                    
-                                    Text(postPlayer.postItem.caption)
-                                        .font(.custom("LexendDeca-Regular", size: 15))
-                                    if postPlayer.postItem.location == "" {
-                                        Text("")
-                                    } else {
-                                        Text( "\(postPlayer.postItem.location)" + "📍")
-                                            .font(.custom("LexendDeca-Regular", size: 15))
-                                    }
-                                }
-                                .padding(.leading, 10)
-                                
-                                
-                            }
-                            
-                        }
-                                
-                        }
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                .padding(.bottom, 40)
-                
-                
-                //-MARK: End of profile info
-                
-                
-                //-MARK: Three buttons on side
-                 VStack(spacing: 7.5) {
-                     
-                     VStack(spacing: -60) {
-                         Button(action: {
-                             self.likedTapped.toggle()
-                             if likedTapped {
-                                 if !doubleTapped {
-                                     feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
-                                 }
-                             } else {
-                                 feedmodel.decreaseLikeCount(postId: postPlayer.postItem.id)
-                             }
-                             self.doubleTapped = self.likedTapped
-                         }) {
-                             VStack {
-                                 Image(self.likedTapped || self.doubleTapped == true ? "eaten" : "noteaten")
-                             }
-                             .padding(.leading, -15)
-                         }
-                         Text("\(postPlayer.postItem.numLikes)")
-                             .foregroundColor(.white)
-                             .font(.custom("LexendDeca-Regular", size: 16))
-                     }
+            //-MARK: User information
+            VStack {
+                HStack(alignment: .bottom) {
                     
-                 
-                    VStack {
-                        Button(action: {
-                            self.commentsTapped.toggle()
+                    VStack(alignment: .leading) {
+                        
+                        //- MARK: Profile pic/username buttons Hstack
+                        HStack(spacing: 10) {
+                            
+                            Button(action: {
+                                // lead to profile page
                             }) {
-                            VStack {
-                                Image(systemName: "text.bubble.fill")
+                                KFImage(URL(string: postPlayer.postItem.profilepic))
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            }
+                            .padding(.bottom, 5)
+                            
+                            //- MARK: Caption/Location buttons VStack
+                            
+                            VStack(alignment: .leading, spacing: 5) {
+                                Button(action: {
+                                    //lead to profile page
+                                }) {
+                                    Text("@\(postPlayer.postItem.username)")
+                                        .font(.custom("LexendDeca-Bold", size: 16))
+                                }
+                                
+                                Text(postPlayer.postItem.caption)
+                                    .font(.custom("LexendDeca-Regular", size: 15))
+                                if postPlayer.postItem.location == "" {
+                                    Text("")
+                                } else {
+                                    Text( "\(postPlayer.postItem.location)" + "📍")
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                }
+                            }
+                        }
+                        .padding(.leading, 10)
+                        
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            .padding(.bottom, 40)
+            
+            
+            //-MARK: End of profile info
+            
+            
+            //-MARK: Three buttons on side
+            VStack(spacing: 7.5) {
+                
+                VStack(spacing: -60) {
+                    Button(action: {
+                        self.likedTapped.toggle()
+                        if likedTapped {
+                            if !doubleTapped {
+                                feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
+                            }
+                        } else {
+                            feedmodel.decreaseLikeCount(postId: postPlayer.postItem.id)
+                        }
+                        self.doubleTapped = self.likedTapped
+                    }) {
+                        VStack {
+                            Image(self.likedTapped || self.doubleTapped == true ? "eaten" : "noteaten")
+                        }
+                        .padding(.leading, -15)
+                    }
+                    Text("\(postPlayer.postItem.numLikes)")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-Regular", size: 16))
+                }
+                
+                
+                VStack {
+                    Button(action: {
+                        self.commentsTapped.toggle()
+                    }) {
+                        VStack {
+                            Image(systemName: "text.bubble.fill")
                                 .resizable()
                                 .frame(width: 35, height: 35)
                                 .foregroundColor(.white)
-                                }
-                            }
-                        Text("\(commentModel.comments.count)")
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Regular", size: 16))
-                            .sheet(isPresented: $commentsTapped) {
-                                CommentsPage(postId: postPlayer.postItem.id, commentModel: commentModel)
-                            .presentationDetents([.fraction(0.85)])
-                            .presentationDragIndicator(.visible)
-                                }
-                            }
-                            .padding(.top, 20)
-              
-                    
-                    Button(action: {
-                        //report post
-                        //delete post if user's post
-                    }) {
-                        Image(systemName: "ellipsis")
-                            .resizable()
-                            .frame(width: 30, height: 7)
-                            .foregroundColor(.white)
+                        }
                     }
-                    .padding(.top, 15)
+                    Text("\(commentModel.comments.count)")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-Regular", size: 16))
+                        .sheet(isPresented: $commentsTapped) {
+                            CommentsPage(postId: postPlayer.postItem.id, commentModel: commentModel)
+                                .presentationDetents([.fraction(0.85)])
+                                .presentationDragIndicator(.visible)
+                        }
                 }
-                .padding(.bottom, 155)
-                .padding(.trailing, -30)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                .padding(.top, 20)
+                
+                
+                Button(action: {
+                    //report post
+                    //delete post if user's post
+                }) {
+                    Image(systemName: "ellipsis")
+                        .resizable()
+                        .frame(width: 30, height: 7)
+                        .foregroundColor(.white)
+                }
+                .padding(.top, 15)
             }
-             .onAppear {
-                 commentModel.postId = postPlayer.postItem.id
-             }
-             .onTapGesture(count: 2) {
-                 if !self.likedTapped {
-                     self.likedTapped = true
-                     feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
-                     self.doubleTapped = self.likedTapped
-                 }
-               scale = 1
-                 withAnimation {
-                     scale = 1.3
-                 }
-                 self.showLikedImage = true
-             }
+            .padding(.bottom, 155)
+            .padding(.trailing, -30)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+        }
+        .onAppear {
+            commentModel.postId = postPlayer.postItem.id
+        }
+        .onTapGesture(count: 2) {
+            if !self.likedTapped {
+                self.likedTapped = true
+                feedmodel.increaseLikeCount(postId: postPlayer.postItem.id)
+                self.doubleTapped = self.likedTapped
+            }
+            scale = 1
+            withAnimation {
+                scale = 1.3
+            }
+            self.showLikedImage = true
+        }
         .background(Color.black.ignoresSafeArea())
     }
 }

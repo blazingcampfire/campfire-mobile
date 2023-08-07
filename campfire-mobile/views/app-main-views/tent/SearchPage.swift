@@ -13,8 +13,12 @@ struct SearchPage: View {
     
     var body: some View {
         NavigationView {
-            SearchList()
-                .environmentObject(model)
+            ZStack {
+                Theme.ScreenColor
+                    .ignoresSafeArea(.all)
+                SearchList()
+                    .environmentObject(model)
+            }
         }
         .searchable(text: $model.name)
         .background(Color.white)
@@ -29,14 +33,19 @@ struct SearchList: View {
     
     @State private var addedTapped: Bool = false
     var body: some View {
-        List {
-            ForEach(model.profiles, id: \.self) { profile in
-                SearchListView(profile: profile)
+        ZStack {
+            Theme.ScreenColor
+                .ignoresSafeArea(.all)
+            
+            List {
+                ForEach(model.profiles, id: \.self) { profile in
+                    SearchListView(profile: profile)
+                }
+                .listRowSeparator(.hidden)
+                .listRowBackground(Theme.ScreenColor)
             }
-            .listRowSeparator(.hidden)
-            .listRowBackground(Theme.ScreenColor)
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
     }
 }
 

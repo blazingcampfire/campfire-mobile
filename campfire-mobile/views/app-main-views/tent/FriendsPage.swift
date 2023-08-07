@@ -14,50 +14,52 @@ struct FriendsPage: View {
     @StateObject var model: FriendsModel
     
     var body: some View {
+        
             NavigationView {
                 if model.friends.isEmpty {
-                    VStack {
-                        VStack {
-                            HStack {
-                                Button {
-                                    dismiss()
-                                } label: {
-                                    BackButton(color: Theme.Peach)
-                                }
-                            }
-                            .padding(.bottom, 10)
-                            
-                            Text("Friends")
-                                .font(.custom("LexendDeca-SemiBold", size: 30))
-                                .foregroundColor(Theme.TextColor)
-                                .padding(.leading, 15)
-                        }
-                        .padding(.leading, 15)
-                        .frame(maxWidth: .infinity,  maxHeight: .infinity, alignment: .topLeading)
+                    ZStack {
+                        Theme.ScreenColor
+                            .ignoresSafeArea(.all)
                         
                         VStack {
-                            Image(systemName: "person.fill.badge.plus")
-                                .font(.system(size: 30))
-                                .foregroundColor(Theme.Peach)
-                                .padding(.bottom, 30)
+                            VStack {
+                                Text("Friends")
+                                    .font(.custom("LexendDeca-SemiBold", size: 30))
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding(.leading, 15)
+                            }
                             
-                            Text("go make some friends!")
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .foregroundColor(Theme.TextColor)
-                            Spacer()
+                            VStack {
+                                Image(systemName: "person.fill.badge.plus")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(Theme.Peach)
+                                    .padding(.bottom, 30)
+                                
+                                Text("go make some friends!")
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                    .foregroundColor(Theme.TextColor)
+                                Spacer()
+                            }
+                            
                         }
-                     
                     }
                     
                 }
                 else {
-                    ListFriends()
+                    ZStack {
+                        Theme.ScreenColor
+                            .ignoresSafeArea(.all)
+                        
+                        ListFriends()
+                    }
                     .environmentObject(model)
                     .listStyle(PlainListStyle())
                     .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
             .background(Color.white)
             .padding(-10)
     }

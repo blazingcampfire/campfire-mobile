@@ -54,7 +54,7 @@ struct OtherProfilePage: View {
                                 HStack {
                                     // MARK: -  if user is looking at non-friends profile
                                     Button(action: {
-//                                   SEND FRIEND REQUEST TO USER OF THE VIEWING PROFILE
+                                        profileModel.requestFriend()
                                     }) {
                                         Text("add friend!")
                                             .font(.custom("LexendDeca-Bold", size: 15))
@@ -105,19 +105,6 @@ struct OtherProfilePage: View {
                                     }
                                 }
                             }
-                            Button(action: {
-                                settingsPageShow.toggle()
-                            }) {
-                                Image(systemName: "gearshape.fill")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(Theme.Peach)
-                            }
-                            .offset(x: 155, y: -140)
-                            .sheet(isPresented: $settingsPageShow) {
-                                SettingsPage()
-                                    .presentationDragIndicator(.visible)
-                                    .presentationCornerRadius(30)
-                            }
                         }
                         if let posts = profileModel.profile?.posts {
                             VStack(spacing: 20) {
@@ -142,6 +129,8 @@ struct OtherProfilePage: View {
                 }
                 .padding()
         }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
         .onAppear {

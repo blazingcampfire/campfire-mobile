@@ -45,7 +45,7 @@ struct EnterName: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
         }
 }
 

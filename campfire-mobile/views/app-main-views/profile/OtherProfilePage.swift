@@ -132,7 +132,7 @@ struct OtherProfilePage: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
         .onAppear {
             profileModel.getProfile()
         }

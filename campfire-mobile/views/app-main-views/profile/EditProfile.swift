@@ -136,7 +136,7 @@ struct EditProfile: View {
         }
         }
                 .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
                 .onChange(of: selectedImage) { newImage in
                     if let image = newImage {
                         updateProfilePic(selectedImage: image, id: currentUser.profile.userID)

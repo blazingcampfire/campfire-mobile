@@ -58,7 +58,7 @@ struct EditFieldPage: View {
             }
             .padding(.top, 50)
         }
-        .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+        .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
         .navigationBarBackButtonHidden(true)
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

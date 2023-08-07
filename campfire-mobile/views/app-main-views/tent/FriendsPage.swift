@@ -28,7 +28,7 @@ struct FriendsPage: View {
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.leading, 15)
                             }
-                            
+                            Spacer()
                             VStack {
                                 Image(systemName: "person.fill.badge.plus")
                                     .font(.system(size: 30))
@@ -38,9 +38,8 @@ struct FriendsPage: View {
                                 Text("go make some friends!")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.TextColor)
-                                Spacer()
                             }
-                            
+                            Spacer()
                         }
                     }
                     

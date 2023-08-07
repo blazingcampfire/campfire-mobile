@@ -21,6 +21,7 @@ struct ContentView: View {
             NavigationBar()
                 .environmentObject(currentUser)
                 .onAppear {
+                    currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()
                 }

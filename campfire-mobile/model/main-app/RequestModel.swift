@@ -27,8 +27,6 @@ class RequestsModel: ObservableObject {
             } else {
                 if let documentSnapshot = documentSnapshot {
                     var requestsArray: [RequestFirestore] = []
-                    print("Request Data got")
-                    print(documentSnapshot.data())
                     let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
                     for request in requests {
                         guard let requestObject = RequestFirestore(data: request) else {

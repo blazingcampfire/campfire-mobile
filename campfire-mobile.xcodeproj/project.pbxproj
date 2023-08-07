@@ -158,6 +158,7 @@
 		F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* OwnProfilePage.swift */; };
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
+		F86FAACD2A81AE0400D3801D /* unallowedCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */; };
 		F87DA9CD2A6783BB00CBAA98 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */; };
 		F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5152A7A1E1200E6E663 /* CropViewController */; };
 		F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = F881D5172A7A1E1200E6E663 /* TOCropViewController */; };
@@ -338,6 +339,7 @@
 		F86695152A40F78300D9471C /* OwnProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnProfilePage.swift; sourceTree = "<group>"; };
 		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F86D83A72A4BC54100223F9A /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unallowedCharacters.swift; sourceTree = "<group>"; };
 		F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		F89402122A5E64F30049410E /* FriendsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListView.swift; sourceTree = "<group>"; };
 		F89402142A5E68480049410E /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				F86D83A52A4BC37900223F9A /* prompts.swift */,
 				E2163E4D2A663501005A20BE /* schools.swift */,
 				E267A9C72A7AA58300489B8E /* tests.swift */,
+				F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */,
 				B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */,
 				B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */,
 			);
@@ -1050,6 +1053,7 @@
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
 				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
 				F89402132A5E64F30049410E /* FriendsListView.swift in Sources */,
+				F86FAACD2A81AE0400D3801D /* unallowedCharacters.swift in Sources */,
 				B14375312A7771F100904C52 /* ReplyModel.swift in Sources */,
 				B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,

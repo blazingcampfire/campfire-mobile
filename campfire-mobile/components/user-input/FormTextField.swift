@@ -7,7 +7,8 @@ struct FormTextField: View {
     var placeholderText: String
     @FocusState var isEnabled: Bool
 
-    var characterLimit: Int? 
+    var characterLimit: Int?
+    var unallowedCharacters: [String]?
 
     var body: some View {
         VStack {
@@ -20,6 +21,13 @@ struct FormTextField: View {
                 .onChange(of: text) { newValue in
                     if let limit = characterLimit, newValue.count > limit {
                         text = String(newValue.prefix(limit))
+                    }
+
+                    if let unallowedChars = unallowedCharacters {
+                        
+                        unallowedChars.forEach { char in
+                            text = text.replacingOccurrences(of: char, with: "")
+                        }
                     }
                 }
 

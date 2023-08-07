@@ -60,7 +60,7 @@ struct EditProfile: View {
                                     Text(currentUser.profile.name)
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                     Spacer()
-                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, field: "name", currentfield: currentUser.profile.name)
+                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: nameIllegalChar, field: "name", currentfield: currentUser.profile.name)
                                         .environmentObject(currentUser)) {
                                             Label("edit name", systemImage: "pencil")
                                                 .font(.custom("LexendDeca-Bold", size: 15))
@@ -71,7 +71,7 @@ struct EditProfile: View {
                                     Text(currentUser.profile.username)
                                         .font(.custom("LexendDeca-Bold", size: 15))
                                    Spacer()
-                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, field: "username", currentfield: currentUser.profile.username)
+                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: usernameIllegalChar, field: "username", currentfield: currentUser.profile.username)
                                         .environmentObject(currentUser)) {
                                             Label("edit username", systemImage: "pencil")
                                                 .font(.custom("LexendDeca-Bold", size: 15))

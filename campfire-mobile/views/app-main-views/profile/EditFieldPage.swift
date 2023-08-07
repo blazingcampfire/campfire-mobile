@@ -13,6 +13,7 @@ struct EditFieldPage: View {
     @State private var isEditing: Bool = false
     @EnvironmentObject var currentUser: CurrentUserModel
     @Environment(\.dismiss) private var dismiss
+    var unallowedCharacters: [String]?
     
     var field: String
     @State var currentfield: String
@@ -46,7 +47,7 @@ struct EditFieldPage: View {
                 }
                 
              
-                LimitedTextField(text: $newName, maxCharacterLength: maxCharacterLength)
+                LimitedTextField(text: $newName, maxCharacterLength: maxCharacterLength, unallowedCharacters: unallowedCharacters)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 2)
@@ -86,20 +87,25 @@ struct EditFieldPage: View {
 struct LimitedTextField: View {
     @Binding var text: String
     let maxCharacterLength: Int
+    let unallowedCharacters: [String]?
 
     var body: some View {
         TextField("Enter text (max \(maxCharacterLength) characters)", text: $text)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .onChange(of: text) { newValue in
+                if let unallowedChars = unallowedCharacters {
+                    text = newValue.filter { !unallowedChars.contains(String($0)) }
+                }
+
                 if newValue.count > maxCharacterLength {
                     text = String(newValue.prefix(maxCharacterLength))
                 }
             }
     }
 }
-
-struct EditFieldPage_Previews: PreviewProvider {
-    static var previews: some View {
-        EditFieldPage(maxCharacterLength: 10, field: "name", currentfield: "David")
-    }
-}
+//
+//struct EditFieldPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditFieldPage(maxCharacterLength: 10, field: "name", currentfield: "David")
+//    }
+//}

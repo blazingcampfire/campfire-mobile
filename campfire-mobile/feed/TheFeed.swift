@@ -83,8 +83,6 @@ struct PostPlayerView: View {
                 KFImage(URL(string: imageURL))
                     .resizable()
                     .scaledToFit()
-                    .edgesIgnoringSafeArea(.all)
-                
             } else {
                 Text("Error Loading Post")
                     .font(.custom("LexendDeca-Regular", size: 25))
@@ -134,8 +132,6 @@ struct PostPlayerView: View {
                     }
             }
             
-            
-            
             VStack {
                 HStack {
                     Button(action: {
@@ -177,56 +173,32 @@ struct PostPlayerView: View {
                             }
                             .padding(.bottom, 5)
                             
-                            
-                            
-                            Button(action: {
-                                //lead to profile page
-                            }) {
-                                Text("@\(postPlayer.postItem.username)")
-                                    .font(.custom("LexendDeca-Bold", size: 16))
-                            }
-                        }
-                        
-                        //- MARK: Caption/Location buttons Vstack
-                        VStack {
-                            Text(postPlayer.postItem.caption)
-                                .font(.custom("LexendDeca-Regular", size: 16))
-                            if postPlayer.postItem.location == "" {
-                                Text("")
-                            } else {
-                                Text("📍" + "\(postPlayer.postItem.location)")
+                            VStack(alignment: .leading, spacing: 5) {
+                                Button(action: {
+                                    //lead to profile page
+                                }) {
+                                    Text("@\(postPlayer.postItem.username)")
+                                        .font(.custom("LexendDeca-Bold", size: 16))
+                                }
+                                
+                                Text(postPlayer.postItem.caption)
                                     .font(.custom("LexendDeca-Regular", size: 15))
+                                if postPlayer.postItem.location == "" {
+                                    Text("")
+                                } else {
+                                    Text( "\(postPlayer.postItem.location)" + "📍")
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                }
                             }
-                        }
-                        .padding(.leading, 40)
-                        
-                        VStack(alignment: .leading, spacing: 5) {
-                            Button(action: {
-                                //lead to profile page
-                            }) {
-                                Text("@\(postPlayer.postItem.username)")
-                                    .font(.custom("LexendDeca-Bold", size: 16))
-                            }
+                            .padding(.leading, 10)
                             
-                            Text(postPlayer.postItem.caption)
-                                .font(.custom("LexendDeca-Regular", size: 15))
-                            if postPlayer.postItem.location == "" {
-                                Text("")
-                            } else {
-                                Text( "\(postPlayer.postItem.location)" + "📍")
-                                    .font(.custom("LexendDeca-Regular", size: 15))
-                            }
+                            
                         }
-                        .padding(.leading, 10)
-                        
                         
                     }
                     
                 }
-                
-                
             }
-            
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.bottom, 40)

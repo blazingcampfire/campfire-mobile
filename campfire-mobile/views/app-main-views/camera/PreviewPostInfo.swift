@@ -52,7 +52,7 @@ struct PhotoPostButton: View {
             }
             else {
                 Button(action: {
-                    if let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8) ?? camera.selectedImageData {
+                    if let imageData = camera.capturedPic?.jpegData(compressionQuality: 1) ?? camera.selectedImageData {
                         isPosting = true
                         Task {
                             do {

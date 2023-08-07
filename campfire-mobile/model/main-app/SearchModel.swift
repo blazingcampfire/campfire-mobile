@@ -44,7 +44,7 @@ class SearchModel: ObservableObject {
                         let profile = try document.data(as: Profile.self)
                         var requestData: [String: Any]
                         requestData = try Firestore.Encoder().encode(Request(userID: profile.userID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
-                        self.requested.append(self.checkRequested(request: RequestFirestore(data: requestData)!))
+                        print(self.checkRequested(request: RequestFirestore(data: requestData)!))
                         print(self.requested)
                         self.profiles.append(profile)
                     } catch {
@@ -130,6 +130,7 @@ class SearchModel: ObservableObject {
                             requested = true
                             return
                         }
+                        return
                     }
                 }
             }

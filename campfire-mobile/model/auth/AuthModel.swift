@@ -21,6 +21,7 @@ final class AuthModel: ObservableObject {
     @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
    @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
     @Published var phoneNumber: String = ""
+    @Published var formattedPhoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
     @Published var name: String = ""
@@ -82,10 +83,10 @@ final class AuthModel: ObservableObject {
 
 extension AuthModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
-        $phoneNumber
+        $formattedPhoneNumber
             .map {
                 number in
-                number.count == 11
+                number.count == 14
             }
             .eraseToAnyPublisher()
     }
@@ -141,6 +142,9 @@ extension AuthModel {
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
 extension AuthModel {
+    func formatPhoneNumber () {
+        self.phoneNumber = self.formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+    }
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
@@ -148,7 +152,7 @@ extension AuthModel {
                 // MARK: - Disable when testing with real device
 
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-
+                formatPhoneNumber()
                 let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil)
                 await MainActor.run(body: {
                     firebaseVerificationCode = code

@@ -31,7 +31,7 @@ struct EnterPhoneNumber: View {
                             
 //                            FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
 //                                .keyboardType(.numberPad)
-                            PhoneNumberField(text: $model.phoneNumber)
+                            PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
                                 .keyboardType(.numberPad)
                                 .background(Color.clear)
                             

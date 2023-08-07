@@ -12,16 +12,15 @@ struct PhoneNumberField: View {
     @Binding var text: String
 
     @FocusState var isEnabled: Bool
+    var placeholderText: String
     
     var body: some View {
         VStack {
-            iPhoneNumberField(text: $text)
+            iPhoneNumberField(placeholderText, text: $text)
                 .font(UIFont(name: "LexendDeca-SemiBold", size: 20))
-                .prefixHidden(false)
-                .flagHidden(false)
-                .defaultRegion("United States")
                 .clearsOnEditingBegan(true)
-                .accentColor(.white)
+                .accentColor(Color.white)
+                .foregroundColor(Color.white)
                 .padding(.horizontal)
                 .focused($isEnabled)
              
@@ -45,6 +44,6 @@ struct PhoneNumberField: View {
 
 struct PhoneNumberField_Previews: PreviewProvider {
     static var previews: some View {
-        PhoneNumberField(text: .constant("now what's the word captain"))
+        PhoneNumberField(text: .constant("now what's the word captain"), placeholderText: "I think I caught you lacking")
     }
 }

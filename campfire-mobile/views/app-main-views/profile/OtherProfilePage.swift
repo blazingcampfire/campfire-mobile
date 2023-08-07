@@ -130,10 +130,11 @@ struct OtherProfilePage: View {
                 .padding()
         }
             .navigationBarTitle("")
-            .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
-        .onAppear {
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
             profileModel.getProfile()
         }
     }
@@ -144,3 +145,4 @@ struct OtherProfilePage: View {
 //        OtherProfilePage()
 //    }
 //}
+ 

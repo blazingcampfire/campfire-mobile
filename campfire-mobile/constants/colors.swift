@@ -15,4 +15,5 @@ struct Theme {
     static let ScreenColor = Color("screencolor") // custom background color to customize dark/light mode background
     static let PFPColor = Color("profileborder")
     static let TextColor = Color("textcolor")
+    static let buttonColor = Color("buttoncolor")
 }

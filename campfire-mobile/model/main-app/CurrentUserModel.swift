@@ -29,7 +29,7 @@ class CurrentUserModel: ObservableObject {
     }
 
     func setCollectionRefs() {
-        if Auth.auth().currentUser?.uid == nil {
+        if Auth.auth().currentUser?.email == nil {
             return
         } else {
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)

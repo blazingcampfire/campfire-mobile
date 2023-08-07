@@ -23,110 +23,124 @@ struct SetProfilePic: View {
                 .environmentObject(currentUser)
         }
         else {
-        GradientBackground()
-            .overlay(
-                VStack {
-                    Spacer()
-                    // MARK: - Profile picture upload button & prompts
-                    VStack(spacing: 60) {
-                        Text("upload a profile picture")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 25))
-                            .padding(.top, 100)
-                        Text("(optional)")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(.top, -40)
+            GradientBackground()
+                .overlay(
+                    VStack {
+                        // MARK: - Back button
                         
-                        ProfilePictureView(selectedPFP: $selectedPFP)
-                        
-                        Text("you're ready!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
-                        
-                        // MARK: - Button redirecting to the main app
-                        
-                        VStack {
-                            Button(action: {
-                                do {
-                                    confirmProfilePic()
-                                    currentUser.setCollectionRefs()
-                                    model.createProfile()
-                                    currentUser.getProfile()
-                                    currentUser.getUser()
-                                    model.presentMainApp()
-                                }
-                            }) {
-                                LFButton(text: "finish")
+                        HStack {
+                            Button {
+                                dismiss()
+                            } label: {
+                                BackButton(color: .white)
                             }
                         }
+                        .padding(.leading, 15)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        Spacer()
+                        
+                        // MARK: - Profile picture upload button & prompts
+                        
+                        VStack(spacing: 60) {
+                            Text("upload a profile picture")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 25))
+                                .padding(.top, 100)
+                            Text("(optional)")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(.top, -40)
+                            
+                            ProfilePictureView(selectedPFP: $selectedPFP)
+                            
+                            Text("you're ready!")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding(-20)
+                            
+                            // MARK: - Button redirecting to the main app
+                            
+                            VStack {
+                                Button(action: {
+                                    Task {
+                                        do {
+                                            try await confirmProfilePic()
+                                            currentUser.setCollectionRefs()
+                                            model.createProfile()
+                                            currentUser.getProfile()
+                                            currentUser.getUser()
+                                            model.presentMainApp()
+                                        } catch {
+                                            print("Error setting profile picture: \(error)")
+                                        }
+                                    }
+                                }) {
+                                    LFButton(text: "finish")
+                                }
+                            }
+                        }
+                        .padding(.bottom, 200)
                     }
-                    Spacer()
-                }
-                .ignoresSafeArea(.keyboard, edges: .bottom)
-            )
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
+                )
+                .navigationBarBackButtonHidden(true)
         }
     }
     
-    func confirmProfilePic() {
-            guard selectedPFP != nil else {
-                print("No image")
-                return
-            }
+    
+    func confirmProfilePic() async throws {
+        guard selectedPFP != nil else {
+            print("No image")
+            throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No image"])
+        }
         
-            let imageData = selectedPFP!.jpegData(compressionQuality: 0.8)
-            guard let imageData = imageData else {
-                print("Image cannot be converted to data")
-                return
-            }
-            
-
-        let imagePath = "profilepictures/\(UUID().uuidString).jpg"
+        guard let imageData = selectedPFP!.jpegData(compressionQuality: 0.8) else {
+            print("Image cannot be converted to data")
+            throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Image cannot be converted to data"])
+        }
         
-        uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
-                if let photoURL = photoURL {
-                    print(photoURL)
-                    model.profilePic = photoURL
-                    print(model)
-                } else {
-                    print("Error uploading picture to storage")
+        let imagePath = "pfpImages/\(UUID().uuidString).jpg"
+        
+        do {
+            let photoURL = try await withCheckedThrowingContinuation { continuation in
+                uploadToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
+                    continuation.resume(returning: photoURL)
+                }
+            }
+            print("0")
+            print(photoURL)
+            model.profilePic = photoURL!
+            print("1")
+            print(model.profilePic)
+        } catch {
+            print("Error uploading picture to storage: \(error)")
+            throw error
+        }
+    }
+    
+    // Updated uploadToBunnyCDNStorage function with correct closure parameter
+    func uploadToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
+        // Implement your code here to upload the image using GCD or other asynchronous techniques
+        // For example, you can use Firebase Storage APIs to upload the image to BunnyCDN
+        let storageRef = Storage.storage().reference()
+        let fileRef = storageRef.child(imagePath)
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        fileRef.putData(imageData, metadata: metadata) { metadata, error in
+            if let error = error {
+                print("Error uploading image to BunnyCDN:", error)
+                completion(nil)
+            } else {
+                fileRef.downloadURL { url, error in
+                    if let downloadURL = url {
+                        completion(downloadURL.absoluteString)
+                    } else {
+                        print("Error retrieving download URL:", error?.localizedDescription ?? "Unknown error")
+                        completion(nil)
+                    }
                 }
             }
         }
-
+    }
 }
-        
-        //    func processUploadPFP() async {
-        //        guard let selectedImage = selectedImage else {
-        //            print("No image")
-        //            return
-        //        }
-        //
-        //        let imageData = selectedImage.jpegData(compressionQuality: 0.8)
-        //        if let imageData = imageData {
-        //            let photoURL = await uploadPFPtoStorage(imageData: imageData)
-        //            if let photoURL = photoURL {
-        //                model.profilePic = photoURL
-        //            } else {
-        //                print("Error uploading profile picture")
-        //            }
-        //        }
-        //    }
-        //
-        //    func uploadPFPtoStorage(imageData: Data) async -> String? {
-        //        do {
-        //            let storageRef = Storage.storage().reference()
-        //            let path = "feedimages/\(UUID().uuidString).jpg"
-        //            let fileRef = storageRef.child(path)
-        //
-        //            fileRef.putData(imageData)
-        //            let photoURL = try await fileRef.downloadURL()
-        //            return photoURL.absoluteString
-        //        } catch {
-        //            print("Error upload photo to storage: \(error.localizedDescription)")
-        //            return nil
-        //        }
-        //    }

@@ -80,7 +80,9 @@ struct VerifyNumber: View {
                     .alert(model.errorMessage, isPresented: $model.showError){}
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             )
-            
+            .onTapGesture {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

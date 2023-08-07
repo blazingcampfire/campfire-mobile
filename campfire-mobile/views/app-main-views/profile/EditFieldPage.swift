@@ -12,7 +12,8 @@ struct EditFieldPage: View {
     @State private var newName: String = ""
     @State private var isEditing: Bool = false
     @EnvironmentObject var currentUser: CurrentUserModel
-
+    @Environment(\.dismiss) private var dismiss
+    
     var field: String
     @State var currentfield: String
 
@@ -54,6 +55,8 @@ struct EditFieldPage: View {
             }
             .padding(.top, 50)
         }
+        .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+        .navigationBarBackButtonHidden(true)
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }

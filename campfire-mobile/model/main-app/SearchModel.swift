@@ -29,6 +29,7 @@ class SearchModel: ObservableObject {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
+            self.profiles = []
             return
         }
         currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in

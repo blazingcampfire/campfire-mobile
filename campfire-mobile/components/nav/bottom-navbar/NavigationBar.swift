@@ -9,7 +9,9 @@ import SwiftUI
 
 
 struct NavigationBar: View {
+    
     @EnvironmentObject var currentUser: CurrentUserModel
+    
     var body: some View {
         NavigationView {
         TabView() {

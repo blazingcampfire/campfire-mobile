@@ -11,16 +11,25 @@ struct NotificationsPage: View {
     let range: ClosedRange<Int>
 
     var body: some View {
-        List {
-            ForEach(range, id: \.self) { _ in
-                VStack {
-                    Notification()
-                    Divider()
-                }
+        ZStack {
+            Theme.ScreenColor
+                .ignoresSafeArea(.all)
+            List {
+                    ForEach(range, id: \.self) { _ in
+                        ZStack {
+                            Theme.ScreenColor
+                                .ignoresSafeArea(.all)
+                            
+                            VStack {
+                                Notification()
+                                Divider()
+                            }
+                        }
+                    }
+                    .listRowSeparator(.hidden)
             }
-            .listRowSeparator(.hidden)
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
         
     }
 }

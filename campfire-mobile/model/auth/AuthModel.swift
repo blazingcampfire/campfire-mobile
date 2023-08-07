@@ -31,6 +31,7 @@ final class AuthModel: ObservableObject {
 
     // Validity booleans
     @Published var validUser: Bool = false
+    @Published var validPhoneNumberString: Bool = false
     @Published var validPhoneNumber: Bool = false
     @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
@@ -58,7 +59,7 @@ final class AuthModel: ObservableObject {
     init() {
         isPhoneNumberValidPublisher
             .receive(on: RunLoop.main)
-            .assign(to: \.validPhoneNumber, on: self)
+            .assign(to: \.validPhoneNumberString, on: self)
             .store(in: &publishers)
         isVerificationCodeValidPublisher
             .receive(on: RunLoop.main)
@@ -157,8 +158,9 @@ extension AuthModel {
                 await MainActor.run(body: {
                     firebaseVerificationCode = code
                 })
+                validPhoneNumber = true
             } catch {
-                await handleError(error: error)
+                await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
             }
         }
     }
@@ -175,7 +177,7 @@ extension AuthModel {
 
                 self.validVerificationCode = true
             } catch {
-                await handleError(error: error)
+                await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
             }
         }
     }
@@ -190,7 +192,7 @@ extension AuthModel {
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
         } catch {
-            await handleError(error: error)
+            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try again.")
         }
     }
 
@@ -200,15 +202,20 @@ extension AuthModel {
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
         } catch {
-            await handleError(error: error)
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please try again.")
         }
     }
 
     // MARK: - Handling errors
 
-    func handleError(error: Error) async {
+    func handleError(error: Error, message: String?) async {
         await MainActor.run(body: {
-            errorMessage = error.localizedDescription
+            if message != nil {
+                errorMessage = message!
+            }
+            else {
+                errorMessage = error.localizedDescription
+            }
             showError.toggle()
         })
     }
@@ -296,7 +303,7 @@ extension AuthModel {
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function
 
-private extension UIApplication {
+extension UIApplication {
     func closeKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

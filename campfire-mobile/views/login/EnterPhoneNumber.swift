@@ -12,10 +12,9 @@ struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
-    @State var canAdvance: Bool = false
     
     var body: some View {
-        if model.login && canAdvance {
+        if model.validPhoneNumber {
             VerifyNumber()
         }
         else {
@@ -51,19 +50,16 @@ struct EnterPhoneNumber: View {
                             // MARK: - NavLink to VerifyNumber screen
                             
                             VStack {
-                                
-                                NavigationLink(destination: VerifyNumber(), label: {
-                                    LFButton(text: "next")
-                                })
-                                // on tap, navLink gets user verification code
-                                .simultaneousGesture(TapGesture().onEnded{
+                                Button {
                                     model.getVerificationCode()
                                     print(model.phoneNumber)
-                                    canAdvance = true
-                                })
+                                } label: {
+                                    LFButton(text: "next")
+                                }
+                            
                             }
                             .opacity(buttonOpacity)
-                            .disabled(!model.validPhoneNumber)
+                            .disabled(!model.validPhoneNumberString)
                         }
                         Spacer()
                     }
@@ -83,7 +79,7 @@ struct EnterPhoneNumber: View {
 
 extension EnterPhoneNumber {
     var buttonOpacity: Double {
-        return model.validPhoneNumber ? 1 : 0.5
+        return model.validPhoneNumberString ? 1 : 0.5
     }
 }
 

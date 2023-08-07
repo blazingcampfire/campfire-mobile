@@ -12,8 +12,13 @@ struct RequestsPage: View {
     
     var body: some View {
         NavigationView {
-            ListRequests()
-                .environmentObject(model)
+            ZStack {
+                Theme.ScreenColor
+                    .ignoresSafeArea(.all)
+                
+                ListRequests()
+                    .environmentObject(model)
+            }
         }
         .background(Color.white)
         .listStyle(PlainListStyle())

@@ -16,43 +16,22 @@ struct LeaderboardPage: View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            
+
             VStack(spacing: 0) {
-                
                 Text("Leaderboard 👑")
                     .font(.custom("LexendDeca-SemiBold", size: 20))
                     .padding(.top, 15)
-                
-                Picker(selection: $selectedOption, label: Text("")) {
-                    Text("All-Time")
-                        .font(.custom("LexendDeca-SemiBold", size: 15))
-                        .tag(5)
-                    Text("Weekly")
-                        .font(.custom("LexendDeca-SemiBold", size: 15))
-                        .tag(6)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                if selectedOption == 5 {
-                    LeaderboardList(range: 1 ... 10)
-                        .environmentObject(model)
-                        .listStyle(InsetListStyle())
-                } else if selectedOption == 6 {
-                    LeaderboardList(range: 1 ... 10)
-                        .environmentObject(model)
-                        .listStyle(InsetListStyle())
-                }
+
+                LeaderboardList()
+                    .environmentObject(model)
+                    .listStyle(InsetListStyle())
             }
         }
     }
 }
 
 struct LeaderboardList: View {
-    
     @EnvironmentObject var model: LeaderboardModel
-    
-    let range: ClosedRange<Int>
 
     var body: some View {
         List {
@@ -92,8 +71,8 @@ struct LeaderboardList: View {
     }
 }
 
-//struct LeaderboardPage_Previews: PreviewProvider {
+// struct LeaderboardPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        LeaderboardPage(model: LeaderboardModel())
 //    }
-//}
+// }

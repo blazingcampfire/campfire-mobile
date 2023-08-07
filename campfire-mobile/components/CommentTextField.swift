@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct CommentTextField: View {
     @Binding var text: String
     var placeholderText: String

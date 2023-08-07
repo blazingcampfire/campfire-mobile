@@ -35,6 +35,9 @@ struct EditFieldPage: View {
                     saveName()
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 2)
+                    .foregroundColor(Theme.Peach))
                 .padding()
                 
                 if newName != currentfield && newName != "" {

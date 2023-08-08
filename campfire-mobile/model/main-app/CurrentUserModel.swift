@@ -46,6 +46,7 @@ class CurrentUserModel: ObservableObject {
 
     func getProfile() {
         print("fired getProfile")
+        print(Auth.auth().currentUser?.email)
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {

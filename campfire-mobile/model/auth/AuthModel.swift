@@ -149,7 +149,9 @@ extension AuthModel {
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
+            
             do {
+                try AuthenticationManager.shared.signOut()
                 // MARK: - Disable when testing with real device
 
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
@@ -174,7 +176,7 @@ extension AuthModel {
                 try await Auth.auth().signIn(with: credential)
 
                 // MARK: User phone number authenticated successfully
-
+                print(phoneNumber)
                 self.validVerificationCode = true
             } catch {
                 await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")

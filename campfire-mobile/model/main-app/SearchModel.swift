@@ -108,7 +108,7 @@ class SearchModel: ObservableObject {
     }
     
     func checkRequested(request: RequestFirestore) -> Bool {
-        var requested: Bool = false
+        var requestBool: Bool = false
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return false
@@ -119,7 +119,9 @@ class SearchModel: ObservableObject {
                 print(error?.localizedDescription)
             }
             else {
-                if let documentSnapshot = documentSnapshot {
+                guard let documentSnapshot = documentSnapshot else {
+                    return
+                }
                     let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
                     for rawRequest in requests {
                         guard let neatRequest = RequestFirestore(data: rawRequest) else {
@@ -127,15 +129,14 @@ class SearchModel: ObservableObject {
                             return
                         }
                         if request.userID == neatRequest.userID {
-                            requested = true
+                            print(request.userID, neatRequest.userID)
                             return
                         }
                         return
                     }
-                }
             }
         }
-        return requested
+        return requestBool
     }
     
 }

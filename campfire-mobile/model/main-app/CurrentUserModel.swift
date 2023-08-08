@@ -32,6 +32,7 @@ class CurrentUserModel: ObservableObject {
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {
+            print(Auth.auth().currentUser?.phoneNumber)
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
             if school == "Does not belong to a supported school" {
                 print("Sorry, but we do not currently support your school.")

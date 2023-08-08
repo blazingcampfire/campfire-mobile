@@ -24,6 +24,11 @@ struct VerifyEmail: View {
         else if (validEmail && model.login) {
             NavigationBar()
                 .environmentObject(currentUser)
+                .onAppear {
+                    currentUser.setCollectionRefs()
+                    currentUser.getProfile()
+                    currentUser.getUser()
+                }
         }
         else {
             GradientBackground()
@@ -72,9 +77,6 @@ struct VerifyEmail: View {
                                             Task {
                                                 do {
                                                     try await model.signInGoogle()
-                                                    currentUser.setCollectionRefs()
-                                                    currentUser.getProfile()
-                                                    currentUser.getUser()
                                                     validEmail = true
                                                 } catch {
                                                     print(error)

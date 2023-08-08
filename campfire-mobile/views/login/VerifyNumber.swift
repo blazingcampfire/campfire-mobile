@@ -26,6 +26,11 @@ struct VerifyNumber: View {
         else if model.login && validPhoneNumber {
             NavigationBar()
                 .environmentObject(currentUser)
+                .onAppear {
+                    currentUser.setCollectionRefs()
+                    currentUser.getProfile()
+                    currentUser.getUser()
+                }
         }
         else {
         GradientBackground()
@@ -63,9 +68,6 @@ struct VerifyNumber: View {
                                 .simultaneousGesture(TapGesture().onEnded{
                                     model.verifyVerificationCode()
                                     if model.login {
-                                        currentUser.setCollectionRefs()
-                                        currentUser.getProfile()
-                                        currentUser.getUser()
                                         validPhoneNumber = true
                                     }
                                 })

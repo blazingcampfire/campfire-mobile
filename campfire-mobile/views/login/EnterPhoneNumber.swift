@@ -52,7 +52,7 @@ struct EnterPhoneNumber: View {
                             VStack {
                                 Button {
                                     model.getVerificationCode()
-                                    print(model.phoneNumber)
+                                    print("\(model.formattedPhoneNumber)")
                                 } label: {
                                     LFButton(text: "next")
                                 }

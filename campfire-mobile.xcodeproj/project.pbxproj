@@ -156,6 +156,7 @@
 		F85F03982A3F9A89000DCBEF /* VerifyNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */; };
 		F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */; };
 		F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86695152A40F78300D9471C /* OwnProfilePage.swift */; };
+		F8681FDA2A82BD7000205CC0 /* WelcomeModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8681FD92A82BD7000205CC0 /* WelcomeModal.swift */; };
 		F86D83A62A4BC37900223F9A /* prompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A52A4BC37900223F9A /* prompts.swift */; };
 		F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86D83A72A4BC54100223F9A /* EditProfile.swift */; };
 		F86FAACD2A81AE0400D3801D /* unallowedCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */; };
@@ -337,6 +338,7 @@
 		F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumber.swift; sourceTree = "<group>"; };
 		F85F03992A3F9BC9000DCBEF /* EmailOrNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailOrNumber.swift; sourceTree = "<group>"; };
 		F86695152A40F78300D9471C /* OwnProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnProfilePage.swift; sourceTree = "<group>"; };
+		F8681FD92A82BD7000205CC0 /* WelcomeModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModal.swift; sourceTree = "<group>"; };
 		F86D83A52A4BC37900223F9A /* prompts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prompts.swift; sourceTree = "<group>"; };
 		F86D83A72A4BC54100223F9A /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unallowedCharacters.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 			isa = PBXGroup;
 			children = (
 				B18B19712A46059700309256 /* SettingsPage.swift */,
+				F8681FD92A82BD7000205CC0 /* WelcomeModal.swift */,
 				F86D83A72A4BC54100223F9A /* EditProfile.swift */,
 				F8A371D42A4BEA660076F1C1 /* EditFieldPage.swift */,
 				F86695152A40F78300D9471C /* OwnProfilePage.swift */,
@@ -1114,6 +1117,7 @@
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
 				B12352352A7B612E00D9BBC7 /* NewFeed.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
+				F8681FDA2A82BD7000205CC0 /* WelcomeModal.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2B248CF2A7EDDAF0004A757 /* LeaderboardModel.swift in Sources */,
 				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,

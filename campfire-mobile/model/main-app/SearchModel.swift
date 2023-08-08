@@ -85,59 +85,6 @@ class SearchModel: ObservableObject {
         ], merge: true)
     }
 
-    func unrequestFriend(request: RequestFirestore) {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
-            return
-        }
-        guard let friendID = request.userID else {
-            print("No request ID")
-            return
-        }
-        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
-        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
-
-        friendRelationshipRef.updateData([
-            "sentRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)]),
-        ])
-
-        userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)]),
-        ])
-    }
-    
-    func checkRequested(request: RequestFirestore) -> Bool {
-        var requested: Bool = false
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
-            return false
-        }
-       
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            else {
-                if let documentSnapshot = documentSnapshot {
-                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
-                    for rawRequest in requests {
-                        guard let neatRequest = RequestFirestore(data: rawRequest) else {
-                            print("Error comparing requests")
-                            return
-                        }
-                        if request.userID == neatRequest.userID {
-                            requested = true
-                            return
-                        }
-                        return
-                    }
-                }
-            }
-        }
-        return requested
-    }
-    
-
     func checkRequested(request: RequestFirestore) -> Bool {
         var requestBool: Bool = false
         guard let userID = Auth.auth().currentUser?.uid else {

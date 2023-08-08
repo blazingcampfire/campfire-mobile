@@ -31,18 +31,22 @@ class CurrentUserModel: ObservableObject {
     func setCollectionRefs() {
         if Auth.auth().currentUser?.email == nil {
             return
-        } else {
-            let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
-            if school == "Does not belong to a supported school" {
-                print("Sorry, but we do not currently support your school.")
-                return
-            }
-            userRef = userParser(school: school)!
-            profileRef = profileParser(school: school)!
-            relationshipsRef = relationshipsParser(school: school)!
-            postsRef = postsParser(school: school)!
         }
-    }
+//        } else {
+//            let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
+//            if school == "Does not belong to a supported school" {
+//                print("Sorry, but we do not currently support your school.")
+//                return
+//            }
+//            userRef = userParser(school: school)!
+//            profileRef = profileParser(school: school)!
+//            relationshipsRef = relationshipsParser(school: school)!
+//            postsRef = postsParser(school: school)!
+            userRef = ndUsers
+            profileRef = ndProfiles
+            relationshipsRef = ndRelationships
+            postsRef = ndPosts
+        }
 
     func getProfile() {
         print("fired getProfile")

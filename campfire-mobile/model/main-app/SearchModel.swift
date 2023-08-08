@@ -119,7 +119,9 @@ class SearchModel: ObservableObject {
                 print(error?.localizedDescription)
             }
             else {
-                if let documentSnapshot = documentSnapshot {
+                guard let documentSnapshot = documentSnapshot else {
+                    return
+                }
                     let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
                     for rawRequest in requests {
                         guard let neatRequest = RequestFirestore(data: rawRequest) else {
@@ -128,12 +130,10 @@ class SearchModel: ObservableObject {
                         }
                         if request.userID == neatRequest.userID {
                             print(request.userID, neatRequest.userID)
-                            requestBool = true
                             return
                         }
                         return
                     }
-                }
             }
         }
         return requestBool

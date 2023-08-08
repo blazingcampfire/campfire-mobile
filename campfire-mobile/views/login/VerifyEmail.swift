@@ -88,7 +88,7 @@ struct VerifyEmail: View {
                         
                     })
                 .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
+                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
     }
 }

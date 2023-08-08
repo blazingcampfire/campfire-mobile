@@ -23,7 +23,7 @@ struct CreateUsername: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.username, placeholderText: "username")
+                        FormTextField(text: $model.username, placeholderText: "username", characterLimit: 20, unallowedCharacters: usernameIllegalChar)
                         
                         Text("almost there!")
                             .foregroundColor(Color.white)
@@ -47,7 +47,7 @@ struct CreateUsername: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
     }
 }
 

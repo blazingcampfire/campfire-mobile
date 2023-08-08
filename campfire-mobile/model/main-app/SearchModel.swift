@@ -14,10 +14,10 @@ import Foundation
 class SearchModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
+    @Published var requested: [Bool] = []
     @Published var name: String = "" {
         didSet {
             searchName(matching: name)
-            print("Email: \(self.currentUser.profile.email). Collection: \(self.currentUser.profileRef.path)")
         }
     }
 
@@ -30,6 +30,7 @@ class SearchModel: ObservableObject {
         let name = name.lowercased()
         if name == "" {
             self.profiles = []
+            self.requested = []
             return
         }
         currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
@@ -37,16 +38,18 @@ class SearchModel: ObservableObject {
                 print("Error querying profiles: \(err)")
             } else {
                 self.profiles = []
+                self.requested = []
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)
-                        print(profile.name)
+                        var requestData: [String: Any]
+                        requestData = try Firestore.Encoder().encode(Request(userID: profile.userID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
+                        print(self.checkRequested(request: RequestFirestore(data: requestData)!))
+                        print(self.requested)
                         self.profiles.append(profile)
                     } catch {
                         print("Error retrieving profile")
-                        print("\(document.documentID) => \(document.data())")
                     }
-                    print("\(document.documentID) => \(document.data())")
                 }
             }
         }
@@ -102,6 +105,38 @@ class SearchModel: ObservableObject {
             "ownRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)]),
         ])
     }
+    
+    func checkRequested(request: RequestFirestore) -> Bool {
+        var requested: Bool = false
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return false
+        }
+       
+        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            else {
+                if let documentSnapshot = documentSnapshot {
+                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
+                    for rawRequest in requests {
+                        guard let neatRequest = RequestFirestore(data: rawRequest) else {
+                            print("Error comparing requests")
+                            return
+                        }
+                        if request.userID == neatRequest.userID {
+                            requested = true
+                            return
+                        }
+                        return
+                    }
+                }
+            }
+        }
+        return requested
+    }
+    
 
     func checkRequested(request: RequestFirestore) -> Bool {
         var requestBool: Bool = false

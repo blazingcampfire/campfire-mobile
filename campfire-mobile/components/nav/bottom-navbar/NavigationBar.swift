@@ -18,7 +18,7 @@ struct NavigationBar: View {
                 TheFeed()
                 .tabItem {
                     Text("Feed")
-                    Image(systemName: "fireplace")
+                    Image(systemName: "play.fill")
                 }
 
                 .toolbar(.visible, for: .tabBar)

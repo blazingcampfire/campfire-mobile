@@ -83,8 +83,6 @@ struct PostPlayerView: View {
                 KFImage(URL(string: imageURL))
                     .resizable()
                     .scaledToFit()
-                    .edgesIgnoringSafeArea(.all)
-                
             } else {
                 Text("Error Loading Post")
                     .font(.custom("LexendDeca-Regular", size: 25))
@@ -134,8 +132,6 @@ struct PostPlayerView: View {
                     }
             }
             
-            
-            
             VStack {
                 HStack {
                     Button(action: {
@@ -177,8 +173,6 @@ struct PostPlayerView: View {
                             }
                             .padding(.bottom, 5)
                             
-                            //- MARK: Caption/Location buttons VStack
-                            
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
                                     //lead to profile page
@@ -196,17 +190,15 @@ struct PostPlayerView: View {
                                         .font(.custom("LexendDeca-Regular", size: 15))
                                 }
                             }
+                            .padding(.leading, 10)
+                            
+                            
                         }
-                        .padding(.leading, 10)
-                        
                         
                     }
                     
                 }
-                
-                
             }
-            
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.bottom, 40)
@@ -235,7 +227,7 @@ struct PostPlayerView: View {
                         }
                         .padding(.leading, -15)
                     }
-                    Text("\(postPlayer.postItem.numLikes)")
+                    Text("\(formatNumber(postPlayer.postItem.numLikes))")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }

@@ -25,7 +25,7 @@ struct EnterName: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
-                        FormTextField(text: $model.name, placeholderText: "name")
+                        FormTextField(text: $model.name, placeholderText: "name", characterLimit: 20, unallowedCharacters: nameIllegalChar)
                         
                         
                         // MARK: - NavLink to VerifyEmail screen
@@ -45,7 +45,7 @@ struct EnterName: View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
 }
 

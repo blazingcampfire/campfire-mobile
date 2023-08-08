@@ -57,7 +57,7 @@ struct LFButton: View {
                     
                     
                 }
-                .frame(width: 300, alignment: .center)
+                .frame(width: 300, height: 40, alignment: .center)
                 .padding()
                 .background(Theme.Peach)
                 .cornerRadius(16)

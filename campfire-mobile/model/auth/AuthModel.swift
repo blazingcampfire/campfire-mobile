@@ -151,9 +151,7 @@ extension AuthModel {
         Task {
             
             do {
-                try AuthenticationManager.shared.signOut()
                 // MARK: - Disable when testing with real device
-
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 formatPhoneNumber()
                 let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil)

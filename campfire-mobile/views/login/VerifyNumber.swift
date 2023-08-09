@@ -73,7 +73,9 @@ struct VerifyNumber: View {
                     }
                     Spacer()
                 }
-                    .alert(model.errorMessage, isPresented: $model.showError){}
+                .alert(title: "Error Verifying Number", message: model.errorMessage,
+                               dismissButton: CustomAlertButton(title: "ok", action: { }),
+                           isPresented: $model.showError)
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .onTapGesture {

@@ -86,9 +86,9 @@ struct VerifyEmail: View {
                         }
                         Spacer()
                     })
-                .alert(model.errorMessage, isPresented: $model.showError){
-                    AccountSetUp()
-                }
+                .alert(title: "Error Verifying Number", message: model.errorMessage,
+                               dismissButton: CustomAlertButton(title: "ok", action: { }),
+                           isPresented: $model.showError)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

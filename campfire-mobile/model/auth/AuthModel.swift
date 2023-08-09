@@ -120,7 +120,8 @@ extension AuthModel {
     var isEmailValidPublisher: AnyPublisher<Bool, Never> {
         $submittedEmail
             .map { submittedEmail in
-                // has a valid "@." email
+                
+                // has a valid "@.edu" email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
                 let validEmail: Bool = emailPredicate.evaluate(with: submittedEmail) && submittedEmail.hasSuffix(".edu") && schoolValidator(email: submittedEmail)
                 return validEmail
@@ -219,7 +220,7 @@ extension AuthModel {
                 catch {
                     await handleError(error: error, message: "No email was found to be associated with the phone number you provided. Please finish our create account flow and try again.")
                 }
-            // MARK: User phone number authenticated successfully
+            // user phone number authenticated successfully
             self.validVerificationCode = true
         }
     }
@@ -259,6 +260,7 @@ extension AuthModel {
                 } catch {
                     await handleError(error: error, message: "No account was found matching the email you provided. Please finish our \("create account") flow and try again.")
                 }
+                // successful Google Sign In
                 emailSignInSuccess = true
             }
         }

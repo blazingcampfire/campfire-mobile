@@ -35,4 +35,11 @@ final class Utilities {
 // MARK: - Error Types
 enum EmailError: Error {
     case noMatch
+    case existingUser
+    case noExistingUser
+}
+
+enum PhoneError: Error {
+    case existingUser
+    case noExistingUser
 }

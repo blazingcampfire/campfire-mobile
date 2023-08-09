@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// MARK: - Utilities Class for View Controllers
 final class Utilities {
     static let shared = Utilities()
     private init() {}
@@ -29,4 +30,9 @@ final class Utilities {
         }
         return controller
     }
+}
+
+// MARK: - Error Types
+enum EmailError: Error {
+    case noMatch
 }

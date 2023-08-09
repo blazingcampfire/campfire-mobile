@@ -55,8 +55,14 @@ final class AuthenticationManager {
             return
         }
         Auth.auth().currentUser?.delete()
-        ndUsers.document(userID).delete()
     }
+    func unlinkCredential(providerID: String) {
+        if Auth.auth().currentUser?.uid == nil {
+            return
+        }
+        Auth.auth().currentUser?.unlink(fromProvider: providerID)
+    }
+
     
     
     // logic still in progress

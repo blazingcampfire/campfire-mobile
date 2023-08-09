@@ -15,6 +15,7 @@ class SearchModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
     @Published var requested: [Bool] = []
+    @Published var test: [[Profile: Bool]] = []
     @Published var name: String = "" {
         didSet {
             searchName(matching: name)
@@ -45,12 +46,13 @@ class SearchModel: ObservableObject {
                         var requestData: [String: Any]
                         requestData = try Firestore.Encoder().encode(Request(userID: profile.userID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
                         self.checkRequested(request: RequestFirestore(data: requestData)!)
-                        print(self.requested)
                         self.profiles.append(profile)
+                        print(self.requested)
                     } catch {
                         print("Error retrieving profile")
                     }
                 }
+                print(self.requested.count, self.profiles.count)
             }
         }
     }
@@ -107,16 +109,14 @@ class SearchModel: ObservableObject {
         ])
     }
     
-    func checkRequested(request: RequestFirestore) {
-        var requestBool: Bool = false
+    func checkRequested(request: RequestFirestore) -> Bool {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
-            return
+            return false
         }
-       
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener {
+        var flag: Bool = false
+        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument {
             documentSnapshot, error in
-            var flag: Bool = false
             if error != nil {
                 print(error?.localizedDescription)
             }
@@ -133,14 +133,13 @@ class SearchModel: ObservableObject {
                         if request.userID == neatRequest.userID {
                             print(request.userID, neatRequest.userID)
                             flag = true
-                            self.requested.append(flag)
                             break
                         }
                     }
             }
-            print(flag)
-            print(self.requested)
         }
+        print(flag)
+        return flag
     }
     
 }

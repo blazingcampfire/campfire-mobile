@@ -24,6 +24,7 @@ final class AuthModel: ObservableObject {
     @Published var formattedPhoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
+    @Published var submittedEmail: String = ""
     @Published var name: String = ""
     @Published var username: String = ""
     @Published var profilePic: String = ""
@@ -41,6 +42,7 @@ final class AuthModel: ObservableObject {
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
     @Published var isMainAppPresented: Bool = false
+    @Published var restart: Bool = false
 
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
@@ -68,6 +70,10 @@ final class AuthModel: ObservableObject {
         isEmailStringValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validEmailString, on: self)
+            .store(in: &publishers)
+        isEmailValidPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.validEmail, on: self)
             .store(in: &publishers)
         isNameValidPublisher
             .receive(on: RunLoop.main)
@@ -107,6 +113,17 @@ extension AuthModel {
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
                 let validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
+                return validEmail
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    var isEmailValidPublisher: AnyPublisher<Bool, Never> {
+        $submittedEmail
+            .map { submittedEmail in
+                // has a valid "@." email
+                let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+                let validEmail: Bool = emailPredicate.evaluate(with: submittedEmail) && submittedEmail.hasSuffix(".edu") && schoolValidator(email: submittedEmail)
                 return validEmail
             }
             .eraseToAnyPublisher()
@@ -158,9 +175,10 @@ extension AuthModel {
                 await MainActor.run(body: {
                     firebaseVerificationCode = code
                 })
-                validPhoneNumber = true
+                self.validPhoneNumber = true
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
+
             }
         }
     }
@@ -191,8 +209,19 @@ extension AuthModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+            if !validEmail {
+                guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else {
+                    throw EmailError.noMatch
+                }
+                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+                self.triggerRestart()
+                throw EmailError.noMatch
+            }
+            else {
+                self.emailSignInSuccess = true
+            }
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try again.")
+            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
         }
     }
 
@@ -201,8 +230,17 @@ extension AuthModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+            self.submittedEmail = (Auth.auth().currentUser?.email)!
+            
+            if !validEmail {
+                throw EmailError.noMatch
+            }
+            else {
+                self.emailSignInSuccess = true
+            }
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please try again.")
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please re-verify your phone number & try to create your account again.")
+            self.triggerRestart()
         }
     }
 
@@ -218,6 +256,27 @@ extension AuthModel {
             }
             showError.toggle()
         })
+    }
+    
+    func triggerRestart() {
+        print("Triggered restart.")
+        validUser = false
+        validPhoneNumberString = false
+        validPhoneNumber = false
+        validVerificationCodeLength = false
+        validVerificationCode = false
+        validEmailString = false
+        validEmail = false
+        validName = false
+        emailSignInSuccess = false
+        validUsername = false
+        login = false
+        createAccount = false
+        isMainAppPresented = false
+    }
+    
+    func resetRestart() {
+        self.restart = false
     }
 }
 

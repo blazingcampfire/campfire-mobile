@@ -65,8 +65,8 @@ struct CustomAlert: View {
                 .font(.custom("LexendDeca-Bold", size: 18))
                 .foregroundColor(.black)
                 .lineSpacing(24 - UIFont.systemFont(ofSize: 18, weight: .bold).lineHeight)
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 
@@ -78,7 +78,7 @@ struct CustomAlert: View {
                 .foregroundColor(title.isEmpty ? .black : .gray)
                 .lineSpacing(24 - UIFont.systemFont(ofSize: title.isEmpty ? 18 : 16).lineHeight)
                 .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
     }
 
@@ -128,10 +128,12 @@ struct CustomAlert: View {
     @ViewBuilder
     private var dismissButtonView: some View {
         if let button = dismissButton {
-            CustomAlertButton(title: button.title) {
+            CustomAlertButton(title: button.title)
+            {
                 animate(isShown: false) {
                     dismiss()
                 }
+                
         
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     button.action?()
@@ -141,9 +143,7 @@ struct CustomAlert: View {
     }
 
     private var dimView: some View {
-        Color.gray
-            .opacity(0.88)
-            .opacity(backgroundOpacity)
+        GradientBackground()
     }
 
 
@@ -196,7 +196,7 @@ struct CustomAlertButton: View {
                 .foregroundColor(.white)
                 .padding()
         }
-        .frame(height: 30)
+        .frame(width: 100, height: 30)
         .background(Theme.Peach)
         .cornerRadius(15)
     }

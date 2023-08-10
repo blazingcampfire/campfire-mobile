@@ -65,6 +65,9 @@ struct EnterPhoneNumber: View {
                     }
                     Spacer()
                 }
+                    .alert(title: "Invalid Phone Number", message: model.errorMessage,
+                                   dismissButton: CustomAlertButton(title: "ok", action: { }),
+                               isPresented: $model.showError)
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .onTapGesture {

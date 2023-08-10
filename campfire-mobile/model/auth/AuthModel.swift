@@ -120,7 +120,7 @@ extension AuthModel {
     var isEmailValidPublisher: AnyPublisher<Bool, Never> {
         $submittedEmail
             .map { submittedEmail in
-                
+
                 // has a valid "@.edu" email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
                 let validEmail: Bool = emailPredicate.evaluate(with: submittedEmail) && submittedEmail.hasSuffix(".edu") && schoolValidator(email: submittedEmail)
@@ -195,10 +195,12 @@ extension AuthModel {
             }
 
             do {
-                submittedEmail = (Auth.auth().currentUser?.email)!
+                if Auth.auth().currentUser?.email == nil {
+                    throw EmailError.noExistingUser
+                }
                 let existingProfile = try await self.checkProfile(email: submittedEmail)
                 print(existingProfile)
-                
+
                 do {
                     if self.login && !existingProfile {
                         try AuthenticationManager.shared.signOut()
@@ -212,16 +214,14 @@ extension AuthModel {
                         try AuthenticationManager.shared.signOut()
                         throw PhoneError.existingUser
                     }
-                }
-                catch {
+                } catch {
                     await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
                 }
+                // user phone number authenticated successfully
+                self.validVerificationCode = true
+            } catch {
+                await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
             }
-                catch {
-                    await handleError(error: error, message: "No email was found to be associated with the phone number you provided. Please finish our create account flow and try again.")
-                }
-            // user phone number authenticated successfully
-            self.validVerificationCode = true
         }
     }
 }
@@ -241,32 +241,20 @@ extension AuthModel {
                 guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else {
                     throw EmailError.noMatch
                 }
-                do {
-                    AuthenticationManager.shared.unlinkCredential(providerID: providerID)
-                    triggerRestart()
-                    throw EmailError.noMatch
-                    
-                }
-                catch {
-                    try AuthenticationManager.shared.deleteUser()
-                    await handleError(error: EmailError.noMatch, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
-                }
+                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+                throw EmailError.noMatch
             } else {
-                do {
-                    let existingProfile: Bool = try await checkProfile(email: submittedEmail)
-                    if !existingProfile {
-                        throw EmailError.noExistingUser
-                    }
-                } catch {
-                    await handleError(error: error, message: "No account was found matching the email you provided. Please finish our \("create account") flow and try again.")
+                let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+                if !existingProfile {
+                    throw EmailError.noExistingUser
                 }
-                // successful Google Sign In
-                emailSignInSuccess = true
+                else {
+                    emailSignInSuccess = true
+                }
             }
-        }
-        catch {
-            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
-        }
+        } catch {
+                await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
+            }
         }
 
     func signUpGoogle() async throws {
@@ -277,9 +265,8 @@ extension AuthModel {
             submittedEmail = (Auth.auth().currentUser?.email)!
 
             if !validEmail {
-                throw EmailError.noMatch
-                await handleError(error: EmailError.noMatch, message: "An error occurred trying to sign up with the email you provided. Please re-verify your phone number & try to create your account again.")
                 triggerRestart()
+                throw EmailError.noMatch
             } else {
                 do {
                     let existingProfile: Bool = try await checkProfile(email: submittedEmail)
@@ -315,7 +302,9 @@ extension AuthModel {
             return false
         }
         let profileRef = profileParser(school: schoolParser(email: email))
-        let document = try await profileRef!.document(userID).getDocument()
+        guard let document = try await profileRef?.document(userID).getDocument() else {
+            throw EmailError.noExistingUser
+        }
         return document.exists
     }
 

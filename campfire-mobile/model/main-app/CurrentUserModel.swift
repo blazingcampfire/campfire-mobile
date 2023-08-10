@@ -13,6 +13,7 @@ import Foundation
 class CurrentUserModel: ObservableObject {
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
+    @Published var signedIn: Bool = false
 
     var userRef: CollectionReference
     var profileRef: CollectionReference
@@ -27,6 +28,19 @@ class CurrentUserModel: ObservableObject {
         self.profileRef = profileRef
         self.relationshipsRef = relationshipsRef
         self.postsRef = postsRef
+        self.authStateDidChange()
+    }
+    
+    func authStateDidChange() {
+        Auth.auth().addStateDidChangeListener { _, user in
+            if user?.email != nil {
+                self.signedIn = true
+                // User is signed in. Show home screen
+            } else {
+                self.signedIn = false
+                // No User is signed in. Show user the login screen
+            }
+        }
     }
 
     func setCollectionRefs() {
@@ -48,12 +62,15 @@ class CurrentUserModel: ObservableObject {
 
     func getProfile() {
         print("fired getProfile")
+        print(profileRef.path)
+        print(userRef.path)
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {
             guard let userID = Auth.auth().currentUser?.uid else {
                 return
             }
+            print(userID)
             let docRef = profileRef.document(userID)
             docRef.addSnapshotListener { documentSnapshot, error in
                 if let error = error {

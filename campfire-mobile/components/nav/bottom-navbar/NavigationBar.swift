@@ -17,7 +17,6 @@ struct NavigationBar: View {
         TabView() {
                 TheFeed()
                 .tabItem {
-                    Text("Feed")
                     Image(systemName: "play.fill")
                 }
 
@@ -26,7 +25,7 @@ struct NavigationBar: View {
             
             MapPage()
                 .tabItem {
-                    Label("Map", systemImage: "map")
+                    Image(systemName: "map")
                 }
             
                 .toolbar(.visible, for: .tabBar)
@@ -38,7 +37,6 @@ struct NavigationBar: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
-                    Text("Camera")
                 }
            
                 .toolbar(.visible, for: .tabBar)
@@ -47,7 +45,7 @@ struct NavigationBar: View {
             TentTabView()
                 .environmentObject(currentUser)
                 .tabItem {
-                    Label("Tent", systemImage: "tent.fill")
+                    Image(systemName: "tent.fill")
                 }
              
                 .toolbar(.visible, for: .tabBar)
@@ -55,7 +53,7 @@ struct NavigationBar: View {
             
             OwnProfilePage()
                 .tabItem {
-                    Label("Profile", systemImage: "person.fill")
+                    Image(systemName: "person.fill")
                 }
             
                 .toolbar(.visible, for: .tabBar)

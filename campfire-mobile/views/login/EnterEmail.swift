@@ -27,7 +27,7 @@ struct EnterEmail: View {
                         FormTextField(text: $model.email, placeholderText: "email")
                         
                         
-                        if !model.validEmail {
+                        if !model.validEmailString {
                             Text("at this time, campfire is only at Yale, Rice, and Notre Dame")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 13))

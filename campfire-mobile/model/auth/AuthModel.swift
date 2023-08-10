@@ -36,7 +36,6 @@ final class AuthModel: ObservableObject {
     @Published var validVerificationCodeLength: Bool = false
     @Published var validVerificationCode: Bool = false
     @Published var validEmailString: Bool = false
-    @Published var validEmail: Bool = false
     @Published var validName: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
@@ -46,6 +45,7 @@ final class AuthModel: ObservableObject {
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
     @Published var createAccount: Bool = false
+    @Published var signedIn: Bool = false
 
     // Error Properties
     @Published var showError: Bool = false
@@ -69,10 +69,6 @@ final class AuthModel: ObservableObject {
         isEmailStringValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validEmailString, on: self)
-            .store(in: &publishers)
-        isEmailValidPublisher
-            .receive(on: RunLoop.main)
-            .assign(to: \.validEmail, on: self)
             .store(in: &publishers)
         isNameValidPublisher
             .receive(on: RunLoop.main)
@@ -111,20 +107,8 @@ extension AuthModel {
             .map { email in
                 // has a valid "@." email
                 let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                let validEmail: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
-                return validEmail
-            }
-            .eraseToAnyPublisher()
-    }
-
-    var isEmailValidPublisher: AnyPublisher<Bool, Never> {
-        $submittedEmail
-            .map { submittedEmail in
-
-                // has a valid "@.edu" email
-                let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-                let validEmail: Bool = emailPredicate.evaluate(with: submittedEmail) && submittedEmail.hasSuffix(".edu") && schoolValidator(email: submittedEmail)
-                return validEmail
+                let validEmailString: Bool = emailPredicate.evaluate(with: email) && email.hasSuffix(".edu") && schoolValidator(email: email)
+                return validEmailString
             }
             .eraseToAnyPublisher()
     }
@@ -195,27 +179,33 @@ extension AuthModel {
             }
 
             do {
-                if Auth.auth().currentUser?.email == nil {
-                    throw EmailError.noExistingUser
-                }
-                let existingProfile = try await self.checkProfile(email: submittedEmail)
-                print(existingProfile)
-
-                do {
-                    if self.login && !existingProfile {
-                        try AuthenticationManager.shared.signOut()
-                        throw PhoneError.noExistingUser
+                if self.login && Auth.auth().currentUser?.email == nil {
+                    throw PhoneError.noExistingUser
+                } else if self.createAccount && Auth.auth().currentUser?.email != nil {
+                    throw PhoneError.existingUser
+                } else if self.login {
+                    let existingProfile = try await self.checkProfile(email: submittedEmail)
+                    print(existingProfile)
+                    if !existingProfile {
+                        do {
+                            try AuthenticationManager.shared.signOut()
+                            throw PhoneError.noExistingUser
+                        } catch {
+                            await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                        }
                     }
-                } catch {
-                    await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
-                }
-                do {
-                    if self.createAccount && existingProfile {
-                        try AuthenticationManager.shared.signOut()
-                        throw PhoneError.existingUser
+                } else if self.createAccount {
+                    do {
+                        let existingProfile = try await self.checkProfile(email: submittedEmail)
+                        do {
+                            if existingProfile {
+                                throw PhoneError.existingUser
+                            }
+                        } catch {
+                            await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        }
+                    } catch {
                     }
-                } catch {
-                    await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
                 }
                 // user phone number authenticated successfully
                 self.validVerificationCode = true
@@ -234,53 +224,46 @@ extension AuthModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
-            
+
             submittedEmail = (Auth.auth().currentUser?.email)!
-            
-            if !validEmail {
-                guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else {
-                    throw EmailError.noMatch
-                }
-                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
-                throw EmailError.noMatch
+
+            let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+            if !existingProfile {
+                throw EmailError.noExistingUser
             } else {
-                let existingProfile: Bool = try await checkProfile(email: submittedEmail)
-                if !existingProfile {
-                    throw EmailError.noExistingUser
-                }
-                else {
-                    emailSignInSuccess = true
-                }
+                emailSignInSuccess = true
             }
         } catch {
-                await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
-            }
+            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
         }
+    }
 
     func signUpGoogle() async throws {
         do {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
-            submittedEmail = (Auth.auth().currentUser?.email)!
-
-            if !validEmail {
-                triggerRestart()
-                throw EmailError.noMatch
-            } else {
+            print(Auth.auth().currentUser?.email)
+            do {
+                submittedEmail = (Auth.auth().currentUser?.email)!
+                let existingProfile: Bool = try await checkProfile(email: submittedEmail)
                 do {
-                    let existingProfile: Bool = try await checkProfile(email: submittedEmail)
                     if existingProfile {
                         throw EmailError.existingUser
                     }
                 } catch {
-                    await handleError(error: error, message: "An account has already been created with these authentication credentials. Please use the login option instead.")
+                    await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
                 }
-                emailSignInSuccess = true
             }
+                catch {
+                }
+            emailSignInSuccess = true
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please re-verify your phone number & try to create your account again.")
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
+            guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else { return  }
+            AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+            try AuthenticationManager.shared.deleteUser()
         }
     }
 
@@ -316,7 +299,6 @@ extension AuthModel {
         validVerificationCodeLength = false
         validVerificationCode = false
         validEmailString = false
-        validEmail = false
         validName = false
         emailSignInSuccess = false
         validUsername = false
@@ -402,6 +384,7 @@ extension AuthModel {
             }
         }
     }
+
 }
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function

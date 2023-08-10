@@ -71,13 +71,16 @@ final class AuthenticationManager {
         if let user = Auth.auth().currentUser {
             try await user.link(with: credential)
             let email = Auth.auth().currentUser?.email!
-            print(email)
-            if !schoolValidator(email: email!)
+            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+            let validEmail: Bool = emailPredicate.evaluate(with: email) && email!.hasSuffix(".edu")
+            print(validEmail)
+            if !schoolValidator(email: email!) || !validEmail
             {
-                print("The email you are trying to sign up with either does not match the one you input earlier, or it is associated with a school that we do not yet support.")
+                print(schoolValidator(email: email!))
                 try deleteUser()
-                
+                throw EmailError.noMatch
             }
+            
         }
         
     }

@@ -25,7 +25,7 @@ struct TentTabView: View {
                 
                 // conditional setup navigates to a different page depending on tab selection
                 if tabIndex == 0 {
-                    NotificationsPage(range: 1 ... 12)
+                    NotificationsPage()
                 } else if tabIndex == 1 {
                     SearchPage(model: SearchModel(currentUser: currentUser))
                 } else if tabIndex == 2 {

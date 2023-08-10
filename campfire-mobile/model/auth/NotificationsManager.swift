@@ -8,7 +8,15 @@
 import Foundation
 import UserNotifications
 
+@MainActor
 class NotificationsManager: ObservableObject {
+    @Published private(set) var hasPermission = false
+    
+    init () {
+        Task {
+            await getAuthStatus()
+        }
+    }
     
     func request() async {
         do {
@@ -21,5 +29,13 @@ class NotificationsManager: ObservableObject {
     
     func getAuthStatus() async {
         let status = await UNUserNotificationCenter.current().notificationSettings()
+        switch status.authorizationStatus {
+        case .authorized,
+                .provisional,
+                .ephemeral:
+            hasPermission = true
+        default:
+            hasPermission = false
+        }
     }
 }

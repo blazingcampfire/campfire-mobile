@@ -18,6 +18,7 @@ class CurrentUserModel: ObservableObject {
     var profileRef: CollectionReference
     var relationshipsRef: CollectionReference
     var postsRef: CollectionReference
+    // var firstTimeUser: Bool
 
     init(privateUserData: PrivateUser, profile: Profile, userRef: CollectionReference, profileRef: CollectionReference, relationshipsRef: CollectionReference, postsRef: CollectionReference) {
         self.privateUserData = privateUserData

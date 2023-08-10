@@ -4,7 +4,6 @@
 //
 //  Created by Toni on 7/9/23.
 //
-
 import Combine
 import FirebaseAuth
 import FirebaseFirestore
@@ -19,11 +18,12 @@ import SwiftUI
 final class AuthModel: ObservableObject {
     // Input values from Views
     @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
-   @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
+    @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
     @Published var phoneNumber: String = ""
     @Published var formattedPhoneNumber: String = ""
     @Published var verificationCode: String = ""
     @Published var email: String = ""
+    @Published var submittedEmail: String = ""
     @Published var name: String = ""
     @Published var username: String = ""
     @Published var profilePic: String = ""
@@ -41,6 +41,7 @@ final class AuthModel: ObservableObject {
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
     @Published var isMainAppPresented: Bool = false
+    @Published var restart: Bool = false
 
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
@@ -68,6 +69,10 @@ final class AuthModel: ObservableObject {
         isEmailStringValidPublisher
             .receive(on: RunLoop.main)
             .assign(to: \.validEmailString, on: self)
+            .store(in: &publishers)
+        isEmailValidPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.validEmail, on: self)
             .store(in: &publishers)
         isNameValidPublisher
             .receive(on: RunLoop.main)
@@ -112,6 +117,18 @@ extension AuthModel {
             .eraseToAnyPublisher()
     }
 
+    var isEmailValidPublisher: AnyPublisher<Bool, Never> {
+        $submittedEmail
+            .map { submittedEmail in
+
+                // has a valid "@.edu" email
+                let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+                let validEmail: Bool = emailPredicate.evaluate(with: submittedEmail) && submittedEmail.hasSuffix(".edu") && schoolValidator(email: submittedEmail)
+                return validEmail
+            }
+            .eraseToAnyPublisher()
+    }
+
     var isNameValidPublisher: AnyPublisher<Bool, Never> {
         $name
             .map {
@@ -143,15 +160,14 @@ extension AuthModel {
 // MARK: - Extension: All Firebase API Authentication logic for the login views
 
 extension AuthModel {
-    func formatPhoneNumber () {
-        self.phoneNumber = self.formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+    func formatPhoneNumber() {
+        phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
     }
+
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
-            
             do {
-                try AuthenticationManager.shared.signOut()
                 // MARK: - Disable when testing with real device
 
                 Auth.auth().settings?.isAppVerificationDisabledForTesting = true
@@ -160,7 +176,7 @@ extension AuthModel {
                 await MainActor.run(body: {
                     firebaseVerificationCode = code
                 })
-                validPhoneNumber = true
+                self.validPhoneNumber = true
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
             }
@@ -174,12 +190,37 @@ extension AuthModel {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)
 
                 try await Auth.auth().signIn(with: credential)
-
-                // MARK: User phone number authenticated successfully
-                print(phoneNumber)
-                self.validVerificationCode = true
             } catch {
                 await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
+            }
+
+            do {
+                if Auth.auth().currentUser?.email == nil {
+                    throw EmailError.noExistingUser
+                }
+                let existingProfile = try await self.checkProfile(email: submittedEmail)
+                print(existingProfile)
+
+                do {
+                    if self.login && !existingProfile {
+                        try AuthenticationManager.shared.signOut()
+                        throw PhoneError.noExistingUser
+                    }
+                } catch {
+                    await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                }
+                do {
+                    if self.createAccount && existingProfile {
+                        try AuthenticationManager.shared.signOut()
+                        throw PhoneError.existingUser
+                    }
+                } catch {
+                    await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                }
+                // user phone number authenticated successfully
+                self.validVerificationCode = true
+            } catch {
+                await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
             }
         }
     }
@@ -193,18 +234,53 @@ extension AuthModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+            
+            submittedEmail = (Auth.auth().currentUser?.email)!
+            
+            if !validEmail {
+                guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else {
+                    throw EmailError.noMatch
+                }
+                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+                throw EmailError.noMatch
+            } else {
+                let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+                if !existingProfile {
+                    throw EmailError.noExistingUser
+                }
+                else {
+                    emailSignInSuccess = true
+                }
+            }
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try again.")
+                await handleError(error: error, message: "An error occurred trying to sign in with the email you provided. Please try to sign in again.")
+            }
         }
-    }
 
     func signUpGoogle() async throws {
         do {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+            submittedEmail = (Auth.auth().currentUser?.email)!
+
+            if !validEmail {
+                triggerRestart()
+                throw EmailError.noMatch
+            } else {
+                do {
+                    let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+                    if existingProfile {
+                        throw EmailError.existingUser
+                    }
+                } catch {
+                    await handleError(error: error, message: "An account has already been created with these authentication credentials. Please use the login option instead.")
+                }
+                emailSignInSuccess = true
+            }
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please try again.")
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. Please re-verify your phone number & try to create your account again.")
+            triggerRestart()
         }
     }
 
@@ -214,12 +290,43 @@ extension AuthModel {
         await MainActor.run(body: {
             if message != nil {
                 errorMessage = message!
-            }
-            else {
+            } else {
                 errorMessage = error.localizedDescription
             }
             showError.toggle()
         })
+    }
+
+    func checkProfile(email: String) async throws -> Bool {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return false
+        }
+        let profileRef = profileParser(school: schoolParser(email: email))
+        guard let document = try await profileRef?.document(userID).getDocument() else {
+            throw EmailError.noExistingUser
+        }
+        return document.exists
+    }
+
+    func triggerRestart() {
+        print("Triggered restart.")
+        validUser = false
+        validPhoneNumberString = false
+        validPhoneNumber = false
+        validVerificationCodeLength = false
+        validVerificationCode = false
+        validEmailString = false
+        validEmail = false
+        validName = false
+        emailSignInSuccess = false
+        validUsername = false
+        login = false
+        createAccount = false
+        isMainAppPresented = false
+    }
+
+    func resetRestart() {
+        restart = false
     }
 }
 
@@ -233,7 +340,6 @@ extension AuthModel {
             isMainAppPresented = true
         }
     }
-    
 
     func createProfile() {
         userID = Auth.auth().currentUser!.uid
@@ -260,17 +366,14 @@ extension AuthModel {
         }
         var profileData: [String: Any]
         var userData: [String: Any]
-        
+
         do {
-            
             profileData = try Firestore.Encoder().encode(Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: ""))
             userData = try Firestore.Encoder().encode(PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school))
-        }
-        catch {
+        } catch {
             print("Could not encode requestFields.")
             return
         }
-
 
         // based on the user's school, their profile document is sorted into the appropriate school document
 
@@ -278,30 +381,27 @@ extension AuthModel {
         userRef.document(userID).setData(userData)
         print("Documents successfully written!")
     }
-    
+
     func getProfile() {
-        
         if Auth.auth().currentUser?.uid == nil {
             return
-        }
-        else {
-            let school: String = schoolParser(email:(Auth.auth().currentUser?.email)!)
+        } else {
+            let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
             guard let profileRef: CollectionReference = profileParser(school: school) else {
                 return
             }
             let userID = Auth.auth().currentUser!.uid
             profileRef.document(userID).getDocument(as: Profile.self) { [self] result in
                 switch result {
-                case .success(let profileData):
+                case let .success(profileData):
                     self.profile = profileData
                     print("Profile Email: \(self.profile.email)")
-                case .failure(let error):
+                case let .failure(error):
                     print("Error decoding profile: \(error)")
                 }
             }
         }
     }
-    
 }
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function

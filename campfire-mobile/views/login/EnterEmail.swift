@@ -13,8 +13,6 @@ struct EnterEmail: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     
- 
-    
     var body: some View {
             GradientBackground()
             .overlay(

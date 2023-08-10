@@ -9,10 +9,10 @@ import SwiftUI
 
 struct UserBio: View {
     var name: String
-    var text: String
+    var bio: String
 
     var body: some View {
-        Text(text)
+        Text(bio)
             .font(.custom("LexendDeca-Bold", size: 15))
             .padding(8)
     }
@@ -20,6 +20,6 @@ struct UserBio: View {
 
 struct UserBio_Previews: PreviewProvider {
     static var previews: some View {
-        UserBio(name: "Adarsh", text: "wtw babygirl")
+        UserBio(name: "Adarsh", bio: "wtw babygirl")
     }
 }

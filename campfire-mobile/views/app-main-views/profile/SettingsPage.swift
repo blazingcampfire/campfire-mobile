@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct SettingsPage: View {
+    @StateObject var model: SettingsModel = SettingsModel()
     var body: some View {
         NavigationView {
             SettingsForm()
+                .environmentObject(model)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack {
@@ -25,9 +27,9 @@ struct SettingsPage: View {
 }
 
 struct SettingsForm: View {
-    @StateObject var model: SettingsModel = SettingsModel()
     @State var darkMode: Bool = false
     @State var notifications: Bool = false
+    @EnvironmentObject var model: SettingsModel
     var body: some View {
         Form {
             Section(header: Text("Display")) {

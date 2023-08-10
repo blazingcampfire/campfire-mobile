@@ -15,6 +15,7 @@ class SearchModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
     @Published var requested: [Bool] = []
+    @Published var test: [[Profile: Bool]] = []
     @Published var name: String = "" {
         didSet {
             searchName(matching: name)
@@ -44,13 +45,14 @@ class SearchModel: ObservableObject {
                         let profile = try document.data(as: Profile.self)
                         var requestData: [String: Any]
                         requestData = try Firestore.Encoder().encode(Request(userID: profile.userID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
-                        print(self.checkRequested(request: RequestFirestore(data: requestData)!))
-                        print(self.requested)
+                        self.checkRequested(request: RequestFirestore(data: requestData)!)
                         self.profiles.append(profile)
+                        print(self.requested)
                     } catch {
                         print("Error retrieving profile")
                     }
                 }
+                print(self.requested.count, self.profiles.count)
             }
         }
     }
@@ -108,13 +110,13 @@ class SearchModel: ObservableObject {
     }
     
     func checkRequested(request: RequestFirestore) -> Bool {
-        var requestBool: Bool = false
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return false
         }
-       
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+        var flag: Bool = false
+        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument {
+            documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)
             }
@@ -130,13 +132,14 @@ class SearchModel: ObservableObject {
                         }
                         if request.userID == neatRequest.userID {
                             print(request.userID, neatRequest.userID)
-                            return
+                            flag = true
+                            break
                         }
-                        return
                     }
             }
         }
-        return requestBool
+        print(flag)
+        return flag
     }
     
 }

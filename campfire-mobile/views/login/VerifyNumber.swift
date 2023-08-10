@@ -12,18 +12,12 @@ struct VerifyNumber: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @State var validPhoneNumber: Bool = false
-    
-
     
     // setting up verification code & advancing as view state
     
     var body: some View {
-        
-        if model.createAccount && model.validVerificationCode {
-            EnterEmail()
-        }
-        else if model.login && validPhoneNumber {
+
+        if (model.login && model.validVerificationCode) {
             NavigationBar()
                 .environmentObject(currentUser)
                 .onAppear {
@@ -60,26 +54,28 @@ struct VerifyNumber: View {
                         // MARK: - NavLink to EnterEmail screen
                         
                         VStack {
-                            // if user is creating account, navigate to email set up
-        
-                                LFButton(text: "verify")
-
-                                // verify user code on tap of link
-                                .simultaneousGesture(TapGesture().onEnded{
-                                    model.verifyVerificationCode()
-                                    if model.login {
-                                        validPhoneNumber = true
-                                    }
+                            if model.createAccount && model.validVerificationCode {
+                                NavigationLink(destination: EnterEmail(), label: {
+                                    LFButton(text: "next")
                                 })
-                            // otherwise log them into the main app
+                            } else {
+                                Button {
+                                    model.verifyVerificationCode()
+                                } label: {
+                                    LFButton(text: "verify")
+                                }
+                                .opacity(buttonOpacity)
+                                .disabled(!model.validVerificationCodeLength)
+                            }
 
                             }
-                        .opacity(buttonOpacity)
-                        .disabled(!model.validVerificationCodeLength)
+                        
                     }
                     Spacer()
                 }
-                    .alert(model.errorMessage, isPresented: $model.showError){}
+                .alert(title: "Error Verifying Number", message: model.errorMessage,
+                               dismissButton: CustomAlertButton(title: "ok", action: { }),
+                           isPresented: $model.showError)
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .onTapGesture {

@@ -243,9 +243,13 @@ extension AuthModel {
             let helper = SignInGoogleHelper()
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
+            submittedEmail = (Auth.auth().currentUser?.email)!
+            if email != submittedEmail {
+                throw EmailError.noMatch
+            }
             print(Auth.auth().currentUser?.email)
             do {
-                submittedEmail = (Auth.auth().currentUser?.email)!
+               
                 let existingProfile: Bool = try await checkProfile(email: submittedEmail)
                 do {
                     if existingProfile {
@@ -259,7 +263,7 @@ extension AuthModel {
                 }
             emailSignInSuccess = true
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
             guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else { return  }
             AuthenticationManager.shared.unlinkCredential(providerID: providerID)

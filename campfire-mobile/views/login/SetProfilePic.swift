@@ -57,7 +57,11 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            model.presentMainApp()
+                                            if !NotificationsManager.shared.hasPermission {
+                                                Task {
+                                                    await NotificationsManager.shared.request()
+                                                }
+                                            }
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }

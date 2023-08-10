@@ -6,22 +6,28 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseMessaging
 import GoogleSignIn
 import AVKit
-import Firebase
+import UserNotifications
 
 // MARK: - Initializing Firebase
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        application.registerForRemoteNotifications()
         
         FirebaseApp.configure()
         let db = Firestore.firestore()
         
         Database.database().isPersistenceEnabled = true
         
-        //Audio Handler
+        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+        // Audio Handler
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
         } catch (let error) {
@@ -39,15 +45,37 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
       return GIDSignIn.sharedInstance.handle(url)
     }
-   
     
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        // deep links to be implemented in future update
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        return [.sound, .badge, .banner, .list]
+    }
+    
+}
+
+extension AppDelegate: MessagingDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        #if DEBUG
+        print("FCM Token: \(fcmToken)")
+        #endif
+    }
 }
 
 @main
 struct campfire_mobileApp: App {
     // register app delegate for Firebase setup
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate: AppDelegate
     
     let persistenceController = PersistenceController.shared
     

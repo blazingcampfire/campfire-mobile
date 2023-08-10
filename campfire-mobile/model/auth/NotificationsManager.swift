@@ -7,12 +7,15 @@
 
 import Foundation
 import UserNotifications
+import UIKit
 
 @MainActor
 class NotificationsManager: ObservableObject {
     @Published private(set) var hasPermission = false
     
-    init () {
+    static let shared = NotificationsManager()
+    
+    private init () {
         Task {
             await getAuthStatus()
         }
@@ -37,5 +40,9 @@ class NotificationsManager: ObservableObject {
         default:
             hasPermission = false
         }
+    }
+    
+    func turnOffNotifications() async {
+        UIApplication.shared.unregisterForRemoteNotifications()
     }
 }

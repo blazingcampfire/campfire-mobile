@@ -28,7 +28,6 @@ struct SettingsPage: View {
 
 struct SettingsForm: View {
     @State var darkMode: Bool = false
-    @State var notifications: Bool = false
     @EnvironmentObject var model: SettingsModel
     var body: some View {
         Form {
@@ -43,7 +42,7 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
 
-                Toggle(isOn: $notifications) {
+                Toggle(isOn: $model.notificationsOn) {
                     Label {
                         Text("Notifications")
                     } icon: {

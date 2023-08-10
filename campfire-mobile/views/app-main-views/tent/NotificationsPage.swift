@@ -9,7 +9,6 @@ import SwiftUI
 
 struct NotificationsPage: View {
     
-    @StateObject private var manager = NotificationsManager()
 
     var body: some View {
         ZStack {
@@ -17,14 +16,14 @@ struct NotificationsPage: View {
                 .ignoresSafeArea(.all)
             Button("Request Notification Permission") {
                 Task {
-                    await manager.request()
+                    await NotificationsManager.shared.request()
                 }
             }
             .buttonStyle(.bordered)
-            .disabled(manager.hasPermission)
+            .disabled(NotificationsManager.shared.hasPermission)
         }
         .task {
-            await manager.getAuthStatus()
+            await NotificationsManager.shared.getAuthStatus()
         }
         
     }

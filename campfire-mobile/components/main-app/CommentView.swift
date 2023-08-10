@@ -102,7 +102,7 @@ struct CommentView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .offset(x: -4)
                             }
-                            Text("\(eachcomment.numLikes)")
+                            Text("\(formatNumber(eachcomment.numLikes))")
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-SemiBold", size: 16))
                         }

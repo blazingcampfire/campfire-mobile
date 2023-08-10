@@ -28,6 +28,8 @@ class CommentsModel: ObservableObject {
         }
     }
     
+    
+    
     //Create UserId field on each comment 
     func createComment(postId: String, commenttext: String ,completion: @escaping () -> Void) {
         let docRef = ndPosts.document(postId).collection("comments").document()

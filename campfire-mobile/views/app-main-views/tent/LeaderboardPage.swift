@@ -75,4 +75,6 @@ struct LeaderboardList: View {
 //    static var previews: some View {
 //        LeaderboardPage(model: LeaderboardModel())
 //    }
-// }
+//}
+
+

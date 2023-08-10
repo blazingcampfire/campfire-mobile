@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct EditFieldPage: View {
-    
+    let maxCharacterLength: Int
     @State private var newName: String = ""
     @State private var isEditing: Bool = false
     @EnvironmentObject var currentUser: CurrentUserModel
     @Environment(\.dismiss) private var dismiss
+    var unallowedCharacters: [String]?
     
     var field: String
     @State var currentfield: String
@@ -29,17 +30,6 @@ struct EditFieldPage: View {
                     .font(.custom("LexendDeca-Bold", size: 20))
                     .padding()
                 
-                TextField("enter new \(field)", text: $newName, onEditingChanged: { editing in
-                    isEditing = editing
-                }, onCommit: {
-                    saveName()
-                })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 2)
-                    .foregroundColor(Theme.Peach))
-                .padding()
-                
                 if newName != currentfield && newName != "" {
                     Button(action: {
                         saveName()
@@ -55,6 +45,14 @@ struct EditFieldPage: View {
                         }
                     }
                 }
+                
+             
+                LimitedTextField(text: $newName, maxCharacterLength: maxCharacterLength, unallowedCharacters: unallowedCharacters)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Theme.Peach))
+                    .padding()
             }
             .padding(.top, 50)
         }
@@ -64,8 +62,8 @@ struct EditFieldPage: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
-    
-    func saveToFireBase() {
+
+    private func saveToFireBase() {
         let docRef = currentUser.profileRef.document(currentUser.profile.userID)
         
         docRef.setData([field: newName], merge: true) { error in
@@ -85,8 +83,29 @@ struct EditFieldPage: View {
     }
 }
 
-struct EditFieldPage_Previews: PreviewProvider {
-    static var previews: some View {
-        EditFieldPage(field: "name", currentfield: "David")
+
+struct LimitedTextField: View {
+    @Binding var text: String
+    let maxCharacterLength: Int
+    let unallowedCharacters: [String]?
+
+    var body: some View {
+        TextField("Enter text (max \(maxCharacterLength) characters)", text: $text)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .onChange(of: text) { newValue in
+                if let unallowedChars = unallowedCharacters {
+                    text = newValue.filter { !unallowedChars.contains(String($0)) }
+                }
+
+                if newValue.count > maxCharacterLength {
+                    text = String(newValue.prefix(maxCharacterLength))
+                }
+            }
     }
 }
+//
+//struct EditFieldPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EditFieldPage(maxCharacterLength: 10, field: "name", currentfield: "David")
+//    }
+//}

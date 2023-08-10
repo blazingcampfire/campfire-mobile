@@ -44,7 +44,7 @@ class CurrentUserModel: ObservableObject {
     }
 
     func setCollectionRefs() {
-        if Auth.auth().currentUser?.uid == nil {
+        if Auth.auth().currentUser?.email == nil {
             return
         } else {
             print(Auth.auth().currentUser?.phoneNumber)

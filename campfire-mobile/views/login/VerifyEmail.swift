@@ -21,6 +21,7 @@ struct VerifyEmail: View {
             NavigationBar()
                 .environmentObject(currentUser)
                 .onAppear {
+                    model.triggerRestart()
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()

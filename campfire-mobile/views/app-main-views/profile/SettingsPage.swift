@@ -97,17 +97,16 @@ struct SettingsForm: View {
                     Button(action: {
                         do {
                             try model.signOut()
-                            print("Signed Out")
-                            model.signedOut = true
                         } catch {
                             print(error)
                         }
                     }, label: {
-                        HStack {
-                            Image(systemName: "lock.fill")
-                                .foregroundColor(Theme.Peach)
+                        Label {
                             Text("Log Out")
                                 .foregroundColor(Theme.TextColor)
+                        } icon: {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(Theme.Peach)
                         }
                     })
                 }

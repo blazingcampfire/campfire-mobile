@@ -263,11 +263,11 @@ extension AuthModel {
                 }
             emailSignInSuccess = true
         } catch {
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
-            guard let providerID = Auth.auth().currentUser?.providerData.last?.providerID else { return  }
-            AuthenticationManager.shared.unlinkCredential(providerID: providerID)
-            try AuthenticationManager.shared.deleteUser()
+            if let providerID = Auth.auth().currentUser?.providerData.last?.providerID {
+                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+            }
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
         }
     }
 
@@ -311,9 +311,6 @@ extension AuthModel {
         isMainAppPresented = false
     }
 
-    func resetRestart() {
-        restart = false
-    }
 }
 
 // MARK: - Create user function

@@ -29,6 +29,7 @@ struct EditFieldPage: View {
                 Text(currentfield)
                     .font(.custom("LexendDeca-Bold", size: 20))
                     .padding()
+                    .multilineTextAlignment(.center)
                 
                 if newName != currentfield && newName != "" {
                     Button(action: {

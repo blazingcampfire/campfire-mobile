@@ -21,11 +21,11 @@ class SearchModel: ObservableObject {
             searchName(matching: name)
         }
     }
-
+    
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
     }
-
+    
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
@@ -68,25 +68,47 @@ class SearchModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-
+        
         do {
             friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        } catch {
+        }
+        catch {
             print("Could not encode requestFields.")
             return
         }
-
+        
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([userRequestField]),
+            "sentRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
-
+    
         userRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([friendRequestField]),
+            "ownRequests": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     }
-
+    
+    func unrequestFriend(request: RequestFirestore) {
+        guard let userID = Auth.auth().currentUser?.uid else {
+            print("You are not currently authenticated.")
+            return
+        }
+        guard let friendID = request.userID else {
+            print("No request ID")
+            return
+        }
+        let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
+        let userRelationshipRef = currentUser.relationshipsRef.document(userID)
+        
+        friendRelationshipRef.updateData([
+            "sentRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
+        ])
+        
+        userRelationshipRef.updateData([
+            "ownRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)])
+        ])
+    }
+    
     func checkRequested(request: RequestFirestore) -> Bool {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
@@ -97,8 +119,11 @@ class SearchModel: ObservableObject {
             documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)
-            } else {
-                if let documentSnapshot = documentSnapshot {
+            }
+            else {
+                guard let documentSnapshot = documentSnapshot else {
+                    return
+                }
                     let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
                     for rawRequest in requests {
                         guard let neatRequest = RequestFirestore(data: rawRequest) else {
@@ -106,7 +131,6 @@ class SearchModel: ObservableObject {
                             return
                         }
                         if request.userID == neatRequest.userID {
-                            requestBool = true
                             print(request.userID, neatRequest.userID)
                             flag = true
                             break
@@ -117,4 +141,5 @@ class SearchModel: ObservableObject {
         print(flag)
         return flag
     }
+    
 }

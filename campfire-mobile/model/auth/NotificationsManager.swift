@@ -12,6 +12,7 @@ import UIKit
 @MainActor
 class NotificationsManager: ObservableObject {
     @Published var hasPermission = false
+    @Published var notifications: [UNNotification] = []
     
     init () {
         Task {
@@ -45,5 +46,26 @@ class NotificationsManager: ObservableObject {
         if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
                             UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: nil)
                         }
+    }
+    
+    func addNotification() async {
+        let content = UNMutableNotificationContent()
+        content.title = "Feed the cat"
+        content.subtitle = "It looks hungry"
+        content.sound = UNNotificationSound.default
+
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+        // add our notification request
+        do {
+            try await UNUserNotificationCenter.current().add(request)
+        }
+        catch {
+            print(error)
+        }
     }
 }

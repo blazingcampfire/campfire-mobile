@@ -99,7 +99,6 @@ struct OwnProfilePage: View {
                                 }
                             }
                         }
-//                        .padding(.bottom, 40)
                         
                         let posts = currentUser.profile.posts
                             VStack {

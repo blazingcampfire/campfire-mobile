@@ -25,6 +25,7 @@ struct NotificationsPage: View {
         }
         .task {
             await notificationsManager.getAuthStatus()
+            await notificationsManager.addNotification()
         }
         
     }

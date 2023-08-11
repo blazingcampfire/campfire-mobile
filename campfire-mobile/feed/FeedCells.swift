@@ -43,7 +43,7 @@ struct PlayerView: View {
     
     var body: some View {
         
-        let currentPostPlayer = feedmodel.postPlayers[safe: currentIndex]
+        let currentPostPlayer = feedmodel.currentPostPlayers[safe: currentIndex]
             
             ZStack {
                 if let currentPostPlayer = currentPostPlayer, !currentPostPlayer.postItem.url.isEmpty {
@@ -53,21 +53,33 @@ struct PlayerView: View {
                         .edgesIgnoringSafeArea(.all)
                 }
                 if let currentPostPlayer = currentPostPlayer {
-                    PlayerContainerView(player: currentPostPlayer.player)
-                        .onTapGesture {
-                            guard let player = currentPostPlayer.player else { return }
-                            if player.timeControlStatus == .playing {
-                                player.pause()
-                            } else {
-                                player.play()
-                            }
+                    GeometryReader { proxy in
+                        if abs(proxy.frame(in: .global).midY - UIScreen.main.bounds.midY) < 50 { // Adjust 50ToBounds
+                            PlayerContainerView(player: currentPostPlayer.player)
+                                .onAppear {
+                                    guard let player = currentPostPlayer.player else { return }
+                                    player.play()
+                                }
+                                .onDisappear {
+                                    guard let player = currentPostPlayer.player else { return }
+                                    player.pause()
+                                }
+                                .onTapGesture {
+                                    guard let player = currentPostPlayer.player else { return }
+                                    if player.timeControlStatus == .playing {
+                                        player.pause()
+                                    } else {
+                                        player.play()
+                                    }
+                                }
+                        } else {
+                            PlayerContainerView(player: currentPostPlayer.player)
+                                .onAppear {
+                                    guard let player = currentPostPlayer.player else { return }
+                                    player.pause()
+                                }
                         }
-                        .onDisappear {
-                            guard let player = currentPostPlayer.player else { return }
-                            if player.timeControlStatus == .playing {
-                                player.pause()
-                            }
-                        }
+                    }
                 }
                     
                 
@@ -209,9 +221,6 @@ struct PlayerView: View {
                             .font(.custom("LexendDeca-Regular", size: 16))
                     }
                     
-                    
-                    
-                    
                     VStack {
                         Button(action: {
                             activeSheet = .second
@@ -244,6 +253,7 @@ struct PlayerView: View {
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
+            .id(feedmodel.isNewFeedSelected ? 1 : 0)
             .onAppear {
                 if let currentPostPlayer = currentPostPlayer {
                     commentModel.postId = currentPostPlayer.postItem.id
@@ -311,13 +321,13 @@ struct PlayerScrollView: UIViewRepresentable {
                subview.removeFromSuperview()
            }
 
-           for i in 0..<feedModel.postPlayers.count {
+           for i in 0..<feedModel.currentPostPlayers.count {
                let childView = UIHostingController(rootView: PlayerView(feedmodel: feedModel, currentIndex: i, commentModel: CommentsModel(currentUser: currentUser), feedUpdate: FeedPostUpdateModel(currentUser: currentUser), postLikeStatusModel: postLikeStatusModel)) // Passing index here
                childView.view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                uiView.addSubview(childView.view)
            }
 
-           uiView.contentSize.height = UIScreen.main.bounds.height * CGFloat(feedModel.postPlayers.count)
+           uiView.contentSize.height = UIScreen.main.bounds.height * CGFloat(feedModel.currentPostPlayers.count)
        }
     
     class Coordinator: NSObject, UIScrollViewDelegate {
@@ -329,20 +339,33 @@ struct PlayerScrollView: UIViewRepresentable {
         }
         
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            let previousIndex = index
             let currentIndex = Int(scrollView.contentOffset.y / UIScreen.main.bounds.height)
             
             if index != currentIndex {
                 index = currentIndex
                 
                 // Pause all
-                parent.feedModel.postPlayers.forEach { postPlayer in
+                parent.feedModel.currentPostPlayers.forEach { postPlayer in
                     postPlayer.player?.pause()
                 }
                 
                 // Play current one
-                if let player = parent.feedModel.postPlayers[safe: currentIndex]?.player {
+                if let player = parent.feedModel.currentPostPlayers[safe: currentIndex]?.player {
                            player.play()
                        }
+                
+                if let previousPlayer = parent.feedModel.currentPostPlayers[safe: previousIndex]?.player {
+                            previousPlayer.seek(to: CMTime.zero)
+                        }
+                let lastIndex = parent.feedModel.currentPostPlayers.count - 1
+                if currentIndex == lastIndex {
+                    if parent.feedModel.isNewFeedSelected {
+                        parent.feedModel.listenForNewFeedPosts()
+                    } else {
+                        parent.feedModel.listenForHotFeedPosts()
+                    }
+                }
             }
         }
     }

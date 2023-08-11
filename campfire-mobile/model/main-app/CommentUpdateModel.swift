@@ -20,6 +20,7 @@ class CommentUpdateModel: ObservableObject {
         }
     }
     @Published var currentUser: CurrentUserModel
+    
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
     }

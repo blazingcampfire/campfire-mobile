@@ -75,5 +75,5 @@ struct EllipsesButtonView_Previews: PreviewProvider {
 }
 
 class PosterIdEqualCurrentUserId: ObservableObject {
-    @Published var isEqual: Bool = true
+    @Published var isEqual: Bool = false
 }

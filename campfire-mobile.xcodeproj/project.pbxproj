@@ -551,7 +551,6 @@
 				E2163E4D2A663501005A20BE /* schools.swift */,
 				E267A9C72A7AA58300489B8E /* tests.swift */,
 				F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */,
-				B121336D2A7EFD2900A9A93F /* gradientLaunchScreen.storyboard */,
 				B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */,
 				E216E3F52A831D4A0021C9F0 /* misc.swift */,
 			);
@@ -1067,7 +1066,6 @@
 				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
 				F89402132A5E64F30049410E /* FriendsListView.swift in Sources */,
 				F86FAACD2A81AE0400D3801D /* unallowedCharacters.swift in Sources */,
-				B14375312A7771F100904C52 /* ReplyModel.swift in Sources */,
 				B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
@@ -1305,10 +1303,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = N2H2HQA8ZA;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
@@ -1340,10 +1338,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = N2H2HQA8ZA;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
@@ -1376,7 +1374,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1398,7 +1396,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileTests";
@@ -1418,7 +1416,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";
@@ -1438,7 +1436,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YLP4XN7VPH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
+				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "campfire.campfire-mobileUITests";

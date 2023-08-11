@@ -5,75 +5,76 @@
 //  Created by Adarsh G on 6/18/23.
 //
 
-import SwiftUI
 import iPhoneNumberField
+import SwiftUI
 
 struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
-    
+
     var body: some View {
-        if model.validPhoneNumber {
-            VerifyNumber()
-        }
-        else {
         GradientBackground()
             .overlay(
-                    VStack {
-                        Spacer()
-                        // MARK: - Form & text prompts
-                        VStack(spacing: 60) {
-                            Text("enter your phone number")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 25))
-                            
+                VStack {
+                    Spacer()
+
+                    // MARK: - Form & text prompts
+
+                    VStack(spacing: 60) {
+                        Text("enter your phone number")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 25))
+
 //                            FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
 //                                .keyboardType(.numberPad)
-                            PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
-                                .keyboardType(.numberPad)
-                                .background(Color.clear)
-                            
-                                
-                            if !model.validPhoneNumber {
-                                Text("phone number must be 10 digits with no spaces")
-                                    .foregroundColor(Color.white)
-                                    .font(.custom("LexendDeca-Bold", size: 13))
-                                    .padding(.top, -40)
-                            }
-                            
-                            Text("check your messages for a verification code!")
+                        PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
+                            .keyboardType(.numberPad)
+                            .background(Color.clear)
+
+                        if !model.validPhoneNumberString {
+                            Text("phone number must be 10 digits with no spaces")
                                 .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding(-20)
-                            
-                            // MARK: - NavLink to VerifyNumber screen
-                            
-                            VStack {
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .padding(.top, -40)
+                        }
+
+                        Text("check your messages for a verification code!")
+                            .foregroundColor(Color.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .padding(-20)
+
+                        // MARK: - NavLink to VerifyNumber screen
+
+                        VStack {
+                            if model.validPhoneNumber {
+                                NavigationLink(destination: VerifyNumber(), label: {
+                                    LFButton(text: "next")
+                                })
+                            } else {
                                 Button {
                                     model.getVerificationCode()
                                     print("\(model.formattedPhoneNumber)")
                                 } label: {
-                                    LFButton(text: "next")
+                                    LFButton(text: "send code")
                                 }
-                            
+                                .opacity(buttonOpacity)
+                                .disabled(!model.validPhoneNumberString)
                             }
-                            .opacity(buttonOpacity)
-                            .disabled(!model.validPhoneNumberString)
                         }
-                        Spacer()
                     }
-                    .ignoresSafeArea(.keyboard, edges: .bottom)
-                    
-                    )
-                    .onTapGesture {
+                    Spacer()
+                }
+                    .alert(title: "Invalid Phone Number", message: model.errorMessage,
+                                   dismissButton: CustomAlertButton(title: "ok", action: { }),
+                               isPresented: $model.showError)
+                .ignoresSafeArea(.keyboard, edges: .bottom)
+            )
+            .onTapGesture {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
-                    
-                }
-
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
     }
 }
 

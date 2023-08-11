@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 
 class SettingsModel: ObservableObject {
-    @Published var signedOut: Bool = false
     func signOut() throws {
         try AuthenticationManager.shared.signOut()
     }

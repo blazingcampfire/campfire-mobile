@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Kingfisher
 
 
 struct CommentsPage: View {
@@ -18,6 +19,8 @@ struct CommentsPage: View {
     @State private var comment: String = ""
     @State private var reply: String = ""
     @State private var replyingToUserId: String?
+    @EnvironmentObject var currentUser: CurrentUserModel
+
     
     var body: some View {
         NavigationView {
@@ -26,10 +29,9 @@ struct CommentsPage: View {
                 Divider()
                 VStack {
                     HStack {
-
                         if replyingToUserId != nil {
                             
-                            Image(info.profilepic)
+                            KFImage(URL(string: currentUser.profile.profilePicURL))
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
@@ -58,7 +60,7 @@ struct CommentsPage: View {
                             .padding(.bottom, 15)
                         }  else {
                             
-                            Image(info.profilepic)
+                            KFImage(URL(string: currentUser.profile.profilePicURL))
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
@@ -88,8 +90,6 @@ struct CommentsPage: View {
                         }
                     }
                     .padding()
-                    
-                    
                 }
             }
             .onTapGesture {
@@ -110,7 +110,6 @@ struct CommentsPage: View {
                             .font(.custom("LexendDeca-Light", size: 16))
                     }
                 }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         dismiss()
@@ -141,6 +140,8 @@ struct CommentsPage: View {
 
 struct CommentsList: View {
     @ObservedObject var commentModel: CommentsModel
+    @EnvironmentObject var currentUser: CurrentUserModel
+    @StateObject var comLikeStatus = CommentLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
     var postID: String
@@ -159,7 +160,8 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, commentsModel: commentModel, replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
+                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, commentLikeStatus: comLikeStatus, commentUpdateModel: CommentUpdateModel(currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
+                        .environmentObject(currentUser)
                 }
                 
             }

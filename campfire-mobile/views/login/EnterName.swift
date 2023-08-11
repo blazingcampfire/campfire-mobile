@@ -11,15 +11,15 @@ struct EnterName: View {
     // setting up environmental variables
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
-    
-    
-    
+
     var body: some View {
-            GradientBackground()
+        GradientBackground()
             .overlay(
                 VStack {
                     Spacer()
-// MARK: - Email form & prompts
+
+                    // MARK: - Email form & prompts
+
                     VStack(spacing: 60) {
                         Text("enter your first name")
                             .foregroundColor(Color.white)
@@ -29,6 +29,7 @@ struct EnterName: View {
                         
                         
                         // MARK: - NavLink to VerifyEmail screen
+
                         VStack {
                             NavigationLink(destination: SetProfilePic(), label: {
                                 LFButton(text: "next")
@@ -42,11 +43,11 @@ struct EnterName: View {
                 .ignoresSafeArea(.keyboard, edges: .bottom)
             )
             .onTapGesture {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
-        }
+    }
 }
 
 extension EnterName {

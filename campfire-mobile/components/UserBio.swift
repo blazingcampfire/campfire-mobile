@@ -18,8 +18,8 @@ struct UserBio: View {
     }
 }
 
-//struct UserBio_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserBio(name: "Adarsh", bio: "wtw babygirl")
-//    }
-//}
+struct UserBio_Previews: PreviewProvider {
+    static var previews: some View {
+        UserBio(name: "Adarsh", bio: "wtw babygirl")
+    }
+}

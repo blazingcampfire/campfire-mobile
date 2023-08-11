@@ -15,9 +15,8 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-                TheFeed()
+            ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
                 .tabItem {
-                    Text("Feed")
                     Image(systemName: "play.fill")
                 }
 
@@ -26,19 +25,18 @@ struct NavigationBar: View {
             
             MapPage()
                 .tabItem {
-                    Label("Map", systemImage: "map")
+                    Image(systemName: "map")
                 }
             
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-           CameraView(currentUser: currentUser)
+            CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 30, height: 30)
-                    Text("Camera")
                 }
            
                 .toolbar(.visible, for: .tabBar)
@@ -47,7 +45,7 @@ struct NavigationBar: View {
             TentTabView()
                 .environmentObject(currentUser)
                 .tabItem {
-                    Label("Tent", systemImage: "tent.fill")
+                    Image(systemName: "tent.fill")
                 }
              
                 .toolbar(.visible, for: .tabBar)
@@ -55,7 +53,7 @@ struct NavigationBar: View {
             
             OwnProfilePage()
                 .tabItem {
-                    Label("Profile", systemImage: "person.fill")
+                    Image(systemName: "person.fill")
                 }
             
                 .toolbar(.visible, for: .tabBar)
@@ -70,5 +68,6 @@ struct NavigationBar: View {
 //struct NavigationBar_Previews: PreviewProvider {
 //    static var previews: some View {
 //        NavigationBar()
+//
 //    }
 //}

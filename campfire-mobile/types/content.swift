@@ -8,6 +8,7 @@
 import SwiftUI
 import AVKit
 import Firebase
+import UIKit
 
 //Update to have user id field
 struct PostItem: Identifiable {
@@ -17,10 +18,10 @@ struct PostItem: Identifiable {
     var caption: String
     var profilepic: String
     var url: String
-    var numLikes: Int
     var location: String
     var postType: String
     var date: Timestamp
+    var posterId: String
 }
 
 struct PostPlayer: Identifiable {
@@ -35,8 +36,8 @@ struct Comment: Identifiable {
     var profilepic: String
     var username: String
     var comment: String
-    var numLikes: Int
     var date: Timestamp
+    var posterId: String
 }
 //Update to have user id field
 struct Reply: Identifiable, Hashable {
@@ -44,9 +45,26 @@ struct Reply: Identifiable, Hashable {
     var profilepic: String
     var username: String
     var reply: String
-    var numLikes: Int
+    var date: Timestamp
+    var posterId: String
+}
+
+struct Like: Identifiable {
+    var id: String
     var date: Timestamp
 }
+
+struct CommentLike: Identifiable {
+    var id: String
+    var date: Timestamp
+}
+
+struct ReplyLike: Identifiable {
+    var id: String
+    var date: Timestamp
+}
+
+
 
 func timeAgoSinceDate(_ date: Date, numericDates: Bool = false) -> String {
     let calendar = Calendar.current
@@ -110,3 +128,22 @@ func timeAgoSinceDate(_ date: Date, numericDates: Bool = false) -> String {
     }
 }
 
+//This acts as the CustomVideoPlayer, so we can replace this with that later
+struct Player: UIViewControllerRepresentable {
+
+    var player: AVPlayer
+
+    func makeUIViewController(context: Context) -> some AVPlayerViewController {
+        let controller = AVPlayerViewController()
+        controller.player = player
+        controller.showsPlaybackControls = false
+        controller.videoGravity = .resizeAspectFill
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: .main) { _ in
+            self.player.seek(to: .zero)
+            self.player.play()
+        }
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}

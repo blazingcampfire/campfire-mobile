@@ -14,17 +14,14 @@ struct VerifyEmail: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @State private var validEmail: Bool = false
-
+    @State var restart: Bool = false
     var body: some View {
         
-        if (validEmail && model.createAccount) {
-            CreateUsername()
-        }
-        else if (validEmail && model.login) {
+        if (model.login && model.emailSignInSuccess) {
             NavigationBar()
                 .environmentObject(currentUser)
                 .onAppear {
+                    model.triggerRestart()
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()
@@ -58,37 +55,41 @@ struct VerifyEmail: View {
 //                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
 //                                    .padding(5)
                                 
-                                if model.createAccount {
+                                if (model.emailSignInSuccess && model.createAccount) {
+                                    NavigationLink(destination: CreateUsername(), label: {
+                                        LFButton(text: "next")
+                                    })
+                                }
+                                else if (model.createAccount && !model.emailSignInSuccess) {
                                     LFButton(text: "Google", icon: Image("glogo2"))
                                         .onTapGesture {
                                             Task {
                                                 do {
                                                     try await model.signUpGoogle()
-                                                    validEmail = true
                                                 } catch {
-                                                    print(error)
                                                 }
                                             }
                                         }
                                 }
-                                else if model.login {
+                                else if model.login && !model.emailSignInSuccess {
+                                    
                                     LFButton(text: "Google", icon: Image("glogo2"))
                                         .onTapGesture {
                                             Task {
                                                 do {
                                                     try await model.signInGoogle()
-                                                    validEmail = true
                                                 } catch {
-                                                    print(error)
                                                 }
                                             }
                                         }
                                 }
                             }
-                            Spacer()
                         }
-                        
+                        Spacer()
                     })
+                .alert(title: "Error Verifying Email", message: model.errorMessage,
+                               dismissButton: CustomAlertButton(title: "ok", action: { }),
+                           isPresented: $model.showError)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

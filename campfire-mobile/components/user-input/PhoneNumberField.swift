@@ -17,7 +17,7 @@ struct PhoneNumberField: View {
     var body: some View {
         VStack {
             iPhoneNumberField(placeholderText, text: $text)
-                .font(UIFont(name: "LexendDeca-SemiBold", size: 20))
+                .font(UIFont(name: "LexendDeca-Bold", size: 20))
                 .clearsOnEditingBegan(true)
                 .accentColor(Color.white)
                 .foregroundColor(Color.white)

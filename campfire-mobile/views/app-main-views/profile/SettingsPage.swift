@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct SettingsPage: View {
+    @StateObject var model: SettingsModel = SettingsModel()
     var body: some View {
         NavigationView {
             SettingsForm()
+                .environmentObject(model)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack {
@@ -25,9 +27,9 @@ struct SettingsPage: View {
 }
 
 struct SettingsForm: View {
-    @StateObject var model: SettingsModel = SettingsModel()
     @State var darkMode: Bool = false
     @State var notifications: Bool = false
+    @EnvironmentObject var model: SettingsModel
     var body: some View {
         Form {
             Section(header: Text("Display")) {
@@ -95,17 +97,16 @@ struct SettingsForm: View {
                     Button(action: {
                         do {
                             try model.signOut()
-                            print("Signed Out")
-                            model.signedOut = true
                         } catch {
                             print(error)
                         }
                     }, label: {
-                        HStack {
-                            Image(systemName: "lock.fill")
-                                .foregroundColor(Theme.Peach)
+                        Label {
                             Text("Log Out")
                                 .foregroundColor(Theme.TextColor)
+                        } icon: {
+                            Image(systemName: "lock.fill")
+                                .foregroundColor(Theme.Peach)
                         }
                     })
                 }

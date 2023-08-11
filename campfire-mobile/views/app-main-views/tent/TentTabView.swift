@@ -12,7 +12,7 @@ struct TentTabView: View {
     // this variable represents the index of each tab
     @State private var tabIndex = 0
     @EnvironmentObject var currentUser: CurrentUserModel
-    
+    @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -29,7 +29,7 @@ struct TentTabView: View {
                 } else if tabIndex == 1 {
                     SearchPage(model: SearchModel(currentUser: currentUser))
                 } else if tabIndex == 2 {
-                    RequestsPage(model: RequestsModel(currentUser: currentUser))
+                    RequestsPage(model: RequestsModel(currentUser: currentUser, notificationsManager: notificationsManager))
                 }
                 Spacer()
             }

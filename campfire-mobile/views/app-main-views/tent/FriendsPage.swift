@@ -52,9 +52,6 @@ struct FriendsPage: View {
                         ListFriends()
                     }
                     .environmentObject(model)
-                    .listStyle(PlainListStyle())
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                 }
             }
             .navigationBarBackButtonHidden(true)

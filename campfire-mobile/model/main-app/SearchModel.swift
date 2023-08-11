@@ -80,11 +80,11 @@ class SearchModel: ObservableObject {
         
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([userRequestField])
+            "sentRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([friendRequestField])
+            "ownRequests": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     }
     

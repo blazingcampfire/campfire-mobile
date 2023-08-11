@@ -48,10 +48,10 @@ class NotificationsManager: ObservableObject {
                         }
     }
     
-    func addNotification() async {
+    func sendNotification(title: String, subtitle: String) async {
         let content = UNMutableNotificationContent()
-        content.title = "Feed the cat"
-        content.subtitle = "It looks hungry"
+        content.title = title
+        content.subtitle = subtitle
         content.sound = UNNotificationSound.default
 
         // show this notification five seconds from now

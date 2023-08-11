@@ -14,11 +14,12 @@ struct SetProfilePic: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     @State var setUpFinished: Bool = false
     @State var selectedPFP: UIImage?
     
     var body: some View {
-        if model.isMainAppPresented {
+        if setUpFinished {
             NavigationBar()
                 .environmentObject(currentUser)
         }
@@ -57,9 +58,9 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            if !NotificationsManager.shared.hasPermission {
+                                            if !notificationsManager.hasPermission {
                                                 Task {
-                                                    await NotificationsManager.shared.request()
+                                                    await notificationsManager.request()
                                                 }
                                             }
                                         } catch {

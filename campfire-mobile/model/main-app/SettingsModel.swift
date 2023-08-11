@@ -11,18 +11,14 @@ import FirebaseAuth
 @MainActor
 class SettingsModel: ObservableObject {
     @Published var signedOut: Bool = false
-    @Published var notificationsOn: Bool = false {
+    @Published var notificationsOn: Bool {
         didSet {
-            Task {
-                await NotificationsManager.shared.getAuthStatus()
-                if notificationsOn && !NotificationsManager.shared.hasPermission {
-                    await NotificationsManager.shared.request()
-                }
-                else if !notificationsOn && NotificationsManager.shared.hasPermission {
-                    await NotificationsManager.shared.turnOffNotifications()
-                }
-            }
+            
         }
+    }
+    
+    init(notificationsOn: Bool) {
+        self.notificationsOn = notificationsOn
     }
     func signOut() throws {
         try AuthenticationManager.shared.signOut()

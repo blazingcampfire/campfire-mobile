@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct OwnProfilePage: View {
-    @State var settingsPageShow = false
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
+    @State var settingsPageShow = false
     @State private var showAddPost = false
     
     var body: some View {
@@ -92,7 +93,7 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage()
+                                    SettingsPage(model: SettingsModel(notificationsOn: notificationsManager.hasPermission))
                                         .presentationDragIndicator(.visible)
                                         .presentationCornerRadius(30)
                                 }

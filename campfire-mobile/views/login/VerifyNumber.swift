@@ -12,6 +12,7 @@ struct VerifyNumber: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     
     // setting up verification code & advancing as view state
     
@@ -20,6 +21,7 @@ struct VerifyNumber: View {
         if (model.login && model.validVerificationCode) {
             NavigationBar()
                 .environmentObject(currentUser)
+                .environmentObject(notificationsManager)
                 .onAppear {
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()

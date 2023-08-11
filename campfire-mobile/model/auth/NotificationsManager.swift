@@ -11,11 +11,9 @@ import UIKit
 
 @MainActor
 class NotificationsManager: ObservableObject {
-    @Published private(set) var hasPermission = false
+    @Published var hasPermission = false
     
-    static let shared = NotificationsManager()
-    
-    private init () {
+    init () {
         Task {
             await getAuthStatus()
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsPage: View {
-    @StateObject var model: SettingsModel = SettingsModel()
+    @StateObject var model: SettingsModel 
     var body: some View {
         NavigationView {
             SettingsForm()
@@ -29,6 +29,7 @@ struct SettingsPage: View {
 struct SettingsForm: View {
     @State var darkMode: Bool = false
     @EnvironmentObject var model: SettingsModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
             Section(header: Text("Display")) {
@@ -42,7 +43,7 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
 
-                Toggle(isOn: $model.notificationsOn) {
+                Toggle(isOn: $notificationsManager.hasPermission) {
                     Label {
                         Text("Notifications")
                     } icon: {
@@ -130,8 +131,8 @@ struct SettingsForm: View {
     }
 }
 
-struct SettingsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsPage()
-    }
-}
+//struct SettingsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsPage()
+//    }
+//}

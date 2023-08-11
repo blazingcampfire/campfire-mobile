@@ -18,7 +18,7 @@ struct CommentView: View {
     @ObservedObject var commentsModel: CommentsModel
     @ObservedObject var commentLikeStatus: CommentLikeStatusModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var commentUpdateModel = CommentUpdateModel()
+    @StateObject var commentUpdateModel: CommentUpdateModel
     @StateObject var replyLikedStatus = ReplyLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
@@ -118,8 +118,7 @@ struct CommentView: View {
                     }
                 if showingReplies {
                     ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
-                        ReplyView(eachreply: reply, comId: comId, postId: postID, replyId: reply.id, replyPosterId: reply.posterId ,commentModel: commentsModel, replyLikeStatus: replyLikedStatus)
-                            .environmentObject(currentUser)
+                        ReplyView(eachreply: reply, comId: comId, postId: postID, replyId: reply.id, replyPosterId: reply.posterId ,commentModel: commentsModel, replyLikeStatus: replyLikedStatus, replyUpdateModel: ReplyUpdateModel(currentUser: currentUser))
                     }
                 }
         }

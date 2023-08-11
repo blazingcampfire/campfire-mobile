@@ -25,11 +25,17 @@ class FeedPostModel: ObservableObject {
             }
         }
     }
+    @Published var currentUser: CurrentUserModel
     var listener: ListenerRegistration?
     
-    init() {
+    init(currentUser: CurrentUserModel) {
+       self.currentUser = currentUser
        self.listenForNewFeedPosts()
     }
+    
+//    init(currentUser: CurrentUserModel) {
+//        self.currentUser = currentUser
+//    }
     
         
     func listenForNewFeedPosts() {

@@ -17,7 +17,7 @@ struct ReplyView: View {
     @ObservedObject var commentModel: CommentsModel
     @ObservedObject var replyLikeStatus: ReplyLikeStatusModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var replyUpdateModel = ReplyUpdateModel()
+    @StateObject var replyUpdateModel: ReplyUpdateModel
     
     
     var body: some View {

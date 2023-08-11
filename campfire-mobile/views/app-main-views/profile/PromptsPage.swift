@@ -25,7 +25,7 @@ struct PromptsPage: View {
 
 
 struct ChoosePrompt: View {
-    let promptList = ["my school moment", "my party face", "top study spot", "weekend outing", "just another day at the office", "work hard play hard!", "one thing you didn't know about me", "welcome to my TedTalk", "mondays are so...", "im totally sober", "cheers🥂"]
+    let promptList = ["sooo college", "my party face", "top study spot", "weekend outing", "just another day at the office", "work hard play hard!", "one thing you didn't know about me", "welcome to my TedTalk", "mondays are so...", "im totally sober", "cheers🥂"]
     @State private var showConfirmButton: Bool?
     
     @Binding var prompt: String

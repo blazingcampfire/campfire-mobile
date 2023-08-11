@@ -13,6 +13,7 @@ import Kingfisher
 enum ActiveSheet: Identifiable {
     case first
     case second
+    case third
     var id: Int {
         hashValue
     }
@@ -36,9 +37,9 @@ struct PlayerView: View {
     @StateObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @State private var activeSheet: ActiveSheet?
-    @StateObject var feedUpdate = FeedPostUpdateModel()
+    @StateObject var feedUpdate: FeedPostUpdateModel
     @ObservedObject var postLikeStatusModel: PostLikeStatusModel
-    
+    @StateObject var idsEqual = PosterIdEqualCurrentUserId()
     
     var body: some View {
         
@@ -230,12 +231,11 @@ struct PlayerView: View {
                     
                     
                     Button(action: {
-                        //report post
-                        //delete post if user's post
+                        activeSheet = .third
                     }) {
-                        Image(systemName: "ellipsis")
+                        Image(systemName: "square.fill")
                             .resizable()
-                            .frame(width: 30, height: 7)
+                            .frame(width: 50, height: 50)
                             .foregroundColor(.white)
                     }
                     .padding(.top, 15)
@@ -248,6 +248,11 @@ struct PlayerView: View {
                 if let currentPostPlayer = currentPostPlayer {
                     commentModel.postId = currentPostPlayer.postItem.id
                     feedUpdate.postId = currentPostPlayer.postItem.id
+                }
+                if let currentPostPlayer = currentPostPlayer {
+                    if currentUser.profile.userID == currentPostPlayer.postItem.posterId {
+                        idsEqual.isEqual = true
+                    }
                 }
             }
             .background(Color.black.ignoresSafeArea())
@@ -263,6 +268,10 @@ struct PlayerView: View {
                             .presentationDetents([.fraction(0.85)])
                             .presentationDragIndicator(.visible)
                     }
+                case .third:
+                    EllipsesButtonView(equalIds: idsEqual)
+                        .presentationDetents([.fraction(0.10)])
+                        .presentationDragIndicator(.visible)
                 }
             }
     }
@@ -274,7 +283,7 @@ struct PlayerView: View {
 //Main thing playing the videos, think of this as theFeed View
 // We'll put UI elements like likebutton, commentspage, ellipses, and userinfo on here
 struct ScrollFeed: View {
-    @StateObject var feedModel = FeedPostModel()
+    @StateObject var feedModel: FeedPostModel
     
     
     var body: some View {
@@ -303,7 +312,7 @@ struct PlayerScrollView: UIViewRepresentable {
            }
 
            for i in 0..<feedModel.postPlayers.count {
-               let childView = UIHostingController(rootView: PlayerView(feedmodel: feedModel, currentIndex: i, commentModel: CommentsModel(currentUser: currentUser), postLikeStatusModel: postLikeStatusModel)) // Passing index here
+               let childView = UIHostingController(rootView: PlayerView(feedmodel: feedModel, currentIndex: i, commentModel: CommentsModel(currentUser: currentUser), feedUpdate: FeedPostUpdateModel(currentUser: currentUser), postLikeStatusModel: postLikeStatusModel)) // Passing index here
                childView.view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                uiView.addSubview(childView.view)
            }

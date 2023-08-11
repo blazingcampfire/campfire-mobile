@@ -13,7 +13,7 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-                ScrollFeed()
+            ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
                 .tabItem {
                     Text("Feed")
                     Image(systemName: "fireplace")

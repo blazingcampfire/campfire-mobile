@@ -160,7 +160,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, commentLikeStatus: comLikeStatus, replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
+                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, commentLikeStatus: comLikeStatus, commentUpdateModel: CommentUpdateModel(currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
                         .environmentObject(currentUser)
                 }
                 

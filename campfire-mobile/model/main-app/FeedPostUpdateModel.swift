@@ -20,7 +20,11 @@ class FeedPostUpdateModel: ObservableObject {
             listenForPostLikes()
         }
     }
-        
+    @Published var currentUser: CurrentUserModel
+    
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
     
     func listenForPostLikes() {
         guard let postId = postId else {

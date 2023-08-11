@@ -24,7 +24,10 @@ class ReplyUpdateModel: ObservableObject {
             print("replyId did set")
         }
     }
-    
+    @Published var currentUser: CurrentUserModel
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
     
     func listenForReplyLikes() {
         print("now listening for likes")

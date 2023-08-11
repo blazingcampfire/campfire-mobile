@@ -19,6 +19,10 @@ class CommentUpdateModel: ObservableObject {
             listenForCommentLikes()
         }
     }
+    @Published var currentUser: CurrentUserModel
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
     
     func listenForCommentLikes() {
         guard let postId = postId else {

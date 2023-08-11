@@ -15,6 +15,7 @@ class CommentsModel: ObservableObject {
     @Published var comments = [Comment]()
     @Published var repliesByComment = [String: [Reply]]()
     @Published var replies = [Reply]()
+    @Published var currentUser: CurrentUserModel
     @Published var isLoading: Bool = false
     private var isCommentsLoaded = false
     @Published var postId: String? = nil {
@@ -28,7 +29,9 @@ class CommentsModel: ObservableObject {
         }
     }
     
-    
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
+    }
     
     //Create UserId field on each comment 
     func createComment(postId: String, commenttext: String ,completion: @escaping () -> Void) {
@@ -36,11 +39,11 @@ class CommentsModel: ObservableObject {
         let now = Timestamp(date: Date())
         let commentData: [String: Any] = [
             "id": docRef.documentID,
-            "username": "bizzle",
-            "profilepic": "",
+            "username": currentUser.profile.username,
+            "profilepic": currentUser.profile.profilePicURL,
             "comment": commenttext,
-            "numLikes": 0,
             "date": now,
+            "posterId": currentUser.profile.userID
         ]
         docRef.setData(commentData) { error in
             if let error = error {
@@ -51,28 +54,18 @@ class CommentsModel: ObservableObject {
             }
         }
     }
-    // func updateUserLikesFromComments(userId: String) {
-    // let docRef = ndProfiles.document(userId)
-    // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
-    // if let error = error {
-    // print("error updating document: \(error)")
-    // } else {
-    // print("Document successfully updated!")
-    // }
-    // }
-    // }
-    
+        
     
     func createReply(postId: String, commentId: String, replytext: String ,completion: @escaping () -> Void) {
         let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document()
         let now = Timestamp(date: Date())
         let replyData: [String: Any] = [
             "id": docRef.documentID,
-            "username": "bizzle",
-            "profilepic": "",
+            "username": currentUser.profile.username,
+            "profilepic": currentUser.profile.profilePicURL,
             "reply": replytext,
-            "numLikes": 0,
             "date": now,
+            "posterId": currentUser.profile.userID
         ]
         docRef.setData(replyData) { error in
             if let error = error {
@@ -83,19 +76,7 @@ class CommentsModel: ObservableObject {
             }
         }
     }
-    // func updateUserLikesFromReplies(userId: String) {
-    // let docRef = ndProfiles.document(userId)
-    // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
-    // if let error = error {
-    // print("error updating document: \(error)")
-    // } else {
-    // print("Document successfully updated!")
-    // }
-    // }
-    // }
-    
-    
-    
+  
     func listenForComments() {
         guard let postId = postId else {
             return
@@ -115,9 +96,9 @@ class CommentsModel: ObservableObject {
                 let profilepic = data["profilepic"] as? String ?? ""
                 let username = data["username"] as? String ?? ""
                 let comment = data["comment"] as? String ?? ""
-                let numLikes = data["numLikes"] as? Int ?? 0
                 let date = data["date"] as? Timestamp ?? Timestamp()
-                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, numLikes: numLikes, date: date)
+                let posterId = data["posterId"] as? String ?? ""
+                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId)
             } 
 
             }
@@ -144,57 +125,12 @@ class CommentsModel: ObservableObject {
                 let profilepic = data["profilepic"] as? String ?? ""
                 let username = data["username"] as? String ?? ""
                 let reply = data["reply"] as? String ?? ""
-                let numLikes = data["numLikes"] as? Int ?? 0
                 let date = data["date"] as? Timestamp ?? Timestamp()
-                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, numLikes: numLikes, date: date)
+                let posterId = data["posterId"] as? String ?? ""
+                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, date: date, posterId: posterId)
             }
         }
     }
     
-    
-    
-    func increaseCommentLikeCount(postId: String, commentId: String) {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-           print("Error updating document: \(error)")
-           } else {
-           print("Document successfully updated!")
-           }
-        }
-   }
-    func decreaseComLikeCount(postId: String, commentId: String) {
-    let docRef = ndPosts.document(postId).collection("comments").document(commentId)
-        docRef.updateData(["numLikes" : FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document: \(error)")
-                } else {
-                print("Document successfully updated!")
-                }
-        }
-    }
-    
-    
-    func increaseReplyLikeCount(postId: String, commentId: String, replyId: String) {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyId)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-           print("Error updating document: \(error)")
-           } else {
-           print("Document successfully updated!")
-           }
-        }
-    }
-    
-    func decreaseReplyLikeCount(postId: String, commentId: String, replyId: String) {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyId)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-           print("Error updating document: \(error)")
-           } else {
-           print("Document successfully updated!")
-           }
-        }
-    }
 
 }

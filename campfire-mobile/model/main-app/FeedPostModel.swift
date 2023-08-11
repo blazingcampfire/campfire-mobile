@@ -13,29 +13,28 @@ import AVKit
 
 class FeedPostModel: ObservableObject {
     @Published var posts = [PostItem]()
-    @Published var postPlayers = [PostPlayer?]()
-    private var listener: ListenerRegistration?
+    @Published var postPlayers = [PostPlayer]()
     @Published var isNewFeedSelected: Bool = false {
         didSet {
             if isNewFeedSelected {
+                listener?.remove()
                 listenForNewFeedPosts()
             } else if !isNewFeedSelected {
+                listener?.remove()
                 listenForHotFeedPosts()
             }
         }
     }
+    var listener: ListenerRegistration?
     
     init() {
-       self.listenForHotFeedPosts()
+       self.listenForNewFeedPosts()
     }
     
-    deinit {
-        listener?.remove()
-    }
         
     func listenForNewFeedPosts() {
-            let docRef = ndPosts.order(by: "date", descending: true)
-        self.listener = docRef.addSnapshotListener { (querySnapshot, error) in
+    let docRef = ndPosts.order(by: "date", descending: true)
+    listener = docRef.addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
                     return
@@ -49,11 +48,11 @@ class FeedPostModel: ObservableObject {
                     let caption = data["caption"] as? String ?? ""
                     let profilepic = data["profilepic"] as? String ?? ""
                     let url = data["url"] as? String ?? ""
-                    let numLikes = data["numLikes"] as? Int ?? 0
                     let location = data["location"] as? String ?? ""
                     let postType = data["postType"] as? String ?? ""
                     let date = data["date"] as? Timestamp ?? Timestamp()
-                    return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, postType: postType, date: date)
+                    let posterId = data["posterId"] as? String ?? ""
+                    return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId)
                 }
 
                 // update postPlayers accordingly
@@ -73,7 +72,7 @@ class FeedPostModel: ObservableObject {
     func listenForHotFeedPosts() {
         let docRef = ndPosts.order(by: "numLikes", descending: true).order(by: "date", descending: true)
         
-        self.listener = docRef.addSnapshotListener { (querySnapshot, error) in
+        listener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -87,12 +86,12 @@ class FeedPostModel: ObservableObject {
                 let caption = data["caption"] as? String ?? ""
                 let profilepic = data["profilepic"] as? String ?? ""
                 let url = data["url"] as? String ?? ""
-                let numLikes = data["numLikes"] as? Int ?? 0
                 let location = data["location"] as? String ?? ""
                 let postType = data["postType"] as? String ?? ""
                 let date = data["date"] as? Timestamp ?? Timestamp()
-                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, numLikes: numLikes, location: location, postType: postType, date: date)
-            }
+                let posterId = data["posterId"] as? String ?? ""
+                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId)
+            } 
 
             // update postPlayers accordingly
             self.postPlayers = self.posts.compactMap { post in
@@ -107,42 +106,5 @@ class FeedPostModel: ObservableObject {
             }
         }
     }
-    
-    
-    
-    
-    func increaseLikeCount(postId: String) {
-        let docRef = ndPosts.document(postId)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-                print("Error updating document: \(error)")
-            } else {
-                print("Document successfully updated!")
-            }
-        }
-    }
-    
-    func decreaseLikeCount(postId: String) {
-        let docRef = ndPosts.document(postId)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document: \(error)")
-            } else {
-                print("Document successfully updated!")
-                }
-            }
-        }
-    
-    // func updateUserLikesFromPost(userId: String) {
-    // let docRef = ndProfiles.document(userId)
-    // docRef.updateData(["smores": FieldValue.increment(Int64(1))] { error in
-    // if let error = error {
-    // print("error updating document: \(error)")
-    // } else {
-    // print("Document successfully updated!")
-    // }
-    // }
-    // }
-    
     
 }

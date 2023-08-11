@@ -20,10 +20,17 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
     }
 
-    func getLocation() {
-        self.locationManager.startUpdatingLocation()
-    }
-
+    func getLocation(completion: @escaping () -> Void) {
+            switch locationManager.authorizationStatus {
+                case .authorizedAlways, .authorizedWhenInUse:
+                    self.locationManager.startUpdatingLocation()
+                case .notDetermined:
+                    self.locationManager.requestWhenInUseAuthorization()
+                default:
+                    break
+            }
+            completion()
+        }
     func getAddress(completion: @escaping (String?) -> Void) {
         guard let currentLocation = self.currentLocation else {
             return completion(nil)
@@ -45,6 +52,15 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             }
         }
     }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+           switch manager.authorizationStatus {
+               case .authorizedAlways, .authorizedWhenInUse:
+                   getLocation() { }
+               default:
+                   break
+           }
+       }
     
     // Delegate function that will be called whenever the device's location is updated.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

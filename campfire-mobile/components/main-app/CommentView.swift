@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CommentView: View {
     var eachcomment: Comment
     var comId: String
     var postID: String
-    @State private var commentLiked: Bool = false
+    var posterId: String
     @State private var showingReplies: Bool = false
     @State private var replyTapped: Bool = false
     @ObservedObject var commentsModel: CommentsModel
+    @ObservedObject var commentLikeStatus: CommentLikeStatusModel
+    @EnvironmentObject var currentUser: CurrentUserModel
+    @StateObject var commentUpdateModel = CommentUpdateModel()
+    @StateObject var replyLikedStatus = ReplyLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
     var usernameId: String
@@ -28,7 +33,7 @@ struct CommentView: View {
                             Button(action: {
                                 //navigate to profile
                             }) {
-                                Image("ragrboard5")
+                                KFImage(URL(string: eachcomment.profilepic))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
@@ -86,36 +91,43 @@ struct CommentView: View {
                         
                         Spacer()
                         
-                        
                         VStack(spacing: -20) {
                             Button(action: {
-                                self.commentLiked.toggle()
-                                if self.commentLiked {
-                                    commentsModel.increaseCommentLikeCount(postId: postID, commentId: comId)
+                                let newLikeStatus = !(commentLikeStatus.likedStatus[comId] ?? false)
+                                print("Before setting newLikeStatus: \(commentLikeStatus.likedStatus[comId] ?? false)")
+                                if newLikeStatus {
+                                    commentUpdateModel.createLikeDocument(postId: postID, comId: comId, userId: currentUser.profile.userID)
+                                    print("INCREASE LIKE FROM COMMENT")
                                 } else {
-                                    commentsModel.decreaseComLikeCount(postId: postID, commentId: comId)
+                                    commentUpdateModel.deleteLikeDocument(postId: postID, comId: comId, userId: currentUser.profile.userID)
+                                    print("DECREASE LIKE FROM COMMENT")
                                 }
+                                commentLikeStatus.likedStatus[comId] = newLikeStatus
+                                print("After setting newLikeStatus: \(commentLikeStatus.likedStatus[comId] ?? false)")
                             }) {
-                                Image(commentLiked == true ? "eaten" : "noteaten")
+                                Image(commentLikeStatus.likedStatus[comId] == true ? "eaten" : "noteaten")
                                     .resizable()
                                     .frame(width: 75, height: 90)
                                     .aspectRatio(contentMode: .fit)
                                     .offset(x: -4)
                             }
-                            Text("\(eachcomment.numLikes)")
+                            Text("\(commentUpdateModel.commentLikes.count)")
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-SemiBold", size: 16))
                         }
                     }
                 if showingReplies {
                     ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
-                        ReplyView(eachreply: reply, comId: comId, postId: postID, commentModel: commentsModel)
+                        ReplyView(eachreply: reply, comId: comId, postId: postID, replyId: reply.id, replyPosterId: reply.posterId ,commentModel: commentsModel, replyLikeStatus: replyLikedStatus)
+                            .environmentObject(currentUser)
                     }
                 }
         }
         }
         .onAppear {
             commentsModel.commentId = comId
+            commentUpdateModel.postId = postID
+            commentUpdateModel.comId = comId
         }
     }
     }

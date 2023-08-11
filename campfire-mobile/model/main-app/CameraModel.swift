@@ -89,7 +89,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             if !self.session.isRunning {
                 self.session.startRunning()
             }
-            self.sessionInterrupted = false
+            self.alertType = .sessionInterrupted
         }
     }
     @objc func handleSessionRuntimeError(notification: NSNotification) {
@@ -374,6 +374,8 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         self.capturedPic = nil
                         self.showSelectPhoto = false
                         self.showSelectVideo = false
+                        self.videoTooLarge = false
+                        self.videoSizeAlert = false
                     }
                 }
             }

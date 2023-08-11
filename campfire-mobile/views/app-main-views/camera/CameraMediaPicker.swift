@@ -88,7 +88,7 @@ struct MediaPickerView: UIViewControllerRepresentable {
                         DispatchQueue.main.async {
                             self.camera.selectedVideoURL = newUrl // Set the selectedVideoURL in the CameraModel
                             print("\(videoData) bytes")
-                            if videoData.count > 10000000 {
+                            if videoData.count > 12000000 {
                                 self.camera.videoTooLarge = true
                                 self.camera.videoSizeAlert = true
                             }

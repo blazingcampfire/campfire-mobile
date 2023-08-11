@@ -93,13 +93,13 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage(model: SettingsModel(notificationsOn: notificationsManager.hasPermission))
+                                    SettingsPage(model: SettingsModel(notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
                                         .presentationDragIndicator(.visible)
                                         .presentationCornerRadius(30)
                                 }
                             }
                         }
-                        .padding(.bottom, 40)
+//                        .padding(.bottom, 40)
                         
                         let posts = currentUser.profile.posts
                             VStack {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsPage: View {
-    @StateObject var model: SettingsModel 
+    @StateObject var model: SettingsModel
     var body: some View {
         NavigationView {
             SettingsForm()
@@ -43,14 +43,19 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
 
-                Toggle(isOn: $notificationsManager.hasPermission) {
+                Button(action: {
+                    Task {
+                        await model.notificationsManager.turnOffNotifications()
+                    }
+                }, label: {
                     Label {
-                        Text("Notifications")
+                        Text("Turn Notifications On/Off")
+                            .foregroundColor(Theme.TextColor)
                     } icon: {
                         Image(systemName: "bell.fill")
                             .foregroundColor(Theme.Peach)
                     }
-                }
+                })
             }
 
             .font(.custom("LexendDeca-Regular", size: 16))
@@ -130,8 +135,8 @@ struct SettingsForm: View {
     }
 }
 
-//struct SettingsPage_Previews: PreviewProvider {
+// struct SettingsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SettingsPage()
 //    }
-//}
+// }

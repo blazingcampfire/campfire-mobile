@@ -42,5 +42,8 @@ class NotificationsManager: ObservableObject {
     
     func turnOffNotifications() async {
         UIApplication.shared.unregisterForRemoteNotifications()
+        if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: nil)
+                        }
     }
 }

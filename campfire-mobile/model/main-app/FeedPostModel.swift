@@ -39,7 +39,7 @@ class FeedPostModel: ObservableObject {
     
         
     func listenForNewFeedPosts() {
-    let docRef = ndPosts.order(by: "date", descending: true)
+        let docRef = currentUser.postsRef.order(by: "date", descending: true)
     listener = docRef.addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
@@ -76,7 +76,7 @@ class FeedPostModel: ObservableObject {
         }
 
     func listenForHotFeedPosts() {
-        let docRef = ndPosts.order(by: "numLikes", descending: true).order(by: "date", descending: true)
+        let docRef = currentUser.postsRef.order(by: "numLikes", descending: true).order(by: "date", descending: true)
         
         listener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {

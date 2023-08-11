@@ -20,7 +20,7 @@ struct CameraView: View {
     
     @StateObject var camera = CameraModel()
     @ObservedObject var currentUser: CurrentUserModel
-    @StateObject var post = CamPostModel()
+    @StateObject var post: CamPostModel
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
     @State private var isShowingCamPicker: Bool = false
@@ -39,6 +39,7 @@ struct CameraView: View {
                     CustomVideoPlayer(player: recordedVideo, isPlaying: $isPlaying)
                         .onTapGesture {
                             isPlaying.toggle()
+                            UIApplication.shared.dismissKeyboard()
                         }
                         .edgesIgnoringSafeArea(.all)
                 }

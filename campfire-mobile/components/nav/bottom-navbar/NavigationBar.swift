@@ -15,7 +15,7 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-                TheFeed()
+            ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
                 .tabItem {
                     Image(systemName: "play.fill")
                 }
@@ -31,7 +31,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
-           CameraView(currentUser: currentUser)
+            CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()
@@ -68,5 +68,6 @@ struct NavigationBar: View {
 //struct NavigationBar_Previews: PreviewProvider {
 //    static var previews: some View {
 //        NavigationBar()
+//
 //    }
 //}

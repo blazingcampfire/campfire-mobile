@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ReplyView: View {
     var eachreply: Reply
     var comId: String
     var postId: String
-    @State private var replyLiked: Bool = false
+    var replyId: String
+    var replyPosterId: String
     @ObservedObject var commentModel: CommentsModel
+    @ObservedObject var replyLikeStatus: ReplyLikeStatusModel
+    @EnvironmentObject var currentUser: CurrentUserModel
+    @StateObject var replyUpdateModel: ReplyUpdateModel
+    
+    
     var body: some View {
         HStack() {
            
@@ -20,7 +27,7 @@ struct ReplyView: View {
                 Button(action: {
                     // navigate to profile
                 }) {
-                    Image("ragrboard5")
+                    KFImage(URL(string: eachreply.profilepic))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -50,27 +57,39 @@ struct ReplyView: View {
             .padding(.leading, 60)
             
             Spacer()
-
+            
             VStack(spacing: -20) {
                 Button(action: {
-                    self.replyLiked.toggle()
-                    if self.replyLiked {
-                        commentModel.increaseReplyLikeCount(postId: postId , commentId: comId, replyId: eachreply.id)
+                    let newLikeStatus = !(replyLikeStatus.likedStatus[replyId] ?? false)
+                    print("Before: \(replyLikeStatus.likedStatus[replyId] ?? false)")
+                    
+                    if newLikeStatus {
+                       replyUpdateModel.createLikeDocument(postId: postId, comId: comId, replyId: replyId, userId: currentUser.profile.userID)
                     } else {
-                        commentModel.decreaseReplyLikeCount(postId: postId, commentId: comId, replyId: eachreply.id)
+                        replyUpdateModel.deleteLikeDocument(postId: postId, comId: comId, replyId: replyId, userId: currentUser.profile.userID)
                     }
+                    
+                    replyLikeStatus.likedStatus[replyId] = newLikeStatus
+                    print("After: \(replyLikeStatus.likedStatus[replyId] ?? false)")
                 }) {
-                    Image(replyLiked == false ? "noteaten" : "eaten")
+                    Image(replyLikeStatus.likedStatus[replyId] == true ? "eaten" : "noteaten")
                         .resizable()
                         .frame(width: 75, height: 90)
                         .aspectRatio(contentMode: .fill)
                         .offset(x: -2)
                 }
-                
-                Text("\(eachreply.numLikes)")
+                Text("\(replyUpdateModel.replyLikes.count)")
                     .foregroundColor(Theme.TextColor)
                     .font(.custom("LexendDeca-SemiBold", size: 16))
             }
+        }
+        .onAppear {
+            replyUpdateModel.postId = postId
+            print("replyupdatemodel postid did set from on appear")
+            replyUpdateModel.comId = comId
+            print("replyupdatemodel comId did set from on appear")
+            replyUpdateModel.replyId = replyId
+            print("replyid did set from on appear")
         }
         
     }

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct OwnProfilePage: View {
-    @State var settingsPageShow = false
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
+    @State var settingsPageShow = false
     @State private var showAddPost = false
     @State var darkMode = false
     
@@ -93,13 +94,12 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage(darkMode: $darkMode)
+                                    SettingsPage(darkmode: $darkmode, model: SettingsModel(notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
                                         .presentationDragIndicator(.visible)
                                         .presentationCornerRadius(30)
                                 }
                             }
                         }
-                        .padding(.bottom, 40)
                         
                         let posts = currentUser.profile.posts
                             VStack {

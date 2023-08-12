@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsPage: View {
     @Binding var darkMode: Bool
-    @StateObject var model: SettingsModel = SettingsModel()
+    @StateObject var model: SettingsModel
     var body: some View {
         NavigationView {
             SettingsForm(darkMode: $darkMode)
@@ -31,6 +31,7 @@ struct SettingsForm: View {
     @Binding var darkMode: Bool
     @State var notifications: Bool = false
     @EnvironmentObject var model: SettingsModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
             Section(header: Text("Display")) {
@@ -44,14 +45,19 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
 
-                Toggle(isOn: $notifications) {
+                Button(action: {
+                    Task {
+                        await model.notificationsManager.turnOffNotifications()
+                    }
+                }, label: {
                     Label {
-                        Text("Notifications")
+                        Text("Turn Notifications On/Off")
+                            .foregroundColor(Theme.TextColor)
                     } icon: {
                         Image(systemName: "bell.fill")
                             .foregroundColor(Theme.Peach)
                     }
-                }
+                })
             }
 
             .font(.custom("LexendDeca-Regular", size: 16))

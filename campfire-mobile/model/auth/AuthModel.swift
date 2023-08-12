@@ -39,8 +39,6 @@ final class AuthModel: ObservableObject {
     @Published var validName: Bool = false
     @Published var emailSignInSuccess: Bool = false
     @Published var validUsername: Bool = false
-    @Published var isMainAppPresented: Bool = false
-    @Published var restart: Bool = false
 
     // Bools for whether user is creating account or logging in
     @Published var login: Bool = false
@@ -308,7 +306,6 @@ extension AuthModel {
         validUsername = false
         login = false
         createAccount = false
-        isMainAppPresented = false
     }
 
 }
@@ -316,14 +313,7 @@ extension AuthModel {
 // MARK: - Create user function
 
 extension AuthModel {
-    func presentMainApp() {
-        if Auth.auth().currentUser?.email == nil || Auth.auth().currentUser?.phoneNumber == nil {
-            return
-        } else {
-            isMainAppPresented = true
-        }
-    }
-
+   
     func createProfile() {
         userID = Auth.auth().currentUser!.uid
         email = Auth.auth().currentUser?.email ?? email

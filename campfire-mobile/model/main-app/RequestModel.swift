@@ -14,13 +14,17 @@ import FirebaseFirestoreSwift
 class RequestsModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var requests: [RequestFirestore] = []
+    @Published var notificationsManager: NotificationsManager
     
-    init(currentUser: CurrentUserModel) {
+    init(currentUser: CurrentUserModel, notificationsManager: NotificationsManager) {
         self.currentUser = currentUser
+        self.notificationsManager = notificationsManager
         self.readRequests()
+        print("read requests fired from init")
     }
     
     func readRequests() {
+        let count = self.requests.count
         let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)
@@ -36,6 +40,8 @@ class RequestsModel: ObservableObject {
                         requestsArray.append(requestObject)
                     }
                     self.requests = requestsArray
+                    print(count)
+                    print(requests.count)
                 }
             }
             

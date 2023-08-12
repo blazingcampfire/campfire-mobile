@@ -325,6 +325,7 @@
 		E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
 		E2B248CE2A7EDDAF0004A757 /* LeaderboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModel.swift; sourceTree = "<group>"; };
 		E2B248D52A800D750004A757 /* PhoneNumberField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberField.swift; sourceTree = "<group>"; };
+		E2B670222A854D26007F6864 /* campfire-mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "campfire-mobile.entitlements"; sourceTree = "<group>"; };
 		E2C446822A4E62B50032CF34 /* CustomTopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopNavBar.swift; sourceTree = "<group>"; };
 		E2C446842A4E6DFC0032CF34 /* TopNavBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBarContainer.swift; sourceTree = "<group>"; };
 		E2C446862A4E82C20032CF34 /* TopNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavBar.swift; sourceTree = "<group>"; };
@@ -581,6 +582,7 @@
 		E29095D92A3E473E001BEDDE /* campfire-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				E2B670222A854D26007F6864 /* campfire-mobile.entitlements */,
 				E2163E502A663B35005A20BE /* types */,
 				E2CBD5E22A6211BE000F3547 /* utilities */,
 				E2E997B12A41459700EBBDD7 /* Info.plist */,
@@ -1299,7 +1301,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_ENTITLEMENTS = "campfire-mobile/campfire-mobile.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
@@ -1322,7 +1327,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.camfer56gpeehiwqui2qwihhhho.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1334,7 +1341,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_ENTITLEMENTS = "campfire-mobile/campfire-mobile.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"campfire-mobile/Preview Content\"";
@@ -1357,7 +1367,9 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.camfer56gpeehiwqui2qwihhhho.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

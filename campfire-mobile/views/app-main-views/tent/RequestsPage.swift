@@ -20,6 +20,10 @@ struct RequestsPage: View {
                     .environmentObject(model)
             }
         }
+        .refreshable {
+            model.readRequests()
+            print("read requests fired from refresh")
+        }
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)

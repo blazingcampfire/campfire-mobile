@@ -14,13 +14,21 @@ struct SetProfilePic: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     @State var setUpFinished: Bool = false
     @State var selectedPFP: UIImage?
     
     var body: some View {
-        if model.isMainAppPresented {
+        if setUpFinished {
             NavigationBar()
                 .environmentObject(currentUser)
+                .onAppear {
+                    if !notificationsManager.hasPermission {
+                        Task {
+                            await notificationsManager.request()
+                        }
+                    }
+                }
         }
         else {
             GradientBackground()
@@ -57,7 +65,7 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            model.triggerRestart()
+                                            
                                             currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")

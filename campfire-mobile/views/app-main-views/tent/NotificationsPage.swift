@@ -8,27 +8,23 @@
 import SwiftUI
 
 struct NotificationsPage: View {
-    let range: ClosedRange<Int>
+    
+    @EnvironmentObject var notificationsManager: NotificationsManager
 
     var body: some View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            List {
-                    ForEach(range, id: \.self) { _ in
-                        ZStack {
-                            Theme.ScreenColor
-                                .ignoresSafeArea(.all)
-                            
-                            VStack {
-                                Notification()
-                                Divider()
-                            }
-                        }
-                    }
-                    .listRowSeparator(.hidden)
+            Button("Request Notification Permission") {
+                Task {
+                    await notificationsManager.request()
+                }
             }
-            .listStyle(PlainListStyle())
+            .buttonStyle(.bordered)
+            .disabled(notificationsManager.hasPermission)
+        }
+        .task {
+            await notificationsManager.getAuthStatus()
         }
         
     }
@@ -36,6 +32,6 @@ struct NotificationsPage: View {
 
 struct NotificationsPage_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationsPage(range: 1 ... 12)
+        NotificationsPage()
     }
 }

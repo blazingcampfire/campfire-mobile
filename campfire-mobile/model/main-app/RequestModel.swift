@@ -15,6 +15,7 @@ class RequestsModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var requests: [RequestFirestore] = []
     @Published var notificationsManager: NotificationsManager
+    
     init(currentUser: CurrentUserModel, notificationsManager: NotificationsManager) {
         self.currentUser = currentUser
         self.notificationsManager = notificationsManager
@@ -41,11 +42,6 @@ class RequestsModel: ObservableObject {
                     self.requests = requestsArray
                     print(count)
                     print(requests.count)
-                    if requests.count > count {
-                        Task {
-                            await self.notificationsManager.sendNotification(title: "New Friend Request", subtitle: "Someone wants to be your friend!")
-                        }
-                    }
                 }
             }
             

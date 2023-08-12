@@ -22,6 +22,13 @@ struct SetProfilePic: View {
         if setUpFinished {
             NavigationBar()
                 .environmentObject(currentUser)
+                .onAppear {
+                    if !notificationsManager.hasPermission {
+                        Task {
+                            await notificationsManager.request()
+                        }
+                    }
+                }
         }
         else {
             GradientBackground()
@@ -58,11 +65,7 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            if !notificationsManager.hasPermission {
-                                                Task {
-                                                    await notificationsManager.request()
-                                                }
-                                            }
+                                            
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }

@@ -25,6 +25,7 @@ class SettingsModel: ObservableObject {
         self.notificationsOn = notificationsOn
         self.notificationsManager = notificationsManager
     }
+    
     func signOut() throws {
         try AuthenticationManager.shared.signOut()
     }

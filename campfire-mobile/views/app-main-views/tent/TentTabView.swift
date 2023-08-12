@@ -19,16 +19,14 @@ struct TentTabView: View {
                 .ignoresSafeArea(.all)
             
             VStack {
-                SlidingTabView(selection: $tabIndex, tabs: ["Notifications", "Search", "Requests"], font: .custom("LexendDeca-SemiBold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
+                SlidingTabView(selection: $tabIndex, tabs: ["Search", "Requests"], font: .custom("LexendDeca-SemiBold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
                 
                 Spacer()
                 
                 // conditional setup navigates to a different page depending on tab selection
                 if tabIndex == 0 {
-                    NotificationsPage()
-                } else if tabIndex == 1 {
                     SearchPage(model: SearchModel(currentUser: currentUser))
-                } else if tabIndex == 2 {
+                } else if tabIndex == 1 {
                     RequestsPage(model: RequestsModel(currentUser: currentUser, notificationsManager: notificationsManager))
                 }
                 Spacer()

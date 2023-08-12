@@ -11,6 +11,7 @@ struct OwnProfilePage: View {
     @State var settingsPageShow = false
     @EnvironmentObject var currentUser: CurrentUserModel
     @State private var showAddPost = false
+    @State var darkMode = false
     
     var body: some View {
         NavigationView {
@@ -92,7 +93,7 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage()
+                                    SettingsPage(darkMode: $darkMode)
                                         .presentationDragIndicator(.visible)
                                         .presentationCornerRadius(30)
                                 }
@@ -143,6 +144,7 @@ struct OwnProfilePage: View {
                 }
             }
         }
+        .preferredColorScheme(darkMode ? .dark : .light)
     }
 }
 

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SettingsPage: View {
+    @Binding var darkMode: Bool
     @StateObject var model: SettingsModel = SettingsModel()
     var body: some View {
         NavigationView {
-            SettingsForm()
+            SettingsForm(darkMode: $darkMode)
                 .environmentObject(model)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -27,7 +28,7 @@ struct SettingsPage: View {
 }
 
 struct SettingsForm: View {
-    @State var darkMode: Bool = false
+    @Binding var darkMode: Bool
     @State var notifications: Bool = false
     @EnvironmentObject var model: SettingsModel
     var body: some View {
@@ -127,11 +128,12 @@ struct SettingsForm: View {
             }
             .font(.custom("LexendDeca-Regular", size: 16))
         }
+        .preferredColorScheme(darkMode ? .dark : .light)
     }
 }
 
-struct SettingsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsPage()
-    }
-}
+//struct SettingsPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsPage()
+//    }
+//}

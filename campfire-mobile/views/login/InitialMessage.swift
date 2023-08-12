@@ -11,7 +11,7 @@ struct InitialMessage: View {
     let school: String
     var body: some View {
         ZStack {
-            Theme.Peach
+            Color.white
                 .ignoresSafeArea(.all)
             VStack(spacing: 25) {
                 VStack {
@@ -20,7 +20,7 @@ struct InitialMessage: View {
                     Text("before you begin...")
                         .font(.custom("LexendDeca-SemiBold", size: 20))
                 }
-                .foregroundColor(Color.white)
+                .foregroundColor(Theme.Peach)
                 .multilineTextAlignment(.center)
                 
                 
@@ -32,15 +32,19 @@ struct InitialMessage: View {
                     Text("⛺ - use the tent to stay up to date with the latest news and find new friends")
                     Text("🎓 - customize your profile with your favorite flicks from around campus")
                 }
-                .foregroundColor(Color.white)
+                .foregroundColor(Theme.Peach)
                 .font(.custom("LexendDeca-SemiBold", size: 16))
                 .multilineTextAlignment(.center)
                 .padding(.leading, 7)
                 .frame(width: 350, alignment: .center)
-                Text("most importantly, enjoy your time around the campfire!")
-                    .font(.custom("LexendDeca-Bold", size: 20))
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
+                HStack {
+                    Spacer()
+                    Text("most importantly, enjoy your time around the campfire!")
+                        .font(.custom("LexendDeca-Bold", size: 15))
+                        .foregroundColor(Theme.Peach)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
             }
         }
     }

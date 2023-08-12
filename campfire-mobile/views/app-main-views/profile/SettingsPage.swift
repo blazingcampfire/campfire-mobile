@@ -56,26 +56,33 @@ struct SettingsForm: View {
 
             .font(.custom("LexendDeca-Regular", size: 16))
             Section(header: Text("About")) {
-                Label {
-                    Text("Community Guidelines")
-                } icon: {
-                    Image(systemName: "doc.plaintext.fill")
-                        .foregroundColor(Theme.Peach)
-                }
-                Label {
-                    Text("Privacy Policy")
-                } icon: {
-                    Image(systemName: "key")
-                        .foregroundColor(Theme.Peach)
-                }
-                Label {
-                    Text("Terms of Service")
-                } icon: {
-                    Image(systemName: "doc.plaintext.fill")
-                        .foregroundColor(Theme.Peach)
-                }
+                Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
+                                    Label {
+                                        Text("Community Guidelines")
+                                    } icon: {
+                                        Image(systemName: "doc.plaintext.fill")
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                                }
+                Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Privacy-Policy-3b8b7d05e438423daf0040181f2d98cf")!) {
+                                    Label {
+                                        Text("Privacy Policy")
+                                    } icon: {
+                                        Image(systemName: "key")
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                                }
+                Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Terms-of-Service-4b592b52c33e44f29b0669d55a236e9e")!) {
+                                    Label {
+                                        Text("Terms of Serice")
+                                    } icon: {
+                                        Image(systemName: "doc.plaintext.fill")
+                                            .foregroundColor(Theme.Peach)
+                                    }
+                                }
             }
             .font(.custom("LexendDeca-Regular", size: 16))
+            .foregroundColor(Theme.TextColor)
 
             Section(header: Text("Support")) {
                 Label {

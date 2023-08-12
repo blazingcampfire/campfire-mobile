@@ -274,6 +274,12 @@ struct PlayerView: View {
                         .presentationDragIndicator(.visible)
                 }
             }
+            .sheet(isPresented: $currentUser.showInitialMessage) {
+                InitialMessage(school: currentUser.profile.school)
+                    .onDisappear {
+                                    currentUser.showInitialMessage = false
+                    }
+            }
     }
 }
     

@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Foundation
 
 class CurrentUserModel: ObservableObject {
+    @Published var showInitialMessage = false // initial message
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
     @Published var signedIn: Bool = false

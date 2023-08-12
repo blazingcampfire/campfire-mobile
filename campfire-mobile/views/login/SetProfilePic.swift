@@ -58,6 +58,7 @@ struct SetProfilePic: View {
                                             currentUser.getProfile()
                                             currentUser.getUser()
                                             model.triggerRestart()
+                                            currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }

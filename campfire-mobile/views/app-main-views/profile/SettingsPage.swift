@@ -56,7 +56,7 @@ struct SettingsForm: View {
             .font(.custom("LexendDeca-Regular", size: 16))
             Section(header: Text("About")) {
                 Label {
-                    Text("FAQ")
+                    Text("Community Guidelines")
                 } icon: {
                     Image(systemName: "doc.plaintext.fill")
                         .foregroundColor(Theme.Peach)

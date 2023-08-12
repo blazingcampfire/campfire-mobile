@@ -53,63 +53,56 @@ struct EditProfile: View {
                                 .foregroundColor(Theme.Peach)
                         }
                         
+                        Spacer()
                         
                         HStack {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack {
                                     Text(currentUser.profile.name)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 17))
                                     
                                     Spacer()
                                     
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
+                                   
                                         
                                     NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: nameIllegalChar, field: "name", currentfield: currentUser.profile.name)
                                         .environmentObject(currentUser)) {
                                             Label("edit name", systemImage: "pencil")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(Color.white)
+                                                .font(.custom("LexendDeca-Bold", size: 17))
+                                                .foregroundColor(Theme.Peach)
                                         }
-                                        }
+                    
                                 }
                                 HStack {
                                     Text(currentUser.profile.username)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 17))
                                    Spacer()
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
+                                    
                                         
                                         NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: usernameIllegalChar, field: "username", currentfield: currentUser.profile.username)
                                             .environmentObject(currentUser)) {
                                                 Label("edit username", systemImage: "pencil")
-                                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                                    .foregroundColor(Color.white)
+                                                    .font(.custom("LexendDeca-Bold", size: 17))
+                                                    .foregroundColor(Theme.Peach)
                                             }
-                                    }
+                                    
                                 }
                                 HStack {
                                     Text(currentUser.profile.bio)
                                         .multilineTextAlignment(.center)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 17))
                                     
                                     Spacer()
                                     
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
+                                   
+                                    
                                         NavigationLink(destination: EditFieldPage(maxCharacterLength: 50, field: "bio", currentfield: currentUser.profile.bio)
                                             .environmentObject(currentUser)) {
                                                 Label("edit bio", systemImage: "pencil")
-                                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                                    .foregroundColor(Color.white)
+                                                    .font(.custom("LexendDeca-Bold", size: 17))
+                                                    .foregroundColor(Theme.Peach)
                                             }
-                                    }
+                                
                                 }
                             }
                             .padding(.leading, 20)

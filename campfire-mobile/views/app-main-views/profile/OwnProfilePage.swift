@@ -12,7 +12,7 @@ struct OwnProfilePage: View {
     @EnvironmentObject var notificationsManager: NotificationsManager
     @State var settingsPageShow = false
     @State private var showAddPost = false
-    @State var darkMode = false
+    @AppStorage("isDarkMode") private var darkMode = false
     
     var body: some View {
         NavigationView {

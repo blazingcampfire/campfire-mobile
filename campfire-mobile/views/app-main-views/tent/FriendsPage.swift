@@ -15,7 +15,6 @@ struct FriendsPage: View {
     
     var body: some View {
         
-            NavigationView {
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor
@@ -42,6 +41,10 @@ struct FriendsPage: View {
                             Spacer()
                         }
                     }
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+                    .background(Color.white)
+                    .padding(-10)
                     
                 }
                 else {
@@ -52,12 +55,12 @@ struct FriendsPage: View {
                         ListFriends()
                     }
                     .environmentObject(model)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+                    .background(Color.white)
+                    .padding(-10)
                 }
-            }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
-            .background(Color.white)
-            .padding(-10)
+            
     }
 }
 

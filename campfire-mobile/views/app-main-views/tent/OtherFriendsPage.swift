@@ -14,7 +14,7 @@ struct OtherFriendsPage: View {
     var userID: String
     var body: some View {
         
-            NavigationView {
+//            NavigationView {
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor
@@ -41,6 +41,10 @@ struct OtherFriendsPage: View {
                             Spacer()
                         }
                     }
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+                    .background(Color.white)
+                    .padding(-10)
                     
                 }
                 else {
@@ -50,16 +54,15 @@ struct OtherFriendsPage: View {
                         
                         ListOtherFriends()
                     }
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+                    .background(Color.white)
+                    .padding(-10)
                     .onAppear {
                         model.readOtherFriends(userID: userID)
                     }
                     .environmentObject(model)
                 }
-            }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
-            .background(Color.white)
-            .padding(-10)
     }
 }
 
@@ -70,7 +73,7 @@ struct ListOtherFriends: View {
     var body: some View {
         List {
             ForEach(model.friends, id: \.self) { request in
-                FriendsListView(request: request)
+                OtherFriendsListView(request: request)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

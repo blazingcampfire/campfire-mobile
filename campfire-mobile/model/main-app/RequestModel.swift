@@ -14,11 +14,9 @@ import FirebaseFirestoreSwift
 class RequestsModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var requests: [RequestFirestore] = []
-    @Published var notificationsManager: NotificationsManager
     
-    init(currentUser: CurrentUserModel, notificationsManager: NotificationsManager) {
+    init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        self.notificationsManager = notificationsManager
         self.readRequests()
         print("read requests fired from init")
     }

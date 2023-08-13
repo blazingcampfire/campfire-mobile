@@ -55,7 +55,7 @@ struct OwnProfilePage: View {
                                     HStack {
                                         NavigationLink(destination: EditProfile()
                                             .environmentObject(currentUser)) {
-                                                Text("Edit Profile")
+                                                Text("edit profile")
                                                     .font(.custom("LexendDeca-Bold", size: 15))
                                                     .foregroundColor(Theme.Peach)
                                                     .padding()
@@ -148,14 +148,6 @@ struct OwnProfilePage: View {
     }
 }
 
-func formatNumber(_ number: Int) -> String {
-    if number >= 1000 {
-        let numberInK = Double(number) / 1000.0
-        return String(format: "%.1fk", numberInK)
-    } else {
-        return String(number)
-    }
-}
 
 
 struct ProfilePage_Previews: PreviewProvider {

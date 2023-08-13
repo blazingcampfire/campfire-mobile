@@ -17,7 +17,7 @@ struct SettingsPage: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack {
-                            Text("Settings")
+                            Text("settings")
                                 .font(.custom("LexendDeca-SemiBold", size: 30))
                                 .foregroundColor(Theme.TextColor)
                         }
@@ -33,10 +33,10 @@ struct SettingsForm: View {
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
-            Section(header: Text("Display")) {
+            Section(header: Text("display")) {
                 Toggle(isOn: $darkMode) {
                     Label {
-                        Text("Dark Mode")
+                        Text("dark mode")
                     } icon: {
                         Image(systemName: "moon")
                             .foregroundColor(Theme.Peach)
@@ -50,7 +50,7 @@ struct SettingsForm: View {
                     }
                 }, label: {
                     Label {
-                        Text("Turn Notifications On/Off")
+                        Text("turn notifications on/off")
                             .foregroundColor(Theme.TextColor)
                     } icon: {
                         Image(systemName: "bell.fill")
@@ -60,10 +60,10 @@ struct SettingsForm: View {
             }
 
             .font(.custom("LexendDeca-Regular", size: 16))
-            Section(header: Text("About")) {
+            Section(header: Text("about")) {
                 Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
                                     Label {
-                                        Text("Community Guidelines")
+                                        Text("community guidelines")
                                     } icon: {
                                         Image(systemName: "doc.plaintext.fill")
                                             .foregroundColor(Theme.Peach)
@@ -71,7 +71,7 @@ struct SettingsForm: View {
                                 }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Privacy-Policy-3b8b7d05e438423daf0040181f2d98cf")!) {
                                     Label {
-                                        Text("Privacy Policy")
+                                        Text("privacy policy")
                                     } icon: {
                                         Image(systemName: "key")
                                             .foregroundColor(Theme.Peach)
@@ -79,7 +79,7 @@ struct SettingsForm: View {
                                 }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Terms-of-Service-4b592b52c33e44f29b0669d55a236e9e")!) {
                                     Label {
-                                        Text("Terms of Service")
+                                        Text("terms of service")
                                     } icon: {
                                         Image(systemName: "doc.plaintext.fill")
                                             .foregroundColor(Theme.Peach)
@@ -89,15 +89,15 @@ struct SettingsForm: View {
             .font(.custom("LexendDeca-Regular", size: 16))
             .foregroundColor(Theme.TextColor)
 
-            Section(header: Text("Support")) {
+            Section(header: Text("support")) {
                 Label {
-                    Text("Report Issue")
+                    Text("report issue")
                 } icon: {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(Theme.Peach)
                 }
                 Label {
-                    Text("Contact Us")
+                    Text("contact us")
                 } icon: {
                     Image(systemName: "envelope")
                         .foregroundStyle(Theme.Peach)
@@ -105,7 +105,7 @@ struct SettingsForm: View {
             }
             .font(.custom("LexendDeca-Regular", size: 16))
 
-            Section(header: Text("Account")) {
+            Section(header: Text("account")) {
                 VStack {
                     Button(action: {
                         do {
@@ -115,7 +115,7 @@ struct SettingsForm: View {
                         }
                     }, label: {
                         Label {
-                            Text("Log Out")
+                            Text("log out")
                                 .foregroundColor(Theme.TextColor)
                         } icon: {
                             Image(systemName: "lock.fill")

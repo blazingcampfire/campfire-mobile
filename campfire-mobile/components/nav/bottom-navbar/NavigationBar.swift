@@ -17,7 +17,7 @@ struct NavigationBar: View {
         TabView() {
             ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
                 .tabItem {
-                    Image(systemName: "play.fill")
+                    Image(systemName: "flame.circle.fill")
                 }
 
                 .toolbar(.visible, for: .tabBar)

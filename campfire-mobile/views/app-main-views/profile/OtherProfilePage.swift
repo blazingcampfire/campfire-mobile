@@ -46,9 +46,7 @@ struct OtherProfilePage: View {
                                         Text(profile.bio)
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                             .padding(8)
-                                    } else {
-                                        Text("Bitch")
-                                    }
+                                    } 
                                 }
                                 .padding(.top)
                                 HStack {

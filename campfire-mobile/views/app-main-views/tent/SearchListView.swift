@@ -9,7 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct SearchListView: View {
-    var profilepic: String = info.profilepic
     var profile: Profile
     @State private var added: Bool = false
     @EnvironmentObject var model: SearchModel
@@ -54,6 +53,7 @@ struct SearchListView: View {
                             .font(.system(size: 30))
                             .foregroundColor(Theme.Peach)
                     }
+                    .listRowBackground(Theme.ScreenColor)
                     .buttonStyle(BorderlessButtonStyle())
                 }
 

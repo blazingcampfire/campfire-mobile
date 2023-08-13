@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RequestsListView: View {
     
-    var profilepic: String = info.profilepic
     var request: RequestFirestore
     @EnvironmentObject var model: RequestsModel
     
@@ -20,7 +20,7 @@ struct RequestsListView: View {
             
             HStack {
                 // user image is passed in
-                Image(profilepic)
+                KFImage(URL(string: request.profilePicURL))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 40, height: 40)

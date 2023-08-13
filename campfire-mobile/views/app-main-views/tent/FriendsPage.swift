@@ -68,7 +68,7 @@ struct ListFriends: View {
     var body: some View {
         List {
             ForEach(model.friends, id: \.self) { request in
-                FriendsListView(profilepic: info.profilepic, request: request)
+                FriendsListView(request: request)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)

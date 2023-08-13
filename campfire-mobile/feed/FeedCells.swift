@@ -78,7 +78,7 @@ struct PlayerView: View {
                         Button(action: {
                             feedmodel.isNewFeedSelected = false
                         }) {
-                            Text("Hot")
+                            Text("hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
                         }
@@ -88,7 +88,7 @@ struct PlayerView: View {
                         Button(action: {
                             feedmodel.isNewFeedSelected = true
                         }) {
-                            Text("New")
+                            Text("new")
                                 .font(.custom("LexendDeca-Bold", size: 35))
                                 .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
                         }

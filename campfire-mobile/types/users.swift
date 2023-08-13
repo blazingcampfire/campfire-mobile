@@ -123,7 +123,7 @@ class Request: Codable, Hashable {
 }
 
 class RequestFirestore: Codable, Hashable {
-    var userID: String?
+    var userID: String
     var name: String
     var username: String
     var profilePicURL: String

@@ -41,7 +41,7 @@ struct SearchListView: View {
                                                            label: { EmptyView() })
                                             .opacity(0)
                                             .frame(width: 10, height: 10)
-                                        )
+                    )
                     
                     Spacer()
                     
@@ -53,7 +53,6 @@ struct SearchListView: View {
                             .font(.system(size: 30))
                             .foregroundColor(Theme.Peach)
                     }
-                    .listRowBackground(Theme.ScreenColor)
                     .buttonStyle(BorderlessButtonStyle())
                 }
 

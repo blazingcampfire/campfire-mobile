@@ -43,13 +43,12 @@ class FriendsModel: ObservableObject {
     }
     
     func removeFriend(request: RequestFirestore) {
+        print("fired remove friend")
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return
         }
-        guard let friendID = request.userID else {
-            return
-        }
+        let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]

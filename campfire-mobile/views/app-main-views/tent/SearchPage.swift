@@ -30,7 +30,7 @@ struct SearchPage: View {
 
 struct SearchList: View {
     
-@EnvironmentObject var model: SearchModel
+    @EnvironmentObject var model: SearchModel
     
     @State private var addedTapped: Bool = false
     var body: some View {

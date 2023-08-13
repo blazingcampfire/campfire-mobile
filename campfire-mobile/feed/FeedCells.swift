@@ -233,11 +233,13 @@ struct PlayerView: View {
                     Button(action: {
                         activeSheet = .third
                     }) {
-                        Image(systemName: "square.fill")
+                        Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 50, height: 50)
+                            .frame(width: 30, height: 13)
                             .foregroundColor(.white)
                     }
+                    .frame(height: 30)
+                    .buttonStyle(BorderlessButtonStyle())
                     .padding(.top, 15)
                 }
                 .padding(.bottom, 155)

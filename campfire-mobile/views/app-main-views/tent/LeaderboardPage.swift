@@ -32,11 +32,13 @@ struct LeaderboardPage: View {
 
 struct LeaderboardList: View {
     @EnvironmentObject var model: LeaderboardModel
+    @EnvironmentObject var currentUser: CurrentUserModel
 
     var body: some View {
         List {
             ForEach(model.profiles.indices, id: \.self) { index in
                 HStack {
+                    HStack {
                     Text("\(index + 1)")
                         .frame(width: 30, alignment: .leading)
                         .font(.custom("LexendDeca-Bold", size: 18))
@@ -48,14 +50,22 @@ struct LeaderboardList: View {
                         .frame(width: 40, height: 40)
                         .clipShape(Circle())
 
-                    VStack(alignment: .leading) {
-                        Text(model.profiles[index].name)
-                            .font(.custom("LexendDeca-Bold", size: 18))
-                            .foregroundColor(Theme.TextColor)
-                        Text("@\(model.profiles[index].username)")
-                            .font(.custom("LexendDeca-Regular", size: 12))
-                            .foregroundColor(.gray)
+                        VStack(alignment: .leading) {
+                            Text(model.profiles[index].name)
+                                .font(.custom("LexendDeca-Bold", size: 18))
+                                .foregroundColor(Theme.TextColor)
+                            Text("@\(model.profiles[index].username)")
+                                .font(.custom("LexendDeca-Regular", size: 12))
+                                .foregroundColor(.gray)
+                        }
                     }
+                    .overlay(
+                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: model.profiles[index].userID, currentUser: currentUser))
+                        },
+                                                           label: { EmptyView() })
+                                            .opacity(0)
+                                            .frame(width: 10, height: 10)
+                                        )
 
                     Spacer()
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct SearchListView: View {
     var profilepic: String = info.profilepic
@@ -20,11 +21,11 @@ struct SearchListView: View {
                 .ignoresSafeArea(.all)
             HStack {
                     HStack {
-                        Image(profilepic)
+                        KFImage(URL(string: profile.profilePicURL))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .clipShape(Circle())
                             .frame(width: 40, height: 40)
+                            .clipShape(Circle())
                         
                         VStack(alignment: .leading) {
                             Text(profile.name)
@@ -42,8 +43,6 @@ struct SearchListView: View {
                                             .opacity(0)
                                             .frame(width: 10, height: 10)
                                         )
-                    
-                
                     
                     Spacer()
                     

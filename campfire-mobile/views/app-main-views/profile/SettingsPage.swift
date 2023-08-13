@@ -29,7 +29,6 @@ struct SettingsPage: View {
 
 struct SettingsForm: View {
     @Binding var darkMode: Bool
-    @State var notifications: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
@@ -80,7 +79,7 @@ struct SettingsForm: View {
                                 }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Terms-of-Service-4b592b52c33e44f29b0669d55a236e9e")!) {
                                     Label {
-                                        Text("Terms of Serice")
+                                        Text("Terms of Service")
                                     } icon: {
                                         Image(systemName: "doc.plaintext.fill")
                                             .foregroundColor(Theme.Peach)
@@ -141,7 +140,7 @@ struct SettingsForm: View {
             }
             .font(.custom("LexendDeca-Regular", size: 16))
         }
-        .preferredColorScheme(darkMode ? .dark : .light)
+        Spacer()
     }
 }
 

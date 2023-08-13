@@ -10,10 +10,8 @@ import SwiftUI
 struct OtherFriendsPage: View {
     
     @Environment(\.dismiss) private var dismiss
-    
     @StateObject var model: FriendsModel
     var userID: String
-    
     var body: some View {
         
             NavigationView {
@@ -36,7 +34,7 @@ struct OtherFriendsPage: View {
                                     .foregroundColor(Theme.Peach)
                                     .padding(.bottom, 30)
                                 
-                                Text("go make some friends!")
+                                Text("no friends yet!")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.TextColor)
                             }
@@ -51,9 +49,9 @@ struct OtherFriendsPage: View {
                             .ignoresSafeArea(.all)
                         
                         ListOtherFriends()
-                            .onAppear {
-                                model.readOtherFriends(userID: userID)
-                            }
+                    }
+                    .onAppear {
+                        model.readOtherFriends(userID: userID)
                     }
                     .environmentObject(model)
                 }

@@ -87,7 +87,7 @@ struct OtherProfilePage: View {
 //                                            )
 //
                                     
-                                    NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser))) {
+                                    NavigationLink(destination: OtherFriendsPage(model: FriendsModel(currentUser: currentUser), userID: profile.userID)) {
                                         Image(systemName: "person.3.fill")
                                             .font(.system(size: 20))
                                             .foregroundColor(Theme.Peach)

@@ -42,6 +42,28 @@ class FriendsModel: ObservableObject {
         }
     }
     
+    func readOtherFriends(userID: String) {
+        let userRelationships = currentUser.relationshipsRef.document(userID).addSnapshotListener { documentSnapshot, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let documentSnapshot = documentSnapshot {
+                    var friendsArray: [RequestFirestore] = []
+                    let requests = documentSnapshot.get("friends") as? [[String: Any]] ?? []
+                    for request in requests {
+                        guard let requestObject = RequestFirestore(data: request) else {
+                            return
+                        }
+                        print(requestObject)
+                        friendsArray.append(requestObject)
+                    }
+                    self.friends = friendsArray
+                }
+            }
+            
+        }
+    }
+    
     func removeFriend(request: RequestFirestore) {
         print("fired remove friend")
         guard let userID = Auth.auth().currentUser?.uid else {

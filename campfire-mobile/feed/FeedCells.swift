@@ -235,10 +235,10 @@ struct PlayerView: View {
                     }) {
                         Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 30, height: 13)
+                            .frame(width: 35, height: 13)
                             .foregroundColor(.white)
                     }
-                    .frame(height: 30)
+                    .frame(height: 35)
                     .buttonStyle(BorderlessButtonStyle())
                     .padding(.top, 15)
                 }

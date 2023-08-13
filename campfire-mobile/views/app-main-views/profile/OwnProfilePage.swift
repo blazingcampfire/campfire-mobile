@@ -83,6 +83,20 @@ struct OwnProfilePage: View {
                                                         )
                                                 )
                                         }
+                                        NavigationLink(destination: RequestsPage(model: RequestsModel(currentUser: currentUser))) {
+                                            Text("requests")
+                                                .font(.custom("LexendDeca-Bold", size: 15))
+                                                .foregroundColor(Theme.Peach)
+                                                .padding()
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.white)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.black, lineWidth: 0.3)
+                                                        )
+                                                )
+                                        }
                                     }
                                 }
                                 Button(action: {

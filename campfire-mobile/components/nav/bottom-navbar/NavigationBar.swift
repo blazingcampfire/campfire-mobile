@@ -42,8 +42,7 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
-            TentTabView()
-                .environmentObject(currentUser)
+            SearchPage(model: SearchModel(currentUser: currentUser))
                 .tabItem {
                     Image(systemName: "tent.fill")
                 }

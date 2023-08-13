@@ -37,7 +37,8 @@ struct SearchListView: View {
                     }
                     .overlay (
                         NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser))
-                        },
+                        }
+                            ,
                                                            label: { EmptyView() })
                                             .opacity(0)
                                             .frame(width: 10, height: 10)

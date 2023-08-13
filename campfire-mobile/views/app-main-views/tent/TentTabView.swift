@@ -10,7 +10,7 @@ import SlidingTabView
 
 struct TentTabView: View {
     // this variable represents the index of each tab
-    @State private var tabIndex = 0
+    @State private var tabIndex: Int = 0
     @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {

@@ -53,63 +53,56 @@ struct EditProfile: View {
                                 .foregroundColor(Theme.Peach)
                         }
                         
+                        Spacer()
                         
                         HStack {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack {
                                     Text(currentUser.profile.name)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 17))
                                     
                                     Spacer()
                                     
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
-                                        
+                                    
+                                    
                                     NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: nameIllegalChar, field: "name", currentfield: currentUser.profile.name)
                                         .environmentObject(currentUser)) {
                                             Label("edit name", systemImage: "pencil")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(Color.white)
+                                                .font(.custom("LexendDeca-Bold", size: 17))
+                                                .foregroundColor(Theme.Peach)
                                         }
-                                        }
+                                    
                                 }
                                 HStack {
                                     Text(currentUser.profile.username)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
-                                   Spacer()
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
-                                        
-                                        NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: usernameIllegalChar, field: "username", currentfield: currentUser.profile.username)
-                                            .environmentObject(currentUser)) {
-                                                Label("edit username", systemImage: "pencil")
-                                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                                    .foregroundColor(Color.white)
-                                            }
-                                    }
+                                        .font(.custom("LexendDeca-Bold", size: 17))
+                                    Spacer()
+                                    
+                                    
+                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 20, unallowedCharacters: usernameIllegalChar, field: "username", currentfield: currentUser.profile.username)
+                                        .environmentObject(currentUser)) {
+                                            Label("edit username", systemImage: "pencil")
+                                                .font(.custom("LexendDeca-Bold", size: 17))
+                                                .foregroundColor(Theme.Peach)
+                                        }
+                                    
                                 }
                                 HStack {
                                     Text(currentUser.profile.bio)
                                         .multilineTextAlignment(.center)
-                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .font(.custom("LexendDeca-Bold", size: 17))
                                     
                                     Spacer()
                                     
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 30.0)
-                                            .foregroundColor(Theme.Peach)
-                                            .opacity(0.85)
-                                        NavigationLink(destination: EditFieldPage(maxCharacterLength: 50, field: "bio", currentfield: currentUser.profile.bio)
-                                            .environmentObject(currentUser)) {
-                                                Label("edit bio", systemImage: "pencil")
-                                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                                    .foregroundColor(Color.white)
-                                            }
-                                    }
+                                    
+                                    
+                                    NavigationLink(destination: EditFieldPage(maxCharacterLength: 50, field: "bio", currentfield: currentUser.profile.bio)
+                                        .environmentObject(currentUser)) {
+                                            Label("edit bio", systemImage: "pencil")
+                                                .font(.custom("LexendDeca-Bold", size: 17))
+                                                .foregroundColor(Theme.Peach)
+                                        }
+                                    
                                 }
                             }
                             .padding(.leading, 20)
@@ -118,56 +111,65 @@ struct EditProfile: View {
                         }
                         
                         let postData = currentUser.profile.posts
-                        VStack(spacing: 20) {
-                            Spacer()
-                            
-                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
-                                ForEach(Array(postData.enumerated()), id: \.element.self) { index, post in
-                                    if let (imageData, prompt) = post.first {
-                                        
-                                        VStack(spacing: 20) {
-                                            ZStack(alignment: .topTrailing) {
-                                                PostAttributes(url: imageData, width: 300)
-                                                
-                                                Circle()
-                                                    .foregroundColor(.white)
-                                                    .frame(width: 50, height: 50)
-                                                    .shadow(color: Color.black.opacity(0.9), radius: 5, x: 2, y: 2)
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(.gray, lineWidth: 0.5)
-                                                            .frame(width: 50, height: 50)
-                                                    )
-                                                    .overlay(
-                                                        NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index, post: post)
-                                                            .environmentObject(currentUser)){
-                                                                Image(systemName: "pencil")
-                                                                    .font(.system(size: 30))
-                                                                    .foregroundColor(Theme.Peach)
-                                                            }
-                                                    )
-                                                    .padding(EdgeInsets(top: -10, leading: 10, bottom: 0, trailing: -25))
+                        if postData.count > 0 {
+                            VStack(spacing: 20) {
+                                Spacer()
+                                
+                                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 30) {
+                                    ForEach(Array(postData.enumerated()), id: \.element.self) { index, post in
+                                        if let (imageData, prompt) = post.first {
+                                            
+                                            VStack(spacing: 20) {
+                                                ZStack(alignment: .topTrailing) {
+                                                    PostAttributes(url: imageData, width: 300)
+                                                    
+                                                    Circle()
+                                                        .foregroundColor(.white)
+                                                        .frame(width: 50, height: 50)
+                                                        .shadow(color: Color.black.opacity(0.9), radius: 5, x: 2, y: 2)
+                                                        .overlay(
+                                                            Circle()
+                                                                .stroke(.gray, lineWidth: 0.5)
+                                                                .frame(width: 50, height: 50)
+                                                        )
+                                                        .overlay(
+                                                            NavigationLink(destination: EditPost(initialImage: imageData, postImage: imageData, prompt: prompt, initialPrompt: prompt, index: index, post: post)
+                                                                .environmentObject(currentUser)){
+                                                                    Image(systemName: "pencil")
+                                                                        .font(.system(size: 30))
+                                                                        .foregroundColor(Theme.Peach)
+                                                                }
+                                                        )
+                                                        .padding(EdgeInsets(top: -10, leading: 10, bottom: 0, trailing: -25))
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                .padding(.horizontal, 10)
+                                .padding(.top, 30)
                             }
-                            .padding(.horizontal, 10)
-                            .padding(.top, 30)
                         }
-                    
-                }
-            }
-        }
-        }
-                .navigationBarBackButtonHidden(true)
-                .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
-                .onChange(of: selectedImage) { newImage in
-                    if let image = newImage {
-                        updateProfilePic(selectedImage: image, id: currentUser.profile.userID)
+                        else {
+                            Spacer()
+                            Spacer()
+                            Text("no posts!")
+                                .font(.custom("LexendDeca-Bold", size: 25))
+                                .foregroundColor(Theme.Peach)
+                                .padding(.top, 30)
+                        }
                     }
                 }
             }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
+            .onChange(of: selectedImage) { newImage in
+                if let image = newImage {
+                    updateProfilePic(selectedImage: image, id: currentUser.profile.userID)
+                }
+            }
+        }
+    }
     
     func updateProfilePic(selectedImage: UIImage, id: String) {
         Task {

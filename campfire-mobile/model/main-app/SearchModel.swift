@@ -80,11 +80,11 @@ class SearchModel: ObservableObject {
         
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([userRequestField])
+            "sentRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([friendRequestField])
+            "ownRequests": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     }
     
@@ -93,10 +93,7 @@ class SearchModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        guard let friendID = request.userID else {
-            print("No request ID")
-            return
-        }
+        let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         

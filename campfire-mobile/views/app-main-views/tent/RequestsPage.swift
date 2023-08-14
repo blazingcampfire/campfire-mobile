@@ -20,6 +20,9 @@ struct RequestsPage: View {
                     .environmentObject(model)
             }
         }
+        .refreshable {
+            model.readRequests()
+        }
         .background(Color.white)
         .listStyle(PlainListStyle())
         .padding(.top, -10)

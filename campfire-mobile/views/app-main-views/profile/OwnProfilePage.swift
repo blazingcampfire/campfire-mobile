@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct OwnProfilePage: View {
-    @State var settingsPageShow = false
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
+    @State var settingsPageShow = false
     @State private var showAddPost = false
+    @AppStorage("isDarkMode") private var darkMode = false
     
     var body: some View {
         NavigationView {
@@ -53,7 +55,7 @@ struct OwnProfilePage: View {
                                     HStack {
                                         NavigationLink(destination: EditProfile()
                                             .environmentObject(currentUser)) {
-                                                Text("Edit Profile")
+                                                Text("edit profile")
                                                     .font(.custom("LexendDeca-Bold", size: 15))
                                                     .foregroundColor(Theme.Peach)
                                                     .padding()
@@ -81,6 +83,20 @@ struct OwnProfilePage: View {
                                                         )
                                                 )
                                         }
+                                        NavigationLink(destination: RequestsPage(model: RequestsModel(currentUser: currentUser))) {
+                                            Text("requests")
+                                                .font(.custom("LexendDeca-Bold", size: 15))
+                                                .foregroundColor(Theme.Peach)
+                                                .padding()
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.white)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.black, lineWidth: 0.3)
+                                                        )
+                                                )
+                                        }
                                     }
                                 }
                                 Button(action: {
@@ -92,13 +108,12 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage()
+                                    SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
                                         .presentationDragIndicator(.visible)
                                         .presentationCornerRadius(30)
                                 }
                             }
                         }
-                        .padding(.bottom, 40)
                         
                         let posts = currentUser.profile.posts
                             VStack {
@@ -116,7 +131,7 @@ struct OwnProfilePage: View {
                                     }
                                     .padding(.horizontal)
                                 }
-                                if posts.count < 7 {
+                                if posts.count < 6 {
                                     Spacer()
                                     NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
                                         ZStack {
@@ -143,17 +158,10 @@ struct OwnProfilePage: View {
                 }
             }
         }
+        .preferredColorScheme(darkMode ? .dark : .light)
     }
 }
 
-func formatNumber(_ number: Int) -> String {
-    if number >= 1000 {
-        let numberInK = Double(number) / 1000.0
-        return String(format: "%.1fk", numberInK)
-    } else {
-        return String(number)
-    }
-}
 
 
 struct ProfilePage_Previews: PreviewProvider {

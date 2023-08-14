@@ -1,0 +1,24 @@
+{
+  "images" : [
+    {
+      "filename" : "White reg 2.svg",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "White reg 1.svg",
+      "idiom" : "universal",
+      "scale" : "2x",
+      "unassigned" : true
+    },
+    {
+      "filename" : "White reg.svg",
+      "idiom" : "universal",
+      "scale" : "3x",
+      "unassigned" : true
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

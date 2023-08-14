@@ -18,10 +18,12 @@ class RequestsModel: ObservableObject {
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
         self.readRequests()
+        print("read requests fired from init")
     }
     
     func readRequests() {
-        let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+        print("fired read requests")
+        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
                 print(error?.localizedDescription)
             } else {
@@ -43,13 +45,12 @@ class RequestsModel: ObservableObject {
     }
         
     func removeRequest(request: RequestFirestore) {
+        print("fired remove request")
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return
         }
-        guard let friendID = request.userID else {
-            return
-        }
+        let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
@@ -78,10 +79,7 @@ class RequestsModel: ObservableObject {
             print("You are not currently authenticated.")
             return
         }
-        guard let friendID = request.userID else {
-            return
-        }
-        
+        let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]

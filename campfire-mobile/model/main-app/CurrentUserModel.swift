@@ -11,6 +11,7 @@ import FirebaseFirestore
 import Foundation
 
 class CurrentUserModel: ObservableObject {
+    @Published var showInitialMessage = false // initial message
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
     @Published var signedIn: Bool = false
@@ -33,7 +34,7 @@ class CurrentUserModel: ObservableObject {
     
     func authStateDidChange() {
         Auth.auth().addStateDidChangeListener { _, user in
-            if user?.email != nil {
+            if ((user?.email) != nil) && ((user?.phoneNumber) != nil) {
                 self.signedIn = true
                 // User is signed in. Show home screen
             } else {
@@ -42,15 +43,29 @@ class CurrentUserModel: ObservableObject {
             }
         }
     }
-
+        
+    func checkProfile(email: String) async throws -> Bool {
+            guard let userID = Auth.auth().currentUser?.uid else {
+                return false
+            }
+            let profileRef = profileParser(school: schoolParser(email: email))
+            guard let document = try await profileRef?.document(userID).getDocument() else {
+                return false
+            }
+            return document.exists
+        }
+        
+    
     func setCollectionRefs() {
         if Auth.auth().currentUser?.email == nil {
+            print("0")
             return
         } else {
-            print(Auth.auth().currentUser?.phoneNumber)
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
             if school == "Does not belong to a supported school" {
                 print("Sorry, but we do not currently support your school.")
+                print("1")
+                print(Auth.auth().currentUser?.email)
                 return
             }
             userRef = userParser(school: school)!

@@ -14,13 +14,21 @@ struct SetProfilePic: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     @State var setUpFinished: Bool = false
     @State var selectedPFP: UIImage?
     
     var body: some View {
-        if model.isMainAppPresented {
+        if setUpFinished {
             NavigationBar()
                 .environmentObject(currentUser)
+                .onAppear {
+                    if !notificationsManager.hasPermission {
+                        Task {
+                            await notificationsManager.request()
+                        }
+                    }
+                }
         }
         else {
             GradientBackground()
@@ -57,7 +65,8 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            model.triggerRestart()
+                                            setUpFinished = true
+                                            currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }
@@ -91,7 +100,7 @@ struct SetProfilePic: View {
         
         do {
             let photoURL = try await withCheckedThrowingContinuation { continuation in
-                uploadToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
+                uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
                     continuation.resume(returning: photoURL)
                 }
             }
@@ -103,33 +112,6 @@ struct SetProfilePic: View {
         } catch {
             print("Error uploading picture to storage: \(error)")
             throw error
-        }
-    }
-    
-    // Updated uploadToBunnyCDNStorage function with correct closure parameter
-    func uploadToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
-        // Implement your code here to upload the image using GCD or other asynchronous techniques
-        // For example, you can use Firebase Storage APIs to upload the image to BunnyCDN
-        let storageRef = Storage.storage().reference()
-        let fileRef = storageRef.child(imagePath)
-        
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        fileRef.putData(imageData, metadata: metadata) { metadata, error in
-            if let error = error {
-                print("Error uploading image to BunnyCDN:", error)
-                completion(nil)
-            } else {
-                fileRef.downloadURL { url, error in
-                    if let downloadURL = url {
-                        completion(downloadURL.absoluteString)
-                    } else {
-                        print("Error retrieving download URL:", error?.localizedDescription ?? "Unknown error")
-                        completion(nil)
-                    }
-                }
-            }
         }
     }
 }

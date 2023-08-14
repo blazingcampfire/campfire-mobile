@@ -14,12 +14,14 @@ struct VerifyEmail: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @State var restart: Bool = false
+    @EnvironmentObject var notificationsManager: NotificationsManager
+   
     var body: some View {
         
         if (model.login && model.emailSignInSuccess) {
             NavigationBar()
                 .environmentObject(currentUser)
+                .environmentObject(notificationsManager)
                 .onAppear {
                     model.triggerRestart()
                     currentUser.setCollectionRefs()

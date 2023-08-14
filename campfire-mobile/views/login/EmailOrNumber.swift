@@ -18,9 +18,9 @@ struct EmailOrNumber: View {
                     VStack {
 // MARK: - App logo & title
                         VStack {
-                            Image("newlogo")
+                            Image("s'more")
                                 .resizable()
-                                .frame(width: 300, height: 300)
+                                .frame(width: 200, height: 200)
 
                             Text("campfire")
                                 .foregroundColor(Color.white)

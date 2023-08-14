@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct SearchListView: View {
-    var profilepic: String = info.profilepic
     var profile: Profile
     @State private var added: Bool = false
     @EnvironmentObject var model: SearchModel
@@ -20,11 +20,11 @@ struct SearchListView: View {
                 .ignoresSafeArea(.all)
             HStack {
                     HStack {
-                        Image(profilepic)
+                        KFImage(URL(string: profile.profilePicURL))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .clipShape(Circle())
                             .frame(width: 40, height: 40)
+                            .clipShape(Circle())
                         
                         VStack(alignment: .leading) {
                             Text(profile.name)
@@ -36,13 +36,13 @@ struct SearchListView: View {
                         }
                     }
                     .overlay (
-                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser)) },
+                        NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser))
+                        }
+                            ,
                                                            label: { EmptyView() })
                                             .opacity(0)
                                             .frame(width: 10, height: 10)
-                                        )
-                    
-                
+                    )
                     
                     Spacer()
                     

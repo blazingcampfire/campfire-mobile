@@ -17,3 +17,4 @@ let profile7 = Profile(name: "Kierkegaard", nameInsensitive: "kierkegaard", phon
 
 let testProfiles = [profile1, profile2, profile3, profile4, profile5, profile6, profile7]
 
+let info = UserInfo()

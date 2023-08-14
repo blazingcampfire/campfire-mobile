@@ -165,3 +165,45 @@
 //
 //
 //
+
+
+//        likeTapped = false
+//        postId = post.id
+//        newFeedModel = model
+//
+//        if likeButton == nil {
+//            likeButton = UIButton(type: .system)
+//            likeButton.addTarget(self, action: #selector(handleLikeTap(_:)), for: .touchUpInside)
+//            contentView.addSubview(likeButton)
+//        }
+//
+//        likeButton.setImage(UIImage(named: likeTapped ? "eatensmore" : "noteatensmore"), for: .normal)
+//        likeButton.translatesAutoresizingMaskIntoConstraints = false
+//           NSLayoutConstraint.activate([
+//               likeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+//               likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+//               likeButton.widthAnchor.constraint(equalToConstant: 30),
+//               likeButton.heightAnchor.constraint(equalToConstant: 30)
+//           ])
+//
+//        if likeLabel == nil {
+//            likeLabel = UILabel()
+//            contentView.addSubview(likeLabel)
+//        }
+//        updateLikes(post.numLikes)
+//    }
+//
+//    func updateLikes(_ likes: Int) {
+//        likeLabel.text = "\(likes)"
+//    }
+//
+//    @objc func handleLikeTap(_ sender: UIButton) {
+//            // Handle the tap event, update Firestore and UI.
+//            if likeTapped {
+//                newFeedModel?.decreasePostLikes(postId: postId!)
+//            } else {
+//                newFeedModel?.increasePostLikes(postId: postId!)
+//            }
+//            likeTapped.toggle()
+//            likeButton.setImage(UIImage(named: likeTapped ? "eatensmore" : "noteatensmore"), for: .normal)
+//        }

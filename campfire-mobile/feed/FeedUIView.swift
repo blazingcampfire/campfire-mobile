@@ -10,7 +10,9 @@ import Kingfisher
 
 struct FeedUIView: View {
     @State private var leaderboardShow: Bool = false
+    @State private var likeTapped: Bool = false
     var post: PostItem
+    
     
     var body: some View {
         ZStack {
@@ -105,6 +107,25 @@ struct FeedUIView: View {
             .padding(.bottom, 40)
             
             VStack(spacing: 7.5) {
+                VStack(spacing: -60) {
+                    Button(action: {
+                        likeTapped.toggle()
+                        if likeTapped {
+                            increasePostLikes(postId: post.id)
+                        } else {
+                            decreasePostLikes(postId: post.id)
+                        }
+                    }) {
+                        Image(likeTapped ? "eatensmore" : "noteatensmore")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .padding(.top, -30)
+                    }
+                }
+                Text("\(post.numLikes)")
+                    .foregroundColor(.white)
+                    .font(.custom("LexendDeca-Regular", size: 16))
+                
                 
                 
                 VStack {

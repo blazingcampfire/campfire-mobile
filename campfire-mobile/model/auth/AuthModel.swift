@@ -178,12 +178,12 @@ extension AuthModel {
 
             do {
                 if self.login && Auth.auth().currentUser?.email == nil {
+                    try AuthenticationManager.shared.deleteUser()
                     throw PhoneError.noExistingUser
                 } else if self.createAccount && Auth.auth().currentUser?.email != nil {
                     throw PhoneError.existingUser
                 } else if self.login {
                     let existingProfile = try await self.checkProfile(email: submittedEmail)
-                    print(existingProfile)
                     if !existingProfile {
                         do {
                             try AuthenticationManager.shared.signOut()
@@ -224,9 +224,10 @@ extension AuthModel {
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
 
             submittedEmail = (Auth.auth().currentUser?.email)!
-
             let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+            print(existingProfile)
             if !existingProfile {
+               try AuthenticationManager.shared.deleteUser()
                 throw EmailError.noExistingUser
             } else {
                 emailSignInSuccess = true
@@ -288,7 +289,7 @@ extension AuthModel {
         }
         let profileRef = profileParser(school: schoolParser(email: email))
         guard let document = try await profileRef?.document(userID).getDocument() else {
-            throw EmailError.noExistingUser
+            return false
         }
         return document.exists
     }

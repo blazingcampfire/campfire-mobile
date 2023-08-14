@@ -44,7 +44,7 @@ struct NavigationBar: View {
             
             SearchPage(model: SearchModel(currentUser: currentUser))
                 .tabItem {
-                    Image(systemName: "magnifyingglass.circle.fill")
+                    Image(systemName: "magnifyingglass")
                 }
              
                 .toolbar(.visible, for: .tabBar)

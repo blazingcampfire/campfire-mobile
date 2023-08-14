@@ -29,6 +29,7 @@ struct SettingsPage: View {
 
 struct SettingsForm: View {
     @Binding var darkMode: Bool
+    @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
@@ -62,29 +63,29 @@ struct SettingsForm: View {
             .font(.custom("LexendDeca-Regular", size: 16))
             Section(header: Text("about")) {
                 Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
-                                    Label {
-                                        Text("community guidelines")
-                                    } icon: {
-                                        Image(systemName: "doc.plaintext.fill")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("community guidelines")
+                    } icon: {
+                        Image(systemName: "doc.plaintext.fill")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Privacy-Policy-3b8b7d05e438423daf0040181f2d98cf")!) {
-                                    Label {
-                                        Text("privacy policy")
-                                    } icon: {
-                                        Image(systemName: "key")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("privacy policy")
+                    } icon: {
+                        Image(systemName: "key")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Terms-of-Service-4b592b52c33e44f29b0669d55a236e9e")!) {
-                                    Label {
-                                        Text("terms of service")
-                                    } icon: {
-                                        Image(systemName: "doc.plaintext.fill")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("terms of service")
+                    } icon: {
+                        Image(systemName: "doc.plaintext.fill")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
             }
             .font(.custom("LexendDeca-Regular", size: 16))
             .foregroundColor(Theme.TextColor)
@@ -118,34 +119,44 @@ struct SettingsForm: View {
                             Text("log out")
                                 .foregroundColor(Theme.TextColor)
                         } icon: {
-                            Image(systemName: "lock.fill")
+                            Image(systemName: "lock")
                                 .foregroundColor(Theme.Peach)
                         }
                     })
                 }
-                //                        NavigationLink(destination: AccountSetUp()) {
-                //                            Label {
-                //                                Text("Log Out")
-                //                            } icon: {
-                //                                Image(systemName: "lock.fill")
-                //                                    .foregroundColor(Theme.Peach)
-                //                            }
-                //                        }
-                //                        Label {
-                //                            Text("Delete Account")
-                //                        } icon: {
-                //                            Image(systemName: "delete.right")
-                //                                .foregroundColor(Theme.Peach)
-                //                        }
+                VStack {
+                    Button(action: {
+                        showDeleteAlert = true
+                    }, label: {
+                        Label {
+                            Text("delete account")
+                                .foregroundColor(Theme.TextColor)
+                        } icon: {
+                            Image(systemName: "delete.left.fill")
+                                .foregroundColor(Theme.Peach)
+                        }
+                    })
+                }
             }
+            .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
+                   dismissButton: CustomAlertButton(title: "yes", action: {
+                       do {
+                           try model.deleteAccount()
+                       } catch {
+                           model.deleteErrorAlert = true
+                       }
+                   }),
+                   isPresented: $showDeleteAlert)
+            .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
+                   dismissButton: CustomAlertButton(title: "ok", action: { }),
+                   isPresented: $model.deleteErrorAlert)
             .font(.custom("LexendDeca-Regular", size: 16))
         }
-        Spacer()
     }
 }
 
-//struct SettingsPage_Previews: PreviewProvider {
+// struct SettingsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SettingsPage()
 //    }
-//}
+// }

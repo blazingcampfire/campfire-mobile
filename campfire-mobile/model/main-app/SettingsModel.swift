@@ -10,8 +10,10 @@ import FirebaseAuth
 
 @MainActor
 class SettingsModel: ObservableObject {
+    @Published var currentUser: CurrentUserModel
     @Published var notificationsManager: NotificationsManager
     @Published var signedOut: Bool = false
+    @Published var deleteErrorAlert: Bool = false
     @Published var notificationsOn: Bool {
         didSet {
             print(notificationsOn)
@@ -21,7 +23,8 @@ class SettingsModel: ObservableObject {
         }
     }
     
-    init(notificationsOn: Bool, notificationsManager: NotificationsManager) {
+    init(currentUser: CurrentUserModel, notificationsOn: Bool, notificationsManager: NotificationsManager) {
+        self.currentUser = currentUser
         self.notificationsOn = notificationsOn
         self.notificationsManager = notificationsManager
     }
@@ -38,6 +41,22 @@ class SettingsModel: ObservableObject {
             }
             else if !notificationsOn && notificationsManager.hasPermission {
                 await notificationsManager.turnOffNotifications()
+            }
+        }
+    }
+    
+    func deleteAccount() throws {
+        if Auth.auth().currentUser?.email == nil {
+            throw EmailError.noExistingUser
+        }
+        else {
+            do {
+                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
+                Auth.auth().currentUser?.delete()
+                print("Reached function end")
+            }
+            catch {
+                self.deleteErrorAlert = true
             }
         }
     }

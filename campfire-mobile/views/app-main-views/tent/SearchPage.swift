@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchPage: View {
-    
+    @State private var viewHasAppeared: Bool = false
     @StateObject var model: SearchModel
     
     var body: some View {
@@ -19,8 +19,8 @@ struct SearchPage: View {
                 SearchList()
                     .environmentObject(model)
             }
+            .searchable(text: $model.name, placement: .navigationBarDrawer)
         }
-        .searchable(text: $model.name)
         .font(.custom("LexendDeca-SemiBold", size: 15))
         .background(Color.white)
         .listStyle(PlainListStyle())

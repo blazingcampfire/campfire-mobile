@@ -88,7 +88,10 @@ struct OtherProfilePage: View {
                                         //                                            )
                                         //
                                         
-                                        NavigationLink(destination: OtherFriendsPage(model: FriendsModel(currentUser: currentUser), userID: profile.userID)) {
+                                        NavigationLink(destination: OtherFriendsPage(model: FriendsModel(currentUser: currentUser)
+                                                                                     , userID: profile.userID)
+                                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                                                            .navigationBarTitleDisplayMode(.inline)) {
                                             Image(systemName: "person.3.fill")
                                                 .font(.system(size: 20))
                                                 .foregroundColor(Theme.Peach)
@@ -129,7 +132,6 @@ struct OtherProfilePage: View {
                 }
                 .padding()
         }
-            .navigationBarTitle("")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)

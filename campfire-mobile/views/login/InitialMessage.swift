@@ -45,3 +45,4 @@ struct InitialMessage_Previews: PreviewProvider {
         InitialMessage(school: "Yale")
     }
 }
+

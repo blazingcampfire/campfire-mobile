@@ -45,7 +45,10 @@ class SearchModel: ObservableObject {
                         let profile = try document.data(as: Profile.self)
                         var requestData: [String: Any]
                         requestData = try Firestore.Encoder().encode(Request(userID: profile.userID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
-                        self.checkRequested(request: RequestFirestore(data: requestData)!)
+                        Task {
+                            let bool = await self.checkRequested(request: RequestFirestore(data: requestData)!)
+                            print(bool)
+                        }
                         self.profiles.append(profile)
                         print(self.requested)
                     } catch {
@@ -106,37 +109,50 @@ class SearchModel: ObservableObject {
         ])
     }
     
-    func checkRequested(request: RequestFirestore) -> Bool {
+    func checkRequested(request: RequestFirestore) async -> Bool {
         guard let userID = Auth.auth().currentUser?.uid else {
             print("You are not currently authenticated.")
             return false
         }
-        var flag: Bool = false
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument {
-            documentSnapshot, error in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-            else {
-                guard let documentSnapshot = documentSnapshot else {
-                    return
+        do {
+            guard let document = try await currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument().data() else { return false }
+            print(document)
+            let docField: [[String: Any]] = document["ownRequests"] as! [[String : Any]]
+            for doc in docField {
+                let requestData = RequestFirestore(data: doc)
+                if requestData?.userID == request.userID {
+                    return true
                 }
-                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
-                    for rawRequest in requests {
-                        guard let neatRequest = RequestFirestore(data: rawRequest) else {
-                            print("Error comparing requests")
-                            return
-                        }
-                        if request.userID == neatRequest.userID {
-                            print(request.userID, neatRequest.userID)
-                            flag = true
-                            break
-                        }
-                    }
             }
+            }
+        catch {
+            print(error)
+            return false
         }
-        print(flag)
-        return flag
+        return false
+//        {
+//            documentSnapshot, error in
+//            if error != nil {
+//                print(error?.localizedDescription)
+//            }
+//            else {
+//                guard let documentSnapshot = documentSnapshot else {
+//                    return
+//                }
+//                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
+//                    for rawRequest in requests {
+//                        guard let neatRequest = RequestFirestore(data: rawRequest) else {
+//                            print("Error comparing requests")
+//                            return
+//                        }
+//                        if request.userID == neatRequest.userID {
+//                            print(request.userID, neatRequest.userID)
+//                            flag = true
+//                            break
+//                        }
+//                    }
+//            }
+//        }
     }
     
 }

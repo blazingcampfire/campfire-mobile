@@ -14,7 +14,7 @@ struct FriendsPage: View {
     @StateObject var model: FriendsModel
     
     var body: some View {
-        
+    
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor

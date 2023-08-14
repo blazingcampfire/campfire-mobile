@@ -13,6 +13,7 @@ struct SearchListView: View {
     @State private var added: Bool = false
     @EnvironmentObject var model: SearchModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     
     var body: some View {
         ZStack {

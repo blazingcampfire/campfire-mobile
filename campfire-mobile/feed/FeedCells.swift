@@ -281,6 +281,7 @@ struct PlayerView: View {
                     .onDisappear {
                                     currentUser.showInitialMessage = false
                     }
+                    .presentationDetents([.fraction(0.50)])
             }
     }
 }

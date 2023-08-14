@@ -18,7 +18,6 @@ class RequestsModel: ObservableObject {
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
         self.readRequests()
-        print("read requests fired from init")
     }
     
     func readRequests() {
@@ -34,7 +33,6 @@ class RequestsModel: ObservableObject {
                         guard let requestObject = RequestFirestore(data: request) else {
                             return
                         }
-                        print(requestObject)
                         requestsArray.append(requestObject)
                     }
                     self.requests = requestsArray

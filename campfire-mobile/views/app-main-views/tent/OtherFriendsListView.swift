@@ -1,14 +1,14 @@
 //
-//  FriendsListView.swift
+//  OtherFriendsListView.swift
 //  campfire-mobile
 //
-//  Created by Adarsh G on 7/11/23.
+//  Created by Toni on 8/13/23.
 //
 
 import Kingfisher
 import SwiftUI
 
-struct FriendsListView: View {
+struct OtherFriendsListView: View {
     var request: RequestFirestore
     @EnvironmentObject var model: FriendsModel
     @EnvironmentObject var currentUser: CurrentUserModel
@@ -48,15 +48,6 @@ struct FriendsListView: View {
                         .frame(width: 10, height: 10)
                 )
                 Spacer()
-
-                Button(action: {
-                    model.removeFriend(request: request)
-                }) {
-                    Image(systemName: "minus.circle.fill")
-                        .foregroundColor(Theme.Peach)
-                        .font(.system( size: 30))
-                }
-                .buttonStyle(BorderlessButtonStyle())
             }
         }
     }
@@ -67,3 +58,4 @@ struct FriendsListView: View {
 //        FriendsListView(profilepic: info.profilepic, name: info.name, username: info.username)
 //    }
 // }
+

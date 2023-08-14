@@ -16,14 +16,14 @@ struct AccountSetUp: View {
                     VStack (spacing: 0) {
                         // MARK: - App logo & title
                         VStack {
-                            Image("newlogo")
+                            Image("s'more")
                                 .resizable()
-                                .frame(width: 300, height: 300)
+                                .frame(width: 200, height: 200)
 
                             Text("campfire")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 60))
-                                .padding(.top, -30)
+                                .padding(.top, -25)
                         }
                         .padding(.bottom, 30)
 

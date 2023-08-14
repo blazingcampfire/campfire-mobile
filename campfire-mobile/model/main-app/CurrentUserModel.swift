@@ -34,7 +34,7 @@ class CurrentUserModel: ObservableObject {
     
     func authStateDidChange() {
         Auth.auth().addStateDidChangeListener { _, user in
-            if user?.email != nil {
+            if ((user?.email) != nil) && ((user?.phoneNumber) != nil) {
                 self.signedIn = true
                 // User is signed in. Show home screen
             } else {
@@ -43,6 +43,18 @@ class CurrentUserModel: ObservableObject {
             }
         }
     }
+        
+    func checkProfile(email: String) async throws -> Bool {
+            guard let userID = Auth.auth().currentUser?.uid else {
+                return false
+            }
+            let profileRef = profileParser(school: schoolParser(email: email))
+            guard let document = try await profileRef?.document(userID).getDocument() else {
+                return false
+            }
+            return document.exists
+        }
+        
     
     func setCollectionRefs() {
         if Auth.auth().currentUser?.email == nil {

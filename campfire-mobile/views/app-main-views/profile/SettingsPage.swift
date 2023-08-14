@@ -17,7 +17,7 @@ struct SettingsPage: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         HStack {
-                            Text("Settings")
+                            Text("settings")
                                 .font(.custom("LexendDeca-SemiBold", size: 30))
                                 .foregroundColor(Theme.TextColor)
                         }
@@ -29,15 +29,15 @@ struct SettingsPage: View {
 
 struct SettingsForm: View {
     @Binding var darkMode: Bool
-    @State var notifications: Bool = false
+    @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
-            Section(header: Text("Display")) {
+            Section(header: Text("display")) {
                 Toggle(isOn: $darkMode) {
                     Label {
-                        Text("Dark Mode")
+                        Text("dark mode")
                     } icon: {
                         Image(systemName: "moon")
                             .foregroundColor(Theme.Peach)
@@ -51,7 +51,7 @@ struct SettingsForm: View {
                     }
                 }, label: {
                     Label {
-                        Text("Turn Notifications On/Off")
+                        Text("turn notifications on/off")
                             .foregroundColor(Theme.TextColor)
                     } icon: {
                         Image(systemName: "bell.fill")
@@ -61,44 +61,44 @@ struct SettingsForm: View {
             }
 
             .font(.custom("LexendDeca-Regular", size: 16))
-            Section(header: Text("About")) {
+            Section(header: Text("about")) {
                 Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
-                                    Label {
-                                        Text("Community Guidelines")
-                                    } icon: {
-                                        Image(systemName: "doc.plaintext.fill")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("community guidelines")
+                    } icon: {
+                        Image(systemName: "doc.plaintext.fill")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Privacy-Policy-3b8b7d05e438423daf0040181f2d98cf")!) {
-                                    Label {
-                                        Text("Privacy Policy")
-                                    } icon: {
-                                        Image(systemName: "key")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("privacy policy")
+                    } icon: {
+                        Image(systemName: "key")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
                 Link(destination: URL(string: "https://burnt-sternum-fd5.notion.site/Terms-of-Service-4b592b52c33e44f29b0669d55a236e9e")!) {
-                                    Label {
-                                        Text("Terms of Serice")
-                                    } icon: {
-                                        Image(systemName: "doc.plaintext.fill")
-                                            .foregroundColor(Theme.Peach)
-                                    }
-                                }
+                    Label {
+                        Text("terms of service")
+                    } icon: {
+                        Image(systemName: "doc.plaintext.fill")
+                            .foregroundColor(Theme.Peach)
+                    }
+                }
             }
             .font(.custom("LexendDeca-Regular", size: 16))
             .foregroundColor(Theme.TextColor)
 
-            Section(header: Text("Support")) {
+            Section(header: Text("support")) {
                 Label {
-                    Text("Report Issue")
+                    Text("report issue")
                 } icon: {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(Theme.Peach)
                 }
                 Label {
-                    Text("Contact Us")
+                    Text("contact us")
                 } icon: {
                     Image(systemName: "envelope")
                         .foregroundStyle(Theme.Peach)
@@ -106,7 +106,7 @@ struct SettingsForm: View {
             }
             .font(.custom("LexendDeca-Regular", size: 16))
 
-            Section(header: Text("Account")) {
+            Section(header: Text("account")) {
                 VStack {
                     Button(action: {
                         do {
@@ -116,37 +116,47 @@ struct SettingsForm: View {
                         }
                     }, label: {
                         Label {
-                            Text("Log Out")
+                            Text("log out")
                                 .foregroundColor(Theme.TextColor)
                         } icon: {
-                            Image(systemName: "lock.fill")
+                            Image(systemName: "lock")
                                 .foregroundColor(Theme.Peach)
                         }
                     })
                 }
-                //                        NavigationLink(destination: AccountSetUp()) {
-                //                            Label {
-                //                                Text("Log Out")
-                //                            } icon: {
-                //                                Image(systemName: "lock.fill")
-                //                                    .foregroundColor(Theme.Peach)
-                //                            }
-                //                        }
-                //                        Label {
-                //                            Text("Delete Account")
-                //                        } icon: {
-                //                            Image(systemName: "delete.right")
-                //                                .foregroundColor(Theme.Peach)
-                //                        }
+                VStack {
+                    Button(action: {
+                        showDeleteAlert = true
+                    }, label: {
+                        Label {
+                            Text("delete account")
+                                .foregroundColor(Theme.TextColor)
+                        } icon: {
+                            Image(systemName: "delete.left.fill")
+                                .foregroundColor(Theme.Peach)
+                        }
+                    })
+                }
             }
+            .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
+                   dismissButton: CustomAlertButton(title: "yes", action: {
+                       do {
+                           try model.deleteAccount()
+                       } catch {
+                           model.deleteErrorAlert = true
+                       }
+                   }),
+                   isPresented: $showDeleteAlert)
+            .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
+                   dismissButton: CustomAlertButton(title: "ok", action: { }),
+                   isPresented: $model.deleteErrorAlert)
             .font(.custom("LexendDeca-Regular", size: 16))
         }
-        .preferredColorScheme(darkMode ? .dark : .light)
     }
 }
 
-//struct SettingsPage_Previews: PreviewProvider {
+// struct SettingsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SettingsPage()
 //    }
-//}
+// }

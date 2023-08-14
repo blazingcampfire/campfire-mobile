@@ -15,7 +15,7 @@ struct VerifyEmail: View {
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
-    @State var restart: Bool = false
+   
     var body: some View {
         
         if (model.login && model.emailSignInSuccess) {

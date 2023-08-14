@@ -10,16 +10,17 @@ import SlidingTabView
 
 struct TentTabView: View {
     // this variable represents the index of each tab
-    @State private var tabIndex = 0
+    @State private var tabIndex: Int = 0
     @EnvironmentObject var currentUser: CurrentUserModel
-    @EnvironmentObject var notificationsManager: NotificationsManager
+    
     var body: some View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
             
             VStack {
-                SlidingTabView(selection: $tabIndex, tabs: ["Search", "Requests"], font: .custom("LexendDeca-SemiBold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
+                SlidingTabView(selection: $tabIndex, tabs: ["search", "requests"], font: .custom("LexendDeca-Bold", size: 15), animation: .easeInOut, activeAccentColor: Theme.Peach, inactiveAccentColor: .gray, selectionBarColor: Theme.Peach)
+                
                 
                 Spacer()
                 
@@ -27,7 +28,7 @@ struct TentTabView: View {
                 if tabIndex == 0 {
                     SearchPage(model: SearchModel(currentUser: currentUser))
                 } else if tabIndex == 1 {
-                    RequestsPage(model: RequestsModel(currentUser: currentUser, notificationsManager: notificationsManager))
+                    RequestsPage(model: RequestsModel(currentUser: currentUser))
                 }
                 Spacer()
             }

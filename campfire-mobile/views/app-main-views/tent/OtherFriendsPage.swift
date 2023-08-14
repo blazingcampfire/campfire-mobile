@@ -1,20 +1,20 @@
 //
-//  FriendsPage.swift
+//  OtherFriendsPage.swift
 //  campfire-mobile
 //
-//  Created by Adarsh G on 6/28/23.
+//  Created by Toni on 8/13/23.
 //
 
 import SwiftUI
 
-struct FriendsPage: View {
+struct OtherFriendsPage: View {
     
     @Environment(\.dismiss) private var dismiss
-    
     @StateObject var model: FriendsModel
-    
+    var userID: String
     var body: some View {
         
+//            NavigationView {
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor
@@ -34,7 +34,7 @@ struct FriendsPage: View {
                                     .foregroundColor(Theme.Peach)
                                     .padding(.bottom, 30)
                                 
-                                Text("go make some friends!")
+                                Text("no friends yet!")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.TextColor)
                             }
@@ -52,26 +52,28 @@ struct FriendsPage: View {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
                         
-                        ListFriends()
+                        ListOtherFriends()
                     }
-                    .environmentObject(model)
                     .navigationBarBackButtonHidden(true)
                     .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
+                    .onAppear {
+                        model.readOtherFriends(userID: userID)
+                    }
+                    .environmentObject(model)
                 }
-            
     }
 }
 
-struct ListFriends: View {
+struct ListOtherFriends: View {
     
     @EnvironmentObject var model: FriendsModel
     
     var body: some View {
         List {
             ForEach(model.friends, id: \.self) { request in
-                FriendsListView(request: request)
+                OtherFriendsListView(request: request)
             }
             .listRowSeparator(.hidden)
             .listRowBackground(Theme.ScreenColor)
@@ -80,8 +82,3 @@ struct ListFriends: View {
     }
 }
 
-//struct FriendsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FriendsPage()
-//    }
-//}

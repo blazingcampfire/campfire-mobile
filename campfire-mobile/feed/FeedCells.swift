@@ -78,7 +78,7 @@ struct PlayerView: View {
                         Button(action: {
                             feedmodel.isNewFeedSelected = false
                         }) {
-                            Text("Hot")
+                            Text("hot")
                                 .font(.custom("LexendDeca-Bold", size:35))
                                 .opacity(feedmodel.isNewFeedSelected ? 0.5 : 1.0)
                         }
@@ -88,7 +88,7 @@ struct PlayerView: View {
                         Button(action: {
                             feedmodel.isNewFeedSelected = true
                         }) {
-                            Text("New")
+                            Text("new")
                                 .font(.custom("LexendDeca-Bold", size: 35))
                                 .opacity(feedmodel.isNewFeedSelected ? 1.0 : 0.5)
                         }
@@ -233,11 +233,13 @@ struct PlayerView: View {
                     Button(action: {
                         activeSheet = .third
                     }) {
-                        Image(systemName: "square.fill")
+                        Image(systemName: "ellipsis")
                             .resizable()
-                            .frame(width: 50, height: 50)
+                            .frame(width: 35, height: 13)
                             .foregroundColor(.white)
                     }
+                    .frame(height: 35)
+                    .buttonStyle(BorderlessButtonStyle())
                     .padding(.top, 15)
                 }
                 .padding(.bottom, 155)

@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+// MARK: - School Functions
 // function verifies whether a given users email belongs to Yale, ND, or Rice
 func schoolValidator(email: String) -> Bool {
     
@@ -52,6 +53,16 @@ func relationshipsParser(school: String) -> CollectionReference? {
 func postsParser(school: String) -> CollectionReference? {
     guard let postCollection = postsMap[school] else { return nil }
     return postCollection
+}
+
+// MARK: - Formatting Functions
+func formatNumber(_ number: Int) -> String {
+    if number >= 1000 {
+        let numberInK = Double(number) / 1000.0
+        return String(format: "%.1fk", numberInK)
+    } else {
+        return String(number)
+    }
 }
 
 

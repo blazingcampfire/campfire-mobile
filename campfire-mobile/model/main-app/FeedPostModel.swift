@@ -39,6 +39,7 @@ class FeedPostModel: ObservableObject {
     
         
     func listenForNewFeedPosts() {
+        print("fired listen for new feed posts")
         let docRef = currentUser.postsRef.order(by: "date", descending: true)
     listener = docRef.addSnapshotListener { (querySnapshot, error) in
                 guard let documents = querySnapshot?.documents else {

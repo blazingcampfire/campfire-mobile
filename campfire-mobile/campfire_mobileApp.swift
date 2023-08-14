@@ -77,6 +77,7 @@ extension AppDelegate: MessagingDelegate {
 struct campfire_mobileApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate: AppDelegate
+    @AppStorage("isDarkMode") private var darkMode = false
     
     let persistenceController = PersistenceController.shared
     
@@ -84,6 +85,7 @@ struct campfire_mobileApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .preferredColorScheme(darkMode ? .dark : .light)
         }
     }
 }

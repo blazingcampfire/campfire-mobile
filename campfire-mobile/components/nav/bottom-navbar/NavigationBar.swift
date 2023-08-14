@@ -17,7 +17,7 @@ struct NavigationBar: View {
         TabView() {
             ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
                 .tabItem {
-                    Image(systemName: "play.fill")
+                    Image(systemName: "flame.circle.fill")
                 }
 
                 .toolbar(.visible, for: .tabBar)
@@ -42,10 +42,9 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
-            TentTabView()
-                .environmentObject(currentUser)
+            SearchPage(model: SearchModel(currentUser: currentUser))
                 .tabItem {
-                    Image(systemName: "tent.fill")
+                    Image(systemName: "magnifyingglass")
                 }
              
                 .toolbar(.visible, for: .tabBar)

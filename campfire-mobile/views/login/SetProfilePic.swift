@@ -65,7 +65,7 @@ struct SetProfilePic: View {
                                             model.createProfile()
                                             currentUser.getProfile()
                                             currentUser.getUser()
-                                            
+                                            setUpFinished = true
                                             currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")

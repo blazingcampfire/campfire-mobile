@@ -27,9 +27,13 @@ struct EditProfile: View {
                                         .clipShape(Circle())
                                     
                                     
-                                } else {
+                                } else if currentUser.profile.profilePicURL != "" {
                                     
-                                    UserProfilePic(pfp: currentUser.profile.profilePicURL)}
+                                    UserProfilePic(pfp: currentUser.profile.profilePicURL)
+                                    
+                                } else {
+                                    FillerPFP()
+                                }
                                 
                                 Button(action: {
                                     showPhotos.toggle()

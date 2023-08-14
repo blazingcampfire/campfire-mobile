@@ -37,10 +37,8 @@ struct PlayerView: View {
     @StateObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @State private var activeSheet: ActiveSheet?
-    @StateObject var feedUpdate: FeedPostUpdateModel
-    @ObservedObject var postLikeStatusModel: PostLikeStatusModel
-    @StateObject var idsEqual = PosterIdEqualCurrentUserId()
-    
+    @StateObject var idsEqual = PosterIdEqualCurrentUserId() //For the ellipses button
+
     var body: some View {
         
         let currentPostPlayer = feedmodel.currentPostPlayers[safe: currentIndex]
@@ -58,7 +56,7 @@ struct PlayerView: View {
                             PlayerContainerView(player: currentPostPlayer.player)
                                 .onAppear {
                                     guard let player = currentPostPlayer.player else { return }
-                                    player.play()
+                                        player.play()
                                 }
                                 .onDisappear {
                                     guard let player = currentPostPlayer.player else { return }
@@ -72,11 +70,11 @@ struct PlayerView: View {
                                         player.play()
                                     }
                                 }
-                        } else {
+                        }  else {
                             PlayerContainerView(player: currentPostPlayer.player)
                                 .onAppear {
                                     guard let player = currentPostPlayer.player else { return }
-                                    player.pause()
+                                        player.pause()
                                 }
                         }
                     }
@@ -186,39 +184,12 @@ struct PlayerView: View {
                 VStack(spacing: 7.5) {
                     
                     VStack(spacing: -60) {
-                        Button(action: {
-                            if let currentPostPlayer = currentPostPlayer {
-                            let postId = currentPostPlayer.postItem.id
-                            let newLikeStatus = !(postLikeStatusModel.likedStatus[postId] ?? false)
-                            
-                            if newLikeStatus {
-                                feedUpdate.createLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
-                                print("added like from post")
-                                feedUpdate.increasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
-                                print("added like from user (from post)")
-                            } else {
-                                feedUpdate.deleteLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
-                                print("deleted like from post")
-                                feedUpdate.decreasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
-                                print("deleted like from user (from post)")
-                            }
-                            postLikeStatusModel.likedStatus[postId] = newLikeStatus
+                        if let currentPostPlayer = currentPostPlayer {
+                            LikeButtonView(likeModel: LikeButtonModel(posterId: currentPostPlayer.postItem.posterId, postId: currentPostPlayer.postItem.id))
+                            Text("\(currentPostPlayer.postItem.numLikes)")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-Regular", size: 16))
                         }
-                        }) {
-                            VStack {
-                                if let currentPostPlayer = currentPostPlayer {
-                                    if postLikeStatusModel.likedStatus[currentPostPlayer.postItem.id] == true {
-                                    Image("eaten")
-                                } else {
-                                    Image("noteaten")
-                                }
-                            }
-                            }
-                            .padding(.leading, -15)
-                        }
-                        Text("\(feedUpdate.likes.count)")
-                            .foregroundColor(.white)
-                            .font(.custom("LexendDeca-Regular", size: 16))
                     }
                     
                     VStack {
@@ -257,7 +228,6 @@ struct PlayerView: View {
             .onAppear {
                 if let currentPostPlayer = currentPostPlayer {
                     commentModel.postId = currentPostPlayer.postItem.id
-                    feedUpdate.postId = currentPostPlayer.postItem.id
                 }
                 if let currentPostPlayer = currentPostPlayer {
                     if currentUser.profile.userID == currentPostPlayer.postItem.posterId {
@@ -293,12 +263,11 @@ struct PlayerView: View {
 //Main thing playing the videos, think of this as theFeed View
 // We'll put UI elements like likebutton, commentspage, ellipses, and userinfo on here
 struct ScrollFeed: View {
-    @StateObject var feedModel: FeedPostModel
-    
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
         ZStack {
-            PlayerScrollView(feedModel: feedModel)
+            PlayerScrollView(feedModel: FeedPostModel(currentUser: currentUser))
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -308,9 +277,9 @@ struct ScrollFeed: View {
 //This controls our actual scrollable ability, makes the vertical scrolling actually possible
 
 struct PlayerScrollView: UIViewRepresentable {
-    @ObservedObject var feedModel: FeedPostModel
+    @StateObject var feedModel: FeedPostModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var postLikeStatusModel = PostLikeStatusModel()
+    
     
     func makeCoordinator() -> Coordinator {
         return PlayerScrollView.Coordinator(parent1: self)
@@ -322,7 +291,7 @@ struct PlayerScrollView: UIViewRepresentable {
            }
 
            for i in 0..<feedModel.currentPostPlayers.count {
-               let childView = UIHostingController(rootView: PlayerView(feedmodel: feedModel, currentIndex: i, commentModel: CommentsModel(currentUser: currentUser), feedUpdate: FeedPostUpdateModel(currentUser: currentUser), postLikeStatusModel: postLikeStatusModel)) // Passing index here
+               let childView = UIHostingController(rootView: PlayerView(feedmodel: feedModel, currentIndex: i, commentModel: CommentsModel(currentUser: currentUser))) // Passing index here
                childView.view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height * CGFloat(i), width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                uiView.addSubview(childView.view)
            }
@@ -360,6 +329,9 @@ struct PlayerScrollView: UIViewRepresentable {
                         }
                 let lastIndex = parent.feedModel.currentPostPlayers.count - 1
                 if currentIndex == lastIndex {
+                    if let player = parent.feedModel.currentPostPlayers[safe: currentIndex]?.player {
+                               player.pause()
+                           }
                     if parent.feedModel.isNewFeedSelected {
                         parent.feedModel.listenForNewFeedPosts()
                     } else {

@@ -22,6 +22,7 @@ struct PostItem: Identifiable {
     var postType: String
     var date: Timestamp
     var posterId: String
+    var numLikes: Int    
 }
 
 struct PostPlayer: Identifiable {
@@ -38,15 +39,17 @@ struct Comment: Identifiable {
     var comment: String
     var date: Timestamp
     var posterId: String
+    var numLikes: Int
 }
 //Update to have user id field
-struct Reply: Identifiable, Hashable {
+struct Reply: Identifiable {
     var id: String
     var profilepic: String
     var username: String
     var reply: String
     var date: Timestamp
     var posterId: String
+    var numLikes: Int
 }
 
 struct Like: Identifiable {

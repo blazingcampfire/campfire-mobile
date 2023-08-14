@@ -21,7 +21,6 @@ class FeedPostModel: ObservableObject {
     @Published var lastSnapShot: DocumentSnapshot?
     @Published var lastHotSnapShot: DocumentSnapshot?
     
-    
 
     var currentPostPlayers: [PostPlayer] {
         isNewFeedSelected ? newPostPlayers : hotPostPlayers
@@ -71,7 +70,8 @@ class FeedPostModel: ObservableObject {
                     let postType = data["postType"] as? String ?? ""
                     let date = data["date"] as? Timestamp ?? Timestamp()
                     let posterId = data["posterId"] as? String ?? ""
-                    return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId)
+                    let numLikes = data["numLikes"] as? Int ?? 0
+                    return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes)
                 }
             
                 self.newPosts.append(contentsOf: newPosts)
@@ -119,7 +119,8 @@ class FeedPostModel: ObservableObject {
                 let postType = data["postType"] as? String ?? ""
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 let posterId = data["posterId"] as? String ?? ""
-                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId)
+                let numLikes = data["numLikes"] as? Int ?? 0
+                return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes)
             }
             self.hotPosts.append(contentsOf: hotPosts)
             // update postPlayers accordingly

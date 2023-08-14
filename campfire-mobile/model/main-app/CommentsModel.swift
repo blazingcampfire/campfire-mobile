@@ -43,7 +43,8 @@ class CommentsModel: ObservableObject {
             "profilepic": currentUser.profile.profilePicURL,
             "comment": commenttext,
             "date": now,
-            "posterId": currentUser.profile.userID
+            "posterId": currentUser.profile.userID,
+            "numLikes": 0
         ]
         docRef.setData(commentData) { error in
             if let error = error {
@@ -65,7 +66,8 @@ class CommentsModel: ObservableObject {
             "profilepic": currentUser.profile.profilePicURL,
             "reply": replytext,
             "date": now,
-            "posterId": currentUser.profile.userID
+            "posterId": currentUser.profile.userID,
+            "numLikes": 0
         ]
         docRef.setData(replyData) { error in
             if let error = error {
@@ -98,7 +100,8 @@ class CommentsModel: ObservableObject {
                 let comment = data["comment"] as? String ?? ""
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 let posterId = data["posterId"] as? String ?? ""
-                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId)
+                let numLikes = data["numLikes"] as? Int ?? 0
+                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId, numLikes: numLikes)
             } 
 
             }
@@ -127,7 +130,8 @@ class CommentsModel: ObservableObject {
                 let reply = data["reply"] as? String ?? ""
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 let posterId = data["posterId"] as? String ?? ""
-                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, date: date, posterId: posterId)
+                let numLikes = data["numLikes"] as? Int ?? 0
+                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, date: date, posterId: posterId, numLikes: numLikes)
             }
         }
     }

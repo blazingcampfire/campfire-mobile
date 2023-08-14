@@ -14,12 +14,8 @@ struct CommentView: View {
     var postID: String
     var posterId: String
     @State private var showingReplies: Bool = false
-    @State private var replyTapped: Bool = false
     @ObservedObject var commentsModel: CommentsModel
-    @ObservedObject var commentLikeStatus: CommentLikeStatusModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var commentUpdateModel: CommentUpdateModel
-    @StateObject var replyLikedStatus = ReplyLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
     var usernameId: String
@@ -92,41 +88,21 @@ struct CommentView: View {
                         Spacer()
                         
                         VStack(spacing: -20) {
-                            Button(action: {
-                                let newLikeStatus = !(commentLikeStatus.likedStatus[comId] ?? false)
-                                print("Before setting newLikeStatus: \(commentLikeStatus.likedStatus[comId] ?? false)")
-                                if newLikeStatus {
-                                    commentUpdateModel.createLikeDocument(postId: postID, comId: comId, userId: currentUser.profile.userID)
-                                    print("INCREASE LIKE FROM COMMENT")
-                                } else {
-                                    commentUpdateModel.deleteLikeDocument(postId: postID, comId: comId, userId: currentUser.profile.userID)
-                                    print("DECREASE LIKE FROM COMMENT")
-                                }
-                                commentLikeStatus.likedStatus[comId] = newLikeStatus
-                                print("After setting newLikeStatus: \(commentLikeStatus.likedStatus[comId] ?? false)")
-                            }) {
-                                Image(commentLikeStatus.likedStatus[comId] == true ? "eaten" : "noteaten")
-                                    .resizable()
-                                    .frame(width: 75, height: 90)
-                                    .aspectRatio(contentMode: .fit)
-                                    .offset(x: -4)
-                            }
-                            Text("\(commentUpdateModel.commentLikes.count)")
+                        //    CommentButtonLikeView(comLikeModel: eachcomment.comLikeModel)
+                            Text("\(eachcomment.numLikes)")
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-SemiBold", size: 16))
                         }
                     }
                 if showingReplies {
                     ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
-                        ReplyView(eachreply: reply, comId: comId, postId: postID, replyId: reply.id, replyPosterId: reply.posterId ,commentModel: commentsModel, replyLikeStatus: replyLikedStatus, replyUpdateModel: ReplyUpdateModel(currentUser: currentUser))
+                        ReplyView(eachreply: reply, comId: comId, postId: postID)
                     }
                 }
         }
         }
         .onAppear {
             commentsModel.commentId = comId
-            commentUpdateModel.postId = postID
-            commentUpdateModel.comId = comId
         }
     }
     }

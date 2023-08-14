@@ -15,7 +15,7 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-            ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
+            FeedViewControllerWrapper()
                 .tabItem {
                     Image(systemName: "play.fill")
                 }

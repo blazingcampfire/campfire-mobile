@@ -72,42 +72,10 @@ class FeedPostUpdateModel: ObservableObject {
             }
         }
     }
+}
     
-    func increasePosterUserLikes(posterUserId: String) {
-        let docRef = yaleProfiles.document(posterUserId)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                // The document exists, proceed to update
-                docRef.updateData(["smores": FieldValue.increment(Int64(1))]) { error in
-                    if let error = error {
-                        print("Error updating document \(error)")
-                    } else {
-                        print("Success incrementing likes")
-                    }
-                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
-        
-    func decreasePosterUserLikes(posterUserId: String) {
-        let docRef = yaleProfiles.document(posterUserId)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                docRef.updateData(["smores": FieldValue.increment(Int64(-1))]) { error in
-                    if let error = error {
-                        print("Error updating document \(error)")
-                    } else {
-                        print("Success decreasing likes")
-                    }
-                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
-    }
-    
+
+
+
 
 

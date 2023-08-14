@@ -141,7 +141,6 @@ struct CommentsPage: View {
 struct CommentsList: View {
     @ObservedObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var comLikeStatus = CommentLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
     var postID: String
@@ -160,7 +159,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, commentLikeStatus: comLikeStatus, commentUpdateModel: CommentUpdateModel(currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
+                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
                         .environmentObject(currentUser)
                 }
                 

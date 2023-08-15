@@ -11,7 +11,7 @@ import Firebase
 import UIKit
 
 //Update to have user id field
-struct PostItem: Identifiable {
+struct PostItem: Identifiable, Equatable {
     var id: String
     var username: String
     var name: String
@@ -149,4 +149,35 @@ struct Player: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
+
+struct PlayerTwo: UIViewControllerRepresentable {
+    @Binding var shouldPlay: Bool
+    var player: AVPlayer
+
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let controller = AVPlayerViewController()
+        controller.player = player
+        controller.showsPlaybackControls = false
+        controller.videoGravity = .resizeAspectFill
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player.currentItem, queue: .main) { _ in
+            self.player.seek(to: .zero)
+            if self.shouldPlay {
+                self.player.play()
+            }
+        }
+        return controller
+    }
+
+    func updateUIViewController(_ playerController: AVPlayerViewController, context: Context) {
+        if shouldPlay {
+            playerController.player?.play()
+        } else {
+            playerController.player?.pause()
+        }
+    }
+    
+    func dismantleUIViewController(_ uiViewController: AVPlayerViewController, coordinator: Coordinator) {
+        NotificationCenter.default.removeObserver(uiViewController, name: .AVPlayerItemDidPlayToEndTime, object: uiViewController.player?.currentItem)
+    }
 }

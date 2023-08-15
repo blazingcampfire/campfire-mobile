@@ -7,19 +7,19 @@
 
 import SwiftUI
 import Kingfisher
+import AVKit
 
 struct FeedUIView: View {
-    @State private var leaderboardShow: Bool = false
-    @State private var likeTapped: Bool = false
-    var post: PostItem
-    
-    
+    @ObservedObject var individualPost: IndividualPost
+    @State private var likeTapped = false
+
     var body: some View {
         ZStack {
+         
             VStack {
                 HStack {
                     Button(action: {
-                        
+
                     }) {
                         Text("Hot")
                             .font(.custom("LexendDeca-Bold", size:35))
@@ -37,12 +37,12 @@ struct FeedUIView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
-            
-            
+
+
             VStack {
                 HStack {
                     Button(action: {
-                        
+
                     }) {
                         Image(systemName: "trophy.fill")
                             .foregroundColor(.white)
@@ -53,81 +53,66 @@ struct FeedUIView: View {
                 .padding(.leading, 310)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            
-            
+
+
             // -MARK: User information
             VStack {
                 HStack(alignment: .bottom) {
-                    
+
                     VStack(alignment: .leading) {
-                        
+
                         //- MARK: Profile pic/username buttons Hstack
                         HStack(spacing: 10) {
-                            
+
                             Button(action: {
                                 // lead to profile page
                             }) {
-                                KFImage(URL(string: post.profilepic))
+                                KFImage(URL(string: individualPost.profilepic))
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
                                         .clipShape(Circle())
-                                
+
                             }
                             .padding(.bottom, 5)
-                            
+
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
-                                    Text("@\(post.username)")
+                                    Text("@\(individualPost.username)")
                                             .font(.custom("LexendDeca-Bold", size: 16))
                                 }
-                         
-                                Text(post.caption)
+
+                                Text(individualPost.caption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
-                                
-                                if post.location == "" {
+
+                                if individualPost.location == "" {
                                         Text("")
                                     } else {
-                                        Text( "\(post.location)" + "📍")
+                                        Text( "\(individualPost.location)" + "📍")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
-                                
+
                             }
                             .padding(.leading, 10)
                         }
-                        
+
                     }
-                    
+
                 }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.bottom, 40)
-            
+
             VStack(spacing: 7.5) {
-                VStack(spacing: -60) {
-                    Button(action: {
-                        likeTapped.toggle()
-                        if likeTapped {
-                            increasePostLikes(postId: post.id)
-                        } else {
-                            decreasePostLikes(postId: post.id)
-                        }
-                    }) {
-                        Image(likeTapped ? "eatensmore" : "noteatensmore")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .padding(.top, -30)
-                    }
-                }
-                Text("\(post.numLikes)")
-                    .foregroundColor(.white)
-                    .font(.custom("LexendDeca-Regular", size: 16))
                 
-                
-                
+                Text("\(individualPost.numLikes)")
+                .foregroundColor(.white)
+                .font(.custom("LexendDeca-Regular", size: 16))
+                .padding(.bottom, -60)
+
                 VStack {
                     Button(action: {
                    //     CommentsPage(postId: <#T##String#>, commentModel: <#T##CommentsModel#>)
@@ -143,11 +128,11 @@ struct FeedUIView: View {
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }
-                .padding(.top, 20)
-                
-                
+                .padding(.top, 30)
+
+
                 Button(action: {
-                    
+
                 }) {
                     Image(systemName: "square.fill")
                         .resizable()
@@ -165,7 +150,47 @@ struct FeedUIView: View {
 }
 
 
-
+//struct FeedUILikeButton: View {
+//    @State private var likeTapped: Bool = false
+//
+//    var body: some View {
+//        Button(action: {
+//            print("Button pressed")
+//            self.onLikeTapped()
+//        }) {
+//            VStack(spacing: -60) {
+//                Image(likeTapped ? "eatensmore" : "noteatensmore")
+//                    .resizable()
+//                    .frame(width: 50, height: 50)
+//                    .padding(.top, -30)
+//            }
+//        }
+//
+//    }
+//}
+//struct FeedUILikeButton: View {
+//    @Binding var likeTapped: Bool
+//    @ObservedObject var individualPost: IndividualPost
+//
+//    var body: some View {
+//        VStack(spacing: -60) {
+//        Button(action: {
+//            likeTapped.toggle()
+//            if likeTapped {
+//                individualPost.increasePostLikes()
+//            } else {
+//                individualPost.decreasePostLikes()
+//            }
+//        }) {
+//            Image(likeTapped ? "eatensmore" : "noteatensmore")
+//                .resizable()
+//                .frame(width: 50, height: 50)
+//                .padding(.top, -30)
+//        }
+//        }
+//
+//    }
+//}
 
 
 

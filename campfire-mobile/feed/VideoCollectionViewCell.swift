@@ -8,36 +8,89 @@
 import UIKit
 import AVKit
 import SwiftUI
+import Combine
+
+class PlayerView: UIView {
+    override class var layerClass: AnyClass {
+        return AVPlayerLayer.self
+    }
+}
+
 
 class VideoCollectionViewCell: UICollectionViewCell {
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
-    //    var likeButton: UIButton!
-    //    var likeLabel: UILabel!
-    //    var postId: String?
-    //    var newFeedModel: NewFeedModel?
-    //    var likeTapped = false
-    
     var hostingController: UIHostingController<FeedUIView>?
+    let likeButton = UIButton()
+    let playerView = PlayerView()
+    var individualPostVM: IndividualPost? {
+        didSet {
+            setupBindings()
+        }
+    }
+    var cancellables = Set<AnyCancellable>()
+
+    private func setupBindings() {
+        cancellables = []
+            guard let viewModel = individualPostVM else { return }
+            viewModel.$isLiked
+                .assign(to: \.isSelected, on: likeButton)
+                .store(in: &cancellables)
+        }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupPlayerLayer()
+        setupGestureRecognizers()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupPlayerLayer()
+        setupGestureRecognizers()
     }
-    
-    
+   
     override func prepareForReuse() {
         super.prepareForReuse()
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        //        likeTapped = false
-        //        postId = nil
-        //        newFeedModel = nil
     }
+    
+    @objc private func likeButtonTapped() {
+        individualPostVM?.toggleLikeStatus()
+    }
+
+    func updateLikes(isLiked: Bool) {
+        likeButton.isSelected = isLiked
+    }
+    
+    private func setupPlayerView() {
+            playerView.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(playerView)
+            
+            NSLayoutConstraint.activate([
+                playerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                playerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                playerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            ])
+        }
+    private func setupLikeButton() {
+        likeButton.setImage(UIImage(named: "noteatensmore"), for: .normal)
+        likeButton.setImage(UIImage(named: "eatensmore"), for: .selected)
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        
+        likeButton.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(likeButton)
+        
+        NSLayoutConstraint.activate([
+            likeButton.widthAnchor.constraint(equalToConstant: 50),
+            likeButton.heightAnchor.constraint(equalToConstant: 50),
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -315), // 10 points from the bottom
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15) // 10 points from the trailing side
+        ])
+    }
+
     
     private func setupPlayerLayer() {
         player = AVPlayer()
@@ -57,91 +110,68 @@ class VideoCollectionViewCell: UICollectionViewCell {
         player?.play()
     }
     
+    private func setupGestureRecognizers() {
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+            self.addGestureRecognizer(tap)
+        }
+        
+        @objc func handleTap() {
+            if player?.rate == 0 {
+                player?.play()
+            } else {
+                player?.pause()
+            }
+        }
+    
+    
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer?.frame = contentView.bounds
     }
     
-    func configure(with post: PostItem, model: NewFeedModel) {
-        let playerItem = AVPlayerItem(url: URL(string: post.url)!)
-        player?.replaceCurrentItem(with: playerItem)
+    func configure(with postItem: PostItem) {
+        // Safely unwrap the URL string
+        if let url = URL(string: postItem.url) {
+            let playerItem = AVPlayerItem(url: url)
+            
+            // Replace the current player item with the new item
+            player?.replaceCurrentItem(with: playerItem)
+        }
+        // Remove the previous SwiftUI view, if any
+        if let swiftUIView = hostingController?.view {
+            swiftUIView.removeFromSuperview()
+        }
+
+        individualPostVM = IndividualPost(postItem: postItem)
+        
         if let swiftUIView = hostingController?.view {
             swiftUIView.removeFromSuperview()
         }
         
-        if hostingController == nil {
-            let overlayView = FeedUIView(post: post)
+        if let individualPostVM = individualPostVM {
+            let overlayView = FeedUIView(individualPost: individualPostVM)
             hostingController = UIHostingController(rootView: overlayView)
+            
+            guard let swiftUIView = hostingController?.view else { return }
+            swiftUIView.backgroundColor = .clear
+            swiftUIView.translatesAutoresizingMaskIntoConstraints = false
+            
+            contentView.addSubview(swiftUIView)
+            
+            NSLayoutConstraint.activate([
+                swiftUIView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                swiftUIView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                swiftUIView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                swiftUIView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            ])
+            
+            // Move this line here to ensure that the likeButton is rendered above swiftUIView
+            setupLikeButton()
         }
-        
-        guard let swiftUIView = hostingController?.view else { return }
-        swiftUIView.backgroundColor = .clear  // Ensure the UIKit hosting view is also clear
-        
-        swiftUIView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(swiftUIView)
-        NSLayoutConstraint.activate([
-            swiftUIView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            swiftUIView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            swiftUIView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            swiftUIView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-        ])
-        //        likeTapped = model.likedPosts[post.id, default: false]
-        //        postId = post.id
-        //        newFeedModel = model
-        //
-        //        if likeButton == nil {
-        //            likeButton = UIButton(type: .system)
-        //            likeButton.addTarget(self, action: #selector(handleLikeTap(_:)), for: .touchUpInside)
-        //            contentView.addSubview(likeButton)
-        //        }
-        //
-        //        likeButton.setImage(UIImage(named: likeTapped ? "eatensmore" : "noteatensmore"), for: .normal)
-        //        likeButton.tintColor = .none
-        //        likeButton.translatesAutoresizingMaskIntoConstraints = false
-        //           NSLayoutConstraint.activate([
-        //               likeButton.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -350),
-        //               likeButton.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
-        //               likeButton.widthAnchor.constraint(equalToConstant: 60),
-        //               likeButton.heightAnchor.constraint(equalToConstant: 60)
-        //           ])
-        //
-        //        if likeLabel == nil {
-        //            likeLabel = UILabel()
-        //            contentView.addSubview(likeLabel)
-        //        }
-        //        updateLikes(post.numLikes)
-        //    }
-        //
-        //    func updateLikes(_ likes: Int) {
-        //        likeLabel.text = "\(likes)"
-        //      //  likeLabel.font = "LexendDeca-Regular"
-        //    }
-        //
-        //    @objc func handleLikeTap(_ sender: UIButton) {
-        //        // Handle the tap event, update Firestore and UI.
-        //        likeTapped.toggle()
-        //        if likeTapped {
-        //            newFeedModel?.increasePostLikes(postId: postId!)
-        //            newFeedModel?.likedPosts[postId!] = true
-        //        } else {
-        //            newFeedModel?.decreasePostLikes(postId: postId!)
-        //            newFeedModel?.likedPosts[postId!] = false
-        //        }
-        //
-        //        updateLikes(newFeedModel?.likedPosts.count ?? 0)
-        //
-        //        let imageName = newFeedModel?.likedPosts[postId!] ?? false ? "eatensmore" : "noteatensmore"
-        //        likeButton.setImage(
-        //            UIImage(named: imageName),
-        //            for: .normal
-        //        )
-        //        if let updatedPost = newFeedModel?.feedPosts.first(where: { $0.id == postId }) {
-        //            // Update the likes label in UI
-        //            updateLikes(updatedPost.numLikes)
-        //        }
-        //    }
-        
     }
+
+
 }
 
 

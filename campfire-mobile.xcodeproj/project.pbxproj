@@ -85,7 +85,6 @@
 		B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */; };
 		B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04A2A57D7B800BA5554 /* cute.jpeg */; };
 		B1CAD04D2A57D83B00BA5554 /* blonde.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */; };
-		B1D502AE2A897EAE00A70780 /* NewFeedUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D502AD2A897EAE00A70780 /* NewFeedUpdateModel.swift */; };
 		B1DEBFF52A82140D00D3013A /* FeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DEBFF42A82140D00D3013A /* FeedCells.swift */; };
 		B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E044D62A762E4900DC767D /* CommentsModel.swift */; };
 		B1E9DE0A2A8826C000E0B61F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE092A8826C000E0B61F /* ImageCollectionViewCell.swift */; };
@@ -103,6 +102,9 @@
 		B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */; };
 		B1FA34622A84E1B70008B4D9 /* ReplyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */; };
 		B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */; };
+		B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */; };
+		B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */; };
+		B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */; };
 		E2163E492A660AA8005A20BE /* collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E482A660AA8005A20BE /* collections.swift */; };
 		E2163E4C2A6633D2005A20BE /* schoolFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4B2A6633D2005A20BE /* schoolFunctions.swift */; };
 		E2163E4E2A663501005A20BE /* schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4D2A663501005A20BE /* schools.swift */; };
@@ -291,7 +293,6 @@
 		B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAuth.swift; sourceTree = "<group>"; };
 		B1CAD04A2A57D7B800BA5554 /* cute.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute.jpeg; sourceTree = "<group>"; };
 		B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blonde.jpeg; sourceTree = "<group>"; };
-		B1D502AD2A897EAE00A70780 /* NewFeedUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedUpdateModel.swift; sourceTree = "<group>"; };
 		B1DEBFF42A82140D00D3013A /* FeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCells.swift; sourceTree = "<group>"; };
 		B1E044D62A762E4900DC767D /* CommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsModel.swift; sourceTree = "<group>"; };
 		B1E9DE092A8826C000E0B61F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -308,6 +309,8 @@
 		B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateModel.swift; sourceTree = "<group>"; };
 		B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyUpdateModel.swift; sourceTree = "<group>"; };
 		B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPage.swift; sourceTree = "<group>"; };
+		B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualPostModel.swift; sourceTree = "<group>"; };
+		B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCommentModel.swift; sourceTree = "<group>"; };
 		E2163E482A660AA8005A20BE /* collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collections.swift; sourceTree = "<group>"; };
 		E2163E4B2A6633D2005A20BE /* schoolFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schoolFunctions.swift; sourceTree = "<group>"; };
 		E2163E4D2A663501005A20BE /* schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schools.swift; sourceTree = "<group>"; };
@@ -399,6 +402,7 @@
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
 				F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
+				B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
@@ -850,7 +854,8 @@
 				B1E9DE0F2A888AC100E0B61F /* FeedUIView.swift */,
 				B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */,
 				B1E9DE152A88BCED00E0B61F /* TestCode.swift */,
-				B1D502AD2A897EAE00A70780 /* NewFeedUpdateModel.swift */,
+				B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */,
+				B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -891,6 +896,7 @@
 				F881D5152A7A1E1200E6E663 /* CropViewController */,
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
+				B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -973,6 +979,7 @@
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1066,7 +1073,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
-				B1D502AE2A897EAE00A70780 /* NewFeedUpdateModel.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
 				B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */,
 				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
@@ -1101,6 +1107,7 @@
 				B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
+				B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */,
 				E216E3F62A831D4A0021C9F0 /* misc.swift in Sources */,
 				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyNumber.swift in Sources */,
@@ -1141,6 +1148,7 @@
 				B1E9DE0C2A8826F300E0B61F /* VideoCollectionViewCell.swift in Sources */,
 				B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */,
 				E2163E4E2A663501005A20BE /* schools.swift in Sources */,
+				B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,
@@ -1546,6 +1554,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1606,6 +1622,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

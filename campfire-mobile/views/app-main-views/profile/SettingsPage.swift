@@ -32,6 +32,10 @@ struct SettingsForm: View {
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var notificationsManager: NotificationsManager
+    
+    @Environment(\.openURL) var openURL
+    @State var emailAlert: Bool = false
+    
     var body: some View {
         Form {
             Section(header: Text("display")) {
@@ -44,7 +48,7 @@ struct SettingsForm: View {
                     }
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
-
+                
                 Button(action: {
                     Task {
                         await model.notificationsManager.turnOffNotifications()
@@ -59,7 +63,7 @@ struct SettingsForm: View {
                     }
                 })
             }
-
+            
             .font(.custom("LexendDeca-Regular", size: 16))
             Section(header: Text("about")) {
                 Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
@@ -89,68 +93,85 @@ struct SettingsForm: View {
             }
             .font(.custom("LexendDeca-Regular", size: 16))
             .foregroundColor(Theme.TextColor)
-
+            
             Section(header: Text("support")) {
-                Label {
-                    Text("report issue")
-                } icon: {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(Theme.Peach)
+                Link(destination: URL(string: "mailto:adarsh@gmail.com")!) {
+                    Label {
+                        Text("report issue")
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(Theme.Peach)
+                    }
                 }
-                Label {
-                    Text("contact us")
-                } icon: {
-                    Image(systemName: "envelope")
-                        .foregroundStyle(Theme.Peach)
-                }
-            }
-            .font(.custom("LexendDeca-Regular", size: 16))
-
-            Section(header: Text("account")) {
-                VStack {
-                    Button(action: {
-                        do {
-                            try model.signOut()
-                        } catch {
-                            print(error)
-                        }
-                    }, label: {
+                Button {
+                    mailto("adt@gmail.com")
+                } label: {
+                    
+                    NavigationLink(destination: EmailView()) {
                         Label {
-                            Text("log out")
-                                .foregroundColor(Theme.TextColor)
+                            Text("contact us")
                         } icon: {
-                            Image(systemName: "lock")
-                                .foregroundColor(Theme.Peach)
+                            Image(systemName: "envelope")
+                                .foregroundStyle(Theme.Peach)
                         }
-                    })
+                    }
                 }
-                VStack {
-                    Button(action: {
-                        showDeleteAlert = true
-                    }, label: {
-                        Label {
-                            Text("delete account")
-                                .foregroundColor(Theme.TextColor)
-                        } icon: {
-                            Image(systemName: "delete.left.fill")
-                                .foregroundColor(Theme.Peach)
-                        }
-                    })
+                .font(.custom("LexendDeca-Regular", size: 16))
+                
+                Section(header: Text("account")) {
+                    VStack {
+                        Button(action: {
+                            do {
+                                try model.signOut()
+                            } catch {
+                                print(error)
+                            }
+                        }, label: {
+                            Label {
+                                Text("log out")
+                                    .foregroundColor(Theme.TextColor)
+                            } icon: {
+                                Image(systemName: "lock")
+                                    .foregroundColor(Theme.Peach)
+                            }
+                        })
+                    }
+                    VStack {
+                        Button(action: {
+                            showDeleteAlert = true
+                        }, label: {
+                            Label {
+                                Text("delete account")
+                                    .foregroundColor(Theme.TextColor)
+                            } icon: {
+                                Image(systemName: "delete.left.fill")
+                                    .foregroundColor(Theme.Peach)
+                            }
+                        })
+                    }
                 }
+                .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
+                       dismissButton: CustomAlertButton(title: "yes", action: {
+                    do {
+                        try model.deleteAccount()
+                    } catch {
+                        model.deleteErrorAlert = true
+                    }
+                }),
+                       isPresented: $showDeleteAlert)
+                .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
+                       dismissButton: CustomAlertButton(title: "ok", action: { }),
+                       isPresented: $model.deleteErrorAlert)
+                .font(.custom("LexendDeca-Regular", size: 16))
             }
-            .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
-                   dismissButton: CustomAlertButton(title: "yes", action: {
-                       do {
-                           try model.deleteAccount()
-                       } catch {
-                           model.deleteErrorAlert = true
-                       }
-                   }),
-                   isPresented: $showDeleteAlert)
-            .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
-                   dismissButton: CustomAlertButton(title: "ok", action: { }),
-                   isPresented: $model.deleteErrorAlert)
-            .font(.custom("LexendDeca-Regular", size: 16))
+        }
+    }
+    func mailto(_ email: String) {
+        let encodedEmail = email.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let mailto = "mailto:\(encodedEmail)"
+        print(mailto)
+        if let url = URL(string: mailto) {
+            openURL(url)
         }
     }
 }

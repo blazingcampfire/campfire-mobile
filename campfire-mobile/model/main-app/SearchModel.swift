@@ -15,7 +15,6 @@ import FirebaseFirestoreSwift
 class SearchModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
-    @Published var requestedBool: [Bool] = []
     @Published var requests: [RequestFirestore] = []
     @Published var name: String = "" {
         didSet {
@@ -25,8 +24,7 @@ class SearchModel: ObservableObject {
     
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        print(currentUser.privateUserData.userID)
-//        readSentRequests()
+        print("currentUser: \(currentUser.privateUserData.userID)")
     }
     
     func searchName(matching: String) {
@@ -34,7 +32,6 @@ class SearchModel: ObservableObject {
         let name = name.lowercased()
         if name == "" {
             self.profiles = []
-            self.requestedBool = []
             return
         }
         currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
@@ -42,51 +39,19 @@ class SearchModel: ObservableObject {
                 print("Error querying profiles: \(err)")
             } else {
                 self.profiles = []
-                self.requestedBool = []
                 var flag: Bool = false
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)
-                        
-                        for request in self.requests {
-                            if profile.userID == request.userID {
-                                flag = true
-                                break
-                            }
-                        }
-                        self.requestedBool.append(flag)
                         self.profiles.append(profile)
-                        print(self.requestedBool)
                     } catch {
                         print("Error retrieving profile")
                     }
                 }
-                print(self.requestedBool.count, self.profiles.count)
             }
         }
     }
     
-    func readSentRequests() {
-        print("fired read requests")
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
-            if error != nil {
-                print(error?.localizedDescription)
-            } else {
-                if let documentSnapshot = documentSnapshot {
-                    var requestsArray: [RequestFirestore] = []
-                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
-                    for request in requests {
-                        guard let requestObject = RequestFirestore(data: request) else {
-                            return
-                        }
-                        requestsArray.append(requestObject)
-                    }
-                    self.requests = requestsArray
-                }
-            }
-            
-        }
-    }
     // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
     func requestFriend(profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {

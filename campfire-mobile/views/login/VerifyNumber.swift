@@ -23,7 +23,6 @@ struct VerifyNumber: View {
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)
                 .onAppear {
-                    model.triggerRestart()
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()

@@ -32,10 +32,9 @@ struct OtherProfilePage: View {
                                             FillerPFP()
                                         }
                                         
-                                        
                                         Spacer()
                                         
-                                        Text((profile.name))
+                                        Text(profile.name)
                                             .font(.custom("LexendDeca-Bold", size: 20))
                                         
                                         HStack {
@@ -55,22 +54,60 @@ struct OtherProfilePage: View {
                                     }
                                     .padding(.top)
                                     HStack {
-                                        // MARK: -  if user is looking at non-friends profile
-                                        Button(action: {
-                                            profileModel.requestFriend()
-                                        }) {
-                                            Text("add friend!")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(Theme.Peach)
-                                                .padding()
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(.white)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(Color.black, lineWidth: 0.3)
-                                                        )
-                                                )
+                                        
+                                        if (profileModel.requested) {
+                                            Button(action: {
+                                                profileModel.removeRequest()
+                                            }) {
+                                                Text("remove request")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
+                                        }
+                                        else if (profileModel.friend) {
+                                            Button(action: {
+                                                profileModel.removeFriend()
+                                            }) {
+                                                Text("remove friend")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
+                                        }
+                                        else {
+                                            Button(action: {
+                                                profileModel.requestFriend()
+                                            }) {
+                                                Text("add friend!")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
                                         }
                                         
                                         // MARK: -  if user is looking at friends profile
@@ -140,9 +177,6 @@ struct OtherProfilePage: View {
             .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-            profileModel.getProfile()
-        }
     }
 }
 

@@ -21,24 +21,29 @@ class RequestsModel: ObservableObject {
     }
     
     func readRequests() {
-        print("fired read requests")
-        currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
-            if error != nil {
-                print(error?.localizedDescription)
-            } else {
-                if let documentSnapshot = documentSnapshot {
-                    var requestsArray: [RequestFirestore] = []
-                    let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
-                    for request in requests {
-                        guard let requestObject = RequestFirestore(data: request) else {
-                            return
+        do {
+            print("fired read requests")
+            currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+                if error != nil {
+                    print(error?.localizedDescription)
+                } else {
+                    if let documentSnapshot = documentSnapshot {
+                        var requestsArray: [RequestFirestore] = []
+                        let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
+                        for request in requests {
+                            guard let requestObject = RequestFirestore(data: request) else {
+                                return
+                            }
+                            requestsArray.append(requestObject)
                         }
-                        requestsArray.append(requestObject)
+                        self.requests = requestsArray
                     }
-                    self.requests = requestsArray
                 }
+                
             }
-            
+        }
+        catch {
+            print(error)
         }
     }
         

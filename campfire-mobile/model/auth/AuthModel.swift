@@ -186,6 +186,7 @@ extension AuthModel {
                     let existingProfile = try await self.checkProfile(email: submittedEmail)
                     if !existingProfile {
                         do {
+                            print("Existing profile: \(existingProfile)")
                             try AuthenticationManager.shared.signOut()
                             throw PhoneError.noExistingUser
                         } catch {
@@ -284,11 +285,14 @@ extension AuthModel {
     }
 
     func checkProfile(email: String) async throws -> Bool {
-        guard let userID = Auth.auth().currentUser?.uid else {
+        guard let email = Auth.auth().currentUser?.email else {
+            print("no existing profile")
             return false
         }
         let profileRef = profileParser(school: schoolParser(email: email))
         guard let document = try await profileRef?.document(userID).getDocument() else {
+            print(profileRef?.path)
+            print("no document w/ \(userID) as id")
             return false
         }
         return document.exists

@@ -15,6 +15,8 @@ let profile5 =  Profile(name: "Horatio", nameInsensitive: "horatio", phoneNumber
 let profile6 = Profile(name: "Kant", nameInsensitive: "kant", phoneNumber: "14879229207", email: "yeswekant@gmail.com", username: "objectivemorality", posts: [], smores: 320, profilePicURL: "", userID: "test-user-6", school: "nd", bio: "take a walk")
 let profile7 = Profile(name: "Kierkegaard", nameInsensitive: "kierkegaard", phoneNumber: "14879229207", email: "soren@gmail.com", username: "faith>reason", posts: [], smores: 187, profilePicURL: "", userID: "test-user-7", school: "nd", bio: "leap.")
 
+let profile8 = Profile(name: "Camus", nameInsensitive: "camus", phoneNumber: "14879229207", email: "alcamus@gmail.com", username: "itsallabsurd", posts: [], smores: 107, profilePicURL: "", userID: "test-user-8", school: "nd", bio: "i was here.")
+
 let testProfiles = [profile1, profile2, profile3, profile4, profile5, profile6, profile7]
 
 let info = UserInfo()

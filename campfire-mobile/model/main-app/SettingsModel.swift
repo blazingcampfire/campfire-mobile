@@ -51,8 +51,9 @@ class SettingsModel: ObservableObject {
         }
         else {
             do {
-                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
+//                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
                 Auth.auth().currentUser?.delete()
+                try AuthenticationManager.shared.signOut()
                 print("Reached function end")
             }
             catch {

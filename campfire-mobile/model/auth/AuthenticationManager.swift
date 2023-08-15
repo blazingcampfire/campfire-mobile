@@ -86,36 +86,37 @@ final class AuthenticationManager {
     }
     
     func deleteAllUserData(currentUser: CurrentUserModel) {
-        currentUser.profileRef.document(currentUser.profile.userID).delete() { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed!")
+        do {
+            currentUser.profileRef.document(currentUser.profile.userID).delete() { error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            currentUser.userRef.document(currentUser.profile.userID).delete() { error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            currentUser.postsRef.document(currentUser.profile.userID).delete() { error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                }
+            }
+            currentUser.relationshipsRef.document(currentUser.profile.userID).delete() { error in
+                if let error = error {
+                    print("Error removing document: \(error)")
+                } else {
+                    print("Document successfully removed!")
+                }
             }
         }
-        currentUser.userRef.document(currentUser.profile.userID).delete() { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
-        currentUser.postsRef.document(currentUser.profile.userID).delete() { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
-        currentUser.relationshipsRef.document(currentUser.profile.userID).delete() { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed!")
-            }
-        }
+        
     }
-    
-
 
 }

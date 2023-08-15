@@ -34,7 +34,8 @@ struct AccountSetUp: View {
                                 LFButton(text: "create account")
                                     .padding(5)
                             })
-                            .simultaneousGesture(TapGesture().onEnded({ model.createAccount = true
+                            .simultaneousGesture(TapGesture().onEnded({
+                                model.createAccount = true
                                 model.login = false
                             }))
 
@@ -42,7 +43,8 @@ struct AccountSetUp: View {
                                 LFButton(text: "login")
                                     .padding(5)
                             })
-                            .simultaneousGesture(TapGesture().onEnded({ model.login = true
+                            .simultaneousGesture(TapGesture().onEnded({
+                                model.login = true
                                 model.createAccount = false
                             }))
                         }

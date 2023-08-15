@@ -28,7 +28,12 @@ struct OwnProfilePage: View {
                                     VStack(spacing: 0) {
                                         let profile = currentUser.profile
                                             
+                                        if profile.profilePicURL != "" {
                                             UserProfilePic(pfp: profile.profilePicURL)
+                                        } else {
+                                            FillerPFP()
+                                        }
+                        
                                             
                                             Spacer()
                                             

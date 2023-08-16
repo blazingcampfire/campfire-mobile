@@ -166,7 +166,7 @@ extension AuthModel {
         }
     }
 
-    func verifyVerificationCode() async throws {
+    func verifyVerificationCode() async {
         UIApplication.shared.closeKeyboard()
             do {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)

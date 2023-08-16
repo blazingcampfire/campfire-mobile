@@ -101,13 +101,6 @@ final class AuthenticationManager {
                     print("Document successfully removed!")
                 }
             }
-            currentUser.postsRef.document(currentUser.profile.userID).delete() { error in
-                if let error = error {
-                    print("Error removing document: \(error)")
-                } else {
-                    print("Document successfully removed!")
-                }
-            }
             currentUser.relationshipsRef.document(currentUser.profile.userID).delete() { error in
                 if let error = error {
                     print("Error removing document: \(error)")

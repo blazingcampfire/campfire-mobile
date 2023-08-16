@@ -141,7 +141,9 @@ struct SettingsForm: View {
             .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                    dismissButton: CustomAlertButton(title: "yes", action: {
                        do {
-                           try model.deleteAccount()
+                           Task {
+                               try await model.deleteAccount()
+                           }
                        } catch {
                            model.deleteErrorAlert = true
                        }

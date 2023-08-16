@@ -45,16 +45,15 @@ class SettingsModel: ObservableObject {
         }
     }
     
-    func deleteAccount() throws {
+    func deleteAccount() async throws {
         if Auth.auth().currentUser?.email == nil {
             throw EmailError.noExistingUser
         }
         else {
             do {
-//                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
-                Auth.auth().currentUser?.delete()
+                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
+                try await Auth.auth().currentUser?.delete()
                 try AuthenticationManager.shared.signOut()
-                print("Reached function end")
             }
             catch {
                 self.deleteErrorAlert = true

@@ -10,7 +10,6 @@
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
 		B121336C2A7EEE9B00A9A93F /* newlaunchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */; };
-		B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
@@ -98,9 +97,6 @@
 		B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2AE2A5915CE0096F335 /* talkin.mov */; };
 		B1EDD2B32A5915CE0096F335 /* gunna.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2B02A5915CE0096F335 /* gunna.mov */; };
 		B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B5402A5F74140037D857 /* GoogleViewController.swift */; };
-		B1FA345E2A84C43E0008B4D9 /* PostLikeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */; };
-		B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */; };
-		B1FA34622A84E1B70008B4D9 /* ReplyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */; };
 		B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */; };
 		B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */; };
 		B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */; };
@@ -219,7 +215,6 @@
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
 		B12133672A7EBE3C00A9A93F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = newlaunchscreen.storyboard; sourceTree = "<group>"; };
-		B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostUpdateModel.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
@@ -305,9 +300,6 @@
 		B1EDD2AE2A5915CE0096F335 /* talkin.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = talkin.mov; sourceTree = "<group>"; };
 		B1EDD2B02A5915CE0096F335 /* gunna.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = gunna.mov; sourceTree = "<group>"; };
 		B1F6B5402A5F74140037D857 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
-		B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeStatus.swift; sourceTree = "<group>"; };
-		B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateModel.swift; sourceTree = "<group>"; };
-		B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyUpdateModel.swift; sourceTree = "<group>"; };
 		B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPage.swift; sourceTree = "<group>"; };
 		B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualPostModel.swift; sourceTree = "<group>"; };
 		B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCommentModel.swift; sourceTree = "<group>"; };
@@ -822,12 +814,8 @@
 				B1E044D62A762E4900DC767D /* CommentsModel.swift */,
 				B11371A62A7A06A200417923 /* CamPostModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestModel.swift */,
-				B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */,
 				E267A9C52A7A1BB500489B8E /* FriendsModel.swift */,
 				E2B248CE2A7EDDAF0004A757 /* LeaderboardModel.swift */,
-				B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */,
-				B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */,
-				B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -1074,7 +1062,6 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
-				B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */,
 				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
 				B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */,
 				B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */,
@@ -1098,7 +1085,6 @@
 				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
 				B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */,
 				B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */,
-				B1FA34622A84E1B70008B4D9 /* ReplyUpdateModel.swift in Sources */,
 				F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */,
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
 				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
@@ -1130,7 +1116,6 @@
 				B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */,
 				B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */,
 				B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */,
-				B1FA345E2A84C43E0008B4D9 /* PostLikeStatus.swift in Sources */,
 				E2DA6CFE2A7165E8002D7660 /* SettingsModel.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
 				E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */,
@@ -1146,7 +1131,6 @@
 				E267A9C62A7A1BB500489B8E /* FriendsModel.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
 				B1E9DE0C2A8826F300E0B61F /* VideoCollectionViewCell.swift in Sources */,
-				B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */,
 				E2163E4E2A663501005A20BE /* schools.swift in Sources */,
 				B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,

@@ -16,6 +16,7 @@ class FeedViewController: UIViewController {
     var newFeedModel = NewFeedModel()
     var cancellables = Set<AnyCancellable>()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,20 +40,34 @@ class FeedViewController: UIViewController {
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCellIdentifier")
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "VideoCellIdentifier")
         newFeedModel.fetchInitialPosts()
-        
         newFeedModel.initialPostsLoaded.sink { [weak self] _ in
+            
         self?.collectionView.reloadData()
+            
         }.store(in: &cancellables)
         
-        newFeedModel.listenForPosts()
-        newFeedModel.$updatedPostIndex.sink { [weak self] index in
-            guard let index = index else { return }
-            DispatchQueue.main.async {
-                self?.updateLikes(for: index)
+        newFeedModel.listenForNewPosts()
+        
+        newFeedModel.$posts
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
             }
-        }.store(in: &cancellables)
+            .store(in: &cancellables)
+        
+        newFeedModel.$newPostAdded.sink { [weak self] newPost in
+            guard let self = self, let newPost = newPost else { return }
 
+            self.newFeedModel.posts.append(newPost)
+
+            let newIndex = IndexPath(item: self.newFeedModel.posts.count - 1, section: 0)
+            self.collectionView.insertItems(at: [newIndex])
+
+        }.store(in: &cancellables)
+        
     }
+    
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -61,30 +76,25 @@ class FeedViewController: UIViewController {
             layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
         }
     }
-}
-
-extension FeedViewController {
-    func updateLikes(for index: Int) {
-        let indexPath = IndexPath(item: index, section: 0)
-        let postItem = newFeedModel.posts[index]
-        
-        if let imageCell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell,
-           let individualPostVM = imageCell.individualPostVM {
-            imageCell.updateLikes(isLiked: individualPostVM.isLiked)
-        } else if let videoCell = collectionView.cellForItem(at: indexPath) as? VideoCollectionViewCell,
-                  let individualPostVM = videoCell.individualPostVM {
-            videoCell.updateLikes(isLiked: individualPostVM.isLiked)
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        for cell in collectionView.visibleCells {
+            (cell as? VideoCollectionViewCell)?.player?.pause()
         }
-        // Update likes count label here, if needed
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        for cell in collectionView.visibleCells {
+            (cell as? VideoCollectionViewCell)?.player?.play()
+        }
     }
 }
 
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-            return 1
-        }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("Number of items: \(newFeedModel.posts.count)")
         return newFeedModel.posts.count
@@ -96,11 +106,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if postItem.postType == "image" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
-            cell.configure(with: postItem)
+            cell.configure(with: postItem, model: newFeedModel)
             return cell
         } else if postItem.postType == "video" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
-            cell.configure(with: postItem)
+            cell.configure(with: postItem, model: newFeedModel)
             return cell
         }
         return UICollectionViewCell()

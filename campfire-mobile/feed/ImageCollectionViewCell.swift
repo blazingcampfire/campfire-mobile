@@ -41,8 +41,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             likeButton.widthAnchor.constraint(equalToConstant: 50),
             likeButton.heightAnchor.constraint(equalToConstant: 50),
-            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -315), // 10 points from the bottom
-            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15) // 10 points from the trailing side
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -325), // 10 points from the bottom
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10) // 10 points from the trailing side
         ])
     }
 
@@ -82,7 +82,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with postItem: PostItem) {
+    func configure(with postItem: PostItem, model: NewFeedModel) {
         imageView.kf.setImage(with: URL(string: postItem.url))
         individualPostVM = IndividualPost(postItem: postItem)
         
@@ -91,7 +91,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
         
         if let individualPostVM = individualPostVM {
-            let overlayView = FeedUIView(individualPost: individualPostVM)
+            let overlayView = FeedUIView(individualPost: individualPostVM, newFeedModel: model)
             hostingController = UIHostingController(rootView: overlayView)
             
             guard let swiftUIView = hostingController?.view else { return }

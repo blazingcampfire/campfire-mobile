@@ -10,38 +10,41 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
 import Firebase
+import Combine
 
 class CommentsModel: ObservableObject {
     @Published var comments = [Comment]()
-    @Published var repliesByComment = [String: [Reply]]()
-    @Published var replies = [Reply]()
+    @Published var repliesByComment: [String: [Reply]] = [:]
     @Published var currentUser: CurrentUserModel
-    @Published var isLoading: Bool = false
-    private var isCommentsLoaded = false
-    @Published var postId: String? = nil {
-        didSet {
-            listenForComments()
-        }
-    }
-    @Published var commentId: String? = nil {
+    @Published var postId: String
+    @Published var commentText: String = ""
+    @Published var replyText: String = ""
+    @Published var getRepliesFor: String? = nil {
         didSet {
             listenForReplies()
         }
     }
     
-    init(currentUser: CurrentUserModel) {
+    var commentListener: ListenerRegistration?
+    var replyListener: ListenerRegistration?
+    
+    
+    init(currentUser: CurrentUserModel, postId: String) {
         self.currentUser = currentUser
+        self.postId = postId
+        listenForComments()
     }
     
+    
     //Create UserId field on each comment 
-    func createComment(postId: String, commenttext: String ,completion: @escaping () -> Void) {
+    func createComment() {
         let docRef = ndPosts.document(postId).collection("comments").document()
         let now = Timestamp(date: Date())
         let commentData: [String: Any] = [
             "id": docRef.documentID,
             "username": currentUser.profile.username,
             "profilepic": currentUser.profile.profilePicURL,
-            "comment": commenttext,
+            "comment": commentText,
             "date": now,
             "posterId": currentUser.profile.userID,
             "numLikes": 0
@@ -51,20 +54,19 @@ class CommentsModel: ObservableObject {
                 print("Error writing document \(error)")
             } else {
                 print("success creation")
-                completion()
+                self.commentText = ""
             }
         }
     }
-        
     
-    func createReply(postId: String, commentId: String, replytext: String ,completion: @escaping () -> Void) {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document()
+    func createReply(comId: String) {
+        let docRef = ndPosts.document(postId).collection("comments").document(comId).collection("replies").document()
         let now = Timestamp(date: Date())
         let replyData: [String: Any] = [
             "id": docRef.documentID,
             "username": currentUser.profile.username,
             "profilepic": currentUser.profile.profilePicURL,
-            "reply": replytext,
+            "reply": replyText,
             "date": now,
             "posterId": currentUser.profile.userID,
             "numLikes": 0
@@ -74,26 +76,21 @@ class CommentsModel: ObservableObject {
                 print("Error writing document \(error)")
             } else {
                 print("success creation")
-                completion()
+                self.replyText = ""
             }
         }
     }
-  
+        
+    
     func listenForComments() {
-        guard let postId = postId else {
-            return
-        }
-
         let docRef = ndPosts.document(postId).collection("comments").order(by: "date", descending: false)
-
-        docRef.addSnapshotListener { (querySnapshot, error) in
+        commentListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
             self.comments = documents.map { queryDocumentSnapshot -> Comment in
                 let data = queryDocumentSnapshot.data()
-                
                 let id = data["id"] as? String ?? ""
                 let profilepic = data["profilepic"] as? String ?? ""
                 let username = data["username"] as? String ?? ""
@@ -107,23 +104,18 @@ class CommentsModel: ObservableObject {
             }
         }
     
-    
     func listenForReplies() {
-        guard let postId = postId else {
+        guard let getRepliesFor = getRepliesFor else {
             return
         }
-        guard let commentId = commentId else {
-            return
-        }
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").order(by: "date", descending: false)
-        docRef.addSnapshotListener { (querySnapshot, error) in
+        let docRef = ndPosts.document(postId).collection("comments").document(getRepliesFor).collection("replies").order(by: "date", descending: false)
+        replyListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
-            self.repliesByComment[commentId] = documents.map { queryDocumentSnapshot -> Reply in
+            self.repliesByComment[getRepliesFor] = documents.map { queryDocumentSnapshot -> Reply in
                 let data = queryDocumentSnapshot.data()
-                
                 let id = data["id"] as? String ?? ""
                 let profilepic = data["profilepic"] as? String ?? ""
                 let username = data["username"] as? String ?? ""
@@ -136,5 +128,6 @@ class CommentsModel: ObservableObject {
         }
     }
     
-
+    
+    
 }

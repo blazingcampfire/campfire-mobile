@@ -58,9 +58,15 @@ struct LeaderboardList: View {
                     }
 
                     Spacer()
-
-                    Text("\(model.profiles[index].smores) 🍫")
-                        .font(.custom("LexendDeca-Bold", size: 23))
+                    
+                    HStack {
+                        Text("\(model.profiles[index].smores)")
+                            .font(.custom("LexendDeca-Bold", size: 23))
+                        Image("noteatensmore")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .scaledToFill()
+                    }
                 }
                 .listRowBackground(Theme.ScreenColor)
                 .listRowSeparator(.hidden)

@@ -22,7 +22,9 @@ struct PostItem: Identifiable, Equatable {
     var postType: String
     var date: Timestamp
     var posterId: String
-    var numLikes: Int    
+    var numLikes: Int
+    var comNum: Int
+    var score: Int
 }
 
 struct PostPlayer: Identifiable {

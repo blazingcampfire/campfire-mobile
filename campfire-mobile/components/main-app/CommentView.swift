@@ -9,17 +9,13 @@ import SwiftUI
 import Kingfisher
 
 struct CommentView: View {
-    var eachcomment: Comment
-    var comId: String
-    var postID: String
-    var posterId: String
     @State private var showingReplies: Bool = false
-    @ObservedObject var commentsModel: CommentsModel
+    @ObservedObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @StateObject var individualComment: IndividualComment
+    @State private var likeTap: Bool = false
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
-    var usernameId: String
-    
     
     var body: some View {
         ZStack {
@@ -29,7 +25,7 @@ struct CommentView: View {
                             Button(action: {
                                 //navigate to profile
                             }) {
-                                KFImage(URL(string: eachcomment.profilepic))
+                                KFImage(URL(string: individualComment.profilepic))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
@@ -42,35 +38,35 @@ struct CommentView: View {
                                 Button(action: {
                                     //navigate to profile
                                 }) {
-                                    Text("@\(eachcomment.username)")
+                                    Text("@\(individualComment.username)")
                                         .font(.custom("LexendDeca-Bold", size: 14))
                                         .foregroundColor(Theme.TextColor)
                                 }
                                 
-                                Text(eachcomment.comment)
+                                Text(individualComment.comment)
                                     .font(.custom("LexendDeca-Light", size: 15))
                                     .foregroundColor(Theme.TextColor)
                                 
                                 HStack(spacing: 15){
-                                    Text(timeAgoSinceDate(eachcomment.date.dateValue()))  //time variable
+                                    Text(timeAgoSinceDate(individualComment.date.dateValue()))  //time variable
                                         .font(.custom("LexendDeca-Light", size: 13))
                                         .foregroundColor(Theme.TextColor)
                                     
                                     Button(action: {
-                                       replyingToComId = comId
-                                        replyingToUserId = usernameId
+                                        replyingToComId = individualComment.comId
+                                        replyingToUserId = individualComment.username
                                     }) {
                                         Text("Reply")
                                             .font(.custom("LexendDeca-SemiBold", size: 13))
                                             .foregroundColor(Theme.TextColor)
                                     }
                                 }
-                                if commentsModel.repliesByComment[comId]?.count ?? 0 > 0 {
+                                if commentModel.repliesByComment[individualComment.comId]?.count ?? 0 > 0 {
                                 Button(action:{
                                     self.showingReplies.toggle()
                                 }) {
                                     HStack(spacing: 2){
-                                        Text("View \(commentsModel.repliesByComment[comId]?.count ?? 0) replies")
+                                        Text("View \(commentModel.repliesByComment[individualComment.comId]?.count ?? 0) replies")
                                             .foregroundColor(Theme.TextColor)
                                             .font(.custom("LexendDeca-Light", size: 13))
                                         Image(systemName: "chevron.down")
@@ -87,22 +83,32 @@ struct CommentView: View {
                         
                         Spacer()
                         
-                        VStack(spacing: -20) {
-                        //    CommentButtonLikeView(comLikeModel: eachcomment.comLikeModel)
-                            Text("\(eachcomment.numLikes)")
+                        VStack(spacing: -15) {
+                            Button(action: {
+                                individualComment.toggleLikeStatus()
+                            }) {
+                                Image(individualComment.isLiked ? "eatensmore" : "noteatensmore")
+                                    .resizable()
+                                    .frame(width: 35, height: 35)
+                                    .aspectRatio(contentMode: .fit)
+                                    .offset(x: -6)
+                            }
+                            
+                            Text("\(formatNumber(individualComment.numLikes))")
                                 .foregroundColor(Theme.TextColor)
                                 .font(.custom("LexendDeca-SemiBold", size: 16))
+                                .offset(x: -6, y: 20)
                         }
                     }
                 if showingReplies {
-                    ForEach(commentsModel.repliesByComment[comId] ?? [], id: \.id) { reply in
-                        ReplyView(eachreply: reply, comId: comId, postId: postID)
+                    ForEach(commentModel.repliesByComment[individualComment.comId] ?? [], id: \.id) { reply in
+                        ReplyView(individualReply: IndividualReply(replyItem: reply, postId: commentModel.postId, commentId: individualComment.comId))
                     }
                 }
         }
         }
         .onAppear {
-            commentsModel.commentId = comId
+            commentModel.getRepliesFor = individualComment.comId
         }
     }
     }

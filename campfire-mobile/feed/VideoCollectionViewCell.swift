@@ -53,17 +53,15 @@ class VideoCollectionViewCell: UICollectionViewCell {
    
     override func prepareForReuse() {
         super.prepareForReuse()
+        player?.pause()
+        player?.seek(to: .zero)
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
-    
-    @objc private func likeButtonTapped() {
-        individualPostVM?.toggleLikeStatus()
+    deinit {
+        player?.pause()
+        NotificationCenter.default.removeObserver(self)
     }
-
-    func updateLikes(isLiked: Bool) {
-        likeButton.isSelected = isLiked
-    }
-    
+   
     private func setupPlayerView() {
             playerView.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(playerView)
@@ -75,6 +73,15 @@ class VideoCollectionViewCell: UICollectionViewCell {
                 playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             ])
         }
+    
+    @objc private func likeButtonTapped() {
+        individualPostVM?.toggleLikeStatus()
+    }
+
+    func updateLikes(isLiked: Bool) {
+        likeButton.isSelected = isLiked
+    }
+    
     private func setupLikeButton() {
         likeButton.setImage(UIImage(named: "noteatensmore"), for: .normal)
         likeButton.setImage(UIImage(named: "eatensmore"), for: .selected)
@@ -86,8 +93,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             likeButton.widthAnchor.constraint(equalToConstant: 50),
             likeButton.heightAnchor.constraint(equalToConstant: 50),
-            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -315), // 10 points from the bottom
-            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15) // 10 points from the trailing side
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -325), // 10 points from the bottom
+            likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10) // 10 points from the trailing side
         ])
     }
 
@@ -130,13 +137,14 @@ class VideoCollectionViewCell: UICollectionViewCell {
         playerLayer?.frame = contentView.bounds
     }
     
-    func configure(with postItem: PostItem) {
+    func configure(with postItem: PostItem, model: NewFeedModel) {
         // Safely unwrap the URL string
         if let url = URL(string: postItem.url) {
             let playerItem = AVPlayerItem(url: url)
             
             // Replace the current player item with the new item
             player?.replaceCurrentItem(with: playerItem)
+            NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         }
         // Remove the previous SwiftUI view, if any
         if let swiftUIView = hostingController?.view {
@@ -150,7 +158,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         }
         
         if let individualPostVM = individualPostVM {
-            let overlayView = FeedUIView(individualPost: individualPostVM)
+            let overlayView = FeedUIView(individualPost: individualPostVM, newFeedModel: model)
             hostingController = UIHostingController(rootView: overlayView)
             
             guard let swiftUIView = hostingController?.view else { return }

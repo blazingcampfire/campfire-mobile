@@ -16,6 +16,10 @@ class ProfileModel: ObservableObject {
         self.getProfile()
     }
     
+   
+    
+    
+    
     func getProfile() {
         let docRef = ndProfiles.document(id)
         

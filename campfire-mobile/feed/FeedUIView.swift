@@ -9,40 +9,57 @@ import SwiftUI
 import Kingfisher
 import AVKit
 
+enum ActiveSheet: Identifiable {
+    case first
+    case second
+    case third
+    var id: Int {
+        hashValue
+    }
+}
+
 struct FeedUIView: View {
     @ObservedObject var individualPost: IndividualPost
-    @State private var likeTapped = false
-
+    @EnvironmentObject var currentUser: CurrentUserModel
+    @State private var activeSheet: ActiveSheet?
+    @StateObject var idsEqual = PosterIdEqualCurrentUserId() //For the ellipses button
+    @ObservedObject var newFeedModel: NewFeedModel
+    @State private var selection: Int = 0
+    
     var body: some View {
         ZStack {
          
             VStack {
                 HStack {
                     Button(action: {
-
+                        newFeedModel.currentAssortment = .hot
                     }) {
                         Text("Hot")
                             .font(.custom("LexendDeca-Bold", size:35))
+                            .opacity(newFeedModel.currentAssortment == .hot ? 1.0 : 0.5)
                     }
                     Rectangle()
                         .frame(width: 2, height: 30)
                         .opacity(0.75)
                     Button(action: {
+                        newFeedModel.currentAssortment = .new
                     }) {
                         Text("New")
                             .font(.custom("LexendDeca-Bold", size: 35))
+                            .opacity(newFeedModel.currentAssortment == .new ? 1.0 : 0.5)
                     }
                 }
                 .padding(.top, 30)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
+            
 
 
             VStack {
                 HStack {
                     Button(action: {
-
+                        activeSheet = .first
                     }) {
                         Image(systemName: "trophy.fill")
                             .foregroundColor(.white)
@@ -62,7 +79,7 @@ struct FeedUIView: View {
                     VStack(alignment: .leading) {
 
                         //- MARK: Profile pic/username buttons Hstack
-                        HStack(spacing: 10) {
+                        HStack(spacing: 5) {
 
                             Button(action: {
                                 // lead to profile page
@@ -74,7 +91,8 @@ struct FeedUIView: View {
                                         .clipShape(Circle())
 
                             }
-                            .padding(.bottom, 5)
+                            .padding(.bottom, 25)
+                            .padding(.leading, 20)
 
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
@@ -108,14 +126,16 @@ struct FeedUIView: View {
 
             VStack(spacing: 7.5) {
                 
-                Text("\(individualPost.numLikes)")
+                Text("\(formatNumber(individualPost.numLikes))")
                 .foregroundColor(.white)
                 .font(.custom("LexendDeca-Regular", size: 16))
                 .padding(.bottom, -60)
 
                 VStack {
                     Button(action: {
-                   //     CommentsPage(postId: <#T##String#>, commentModel: <#T##CommentsModel#>)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            activeSheet = .second
+                        }
                     }) {
                         VStack {
                             Image(systemName: "text.bubble.fill")
@@ -124,7 +144,7 @@ struct FeedUIView: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    Text("\("")")
+                    Text("\(individualPost.comNum)")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }
@@ -132,7 +152,7 @@ struct FeedUIView: View {
 
 
                 Button(action: {
-
+                    activeSheet = .third
                 }) {
                     Image(systemName: "square.fill")
                         .resizable()
@@ -146,51 +166,30 @@ struct FeedUIView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
         .background(Color.clear)
+        .onAppear {
+            if currentUser.profile.userID == individualPost.posterId || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
+                idsEqual.isEqual = true
+            }
+        }
+        .sheet(item: $activeSheet) { sheet in
+            switch sheet {
+            case .first:
+                LeaderboardPage(model: LeaderboardModel(currentUser: currentUser))
+                    .presentationDragIndicator(.visible)
+                    .presentationCornerRadius(30)
+            case .second:
+                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
+                    .presentationDetents([.fraction(0.85)])
+                    .presentationDragIndicator(.visible)
+            case .third:
+                EllipsesButtonView(equalIds: idsEqual)
+                    .presentationDetents([.fraction(0.15)])
+                    .presentationDragIndicator(.visible)
+            }
+        }
     }
-}
+    }
 
-
-//struct FeedUILikeButton: View {
-//    @State private var likeTapped: Bool = false
-//
-//    var body: some View {
-//        Button(action: {
-//            print("Button pressed")
-//            self.onLikeTapped()
-//        }) {
-//            VStack(spacing: -60) {
-//                Image(likeTapped ? "eatensmore" : "noteatensmore")
-//                    .resizable()
-//                    .frame(width: 50, height: 50)
-//                    .padding(.top, -30)
-//            }
-//        }
-//
-//    }
-//}
-//struct FeedUILikeButton: View {
-//    @Binding var likeTapped: Bool
-//    @ObservedObject var individualPost: IndividualPost
-//
-//    var body: some View {
-//        VStack(spacing: -60) {
-//        Button(action: {
-//            likeTapped.toggle()
-//            if likeTapped {
-//                individualPost.increasePostLikes()
-//            } else {
-//                individualPost.decreasePostLikes()
-//            }
-//        }) {
-//            Image(likeTapped ? "eatensmore" : "noteatensmore")
-//                .resizable()
-//                .frame(width: 50, height: 50)
-//                .padding(.top, -30)
-//        }
-//        }
-//
-//    }
-//}
 
 
 

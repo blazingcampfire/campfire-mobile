@@ -9,10 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct ReplyView: View {
-    var eachreply: Reply
-    var comId: String
-    var postId: String
     @EnvironmentObject var currentUser: CurrentUserModel
+    @StateObject var individualReply: IndividualReply
+    @State private var likeTap: Bool = false
     
     
     var body: some View {
@@ -22,7 +21,7 @@ struct ReplyView: View {
                 Button(action: {
                     // navigate to profile
                 }) {
-                    KFImage(URL(string: eachreply.profilepic))
+                    KFImage(URL(string: individualReply.profilepic))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -34,16 +33,16 @@ struct ReplyView: View {
                     Button(action: {
                         // navigate to profile
                     }) {
-                        Text("@\(eachreply.username)")
+                        Text("@\(individualReply.username)")
                             .font(.custom("LexendDeca-Bold", size: 14))
                             .foregroundColor(Theme.TextColor)
                     }
                     
-                    Text(eachreply.reply)
+                    Text(individualReply.reply)
                         .font(.custom("LexendDeca-Light", size: 15))
                         .foregroundColor(Theme.TextColor)
                     
-                    Text(timeAgoSinceDate(eachreply.date.dateValue()))  // time variable
+                    Text(timeAgoSinceDate(individualReply.date.dateValue()))  // time variable
                         .font(.custom("LexendDeca-Light", size: 13))
                         .foregroundColor(Theme.TextColor)
                 }
@@ -54,10 +53,20 @@ struct ReplyView: View {
             Spacer()
             
             VStack(spacing: -20) {
-            //    ReplyButtonLikeView(replyLikeModel: eachreply.replyLikeModel)
-                Text("\(eachreply.numLikes)")
+                Button(action: {
+                    individualReply.toggleLikeStatus()
+                }) {
+                    Image(individualReply.isLiked ? "eatensmore" : "noteatensmore")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .aspectRatio(contentMode: .fill)
+                        .offset(x: -4)
+                }
+                
+                Text("\(formatNumber(individualReply.numLikes))")
                     .foregroundColor(Theme.TextColor)
                     .font(.custom("LexendDeca-SemiBold", size: 16))
+                    .offset(x: -4, y: 20)
             }
         }
     }

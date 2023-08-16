@@ -36,6 +36,7 @@ struct PlayerView: View {
     var currentIndex: Int
     @StateObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     @State private var activeSheet: ActiveSheet?
     @StateObject var feedUpdate: FeedPostUpdateModel
     @ObservedObject var postLikeStatusModel: PostLikeStatusModel
@@ -44,7 +45,7 @@ struct PlayerView: View {
     var body: some View {
         
         let currentPostPlayer = feedmodel.postPlayers[safe: currentIndex]
-            
+        NavigationView {
             ZStack {
                 if let currentPostPlayer = currentPostPlayer, !currentPostPlayer.postItem.url.isEmpty {
                     KFImage(URL(string: currentPostPlayer.postItem.url))
@@ -69,7 +70,7 @@ struct PlayerView: View {
                             }
                         }
                 }
-                    
+                
                 
                 
                 //- MARK: Hot/New button
@@ -138,14 +139,22 @@ struct PlayerView: View {
                                 .padding(.bottom, 5)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    Button(action: {
-                                        //lead to profile page
-                                    }) {
+                                    NavigationLink(destination: {
+                                        if currentPostPlayer!.postItem.id == currentUser.profile.userID {
+                                            OwnProfilePage()
+                                                .environmentObject(currentUser)
+                                                .environmentObject(notificationsManager)
+                                        }
+                                        else {
+                                            OtherProfilePage(profileModel: ProfileModel(id: currentPostPlayer!.postItem.id, currentUser: currentUser))
+                                        }
+                                    },
+                                                   label: {
                                         if let currentPostPlayer = currentPostPlayer {
                                             Text("@\(currentPostPlayer.postItem.username)")
-                                                .font(.custom("LexendDeca-Bold", size: 16))
+                                                .font(.custom("LexendDeca-Bold", size: 15))
                                         }
-                                    }
+                                    })
                                     if let currentPostPlayer = currentPostPlayer {
                                         Text(currentPostPlayer.postItem.caption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
@@ -176,31 +185,31 @@ struct PlayerView: View {
                     VStack(spacing: -60) {
                         Button(action: {
                             if let currentPostPlayer = currentPostPlayer {
-                            let postId = currentPostPlayer.postItem.id
-                            let newLikeStatus = !(postLikeStatusModel.likedStatus[postId] ?? false)
-                            
-                            if newLikeStatus {
-                                feedUpdate.createLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
-                                print("added like from post")
-                                feedUpdate.increasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
-                                print("added like from user (from post)")
-                            } else {
-                                feedUpdate.deleteLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
-                                print("deleted like from post")
-                                feedUpdate.decreasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
-                                print("deleted like from user (from post)")
+                                let postId = currentPostPlayer.postItem.id
+                                let newLikeStatus = !(postLikeStatusModel.likedStatus[postId] ?? false)
+                                
+                                if newLikeStatus {
+                                    feedUpdate.createLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
+                                    print("added like from post")
+                                    feedUpdate.increasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
+                                    print("added like from user (from post)")
+                                } else {
+                                    feedUpdate.deleteLikeDocument(postId: currentPostPlayer.postItem.id, userId: currentUser.profile.userID)
+                                    print("deleted like from post")
+                                    feedUpdate.decreasePosterUserLikes(posterUserId: currentPostPlayer.postItem.posterId)
+                                    print("deleted like from user (from post)")
+                                }
+                                postLikeStatusModel.likedStatus[postId] = newLikeStatus
                             }
-                            postLikeStatusModel.likedStatus[postId] = newLikeStatus
-                        }
                         }) {
                             VStack {
                                 if let currentPostPlayer = currentPostPlayer {
                                     if postLikeStatusModel.likedStatus[currentPostPlayer.postItem.id] == true {
-                                    Image("eaten")
-                                } else {
-                                    Image("noteaten")
+                                        Image("eaten")
+                                    } else {
+                                        Image("noteaten")
+                                    }
                                 }
-                            }
                             }
                             .padding(.leading, -15)
                         }
@@ -246,6 +255,7 @@ struct PlayerView: View {
                 .padding(.trailing, -30)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
+        }
             .onAppear {
                 if let currentPostPlayer = currentPostPlayer {
                     commentModel.postId = currentPostPlayer.postItem.id
@@ -256,6 +266,13 @@ struct PlayerView: View {
                         idsEqual.isEqual = true
                     }
                 }
+            }
+            .sheet(isPresented: $currentUser.showInitialMessage) {
+                InitialMessage(school: currentUser.profile.school)
+                    .onDisappear {
+                                    currentUser.showInitialMessage = false
+                    }
+                    .presentationDetents([.fraction(0.75)])
             }
             .background(Color.black.ignoresSafeArea())
             .sheet(item: $activeSheet) { sheet in
@@ -275,13 +292,6 @@ struct PlayerView: View {
                         .presentationDetents([.fraction(0.10)])
                         .presentationDragIndicator(.visible)
                 }
-            }
-            .sheet(isPresented: $currentUser.showInitialMessage) {
-                InitialMessage(school: currentUser.profile.school)
-                    .onDisappear {
-                                    currentUser.showInitialMessage = false
-                    }
-                    .presentationDetents([.fraction(0.50)])
             }
     }
 }

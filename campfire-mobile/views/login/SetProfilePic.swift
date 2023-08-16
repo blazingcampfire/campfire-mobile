@@ -42,10 +42,10 @@ struct SetProfilePic: View {
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 25))
                                 .padding(.top, 100)
-                            Text("(optional)")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding(.top, -40)
+//                            Text("(optional)")
+//                                .foregroundColor(Color.white)
+//                                .font(.custom("LexendDeca-Bold", size: 15))
+//                                .padding(.top, -40)
                             
                             ProfilePictureView(selectedPFP: $selectedPFP)
                             

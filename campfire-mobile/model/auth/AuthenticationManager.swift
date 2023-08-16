@@ -50,11 +50,13 @@ final class AuthenticationManager {
         return try await signIn(credential: credential)
     }
     
-    func deleteUser() throws {
+    func deleteUser() {
         guard let userID = Auth.auth().currentUser?.uid else {
+            print("returned")
             return
         }
-        Auth.auth().currentUser?.delete()
+        Auth.auth().currentUser!.delete()
+        print("end of function call")
     }
     func unlinkCredential(providerID: String) {
         if Auth.auth().currentUser?.uid == nil {

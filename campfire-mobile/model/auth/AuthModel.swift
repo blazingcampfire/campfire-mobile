@@ -161,19 +161,20 @@ extension AuthModel {
                 self.validPhoneNumber = true
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
+                return
             }
         }
     }
 
-    func verifyVerificationCode() {
+    func verifyVerificationCode() async throws {
         UIApplication.shared.closeKeyboard()
-        Task {
             do {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)
                 
                 try await Auth.auth().signIn(with: credential)
             } catch {
                 await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
+                return
             }
             do {
                 var flag: Bool = false
@@ -187,16 +188,18 @@ extension AuthModel {
                     Task {
                         let existingProfile = await self.checkProfile(email: submittedEmail)
                         print(existingProfile)
-                        if !existingProfile {
+                        flag = existingProfile
+                    }
+                        if !flag {
                             do {
-                                print("Existing profile: \(existingProfile)")
+                                print("Existing profile: \(flag)")
                                 try AuthenticationManager.shared.signOut()
                                 throw PhoneError.noExistingUser
                             } catch {
                                 await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                                return
                             }
                         }
-                    }
                 } else if self.createAccount {
                     let existingProfile = await self.checkProfile(email: submittedEmail)
                     do {
@@ -205,14 +208,15 @@ extension AuthModel {
                         }
                     } catch {
                         await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        return
                     }
                 }
             } catch {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
+                return
             }
-        }
 //        // user phone number authenticated successfully
-//        self.validVerificationCode = true
+        self.validVerificationCode = true
         print("verification code is valid")
     }
 }
@@ -258,6 +262,7 @@ extension AuthModel {
                     }
                 } catch {
                     await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
+                    return
                 }
             } catch {
             }
@@ -268,6 +273,7 @@ extension AuthModel {
                 AuthenticationManager.shared.unlinkCredential(providerID: providerID)
             }
             await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
+            return
         }
     }
 
@@ -285,13 +291,15 @@ extension AuthModel {
     }
 
     func checkProfile(email: String) async -> Bool {
+        print("checkProfile")
         guard let email = Auth.auth().currentUser?.email else {
             print("no existing profile")
             return false
         }
         let profileRef = profileParser(school: schoolParser(email: email))
+        print(email)
         do {
-            guard let document = try await profileRef?.document(userID).getDocument() else {
+            guard let document = try await profileRef?.document((Auth.auth().currentUser?.uid)!).getDocument() else {
                 print(profileRef?.path)
                 print("no document w/ \(userID) as id")
                 return false
@@ -301,6 +309,8 @@ extension AuthModel {
             print(error)
             return false
         }
+        print(profileRef?.path)
+        return true
     }
 
     func triggerRestart() {

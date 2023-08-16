@@ -123,6 +123,17 @@ struct PlayerView: View {
                         VStack(alignment: .leading) {
                             
                             //- MARK: Profile pic/username buttons Hstack
+                            NavigationLink(destination: {
+                                if currentPostPlayer!.postItem.id == currentUser.profile.userID {
+                                    OwnProfilePage()
+                                        .environmentObject(currentUser)
+                                        .environmentObject(notificationsManager)
+                                }
+                                else {
+                                    OtherProfilePage(profileModel: ProfileModel(id: currentPostPlayer!.postItem.id, currentUser: currentUser))
+                                }
+                            },
+                                           label: {
                             HStack(spacing: 10) {
                                 
                                 Button(action: {
@@ -139,25 +150,13 @@ struct PlayerView: View {
                                 .padding(.bottom, 5)
                                 
                                 VStack(alignment: .leading, spacing: 5) {
-                                    NavigationLink(destination: {
-                                        if currentPostPlayer!.postItem.id == currentUser.profile.userID {
-                                            OwnProfilePage()
-                                                .environmentObject(currentUser)
-                                                .environmentObject(notificationsManager)
-                                        }
-                                        else {
-                                            OtherProfilePage(profileModel: ProfileModel(id: currentPostPlayer!.postItem.id, currentUser: currentUser))
-                                        }
-                                    },
-                                                   label: {
                                         if let currentPostPlayer = currentPostPlayer {
                                             Text("@\(currentPostPlayer.postItem.username)")
                                                 .font(.custom("LexendDeca-Bold", size: 15))
                                         }
-                                    })
                                     if let currentPostPlayer = currentPostPlayer {
                                         Text(currentPostPlayer.postItem.caption)
-                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                            .font(.custom("LexendDeca-Regular", size: 15))
                                     }
                                     if let currentPostPlayer = currentPostPlayer {
                                         if currentPostPlayer.postItem.location == "" {
@@ -170,6 +169,7 @@ struct PlayerView: View {
                                 }
                                 .padding(.leading, 10)
                             }
+                        })
                             
                         }
                         

@@ -15,7 +15,8 @@ class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
     var newFeedModel = NewFeedModel()
     var cancellables = Set<AnyCancellable>()
-
+    var newCancellables = Set<AnyCancellable>()
+    var hotCancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +40,6 @@ class FeedViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCellIdentifier")
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "VideoCellIdentifier")
-        newFeedModel.fetchInitialPosts()
-        newFeedModel.initialPostsLoaded.sink { [weak self] _ in
-            
-        self?.collectionView.reloadData()
-            
-        }.store(in: &cancellables)
-        
-        newFeedModel.listenForNewPosts()
         
         newFeedModel.$posts
             .receive(on: DispatchQueue.main)
@@ -54,17 +47,7 @@ class FeedViewController: UIViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
-        
-        newFeedModel.$newPostAdded.sink { [weak self] newPost in
-            guard let self = self, let newPost = newPost else { return }
 
-            self.newFeedModel.posts.append(newPost)
-
-            let newIndex = IndexPath(item: self.newFeedModel.posts.count - 1, section: 0)
-            self.collectionView.insertItems(at: [newIndex])
-
-        }.store(in: &cancellables)
-        
     }
     
     

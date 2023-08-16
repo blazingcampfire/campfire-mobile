@@ -18,10 +18,7 @@ enum Assortment {
 
 class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
-    @Published var updatedPostIndex: Int?
-    @Published var newPostAdded: PostItem?
-    @Published var currentAssortment: Assortment = .new
-    var initialPostsLoaded = PassthroughSubject<Void, Never>()
+    @Published var currentAssortment: Assortment = .hot
     var cancellables = Set<AnyCancellable>()
     
     private var newListener: ListenerRegistration?
@@ -30,12 +27,7 @@ class NewFeedModel: ObservableObject {
     init() {
         $currentAssortment
         .sink { [weak self] assortment in
-            switch assortment {
-            case .hot:
-                self?.listenForHotPosts()
-            case .new:
-                self?.listenForNewPosts()
-            }
+            self?.switchAssortment(to: assortment)
         }.store(in: &cancellables)
     }
     
@@ -43,6 +35,25 @@ class NewFeedModel: ObservableObject {
         newListener?.remove()
         hotListener?.remove()
     }
+    
+    private func switchAssortment(to assortment: Assortment) {
+           // Step 1: Clear the current posts
+        self.posts.removeAll()
+        
+        DispatchQueue.main.async {
+              self.objectWillChange.send()
+          }
+           
+           // Step 2 and 3: Switch the assortment and start the appropriate listener
+           switch assortment {
+           case .hot:
+               listenForHotPosts()
+           case .new:
+               listenForNewPosts()
+           }
+       }
+    
+    
 
     func listenForNewPosts() {
         hotListener?.remove()
@@ -52,65 +63,37 @@ class NewFeedModel: ObservableObject {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
-            snapshot.documentChanges.forEach { diff in
-                if (diff.type == .added) {
-                    let data = diff.document.data()
-                    let newPost = self.getPostItem(from: data)
-                    self.newPostAdded = newPost
-                }
-                else if (diff.type == .modified) {
-                    let data = diff.document.data()
-                    let newPost = self.getPostItem(from: data)
-                    
-                    if let index = self.posts.firstIndex(where: { $0.id == newPost.id }) {
-                        self.posts[index] = newPost
-                    }
-                }
-                else if (diff.type == .removed) {
-                    let data = diff.document.data()
-                    let removedPost = self.getPostItem(from: data)
-                    
-                    if let index = self.posts.firstIndex(where: { $0.id == removedPost.id }) {
-                        self.posts.remove(at: index)
-                    }
-                }
+            // Create a new array to store the updated list of posts
+            var newPosts: [PostItem] = []
+            // For each document in the snapshot, convert it to a PostItem and append it to newPosts
+            snapshot.documents.forEach { document in
+                let data = document.data()
+                let newPost = self.getPostItem(from: data)
+                newPosts.append(newPost)
             }
+            self.posts = newPosts
         }
     }
+
     
     func listenForHotPosts() {
         newListener?.remove()
-        hotListener = ndPosts.order(by: "score", descending: true)
+        hotListener = ndPosts.order(by: "score", descending: true) // Replace 'someProperty' with your actual field name
             .addSnapshotListener { (querySnapshot, error) in
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
-            snapshot.documentChanges.forEach { diff in
-                if (diff.type == .added) {
-                    let data = diff.document.data()
-                    let newPost = self.getPostItem(from: data)
-                    self.newPostAdded = newPost
-                }
-                else if (diff.type == .modified) {
-                    let data = diff.document.data()
-                    let newPost = self.getPostItem(from: data)
-                    
-                    if let index = self.posts.firstIndex(where: { $0.id == newPost.id }) {
-                        self.posts[index] = newPost
-                    }
-                }
-                else if (diff.type == .removed) {
-                    let data = diff.document.data()
-                    let removedPost = self.getPostItem(from: data)
-                    
-                    if let index = self.posts.firstIndex(where: { $0.id == removedPost.id }) {
-                        self.posts.remove(at: index)
-                    }
-                }
+            var newPosts: [PostItem] = []
+            snapshot.documents.forEach { document in
+                let data = document.data()
+                let newPost = self.getPostItem(from: data)
+                newPosts.append(newPost)
             }
+            self.posts = newPosts
         }
     }
+
         
     func getPostItem(from data: [String: Any]) -> PostItem {
         let id = data["id"] as? String ?? ""
@@ -126,32 +109,9 @@ class NewFeedModel: ObservableObject {
         let numLikes = data["numLikes"] as? Int ?? 0
         let comNum = data["comNum"] as? Int ?? 0
         let score = data["score"] as? Int ?? 0
-
-        // Now return a `PostItem` made from the above data
         return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes, comNum: comNum, score: score)
     }
     
-    func fetchInitialPosts() {
-        ndPosts.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error fetching initial posts: \(error)")
-                return
-            }
-
-            print("fetched the posts")
-            print("Raw Query Snapshot Data: \(String(describing: querySnapshot))")
-
-            self.posts = querySnapshot?.documents.compactMap { document in
-                let postItem = self.getPostItem(from: document.data())
-                print("Parsed Post Item: \(postItem)")
-                self.initialPostsLoaded.send(())
-                return postItem
-            } ?? []
-
-            print("Updated Posts Array: \(self.posts)")
-        }
-    }
-
 
     
     

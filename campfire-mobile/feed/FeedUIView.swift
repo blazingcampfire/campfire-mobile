@@ -34,8 +34,8 @@ struct FeedUIView: View {
                     Button(action: {
                         newFeedModel.currentAssortment = .hot
                     }) {
-                        Text("Hot")
-                            .font(.custom("LexendDeca-Bold", size:35))
+                        Text("hot")
+                            .font(.custom("LexendDeca-Bold", size: 37))
                             .opacity(newFeedModel.currentAssortment == .hot ? 1.0 : 0.5)
                     }
                     Rectangle()
@@ -44,8 +44,8 @@ struct FeedUIView: View {
                     Button(action: {
                         newFeedModel.currentAssortment = .new
                     }) {
-                        Text("New")
-                            .font(.custom("LexendDeca-Bold", size: 35))
+                        Text("new")
+                            .font(.custom("LexendDeca-Bold", size: 37))
                             .opacity(newFeedModel.currentAssortment == .new ? 1.0 : 0.5)
                     }
                 }
@@ -133,9 +133,7 @@ struct FeedUIView: View {
 
                 VStack {
                     Button(action: {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            activeSheet = .second
-                        }
+                        activeSheet = .second
                     }) {
                         VStack {
                             Image(systemName: "text.bubble.fill")

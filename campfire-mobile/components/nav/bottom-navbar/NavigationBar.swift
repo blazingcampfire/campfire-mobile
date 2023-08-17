@@ -15,13 +15,12 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-            FeedViewControllerWrapper()
-                .tabItem {
-                    Image(systemName: "play.fill")
-                }
-
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.black, for: .tabBar)
+                FeedViewControllerWrapper()
+                    .tabItem {
+                        Image(systemName: "play.fill")
+                    }
+                    .toolbar(.visible, for: .tabBar)
+                    .toolbarBackground(Color.black, for: .tabBar)
             
             MapPage()
                 .tabItem {

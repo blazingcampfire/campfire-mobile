@@ -63,16 +63,15 @@ class VideoCollectionViewCell: UICollectionViewCell {
     }
    
     private func setupPlayerView() {
-            playerView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(playerView)
-            
-            NSLayoutConstraint.activate([
-                playerView.topAnchor.constraint(equalTo: contentView.topAnchor),
-                playerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                playerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            ])
-        }
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(playerView)
+        NSLayoutConstraint.activate([
+            playerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            playerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            playerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            playerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        ])
+    }
     
     @objc private func likeButtonTapped() {
         individualPostVM?.toggleLikeStatus()
@@ -146,7 +145,11 @@ class VideoCollectionViewCell: UICollectionViewCell {
             player?.replaceCurrentItem(with: playerItem)
             NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
         }
-        // Remove the previous SwiftUI view, if any
+        
+        if model.pauseVideos {
+            player?.pause()
+        }
+        
         if let swiftUIView = hostingController?.view {
             swiftUIView.removeFromSuperview()
         }

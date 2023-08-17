@@ -76,13 +76,11 @@ class FeedViewController: UIViewController {
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Number of items: \(newFeedModel.posts.count)")
+   //     print("Number of items: \(newFeedModel.posts.count)")
         return newFeedModel.posts.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("Configuring cell for item at: \(indexPath.item)")
         let postItem = newFeedModel.posts[indexPath.item]
-        print("2. Configuring cell for item at: \(indexPath.item)")
         
         if postItem.postType == "image" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
@@ -106,7 +104,6 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
            let threshold = 1 // How many more cells until the end to trigger the load more action
            if indexPath.item >= (newFeedModel.posts.count - threshold) {
                if !newFeedModel.reachedEndofData {
-                   // Call loadMorePosts to load the next batch
                    newFeedModel.loadMorePosts()
                }
            }

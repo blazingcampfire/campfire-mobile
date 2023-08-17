@@ -20,6 +20,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
     var cancellables = Set<AnyCancellable>()
+    
 
     private func setupBindings() {
         cancellables = []
@@ -70,7 +71,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
     private func setupImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .clear
         contentView.addSubview(imageView)
         
         // Pin the imageView to the edges of the cell
@@ -106,7 +106,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
                 swiftUIView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 swiftUIView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             ])
-            
             // Move this line here to ensure that the likeButton is rendered above swiftUIView
             setupLikeButton()
         }

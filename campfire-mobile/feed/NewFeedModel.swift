@@ -20,6 +20,7 @@ enum Assortment {
 class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
     @Published var currentAssortment: Assortment = .hot
+    @Published var pauseVideos = false
     var initialLoadCompleted = false
     var cancellables = Set<AnyCancellable>()
     
@@ -41,27 +42,44 @@ class NewFeedModel: ObservableObject {
         hotListener?.remove()
     }
     
+    private func removeOldListeners(completion: @escaping () -> Void) {
+        newListener?.remove()
+        hotListener?.remove()
+        print("removed old listeners")
+        completion()
+    }
+    
+    private func startListener(for assortment: Assortment) {
+        switch assortment {
+        case .new:
+            listenForNewPosts()
+        case .hot:
+            listenForHotPosts()
+        }
+    }
+    
     private func switchAssortment(to assortment: Assortment) {
-        
         self.posts.removeAll()
-        
-        DispatchQueue.main.async {
-              self.objectWillChange.send()
-          }
-        
-        loadInitialPosts()
-        
-       }
+        self.lastDocumentSnapshot = nil
+        self.reachedEndofData = false
+        removeOldListeners {
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+            self.loadInitialPosts {
+                self.startListener(for: assortment)
+            }
+        }
+    }
     
     
-
     func listenForNewPosts() {
         hotListener?.remove()
         initialLoadCompleted = false
         
-        newListener = ndPosts.order(by: "date", descending: false)
+        newListener = ndPosts.order(by: "date", descending: true)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
-            
+                print("new listener off")
             guard let self = self else { return }
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
@@ -77,9 +95,9 @@ class NewFeedModel: ObservableObject {
                     let newPost = self.getPostItem(from: data)
                     newPosts.append(newPost)
                 }
-                
-                self.posts = newPosts
-                
+                DispatchQueue.main.async {
+                    self.posts = newPosts
+                }
             } else {  // Subsequent updates
                 snapshot.documentChanges.forEach { diff in
                     let data = diff.document.data()
@@ -102,61 +120,41 @@ class NewFeedModel: ObservableObject {
         }
     }
 
-    func loadInitialPosts() {
+    func loadInitialPosts(completion: @escaping () -> Void) {
         self.reachedEndofData = false
-        print("loaded three posts")
-        
-        let query: Query
+        self.initialLoadCompleted = false
+        self.posts.removeAll()
+        print("loaded in posts")
+
+        var query: Query
         switch currentAssortment {
         case .hot:
             query = ndPosts.order(by: "score", descending: true).limit(to: 3)
         case .new:
-            query = ndPosts.order(by: "date", descending: false).limit(to: 3)
+            query = ndPosts.order(by: "date", descending: true).limit(to: 3)
         }
-        
-        query.addSnapshotListener { [weak self] (querySnapshot, error) in
+
+        query.getDocuments { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
-            
-            snapshot.documentChanges.forEach { diff in
-                let data = diff.document.data()
-                let post = self.getPostItem(from: data)
-                
-                switch diff.type {
-                case .added:
-                    // If the initial load hasn't been completed, append the posts.
-                    // After initial load, only add new posts.
-                //    if !self.initialLoadCompleted {
-                        self.posts.append(post)
-               //     }
-                    
-                case .modified:
-                    // Update the specific post that was modified.
-                    print("updated post")
-                    
-                case .removed:
-                    // Remove the specific post that was deleted.
-                    if let index = self.posts.firstIndex(where: { $0.id == post.id }) {
-                        self.posts.remove(at: index)
-                    }
-                }
+
+            var newPosts: [PostItem] = []
+            snapshot.documents.forEach { document in
+                let data = document.data()
+                let newPost = self.getPostItem(from: data)
+                newPosts.append(newPost)
             }
-            // After initial data is loaded, set initialLoadCompleted to true
-            if !self.initialLoadCompleted {
-                self.initialLoadCompleted = true
-            }
-            
-            // Set the lastDocumentSnapshot for further pagination
+            self.posts = newPosts
             self.lastDocumentSnapshot = snapshot.documents.last
-            // Check if we reached the end of data
             self.reachedEndofData = snapshot.documents.isEmpty || snapshot.documents.count < 3
+            completion()
         }
     }
 
-    
+
     func loadMorePosts() {
         guard !reachedEndofData else {
             return
@@ -167,7 +165,7 @@ class NewFeedModel: ObservableObject {
         case .hot:
             query = ndPosts.order(by: "score", descending: true).limit(to: 3)
         case .new:
-            query = ndPosts.order(by: "date", descending: false).limit(to: 3)
+            query = ndPosts.order(by: "date", descending: true).limit(to: 3)
         }
         
         if let lastSnapshot = self.lastDocumentSnapshot {
@@ -175,41 +173,35 @@ class NewFeedModel: ObservableObject {
             query = query.start(afterDocument: lastSnapshot)
         }
         
-        query.addSnapshotListener { [weak self] (querySnapshot, error) in
+        query.getDocuments { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
             
-            snapshot.documentChanges.forEach { diff in
-                let data = diff.document.data()
+            var newPosts: [PostItem] = []
+            snapshot.documents.forEach { document in
+                let data = document.data()
                 let post = self.getPostItem(from: data)
-                
-                switch diff.type {
-                case .added:
-                    self.posts.append(post)
-                    
-                case .modified:
-                    print("updated post")
-                    
-                case .removed:
-                    if let index = self.posts.firstIndex(where: { $0.id == post.id }) {
-                        self.posts.remove(at: index)
-                    }
-                }
+                newPosts.append(post)
             }
-            // Set the lastDocumentSnapshot for further pagination
+            
+            let newUniquePosts = newPosts.filter { newItem in
+                !self.posts.contains(where: { $0.id == newItem.id })
+            }
+            
+            // Append the new posts to the existing posts
+            DispatchQueue.main.async {
+                self.posts.append(contentsOf: newUniquePosts)
+                self.objectWillChange.send()
+            }
             self.lastDocumentSnapshot = snapshot.documents.last
-            // Check if we reached the end of data
             self.reachedEndofData = snapshot.documents.isEmpty || snapshot.documents.count < 3
         }
     }
 
 
-    
-
-    
     func listenForHotPosts() {
         newListener?.remove()
         initialLoadCompleted = false
@@ -217,6 +209,7 @@ class NewFeedModel: ObservableObject {
         hotListener = ndPosts.order(by: "score", descending: true)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
             
+            print("hot listener off")
             guard let self = self else { return }
             guard let snapshot = querySnapshot else {
                 print("Error fetching snapshots: \(error!)")
@@ -233,9 +226,9 @@ class NewFeedModel: ObservableObject {
                     let newPost = self.getPostItem(from: data)
                     newPosts.append(newPost)
                 }
-                
-                self.posts = newPosts
-                
+                DispatchQueue.main.async {
+                    self.posts = newPosts
+                }
             } else {  // Subsequent updates
                 snapshot.documentChanges.forEach { diff in
                     let data = diff.document.data()
@@ -275,10 +268,6 @@ class NewFeedModel: ObservableObject {
         let score = data["score"] as? Int ?? 0
         return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes, comNum: comNum, score: score)
     }
-    
-
-    
-    
 }
 
 

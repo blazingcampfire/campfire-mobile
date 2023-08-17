@@ -162,6 +162,7 @@ struct FeedUIView: View {
             .padding(.bottom, 155)
             .padding(.trailing, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            
         }
         .background(Color.clear)
         .onAppear {
@@ -186,6 +187,7 @@ struct FeedUIView: View {
             }
         }
     }
+    
     }
 
 

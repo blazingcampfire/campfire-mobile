@@ -18,7 +18,6 @@ struct CommentsPage: View {
     @State private var replyingToUserId: String?
     @EnvironmentObject var currentUser: CurrentUserModel
     @ObservedObject var post: IndividualPost
-    @State private var keyboardHeight: CGFloat = 0
 
     var body: some View {
         NavigationView {
@@ -133,9 +132,6 @@ struct CommentsPage: View {
         UIApplication.shared.dismissKeyboard()
     }
 }
-
-
-
 
 
 struct CommentsList: View {

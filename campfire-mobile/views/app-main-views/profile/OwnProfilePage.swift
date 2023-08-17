@@ -13,6 +13,7 @@ struct OwnProfilePage: View {
     @State var settingsPageShow = false
     @State private var showAddPost = false
     @AppStorage("isDarkMode") private var darkMode = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
@@ -163,7 +164,8 @@ struct OwnProfilePage: View {
                 }
             }
         }
-        .preferredColorScheme(darkMode ? .dark : .light)
+        
+        
     }
 }
 

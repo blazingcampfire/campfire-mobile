@@ -124,14 +124,7 @@ struct PlayerView: View {
                             
                             //- MARK: Profile pic/username buttons Hstack
                             NavigationLink(destination: {
-                                if currentPostPlayer!.postItem.id == currentUser.profile.userID {
-                                    OwnProfilePage()
-                                        .environmentObject(currentUser)
-                                        .environmentObject(notificationsManager)
-                                }
-                                else {
-                                    OtherProfilePage(profileModel: ProfileModel(id: currentPostPlayer!.postItem.id, currentUser: currentUser))
-                                }
+                                    OtherProfilePage(profileModel: ProfileModel(id: currentPostPlayer!.postItem.posterId, currentUser: currentUser))
                             },
                                            label: {
                             HStack(spacing: 10) {

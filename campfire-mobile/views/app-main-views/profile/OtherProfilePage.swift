@@ -91,7 +91,7 @@ struct OtherProfilePage: View {
                                                     )
                                             }
                                         }
-                                        else {
+                                        else if profileModel.profile?.userID != currentUser.profile.userID {
                                             Button(action: {
                                                 profileModel.requestFriend()
                                             }) {

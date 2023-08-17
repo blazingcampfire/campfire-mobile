@@ -37,14 +37,7 @@ struct SearchListView: View {
                 }
                 .overlay (
                     NavigationLink(destination: {
-                        if profile.userID == currentUser.profile.userID {
-                            OwnProfilePage()
-                                .environmentObject(currentUser)
-                                .environmentObject(notificationsManager)
-                        }
-                        else {
-                            OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser))
-                        }
+                        OtherProfilePage(profileModel: ProfileModel(id: profile.userID, currentUser: currentUser))
                     },
                                    label: { EmptyView() })
                     .opacity(0)

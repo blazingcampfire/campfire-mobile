@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import SwiftUIPager
 import Combine
+import Firebase
 
 enum Assortment {
     case hot
@@ -19,13 +20,14 @@ enum Assortment {
 class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
     @Published var currentAssortment: Assortment = .hot
-    private var initialLoadCompleted = false
+    var initialLoadCompleted = false
     var cancellables = Set<AnyCancellable>()
     
     private var newListener: ListenerRegistration?
     private var hotListener: ListenerRegistration?
     
-    
+     var lastDocumentSnapshot: DocumentSnapshot?
+     var reachedEndofData = false
     
     init() {
         $currentAssortment
@@ -40,19 +42,15 @@ class NewFeedModel: ObservableObject {
     }
     
     private func switchAssortment(to assortment: Assortment) {
-           // Step 1: Clear the current posts
+        
         self.posts.removeAll()
         
         DispatchQueue.main.async {
               self.objectWillChange.send()
           }
-         // Switch the assortment and start the appropriate listener
-           switch assortment {
-           case .hot:
-               listenForHotPosts()
-           case .new:
-               listenForNewPosts()
-           }
+        
+        loadInitialPosts()
+        
        }
     
     
@@ -69,7 +67,6 @@ class NewFeedModel: ObservableObject {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
-            
             // Initial Load
             if !self.initialLoadCompleted {
                 self.initialLoadCompleted = true
@@ -105,6 +102,112 @@ class NewFeedModel: ObservableObject {
         }
     }
 
+    func loadInitialPosts() {
+        self.reachedEndofData = false
+        print("loaded three posts")
+        
+        let query: Query
+        switch currentAssortment {
+        case .hot:
+            query = ndPosts.order(by: "score", descending: true).limit(to: 3)
+        case .new:
+            query = ndPosts.order(by: "date", descending: false).limit(to: 3)
+        }
+        
+        query.addSnapshotListener { [weak self] (querySnapshot, error) in
+            guard let self = self else { return }
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { diff in
+                let data = diff.document.data()
+                let post = self.getPostItem(from: data)
+                
+                switch diff.type {
+                case .added:
+                    // If the initial load hasn't been completed, append the posts.
+                    // After initial load, only add new posts.
+                //    if !self.initialLoadCompleted {
+                        self.posts.append(post)
+               //     }
+                    
+                case .modified:
+                    // Update the specific post that was modified.
+                    print("updated post")
+                    
+                case .removed:
+                    // Remove the specific post that was deleted.
+                    if let index = self.posts.firstIndex(where: { $0.id == post.id }) {
+                        self.posts.remove(at: index)
+                    }
+                }
+            }
+            // After initial data is loaded, set initialLoadCompleted to true
+            if !self.initialLoadCompleted {
+                self.initialLoadCompleted = true
+            }
+            
+            // Set the lastDocumentSnapshot for further pagination
+            self.lastDocumentSnapshot = snapshot.documents.last
+            // Check if we reached the end of data
+            self.reachedEndofData = snapshot.documents.isEmpty || snapshot.documents.count < 3
+        }
+    }
+
+    
+    func loadMorePosts() {
+        guard !reachedEndofData else {
+            return
+        }
+        print("loaded three more posts")
+        var query: Query
+        switch currentAssortment {
+        case .hot:
+            query = ndPosts.order(by: "score", descending: true).limit(to: 3)
+        case .new:
+            query = ndPosts.order(by: "date", descending: false).limit(to: 3)
+        }
+        
+        if let lastSnapshot = self.lastDocumentSnapshot {
+            // Start after the last document we have
+            query = query.start(afterDocument: lastSnapshot)
+        }
+        
+        query.addSnapshotListener { [weak self] (querySnapshot, error) in
+            guard let self = self else { return }
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { diff in
+                let data = diff.document.data()
+                let post = self.getPostItem(from: data)
+                
+                switch diff.type {
+                case .added:
+                    self.posts.append(post)
+                    
+                case .modified:
+                    print("updated post")
+                    
+                case .removed:
+                    if let index = self.posts.firstIndex(where: { $0.id == post.id }) {
+                        self.posts.remove(at: index)
+                    }
+                }
+            }
+            // Set the lastDocumentSnapshot for further pagination
+            self.lastDocumentSnapshot = snapshot.documents.last
+            // Check if we reached the end of data
+            self.reachedEndofData = snapshot.documents.isEmpty || snapshot.documents.count < 3
+        }
+    }
+
+
+    
 
     
     func listenForHotPosts() {

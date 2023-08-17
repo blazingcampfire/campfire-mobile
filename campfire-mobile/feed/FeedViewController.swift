@@ -47,10 +47,7 @@ class FeedViewController: UIViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
-
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -102,10 +99,19 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-          if let videoCell = cell as? VideoCollectionViewCell {
-              videoCell.play()
-          }
-      }
+           if let videoCell = cell as? VideoCollectionViewCell {
+               videoCell.play()
+           }
+           // Load more posts when the user is close to the end of the current list
+           let threshold = 1 // How many more cells until the end to trigger the load more action
+           if indexPath.item >= (newFeedModel.posts.count - threshold) {
+               if !newFeedModel.reachedEndofData {
+                   // Call loadMorePosts to load the next batch
+                   newFeedModel.loadMorePosts()
+               }
+           }
+       }
+       
       func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
           if let videoCell = cell as? VideoCollectionViewCell {
               videoCell.stop()

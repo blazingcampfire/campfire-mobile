@@ -56,8 +56,7 @@ struct RequestsPage: View {
                 .padding(.top, -10)
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
+    
     }
 }
 

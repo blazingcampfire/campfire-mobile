@@ -44,6 +44,7 @@ struct SettingsForm: View {
                             .foregroundColor(Theme.Peach)
                     }
                 }
+                .tint(Theme.Peach)
                 .font(.custom("LexendDeca-Regular", size: 16))
 
                 Button(action: {

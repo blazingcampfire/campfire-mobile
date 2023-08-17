@@ -44,13 +44,11 @@ struct FriendsListView: View {
                     NavigationLink(destination: {
                         if currentUser.profile.userID == currentUser.profile.userID {
                             OwnProfilePage()
-                                .navigationBarBackButtonHidden(true)
                                 .environmentObject(currentUser)
                                 .environmentObject(notificationsManager)
                         }
                         else {
                             OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
-                                .navigationBarBackButtonHidden(true)
                         }
                     },
                                    label: { EmptyView() })

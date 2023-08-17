@@ -185,12 +185,9 @@ extension AuthModel {
                     throw PhoneError.existingUser
                 } else if self.login {
                     print("self.login")
-                    Task {
                         let existingProfile = await self.checkProfile(email: submittedEmail)
                         print(existingProfile)
-                        flag = existingProfile
-                    }
-                        if !flag {
+                        if !existingProfile {
                             do {
                                 print("Existing profile: \(flag)")
                                 try AuthenticationManager.shared.signOut()

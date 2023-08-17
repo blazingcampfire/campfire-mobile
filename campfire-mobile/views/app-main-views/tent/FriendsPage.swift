@@ -41,8 +41,6 @@ struct FriendsPage: View {
                             Spacer()
                         }
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     
@@ -55,8 +53,6 @@ struct FriendsPage: View {
                         ListFriends()
                     }
                     .environmentObject(model)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                 }

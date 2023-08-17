@@ -23,13 +23,13 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Color.black, for: .tabBar)
             
-            MapPage()
-                .tabItem {
-                    Image(systemName: "map")
-                }
-            
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
+//            MapPage()
+//                .tabItem {
+//                    Image(systemName: "map")
+//                }
+//            
+//                .toolbar(.visible, for: .tabBar)
+//                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
             CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
                 .tabItem {
@@ -58,8 +58,8 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
-        .accentColor(Theme.Peach)
     }
+        .accentColor(Theme.Peach)
         .navigationBarBackButtonHidden(true)
     }
 }

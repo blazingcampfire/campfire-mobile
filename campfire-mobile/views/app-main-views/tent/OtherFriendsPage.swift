@@ -41,8 +41,6 @@ struct OtherFriendsPage: View {
                             Spacer()
                         }
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     
@@ -54,8 +52,6 @@ struct OtherFriendsPage: View {
                         
                         ListOtherFriends()
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     .onAppear {

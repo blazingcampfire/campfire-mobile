@@ -18,15 +18,20 @@ struct LeaderboardPage: View {
                     .ignoresSafeArea(.all)
                 
                 VStack(spacing: 0) {
-                    Text("leaderboard 👑")
-                        .font(.custom("LexendDeca-SemiBold", size: 20))
-                        .padding(.top, 15)
+                    HStack {
+                        Text("leaderboard")
+                            .font(.custom("LexendDeca-SemiBold", size: 20))
+                        Text("👑")
+                            .padding(.top, -3)
+                    }
+                    .padding(.top, 15)
                     LeaderboardList()
                         .environmentObject(model)
                         .listStyle(InsetListStyle())
                 }
             }
         }
+        .accentColor(Theme.Peach)
     }
 }
 

@@ -297,7 +297,6 @@ struct PlayerView: View {
 struct ScrollFeed: View {
     @StateObject var feedModel: FeedPostModel
     
-    
     var body: some View {
         ZStack {
             PlayerScrollView(feedModel: feedModel)

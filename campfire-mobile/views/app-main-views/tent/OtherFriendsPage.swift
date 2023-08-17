@@ -22,7 +22,7 @@ struct OtherFriendsPage: View {
                         
                         VStack {
                             VStack {
-                                Text("Friends")
+                                Text("friends")
                                     .font(.custom("LexendDeca-SemiBold", size: 30))
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.leading, 15)

@@ -12,7 +12,7 @@ struct OtherProfilePage: View {
     @State var settingsPageShow = false
     @StateObject var profileModel: ProfileModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
             ZStack {
@@ -166,17 +166,14 @@ struct OtherProfilePage: View {
                                 .padding(.horizontal)
                             }
                         } else {
-                            Text("No posts yet.")
+                            Text("no posts yet.")
                         }
 
                     }
                 }
                 .padding()
         }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .navigationBarTitleDisplayMode(.inline)
     }
 }
 

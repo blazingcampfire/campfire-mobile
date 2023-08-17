@@ -46,16 +46,6 @@ struct SearchListView: View {
                 
                 Spacer()
                 
-                //                    Button(action: {
-                //                        self.added.toggle()
-                //                        model.requestFriend(profile: profile)
-                //                    }) {
-                //                        Image(systemName: self.added == false ? "plus.circle.fill" : "minus.circle.fill")
-                //                            .font(.system(size: 30))
-                //                            .foregroundColor(Theme.Peach)
-                //                    }
-                //                    .buttonStyle(BorderlessButtonStyle())
-                //                }
                 
             }
         }

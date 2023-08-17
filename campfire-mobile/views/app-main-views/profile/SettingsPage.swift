@@ -24,6 +24,7 @@ struct SettingsPage: View {
                     }
                 }
         }
+        .preferredColorScheme(darkMode ? .dark : .light)
     }
 }
 

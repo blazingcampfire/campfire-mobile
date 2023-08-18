@@ -42,15 +42,8 @@ struct FriendsListView: View {
                 }
                 .overlay(
                     NavigationLink(destination: {
-                        if currentUser.profile.userID == currentUser.profile.userID {
-                            OwnProfilePage()
-                                .environmentObject(currentUser)
-                                .environmentObject(notificationsManager)
-                        }
-                        else {
-                            OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
-                        }
-                    },
+                                       OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
+                                   },
                                    label: { EmptyView() })
                         .opacity(0)
                         .frame(width: 10, height: 10)
@@ -62,7 +55,7 @@ struct FriendsListView: View {
                 }) {
                     Image(systemName: "minus.circle.fill")
                         .foregroundColor(Theme.Peach)
-                        .font(.system( size: 30))
+                        .font(.system(size: 30))
                 }
                 .buttonStyle(BorderlessButtonStyle())
             }

@@ -45,20 +45,20 @@ class SettingsModel: ObservableObject {
         }
     }
     
-    func deleteAccount() async throws {
-        if Auth.auth().currentUser?.email == nil {
-            throw EmailError.noExistingUser
-        }
-        else {
-            do {
-                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
-                print("successfully deleted user data")
-                AuthenticationManager.shared.deleteUser()
-                try AuthenticationManager.shared.signOut()
-            }
-            catch {
-                self.deleteErrorAlert = true
-            }
-        }
-    }
+//    func deleteAccount() async throws {
+//        if Auth.auth().currentUser?.email == nil {
+//            throw EmailError.noExistingUser
+//        }
+//        else {
+//            do {
+//                AuthenticationManager.shared.deleteAllUserData(currentUser: currentUser)
+//                print("successfully deleted user data")
+//                AuthenticationManager.shared.deleteUser()
+//                try AuthenticationManager.shared.signOut()
+//            }
+//            catch {
+//                self.deleteErrorAlert = true
+//            }
+//        }
+//    }
 }

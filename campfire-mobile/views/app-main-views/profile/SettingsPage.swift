@@ -32,6 +32,7 @@ struct SettingsForm: View {
     @Binding var darkMode: Bool
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
@@ -143,9 +144,9 @@ struct SettingsForm: View {
             .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                    dismissButton: CustomAlertButton(title: "yes", action: {
                        do {
-                           Task {
-                               try await model.deleteAccount()
-                           }
+                           try AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
+                           currentUser.signedIn = false
+
                        } catch {
                            model.deleteErrorAlert = true
                        }

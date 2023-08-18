@@ -95,11 +95,11 @@ struct CommentsPage: View {
             .onTapGesture {
                 isEditing = false
                 newFeedModel.pauseVideos = false
-                UIApplication.shared.dismissKeyboard()
+               UIApplication.shared.dismissKeyboard()
                 replyingToCommentId = nil
                 replyingToUserId = nil
             }
-            .ignoresSafeArea(.keyboard, edges: .bottom)
+         //   .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {

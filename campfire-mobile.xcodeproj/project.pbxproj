@@ -20,7 +20,6 @@
 		B15D08AA2A85C3010038C19D /* EllipsesButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */; };
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
 		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
-		B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
 		B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19732A4613A200309256 /* LeaderboardPage.swift */; };
 		B18B19912A46976700309256 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */; };
@@ -74,7 +73,6 @@
 		B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */; };
 		B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */; };
 		B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */; };
-		B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */; };
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
@@ -228,7 +226,6 @@
 		B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipsesButtonView.swift; sourceTree = "<group>"; };
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
 		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
-		B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostModel.swift; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -282,7 +279,6 @@
 		B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHotspots.swift; sourceTree = "<group>"; };
 		B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttributes.swift; sourceTree = "<group>"; };
 		B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -556,7 +552,6 @@
 				B164A9F02A5B729F0033586F /* CommentTextField.swift */,
 				F8FE7B5E2A6B9705004B41A5 /* FireGIF.swift */,
 				B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */,
-				B1B5EFC72A4F569A00FA79CE /* UserBio.swift */,
 				B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */,
 				F8EC241F2A5C89AD0010D46E /* ImagePicker.swift */,
 				E2C446912A4E88820032CF34 /* nav */,
@@ -576,7 +571,6 @@
 				E2163E4D2A663501005A20BE /* schools.swift */,
 				E267A9C72A7AA58300489B8E /* tests.swift */,
 				F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */,
-				B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */,
 				E216E3F52A831D4A0021C9F0 /* misc.swift */,
 				B1E9DE112A889F4300E0B61F /* smoreLaunchScreen.storyboard */,
 			);
@@ -760,6 +754,7 @@
 		E2C446912A4E88820032CF34 /* nav */ = {
 			isa = PBXGroup;
 			children = (
+				B1B5EFC72A4F569A00FA79CE /* UserBio.swift */,
 				E2C446922A4E89C50032CF34 /* bottom-navbar */,
 				E2C446882A4E84610032CF34 /* top-navbar */,
 			);
@@ -769,7 +764,6 @@
 		E2C446922A4E89C50032CF34 /* bottom-navbar */ = {
 			isa = PBXGroup;
 			children = (
-				B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */,
 				B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */,
 			);
 			path = "bottom-navbar";
@@ -824,7 +818,6 @@
 				F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */,
 				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 				E21F79C32A68DF98004B3DCC /* SearchModel.swift */,
-				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
 				E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */,
 				B1E044D62A762E4900DC767D /* CommentsModel.swift */,
 				B11371A62A7A06A200417923 /* CamPostModel.swift */,
@@ -1092,7 +1085,6 @@
 				E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */,
 				E2578DA22A6B6429004C65DC /* EnterName.swift in Sources */,
 				B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */,
-				B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */,
 				F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */,
 				B1E9DE0E2A88290E00E0B61F /* FeedViewController.swift in Sources */,
 				E2DA6CFC2A709C24002D7660 /* NotificationsManager.swift in Sources */,
@@ -1184,7 +1176,6 @@
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
 				B1B357422A8704B20043AC2A /* LikeButtonView.swift in Sources */,
-				B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */,
 				B1E9DE102A888AC100E0B61F /* FeedUIView.swift in Sources */,
 				E21F79C42A68DF98004B3DCC /* SearchModel.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,
@@ -1375,8 +1366,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swijswijsjiwjsihhho.campfire-mobile";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1415,8 +1405,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swijswijsjiwjsihhho.campfire-mobile";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1433,7 +1422,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1455,7 +1444,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1473,9 +1462,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1493,9 +1483,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/femi/Desktop/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;

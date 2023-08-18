@@ -41,6 +41,7 @@ struct EllipsesButtonView: View {
                 Button(action: {
                     // Action for deleting the post
                     selectedAction = "delete"
+                    equalIds.showAlert = true
                     print("Delete Post tapped")
                 }) {
                     HStack {
@@ -76,4 +77,5 @@ struct EllipsesButtonView_Previews: PreviewProvider {
 
 class PosterIdEqualCurrentUserId: ObservableObject {
     @Published var isEqual: Bool = false
+    @Published var showAlert: Bool = false
 }

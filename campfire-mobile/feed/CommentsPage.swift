@@ -11,21 +11,19 @@ import Kingfisher
 
 
 struct CommentsPage: View {
-    var postId: String
     @State private var isEditing: Bool = false
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var commentModel: CommentsModel
+    @StateObject var commentModel: CommentsModel
     @State private var replyingToCommentId: String?
-    @State private var comment: String = ""
-    @State private var reply: String = ""
     @State private var replyingToUserId: String?
     @EnvironmentObject var currentUser: CurrentUserModel
+    @ObservedObject var post: IndividualPost
+    @ObservedObject var newFeedModel: NewFeedModel
 
-    
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList(commentModel: commentModel, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId, postID: postId)
+                CommentsList(commentModel: commentModel, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId)
                 Divider()
                 VStack {
                     HStack {
@@ -46,11 +44,12 @@ struct CommentsPage: View {
                                 
                                 TextField(
                                     "",
-                                    text: replyingToCommentId != nil ? $reply : $comment,
+                                    text: replyingToCommentId != nil ? $commentModel.replyText : $commentModel.commentText,
                                     prompt: Text(replyingToCommentId != nil ? "add reply" : "add comment!").font(.custom("LexendDeca-Regular", size: 15))
                                 )
                                 .onTapGesture {
                                     isEditing = true
+                                    newFeedModel.pauseVideos = true
                                 }
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .overlay(RoundedRectangle(cornerRadius: 10)
@@ -68,11 +67,12 @@ struct CommentsPage: View {
                             
                             TextField(
                                 "",
-                                text: replyingToCommentId != nil ? $reply : $comment,
+                                text: replyingToCommentId != nil ? $commentModel.replyText : $commentModel.commentText,
                                 prompt: Text(replyingToCommentId != nil ? "add reply" : "add comment!").font(.custom("LexendDeca-Regular", size: 15))
                             )
                             .onTapGesture {
                                 isEditing = true
+                                newFeedModel.pauseVideos = true
                             }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
@@ -80,9 +80,9 @@ struct CommentsPage: View {
                                 .foregroundColor(Theme.Peach))
                         }
                         
-                        if (isEditing && comment != "") || (isEditing && reply != "") {
+                        if (isEditing && commentModel.commentText != "") || (isEditing && commentModel.replyText != "") {
                             Button(action: {
-                            createContent()
+                                createContent()
                             }) {
                                 Image(systemName: "paperplane.fill")
                                     .foregroundColor(Theme.Peach)
@@ -94,17 +94,19 @@ struct CommentsPage: View {
             }
             .onTapGesture {
                 isEditing = false
+                newFeedModel.pauseVideos = false
                 UIApplication.shared.dismissKeyboard()
                 replyingToCommentId = nil
                 replyingToUserId = nil
             }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {
                         Text("Comments")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
-                     
+                        
                         Text("\(commentModel.comments.count)")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
@@ -120,31 +122,28 @@ struct CommentsPage: View {
                     }
                 }
             }
-        }
+    }
     }
     func createContent() {
         if let replyingId = replyingToCommentId {
-            commentModel.createReply(postId: postId, commentId: replyingId, replytext: reply) {
-                reply = ""  // Reset here
-                replyingToCommentId = nil
-                replyingToUserId = nil
-            }
+            commentModel.createReply(comId: replyingId)
+            replyingToCommentId = nil
+            replyingToUserId = nil
         } else {
-            commentModel.createComment(postId: postId, commenttext: comment) {
-                comment = ""
-            }
+            commentModel.createComment()
+            post.increaseComNum()
+            post.increasePostScore()
         }
         UIApplication.shared.dismissKeyboard()
     }
 }
 
+
 struct CommentsList: View {
     @ObservedObject var commentModel: CommentsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var comLikeStatus = CommentLikeStatusModel()
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
-    var postID: String
     var body: some View {
         ScrollView {
             if commentModel.comments.isEmpty {
@@ -160,10 +159,8 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(eachcomment: comment, comId: comment.id, postID: postID, posterId: comment.posterId, commentsModel: commentModel, commentLikeStatus: comLikeStatus, commentUpdateModel: CommentUpdateModel(currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, usernameId: comment.username)
-                        .environmentObject(currentUser)
+                    CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId)
                 }
-                
             }
         }
     }

@@ -55,7 +55,10 @@ class CamPostModel: ObservableObject {
                             "postType": "image",
                             "id": docRef.documentID,
                             "date": now,
-                            "posterId": currentUser.profile.userID  //id of the person who posted
+                            "posterId": currentUser.profile.userID,  //id of the person who posted
+                            "numLikes": 0,
+                            "comNum": 0,
+                            "score": 0
                         ]
                         self.createPost(data: photoDocData, documentRef: docRef)
                         self.caption = ""
@@ -85,7 +88,10 @@ class CamPostModel: ObservableObject {
                             "postType": "video",
                             "id": docRef.documentID,
                             "date": now,
-                            "posterId": currentUser.profile.userID
+                            "posterId": currentUser.profile.userID,
+                            "numLikes": 0,
+                            "comNum": 0,
+                            "score": 0
                         ]
                         self.createPost(data: videoDocData, documentRef: docRef)
                         self.caption = ""

@@ -9,15 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct ReplyView: View {
-    var eachreply: Reply
-    var comId: String
-    var postId: String
-    var replyId: String
-    var replyPosterId: String
-    @ObservedObject var commentModel: CommentsModel
-    @ObservedObject var replyLikeStatus: ReplyLikeStatusModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @StateObject var replyUpdateModel: ReplyUpdateModel
+    @StateObject var individualReply: IndividualReply
+    @State private var likeTap: Bool = false
     
     
     var body: some View {
@@ -27,7 +21,7 @@ struct ReplyView: View {
                 Button(action: {
                     // navigate to profile
                 }) {
-                    KFImage(URL(string: eachreply.profilepic))
+                    KFImage(URL(string: individualReply.profilepic))
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
@@ -39,16 +33,16 @@ struct ReplyView: View {
                     Button(action: {
                         // navigate to profile
                     }) {
-                        Text("@\(eachreply.username)")
+                        Text("@\(individualReply.username)")
                             .font(.custom("LexendDeca-Bold", size: 14))
                             .foregroundColor(Theme.TextColor)
                     }
                     
-                    Text(eachreply.reply)
+                    Text(individualReply.reply)
                         .font(.custom("LexendDeca-Light", size: 15))
                         .foregroundColor(Theme.TextColor)
                     
-                    Text(timeAgoSinceDate(eachreply.date.dateValue()))  // time variable
+                    Text(timeAgoSinceDate(individualReply.date.dateValue()))  // time variable
                         .font(.custom("LexendDeca-Light", size: 13))
                         .foregroundColor(Theme.TextColor)
                 }
@@ -60,38 +54,21 @@ struct ReplyView: View {
             
             VStack(spacing: -20) {
                 Button(action: {
-                    let newLikeStatus = !(replyLikeStatus.likedStatus[replyId] ?? false)
-                    print("Before: \(replyLikeStatus.likedStatus[replyId] ?? false)")
-                    
-                    if newLikeStatus {
-                       replyUpdateModel.createLikeDocument(postId: postId, comId: comId, replyId: replyId, userId: currentUser.profile.userID)
-                    } else {
-                        replyUpdateModel.deleteLikeDocument(postId: postId, comId: comId, replyId: replyId, userId: currentUser.profile.userID)
-                    }
-                    
-                    replyLikeStatus.likedStatus[replyId] = newLikeStatus
-                    print("After: \(replyLikeStatus.likedStatus[replyId] ?? false)")
+                    individualReply.toggleLikeStatus()
                 }) {
-                    Image(replyLikeStatus.likedStatus[replyId] == true ? "eaten" : "noteaten")
+                    Image(individualReply.isLiked ? "eatensmore" : "noteatensmore")
                         .resizable()
-                        .frame(width: 75, height: 90)
+                        .frame(width: 30, height: 30)
                         .aspectRatio(contentMode: .fill)
-                        .offset(x: -2)
+                        .offset(x: -4)
                 }
-                Text("\(replyUpdateModel.replyLikes.count)")
+                
+                Text("\(formatNumber(individualReply.numLikes))")
                     .foregroundColor(Theme.TextColor)
                     .font(.custom("LexendDeca-SemiBold", size: 16))
+                    .offset(x: -4, y: 20)
             }
         }
-        .onAppear {
-            replyUpdateModel.postId = postId
-            print("replyupdatemodel postid did set from on appear")
-            replyUpdateModel.comId = comId
-            print("replyupdatemodel comId did set from on appear")
-            replyUpdateModel.replyId = replyId
-            print("replyid did set from on appear")
-        }
-        
     }
 }
 

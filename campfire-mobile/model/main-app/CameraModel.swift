@@ -356,6 +356,13 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
 
     func reTake() {
+        isFlashOn = false
+        if let deviceInput = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput {
+            
+            // Turn off the torch
+            setTorchModeOn(device: deviceInput.device, on: isFlashOn)
+        }
+
             // Perform the session start operation on a background queue
             DispatchQueue.global(qos: .userInitiated).async {
                 self.session.startRunning()
@@ -397,7 +404,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                 do {
                     try device.device.lockForConfiguration()
                     device.device.isSmoothAutoFocusEnabled = false
-                    device.device.torchMode = isFlashOn ? .on : .off  // Set torch mode when camera device is locked for configuration
+                    setTorchModeOn(device: device.device, on: isFlashOn)
                     device.device.unlockForConfiguration()  // Unlock the configuration
                 } catch {
                     print("Could not lock device for configuration: \(error)")
@@ -435,14 +442,23 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             }
     }
     
-    func setTorchModeOn(device: AVCaptureDevice) {
-        // No need to lock/unlock for configuration on this function, do this outside before calling the setTorchModeOn(device:) function
-        if device.hasTorch {
-            device.torchMode = isFlashOn ? .on : .off
-        } else {
-            print("Torch is not available on this device")
+    func setTorchModeOn(device: AVCaptureDevice, on: Bool) {
+        do {
+            try device.lockForConfiguration()
+            
+            if device.hasTorch {
+                device.torchMode = on ? .on : .off
+            } else {
+                print("Torch is not available on this device")
+            }
+            
+            device.unlockForConfiguration()
+            
+        } catch {
+            print("Error while locking device for torch configuration: \(error)")
         }
     }
+
     
     func stopRecording() {
         DispatchQueue.main.async {

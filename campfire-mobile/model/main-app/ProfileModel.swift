@@ -16,7 +16,11 @@ class ProfileModel: ObservableObject {
         self.currentUser = currentUser
         self.getProfile()
     }
-
+    
+   
+    
+    
+    
     func getProfile() {
         let docRef = currentUser.profileRef.document(id)
 

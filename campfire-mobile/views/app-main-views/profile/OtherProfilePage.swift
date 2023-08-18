@@ -43,8 +43,15 @@ struct OtherProfilePage: View {
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(formatNumber(profile.smores))🍫")
-                                                .font(.custom("LexendDeca-SemiBold", size: 15))
+                                            HStack {
+                                                Text("\(formatNumber(profile.smores))")
+                                                    .font(.custom("LexendDeca-SemiBold", size: 15))
+                                                Image("noteatensmore")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 18, height: 18)
+                                                    .offset(x: -3)
+                                            }
                                         }
                                         
                                         Text(profile.bio)

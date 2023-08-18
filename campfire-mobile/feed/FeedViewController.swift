@@ -15,8 +15,7 @@ class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
     var newFeedModel = NewFeedModel()
     var cancellables = Set<AnyCancellable>()
-    var newCancellables = Set<AnyCancellable>()
-    var hotCancellables = Set<AnyCancellable>()
+    var currentInteractingIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +46,9 @@ class FeedViewController: UIViewController {
                 self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
+        
+  //      observePauseVideos()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,15 +72,40 @@ class FeedViewController: UIViewController {
             (cell as? VideoCollectionViewCell)?.player?.play()
         }
     }
+    
+//    func observePauseVideos() {
+//        newFeedModel.$pauseVideos
+//            .sink { [weak self] isPaused in
+//                guard let self = self else { return }
+//
+//                if !isPaused, let indexPath = self.currentInteractingIndexPath {
+//                    print("scrolled back to correct item")
+//                    self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+//                }
+//            }
+//            .store(in: &cancellables)
+//    }
+
 }
 
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-   //     print("Number of items: \(newFeedModel.posts.count)")
+        print("Number of items: \(newFeedModel.posts.count)")
         return newFeedModel.posts.count
     }
+    
+    func currentVisibleIndexPath() -> IndexPath? {
+            for cell in collectionView.visibleCells {
+                if let indexPath = collectionView.indexPath(for: cell) {
+                    return indexPath
+                }
+            }
+            return nil
+        }
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let postItem = newFeedModel.posts[indexPath.item]
         
@@ -98,11 +125,14 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
            if let videoCell = cell as? VideoCollectionViewCell {
-               videoCell.play()
+               if !newFeedModel.pauseVideos {
+                   videoCell.play()
+               }
            }
            // Load more posts when the user is close to the end of the current list
            let threshold = 1 // How many more cells until the end to trigger the load more action
            if indexPath.item >= (newFeedModel.posts.count - threshold) {
+               print("nearing the end")
                if !newFeedModel.reachedEndofData {
                    newFeedModel.loadMorePosts()
                }
@@ -115,6 +145,14 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
           }
       }
 }
+
+extension FeedViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let indexPath = currentVisibleIndexPath() else { return }
+        currentInteractingIndexPath = indexPath
+    }
+}
+
 
 
 struct FeedViewControllerWrapper: UIViewControllerRepresentable {
@@ -129,4 +167,13 @@ struct FeedViewControllerWrapper: UIViewControllerRepresentable {
     
 }
 
+struct KeyboardSafeAreaKey: EnvironmentKey {
+    static let defaultValue: CGFloat = 0
+}
+extension EnvironmentValues {
+    var keyboardSafeArea: CGFloat {
+        get { self[KeyboardSafeAreaKey.self] }
+        set { self[KeyboardSafeAreaKey.self] = newValue }
+    }
+}
 

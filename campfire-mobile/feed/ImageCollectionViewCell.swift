@@ -60,7 +60,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
         setupImageView()
     }
     
-
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -72,7 +71,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
-        
         // Pin the imageView to the edges of the cell
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -94,6 +92,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
             let overlayView = FeedUIView(individualPost: individualPostVM, newFeedModel: model)
             hostingController = UIHostingController(rootView: overlayView)
             
+            
             guard let swiftUIView = hostingController?.view else { return }
             swiftUIView.backgroundColor = .clear
             swiftUIView.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +109,5 @@ class ImageCollectionViewCell: UICollectionViewCell {
             setupLikeButton()
         }
     }
-
-
 }
+

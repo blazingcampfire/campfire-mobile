@@ -129,8 +129,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
             }
         }
     
-    
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         playerLayer?.frame = contentView.bounds
@@ -176,7 +174,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
                 swiftUIView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 swiftUIView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             ])
-            
             // Move this line here to ensure that the likeButton is rendered above swiftUIView
             setupLikeButton()
         }

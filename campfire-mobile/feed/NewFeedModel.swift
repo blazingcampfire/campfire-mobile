@@ -59,14 +59,14 @@ class NewFeedModel: ObservableObject {
     }
     
     private func switchAssortment(to assortment: Assortment) {
+        print("switch assortment went off ")
         self.posts.removeAll()
-        self.lastDocumentSnapshot = nil
-        self.reachedEndofData = false
         removeOldListeners {
             DispatchQueue.main.async {
                 self.objectWillChange.send()
             }
             self.loadInitialPosts {
+                self.lastDocumentSnapshot = nil
                 self.startListener(for: assortment)
             }
         }
@@ -77,7 +77,7 @@ class NewFeedModel: ObservableObject {
         hotListener?.remove()
         initialLoadCompleted = false
         
-        newListener = ndPosts.order(by: "date", descending: true)
+        newListener = ndPosts.order(by: "date", descending: true).limit(to: 3)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
                 print("new listener off")
             guard let self = self else { return }
@@ -124,7 +124,7 @@ class NewFeedModel: ObservableObject {
         self.reachedEndofData = false
         self.initialLoadCompleted = false
         self.posts.removeAll()
-        print("loaded in posts")
+        print("loaded in three posts")
 
         var query: Query
         switch currentAssortment {
@@ -159,7 +159,7 @@ class NewFeedModel: ObservableObject {
         guard !reachedEndofData else {
             return
         }
-        print("loaded three more posts")
+   //     print("loaded three more posts")
         var query: Query
         switch currentAssortment {
         case .hot:
@@ -195,6 +195,7 @@ class NewFeedModel: ObservableObject {
             DispatchQueue.main.async {
                 self.posts.append(contentsOf: newUniquePosts)
                 self.objectWillChange.send()
+                print("loaded three more posts")
             }
             self.lastDocumentSnapshot = snapshot.documents.last
             self.reachedEndofData = snapshot.documents.isEmpty || snapshot.documents.count < 3
@@ -206,7 +207,7 @@ class NewFeedModel: ObservableObject {
         newListener?.remove()
         initialLoadCompleted = false
         
-        hotListener = ndPosts.order(by: "score", descending: true)
+        hotListener = ndPosts.order(by: "score", descending: true).limit(to: 3)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
             
             print("hot listener off")

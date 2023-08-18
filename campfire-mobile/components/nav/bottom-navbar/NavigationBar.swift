@@ -17,18 +17,12 @@ struct NavigationBar: View {
         TabView() {
                 FeedViewControllerWrapper()
                     .tabItem {
-                        Image(systemName: "play.fill")
+                        Image(systemName: "flame.circle.fill")
                     }
                     .toolbar(.visible, for: .tabBar)
                     .toolbarBackground(Color.black, for: .tabBar)
+                    .background(Color.black)
             
-            MapPage()
-                .tabItem {
-                    Image(systemName: "map")
-                }
-            
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
             CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
                 .tabItem {

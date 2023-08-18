@@ -18,6 +18,7 @@ struct CommentsPage: View {
     @State private var replyingToUserId: String?
     @EnvironmentObject var currentUser: CurrentUserModel
     @ObservedObject var post: IndividualPost
+    @ObservedObject var newFeedModel: NewFeedModel
 
     var body: some View {
         NavigationView {
@@ -48,6 +49,7 @@ struct CommentsPage: View {
                                 )
                                 .onTapGesture {
                                     isEditing = true
+                                    newFeedModel.pauseVideos = true
                                 }
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .overlay(RoundedRectangle(cornerRadius: 10)
@@ -70,6 +72,7 @@ struct CommentsPage: View {
                             )
                             .onTapGesture {
                                 isEditing = true
+                                newFeedModel.pauseVideos = true
                             }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
@@ -91,10 +94,12 @@ struct CommentsPage: View {
             }
             .onTapGesture {
                 isEditing = false
+                newFeedModel.pauseVideos = false
                 UIApplication.shared.dismissKeyboard()
                 replyingToCommentId = nil
                 replyingToUserId = nil
             }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {

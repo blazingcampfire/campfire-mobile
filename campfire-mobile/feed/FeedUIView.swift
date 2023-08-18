@@ -28,7 +28,7 @@ struct FeedUIView: View {
     
     var body: some View {
         ZStack {
-         
+            
             VStack {
                 HStack {
                     Button(action: {
@@ -54,8 +54,8 @@ struct FeedUIView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
             
-
-
+            
+            
             VStack {
                 HStack {
                     Button(action: {
@@ -70,67 +70,67 @@ struct FeedUIView: View {
                 .padding(.leading, 310)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-
-
+            
+            
             // -MARK: User information
             VStack {
                 HStack(alignment: .bottom) {
-
+                    
                     VStack(alignment: .leading) {
-
+                        
                         //- MARK: Profile pic/username buttons Hstack
                         HStack(spacing: 5) {
-
+                            
                             Button(action: {
                                 // lead to profile page
                             }) {
                                 KFImage(URL(string: individualPost.profilepic))
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                
                             }
                             .padding(.bottom, 25)
                             .padding(.leading, 20)
-
+                            
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
                                     //lead to profile page
                                 }) {
                                     Text("@\(individualPost.username)")
-                                            .font(.custom("LexendDeca-Bold", size: 16))
+                                        .font(.custom("LexendDeca-Bold", size: 16))
                                 }
-
+                                
                                 Text(individualPost.caption)
-                                        .font(.custom("LexendDeca-Regular", size: 15))
-
+                                    .font(.custom("LexendDeca-Regular", size: 15))
+                                
                                 if individualPost.location == "" {
-                                        Text("")
-                                    } else {
-                                        Text( "\(individualPost.location)" + "📍")
-                                            .font(.custom("LexendDeca-Regular", size: 15))
-                                    }
-
+                                    Text("")
+                                } else {
+                                    Text( "\(individualPost.location)" + "📍")
+                                        .font(.custom("LexendDeca-Regular", size: 15))
+                                }
+                                
                             }
                             .padding(.leading, 10)
                         }
-
+                        
                     }
-
+                    
                 }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.bottom, 40)
-
+            
             VStack(spacing: 7.5) {
                 
                 Text("\(formatNumber(individualPost.numLikes))")
-                .foregroundColor(.white)
-                .font(.custom("LexendDeca-Regular", size: 16))
-                .padding(.bottom, -60)
-
+                    .foregroundColor(.white)
+                    .font(.custom("LexendDeca-Regular", size: 16))
+                    .padding(.bottom, -60)
+                
                 VStack {
                     Button(action: {
                         activeSheet = .second
@@ -147,8 +147,8 @@ struct FeedUIView: View {
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }
                 .padding(.top, 30)
-
-
+                
+                
                 Button(action: {
                     activeSheet = .third
                 }) {
@@ -177,7 +177,7 @@ struct FeedUIView: View {
                     .presentationDragIndicator(.visible)
                     .presentationCornerRadius(30)
             case .second:
-                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
+                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)
             case .third:

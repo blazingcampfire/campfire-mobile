@@ -99,6 +99,12 @@ class CurrentUserModel: ObservableObject {
                 }
                 
                 guard let profile = try? document.data(as: Profile.self) else {
+                    do {
+                        try AuthenticationManager.shared.signOut()
+                    }
+                    catch {
+                        
+                    }
                     print("Error decoding profile in profileModel.")
                     return
                 }
@@ -136,6 +142,12 @@ class CurrentUserModel: ObservableObject {
                     print("Profile Email: \(privateUserData.email)")
                 case let .failure(error):
                     print("Error decoding profile: \(error)")
+                    do {
+                        try AuthenticationManager.shared.signOut()
+                    }
+                    catch {
+                        
+                    }
                 }
             }
         }

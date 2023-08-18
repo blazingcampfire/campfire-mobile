@@ -26,8 +26,6 @@ struct EnterPhoneNumber: View {
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
 
-//                            FormTextField(text: $model.phoneNumber, placeholderText: "phone number" )
-//                                .keyboardType(.numberPad)
                         PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
                             .keyboardType(.numberPad)
                             .background(Color.clear)

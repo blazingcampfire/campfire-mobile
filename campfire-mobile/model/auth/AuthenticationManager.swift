@@ -58,6 +58,7 @@ final class AuthenticationManager {
         Auth.auth().currentUser!.delete()
         print("end of function call")
     }
+    
     func unlinkCredential(providerID: String) {
         if Auth.auth().currentUser?.uid == nil {
             return
@@ -79,7 +80,7 @@ final class AuthenticationManager {
             if !schoolValidator(email: email!) || !validEmail
             {
                 print(schoolValidator(email: email!))
-                try deleteUser()
+                self.deleteUser()
                 throw EmailError.noMatch
             }
             

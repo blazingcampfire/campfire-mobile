@@ -12,8 +12,8 @@ struct EllipsesButtonView: View {
     @EnvironmentObject var individualPostModel: IndividualPost
     @Environment(\.dismiss) private var dismiss
     @State private var selectedAction: String? = nil   // Tracks the selected action
-    let optionsList = ["abuse", "spam", "threatens safety", "other"]
-    @State private var option = "other"
+    let optionsList = ["spam", "abuse", "threatens safety", "other"]
+    @State private var option = "spam"
     var body: some View {
         VStack {
 
@@ -81,7 +81,6 @@ struct EllipsesButtonView: View {
                     // Action for deleting the post
                     selectedAction = "delete"
                     equalIds.showAlert = true
-                    dismiss()
                 }) {
                     HStack {
                         Text("delete post")

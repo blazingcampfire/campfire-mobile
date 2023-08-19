@@ -20,11 +20,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="Gbl-Sf-bTM">
-                                <rect key="frame" x="-37" y="-32" width="900" height="895"/>
+                                <rect key="frame" x="-37" y="-32" width="900" height="912"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="s'more" translatesAutoresizingMaskIntoConstraints="NO" id="EEm-ib-hWY">
-                                <rect key="frame" x="70" y="334" width="273" height="163"/>
+                                <rect key="frame" x="60" y="345" width="273" height="163"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>

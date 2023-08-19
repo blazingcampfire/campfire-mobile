@@ -185,7 +185,7 @@ struct FeedUIView: View {
                     .presentationDragIndicator(.visible)
                     .presentationCornerRadius(30)
             case .second:
-                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
+                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
                     .tint(Theme.Peach)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)

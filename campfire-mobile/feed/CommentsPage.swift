@@ -99,7 +99,7 @@ struct CommentsPage: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {
-                        Text("Comments")
+                        Text("comments")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                         

@@ -102,7 +102,7 @@ struct CommentView: View {
                     }
                 if showingReplies {
                     ForEach(commentModel.repliesByComment[individualComment.comId] ?? [], id: \.id) { reply in
-                        ReplyView(individualReply: IndividualReply(replyItem: reply, postId: commentModel.postId, commentId: individualComment.comId))
+                        ReplyView(individualReply: IndividualReply(replyItem: reply, postId: commentModel.postId, commentId: individualComment.comId, currentUser: currentUser))
                     }
                 }
         }

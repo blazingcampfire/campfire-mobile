@@ -21,7 +21,7 @@ class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
     @Published var currentAssortment: Assortment = .hot
     @Published var pauseVideos = false
-    // @Published var currentUser: CurrentUserModel
+    @Published var currentUser: CurrentUserModel
     var initialLoadCompleted = false
     var cancellables = Set<AnyCancellable>()
     
@@ -31,12 +31,12 @@ class NewFeedModel: ObservableObject {
      var lastDocumentSnapshot: DocumentSnapshot?
      var reachedEndofData = false
     
-    init() {
+    init(currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
         $currentAssortment
         .sink { [weak self] assortment in
             self?.switchAssortment(to: assortment)
         }.store(in: &cancellables)
-        //self.currentUser = currentUser
     }
     
     deinit {
@@ -79,7 +79,7 @@ class NewFeedModel: ObservableObject {
         hotListener?.remove()
         initialLoadCompleted = false
         
-        newListener = ndPosts.order(by: "date", descending: true).limit(to: 3)
+        newListener = currentUser.postsRef.order(by: "date", descending: true).limit(to: 3)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
                 print("new listener off")
             guard let self = self else { return }
@@ -131,9 +131,9 @@ class NewFeedModel: ObservableObject {
         var query: Query
         switch currentAssortment {
         case .hot:
-            query = ndPosts.order(by: "score", descending: true).limit(to: 3)
+            query = currentUser.postsRef.order(by: "score", descending: true).limit(to: 3)
         case .new:
-            query = ndPosts.order(by: "date", descending: true).limit(to: 3)
+            query = currentUser.postsRef.order(by: "date", descending: true).limit(to: 3)
         }
 
         query.getDocuments { [weak self] (querySnapshot, error) in
@@ -165,9 +165,9 @@ class NewFeedModel: ObservableObject {
         var query: Query
         switch currentAssortment {
         case .hot:
-            query = ndPosts.order(by: "score", descending: true).limit(to: 3)
+            query = currentUser.postsRef.order(by: "score", descending: true).limit(to: 3)
         case .new:
-            query = ndPosts.order(by: "date", descending: true).limit(to: 3)
+            query = currentUser.postsRef.order(by: "date", descending: true).limit(to: 3)
         }
         
         if let lastSnapshot = self.lastDocumentSnapshot {
@@ -209,7 +209,7 @@ class NewFeedModel: ObservableObject {
         newListener?.remove()
         initialLoadCompleted = false
         
-        hotListener = ndPosts.order(by: "score", descending: true).limit(to: 3)
+        hotListener = currentUser.postsRef.order(by: "score", descending: true).limit(to: 3)
             .addSnapshotListener { [weak self] (querySnapshot, error) in
             
             print("hot listener off")

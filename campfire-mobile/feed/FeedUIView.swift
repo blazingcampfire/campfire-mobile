@@ -28,6 +28,14 @@ struct FeedUIView: View {
     
     var body: some View {
         ZStack {
+            if newFeedModel.posts.isEmpty {
+                Color.blue
+                
+                Text("no posts yet, get the campfire started!")
+                    .font(.custom("LexendDeca-Bold", size: 25))
+                    .foregroundColor(.white)
+            }
+            else {
             VStack {
                 HStack {
                     Button(action: {
@@ -160,6 +168,7 @@ struct FeedUIView: View {
             .padding(.trailing, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
         }
+        }
         .background(Color.clear)
         .onAppear {
             if currentUser.profile.userID == individualPost.posterId || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
@@ -173,7 +182,7 @@ struct FeedUIView: View {
                     .presentationDragIndicator(.visible)
                     .presentationCornerRadius(30)
             case .second:
-                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
+                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)
             case .third:

@@ -13,6 +13,7 @@ class IndividualComment: ObservableObject {
     @Published var commentItem: Comment
     @Published var postId: String
     @Published var isLiked: Bool = false
+    @Published var currentUser: CurrentUserModel
     
     var profilepic: String {
         return commentItem.profilepic
@@ -38,9 +39,10 @@ class IndividualComment: ObservableObject {
         return commentItem.id
     }
     
-    init(commentItem: Comment, postId: String) {
+    init(commentItem: Comment, postId: String, currentUser: CurrentUserModel) {
         self.commentItem = commentItem
         self.postId = postId
+        self.currentUser = currentUser
     }
     
     func toggleLikeStatus() {
@@ -53,8 +55,8 @@ class IndividualComment: ObservableObject {
     }
     
     func modifyLikes(increment: Int64) {
-           let commentDocRef = ndPosts.document(postId).collection("comments").document(commentItem.id)
-           let userDocRef = yaleProfiles.document(commentItem.posterId)
+        let commentDocRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
+        let userDocRef = currentUser.profileRef.document(commentItem.posterId)
            
            // Run a transaction
            db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -74,55 +76,6 @@ class IndividualComment: ObservableObject {
            }
        }
     
-    func increaseCommentLikes() {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentItem.id)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing comment likes")
-                DispatchQueue.main.async {
-                    self.commentItem.numLikes += 1
-                }
-            }
-        }
-    }
-
-    func decreaseCommentLikes() {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentItem.id)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing comment likes")
-                DispatchQueue.main.async {
-                    self.commentItem.numLikes -= 1
-                }
-            }
-        }
-    }
-    
-    func increaseUserLikesCom() {
-        let docRef = yaleProfiles.document(commentItem.posterId)
-        docRef.updateData(["smores": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing users likes from comment")
-            }
-        }
-    }
-
-    func decreaseUserLikesCom() {
-        let docRef = yaleProfiles.document(commentItem.posterId)
-        docRef.updateData(["smores": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing users likes from comment")
-            }
-        }
-    }
 }
 
 class IndividualReply: ObservableObject {
@@ -130,6 +83,7 @@ class IndividualReply: ObservableObject {
     @Published var postId: String
     @Published var commentId: String
     @Published var isLiked: Bool = false
+    @Published var currentUser: CurrentUserModel
 
     var profilepic: String {
         return replyItem.profilepic
@@ -151,10 +105,11 @@ class IndividualReply: ObservableObject {
         return replyItem.numLikes
     }
 
-    init(replyItem: Reply, postId: String, commentId: String) {
+    init(replyItem: Reply, postId: String, commentId: String, currentUser: CurrentUserModel) {
         self.replyItem = replyItem
         self.postId = postId
         self.commentId = commentId
+        self.currentUser = currentUser
     }
 
     func toggleLikeStatus() {
@@ -167,8 +122,8 @@ class IndividualReply: ObservableObject {
     }
     
     func modifyLikes(increment: Int64) {
-           let replyDocRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
-           let userDocRef = yaleProfiles.document(replyItem.posterId)
+        let replyDocRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
+        let userDocRef = currentUser.profileRef.document(replyItem.posterId)
            
            // Run a transaction
            db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -186,59 +141,6 @@ class IndividualReply: ObservableObject {
                }
            }
        }
-    
-    
-    
-    
-    func increaseReplyLikes() {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing reply likes")
-                DispatchQueue.main.async {
-                    self.replyItem.numLikes += 1
-                }
-            }
-        }
-    }
-
-    func decreaseReplyLikes() {
-        let docRef = ndPosts.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
-        docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing reply likes")
-                DispatchQueue.main.async {
-                    self.replyItem.numLikes -= 1
-                }
-            }
-        }
-    }
-    
-    func increaseUserLikesReply() {
-        let docRef = yaleProfiles.document(replyItem.posterId)
-        docRef.updateData(["smores": FieldValue.increment(Int64(1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing users likes from reply")
-            }
-        }
-    }
-
-    func decreaseUserLikesReply() {
-        let docRef = yaleProfiles.document(replyItem.posterId)
-        docRef.updateData(["smores": FieldValue.increment(Int64(-1))]) { error in
-            if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing users likes from reply")
-            }
-        }
-    }
 
 }
 

@@ -18,7 +18,7 @@ struct CommentsPage: View {
     @State private var replyingToUserId: String?
     @EnvironmentObject var currentUser: CurrentUserModel
     @ObservedObject var post: IndividualPost
-    @ObservedObject var newFeedModel: NewFeedModel
+
 
     var body: some View {
         NavigationView {
@@ -49,7 +49,6 @@ struct CommentsPage: View {
                                 )
                                 .onTapGesture {
                                     isEditing = true
-                                    newFeedModel.pauseVideos = true
                                 }
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .overlay(RoundedRectangle(cornerRadius: 10)
@@ -72,7 +71,6 @@ struct CommentsPage: View {
                             )
                             .onTapGesture {
                                 isEditing = true
-                                newFeedModel.pauseVideos = true
                             }
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(RoundedRectangle(cornerRadius: 10)
@@ -94,7 +92,6 @@ struct CommentsPage: View {
             }
             .onTapGesture {
                 isEditing = false
-                newFeedModel.pauseVideos = false
                UIApplication.shared.dismissKeyboard()
                 replyingToCommentId = nil
                 replyingToUserId = nil
@@ -158,7 +155,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId)
+                    CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId, currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId)
                 }
             }
         }

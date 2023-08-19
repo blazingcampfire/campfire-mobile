@@ -30,6 +30,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         }
     }
     var cancellables = Set<AnyCancellable>()
+    var currentUser: CurrentUserModel?
 
     private func setupBindings() {
         cancellables = []
@@ -135,7 +136,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
         playerLayer?.frame = contentView.bounds
     }
     
-    func configure(with postItem: PostItem, model: NewFeedModel) {
+    func configure(with postItem: PostItem, model: NewFeedModel, currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
         // Safely unwrap the URL string
         if let url = URL(string: postItem.url) {
             let playerItem = AVPlayerItem(url: url)
@@ -153,7 +155,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
             swiftUIView.removeFromSuperview()
         }
 
-        individualPostVM = IndividualPost(postItem: postItem)
+        individualPostVM = IndividualPost(postItem: postItem, currentUser: currentUser)
         
         if let swiftUIView = hostingController?.view {
             swiftUIView.removeFromSuperview()

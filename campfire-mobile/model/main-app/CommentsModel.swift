@@ -38,7 +38,7 @@ class CommentsModel: ObservableObject {
     
     //Create UserId field on each comment 
     func createComment() {
-        let docRef = ndPosts.document(postId).collection("comments").document()
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document()
         let now = Timestamp(date: Date())
         let commentData: [String: Any] = [
             "id": docRef.documentID,
@@ -60,7 +60,7 @@ class CommentsModel: ObservableObject {
     }
     
     func createReply(comId: String) {
-        let docRef = ndPosts.document(postId).collection("comments").document(comId).collection("replies").document()
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(comId).collection("replies").document()
         let now = Timestamp(date: Date())
         let replyData: [String: Any] = [
             "id": docRef.documentID,
@@ -83,7 +83,7 @@ class CommentsModel: ObservableObject {
         
     
     func listenForComments() {
-        let docRef = ndPosts.document(postId).collection("comments").order(by: "date", descending: false)
+        let docRef = currentUser.postsRef.document(postId).collection("comments").order(by: "date", descending: false)
         commentListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
@@ -108,7 +108,7 @@ class CommentsModel: ObservableObject {
         guard let getRepliesFor = getRepliesFor else {
             return
         }
-        let docRef = ndPosts.document(postId).collection("comments").document(getRepliesFor).collection("replies").order(by: "date", descending: false)
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(getRepliesFor).collection("replies").order(by: "date", descending: false)
         replyListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")

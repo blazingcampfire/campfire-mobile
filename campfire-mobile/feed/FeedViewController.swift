@@ -13,9 +13,20 @@ import Combine
 
 class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
-    var newFeedModel = NewFeedModel()
+    var newFeedModel: NewFeedModel
     var cancellables = Set<AnyCancellable>()
 
+
+    init(currentUser: CurrentUserModel) {
+        self.newFeedModel = NewFeedModel(currentUser: currentUser)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,11 +102,11 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if postItem.postType == "image" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
-            cell.configure(with: postItem, model: newFeedModel)
+            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
             return cell
         } else if postItem.postType == "video" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
-            cell.configure(with: postItem, model: newFeedModel)
+            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
             return cell
         }
         return UICollectionViewCell()
@@ -128,8 +139,10 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
 
 
 struct FeedViewControllerWrapper: UIViewControllerRepresentable {
+    @EnvironmentObject var currentUser: CurrentUserModel
+    
     func makeUIViewController(context: Context) -> FeedViewController {
-        return FeedViewController()
+        return FeedViewController(currentUser: currentUser)
     }
     
     typealias UIViewControllerType = FeedViewController

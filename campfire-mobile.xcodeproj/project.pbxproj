@@ -51,9 +51,6 @@
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
 		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
 		B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */; };
-		B1B357422A8704B20043AC2A /* LikeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B357412A8704B20043AC2A /* LikeButtonView.swift */; };
-		B1B357442A87372E0043AC2A /* CommentLikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B357432A87372E0043AC2A /* CommentLikeButton.swift */; };
-		B1B357462A873BAE0043AC2A /* ReplyLikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B357452A873BAE0043AC2A /* ReplyLikeButton.swift */; };
 		B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7D92A57293C00E30064 /* tiger.mp4 */; };
 		B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DD2A572B8100E30064 /* davo.mp4 */; };
 		B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DF2A572D7200E30064 /* me.jpeg */; };
@@ -257,9 +254,6 @@
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
 		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
 		B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsPage.swift; sourceTree = "<group>"; };
-		B1B357412A8704B20043AC2A /* LikeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButtonView.swift; sourceTree = "<group>"; };
-		B1B357432A87372E0043AC2A /* CommentLikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLikeButton.swift; sourceTree = "<group>"; };
-		B1B357452A873BAE0043AC2A /* ReplyLikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyLikeButton.swift; sourceTree = "<group>"; };
 		B1B5D7D92A57293C00E30064 /* tiger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiger.mp4; sourceTree = "<group>"; };
 		B1B5D7DD2A572B8100E30064 /* davo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = davo.mp4; sourceTree = "<group>"; };
 		B1B5D7DF2A572D7200E30064 /* me.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpeg; sourceTree = "<group>"; };
@@ -690,9 +684,6 @@
 				B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */,
 				B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */,
 				F85957B72A8825DA00E2DDC1 /* FillerPFP.swift */,
-				B1B357412A8704B20043AC2A /* LikeButtonView.swift */,
-				B1B357432A87372E0043AC2A /* CommentLikeButton.swift */,
-				B1B357452A873BAE0043AC2A /* ReplyLikeButton.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -1111,7 +1102,6 @@
 				E2C446852A4E6DFC0032CF34 /* TopNavBarContainer.swift in Sources */,
 				B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */,
 				B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */,
-				B1B357462A873BAE0043AC2A /* ReplyLikeButton.swift in Sources */,
 				B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
 				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,
@@ -1129,7 +1119,6 @@
 				E2DA6CFE2A7165E8002D7660 /* SettingsModel.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
 				E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */,
-				B1B357442A87372E0043AC2A /* CommentLikeButton.swift in Sources */,
 				E2434C4D2A5A412C000A70DB /* GradientBackground.swift in Sources */,
 				E2B248D62A800D750004A757 /* PhoneNumberField.swift in Sources */,
 				B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */,
@@ -1175,7 +1164,6 @@
 				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
-				B1B357422A8704B20043AC2A /* LikeButtonView.swift in Sources */,
 				B1E9DE102A888AC100E0B61F /* FeedUIView.swift in Sources */,
 				E21F79C42A68DF98004B3DCC /* SearchModel.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,

@@ -13,6 +13,7 @@ import FirebaseFirestore
 class IndividualPost: ObservableObject {
     @Published var postItem: PostItem
     @Published var isLiked: Bool = false
+    @Published var currentUser: CurrentUserModel
     
     var numLikes: Int {
         return postItem.numLikes
@@ -53,8 +54,9 @@ class IndividualPost: ObservableObject {
         return postItem.posterId
     }
     
-    init(postItem: PostItem) {
+    init(postItem: PostItem, currentUser: CurrentUserModel) {
         self.postItem = postItem
+        self.currentUser = currentUser
     }
     
     private var listener: ListenerRegistration?
@@ -73,7 +75,7 @@ class IndividualPost: ObservableObject {
     }
     
     func increaseComNum() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["comNum": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -87,7 +89,7 @@ class IndividualPost: ObservableObject {
     }
     
     func increasePostScore() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["score": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -98,7 +100,7 @@ class IndividualPost: ObservableObject {
     }
     
     func decreasePostScore() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["score": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -112,7 +114,7 @@ class IndividualPost: ObservableObject {
     
     
     func increasePostLikes() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -126,7 +128,7 @@ class IndividualPost: ObservableObject {
     }
 
     func decreasePostLikes() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -140,7 +142,7 @@ class IndividualPost: ObservableObject {
     }
     
     func increaseUserLikesPost() {
-        let docRef = yaleProfiles.document(postItem.posterId)
+        let docRef = currentUser.profileRef.document(postItem.posterId)
         docRef.updateData(["smores": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -151,7 +153,7 @@ class IndividualPost: ObservableObject {
     }
 
     func decreaseUserLikesPost() {
-        let docRef = yaleProfiles.document(postItem.posterId)
+        let docRef = currentUser.profileRef.document(postItem.posterId)
         docRef.updateData(["smores": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
@@ -162,7 +164,7 @@ class IndividualPost: ObservableObject {
     }
     
     func deletePostDocument() {
-        let docRef = ndPosts.document(postItem.id)
+        let docRef = currentUser.postsRef.document(postItem.id)
         docRef.delete() { error in
             if let error = error {
                 print("Error updating document \(error)")

@@ -20,6 +20,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
     var cancellables = Set<AnyCancellable>()
+    var currentUser: CurrentUserModel?
     
 
     private func setupBindings() {
@@ -80,9 +81,11 @@ class ImageCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with postItem: PostItem, model: NewFeedModel) {
+    func configure(with postItem: PostItem, model: NewFeedModel, currentUser: CurrentUserModel) {
+        self.currentUser = currentUser
         imageView.kf.setImage(with: URL(string: postItem.url))
-        individualPostVM = IndividualPost(postItem: postItem)
+        individualPostVM = IndividualPost(postItem: postItem, currentUser: currentUser)
+            
         
         if let swiftUIView = hostingController?.view {
             swiftUIView.removeFromSuperview()

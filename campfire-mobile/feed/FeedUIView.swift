@@ -29,14 +29,6 @@ struct FeedUIView: View {
     
     var body: some View {
         ZStack {
-            if newFeedModel.posts.isEmpty {
-                Color.blue
-                
-                Text("no posts yet, get the campfire started!")
-                    .font(.custom("LexendDeca-Bold", size: 25))
-                    .foregroundColor(.white)
-            }
-            else {
             VStack {
                 HStack {
                     Button(action: {
@@ -167,7 +159,6 @@ struct FeedUIView: View {
             .padding(.bottom, 155)
             .padding(.trailing, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-        }
         }
         .background(Color.clear)
         .onAppear {

@@ -92,11 +92,10 @@ class ImageCollectionViewCell: UICollectionViewCell {
             let overlayView = FeedUIView(individualPost: individualPostVM, newFeedModel: model)
             hostingController = UIHostingController(rootView: overlayView)
             
-            
             guard let swiftUIView = hostingController?.view else { return }
             swiftUIView.backgroundColor = .clear
             swiftUIView.translatesAutoresizingMaskIntoConstraints = false
-            
+    
             contentView.addSubview(swiftUIView)
             
             NSLayoutConstraint.activate([
@@ -110,4 +109,5 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
 }
+
 

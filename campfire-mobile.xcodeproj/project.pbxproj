@@ -16,7 +16,6 @@
 		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
 		B14D678A2A748A030035B0CE /* content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14D67892A748A030035B0CE /* content.swift */; };
 		B1562CDF2A5E501B00E8C5FD /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */; };
-		B159B3972A8EAE1A00302FDC /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B159B3962A8EAE1A00302FDC /* KeyboardObserver.swift */; };
 		B15D08AA2A85C3010038C19D /* EllipsesButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */; };
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
 		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
@@ -80,6 +79,7 @@
 		B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA62A71E770008E6C69 /* CameraView.swift */; };
 		B1C51EA92A71E7A3008E6C69 /* CameraMediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA82A71E7A3008E6C69 /* CameraMediaPicker.swift */; };
 		B1C51EAB2A722522008E6C69 /* PreviewPostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EAA2A722522008E6C69 /* PreviewPostInfo.swift */; };
+		B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1C6885B2A8FF8430049102D /* InterposeKit */; };
 		B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */; };
 		B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04A2A57D7B800BA5554 /* cute.jpeg */; };
 		B1CAD04D2A57D83B00BA5554 /* blonde.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */; };
@@ -222,7 +222,6 @@
 		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
 		B14D67892A748A030035B0CE /* content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = content.swift; sourceTree = "<group>"; };
 		B1562CDE2A5E501B00E8C5FD /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
-		B159B3962A8EAE1A00302FDC /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipsesButtonView.swift; sourceTree = "<group>"; };
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
 		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
@@ -401,6 +400,7 @@
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
 				B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
+				B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
@@ -851,7 +851,6 @@
 				B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */,
 				B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */,
 				B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */,
-				B159B3962A8EAE1A00302FDC /* KeyboardObserver.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -893,6 +892,7 @@
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
 				B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */,
+				B1C6885B2A8FF8430049102D /* InterposeKit */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -976,6 +976,7 @@
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1133,7 +1134,6 @@
 				E2B248D62A800D750004A757 /* PhoneNumberField.swift in Sources */,
 				B1B5EFD12A4F56C200FA79CE /* FormTextField.swift in Sources */,
 				E2163E492A660AA8005A20BE /* collections.swift in Sources */,
-				B159B3972A8EAE1A00302FDC /* KeyboardObserver.swift in Sources */,
 				E2C446832A4E62B50032CF34 /* CustomTopNavBar.swift in Sources */,
 				B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */,
 				B1562CDF2A5E501B00E8C5FD /* ReplyView.swift in Sources */,
@@ -1550,6 +1550,14 @@
 				kind = branch;
 			};
 		};
+		B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/steipete/InterposeKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1621,6 +1629,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */;
 			productName = SwiftUICam;
+		};
+		B1C6885B2A8FF8430049102D /* InterposeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */;
+			productName = InterposeKit;
 		};
 		B1EA23B92A74E0790021F0D1 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

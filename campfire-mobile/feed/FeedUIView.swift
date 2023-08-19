@@ -28,7 +28,6 @@ struct FeedUIView: View {
     
     var body: some View {
         ZStack {
-            
             VStack {
                 HStack {
                     Button(action: {
@@ -53,8 +52,6 @@ struct FeedUIView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
-            
-            
             
             VStack {
                 HStack {
@@ -162,9 +159,6 @@ struct FeedUIView: View {
             .padding(.bottom, 155)
             .padding(.trailing, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-            
-            
-            
         }
         .background(Color.clear)
         .onAppear {
@@ -194,7 +188,6 @@ struct FeedUIView: View {
         .onTapGesture {
             idsEqual.showAlert = false
         }
-        
     }
     
     }

@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "interposekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/steipete/InterposeKit.git",
+      "state" : {
+        "revision" : "17853ad69961a5114e25c60c3ce7600feac0eabd",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "iphonenumberfield",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MojtabaHs/iPhoneNumberField.git",

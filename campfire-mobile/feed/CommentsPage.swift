@@ -99,7 +99,6 @@ struct CommentsPage: View {
                 replyingToCommentId = nil
                 replyingToUserId = nil
             }
-         //   .ignoresSafeArea(.keyboard, edges: .bottom)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     HStack {

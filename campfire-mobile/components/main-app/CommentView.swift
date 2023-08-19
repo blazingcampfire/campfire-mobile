@@ -22,26 +22,23 @@ struct CommentView: View {
             VStack(spacing: 0) { //View Replies wrapped
                     HStack { //Profile pic to comment info to like button wrapped horizontally
                         HStack(spacing: 5){
-                            Button(action: {
-                                //navigate to profile
-                            }) {
+                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.id, currentUser: currentUser)) , label: {
                                 KFImage(URL(string: individualComment.profilepic))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
                                     .clipShape(Circle())
-                            }
+                            })
                             .padding(.trailing, 5)
                             
                             //-MARK: Comment Info
                             VStack(alignment: .leading, spacing: 2) {
-                                Button(action: {
+                                NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.id, currentUser: currentUser)), label: {
                                     //navigate to profile
-                                }) {
                                     Text("@\(individualComment.username)")
                                         .font(.custom("LexendDeca-Bold", size: 14))
                                         .foregroundColor(Theme.TextColor)
-                                }
+                                })
                                 
                                 Text(individualComment.comment)
                                     .font(.custom("LexendDeca-Light", size: 15))
@@ -110,6 +107,7 @@ struct CommentView: View {
         .onAppear {
             commentModel.getRepliesFor = individualComment.comId
         }
+        .tint(Theme.Peach)
     }
     }
 //struct CommentView_Previews: PreviewProvider {

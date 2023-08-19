@@ -216,9 +216,9 @@ struct EditPost: View {
         }
         .onChange(of: selectedImage) { newImage in
             
-                    changePic = true
+            changePic = true
             
-                }
+        }
         
     }
     

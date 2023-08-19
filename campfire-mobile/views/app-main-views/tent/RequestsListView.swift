@@ -40,7 +40,6 @@ struct RequestsListView: View {
                 }
                 .overlay(
                     NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
-                            .navigationBarBackButtonHidden(true)
                                    },
                                    label: { EmptyView() })
                         .opacity(0)

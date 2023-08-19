@@ -75,11 +75,11 @@ class SearchModel: ObservableObject {
         
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([userRequestField])
+            "ownRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
     
         userRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([friendRequestField])
+            "sentRequests": FieldValue.arrayUnion([friendRequestField])
         ], merge: true)
     }
     
@@ -93,11 +93,11 @@ class SearchModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         
         friendRelationshipRef.updateData([
-            "sentRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
+            "ownRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
         ])
         
         userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)])
+            "sentRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)])
         ])
     }
     
@@ -124,28 +124,6 @@ class SearchModel: ObservableObject {
         }
         return false
         
-//            documentSnapshot, error in
-//            if error != nil {
-//                print(error?.localizedDescription)
-//            }
-//            else {
-//                guard let documentSnapshot = documentSnapshot else {
-//                    return
-//                }
-//                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
-//                    for rawRequest in requests {
-//                        guard let neatRequest = RequestFirestore(data: rawRequest) else {
-//                            print("Error comparing requests")
-//                            return
-//                        }
-//                        if request.userID == neatRequest.userID {
-//                            print(request.userID, neatRequest.userID)
-//                            flag = true
-//                            break
-//                        }
-//                    }
-//            }
-//        }
     }
     
 }

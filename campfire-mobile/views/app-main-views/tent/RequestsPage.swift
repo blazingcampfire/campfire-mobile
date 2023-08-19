@@ -10,19 +10,21 @@ struct RequestsPage: View {
     @StateObject var model: RequestsModel
     @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationView {
             if model.requests.isEmpty {
                 ZStack {
                     Theme.ScreenColor
                         .ignoresSafeArea(.all)
 
                     VStack {
-                        VStack {
-                            Text("requests")
-                                .font(.custom("LexendDeca-SemiBold", size: 30))
-                                .foregroundColor(Theme.TextColor)
-                                .padding(.leading, 15)
-                                .frame(alignment: .leading)
+                        HStack {
+                            VStack {
+                                Text("requests")
+                                    .font(.custom("LexendDeca-SemiBold", size: 30))
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding()
+                            }
+                            Spacer()
+                            
                         }
                         Spacer()
                         VStack {
@@ -44,9 +46,20 @@ struct RequestsPage: View {
                 ZStack {
                     Theme.ScreenColor
                         .ignoresSafeArea(.all)
-
-                    ListRequests()
-                        .environmentObject(model)
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("requests")
+                                    .font(.custom("LexendDeca-SemiBold", size: 30))
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding()
+                            }
+                            Spacer()
+                            
+                        }
+                        ListRequests()
+                            .environmentObject(model)
+                    }
                 }
                 .refreshable {
                     model.readRequests()
@@ -55,7 +68,6 @@ struct RequestsPage: View {
                 .listStyle(PlainListStyle())
                 .padding(.top, -10)
             }
-        }
     
     }
 }

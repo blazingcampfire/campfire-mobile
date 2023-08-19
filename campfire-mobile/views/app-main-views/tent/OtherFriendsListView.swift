@@ -40,7 +40,8 @@ struct OtherFriendsListView: View {
                     }
                 }
                 .overlay(
-                    NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
+                    NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser)
+                    )
                                    },
                                    label: { EmptyView() })
                         .opacity(0)

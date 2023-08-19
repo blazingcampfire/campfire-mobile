@@ -18,15 +18,14 @@ struct EllipsesButtonView: View {
             Button(action: {
                 // Action for reporting the post
                 selectedAction = "report"
-                print("Report Post tapped")
             }) {
                 HStack {
-                    Text("Report Post")
+                    Text("report post")
                         .font(.custom("LexendDeca-SemiBold", size: 20))
                         .padding(.leading, 16)  // Padding to move text away from edge
                     Spacer()
                     if selectedAction == "report" {
-                        Image(systemName: "button.programmable")
+                        Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(Theme.Peach)
                             .bold()
                             .font(.system(size: 25))
@@ -42,19 +41,18 @@ struct EllipsesButtonView: View {
                     // Action for deleting the post
                     selectedAction = "delete"
                     equalIds.showAlert = true
-                    print("Delete Post tapped")
                 }) {
                     HStack {
-                        Text("Delete Post")
+                        Text("delete post")
                             .font(.custom("LexendDeca-SemiBold", size: 20))
                             .padding(.leading, 16)  // Padding to move text away from edge
                         Spacer()
                         if selectedAction == "delete" {
-                            Image(systemName: "button.programmable")
+                            Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(Theme.Peach)
                                 .bold()
                                 .font(.system(size: 25))
-                                .padding(.trailing, 40)
+                                .padding(.trailing, 30)
                         }
                     }
                 }

@@ -21,6 +21,9 @@ struct ContentView: View {
                     currentUser.setCollectionRefs()
                     currentUser.getUser()
                     currentUser.getProfile()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        currentUser.showInitialMessage = true
+                    }
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)

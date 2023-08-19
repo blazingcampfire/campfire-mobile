@@ -11,7 +11,7 @@ import FirebaseFirestore
 import Foundation
 
 class CurrentUserModel: ObservableObject {
-    @Published var showInitialMessage = false // initial message
+    @Published var showInitialMessage = false
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
     @Published var signedIn: Bool = false
@@ -20,7 +20,6 @@ class CurrentUserModel: ObservableObject {
     var profileRef: CollectionReference
     var relationshipsRef: CollectionReference
     var postsRef: CollectionReference
-    // var firstTimeUser: Bool
 
     init(privateUserData: PrivateUser, profile: Profile, userRef: CollectionReference, profileRef: CollectionReference, relationshipsRef: CollectionReference, postsRef: CollectionReference) {
         self.privateUserData = privateUserData

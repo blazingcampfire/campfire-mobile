@@ -117,11 +117,11 @@ class ProfileModel: ObservableObject {
             return
         }
         friendRelationshipRef.updateData([
-            "sentRequests": FieldValue.arrayRemove([userRequestField]),
+            "ownRequests": FieldValue.arrayRemove([userRequestField]),
         ])
 
         userRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([friendRequestField]),
+            "sentRequests": FieldValue.arrayRemove([friendRequestField]),
         ])
         self.requested = false
     }

@@ -21,11 +21,15 @@ struct FriendsPage: View {
                             .ignoresSafeArea(.all)
                         
                         VStack {
-                            VStack {
-                                Text("Friends")
-                                    .font(.custom("LexendDeca-SemiBold", size: 30))
-                                    .foregroundColor(Theme.TextColor)
-                                    .padding(.leading, 15)
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
                             }
                             Spacer()
                             VStack {
@@ -49,8 +53,20 @@ struct FriendsPage: View {
                     ZStack {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
-                        
-                        ListFriends()
+                        VStack {
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
+                            }
+                            
+                            ListFriends()
+                        }
                     }
                     .environmentObject(model)
                     .background(Color.white)

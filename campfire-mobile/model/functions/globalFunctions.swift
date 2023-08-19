@@ -55,6 +55,11 @@ func postsParser(school: String) -> CollectionReference? {
     return postCollection
 }
 
+func reportsParser(school: String) -> CollectionReference? {
+    guard let reportsCollection = reportsMap[school] else { return nil }
+    return reportsCollection
+}
+
 // MARK: - Formatting Functions
 func formatNumber(_ number: Int) -> String {
     if number >= 1000 {

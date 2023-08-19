@@ -33,3 +33,9 @@ let riceRelationships = db.collection("relationships").document("rice").collecti
 let ndPosts = notreDame.collection("posts")
 let yalePosts = yale.collection("posts")
 let ricePosts = rice.collection("posts")
+
+// MARK: - Reports(Collection)
+let ndReports = notreDame.collection("reports")
+let yaleReports = yale.collection("reports")
+let riceReports = rice.collection("reports")
+

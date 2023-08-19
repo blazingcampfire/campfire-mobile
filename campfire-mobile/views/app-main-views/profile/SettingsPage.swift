@@ -32,6 +32,7 @@ struct SettingsForm: View {
     @Binding var darkMode: Bool
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
@@ -93,20 +94,27 @@ struct SettingsForm: View {
             .foregroundColor(Theme.TextColor)
 
             Section(header: Text("support")) {
-                Label {
-                    Text("report issue")
-                } icon: {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(Theme.Peach)
-                }
-                Label {
-                    Text("contact us")
-                } icon: {
-                    Image(systemName: "envelope")
-                        .foregroundStyle(Theme.Peach)
+                Button(action: {
+                    model.openMail(emailTo: "support@campfireco.app", subject: "", body: "")
+                }, label: {
+                    Label {
+                        Text("support/report issue")
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(Theme.Peach)
+                    }})
+                Link(destination: URL(string: "https://www.campfireco.app/")!) {
+                    Label {
+                        Text("website")
+                    } icon: {
+                        Image(systemName: "network")
+                            .foregroundColor(Theme.Peach)
+                    }
                 }
             }
             .font(.custom("LexendDeca-Regular", size: 16))
+            .foregroundColor(Theme.TextColor)
+                       
 
             Section(header: Text("account")) {
                 VStack {
@@ -143,9 +151,9 @@ struct SettingsForm: View {
             .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                    dismissButton: CustomAlertButton(title: "yes", action: {
                        do {
-                           Task {
-                               try await model.deleteAccount()
-                           }
+                           try AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
+                           currentUser.signedIn = false
+
                        } catch {
                            model.deleteErrorAlert = true
                        }

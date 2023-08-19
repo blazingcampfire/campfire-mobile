@@ -115,7 +115,9 @@ extension AuthModel {
         $name
             .map {
                 name in
-                name.count >= 2
+                let RegEx = "\\w{2,18}"
+                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                return Test.evaluate(with: name)
             }
             .eraseToAnyPublisher()
     }
@@ -123,8 +125,10 @@ extension AuthModel {
     var isUserNameValidPublisher: AnyPublisher<Bool, Never> {
         $username
             .map {
-                name in
-                name.count >= 3
+                username in
+                let RegEx = "\\w{4,18}"
+                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                return Test.evaluate(with: username)
             }
             .eraseToAnyPublisher()
     }
@@ -177,19 +181,16 @@ extension AuthModel {
                 return
             }
             do {
-                var flag: Bool = false
                 if self.login && Auth.auth().currentUser?.email == nil {
                     try AuthenticationManager.shared.deleteUser()
                     throw PhoneError.noExistingUser
-                } else if self.createAccount && Auth.auth().currentUser?.email != nil {
-                    throw PhoneError.existingUser
                 } else if self.login {
                     print("self.login")
                         let existingProfile = await self.checkProfile(email: submittedEmail)
                         print(existingProfile)
                         if !existingProfile {
                             do {
-                                print("Existing profile: \(flag)")
+                                print("Existing profile: \(existingProfile)")
                                 try AuthenticationManager.shared.signOut()
                                 throw PhoneError.noExistingUser
                             } catch {
@@ -265,11 +266,12 @@ extension AuthModel {
             }
             emailSignInSuccess = true
         } catch {
+//            if let providerID = Auth.auth().currentUser?.providerData.last?.providerID {
+//                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+//            }
+            AuthenticationManager.shared.deleteUser()
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
-            if let providerID = Auth.auth().currentUser?.providerData.last?.providerID {
-                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
-            }
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
             return
         }
     }

@@ -19,6 +19,7 @@ struct NavigationBar: View {
                     .tabItem {
                         Image(systemName: "flame.circle.fill")
                     }
+                    .environmentObject(currentUser)
                     .toolbar(.visible, for: .tabBar)
                     .toolbarBackground(Color.black, for: .tabBar)
                     .background(Color.black)

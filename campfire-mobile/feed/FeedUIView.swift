@@ -13,6 +13,7 @@ enum ActiveSheet: Identifiable {
     case first
     case second
     case third
+    case fourth
     var id: Int {
         hashValue
     }
@@ -85,9 +86,8 @@ struct FeedUIView: View {
                         
                         //- MARK: Profile pic/username buttons Hstack
                         HStack(spacing: 5) {
-                            
+                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.posterId, currentUser: currentUser)), label: {
                             Button(action: {
-                                // lead to profile page
                             }) {
                                 KFImage(URL(string: individualPost.profilepic))
                                     .resizable()
@@ -101,7 +101,6 @@ struct FeedUIView: View {
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
-                                    //lead to profile page
                                 }) {
                                     Text("@\(individualPost.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
@@ -119,6 +118,7 @@ struct FeedUIView: View {
                                 
                             }
                             .padding(.leading, 10)
+                        })
                         }
                         
                     }
@@ -157,9 +157,9 @@ struct FeedUIView: View {
                 Button(action: {
                     activeSheet = .third
                 }) {
-                    Image(systemName: "square.fill")
+                    Image(systemName: "ellipsis.circle.fill")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 40, height: 40)
                         .foregroundColor(.white)
                 }
                 .padding(.top, 15)
@@ -174,6 +174,9 @@ struct FeedUIView: View {
             if currentUser.profile.userID == individualPost.posterId || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
                 idsEqual.isEqual = true
             }
+            if currentUser.showInitialMessage == true {
+                activeSheet = .fourth
+            }
         }
         .sheet(item: $activeSheet) { sheet in
             switch sheet {
@@ -182,20 +185,25 @@ struct FeedUIView: View {
                     .presentationDragIndicator(.visible)
                     .presentationCornerRadius(30)
             case .second:
-                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
+                CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
+                    .tint(Theme.Peach)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)
             case .third:
                 EllipsesButtonView(equalIds: idsEqual)
-                    .presentationDetents([.fraction(0.15)])
+                    .presentationDetents([.fraction(0.50)])
                     .presentationDragIndicator(.visible)
+                    .environmentObject(individualPost)
+            case .fourth:
+                InitialMessage(school: currentUser.profile.school)
             }
         }
-        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
-               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
-               isPresented: $idsEqual.showAlert)
+//        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
+//               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
+//               isPresented: $idsEqual.showAlert)
         .onTapGesture {
             idsEqual.showAlert = false
+            currentUser.showInitialMessage = false
         }
     }
     

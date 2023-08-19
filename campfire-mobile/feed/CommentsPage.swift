@@ -159,6 +159,7 @@ struct CommentsList: View {
                 }
             }
         }
+        .tint(Theme.Peach)
     }
 }
       

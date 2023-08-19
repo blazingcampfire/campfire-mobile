@@ -32,15 +32,14 @@ struct SearchList: View {
     
     @EnvironmentObject var model: SearchModel
     
-    @State private var addedTapped: Bool = false
     var body: some View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
             
             List {
-                ForEach(model.profiles, id: \.self) { profile in
-                    SearchListView(profile: profile)
+                ForEach(model.profiles.indices, id: \.self) { index in
+                    SearchListView(profile: model.profiles[index])
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(Theme.ScreenColor)

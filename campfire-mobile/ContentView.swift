@@ -15,7 +15,7 @@ struct ContentView: View {
    
     
     var body: some View {
-        if currentUser.signedIn && !authModel.createAccount {
+        if currentUser.signedIn && (!authModel.createAccount && !authModel.login) {
             NavigationBar()
                 .onAppear {
                     currentUser.setCollectionRefs()

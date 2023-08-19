@@ -25,10 +25,13 @@ struct CreateUsername: View {
                         
                         FormTextField(text: $model.username, placeholderText: "username", characterLimit: 20, unallowedCharacters: usernameIllegalChar)
                         
-                        Text("almost there!")
-                            .foregroundColor(Color.white)
-                            .font(.custom("LexendDeca-Bold", size: 15))
-                            .padding(-20)
+                        if !model.validUsername {
+                            Text("username must be 4-17 characters w/ no special characters")
+                                .foregroundColor(Color.white)
+                                .font(.custom("LexendDeca-Bold", size: 13))
+                                .padding(.top, -40)
+                        }
+                       
                         
                         // MARK: - NavLink to SetProfilePic screen
                         VStack {

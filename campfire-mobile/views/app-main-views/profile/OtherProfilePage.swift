@@ -12,7 +12,7 @@ struct OtherProfilePage: View {
     @State var settingsPageShow = false
     @StateObject var profileModel: ProfileModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
             ZStack {
@@ -26,17 +26,15 @@ struct OtherProfilePage: View {
                                 if let profile = profileModel.profile {
                                     VStack(spacing: 0) {
                                         
-                                        
                                         if profile.profilePicURL != "" {
                                             UserProfilePic(pfp: profileModel.profile?.profilePicURL)
                                         } else {
                                             FillerPFP()
                                         }
                                         
-                                        
                                         Spacer()
                                         
-                                        Text((profile.name))
+                                        Text(profile.name)
                                             .font(.custom("LexendDeca-Bold", size: 20))
                                         
                                         HStack {
@@ -45,8 +43,15 @@ struct OtherProfilePage: View {
                                             Circle()
                                                 .frame(width: 4, height: 4)
                                                 .foregroundColor(Theme.TextColor)
-                                            Text("\(formatNumber(profile.smores))🍫")
-                                                .font(.custom("LexendDeca-SemiBold", size: 15))
+                                            HStack {
+                                                Text("\(formatNumber(profile.smores))")
+                                                    .font(.custom("LexendDeca-SemiBold", size: 15))
+                                                Image("noteatensmore")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 18, height: 18)
+                                                    .offset(x: -3)
+                                            }
                                         }
                                         
                                         Text(profile.bio)
@@ -56,22 +61,60 @@ struct OtherProfilePage: View {
                                     }
                                     .padding(.top)
                                     HStack {
-                                        // MARK: -  if user is looking at non-friends profile
-                                        Button(action: {
-                                            profileModel.requestFriend()
-                                        }) {
-                                            Text("add friend!")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
-                                                .foregroundColor(Theme.Peach)
-                                                .padding()
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(.white)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(Color.black, lineWidth: 0.3)
-                                                        )
-                                                )
+                                        
+                                        if (profileModel.requested) {
+                                            Button(action: {
+                                                profileModel.removeRequest()
+                                            }) {
+                                                Text("remove request")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
+                                        }
+                                        else if (profileModel.friend) {
+                                            Button(action: {
+                                                profileModel.removeFriend()
+                                            }) {
+                                                Text("remove friend")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
+                                        }
+                                        else if profileModel.profile?.userID != currentUser.profile.userID {
+                                            Button(action: {
+                                                profileModel.requestFriend()
+                                            }) {
+                                                Text("add friend!")
+                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
                                         }
                                         
                                         // MARK: -  if user is looking at friends profile
@@ -130,20 +173,14 @@ struct OtherProfilePage: View {
                                 .padding(.horizontal)
                             }
                         } else {
-                            Text("No posts yet.")
+                            Text("no posts yet.")
                         }
 
                     }
                 }
                 .padding()
         }
-            .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-            profileModel.getProfile()
-        }
     }
 }
 

@@ -39,7 +39,7 @@ class CamPostModel: ObservableObject {
     func createPhotoPost(imageData: Data) async throws {
         let imagePath = "feedpostimages/\(UUID().uuidString).jpg"
         uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { [self] photoURL in
-        let docRef = ndPosts.document()
+            let docRef = currentUser.postsRef.document()
         let now = Timestamp(date: Date())
             self.locationManager.getLocation { [weak self] in
                 self?.locationManager.getAddress { location in
@@ -55,7 +55,10 @@ class CamPostModel: ObservableObject {
                             "postType": "image",
                             "id": docRef.documentID,
                             "date": now,
-                            "posterId": currentUser.profile.userID  //id of the person who posted
+                            "posterId": currentUser.profile.userID,  //id of the person who posted
+                            "numLikes": 0,
+                            "comNum": 0,
+                            "score": 0
                         ]
                         self.createPost(data: photoDocData, documentRef: docRef)
                         self.caption = ""
@@ -68,8 +71,8 @@ class CamPostModel: ObservableObject {
         
     func createVideoPost(videoURL: URL) async throws {
         let videoPath = "feedPostVideos/\(UUID().uuidString).mov"
-        uploadVideoToBunnyStorage(videoURL: videoURL, videoPath: videoPath) { postVideoURL in
-            let docRef = ndPosts.document()
+        uploadVideoToBunnyStorage(videoURL: videoURL, videoPath: videoPath) { [self] postVideoURL in
+            let docRef = currentUser.postsRef.document()
             let now = Timestamp(date: Date())
             self.locationManager.getLocation { [weak self] in
                 self?.locationManager.getAddress { location in
@@ -85,7 +88,10 @@ class CamPostModel: ObservableObject {
                             "postType": "video",
                             "id": docRef.documentID,
                             "date": now,
-                            "posterId": currentUser.profile.userID
+                            "posterId": currentUser.profile.userID,
+                            "numLikes": 0,
+                            "comNum": 0,
+                            "score": 0
                         ]
                         self.createPost(data: videoDocData, documentRef: docRef)
                         self.caption = ""
@@ -200,5 +206,58 @@ class CamPostModel: ObservableObject {
         }
         
     }
+        
+//    public func createFile(bucket: String, key: String, withData data: Data) async throws {
+//        let dataStream = ByteStream.from(data: data)
+//
+//        let input = PutObjectInput(
+//            body: dataStream,
+//            bucket: bucket,
+//            key: key
+//        )
+//        _ = try await client.putObject(input: input)
+//    }
+
+
+
+
+//    let headers = [
+//      "Content-Type": "application/json",
+//      "Upload-Creator": "",
+//      "Upload-Metadata": "",
+//      "X-Auth-Email": ""
+//    ]
+//    let parameters = [
+//      "allowedOrigins": ["example.com"],
+//      "creator": "creator-id_abcde12345",
+//      "meta": ["name": "video12345.mp4"],
+//      "requireSignedURLs": true,
+//      "scheduledDeletion": "2014-01-02T02:20:00Z",
+//      "thumbnailTimestampPct": 0.529241,
+//      "url": "https://example.com/myvideo.mp4",
+//      "watermark": ["uid": "ea95132c15732412d22c1476fa83f27a"]
+//    ] as [String : Any]
+//
+//    let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
+//
+//    let request = NSMutableURLRequest(url: NSURL(string: "https://api.cloudflare.com/client/v4/accounts/account_identifier/stream/copy")! as URL,
+//                                            cachePolicy: .useProtocolCachePolicy,
+//                                        timeoutInterval: 10.0)
+//    request.httpMethod = "POST"
+//    request.allHTTPHeaderFields = headers
+//    request.httpBody = postData as Data
+//
+//    let session = URLSession.shared
+//    let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+//      if (error != nil) {
+//        print(error)
+//      } else {
+//        let httpResponse = response as? HTTPURLResponse
+//        print(httpResponse)
+//      }
+//    })
+//
+//    dataTask.resume()
+    
     
 }

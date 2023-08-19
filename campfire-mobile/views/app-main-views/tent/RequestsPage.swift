@@ -7,32 +7,74 @@
 import SwiftUI
 
 struct RequestsPage: View {
-    
     @StateObject var model: RequestsModel
-    
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        NavigationView {
-            ZStack {
-                Theme.ScreenColor
-                    .ignoresSafeArea(.all)
-                
-                ListRequests()
-                    .environmentObject(model)
+            if model.requests.isEmpty {
+                ZStack {
+                    Theme.ScreenColor
+                        .ignoresSafeArea(.all)
+
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("requests")
+                                    .font(.custom("LexendDeca-SemiBold", size: 30))
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding()
+                            }
+                            Spacer()
+                            
+                        }
+                        Spacer()
+                        VStack {
+                            Image(systemName: "person.fill.badge.plus")
+                                .font(.system(size: 30))
+                                .foregroundColor(Theme.Peach)
+                                .padding(.bottom, 30)
+
+                            Text("no requests right now!")
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .foregroundColor(Theme.TextColor)
+                        }
+                        Spacer()
+                    }
+                }
+                .background(Color.white)
+                .padding(-10)
+            } else {
+                ZStack {
+                    Theme.ScreenColor
+                        .ignoresSafeArea(.all)
+                    VStack {
+                        HStack {
+                            VStack {
+                                Text("requests")
+                                    .font(.custom("LexendDeca-SemiBold", size: 30))
+                                    .foregroundColor(Theme.TextColor)
+                                    .padding()
+                            }
+                            Spacer()
+                            
+                        }
+                        ListRequests()
+                            .environmentObject(model)
+                    }
+                }
+                .refreshable {
+                    model.readRequests()
+                }
+                .background(Color.white)
+                .listStyle(PlainListStyle())
+                .padding(.top, -10)
             }
-        }
-        .refreshable {
-            model.readRequests()
-        }
-        .background(Color.white)
-        .listStyle(PlainListStyle())
-        .padding(.top, -10)
+    
     }
 }
 
 struct ListRequests: View {
-    
     @EnvironmentObject var model: RequestsModel
-    
+
     var body: some View {
         List {
             ForEach(model.requests, id: \.self) { request in
@@ -45,8 +87,8 @@ struct ListRequests: View {
     }
 }
 
-//struct RequestsPage_Previews: PreviewProvider {
+// struct RequestsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        RequestsPage()
 //    }
-//}
+// }

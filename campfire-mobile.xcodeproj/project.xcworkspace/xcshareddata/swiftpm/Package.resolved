@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "interposekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/steipete/InterposeKit.git",
+      "state" : {
+        "revision" : "17853ad69961a5114e25c60c3ce7600feac0eabd",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "iphonenumberfield",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MojtabaHs/iPhoneNumberField.git",
@@ -187,6 +196,15 @@
       "state" : {
         "branch" : "master",
         "revision" : "6e85adae49b26d734bf3810b6d237d2688cc976a"
+      }
+    },
+    {
+      "identity" : "swiftuipager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fermoya/SwiftUIPager.git",
+      "state" : {
+        "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb",
+        "version" : "2.5.0"
       }
     },
     {

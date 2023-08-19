@@ -115,7 +115,9 @@ extension AuthModel {
         $name
             .map {
                 name in
-                name.count >= 2
+                let RegEx = "\\w{2,18}"
+                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                return Test.evaluate(with: name)
             }
             .eraseToAnyPublisher()
     }
@@ -123,8 +125,10 @@ extension AuthModel {
     var isUserNameValidPublisher: AnyPublisher<Bool, Never> {
         $username
             .map {
-                name in
-                name.count >= 3
+                username in
+                let RegEx = "\\w{4,18}"
+                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                return Test.evaluate(with: username)
             }
             .eraseToAnyPublisher()
     }
@@ -161,56 +165,57 @@ extension AuthModel {
                 self.validPhoneNumber = true
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
+                return
             }
         }
     }
 
-    func verifyVerificationCode() {
+    func verifyVerificationCode() async {
         UIApplication.shared.closeKeyboard()
-        Task {
             do {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)
-
+                
                 try await Auth.auth().signIn(with: credential)
             } catch {
                 await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
+                return
             }
-
             do {
                 if self.login && Auth.auth().currentUser?.email == nil {
                     try AuthenticationManager.shared.deleteUser()
                     throw PhoneError.noExistingUser
-                } else if self.createAccount && Auth.auth().currentUser?.email != nil {
-                    throw PhoneError.existingUser
                 } else if self.login {
-                    let existingProfile = try await self.checkProfile(email: submittedEmail)
-                    if !existingProfile {
-                        do {
-                            try AuthenticationManager.shared.signOut()
-                            throw PhoneError.noExistingUser
-                        } catch {
-                            await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
-                        }
-                    }
-                } else if self.createAccount {
-                    do {
-                        let existingProfile = try await self.checkProfile(email: submittedEmail)
-                        do {
-                            if existingProfile {
-                                throw PhoneError.existingUser
+                    print("self.login")
+                        let existingProfile = await self.checkProfile(email: submittedEmail)
+                        print(existingProfile)
+                        if !existingProfile {
+                            do {
+                                print("Existing profile: \(existingProfile)")
+                                try AuthenticationManager.shared.signOut()
+                                throw PhoneError.noExistingUser
+                            } catch {
+                                await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                                return
                             }
-                        } catch {
-                            await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        }
+                } else if self.createAccount {
+                    let existingProfile = await self.checkProfile(email: submittedEmail)
+                    do {
+                        if existingProfile {
+                            throw PhoneError.existingUser
                         }
                     } catch {
+                        await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        return
                     }
                 }
-                // user phone number authenticated successfully
-                self.validVerificationCode = true
             } catch {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
+                return
             }
-        }
+//        // user phone number authenticated successfully
+        self.validVerificationCode = true
+        print("verification code is valid")
     }
 }
 
@@ -224,10 +229,10 @@ extension AuthModel {
             try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
 
             submittedEmail = (Auth.auth().currentUser?.email)!
-            let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+            let existingProfile: Bool = await checkProfile(email: submittedEmail)
             print(existingProfile)
             if !existingProfile {
-               try AuthenticationManager.shared.deleteUser()
+                try AuthenticationManager.shared.deleteUser()
                 throw EmailError.noExistingUser
             } else {
                 emailSignInSuccess = true
@@ -248,25 +253,26 @@ extension AuthModel {
             }
             print(Auth.auth().currentUser?.email)
             do {
-               
-                let existingProfile: Bool = try await checkProfile(email: submittedEmail)
+                let existingProfile: Bool = await checkProfile(email: submittedEmail)
                 do {
                     if existingProfile {
                         throw EmailError.existingUser
                     }
                 } catch {
                     await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
+                    return
                 }
+            } catch {
             }
-                catch {
-                }
             emailSignInSuccess = true
         } catch {
+//            if let providerID = Auth.auth().currentUser?.providerData.last?.providerID {
+//                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
+//            }
+            AuthenticationManager.shared.deleteUser()
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
-            if let providerID = Auth.auth().currentUser?.providerData.last?.providerID {
-                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
-            }
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
+            return
         }
     }
 
@@ -283,15 +289,27 @@ extension AuthModel {
         })
     }
 
-    func checkProfile(email: String) async throws -> Bool {
-        guard let userID = Auth.auth().currentUser?.uid else {
+    func checkProfile(email: String) async -> Bool {
+        print("checkProfile")
+        guard let email = Auth.auth().currentUser?.email else {
+            print("no existing profile")
             return false
         }
         let profileRef = profileParser(school: schoolParser(email: email))
-        guard let document = try await profileRef?.document(userID).getDocument() else {
+        print(email)
+        do {
+            guard let document = try await profileRef?.document((Auth.auth().currentUser?.uid)!).getDocument() else {
+                print(profileRef?.path)
+                print("no document w/ \(userID) as id")
+                return false
+            }
+            return document.exists
+        } catch {
+            print(error)
             return false
         }
-        return document.exists
+        print(profileRef?.path)
+        return true
     }
 
     func triggerRestart() {
@@ -308,13 +326,11 @@ extension AuthModel {
         login = false
         createAccount = false
     }
-
 }
 
 // MARK: - Create user function
 
 extension AuthModel {
-   
     func createProfile() {
         userID = Auth.auth().currentUser!.uid
         email = Auth.auth().currentUser?.email ?? email
@@ -376,7 +392,6 @@ extension AuthModel {
             }
         }
     }
-
 }
 
 // MARK: - Extension to UIApplication for setup of closeKeyboard function

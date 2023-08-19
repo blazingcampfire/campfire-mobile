@@ -16,4 +16,5 @@ struct Theme {
     static let PFPColor = Color("profileborder")
     static let TextColor = Color("textcolor")
     static let ButtonColor = Color("buttoncolor")
+    static let ShadowColor = Color("Shadow")
 }

@@ -23,7 +23,6 @@ struct VerifyNumber: View {
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)
                 .onAppear {
-                    model.triggerRestart()
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()
@@ -63,7 +62,9 @@ struct VerifyNumber: View {
                                 })
                             } else {
                                 Button {
-                                    model.verifyVerificationCode()
+                                    Task {
+                                       try await model.verifyVerificationCode()
+                                    }
                                 } label: {
                                     LFButton(text: "verify")
                                 }

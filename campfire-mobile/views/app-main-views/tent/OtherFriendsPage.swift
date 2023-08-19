@@ -22,7 +22,7 @@ struct OtherFriendsPage: View {
                         
                         VStack {
                             VStack {
-                                Text("Friends")
+                                Text("friends")
                                     .font(.custom("LexendDeca-SemiBold", size: 30))
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.leading, 15)
@@ -41,8 +41,6 @@ struct OtherFriendsPage: View {
                             Spacer()
                         }
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     
@@ -54,8 +52,6 @@ struct OtherFriendsPage: View {
                         
                         ListOtherFriends()
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     .onAppear {

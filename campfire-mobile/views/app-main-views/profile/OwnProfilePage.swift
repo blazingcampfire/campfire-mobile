@@ -13,6 +13,7 @@ struct OwnProfilePage: View {
     @State var settingsPageShow = false
     @State private var showAddPost = false
     @AppStorage("isDarkMode") private var darkMode = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationView {
@@ -27,33 +28,40 @@ struct OwnProfilePage: View {
                                 VStack {
                                     VStack(spacing: 0) {
                                         let profile = currentUser.profile
-                                            
+                                        
                                         if profile.profilePicURL != "" {
                                             UserProfilePic(pfp: profile.profilePicURL)
                                         } else {
                                             FillerPFP()
                                         }
-                        
-                                            
-                                            Spacer()
-                                            
-                                            Text(profile.name)
-                                                .font(.custom("LexendDeca-Bold", size: 20))
-                                            
+                                        
+                                        
+                                        Spacer()
+                                        
+                                        Text(profile.name)
+                                            .font(.custom("LexendDeca-Bold", size: 20))
+                                        
+                                        HStack {
+                                            Text(profile.username)
+                                                .font(.custom("LexendDeca-SemiBold", size: 15))
+                                            Circle()
+                                                .frame(width: 4, height: 4)
+                                                .foregroundColor(Theme.TextColor)
                                             HStack {
-                                                Text(profile.username)
+                                                Text("\(formatNumber(profile.smores))")
                                                     .font(.custom("LexendDeca-SemiBold", size: 15))
-                                                Circle()
-                                                    .frame(width: 4, height: 4)
-                                                    .foregroundColor(Theme.TextColor)
-                                                Text("\(formatNumber(profile.smores))🍫")
-                                                    .font(.custom("LexendDeca-SemiBold", size: 15))
+                                                Image("noteatensmore")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 18, height: 18)
+                                                    .offset(x: -3)
                                             }
-                                            
-                                            Text(profile.bio)
-                                                .font(.custom("LexendDeca-Regular", size: 13))
-                                                .multilineTextAlignment(.center)
-                                                .padding(8)
+                                        }
+                                        
+                                        Text(profile.bio)
+                                            .font(.custom("LexendDeca-Regular", size: 13))
+                                            .multilineTextAlignment(.center)
+                                            .padding(8)
                                         
                                     }
                                     .padding(.top)
@@ -74,7 +82,8 @@ struct OwnProfilePage: View {
                                                     )
                                             }
                                         
-                                        NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser))) {
+                                        NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser)))
+                                        {
                                             Image(systemName: "person.3.fill")
                                                 .font(.system(size: 20))
                                                 .foregroundColor(Theme.Peach)
@@ -121,40 +130,40 @@ struct OwnProfilePage: View {
                         }
                         
                         let posts = currentUser.profile.posts
-                            VStack {
-                                VStack(spacing: 20) {
-                                    Spacer()
-                                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
-                                        ForEach(posts, id: \.self) { post in
-                                            if let (imageURL, prompt) = post.first {
-                                                VStack(spacing: 20) {
-                                                    PostAttributes(url: imageURL, prompt: prompt)
-                                                        .frame(width: 350)
-                                                }
+                        VStack {
+                            VStack(spacing: 20) {
+                                Spacer()
+                                LazyVGrid(columns: [GridItem(.flexible(), spacing: 20)], spacing: 60) {
+                                    ForEach(posts, id: \.self) { post in
+                                        if let (imageURL, prompt) = post.first {
+                                            VStack(spacing: 20) {
+                                                PostAttributes(url: imageURL, prompt: prompt)
+                                                    .frame(width: 350)
                                             }
                                         }
                                     }
-                                    .padding(.horizontal)
                                 }
-                                if posts.count < 6 {
-                                    Spacer()
-                                    NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(.clear)
-                                                .frame(width: 350, height: 350)
-                                            VStack {
-                                                Image(systemName: "plus.circle")
-                                                    .font(.system(size: 75))
-                                                    .foregroundColor(Theme.Peach)
-                                                Text("add post!")
-                                                    .font(.custom("LexendDeca-SemiBold", size: 25))
-                                                    .foregroundColor(Theme.Peach)
-                                            }
+                                .padding(.horizontal)
+                            }
+                            if posts.count < 6 {
+                                Spacer()
+                                NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(.clear)
+                                            .frame(width: 350, height: 350)
+                                        VStack {
+                                            Image(systemName: "plus.circle")
+                                                .font(.system(size: 75))
+                                                .foregroundColor(Theme.Peach)
+                                            Text("add post!")
+                                                .font(.custom("LexendDeca-SemiBold", size: 25))
+                                                .foregroundColor(Theme.Peach)
                                         }
                                     }
                                 }
                             }
+                        }
                         
                     }
                     .padding()
@@ -163,7 +172,8 @@ struct OwnProfilePage: View {
                 }
             }
         }
-        .preferredColorScheme(darkMode ? .dark : .light)
+        
+        
     }
 }
 

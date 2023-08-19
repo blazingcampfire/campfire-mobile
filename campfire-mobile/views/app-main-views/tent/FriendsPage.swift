@@ -14,18 +14,22 @@ struct FriendsPage: View {
     @StateObject var model: FriendsModel
     
     var body: some View {
-        
+    
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
                         
                         VStack {
-                            VStack {
-                                Text("Friends")
-                                    .font(.custom("LexendDeca-SemiBold", size: 30))
-                                    .foregroundColor(Theme.TextColor)
-                                    .padding(.leading, 15)
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
                             }
                             Spacer()
                             VStack {
@@ -41,8 +45,6 @@ struct FriendsPage: View {
                             Spacer()
                         }
                     }
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                     
@@ -51,12 +53,22 @@ struct FriendsPage: View {
                     ZStack {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
-                        
-                        ListFriends()
+                        VStack {
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
+                            }
+                            
+                            ListFriends()
+                        }
                     }
                     .environmentObject(model)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.Peach))
                     .background(Color.white)
                     .padding(-10)
                 }

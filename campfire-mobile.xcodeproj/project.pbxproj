@@ -10,7 +10,6 @@
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
 		B121336C2A7EEE9B00A9A93F /* newlaunchscreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */; };
-		B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */; };
 		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
@@ -20,7 +19,6 @@
 		B15D08AA2A85C3010038C19D /* EllipsesButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */; };
 		B164A9F12A5B729F0033586F /* CommentTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F02A5B729F0033586F /* CommentTextField.swift */; };
 		B164A9F32A5B89150033586F /* InitialMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B164A9F22A5B89150033586F /* InitialMessage.swift */; };
-		B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */; };
 		B18B19722A46059700309256 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19712A46059700309256 /* SettingsPage.swift */; };
 		B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18B19732A4613A200309256 /* LeaderboardPage.swift */; };
 		B18B19912A46976700309256 /* Comfortaa-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B198A2A46974300309256 /* Comfortaa-Bold.ttf */; };
@@ -53,7 +51,6 @@
 		B18B19AC2A46977200309256 /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B18B19882A46974300309256 /* LexendDeca-Thin.ttf */; };
 		B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */; };
 		B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */; };
-		B1A377992A813C36008B7ABC /* testLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */; };
 		B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7D92A57293C00E30064 /* tiger.mp4 */; };
 		B1B5D7DE2A572B8100E30064 /* davo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DD2A572B8100E30064 /* davo.mp4 */; };
 		B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1B5D7DF2A572D7200E30064 /* me.jpeg */; };
@@ -72,7 +69,6 @@
 		B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */; };
 		B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */; };
 		B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */; };
-		B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */; };
 		B1B6CCAF2A41129F001C6A50 /* SearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */; };
 		B1B6CCB12A4114A1001C6A50 /* MapPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B6CCB02A4114A1001C6A50 /* MapPage.swift */; };
 		B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B71FC92A48EFE900C54090 /* UserInfo.swift */; };
@@ -80,19 +76,26 @@
 		B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA62A71E770008E6C69 /* CameraView.swift */; };
 		B1C51EA92A71E7A3008E6C69 /* CameraMediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EA82A71E7A3008E6C69 /* CameraMediaPicker.swift */; };
 		B1C51EAB2A722522008E6C69 /* PreviewPostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C51EAA2A722522008E6C69 /* PreviewPostInfo.swift */; };
+		B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */ = {isa = PBXBuildFile; productRef = B1C6885B2A8FF8430049102D /* InterposeKit */; };
 		B1C7D77C2A5CC63E00ACA02A /* NumberAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */; };
 		B1CAD04B2A57D7B800BA5554 /* cute.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04A2A57D7B800BA5554 /* cute.jpeg */; };
 		B1CAD04D2A57D83B00BA5554 /* blonde.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */; };
 		B1DEBFF52A82140D00D3013A /* FeedCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1DEBFF42A82140D00D3013A /* FeedCells.swift */; };
 		B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E044D62A762E4900DC767D /* CommentsModel.swift */; };
+		B1E9DE0A2A8826C000E0B61F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE092A8826C000E0B61F /* ImageCollectionViewCell.swift */; };
+		B1E9DE0C2A8826F300E0B61F /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE0B2A8826F300E0B61F /* VideoCollectionViewCell.swift */; };
+		B1E9DE0E2A88290E00E0B61F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE0D2A88290E00E0B61F /* FeedViewController.swift */; };
+		B1E9DE102A888AC100E0B61F /* FeedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE0F2A888AC100E0B61F /* FeedUIView.swift */; };
+		B1E9DE122A889F4300E0B61F /* smoreLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1E9DE112A889F4300E0B61F /* smoreLaunchScreen.storyboard */; };
+		B1E9DE142A88AD7000E0B61F /* NewFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */; };
 		B1EA23BA2A74E0790021F0D1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = B1EA23B92A74E0790021F0D1 /* Kingfisher */; };
 		B1EDD2B12A5915CE0096F335 /* talkin.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2AE2A5915CE0096F335 /* talkin.mov */; };
 		B1EDD2B32A5915CE0096F335 /* gunna.mov in Resources */ = {isa = PBXBuildFile; fileRef = B1EDD2B02A5915CE0096F335 /* gunna.mov */; };
 		B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B5402A5F74140037D857 /* GoogleViewController.swift */; };
-		B1FA345E2A84C43E0008B4D9 /* PostLikeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */; };
-		B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */; };
-		B1FA34622A84E1B70008B4D9 /* ReplyUpdateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */; };
 		B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */; };
+		B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */; };
+		B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */; };
+		B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */; };
 		E2163E492A660AA8005A20BE /* collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E482A660AA8005A20BE /* collections.swift */; };
 		E2163E4C2A6633D2005A20BE /* globalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4B2A6633D2005A20BE /* globalFunctions.swift */; };
 		E2163E4E2A663501005A20BE /* schools.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4D2A663501005A20BE /* schools.swift */; };
@@ -211,7 +214,6 @@
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
 		B12133672A7EBE3C00A9A93F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		B121336B2A7EEE9B00A9A93F /* newlaunchscreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = newlaunchscreen.storyboard; sourceTree = "<group>"; };
-		B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostUpdateModel.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
@@ -220,7 +222,6 @@
 		B15D08A92A85C3010038C19D /* EllipsesButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipsesButtonView.swift; sourceTree = "<group>"; };
 		B164A9F02A5B729F0033586F /* CommentTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextField.swift; sourceTree = "<group>"; };
 		B164A9F22A5B89150033586F /* InitialMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMessage.swift; sourceTree = "<group>"; };
-		B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostModel.swift; sourceTree = "<group>"; };
 		B18B19712A46059700309256 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		B18B19732A4613A200309256 /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
 		B18B19752A46974200309256 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -253,7 +254,6 @@
 		B18B19902A46974300309256 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
 		B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionTextField.swift; sourceTree = "<group>"; };
 		B19EA15A2A60AEA7001B0658 /* PromptsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptsPage.swift; sourceTree = "<group>"; };
-		B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = testLaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1B5D7D92A57293C00E30064 /* tiger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = tiger.mp4; sourceTree = "<group>"; };
 		B1B5D7DD2A572B8100E30064 /* davo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = davo.mp4; sourceTree = "<group>"; };
 		B1B5D7DF2A572D7200E30064 /* me.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = me.jpeg; sourceTree = "<group>"; };
@@ -272,7 +272,6 @@
 		B1B5EFD52A4F56D700FA79CE /* MapHotspots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapHotspots.swift; sourceTree = "<group>"; };
 		B1B5EFD62A4F56D700FA79CE /* PostAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttributes.swift; sourceTree = "<group>"; };
 		B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
-		B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		B1B6CCAE2A41129F001C6A50 /* SearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPage.swift; sourceTree = "<group>"; };
 		B1B6CCB02A4114A1001C6A50 /* MapPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPage.swift; sourceTree = "<group>"; };
 		B1B71FC92A48EFE900C54090 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -285,13 +284,18 @@
 		B1CAD04C2A57D83B00BA5554 /* blonde.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blonde.jpeg; sourceTree = "<group>"; };
 		B1DEBFF42A82140D00D3013A /* FeedCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCells.swift; sourceTree = "<group>"; };
 		B1E044D62A762E4900DC767D /* CommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsModel.swift; sourceTree = "<group>"; };
+		B1E9DE092A8826C000E0B61F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1E9DE0B2A8826F300E0B61F /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		B1E9DE0D2A88290E00E0B61F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		B1E9DE0F2A888AC100E0B61F /* FeedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIView.swift; sourceTree = "<group>"; };
+		B1E9DE112A889F4300E0B61F /* smoreLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = smoreLaunchScreen.storyboard; sourceTree = "<group>"; };
+		B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedModel.swift; sourceTree = "<group>"; };
 		B1EDD2AE2A5915CE0096F335 /* talkin.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = talkin.mov; sourceTree = "<group>"; };
 		B1EDD2B02A5915CE0096F335 /* gunna.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = gunna.mov; sourceTree = "<group>"; };
 		B1F6B5402A5F74140037D857 /* GoogleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
-		B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikeStatus.swift; sourceTree = "<group>"; };
-		B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentUpdateModel.swift; sourceTree = "<group>"; };
-		B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyUpdateModel.swift; sourceTree = "<group>"; };
 		B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsPage.swift; sourceTree = "<group>"; };
+		B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualPostModel.swift; sourceTree = "<group>"; };
+		B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualCommentModel.swift; sourceTree = "<group>"; };
 		E2163E482A660AA8005A20BE /* collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collections.swift; sourceTree = "<group>"; };
 		E2163E4B2A6633D2005A20BE /* globalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = globalFunctions.swift; sourceTree = "<group>"; };
 		E2163E4D2A663501005A20BE /* schools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schools.swift; sourceTree = "<group>"; };
@@ -388,7 +392,9 @@
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
 				F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
+				B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
+				B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
@@ -540,7 +546,6 @@
 				B164A9F02A5B729F0033586F /* CommentTextField.swift */,
 				F8FE7B5E2A6B9705004B41A5 /* FireGIF.swift */,
 				B1B5EFC62A4F569A00FA79CE /* EditPosts.swift */,
-				B1B5EFC72A4F569A00FA79CE /* UserBio.swift */,
 				B19B2AFE2A4E7D49006C9B44 /* CaptionTextField.swift */,
 				F8EC241F2A5C89AD0010D46E /* ImagePicker.swift */,
 				E2C446912A4E88820032CF34 /* nav */,
@@ -560,8 +565,8 @@
 				E2163E4D2A663501005A20BE /* schools.swift */,
 				E267A9C72A7AA58300489B8E /* tests.swift */,
 				F86FAACC2A81AE0400D3801D /* unallowedCharacters.swift */,
-				B1A377982A813C36008B7ABC /* testLaunchScreen.storyboard */,
 				E216E3F52A831D4A0021C9F0 /* misc.swift */,
+				B1E9DE112A889F4300E0B61F /* smoreLaunchScreen.storyboard */,
 			);
 			path = constants;
 			sourceTree = "<group>";
@@ -740,6 +745,7 @@
 		E2C446912A4E88820032CF34 /* nav */ = {
 			isa = PBXGroup;
 			children = (
+				B1B5EFC72A4F569A00FA79CE /* UserBio.swift */,
 				E2C446922A4E89C50032CF34 /* bottom-navbar */,
 				E2C446882A4E84610032CF34 /* top-navbar */,
 			);
@@ -749,7 +755,6 @@
 		E2C446922A4E89C50032CF34 /* bottom-navbar */ = {
 			isa = PBXGroup;
 			children = (
-				B1B5EFDD2A4F56E900FA79CE /* NavBar.swift */,
 				B1B5EFDC2A4F56E900FA79CE /* NavigationBar.swift */,
 			);
 			path = "bottom-navbar";
@@ -804,17 +809,12 @@
 				F87DA9CC2A6783BB00CBAA98 /* ProfileModel.swift */,
 				E2A37EF72A78830E001A4306 /* CurrentUserModel.swift */,
 				E21F79C32A68DF98004B3DCC /* SearchModel.swift */,
-				B1753BDF2A738EBE008BEC6E /* FeedPostModel.swift */,
 				E2DA6CFD2A7165E8002D7660 /* SettingsModel.swift */,
 				B1E044D62A762E4900DC767D /* CommentsModel.swift */,
 				B11371A62A7A06A200417923 /* CamPostModel.swift */,
 				E2A37EF52A7622DD001A4306 /* RequestModel.swift */,
-				B124AFD02A7D955300DB45A2 /* FeedPostUpdateModel.swift */,
 				E267A9C52A7A1BB500489B8E /* FriendsModel.swift */,
 				E2B248CE2A7EDDAF0004A757 /* LeaderboardModel.swift */,
-				B1FA345D2A84C43E0008B4D9 /* PostLikeStatus.swift */,
-				B1FA345F2A84DAB30008B4D9 /* CommentUpdateModel.swift */,
-				B1FA34612A84E1B70008B4D9 /* ReplyUpdateModel.swift */,
 			);
 			path = "main-app";
 			sourceTree = "<group>";
@@ -835,6 +835,13 @@
 				F8950DCB2A4800BF00C13075 /* CustomVideoPlayer.swift */,
 				F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */,
 				B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */,
+				B1E9DE092A8826C000E0B61F /* ImageCollectionViewCell.swift */,
+				B1E9DE0B2A8826F300E0B61F /* VideoCollectionViewCell.swift */,
+				B1E9DE0D2A88290E00E0B61F /* FeedViewController.swift */,
+				B1E9DE0F2A888AC100E0B61F /* FeedUIView.swift */,
+				B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */,
+				B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */,
+				B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -875,6 +882,8 @@
 				F881D5152A7A1E1200E6E663 /* CropViewController */,
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
+				B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */,
+				B1C6885B2A8FF8430049102D /* InterposeKit */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
@@ -957,6 +966,8 @@
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
+				B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -992,7 +1003,6 @@
 				B18B19952A46976700309256 /* Comfortaa-SemiBold.ttf in Resources */,
 				B1B5D7DA2A57293C00E30064 /* tiger.mp4 in Resources */,
 				B18B19962A46976700309256 /* JosefinSans-Bold.ttf in Resources */,
-				B1A377992A813C36008B7ABC /* testLaunchScreen.storyboard in Resources */,
 				B18B19972A46976700309256 /* JosefinSans-BoldItalic.ttf in Resources */,
 				B18B19982A46976700309256 /* JosefinSans-ExtraLight.ttf in Resources */,
 				B1B5D7E02A572D7200E30064 /* me.jpeg in Resources */,
@@ -1022,6 +1032,7 @@
 				B18B19A72A46976700309256 /* LexendDeca-ExtraLight.ttf in Resources */,
 				B18B19A82A46976700309256 /* LexendDeca-Regular.ttf in Resources */,
 				E29095E22A3E4741001BEDDE /* Preview Assets.xcassets in Resources */,
+				B1E9DE122A889F4300E0B61F /* smoreLaunchScreen.storyboard in Resources */,
 				E29095DF2A3E4741001BEDDE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1051,7 +1062,6 @@
 			files = (
 				E28D3A6B2A400A8100B1EEE9 /* CreateUsername.swift in Sources */,
 				B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */,
-				B124AFD12A7D955300DB45A2 /* FeedPostUpdateModel.swift in Sources */,
 				F86695162A40F78300D9471C /* OwnProfilePage.swift in Sources */,
 				B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */,
 				B1C51EA52A71E709008E6C69 /* CameraModel.swift in Sources */,
@@ -1067,15 +1077,14 @@
 				E2A37EF82A78830E001A4306 /* CurrentUserModel.swift in Sources */,
 				E2578DA22A6B6429004C65DC /* EnterName.swift in Sources */,
 				B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */,
-				B1B5EFDF2A4F56E900FA79CE /* NavBar.swift in Sources */,
 				F8A371D52A4BEA660076F1C1 /* EditFieldPage.swift in Sources */,
+				B1E9DE0E2A88290E00E0B61F /* FeedViewController.swift in Sources */,
 				E2DA6CFC2A709C24002D7660 /* NotificationsManager.swift in Sources */,
 				E29095E42A3E4741001BEDDE /* Persistence.swift in Sources */,
 				F85957B82A8825DA00E2DDC1 /* FillerPFP.swift in Sources */,
 				E28D3A672A3FFA3400B1EEE9 /* EnterEmail.swift in Sources */,
 				B1B5EFDB2A4F56D700FA79CE /* PostAttributes.swift in Sources */,
 				B1B5EFDE2A4F56E900FA79CE /* NavigationBar.swift in Sources */,
-				B1FA34622A84E1B70008B4D9 /* ReplyUpdateModel.swift in Sources */,
 				F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */,
 				B1B5EFDA2A4F56D700FA79CE /* MapHotspots.swift in Sources */,
 				F8FE7B5F2A6B9705004B41A5 /* FireGIF.swift in Sources */,
@@ -1084,6 +1093,7 @@
 				B1E044D72A762E4900DC767D /* CommentsModel.swift in Sources */,
 				E28D3A692A3FFC7600B1EEE9 /* VerifyEmail.swift in Sources */,
 				F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */,
+				B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */,
 				E216E3F62A831D4A0021C9F0 /* misc.swift in Sources */,
 				F86D83A62A4BC37900223F9A /* prompts.swift in Sources */,
 				F85F03982A3F9A89000DCBEF /* VerifyNumber.swift in Sources */,
@@ -1095,6 +1105,7 @@
 				B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */,
 				B1B71FCA2A48EFE900C54090 /* UserInfo.swift in Sources */,
 				F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */,
+				B1E9DE142A88AD7000E0B61F /* NewFeedModel.swift in Sources */,
 				F85F039A2A3F9BC9000DCBEF /* EmailOrNumber.swift in Sources */,
 				B19B2AFF2A4E7D49006C9B44 /* CaptionTextField.swift in Sources */,
 				B18B19742A4613A200309256 /* LeaderboardPage.swift in Sources */,
@@ -1105,7 +1116,6 @@
 				B1C51EA72A71E770008E6C69 /* CameraView.swift in Sources */,
 				B1B5EFC92A4F569A00FA79CE /* UserBio.swift in Sources */,
 				B1B5EFCD2A4F56B000FA79CE /* LFButton.swift in Sources */,
-				B1FA345E2A84C43E0008B4D9 /* PostLikeStatus.swift in Sources */,
 				E2DA6CFE2A7165E8002D7660 /* SettingsModel.swift in Sources */,
 				F86D83A82A4BC54100223F9A /* EditProfile.swift in Sources */,
 				E2CBD5E92A633EBC000F3547 /* SignInGoogleHelper.swift in Sources */,
@@ -1119,8 +1129,9 @@
 				B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */,
 				E267A9C62A7A1BB500489B8E /* FriendsModel.swift in Sources */,
 				B1B5EFD92A4F56D700FA79CE /* UserProfilePic.swift in Sources */,
-				B1FA34602A84DAB30008B4D9 /* CommentUpdateModel.swift in Sources */,
+				B1E9DE0C2A8826F300E0B61F /* VideoCollectionViewCell.swift in Sources */,
 				E2163E4E2A663501005A20BE /* schools.swift in Sources */,
+				B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */,
 				F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */,
 				E29095DD2A3E473E001BEDDE /* ContentView.swift in Sources */,
 				F82C10AA2A42A74200864FBD /* TheFeed.swift in Sources */,
@@ -1147,12 +1158,13 @@
 				F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */,
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
+				B1E9DE0A2A8826C000E0B61F /* ImageCollectionViewCell.swift in Sources */,
 				B19EA15B2A60AEA7001B0658 /* PromptsPage.swift in Sources */,
 				E2B248CF2A7EDDAF0004A757 /* LeaderboardModel.swift in Sources */,
 				E267A9C82A7AA58300489B8E /* tests.swift in Sources */,
 				E2E355442A58F6A300EE16C6 /* BackButton.swift in Sources */,
 				B1B5EFCC2A4F56B000FA79CE /* ProfilePictureView.swift in Sources */,
-				B1753BE02A738EBE008BEC6E /* FeedPostModel.swift in Sources */,
+				B1E9DE102A888AC100E0B61F /* FeedUIView.swift in Sources */,
 				E21F79C42A68DF98004B3DCC /* SearchModel.swift in Sources */,
 				B1B5EFD72A4F56D700FA79CE /* FeedInfo.swift in Sources */,
 				F87DA9CD2A6783BB00CBAA98 /* ProfileModel.swift in Sources */,
@@ -1334,7 +1346,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = testLaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = smoreLaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1343,6 +1355,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.campfirehhco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1373,7 +1386,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = testLaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = smoreLaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1382,6 +1395,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.campfirehhco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1398,7 +1412,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1420,7 +1434,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1438,9 +1452,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1458,9 +1473,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YLP4XN7VPH;
+				DEVELOPMENT_TEAM = P898RXX9FS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "/Users/adarshh_g/Documents/campfire-mobile/campfire-mobile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1524,12 +1540,28 @@
 				kind = branch;
 			};
 		};
+		B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/steipete/InterposeKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
+			};
+		};
+		B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 		E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -1588,10 +1620,20 @@
 			package = B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */;
 			productName = SwiftUICam;
 		};
+		B1C6885B2A8FF8430049102D /* InterposeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */;
+			productName = InterposeKit;
+		};
 		B1EA23B92A74E0790021F0D1 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

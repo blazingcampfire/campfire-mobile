@@ -15,21 +15,15 @@ struct NavigationBar: View {
     var body: some View {
         NavigationView {
         TabView() {
-            ScrollFeed(feedModel: FeedPostModel(currentUser: currentUser))
-                .tabItem {
-                    Image(systemName: "flame.circle.fill")
-                }
-
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Color.black, for: .tabBar)
+                FeedViewControllerWrapper()
+                    .tabItem {
+                        Image(systemName: "flame.circle.fill")
+                    }
+                    .environmentObject(currentUser)
+                    .toolbar(.visible, for: .tabBar)
+                    .toolbarBackground(Color.black, for: .tabBar)
+                    .background(Color.black)
             
-            MapPage()
-                .tabItem {
-                    Image(systemName: "map")
-                }
-            
-                .toolbar(.visible, for: .tabBar)
-                .toolbarBackground(Theme.ScreenColor, for: .tabBar)
             
             CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
                 .tabItem {
@@ -58,8 +52,8 @@ struct NavigationBar: View {
                 .toolbar(.visible, for: .tabBar)
                 .toolbarBackground(Theme.ScreenColor, for: .tabBar)
         }
-        .accentColor(Theme.Peach)
     }
+        .accentColor(Theme.Peach)
         .navigationBarBackButtonHidden(true)
     }
 }

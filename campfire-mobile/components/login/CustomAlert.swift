@@ -42,6 +42,9 @@ struct CustomAlert: View {
         .task {
             animate(isShown: true)
         }
+        .onTapGesture {
+            dismiss()
+        }
     }
 
     // MARK: Private

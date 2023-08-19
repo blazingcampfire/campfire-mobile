@@ -17,7 +17,7 @@ struct SetProfilePic: View {
     @EnvironmentObject var notificationsManager: NotificationsManager
     @State var setUpFinished: Bool = false
     @State var selectedPFP: UIImage?
-    
+
     var body: some View {
         if setUpFinished {
             NavigationBar()
@@ -29,33 +29,31 @@ struct SetProfilePic: View {
                         }
                     }
                 }
-        }
-        else {
+        } else {
             GradientBackground()
                 .overlay(
                     VStack {
-                        
                         // MARK: - Profile picture upload button & prompts
-                        
+
                         VStack(spacing: 60) {
                             Text("upload a profile picture")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 25))
                                 .padding(.top, 100)
-                            Text("(optional)")
-                                .foregroundColor(Color.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding(.top, -40)
-                            
+//                            Text("(optional)")
+//                                .foregroundColor(Color.white)
+//                                .font(.custom("LexendDeca-Bold", size: 15))
+//                                .padding(.top, -40)
+
                             ProfilePictureView(selectedPFP: $selectedPFP)
-                            
-                            Text("you're ready!")
+
+                            Text("last thing!")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding(-20)
-                            
+
                             // MARK: - Button redirecting to the main app
-                            
+
                             VStack {
                                 Button(action: {
                                     Task {
@@ -66,7 +64,9 @@ struct SetProfilePic: View {
                                             currentUser.getProfile()
                                             currentUser.getUser()
                                             setUpFinished = true
-                                            currentUser.showInitialMessage = true
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                currentUser.showInitialMessage = true
+                                            }
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }
@@ -83,21 +83,20 @@ struct SetProfilePic: View {
                 .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }
     }
-    
-    
+
     func confirmProfilePic() async throws {
         guard selectedPFP != nil else {
             print("No image")
             throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No image"])
         }
-        
+
         guard let imageData = selectedPFP!.jpegData(compressionQuality: 0.8) else {
             print("Image cannot be converted to data")
             throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Image cannot be converted to data"])
         }
-        
+
         let imagePath = "pfpImages/\(UUID().uuidString).jpg"
-        
+
         do {
             let photoURL = try await withCheckedThrowingContinuation { continuation in
                 uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in

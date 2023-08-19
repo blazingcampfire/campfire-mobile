@@ -12,6 +12,7 @@ struct FriendsListView: View {
     var request: RequestFirestore
     @EnvironmentObject var model: FriendsModel
     @EnvironmentObject var currentUser: CurrentUserModel
+    @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -40,8 +41,8 @@ struct FriendsListView: View {
                     }
                 }
                 .overlay(
-                    NavigationLink(destination: { OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
-                            .navigationBarBackButtonHidden(true)
+                    NavigationLink(destination: {
+                                       OtherProfilePage(profileModel: ProfileModel(id: request.userID, currentUser: currentUser))
                                    },
                                    label: { EmptyView() })
                         .opacity(0)
@@ -54,7 +55,7 @@ struct FriendsListView: View {
                 }) {
                     Image(systemName: "minus.circle.fill")
                         .foregroundColor(Theme.Peach)
-                        .font(.system( size: 30))
+                        .font(.system(size: 30))
                 }
                 .buttonStyle(BorderlessButtonStyle())
             }

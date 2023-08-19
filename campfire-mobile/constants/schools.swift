@@ -31,5 +31,9 @@ let postsMap: [String: CollectionReference] = [
     "yale": yalePosts,
     "rice": ricePosts]
 
+let reportsMap: [String: CollectionReference] = [
+    "nd": ndReports,
+    "yale": yaleReports,
+    "rice": riceReports]
 
 

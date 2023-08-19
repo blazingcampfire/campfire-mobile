@@ -94,20 +94,27 @@ struct SettingsForm: View {
             .foregroundColor(Theme.TextColor)
 
             Section(header: Text("support")) {
-                Label {
-                    Text("report issue")
-                } icon: {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(Theme.Peach)
-                }
-                Label {
-                    Text("contact us")
-                } icon: {
-                    Image(systemName: "envelope")
-                        .foregroundStyle(Theme.Peach)
+                Button(action: {
+                    model.openMail(emailTo: "support@campfireco.app", subject: "", body: "")
+                }, label: {
+                    Label {
+                        Text("support/report issue")
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(Theme.Peach)
+                    }})
+                Link(destination: URL(string: "https://www.campfireco.app/")!) {
+                    Label {
+                        Text("website")
+                    } icon: {
+                        Image(systemName: "network")
+                            .foregroundColor(Theme.Peach)
+                    }
                 }
             }
             .font(.custom("LexendDeca-Regular", size: 16))
+            .foregroundColor(Theme.TextColor)
+                       
 
             Section(header: Text("account")) {
                 VStack {

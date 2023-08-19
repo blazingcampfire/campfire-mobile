@@ -184,6 +184,7 @@ struct FeedUIView: View {
                 EllipsesButtonView(equalIds: idsEqual)
                     .presentationDetents([.fraction(0.50)])
                     .presentationDragIndicator(.visible)
+                    .environmentObject(individualPost)
             case .fourth:
                 InitialMessage(school: currentUser.profile.school)
             }

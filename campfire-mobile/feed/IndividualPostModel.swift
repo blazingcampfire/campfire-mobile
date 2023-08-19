@@ -172,6 +172,17 @@ class IndividualPost: ObservableObject {
         }
     }
     
+    func reportPost(issue: String) {
+        let docRef = ndReports.document(postItem.id)
+        docRef.setData([
+            "postID": postItem.id,
+            "userID": postItem.posterId,
+            "issue": issue,
+            "postType": postItem.postType
+        ])
+        print(postItem.id, postItem.posterId, issue, postItem.postType)
+    }
+    
     
     
     

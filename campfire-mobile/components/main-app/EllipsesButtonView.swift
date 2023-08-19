@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EllipsesButtonView: View {
     @ObservedObject var equalIds: PosterIdEqualCurrentUserId
+    @EnvironmentObject var individualPostModel: IndividualPost
     @Environment(\.dismiss) private var dismiss
     @State private var selectedAction: String? = nil   // Tracks the selected action
     let optionsList = ["abuse", "spam", "threatens safety", "other"]
@@ -58,6 +59,7 @@ struct EllipsesButtonView: View {
                             }
                         }
                         Button(action: {
+                            individualPostModel.reportPost(issue: option)
                             dismiss()
                         }, label: {
                                 Text("confirm")

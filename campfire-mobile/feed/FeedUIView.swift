@@ -77,10 +77,9 @@ struct FeedUIView: View {
                     VStack(alignment: .leading) {
                         
                         //- MARK: Profile pic/username buttons Hstack
+                        NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.posterId, currentUser: currentUser)), label: {
                         HStack(spacing: 5) {
-                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.posterId, currentUser: currentUser)), label: {
-                            Button(action: {
-                            }) {
+                            VStack {
                                 KFImage(URL(string: individualPost.profilepic))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -92,8 +91,7 @@ struct FeedUIView: View {
                             .padding(.leading, 20)
                             
                             VStack(alignment: .leading, spacing: 5) {
-                                Button(action: {
-                                }) {
+                                VStack {
                                     Text("@\(individualPost.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
                                 }
@@ -110,9 +108,8 @@ struct FeedUIView: View {
                                 
                             }
                             .padding(.leading, 10)
-                        })
                         }
-                        
+                    })
                     }
                     
                 }

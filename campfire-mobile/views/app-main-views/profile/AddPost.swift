@@ -1,4 +1,4 @@
-//
+////
 //  EditPost.swift
 //  campfire-mobile
 //
@@ -215,16 +215,14 @@ struct AddPost: View {
 
 func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
     guard let storageZone = ProcessInfo.processInfo.environment["storageZone"] else {
-        return
-    }
-    guard let apiKey = ProcessInfo.processInfo.environment["apiKey"] else {
-        return
-    }
-    guard let baseCDNURL = ProcessInfo.processInfo.environment["baseCDNURL"] else {
-        return
-    }
+          return
+      }
+      guard let apiKey = ProcessInfo.processInfo.environment["apiKey"] else {
+          return
+      }
 
-    let urlString = "\(baseCDNURL)\(storageZone)/\(imagePath)"
+    let urlString = "https://storage.bunnycdn.com/\(storageZone)/\(imagePath)"
+    print(urlString)
     if let url = URL(string: urlString) {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"

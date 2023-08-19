@@ -76,12 +76,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "apiKey"
-            value = "&quot;c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a&quot;"
+            value = "c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "baseCDNURL"
-            value = "&quot;https://campfirepullzone.b-cdn.net/&quot;"
+            value = "https://campfirepullzone.b-cdn.net/"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable

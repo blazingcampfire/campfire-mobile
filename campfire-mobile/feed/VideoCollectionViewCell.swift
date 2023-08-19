@@ -10,6 +10,7 @@ import AVKit
 import SwiftUI
 import Combine
 
+
 class PlayerView: UIView {
     override class var layerClass: AnyClass {
         return AVPlayerLayer.self
@@ -191,3 +192,4 @@ extension VideoCollectionViewCell {
         player?.pause()
     }
 }
+

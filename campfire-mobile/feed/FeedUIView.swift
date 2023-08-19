@@ -28,7 +28,6 @@ struct FeedUIView: View {
     
     var body: some View {
         ZStack {
-            
             VStack {
                 HStack {
                     Button(action: {
@@ -53,8 +52,6 @@ struct FeedUIView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
-            
-            
             
             VStack {
                 HStack {
@@ -163,7 +160,6 @@ struct FeedUIView: View {
             .padding(.bottom, 155)
             .padding(.trailing, 10)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-            
         }
         .background(Color.clear)
         .onAppear {
@@ -186,6 +182,12 @@ struct FeedUIView: View {
                     .presentationDetents([.fraction(0.15)])
                     .presentationDragIndicator(.visible)
             }
+        }
+        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
+               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
+               isPresented: $idsEqual.showAlert)
+        .onTapGesture {
+            idsEqual.showAlert = false
         }
     }
     

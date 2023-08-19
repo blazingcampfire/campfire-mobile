@@ -21,6 +21,7 @@ class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
     @Published var currentAssortment: Assortment = .hot
     @Published var pauseVideos = false
+    // @Published var currentUser: CurrentUserModel
     var initialLoadCompleted = false
     var cancellables = Set<AnyCancellable>()
     
@@ -35,6 +36,7 @@ class NewFeedModel: ObservableObject {
         .sink { [weak self] assortment in
             self?.switchAssortment(to: assortment)
         }.store(in: &cancellables)
+        //self.currentUser = currentUser
     }
     
     deinit {

@@ -15,7 +15,6 @@ class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
     var newFeedModel = NewFeedModel()
     var cancellables = Set<AnyCancellable>()
-    var currentInteractingIndexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,39 +24,42 @@ class FeedViewController: UIViewController {
         layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        
+
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        print("View Safe Area Insets:", view.safeAreaInsets)
+        print("Collection View Safe Area Insets:", collectionView.safeAreaInsets)
+        
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
         collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         view.addSubview(collectionView)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCellIdentifier")
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "VideoCellIdentifier")
         
+ 
         newFeedModel.$posts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
             }
             .store(in: &cancellables)
-        
-  //      observePauseVideos()
-        
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+ 
+
+    func updateCollectionViewLayout() {
+        print("update function went off ")
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
+            layout.invalidateLayout()
         }
     }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -68,26 +70,14 @@ class FeedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateCollectionViewLayout()
         for cell in collectionView.visibleCells {
             (cell as? VideoCollectionViewCell)?.player?.play()
         }
     }
     
-//    func observePauseVideos() {
-//        newFeedModel.$pauseVideos
-//            .sink { [weak self] isPaused in
-//                guard let self = self else { return }
-//
-//                if !isPaused, let indexPath = self.currentInteractingIndexPath {
-//                    print("scrolled back to correct item")
-//                    self.collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
-//                }
-//            }
-//            .store(in: &cancellables)
-//    }
-
+    
 }
-
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -95,16 +85,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         print("Number of items: \(newFeedModel.posts.count)")
         return newFeedModel.posts.count
     }
-    
-    func currentVisibleIndexPath() -> IndexPath? {
-            for cell in collectionView.visibleCells {
-                if let indexPath = collectionView.indexPath(for: cell) {
-                    return indexPath
-                }
-            }
-            return nil
-        }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let postItem = newFeedModel.posts[indexPath.item]
@@ -146,14 +126,6 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
       }
 }
 
-extension FeedViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        guard let indexPath = currentVisibleIndexPath() else { return }
-        currentInteractingIndexPath = indexPath
-    }
-}
-
-
 
 struct FeedViewControllerWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> FeedViewController {
@@ -167,13 +139,5 @@ struct FeedViewControllerWrapper: UIViewControllerRepresentable {
     
 }
 
-struct KeyboardSafeAreaKey: EnvironmentKey {
-    static let defaultValue: CGFloat = 0
-}
-extension EnvironmentValues {
-    var keyboardSafeArea: CGFloat {
-        get { self[KeyboardSafeAreaKey.self] }
-        set { self[KeyboardSafeAreaKey.self] = newValue }
-    }
-}
+
 

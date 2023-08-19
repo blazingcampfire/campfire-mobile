@@ -161,5 +161,18 @@ class IndividualPost: ObservableObject {
         }
     }
     
+    func deletePostDocument() {
+        let docRef = ndPosts.document(postItem.id)
+        docRef.delete() { error in
+            if let error = error {
+                print("Error updating document \(error)")
+            } else {
+                print("Success deleting post document")
+            }
+        }
+    }
+    
+    
+    
     
 }

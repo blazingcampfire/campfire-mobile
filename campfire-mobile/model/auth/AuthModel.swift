@@ -270,7 +270,7 @@ extension AuthModel {
 //                AuthenticationManager.shared.unlinkCredential(providerID: providerID)
 //            }
             AuthenticationManager.shared.deleteUser()
-            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we currently support. Please re-verify your phone number & try to create your account again.")
+            await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
             triggerRestart()
             return
         }

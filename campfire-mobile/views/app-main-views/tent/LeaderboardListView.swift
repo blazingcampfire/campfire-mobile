@@ -46,8 +46,11 @@ struct LeaderboardListView: View {
             
             Spacer()
             
-            Text("\(profile.smores) 🍫")
+            Text("\(profile.smores)")
                 .font(.custom("LexendDeca-Bold", size: 23))
+            Image("noteatensmore")
+                .resizable()
+                .frame(width: 40, height: 40)
         }
     }
 }

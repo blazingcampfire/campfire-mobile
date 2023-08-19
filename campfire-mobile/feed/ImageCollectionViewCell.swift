@@ -30,7 +30,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
                 .store(in: &cancellables)
         }
     
-
     private func setupLikeButton() {
         likeButton.setImage(UIImage(named: "noteatensmore"), for: .normal)
         likeButton.setImage(UIImage(named: "eatensmore"), for: .selected)

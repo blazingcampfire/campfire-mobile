@@ -177,21 +177,20 @@ struct FeedUIView: View {
                     .presentationCornerRadius(30)
             case .second:
                 CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
-//                    .accentColor(Theme.Peach)
                     .tint(Theme.Peach)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)
             case .third:
                 EllipsesButtonView(equalIds: idsEqual)
-                    .presentationDetents([.fraction(0.15)])
+                    .presentationDetents([.fraction(0.50)])
                     .presentationDragIndicator(.visible)
             case .fourth:
                 InitialMessage(school: currentUser.profile.school)
             }
         }
-        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
-               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
-               isPresented: $idsEqual.showAlert)
+//        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
+//               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
+//               isPresented: $idsEqual.showAlert)
         .onTapGesture {
             idsEqual.showAlert = false
             currentUser.showInitialMessage = false

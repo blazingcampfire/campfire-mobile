@@ -220,7 +220,7 @@ func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completi
     guard let apiKey = ProcessInfo.processInfo.environment["apiKey"] else {
         return
     }
-    guard let baseCDNURL = ProcessInfo.processInfo.environment["apiKey"] else {
+    guard let baseCDNURL = ProcessInfo.processInfo.environment["baseCDNURL"] else {
         return
     }
 

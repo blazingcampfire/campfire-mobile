@@ -14,18 +14,21 @@ struct OtherFriendsPage: View {
     var userID: String
     var body: some View {
         
-//            NavigationView {
                 if model.friends.isEmpty {
                     ZStack {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
                         
                         VStack {
-                            VStack {
-                                Text("friends")
-                                    .font(.custom("LexendDeca-SemiBold", size: 30))
-                                    .foregroundColor(Theme.TextColor)
-                                    .padding(.leading, 15)
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
                             }
                             Spacer()
                             VStack {
@@ -49,8 +52,20 @@ struct OtherFriendsPage: View {
                     ZStack {
                         Theme.ScreenColor
                             .ignoresSafeArea(.all)
-                        
-                        ListOtherFriends()
+                        VStack {
+                            HStack {
+                                VStack {
+                                    Text("friends")
+                                        .font(.custom("LexendDeca-SemiBold", size: 30))
+                                        .foregroundColor(Theme.TextColor)
+                                        .padding()
+                                }
+                                Spacer()
+                                
+                            }
+                            
+                            ListOtherFriends()
+                        }
                     }
                     .background(Color.white)
                     .padding(-10)

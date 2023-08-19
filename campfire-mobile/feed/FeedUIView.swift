@@ -77,9 +77,8 @@ struct FeedUIView: View {
                         
                         //- MARK: Profile pic/username buttons Hstack
                         HStack(spacing: 5) {
-                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.id, currentUser: currentUser)), label: {
+                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.posterId, currentUser: currentUser)), label: {
                             Button(action: {
-                                // lead to profile page
                             }) {
                                 KFImage(URL(string: individualPost.profilepic))
                                     .resizable()
@@ -93,7 +92,6 @@ struct FeedUIView: View {
                             
                             VStack(alignment: .leading, spacing: 5) {
                                 Button(action: {
-                                    //lead to profile page
                                 }) {
                                     Text("@\(individualPost.username)")
                                         .font(.custom("LexendDeca-Bold", size: 16))
@@ -150,9 +148,9 @@ struct FeedUIView: View {
                 Button(action: {
                     activeSheet = .third
                 }) {
-                    Image(systemName: "square.fill")
+                    Image(systemName: "ellipsis.circle.fill")
                         .resizable()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 40, height: 40)
                         .foregroundColor(.white)
                 }
                 .padding(.top, 15)
@@ -175,6 +173,8 @@ struct FeedUIView: View {
                     .presentationCornerRadius(30)
             case .second:
                 CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost, newFeedModel: newFeedModel)
+//                    .accentColor(Theme.Peach)
+                    .tint(Theme.Peach)
                     .presentationDetents([.fraction(0.85)])
                     .presentationDragIndicator(.visible)
             case .third:

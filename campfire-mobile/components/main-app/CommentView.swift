@@ -22,7 +22,7 @@ struct CommentView: View {
             VStack(spacing: 0) { //View Replies wrapped
                     HStack { //Profile pic to comment info to like button wrapped horizontally
                         HStack(spacing: 5){
-                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.id, currentUser: currentUser)) , label: {
+                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.posterId, currentUser: currentUser)) , label: {
                                 KFImage(URL(string: individualComment.profilepic))
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -33,7 +33,7 @@ struct CommentView: View {
                             
                             //-MARK: Comment Info
                             VStack(alignment: .leading, spacing: 2) {
-                                NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.id, currentUser: currentUser)), label: {
+                                NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualComment.commentItem.posterId, currentUser: currentUser)), label: {
                                     //navigate to profile
                                     Text("@\(individualComment.username)")
                                         .font(.custom("LexendDeca-Bold", size: 14))
@@ -107,7 +107,7 @@ struct CommentView: View {
         .onAppear {
             commentModel.getRepliesFor = individualComment.comId
         }
-        .tint(Theme.Peach)
+        
     }
     }
 //struct CommentView_Previews: PreviewProvider {

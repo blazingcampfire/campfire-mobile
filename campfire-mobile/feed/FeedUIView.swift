@@ -80,7 +80,7 @@ struct FeedUIView: View {
                         
                         //- MARK: Profile pic/username buttons Hstack
                         HStack(spacing: 5) {
-                            
+                            NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.id, currentUser: currentUser)), label: {
                             Button(action: {
                                 // lead to profile page
                             }) {
@@ -114,6 +114,7 @@ struct FeedUIView: View {
                                 
                             }
                             .padding(.leading, 10)
+                        })
                         }
                         
                     }

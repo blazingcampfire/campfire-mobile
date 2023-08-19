@@ -49,6 +49,8 @@ struct EditFieldPage: View {
                 
              
                 LimitedTextField(text: $newName, maxCharacterLength: maxCharacterLength, unallowedCharacters: unallowedCharacters)
+                    .font(.custom("LexendDeca-SemiBold", size: 18))
+                    .foregroundColor(Theme.TextColor)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 2)
@@ -57,8 +59,6 @@ struct EditFieldPage: View {
             }
             .padding(.top, 50)
         }
-        .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: Theme.ButtonColor))
-        .navigationBarBackButtonHidden(true)
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
@@ -91,7 +91,7 @@ struct LimitedTextField: View {
     let unallowedCharacters: [String]?
 
     var body: some View {
-        TextField("Enter text (max \(maxCharacterLength) characters)", text: $text)
+        TextField("enter text (max \(maxCharacterLength) characters)", text: $text)
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .onChange(of: text) { newValue in
                 if let unallowedChars = unallowedCharacters {

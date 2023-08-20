@@ -78,7 +78,6 @@ struct EditPost: View {
                             PromptsPage(prompt: $prompt)
                                 .presentationDetents([.fraction(0.7)])
                                 .presentationDragIndicator(.visible)
-                                .presentationCornerRadius(30)
                         }
                         
                         Spacer()

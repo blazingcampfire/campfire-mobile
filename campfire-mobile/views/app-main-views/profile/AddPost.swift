@@ -61,7 +61,6 @@ struct AddPost: View {
                                 PromptsPage(prompt: $prompt)
                                     .presentationDetents([.fraction(0.7)])
                                     .presentationDragIndicator(.visible)
-                                    .presentationCornerRadius(30)
                             }
                             
                             if prompt != "no prompt" {

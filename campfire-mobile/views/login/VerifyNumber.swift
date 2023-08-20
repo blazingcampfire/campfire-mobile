@@ -13,7 +13,7 @@ struct VerifyNumber: View {
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
-    
+    @State var canAdvance: Bool = false
     // setting up verification code & advancing as view state
     
     var body: some View {
@@ -56,15 +56,19 @@ struct VerifyNumber: View {
                         // MARK: - NavLink to EnterEmail screen
                         
                         VStack {
-                            if model.createAccount && model.validVerificationCode {
+                            if model.createAccount && canAdvance {
                                 NavigationLink(destination: EnterEmail(), label: {
                                     LFButton(text: "next")
                                 })
                             } else {
                                 Button {
+                                    do {
                                     Task {
-                                       await model.verifyVerificationCode()
+                                            await model.verifyVerificationCode()
+                                        }
                                     }
+                                    print(model.validVerificationCode)
+                                    canAdvance = true
                                 } label: {
                                     LFButton(text: "verify")
                                 }

@@ -190,31 +190,8 @@ struct AddPost: View {
     }
 }
 
-//    func uploadPictureToStorage(imageData: Data, completion: @escaping (String?) -> Void) {
-//        let storageRef = Storage.storage().reference()
-//        let path = "profilepostimages/\(UUID().uuidString).jpg"
-//        let fileRef = storageRef.child(path)
-//
-//        fileRef.putData(imageData, metadata: nil) { _, error in
-//            if let error = error {
-//                print("Error upload photo to storage: \(error.localizedDescription)")
-//                completion(nil)
-//            } else {
-//                fileRef.downloadURL { url, error in
-//                    if let url = url {
-//                        completion(url.absoluteString)
-//                    } else {
-//                        print("Error getting download URL: \(error?.localizedDescription ?? "Unknown error")")
-//                        completion(nil)
-//                    }
-//                }
-//            }
-//        }
-//    }
 
 func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
-    let storageZone = "campfireco-storage"
-    let apiKey = "c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a"
 
     let urlString = "https://storage.bunnycdn.com/\(storageZone)/\(imagePath)"
     if let url = URL(string: urlString) {

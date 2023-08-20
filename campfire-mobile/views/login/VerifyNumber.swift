@@ -63,7 +63,7 @@ struct VerifyNumber: View {
                             } else {
                                 Button {
                                     Task {
-                                       try await model.verifyVerificationCode()
+                                       await model.verifyVerificationCode()
                                     }
                                 } label: {
                                     LFButton(text: "verify")

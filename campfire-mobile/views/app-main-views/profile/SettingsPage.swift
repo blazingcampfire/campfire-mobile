@@ -153,7 +153,6 @@ struct SettingsForm: View {
                        do {
                            try AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
                            currentUser.authStateDidChange()
-
                        } catch {
                            model.deleteErrorAlert = true
                        }

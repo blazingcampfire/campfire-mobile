@@ -31,7 +31,7 @@ struct EnterPhoneNumber: View {
                             .background(Color.clear)
 
                         if !model.validPhoneNumberString {
-                            Text("phone number must be 10 digits with no spaces")
+                            Text("phone number must be 10 digits")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 13))
                                 .padding(.top, -40)
@@ -51,7 +51,9 @@ struct EnterPhoneNumber: View {
                                 })
                             } else {
                                 Button {
-                                    model.getVerificationCode()
+                                    Task {
+                                        await model.getVerificationCode()
+                                    }
                                     print("\(model.formattedPhoneNumber)")
                                 } label: {
                                     LFButton(text: "send code")

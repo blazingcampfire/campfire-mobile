@@ -40,7 +40,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var zoomFactor: CGFloat = 1.0
     @Published var isSetup = false
     @Published var needtoShowAlert = false
-    @Published var sessionInterrupted: Bool = false
+    @objc @Published var sessionInterrupted: Bool = false
     @Published var capturedPic: UIImage?
     @Published var showSelectPhoto: Bool = false
     @Published var showSelectVideo: Bool = false
@@ -72,7 +72,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
        super.init()
         checkCameraPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: NSNotification.Name.AVCaptureSessionInterruptionEnded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getter: sessionInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionRuntimeError), name: .AVCaptureSessionRuntimeError, object: nil)
     }
     @objc func sessionWasInterrupted(notification: NSNotification) {

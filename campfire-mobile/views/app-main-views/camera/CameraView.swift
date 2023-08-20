@@ -178,7 +178,7 @@ struct CameraView: View {
                                 .font(.system(size: 30))
                                 .foregroundColor(.white)
                         }
-                        .padding(.top, 600)
+                        .padding(.top, 550)
                         .padding(.leading, 200)
                         .sheet(isPresented: $isShowingCamPicker) {
                             MediaPickerView()
@@ -211,7 +211,7 @@ struct CameraView: View {
                         .contentShape(Rectangle())
                        .simultaneousGesture(tapGesture)
                        .simultaneousGesture(longPressGesture.sequenced(before: dragGesture))
-                        .padding(.top, 600)
+                        .padding(.top, 550)
                     }
                     
                 }
@@ -278,7 +278,7 @@ struct CameraView: View {
         }
 
     var longPressGesture: some Gesture {
-        LongPressGesture(minimumDuration: 0.5)
+        LongPressGesture(minimumDuration: 0.3)
             .onEnded { _ in
                 camera.startRecording()
             }

@@ -24,7 +24,7 @@ struct PreviewPostInfo: View {
                 VStack {
                     Text("@\(currentUser.profile.username)")
                         .font(.custom("LexendDeca-Bold", size: 14))
-                        .foregroundColor(Theme.TextColor)
+                        .foregroundColor(.white)
                 }
                 .padding(.top, 2)
             }
@@ -34,7 +34,7 @@ struct PreviewPostInfo: View {
             }
         }
         .padding(.bottom, 100)
-        .padding(.top, 400)
+        .padding(.top, 430)
     }
 }
 
@@ -138,19 +138,21 @@ struct PhotoSaveButton: View {
             Button(action: {
                 if !camera.isSaved{camera.savePic()}
             }) {
-                Circle()
-                .overlay(
-                Image(systemName: self.camera.isSaved ? "checkmark.circle.fill" : "arrow.down.circle.fill")
-                    .foregroundColor(.white)
-                    .background(Theme.Peach)
-                    .font(.system(size: 30))
-                    .clipShape(Circle())
-                )
-                .frame(width: 50, height: 50)
+                HStack(spacing: 5) {
+                    Text(camera.isSaved ? "Saved" : "Save")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-SemiBold", size: 21))
+                    Image(systemName: camera.isSaved ? "checkmark" : "arrow.down")
+                        .font(.system(size: 18))
+                        .bold()
+                        .foregroundColor(.white)
+                }
+                .padding(15)
+                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
             }
         }
         .padding(.bottom, 30)
-        .padding(.trailing, 315)
+        .padding(.trailing, 260)
     }
 }
 
@@ -162,19 +164,21 @@ struct VideoSaveButton: View {
             Button(action: {
                 if !camera.isSaved{camera.saveVideo()}
             }) {
-                Circle()
-                .overlay(
-                Image(systemName: self.camera.isSaved ? "checkmark.circle.fill" : "arrow.down.circle.fill")
-                    .foregroundColor(.white)
-                    .background(Theme.Peach)
-                    .font(.system(size: 30))
-                    .clipShape(Circle())
-                )
-                .frame(width: 50, height: 50)
+                HStack(spacing: 5) {
+                    Text(camera.isSaved ? "Saved" : "Save")
+                        .foregroundColor(.white)
+                        .font(.custom("LexendDeca-SemiBold", size: 21))
+                    Image(systemName: camera.isSaved ? "checkmark" : "arrow.down")
+                        .font(.system(size: 18))
+                        .bold()
+                        .foregroundColor(.white)
+                }
+                .padding(15)
+                .background(RoundedRectangle(cornerRadius: 40).fill(Theme.Peach))
             }
         }
         .padding(.bottom, 30)
-        .padding(.trailing, 315)
+        .padding(.trailing, 260)
     }
 }
 

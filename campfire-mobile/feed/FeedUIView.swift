@@ -171,7 +171,6 @@ struct FeedUIView: View {
             case .first:
                 LeaderboardPage(model: LeaderboardModel(currentUser: currentUser))
                     .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(30)
             case .second:
                 CommentsPage(commentModel: CommentsModel(currentUser: currentUser, postId: individualPost.id), post: individualPost)
                     .tint(Theme.Peach)
@@ -186,9 +185,6 @@ struct FeedUIView: View {
                 InitialMessage(school: currentUser.profile.school)
             }
         }
-//        .alert(title: "Delete Post", message: "Are you sure you want to delete your post",
-//               dismissButton: CustomAlertButton(title: "yes", action: individualPost.deletePostDocument),
-//               isPresented: $idsEqual.showAlert)
         .onTapGesture {
             idsEqual.showAlert = false
             currentUser.showInitialMessage = false

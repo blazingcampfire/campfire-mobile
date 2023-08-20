@@ -31,7 +31,7 @@ class SearchModel: ObservableObject {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
-            currentUser.profileRef.order(by: "smores").limit(to: 8).getDocuments { QuerySnapshot, err in
+            currentUser.profileRef.order(by: "smores", descending: true).limit(to: 10).getDocuments { QuerySnapshot, err in
                 if let err = err {
                     print("Error querying profiles: \(err)")
                 } else {

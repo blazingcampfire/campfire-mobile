@@ -12,6 +12,7 @@ struct FriendsPage: View {
     @Environment(\.dismiss) private var dismiss
     
     @StateObject var model: FriendsModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
     
@@ -33,11 +34,6 @@ struct FriendsPage: View {
                             }
                             Spacer()
                             VStack {
-                                Image(systemName: "person.fill.badge.plus")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(Theme.Peach)
-                                    .padding(.bottom, 30)
-                                
                                 Text("go make some friends!")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .foregroundColor(Theme.TextColor)

@@ -28,6 +28,7 @@ struct SetProfilePic: View {
                             await notificationsManager.request()
                         }
                     }
+                    currentUser.showInitialMessage = true
                 }
         } else {
             GradientBackground()
@@ -64,7 +65,6 @@ struct SetProfilePic: View {
                                             currentUser.getProfile()
                                             currentUser.getUser()
                                             setUpFinished = true
-                                            currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }

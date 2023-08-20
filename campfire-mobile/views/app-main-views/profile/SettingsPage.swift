@@ -152,7 +152,7 @@ struct SettingsForm: View {
                    dismissButton: CustomAlertButton(title: "yes", action: {
                        do {
                            try AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
-                           currentUser.signedIn = false
+                           currentUser.authStateDidChange()
 
                        } catch {
                            model.deleteErrorAlert = true

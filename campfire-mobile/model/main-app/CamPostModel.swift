@@ -172,12 +172,8 @@ class CamPostModel: ObservableObject {
 //    }
     
     func uploadVideoToBunnyStorage(videoURL: URL, videoPath: String, completion: @escaping (String?) -> Void) {
-        guard let storageZone = ProcessInfo.processInfo.environment["storageZone"] else {
-            return
-        }
-        guard let apiKey = ProcessInfo.processInfo.environment["apiKey"] else {
-            return
-        }
+        let storageZone = "campfireco-storage"
+        let apiKey = "c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a"
         
         let urlString = "https://storage.bunnycdn.com/\(storageZone)/\(videoPath)"
         if let url = URL(string: urlString) {

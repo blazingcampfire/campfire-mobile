@@ -54,20 +54,6 @@ struct Reply: Identifiable {
     var numLikes: Int
 }
 
-struct Like: Identifiable {
-    var id: String
-    var date: Timestamp
-}
-
-struct CommentLike: Identifiable {
-    var id: String
-    var date: Timestamp
-}
-
-struct ReplyLike: Identifiable {
-    var id: String
-    var date: Timestamp
-}
 
 
 

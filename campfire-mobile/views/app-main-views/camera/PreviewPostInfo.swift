@@ -29,12 +29,12 @@ struct PreviewPostInfo: View {
                 .padding(.top, 2)
             }
             .padding(.leading, 20)
-            VStack(alignment: .leading, spacing: 10) {
+            VStack {
                 CaptionTextField(text: $postModel.caption, placeholderText: "enter your caption")
             }
         }
         .padding(.bottom, 100)
-        .padding(.top, 500)
+        .padding(.top, 400)
     }
 }
 

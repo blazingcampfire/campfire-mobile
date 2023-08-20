@@ -54,6 +54,16 @@ class IndividualPost: ObservableObject {
         return postItem.posterId
     }
     
+    var algorithm: Double {
+        return Double(postItem.numLikes + (postItem.comNum * Int(1.5)))
+    }
+    
+    var decreaseAlgo: Double {
+        return Double((postItem.numLikes + (postItem.comNum * Int(1.5))) * (-1))
+    }
+    
+    
+    
     init(postItem: PostItem, currentUser: CurrentUserModel) {
         self.postItem = postItem
         self.currentUser = currentUser
@@ -90,26 +100,25 @@ class IndividualPost: ObservableObject {
     
     func increasePostScore() {
         let docRef = currentUser.postsRef.document(postItem.id)
-        docRef.updateData(["score": FieldValue.increment(Int64(1))]) { error in
+        docRef.updateData(["score": FieldValue.increment(Double(algorithm))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
             } else {
-                print("Success increasing post score")
+                print("Success editing post score")
             }
         }
     }
     
     func decreasePostScore() {
         let docRef = currentUser.postsRef.document(postItem.id)
-        docRef.updateData(["score": FieldValue.increment(Int64(-1))]) { error in
+        docRef.updateData(["score": FieldValue.increment(Double(decreaseAlgo))]) { error in
             if let error = error {
                 print("Error updating document \(error)")
             } else {
-                print("Success decreasing post score")
+                print("Success editing post score")
             }
         }
     }
-    
     
     
     

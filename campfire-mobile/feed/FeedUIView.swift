@@ -102,7 +102,7 @@ struct FeedUIView: View {
                                 if individualPost.location == "" {
                                     Text("")
                                 } else {
-                                    Text( "\(individualPost.location)" + "📍")
+                                    Text( "\(formatAddress(individualPost.location))" + "📍")
                                         .font(.custom("LexendDeca-Regular", size: 15))
                                 }
                                 

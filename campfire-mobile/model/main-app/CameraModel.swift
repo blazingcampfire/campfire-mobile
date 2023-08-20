@@ -40,7 +40,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var zoomFactor: CGFloat = 1.0
     @Published var isSetup = false
     @Published var needtoShowAlert = false
-    @objc @Published var sessionInterrupted: Bool = false
+    @Published var sessionInterrupted: Bool = false
     @Published var capturedPic: UIImage?
     @Published var showSelectPhoto: Bool = false
     @Published var showSelectVideo: Bool = false
@@ -72,7 +72,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
        super.init()
         checkCameraPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(getter: sessionInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: .AVCaptureSessionInterruptionEnded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionRuntimeError), name: .AVCaptureSessionRuntimeError, object: nil)
     }
     @objc func sessionWasInterrupted(notification: NSNotification) {
@@ -89,9 +89,10 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             if !self.session.isRunning {
                 self.session.startRunning()
             }
-            self.alertType = .sessionInterrupted
+           self.alertType = .sessionInterrupted
         }
     }
+    
     @objc func handleSessionRuntimeError(notification: NSNotification) {
         DispatchQueue.main.async {
             self.alertType = .sessionInterrupted
@@ -192,23 +193,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             }
         }
     }
-    func tearDown() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            print("tearing down")
-            self.session.stopRunning()
-            for input in self.session.inputs {
-                self.session.removeInput(input)
-            }
-            for output in self.session.outputs {
-                self.session.removeOutput(output)
-            }
-            DispatchQueue.main.async {
-                self.isSetup = false
-                self.preview = nil
-            }
-        }
-    }
-
+  
     
     @objc func handleAudioSessionInterruption(notification: NSNotification) {
         guard let info = notification.userInfo,
@@ -216,9 +201,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
               let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
             return
         }
-
-    
-        
         switch type {
         case .began:
             // Interruption began, remove audio input
@@ -356,17 +338,15 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
 
     func reTake() {
-        isFlashOn = false
-        if let deviceInput = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput {
-            
-            // Turn off the torch
-            setTorchModeOn(device: deviceInput.device, on: isFlashOn)
-        }
-
             // Perform the session start operation on a background queue
             DispatchQueue.global(qos: .userInitiated).async {
                 self.session.startRunning()
-        
+                
+                guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
+                    print("Could not find a suitable input device for turning off torch")
+                    return
+                }
+                self.setTorchModeOff(device: device.device)
                 // Perform UI updates on the main queue
                 DispatchQueue.main.async {
                     withAnimation {
@@ -383,6 +363,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         self.showSelectVideo = false
                         self.videoTooLarge = false
                         self.videoSizeAlert = false
+                        self.isFlashOn = false
                     }
                 }
             }
@@ -404,7 +385,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                 do {
                     try device.device.lockForConfiguration()
                     device.device.isSmoothAutoFocusEnabled = false
-                    setTorchModeOn(device: device.device, on: isFlashOn)
+                    setTorchModeOn(device: device.device)
                     device.device.unlockForConfiguration()  // Unlock the configuration
                 } catch {
                     print("Could not lock device for configuration: \(error)")
@@ -442,12 +423,29 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             }
     }
     
-    func setTorchModeOn(device: AVCaptureDevice, on: Bool) {
+    func setTorchModeOn(device: AVCaptureDevice) {
         do {
             try device.lockForConfiguration()
             
             if device.hasTorch {
-                device.torchMode = on ? .on : .off
+                device.torchMode = isFlashOn ? .on : .off
+            } else {
+                print("Torch is not available on this device")
+            }
+            
+            device.unlockForConfiguration()
+            
+        } catch {
+            print("Error while locking device for torch configuration: \(error)")
+        }
+    }
+    
+    func setTorchModeOff(device: AVCaptureDevice) {
+        do {
+            try device.lockForConfiguration()
+            
+            if device.hasTorch {
+                device.torchMode = .off
             } else {
                 print("Torch is not available on this device")
             }

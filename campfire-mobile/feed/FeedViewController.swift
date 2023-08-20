@@ -13,6 +13,7 @@ import Combine
 
 class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
+    let refreshControl = UIRefreshControl()
     var newFeedModel: NewFeedModel
     var cancellables = Set<AnyCancellable>()
 
@@ -38,6 +39,8 @@ class FeedViewController: UIViewController {
 
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
         
         print("View Safe Area Insets:", view.safeAreaInsets)
         print("Collection View Safe Area Insets:", collectionView.safeAreaInsets)
@@ -68,6 +71,13 @@ class FeedViewController: UIViewController {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
             layout.invalidateLayout()
+        }
+    }
+    
+    @objc func refreshPosts() {
+        DispatchQueue.main.async { [self] in
+            newFeedModel.loadInitialPosts {}
+            print("refreshed posts")
         }
     }
     

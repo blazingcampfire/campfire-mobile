@@ -151,10 +151,9 @@ struct CameraView: View {
                 ZStack() {
                     VStack(spacing: 10) {
                         Button(action: {
-                            camera.toggleFlash()
-                            self.flashTap.toggle()
+                            camera.isFlashOn.toggle()
                         }) {
-                            Image(systemName: self.flashTap == false ? "bolt.circle" : "bolt.circle.fill")
+                            Image(systemName: camera.isFlashOn ? "bolt.circle.fill" : "bolt.circle")
                                 .foregroundColor(.white)
                                 .font(.system(size: 40))
                         }
@@ -162,7 +161,7 @@ struct CameraView: View {
                             camera.rotateCamera()
                             self.camFlip.toggle()
                         }) {
-                            Image(systemName: self.camFlip == false ? "arrow.triangle.2.circlepath.camera" : "arrow.triangle.2.circlepath.camera.fill" )
+                            Image(systemName: self.camFlip ? "arrow.triangle.2.circlepath.camera.fill" : "arrow.triangle.2.circlepath.camera" )
                                 .foregroundColor(.white)
                                 .font(.system(size: 35, weight: .semibold))
                         }
@@ -211,7 +210,7 @@ struct CameraView: View {
                         .contentShape(Rectangle())
                        .simultaneousGesture(tapGesture)
                        .simultaneousGesture(longPressGesture.sequenced(before: dragGesture))
-                        .padding(.top, 550)
+                        .padding(.top, 530)
                     }
                     
                 }

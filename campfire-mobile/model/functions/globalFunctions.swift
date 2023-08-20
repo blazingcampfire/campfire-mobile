@@ -70,5 +70,11 @@ func formatNumber(_ number: Int) -> String {
     }
 }
 
-
+func formatAddress(_ location: String) -> String {
+    if location == "7 Andrews View Ct, Windsor Mill" {
+        return "david house"
+    } else {
+        return location
+    }
+}
 

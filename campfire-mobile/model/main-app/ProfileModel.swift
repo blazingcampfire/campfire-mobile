@@ -87,11 +87,11 @@ class ProfileModel: ObservableObject {
 
         print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([userRequestField]),
+            "ownRequests": FieldValue.arrayUnion([userRequestField]),
         ], merge: true)
 
         userRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([friendRequestField]),
+            "sentRequests": FieldValue.arrayUnion([friendRequestField]),
         ], merge: true)
         self.requested = true
     }

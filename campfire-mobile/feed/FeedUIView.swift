@@ -179,10 +179,11 @@ struct FeedUIView: View {
             case .third:
                 EllipsesButtonView(equalIds: idsEqual)
                     .presentationDetents([.fraction(0.50)])
-                    .presentationDragIndicator(.visible)
                     .environmentObject(individualPost)
             case .fourth:
                 InitialMessage(school: currentUser.profile.school)
+                    .presentationDetents([.fraction(0.50)])
+                    .presentationDragIndicator(.visible)
             }
         }
         .onTapGesture {

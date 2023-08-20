@@ -24,22 +24,34 @@ class SearchModel: ObservableObject {
     
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        print("currentUser: \(currentUser.privateUserData.userID)")
+        self.searchName(matching: name)
     }
     
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
-            self.profiles = []
-            return
+            currentUser.profileRef.order(by: "smores").limit(to: 8).getDocuments { QuerySnapshot, err in
+                if let err = err {
+                    print("Error querying profiles: \(err)")
+                } else {
+                    self.profiles = []
+                    for document in QuerySnapshot!.documents {
+                        do {
+                            let profile = try document.data(as: Profile.self)
+                            self.profiles.append(profile)
+                        } catch {
+                            print("Error retrieving profile")
+                        }
+                    }
+                }
+            }
         }
         currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
             if let err = err {
                 print("Error querying profiles: \(err)")
             } else {
                 self.profiles = []
-                var flag: Bool = false
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)

@@ -64,9 +64,7 @@ struct SetProfilePic: View {
                                             currentUser.getProfile()
                                             currentUser.getUser()
                                             setUpFinished = true
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                                currentUser.showInitialMessage = true
-                                            }
+                                            currentUser.showInitialMessage = true
                                         } catch {
                                             print("Error setting profile picture: \(error)")
                                         }

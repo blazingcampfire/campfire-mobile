@@ -28,7 +28,6 @@ struct InitialMessage: View {
             VStack(alignment: .leading, spacing: 5) {
                 Text("🙅🏾‍♂️ - campfire is not associated with \(school)")
                 Text("😹 - check out funny pictures and videos on the feed")
-                Text(" 🗺️ - see what's going on around campus on the map")
                 Text("📸 - add your own favorite pics and vids with the camera")
                 Text("⛺ - use our search tab to find old friends and new ones too")
                 Text("🎓 - customize your profile with your favorite flicks from around campus")

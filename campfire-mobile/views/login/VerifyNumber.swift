@@ -40,7 +40,6 @@ struct VerifyNumber: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
-                            .keyboardType(.numberPad)
                         
                         VStack{
                             Text("code sent to \(model.formattedPhoneNumber)")

@@ -42,6 +42,7 @@ struct EditPost: View {
                     
                     Button(action: {
                         isPickerShowing = true
+                        print("bro")
                     }) {
                         Image(systemName: "camera")
                             .font(.system(size: 100))
@@ -49,6 +50,16 @@ struct EditPost: View {
                             .frame(width: 350, height: 350)
                             .background(Color.black.opacity(0.5))
                             .clipShape(RoundedRectangle(cornerRadius: 30))
+                        
+                    }
+                    .sheet(isPresented: $isPickerShowing) {
+                        ImagePicker(sourceType:.photoLibrary) { image in
+                            self.selectedImage = image
+                        }
+                    }
+                    .onChange(of: selectedImage) { newImage in
+                        
+                        changePic = true
                         
                     }
                 }
@@ -66,9 +77,8 @@ struct EditPost: View {
                         Spacer()
                         Spacer()
                         
-                        Button(action: {
-                            self.promptScreen.toggle()
-                        }) {
+                        NavigationLink(destination: PromptsPage(prompt: $prompt))
+                        {
                             Text(prompt != "no prompt" ? "Change Prompt" : "Add Prompt")
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .foregroundColor(Theme.Peach)
@@ -208,17 +218,6 @@ struct EditPost: View {
                 )
             }
         }
-        .sheet(isPresented: $isPickerShowing) {
-            ImagePicker(sourceType: .photoLibrary) { image in
-                self.selectedImage = image
-            }
-        }
-        .onChange(of: selectedImage) { newImage in
-            
-            changePic = true
-            
-        }
-        
     }
     
     func changePrompt(_ userID: String) {

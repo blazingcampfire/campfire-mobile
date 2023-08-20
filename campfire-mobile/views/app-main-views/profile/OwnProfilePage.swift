@@ -155,7 +155,7 @@ struct OwnProfilePage: View {
                                             Image(systemName: "plus.circle")
                                                 .font(.system(size: 75))
                                                 .foregroundColor(Theme.Peach)
-                                            Text("add post!")
+                                            Text("add flick!")
                                                 .font(.custom("LexendDeca-SemiBold", size: 25))
                                                 .foregroundColor(Theme.Peach)
                                         }

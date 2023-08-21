@@ -86,30 +86,31 @@ class ProfileModel: ObservableObject {
         self.requested = true
     }
     
-    func removeRequest() {
+    func removeRequest(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        guard let friendID = profile?.userID else {
-            return
-        }
+        let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-
+        
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile!.name, username: profile!.username, profilePicURL: profile!.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        } catch {
+        }
+        catch {
             return
         }
         friendRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([userRequestField]),
+            "sentRequests": FieldValue.arrayRemove([userRequestField])
         ])
-
+        
         userRelationshipRef.updateData([
-            "sentRequests": FieldValue.arrayRemove([friendRequestField]),
+            "ownRequests": FieldValue.arrayRemove([friendRequestField]),
+            "sentRequests": FieldValue.arrayRemove([friendRequestField])
         ])
         self.requested = false
     }

@@ -11,7 +11,7 @@ struct SettingsPage: View {
     @Binding var darkMode: Bool
     @StateObject var model: SettingsModel
     var body: some View {
-        NavigationView {
+        NavigationStack {
             SettingsForm(darkMode: $darkMode)
                 .environmentObject(model)
                 .toolbar {

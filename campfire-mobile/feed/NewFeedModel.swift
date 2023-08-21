@@ -105,7 +105,7 @@ class NewFeedModel: ObservableObject {
                     case .added:
                         self.posts.append(post)
                         
-                    case .modified:
+                    case .modified: break
                         
                     case .removed:
                         if let index = self.posts.firstIndex(where: { $0.id == post.id }) {
@@ -229,7 +229,7 @@ class NewFeedModel: ObservableObject {
                     case .added:
                         self.posts.append(post)
                         
-                    case .modified:
+                    case .modified: break
                         
                     case .removed:
                         if let index = self.posts.firstIndex(where: { $0.id == post.id }) {

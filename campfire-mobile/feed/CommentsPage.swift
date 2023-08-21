@@ -103,7 +103,7 @@ struct CommentsPage: View {
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                         
-                        Text("\(commentModel.comments.count)")
+                        Text("\(formatNumber(commentModel.comments.count))")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
                     }
@@ -123,6 +123,7 @@ struct CommentsPage: View {
     func createContent() {
         if let replyingId = replyingToCommentId {
             commentModel.createReply(comId: replyingId)
+            post.increaseComNum()
             replyingToCommentId = nil
             replyingToUserId = nil
         } else {

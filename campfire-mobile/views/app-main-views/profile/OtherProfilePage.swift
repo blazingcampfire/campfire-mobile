@@ -156,9 +156,17 @@ struct OtherProfilePage: View {
                                 .padding(.horizontal)
                             }
                         } else {
-                            Text("no posts yet.")
+                            VStack {
+                                Spacer()
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Theme.ScreenColor, lineWidth: 0.3)
+                                    .frame(height: 200)
+                                Text("profile does not exist")
+                                    .font(.custom("LexendDeca-SemiBold", size: 35))
+                                    .foregroundColor(Theme.TextColor)
+                                    .multilineTextAlignment(.center)
+                            }
                         }
-
                     }
                 }
                 .padding()

@@ -26,7 +26,6 @@ public struct ImagePicker: UIViewControllerRepresentable {
         picker.allowsEditing = true
         return picker
     }
-
     public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 
     public func makeCoordinator() -> Coordinator {

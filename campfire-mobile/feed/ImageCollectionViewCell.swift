@@ -45,6 +45,12 @@ class ImageCollectionViewCell: UICollectionViewCell {
             likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -325), // 10 points from the bottom
             likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10) // 10 points from the trailing side
         ])
+        
+        // Set the button's state based on the post's like status
+        if let individualPost = individualPostVM?.postItem {
+            let hasLiked = individualPost.usersWhoLiked.contains(currentUser!.profile.userID)
+            updateLikes(isLiked: hasLiked)
+        }
     }
 
     @objc private func likeButtonTapped() {

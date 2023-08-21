@@ -61,7 +61,15 @@ class FeedViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
- 
+    
+    @objc func refreshPosts() {
+           DispatchQueue.main.async { [weak self] in
+               self?.newFeedModel.loadInitialPosts {
+                   print("refreshed posts")
+               }
+           }
+       }
+
 
     func updateCollectionViewLayout() {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -71,12 +79,7 @@ class FeedViewController: UIViewController {
         }
     }
     
-    @objc func refreshPosts() {
-        DispatchQueue.main.async { [self] in
-            newFeedModel.loadInitialPosts {}
-            print("refreshed posts")
-        }
-    }
+   
     
     
     override func viewDidDisappear(_ animated: Bool) {

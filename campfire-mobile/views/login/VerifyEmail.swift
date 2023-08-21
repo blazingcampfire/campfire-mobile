@@ -57,7 +57,7 @@ struct VerifyEmail: View {
 //                                    .padding(5)
                                 
                                 if (model.emailSignInSuccess && model.createAccount) {
-                                    NavigationLink(destination: CreateUsername(), label: {
+                                    NavigationLink(destination: EnterName(), label: {
                                         LFButton(text: "next")
                                     })
                                 }

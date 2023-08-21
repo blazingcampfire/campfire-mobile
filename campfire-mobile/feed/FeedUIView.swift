@@ -162,9 +162,9 @@ struct FeedUIView: View {
             if currentUser.profile.userID == individualPost.posterId || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
                 idsEqual.isEqual = true
             }
-            if currentUser.showInitialMessage == true {
-                activeSheet = .fourth
-            }
+//            if currentUser.showInitialMessage == true {
+//                activeSheet = .fourth
+//            }
         }
         .sheet(item: $activeSheet) { sheet in
             switch sheet {
@@ -187,7 +187,7 @@ struct FeedUIView: View {
         }
         .onTapGesture {
             idsEqual.showAlert = false
-            currentUser.showInitialMessage = false
+//            currentUser.showInitialMessage = false
         }
     }
     

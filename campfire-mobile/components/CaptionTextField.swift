@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CaptionTextField: View {
    @Binding var text: String
+    let maxCharacterLength = 40
 
     var placeholderText: String
 
@@ -26,6 +27,11 @@ struct CaptionTextField: View {
                     .foregroundColor(Color.white)
                     .padding(.horizontal)
                     .frame(width: 360, height: 35)
+                    .onChange(of: text) { newValue in
+                        if newValue.count > maxCharacterLength {
+                            text = String(newValue.prefix(maxCharacterLength))
+                        }
+                    }
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2)

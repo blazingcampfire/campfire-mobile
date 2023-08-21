@@ -22,6 +22,7 @@ struct EditPost: View {
     @State var post: [String : String]
     @State var changePic = false
     @Environment(\.presentationMode) var presentationMode
+    @State private var test = false
     
     var body: some View {
         ZStack {
@@ -40,17 +41,27 @@ struct EditPost: View {
                         PostAttributes(url: postImage)
                     }
                     
-                    Button(action: {
-                        isPickerShowing = true
-                    }) {
                         Image(systemName: "camera")
                             .font(.system(size: 100))
                             .foregroundColor(Theme.Peach)
                             .frame(width: 350, height: 350)
                             .background(Color.black.opacity(0.5))
                             .clipShape(RoundedRectangle(cornerRadius: 30))
-                        
-                    }
+                            .onTapGesture {
+                                isPickerShowing = true
+                            }
+                            .fullScreenCover(isPresented: $isPickerShowing) {
+                                    ImagePicker(sourceType: .photoLibrary) { image in
+                                        selectedImage = image
+                                        isPickerShowing = false
+                                    }
+                                }
+                            .onChange(of: selectedImage) { newImage in
+                                       
+                                       changePic = true
+                                       
+                                   }
+                    
                 }
                 
                 ZStack {
@@ -66,19 +77,14 @@ struct EditPost: View {
                         Spacer()
                         Spacer()
                         
-                        Button(action: {
-                            self.promptScreen.toggle()
-                        }) {
+                        NavigationLink(destination: PromptsPage(prompt: $prompt))
+                        {
                             Text(prompt != "no prompt" ? "Change Prompt" : "Add Prompt")
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .foregroundColor(Theme.Peach)
                             
                         }
-                        .sheet(isPresented: $promptScreen) {
-                            PromptsPage(prompt: $prompt)
-                                .presentationDetents([.fraction(0.7)])
-                                .presentationDragIndicator(.visible)
-                        }
+                    
                         
                         Spacer()
                         Spacer()
@@ -208,18 +214,8 @@ struct EditPost: View {
                 )
             }
         }
-        .sheet(isPresented: $isPickerShowing) {
-            ImagePicker(sourceType: .photoLibrary) { image in
-                self.selectedImage = image
-            }
-        }
-        .onChange(of: selectedImage) { newImage in
-            
-            changePic = true
-            
-        }
-        
     }
+    
     
     func changePrompt(_ userID: String) {
         let docRef = currentUser.profileRef.document(userID)

@@ -182,8 +182,7 @@ struct FeedUIView: View {
                     .environmentObject(individualPost)
             case .fourth:
                 InitialMessage(school: currentUser.profile.school)
-                    .presentationDetents([.fraction(0.50)])
-                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.fraction(0.75)])
             }
         }
         .onTapGesture {

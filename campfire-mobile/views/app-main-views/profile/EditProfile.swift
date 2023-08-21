@@ -157,7 +157,7 @@ struct EditProfile: View {
                         else {
                             Spacer()
                             Spacer()
-                            Text("no posts!")
+                            Text("no flicks!")
                                 .font(.custom("LexendDeca-Bold", size: 25))
                                 .foregroundColor(Theme.Peach)
                                 .padding(.top, 30)

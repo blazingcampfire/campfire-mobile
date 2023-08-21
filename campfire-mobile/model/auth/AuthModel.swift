@@ -50,7 +50,7 @@ final class AuthModel: ObservableObject {
     @Published var errorMessage: String = ""
 
     // VerificationCode from firebase
-    var firebaseVerificationCode: String = ""
+    var verificationID: String = ""
 
     private var publishers = Set<AnyCancellable>()
 
@@ -147,22 +147,24 @@ extension AuthModel {
 
 extension AuthModel {
     func formatPhoneNumber() {
-        phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+        self.phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+        print(self.phoneNumber)
     }
 
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
         Task {
             do {
-                // MARK: - Disable when testing with real device
-
-                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 formatPhoneNumber()
-                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil)
-                await MainActor.run(body: {
-                    firebaseVerificationCode = code
-                })
-                self.validPhoneNumber = true
+                PhoneAuthProvider.provider()
+                  .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
+                      if let error = error {
+                          print(error.localizedDescription)
+                          return
+                      }
+                      self.verificationID = verificationID!
+                      self.validPhoneNumber = true
+                  }
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
                 return
@@ -173,8 +175,10 @@ extension AuthModel {
     func verifyVerificationCode() async {
         UIApplication.shared.closeKeyboard()
             do {
-                let credential = PhoneAuthProvider.provider().credential(withVerificationID: firebaseVerificationCode, verificationCode: verificationCode)
-                
+                let credential = PhoneAuthProvider.provider().credential(
+                  withVerificationID: verificationID,
+                  verificationCode: self.verificationCode
+                )
                 try await Auth.auth().signIn(with: credential)
             } catch {
                 await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
@@ -213,9 +217,8 @@ extension AuthModel {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
                 return
             }
-//        // user phone number authenticated successfully
         self.validVerificationCode = true
-        print("verification code is valid")
+        print("verification code is \(self.validVerificationCode)")
     }
 }
 

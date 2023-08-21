@@ -52,7 +52,7 @@ struct EnterPhoneNumber: View {
                             } else {
                                 Button {
                                     Task {
-                                        await model.getVerificationCode()
+                                        model.getVerificationCode()
                                     }
                                 } label: {
                                     LFButton(text: "send code")

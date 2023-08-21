@@ -86,18 +86,20 @@ class ProfileModel: ObservableObject {
         self.requested = true
     }
     
-    func removeRequest(request: RequestFirestore) {
+    func removeRequest() {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        let friendID = request.userID
+        guard let friendID = self.profile?.userID else {
+            return
+        }
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
         
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: self.profile!.name, username: self.profile!.username, profilePicURL: self.profile!.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {

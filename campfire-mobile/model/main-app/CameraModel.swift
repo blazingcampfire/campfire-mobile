@@ -593,6 +593,9 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
             device.unlockForConfiguration()
         }
+        catch {
+            return
+        }
     }
 
 }

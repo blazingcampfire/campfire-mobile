@@ -508,8 +508,8 @@
 				F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */,
 				E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */,
 				E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */,
-				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
 				E2578DA12A6B6429004C65DC /* EnterName.swift */,
+				E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */,
 				F834163F2A40E6A500803D32 /* SetProfilePic.swift */,
 				E2434C4C2A5A412C000A70DB /* GradientBackground.swift */,
 				B164A9F22A5B89150033586F /* InitialMessage.swift */,
@@ -1332,7 +1332,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1373,7 +1373,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-com.campfireco.campfire-mobile";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

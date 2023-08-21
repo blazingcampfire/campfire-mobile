@@ -52,8 +52,5 @@ struct AccountSetUp: View {
                     .padding(.bottom, 100)
                 )
         }
-        .onAppear {
-            model.triggerRestart()
-        }
     }
 }

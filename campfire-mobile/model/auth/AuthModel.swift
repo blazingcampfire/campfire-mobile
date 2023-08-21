@@ -155,7 +155,7 @@ extension AuthModel {
         Task {
             do {
                 formatPhoneNumber()
-                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+//                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
                       if let error = error {
@@ -196,6 +196,7 @@ extension AuthModel {
                                 throw PhoneError.noExistingUser
                             } catch {
                                 await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                                self.triggerRestart()
                                 return
                             }
                         }
@@ -207,14 +208,16 @@ extension AuthModel {
                         }
                     } catch {
                         await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        self.triggerRestart()
                         return
                     }
                 }
+                self.validVerificationCode = true
+                print(self.validVerificationCode)
             } catch {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
                 return
             }
-        self.validVerificationCode = true
     }
 }
 
@@ -257,6 +260,7 @@ extension AuthModel {
                     }
                 } catch {
                     await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
+                    self.triggerRestart()
                     return
                 }
             } catch {
@@ -268,7 +272,7 @@ extension AuthModel {
 //            }
             AuthenticationManager.shared.deleteUser()
             await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
-            triggerRestart()
+            self.triggerRestart()
             return
         }
     }

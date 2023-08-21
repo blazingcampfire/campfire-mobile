@@ -44,7 +44,7 @@ struct EnterName: View {
                         // MARK: - NavLink to VerifyEmail screen
 
                         VStack {
-                            NavigationLink(destination: SetProfilePic(), label: {
+                            NavigationLink(destination: CreateUsername(), label: {
                                 LFButton(text: "next")
                             })
                         }

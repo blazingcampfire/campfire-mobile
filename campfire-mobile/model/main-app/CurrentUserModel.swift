@@ -145,6 +145,9 @@ class CurrentUserModel: ObservableObject {
                 try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
                 try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
             }
+            catch {
+                return
+            }
         }
     }
 }

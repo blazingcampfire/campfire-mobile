@@ -256,7 +256,8 @@ class NewFeedModel: ObservableObject {
         let numLikes = data["numLikes"] as? Int ?? 0
         let comNum = data["comNum"] as? Int ?? 0
         let score = data["score"] as? Int ?? 0
-        return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes, comNum: comNum, score: score)
+        let usersWhoLiked = data["usersWhoLiked"] as? [String] ?? [""]
+        return PostItem(id: id, username: username, name: name, caption: caption, profilepic: profilepic, url: url, location: location, postType: postType, date: date, posterId: posterId, numLikes: numLikes, comNum: comNum, score: score, usersWhoLiked: usersWhoLiked)
     }
 }
 

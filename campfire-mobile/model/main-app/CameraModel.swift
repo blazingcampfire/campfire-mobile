@@ -171,7 +171,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
 
                 self.session.commitConfiguration()
-
+                
                 self.session.startRunning()  // It's crucial to startRunning() on a background thread to prevent blocking the UI.
 
                 DispatchQueue.main.async {

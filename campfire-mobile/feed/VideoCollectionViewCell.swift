@@ -97,6 +97,11 @@ class VideoCollectionViewCell: UICollectionViewCell {
             likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -325), // 10 points from the bottom
             likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10) // 10 points from the trailing side
         ])
+        
+        if let individualPost = individualPostVM?.postItem {
+            let hasLiked = individualPost.usersWhoLiked.contains(currentUser!.profile.userID)
+            updateLikes(isLiked: hasLiked)
+        }
     }
 
     

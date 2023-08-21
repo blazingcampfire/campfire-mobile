@@ -49,7 +49,7 @@ struct EditProfile: View {
                                     ImagePicker(sourceType:.photoLibrary) { image in
                                         self.selectedImage = image
                                     }
-
+                                    
                                 }
                             }
                             Text("change profile pic")

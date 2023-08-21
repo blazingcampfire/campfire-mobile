@@ -28,10 +28,6 @@ struct RequestsPage: View {
                         }
                         Spacer()
                         VStack {
-                            Image(systemName: "person.fill.badge.plus")
-                                .font(.system(size: 30))
-                                .foregroundColor(Theme.Peach)
-                                .padding(.bottom, 30)
 
                             Text("no requests right now!")
                                 .font(.custom("LexendDeca-Bold", size: 15))

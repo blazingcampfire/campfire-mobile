@@ -13,7 +13,7 @@ struct VerifyNumber: View {
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
-    
+    @State var canAdvance: Bool = false
     // setting up verification code & advancing as view state
     
     var body: some View {
@@ -40,6 +40,7 @@ struct VerifyNumber: View {
                             .font(.custom("LexendDeca-Bold", size: 25))
                         
                         FormTextField(text: $model.verificationCode, placeholderText: "verification code")
+                            .keyboardType(.numberPad)
                         
                         VStack{
                             Text("code sent to \(model.formattedPhoneNumber)")
@@ -55,14 +56,17 @@ struct VerifyNumber: View {
                         // MARK: - NavLink to EnterEmail screen
                         
                         VStack {
-                            if model.createAccount && model.validVerificationCode {
+                            if model.createAccount && canAdvance {
                                 NavigationLink(destination: EnterEmail(), label: {
                                     LFButton(text: "next")
                                 })
                             } else {
                                 Button {
+                                    do {
                                     Task {
-                                       try await model.verifyVerificationCode()
+                                            await model.verifyVerificationCode()
+                                            canAdvance = true
+                                        }
                                     }
                                 } label: {
                                     LFButton(text: "verify")

@@ -13,7 +13,6 @@ enum ActiveSheet: Identifiable {
     case first
     case second
     case third
-    case fourth
     var id: Int {
         hashValue
     }
@@ -163,9 +162,6 @@ struct FeedUIView: View {
             if currentUser.profile.userID == individualPost.posterId || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
                 idsEqual.isEqual = true
             }
-            if currentUser.showInitialMessage == true {
-                activeSheet = .fourth
-            }
         }
         .sheet(item: $activeSheet) { sheet in
             switch sheet {
@@ -181,10 +177,10 @@ struct FeedUIView: View {
                 EllipsesButtonView(equalIds: idsEqual)
                     .presentationDetents([.fraction(0.50)])
                     .environmentObject(individualPost)
-            case .fourth:
-                InitialMessage(school: currentUser.profile.school)
-                    .presentationDetents([.fraction(0.75)])
             }
+        }
+        .sheet(isPresented: $currentUser.showInitialMessage) {
+            InitialMessage(school: currentUser.profile.school)
         }
         .onTapGesture {
             idsEqual.showAlert = false

@@ -70,6 +70,7 @@ class IndividualPost: ObservableObject {
     init(postItem: PostItem, currentUser: CurrentUserModel) {
         self.postItem = postItem
         self.currentUser = currentUser
+        self.isLiked = postItem.usersWhoLiked.contains(currentUser.profile.userID)
     }
     private var listener: ListenerRegistration?
     
@@ -81,10 +82,11 @@ class IndividualPost: ObservableObject {
         if let index = postItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
             isLiked = false
             postItem.usersWhoLiked.remove(at: index)  // Remove user ID from the list
-            
-            decreasePostLikes()
-            decreasePostScore()
-            decreaseUserLikesPost()
+            if postItem.numLikes > 0 {
+                decreasePostLikes()
+                decreasePostScore()
+                decreaseUserLikesPost()
+            }
         } else { // If user hasn't liked the post yet
             isLiked = true
             postItem.usersWhoLiked.append(currentUser.profile.userID)  // Append user ID to the list

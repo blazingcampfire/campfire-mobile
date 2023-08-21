@@ -19,6 +19,7 @@ enum ActiveSheet: Identifiable {
     }
 }
 
+
 struct FeedUIView: View {
     @ObservedObject var individualPost: IndividualPost
     @EnvironmentObject var currentUser: CurrentUserModel

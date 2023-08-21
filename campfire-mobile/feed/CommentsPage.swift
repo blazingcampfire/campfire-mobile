@@ -123,6 +123,7 @@ struct CommentsPage: View {
     func createContent() {
         if let replyingId = replyingToCommentId {
             commentModel.createReply(comId: replyingId)
+            post.increaseComNum()
             replyingToCommentId = nil
             replyingToUserId = nil
         } else {

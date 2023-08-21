@@ -53,7 +53,9 @@ class IndividualComment: ObservableObject {
         if let index = commentItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
             isLiked = false
             commentItem.usersWhoLiked.remove(at: index)
-            modifyLikes(increment: -1)
+            if commentItem.numLikes > 0 {
+                modifyLikes(increment: -1)
+            }
         } else {
             isLiked = true
             commentItem.usersWhoLiked.append(currentUser.profile.userID)
@@ -139,7 +141,9 @@ class IndividualReply: ObservableObject {
         if let index = replyItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
             isLiked = false
             replyItem.usersWhoLiked.remove(at: index)
-            modifyLikes(increment: -1)
+            if replyItem.numLikes > 0 {
+                modifyLikes(increment: -1)
+            }
         } else {
             isLiked = true
             replyItem.usersWhoLiked.append(currentUser.profile.userID)

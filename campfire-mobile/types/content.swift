@@ -25,6 +25,7 @@ struct PostItem: Identifiable, Equatable {
     var numLikes: Int
     var comNum: Int
     var score: Int
+    var usersWhoLiked: [String]
 }
 
 struct PostPlayer: Identifiable {
@@ -42,6 +43,7 @@ struct Comment: Identifiable {
     var date: Timestamp
     var posterId: String
     var numLikes: Int
+    var usersWhoLiked: [String]
 }
 //Update to have user id field
 struct Reply: Identifiable {
@@ -52,6 +54,7 @@ struct Reply: Identifiable {
     var date: Timestamp
     var posterId: String
     var numLikes: Int
+    var usersWhoLiked: [String]
 }
 
 

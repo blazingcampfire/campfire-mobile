@@ -47,7 +47,8 @@ class CommentsModel: ObservableObject {
             "comment": commentText,
             "date": now,
             "posterId": currentUser.profile.userID,
-            "numLikes": 0
+            "numLikes": 0,
+            "usersWhoLiked": [""]
         ]
         docRef.setData(commentData) { error in
             if let error = error {
@@ -69,7 +70,8 @@ class CommentsModel: ObservableObject {
             "reply": replyText,
             "date": now,
             "posterId": currentUser.profile.userID,
-            "numLikes": 0
+            "numLikes": 0,
+            "usersWhoLiked": [""]
         ]
         docRef.setData(replyData) { error in
             if let error = error {
@@ -98,7 +100,8 @@ class CommentsModel: ObservableObject {
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 let posterId = data["posterId"] as? String ?? ""
                 let numLikes = data["numLikes"] as? Int ?? 0
-                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId, numLikes: numLikes)
+                let usersWhoLiked = data["usersWhoLiked"] as? [String] ?? [""]
+                return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId, numLikes: numLikes, usersWhoLiked: usersWhoLiked)
             } 
 
             }
@@ -123,7 +126,8 @@ class CommentsModel: ObservableObject {
                 let date = data["date"] as? Timestamp ?? Timestamp()
                 let posterId = data["posterId"] as? String ?? ""
                 let numLikes = data["numLikes"] as? Int ?? 0
-                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, date: date, posterId: posterId, numLikes: numLikes)
+                let usersWhoLiked = data["usersWhoLiked"] as? [String] ?? [""]
+                return Reply(id: id, profilepic: profilepic, username: username, reply: reply, date: date, posterId: posterId, numLikes: numLikes, usersWhoLiked: usersWhoLiked)
             }
         }
     }

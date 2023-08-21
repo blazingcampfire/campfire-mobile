@@ -43,15 +43,23 @@ class IndividualComment: ObservableObject {
         self.commentItem = commentItem
         self.postId = postId
         self.currentUser = currentUser
+        self.isLiked = commentItem.usersWhoLiked.contains(currentUser.profile.userID)
     }
     
+    
     func toggleLikeStatus() {
-        isLiked.toggle()
-        if isLiked {
-         modifyLikes(increment: 1)
+        commentItem.usersWhoLiked.removeAll(where: {$0 == ""})
+        
+        if let index = commentItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
+            isLiked = false
+            commentItem.usersWhoLiked.remove(at: index)
+            modifyLikes(increment: -1)
         } else {
-         modifyLikes(increment: -1)
+            isLiked = true
+            commentItem.usersWhoLiked.append(currentUser.profile.userID)
+            modifyLikes(increment: 1)
         }
+        updateUsersWhoLikedCom()
     }
     
     func modifyLikes(increment: Int64) {
@@ -75,6 +83,18 @@ class IndividualComment: ObservableObject {
                }
            }
        }
+    
+    func updateUsersWhoLikedCom() {
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
+        docRef.updateData(["usersWhoLiked": commentItem.usersWhoLiked]) { error in
+            if let error = error {
+                print("Error updating document \(error)")
+            } else {
+                print("Success updating comment usersWhoLiked array")
+            }
+        }
+    }
+    
     
 }
 
@@ -110,15 +130,22 @@ class IndividualReply: ObservableObject {
         self.postId = postId
         self.commentId = commentId
         self.currentUser = currentUser
+        self.isLiked = replyItem.usersWhoLiked.contains(currentUser.profile.userID)
     }
 
     func toggleLikeStatus() {
-        isLiked.toggle()
-        if isLiked {
-        modifyLikes(increment: 1)
+        replyItem.usersWhoLiked.removeAll(where: {$0 == ""})
+        
+        if let index = replyItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
+            isLiked = false
+            replyItem.usersWhoLiked.remove(at: index)
+            modifyLikes(increment: -1)
         } else {
-         modifyLikes(increment: -1)
+            isLiked = true
+            replyItem.usersWhoLiked.append(currentUser.profile.userID)
+            modifyLikes(increment: 1)
         }
+        updateUsersWhoLikedReply()
     }
     
     func modifyLikes(increment: Int64) {
@@ -141,6 +168,17 @@ class IndividualReply: ObservableObject {
                }
            }
        }
+    
+    func updateUsersWhoLikedReply() {
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
+        docRef.updateData(["usersWhoLiked": replyItem.usersWhoLiked]) { error in
+            if let error = error {
+                print("Error updating document \(error)")
+            } else {
+                print("Success updating reply usersWhoLiked array")
+            }
+        }
+    }
 
 }
 

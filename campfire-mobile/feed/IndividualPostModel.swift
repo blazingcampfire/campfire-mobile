@@ -62,27 +62,55 @@ class IndividualPost: ObservableObject {
         return Double((postItem.numLikes + (postItem.comNum * Int(1.5))) * (-1))
     }
     
+    var usersWhoLiked: [String] {
+        return postItem.usersWhoLiked
+    }
     
     
     init(postItem: PostItem, currentUser: CurrentUserModel) {
         self.postItem = postItem
         self.currentUser = currentUser
     }
-    
     private var listener: ListenerRegistration?
     
+    
     func toggleLikeStatus() {
-        isLiked.toggle()
-        if isLiked {
-            increasePostLikes()
-            increasePostScore()
-            increaseUserLikesPost()
-        } else {
+        
+        postItem.usersWhoLiked.removeAll(where: { $0 == "" })
+        // If user has already liked the post
+        if let index = postItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
+            isLiked = false
+            postItem.usersWhoLiked.remove(at: index)  // Remove user ID from the list
+            
             decreasePostLikes()
             decreasePostScore()
             decreaseUserLikesPost()
+        } else { // If user hasn't liked the post yet
+            isLiked = true
+            postItem.usersWhoLiked.append(currentUser.profile.userID)  // Append user ID to the list
+            
+            increasePostLikes()
+            increasePostScore()
+            increaseUserLikesPost()
+        }
+        
+        updateUsersWhoLiked()
+    }
+    
+    func updateUsersWhoLiked() {
+    let docRef = currentUser.postsRef.document(postItem.id)
+        docRef.updateData(["usersWhoLiked": postItem.usersWhoLiked]) { error in
+            if let error = error {
+                print("Error updating document \(error)")
+            } else {
+                print("Success updating usersWhoLiked array")
+            }
         }
     }
+    
+    
+    
+    
     
     func increaseComNum() {
         let docRef = currentUser.postsRef.document(postItem.id)

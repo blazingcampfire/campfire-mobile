@@ -28,7 +28,6 @@ struct SetProfilePic: View {
                             await notificationsManager.request()
                         }
                     }
-                    currentUser.showInitialMessage = true
                 }
         } else {
             GradientBackground()

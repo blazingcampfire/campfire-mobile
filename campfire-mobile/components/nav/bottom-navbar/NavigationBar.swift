@@ -57,10 +57,3 @@ struct NavigationBar: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-
-//struct NavigationBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationBar()
-//
-//    }
-//}

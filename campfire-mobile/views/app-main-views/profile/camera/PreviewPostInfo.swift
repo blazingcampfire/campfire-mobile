@@ -194,12 +194,3 @@ struct RetakeButton: View {
         .padding(.leading, 330)
     }
 }
-
-
-
-
-//struct PreviewPostInfo_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PreviewPostInfo(currentUser: CurrentUserModel())
-//    }
-//}

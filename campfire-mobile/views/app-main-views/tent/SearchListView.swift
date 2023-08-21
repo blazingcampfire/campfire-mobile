@@ -58,11 +58,4 @@ struct SearchListView: View {
         }
     }
 }
-    
-
-// struct SearchListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       SearchListView()
-//    }
-// }
 

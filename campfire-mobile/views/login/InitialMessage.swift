@@ -51,9 +51,3 @@ struct InitialMessage: View {
         .padding(.horizontal)
     }
 }
-
-struct InitialMessage_Previews: PreviewProvider {
-    static var previews: some View {
-        InitialMessage(school: "Yale")
-    }
-}

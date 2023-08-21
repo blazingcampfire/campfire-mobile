@@ -164,9 +164,3 @@ struct SettingsForm: View {
         }
     }
 }
-
-// struct SettingsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsPage()
-//    }
-// }

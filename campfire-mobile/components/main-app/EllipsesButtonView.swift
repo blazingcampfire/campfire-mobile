@@ -104,17 +104,6 @@ struct EllipsesButtonView: View {
     }
 }
 
-
-
-
-
-
-struct EllipsesButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        EllipsesButtonView(equalIds: PosterIdEqualCurrentUserId())
-    }
-}
-
 class PosterIdEqualCurrentUserId: ObservableObject {
     @Published var isEqual: Bool = false
     @Published var showAlert: Bool = false

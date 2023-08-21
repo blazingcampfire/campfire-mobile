@@ -284,9 +284,3 @@ struct CameraView: View {
     }
     
 }
-
-//struct CameraView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CameraView(camera: CameraModel(), currentUser: CurrentUserModel())
-//    }
-//}

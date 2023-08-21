@@ -192,12 +192,3 @@ struct FeedUIView: View {
     }
     
     }
-
-
-
-
-//struct FeedUIView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FeedUIView()
-//    }
-//}

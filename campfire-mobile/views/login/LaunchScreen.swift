@@ -43,11 +43,3 @@ struct LaunchScreen: View {
     }
     
 }
-
-
-
-struct LaunchScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchScreen()
-    }
-}

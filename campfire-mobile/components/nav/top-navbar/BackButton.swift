@@ -25,15 +25,3 @@ struct BackButton: View {
         .frame(width:80, height: 40)
     }
 }
-
-struct BackButton_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            Image(systemName: "arrowshape.backward.fill")
-                .foregroundColor(Theme.Peach)
-                .font(.system(size: 20))
-            Text("back")
-                .font(.custom("LexendDeca-Bold", size: 20))
-        }
-    }
-}

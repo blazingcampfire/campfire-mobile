@@ -271,29 +271,3 @@ extension View {
         return modifier(CustomAlertModifier(title: title, message: message, primaryButton: primaryButton, secondaryButton: secondaryButton, isPresented: isPresented))
     }
 }
-
-#if DEBUG
-struct CustomAlert_Previews: PreviewProvider {
-
-    static var previews: some View {
-        let dismissButton   = CustomAlertButton(title: "ok")
-        let primaryButton   = CustomAlertButton(title: "OK")
-        let secondaryButton = CustomAlertButton(title: "Cancel")
-
-        let title = "This is your life. Do what you want and do it often."
-        let message = """
-                    If you don't like something, change it.
-                    If you don't like your job, quit.
-                    If you don't have enough time, stop watching TV.
-                    """
-
-        return VStack {
-            CustomAlert(title: title, message: message, dismissButton: nil,           primaryButton: nil,           secondaryButton: nil)
-            CustomAlert(title: title, message: message, dismissButton: dismissButton, primaryButton: nil,           secondaryButton: nil)
-            CustomAlert(title: title, message: message, dismissButton: nil,           primaryButton: primaryButton, secondaryButton: secondaryButton)
-        }
-        .previewDevice("iPhone 13 Pro Max")
-        .preferredColorScheme(.light)
-    }
-}
-#endif

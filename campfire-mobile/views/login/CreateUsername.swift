@@ -59,9 +59,3 @@ extension CreateUsername {
         return model.validUsername ? 1 : 0.5
     }
 }
-
-struct CreateUsername_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateUsername()
-    }
-}

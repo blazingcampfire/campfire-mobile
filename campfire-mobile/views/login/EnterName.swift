@@ -68,9 +68,3 @@ extension EnterName {
         return model.validName ? 1 : 0.5
     }
 }
-
-struct EnterName_Previews: PreviewProvider {
-    static var previews: some View {
-        EnterName()
-    }
-}

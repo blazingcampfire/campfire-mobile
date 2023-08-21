@@ -82,9 +82,3 @@ struct ListRequests: View {
         .listStyle(PlainListStyle())
     }
 }
-
-// struct RequestsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RequestsPage()
-//    }
-// }

@@ -40,9 +40,3 @@ struct PhoneNumberField: View {
         .padding(.horizontal)
     }
 }
-
-struct PhoneNumberField_Previews: PreviewProvider {
-    static var previews: some View {
-        PhoneNumberField(text: .constant("now what's the word captain"), placeholderText: "I think I caught you lacking")
-    }
-}

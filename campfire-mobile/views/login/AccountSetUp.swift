@@ -57,9 +57,3 @@ struct AccountSetUp: View {
         }
     }
 }
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountSetUp()
-    }
-}

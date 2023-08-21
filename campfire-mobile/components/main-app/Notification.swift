@@ -42,9 +42,3 @@ struct Notification: View {
         .padding()
     }
 }
-
-struct NotificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        Notification()
-    }
-}

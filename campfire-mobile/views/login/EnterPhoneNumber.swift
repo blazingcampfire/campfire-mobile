@@ -82,9 +82,3 @@ extension EnterPhoneNumber {
         return model.validPhoneNumberString ? 1 : 0.5
     }
 }
-
-struct EnterPhoneNumber_Previews: PreviewProvider {
-    static var previews: some View {
-        EnterPhoneNumber()
-    }
-}

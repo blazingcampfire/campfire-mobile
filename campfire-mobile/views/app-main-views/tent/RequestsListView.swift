@@ -68,9 +68,3 @@ struct RequestsListView: View {
         }
     }
 }
-
-// struct RequestsListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RequestsListView(profile: profile, info.profilepic)
-//    }
-// }

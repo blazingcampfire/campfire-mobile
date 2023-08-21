@@ -99,9 +99,3 @@ extension VerifyNumber {
         return model.validVerificationCodeLength ? 1 : 0.5
     }
 }
-
-struct VerifyAccount_Previews: PreviewProvider {
-    static var previews: some View {
-        VerifyNumber()
-    }
-}

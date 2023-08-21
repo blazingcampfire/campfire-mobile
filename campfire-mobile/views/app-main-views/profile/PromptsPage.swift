@@ -61,16 +61,3 @@ struct ChoosePrompt: View {
         }
     }
 }
-
-
-
-
-
-
-//
-//
-//struct PromptsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PromptsPage(prompt: <#Binding<String>#>)
-//    }
-//}

@@ -63,9 +63,3 @@ extension EnterEmail {
         return model.validEmailString ? 1 : 0.5
     }
 }
-
-struct EnterEmail_Previews: PreviewProvider {
-    static var previews: some View {
-        EnterEmail()
-    }
-}

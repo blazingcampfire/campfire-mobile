@@ -42,9 +42,3 @@ struct CaptionTextField: View {
         .padding(.horizontal)
     }
 }
-
-struct CaptionTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        CaptionTextField(text: .constant("now what's the word captain"), placeholderText: "enter your caption")
-    }
-}

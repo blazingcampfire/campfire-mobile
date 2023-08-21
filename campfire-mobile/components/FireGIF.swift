@@ -13,9 +13,3 @@ struct FireGIF: View {
         }
     }
 }
-
-struct Previews_FireGif: PreviewProvider {
-    static var previews: some View {
-        FireGIF()
-    }
-}

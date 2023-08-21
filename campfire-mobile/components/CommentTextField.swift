@@ -33,9 +33,3 @@ struct CommentTextField: View {
         }
     }
 }
-
-//struct CommentTextField_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CommentTextField(text: "yooo", placeholderText: "add comment...")
-//    }
-//}

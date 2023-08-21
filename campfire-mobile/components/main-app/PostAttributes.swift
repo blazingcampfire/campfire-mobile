@@ -27,7 +27,7 @@ struct PostAttributes: View {
                 }
                 
                 Button(action: {
-                    print("ok")
+           
                 }) {
                     KFImage(URL(string: url))
                         .resizable()

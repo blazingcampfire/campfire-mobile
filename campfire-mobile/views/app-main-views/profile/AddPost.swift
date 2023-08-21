@@ -138,13 +138,11 @@ struct AddPost: View {
     
     func confirmPost(userID: String, prompt: String) {
         guard let selectedImage = selectedImage else {
-            print("No image")
             return
         }
         
         let imageData = selectedImage.jpegData(compressionQuality: 0.8)
         guard let imageData = imageData else {
-            print("Image cannot be converted to data")
             return
         }
         
@@ -155,7 +153,6 @@ struct AddPost: View {
         uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 let docRef = currentUser.profileRef.document(userID)
-                print(photoURL)
                 
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
@@ -170,21 +167,15 @@ struct AddPost: View {
                         
                         docRef.setData(data) { error in
                             if let error = error {
-                                print("Error updating document: \(error)")
+                               return
                             } else {
-                                print("Successfully updated document")
                                 var posts = currentUser.profile.posts
                                 posts.append([photoURL: prompt])
                                 currentUser.profile.posts = posts
-                                print(currentUser.profile.posts)
                             }
                         }
-                    } else {
-                        print("Document does not exist")
                     }
                 }
-            } else {
-                print("Error uploading picture to storage")
             }
         }
     }
@@ -206,18 +197,15 @@ func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completi
                     let downloadURL = "https://campfirepullzone.b-cdn.net/\(imagePath)"
                     completion(downloadURL)
                 } else {
-                    print("Error uploading image: HTTP Status Code:", response.statusCode)
                     completion(nil)
                 }
             } else {
-                print("Error uploading image:", error?.localizedDescription ?? "Unknown error")
                 completion(nil)
             }
         }
 
         task.resume()
     } else {
-        print("Error: Invalid URL")
         completion(nil)
     }
 }

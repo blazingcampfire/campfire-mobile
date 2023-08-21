@@ -17,9 +17,3 @@ struct UserBio: View {
             .padding(8)
     }
 }
-
-struct UserBio_Previews: PreviewProvider {
-    static var previews: some View {
-        UserBio(name: "Adarsh", bio: "wtw babygirl")
-    }
-}

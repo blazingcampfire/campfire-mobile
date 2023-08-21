@@ -30,7 +30,7 @@ struct PromptsPage: View {
 
 
 struct ChoosePrompt: View {
-    let promptList = ["sooo college", "my party face", "top study spot", "weekend outing", "just another day at the office", "work hard play hard!", "one thing you didn't know about me", "welcome to my TedTalk", "mondays are so...", "im totally sober", "cheers🥂", "my proudest moment", "my hidden talent", "moments before disaster...", "my album cover", "don't show my mom", "good friends, bad ideas", "i tried","felt cute", "might delete later"]
+    let promptList = ["sooo college", "my party face", "for the boys", "top study spot", "weekend outing", "t-rizzonosaurus rex", "just another day at the office", "work hard play hard!", "one thing you didn't know about me", "welcome to my TedTalk", "mondays are so...", "im totally sober", "cheers🥂", "my proudest moment", "my hidden talent", "moments before disaster...", "my album cover", "don't show my mom", "good friends, bad ideas", "i tried", "felt cute, might delete later", "all my single ladies"]
     @State private var showConfirmButton: Bool?
     
     @Binding var prompt: String
@@ -66,16 +66,3 @@ struct ChoosePrompt: View {
         }
     }
 }
-
-
-
-
-
-
-//
-//
-//struct PromptsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PromptsPage(prompt: <#Binding<String>#>)
-//    }
-//}

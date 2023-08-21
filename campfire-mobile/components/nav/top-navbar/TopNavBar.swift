@@ -15,20 +15,12 @@ struct TopNavBar<Content: View>: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TopNavBarContainer {
                 content
             }
         }
         .navigationBarHidden(true)
         .background(.clear)
-    }
-}
-
-struct TopNavBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        TopNavBar {
-            Color.red.ignoresSafeArea()
-        }
     }
 }

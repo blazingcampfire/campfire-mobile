@@ -118,23 +118,6 @@ struct OtherProfilePage: View {
                                         }
                                         
                                         // MARK: -  if user is looking at friends profile
-                                        //
-                                        //                                    Button(action: {
-                                        ///                                       SEND ALERT TO UNFRIEND
-                                        //                                     }) {
-                                        //                                        Text("Friends")
-                                        //                                            .font(.custom("LexendDeca-Bold", size: 15))
-                                        //                                            .foregroundColor(Theme.Peach)
-                                        //                                            .padding()
-                                        //                                            .background(
-                                        //                                                RoundedRectangle(cornerRadius: 10)
-                                        //                                                    .fill(.white)
-                                        //                                                    .overlay(
-                                        //                                                        RoundedRectangle(cornerRadius: 10)
-                                        //                                                            .stroke(Color.black, lineWidth: 0.3)
-                                        //                                                    )
-                                        //                                            )
-                                        //
                                         
                                         NavigationLink(destination: OtherFriendsPage(model: FriendsModel(currentUser: currentUser)
                                                                                      , userID: profile.userID)
@@ -184,9 +167,4 @@ struct OtherProfilePage: View {
     }
 }
 
-//struct OtherProfilePage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        OtherProfilePage()
-//    }
-//}
  

@@ -265,7 +265,6 @@ struct CameraView: View {
     var tapGesture: some Gesture {
             TapGesture()
                 .onEnded {
-                    print("tapped")
                     camera.takePic()
                 }
         }
@@ -284,9 +283,3 @@ struct CameraView: View {
     }
     
 }
-
-//struct CameraView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CameraView(camera: CameraModel(), currentUser: CurrentUserModel())
-//    }
-//}

@@ -42,8 +42,6 @@ class FeedViewController: UIViewController {
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
         
-        print("View Safe Area Insets:", view.safeAreaInsets)
-        print("Collection View Safe Area Insets:", collectionView.safeAreaInsets)
         
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
@@ -66,7 +64,6 @@ class FeedViewController: UIViewController {
  
 
     func updateCollectionViewLayout() {
-        print("update function went off ")
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
@@ -103,7 +100,6 @@ class FeedViewController: UIViewController {
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Number of items: \(newFeedModel.posts.count)")
         return newFeedModel.posts.count
     }
     
@@ -133,7 +129,6 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
            // Load more posts when the user is close to the end of the current list
            let threshold = 1 // How many more cells until the end to trigger the load more action
            if indexPath.item >= (newFeedModel.posts.count - threshold) {
-               print("nearing the end")
                if !newFeedModel.reachedEndofData {
                    newFeedModel.loadMorePosts()
                }

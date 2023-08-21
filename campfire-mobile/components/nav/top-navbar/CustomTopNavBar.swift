@@ -21,12 +21,3 @@ struct CustomTopNavBar: View {
         .background(.clear)
     }
 }
-
-struct CustomTopNavBar_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            CustomTopNavBar()
-            Spacer()
-        }
-    }
-}

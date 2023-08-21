@@ -25,13 +25,3 @@ struct TopNavBarContainer<Content: View>: View {
     }
 }
 
-struct TopNavBarContainer_Previews: PreviewProvider {
-    static var previews: some View {
-        TopNavBarContainer {
-            ZStack {
-                Color.green.ignoresSafeArea()
-                Text("Hello, world!")
-            }
-        }
-    }
-}

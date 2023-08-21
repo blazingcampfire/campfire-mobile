@@ -21,7 +21,7 @@ struct CommentsPage: View {
 
 
     var body: some View {
-        NavigationView {
+        NavigationStack{
             VStack {
                 CommentsList(commentModel: commentModel, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId)
                 Divider()

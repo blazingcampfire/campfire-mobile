@@ -10,7 +10,7 @@ import SwiftUI
 struct AccountSetUp: View {
     @EnvironmentObject var model: AuthModel
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GradientBackground()
                 .overlay(
                     VStack (spacing: 0) {
@@ -52,14 +52,5 @@ struct AccountSetUp: View {
                     .padding(.bottom, 100)
                 )
         }
-        .onAppear {
-            model.triggerRestart()
-        }
-    }
-}
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        AccountSetUp()
     }
 }

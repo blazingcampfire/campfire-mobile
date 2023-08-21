@@ -15,10 +15,6 @@ let users = db.collection("users")
 let college = users.document("rice")
 let profiles = college.collection("profiles")
 
-
-
-
-
 struct UserInfo {
     var name: String = "David"
     var username: String = "david_adegangbanger"

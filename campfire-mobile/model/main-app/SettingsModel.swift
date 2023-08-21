@@ -17,7 +17,6 @@ class SettingsModel: ObservableObject {
     @Published var deleteErrorAlert: Bool = false
     @Published var notificationsOn: Bool {
         didSet {
-            print(notificationsOn)
             Task {
                 await setNotificationsStatus()
             }
@@ -66,6 +65,5 @@ extension String {
             .replacingOccurrences(of: "/", with: "%2F")
             .replacingOccurrences(of: "‘", with: "%91")
             .replacingOccurrences(of: ",", with: "%2C")
-            //more symbols fixes here: https://mykindred.com/htmlspecialchars.php
     }
 }

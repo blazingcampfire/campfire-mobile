@@ -31,8 +31,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Audio Handler
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
-        } catch (let error) {
-            print(error.localizedDescription)
+        } catch (_) {
         }
         return true
     }

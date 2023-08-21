@@ -35,7 +35,7 @@ struct CreateUsername: View {
                         
                         // MARK: - NavLink to SetProfilePic screen
                         VStack {
-                            NavigationLink(destination: EnterName(), label: {
+                            NavigationLink(destination: SetProfilePic(), label: {
                                 LFButton(text: "next")
                             })
                         }
@@ -57,11 +57,5 @@ struct CreateUsername: View {
 extension CreateUsername {
     var buttonOpacity: Double {
         return model.validUsername ? 1 : 0.5
-    }
-}
-
-struct CreateUsername_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateUsername()
     }
 }

@@ -52,9 +52,8 @@ struct EnterPhoneNumber: View {
                             } else {
                                 Button {
                                     Task {
-                                        await model.getVerificationCode()
+                                        model.getVerificationCode()
                                     }
-                                    print("\(model.formattedPhoneNumber)")
                                 } label: {
                                     LFButton(text: "send code")
                                 }
@@ -81,11 +80,5 @@ struct EnterPhoneNumber: View {
 extension EnterPhoneNumber {
     var buttonOpacity: Double {
         return model.validPhoneNumberString ? 1 : 0.5
-    }
-}
-
-struct EnterPhoneNumber_Previews: PreviewProvider {
-    static var previews: some View {
-        EnterPhoneNumber()
     }
 }

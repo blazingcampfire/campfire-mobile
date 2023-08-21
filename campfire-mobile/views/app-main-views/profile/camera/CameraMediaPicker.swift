@@ -68,13 +68,12 @@ struct MediaPickerView: UIViewControllerRepresentable {
                             self.camera.selectedImageData = adjustedImage.jpegData(compressionQuality: 0.8)
                         }
                     } else if let error = error {
-                        print("Failed to load image: \(error.localizedDescription)")
+                       return
                     }
                 }
             } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
                 itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
                     guard error == nil, let url = url else {
-                        print("Failed to load video URL: \(error?.localizedDescription ?? "Unknown error")")
                         return
                     }
                     // Create a new filename for the video
@@ -87,14 +86,13 @@ struct MediaPickerView: UIViewControllerRepresentable {
                         let videoData = try Data(contentsOf: newUrl)
                         DispatchQueue.main.async {
                             self.camera.selectedVideoURL = newUrl // Set the selectedVideoURL in the CameraModel
-                            print("\(videoData) bytes")
                             if videoData.count > 12000000 {
                                 self.camera.videoTooLarge = true
                                 self.camera.videoSizeAlert = true
                             }
                         }
                     } catch {
-                        print("Failed to copy video: \(error.localizedDescription)")
+                        return
                     }
                 }
             }

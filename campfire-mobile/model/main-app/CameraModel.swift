@@ -76,7 +76,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionRuntimeError), name: .AVCaptureSessionRuntimeError, object: nil)
     }
     @objc func sessionWasInterrupted(notification: NSNotification) {
-        print("Session was interrupted")
         DispatchQueue.main.async {
             self.alertType = .sessionInterrupted
         }
@@ -84,7 +83,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
     @objc func sessionInterruptionEnded(notification: NSNotification) {
         // handle session interruption ended, you can restart your session here
-        print("Session interruption ended, attempting to restart session")
         DispatchQueue.main.async {
             if !self.session.isRunning {
                 self.session.startRunning()
@@ -114,7 +112,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             self.setUp()
-            print("working")
             return
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { (status) in
@@ -129,7 +126,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         case .denied:
             DispatchQueue.main.async {
                 self.alertType = .accessDenied
-                print("denied access")
                 return
             }
         default:
@@ -157,8 +153,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     if self.session.canAddInput(input) {
                         self.session.addInput(input)
                     }
-                } else {
-                    print("No suitable camera type found.")
                 }
 
                 if self.session.canAddOutput(self.output) {
@@ -188,8 +182,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     NotificationCenter.default.addObserver(self, selector: #selector(self.handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: audioSession)
                 }
             } catch {
-                print("Oops, something went wrong during camera setup: \(error)")
-                print("video error \(error)")
             }
         }
     }
@@ -261,7 +253,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     
     func toggleFlash() {
                isFlashOn.toggle()
-               print("Flash is now: \(isFlashOn ? "On" : "OFF")")
            }
     
 
@@ -272,7 +263,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             // Check if the device supports flash and if it's enabled
             if let device = AVCaptureDevice.default(for: .video), device.isFlashAvailable {
                 settings.flashMode = self.isFlashOn ? .on : .off
-                print("Taking picture with flash \(settings.flashMode == .on ? "ON" : "OFF")")
             }
 
             self.output.capturePhoto(with: settings, delegate: self)
@@ -372,13 +362,11 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
    
     
     func startRecording() {
-        print("called startrecord")
         let maxDuration = CMTimeMakeWithSeconds(15, preferredTimescale: 30) // Max duration = 15 seconds
         self.movieOutput.maxRecordedDuration = maxDuration
         
         // Get the camera device and check if it supports video recording.
         guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
-            print("Could not find a suitable input device for video recording")
             return
         }
             if device.device.isSmoothAutoFocusSupported {
@@ -388,7 +376,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     setTorchModeOn(device: device.device)
                     device.device.unlockForConfiguration()  // Unlock the configuration
                 } catch {
-                    print("Could not lock device for configuration: \(error)")
+                    return
                 }
             }
   
@@ -428,15 +416,15 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             try device.lockForConfiguration()
             
             if device.hasTorch {
-                device.torchMode = isFlashOn ? .on : .off
+                device.torchMode = on ? .on : .off
             } else {
-                print("Torch is not available on this device")
+                return
             }
             
             device.unlockForConfiguration()
             
         } catch {
-            print("Error while locking device for torch configuration: \(error)")
+            return
         }
     }
     
@@ -447,20 +435,19 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             if device.hasTorch {
                 device.torchMode = .off
             } else {
-                print("Torch is not available on this device")
+                return
             }
             
             device.unlockForConfiguration()
             
         } catch {
-            print("Error while locking device for torch configuration: \(error)")
+            return
         }
     }
 
     
     func stopRecording() {
         DispatchQueue.main.async {
-        print("called stoprecord")
             self.movieOutput.stopRecording()
             self.timer?.cancel()
             self.timer = nil
@@ -470,7 +457,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     //-MARK: Deals with the photo output and saving
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
             if let error = error {
-                print("Error capturing photo: \(error)")
+                return
             } else if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
                 // Here's the captured photo. You can do something with it now,
                 // like save it to your photo library or display it in your UI.
@@ -485,21 +472,19 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
 
     
     func savePic() {
-        print("Attempting to save photo")
 
         PHPhotoLibrary.requestAuthorization { status in
-            print("Photo library authorization status: \(status.rawValue)")
             DispatchQueue.main.async {
                 switch status {
                 case .authorized:
                     if let uiImage = self.capturedPic {
                         UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
                     } else {
-                        print("Could not convert data to UIImage")
+                        return
                     }
                 case .denied:
                     self.alertType = .cameraRollAccessDenied
-                    print("denied access")
+                    
                 case .restricted:
                     print("Couldn't save photo: Photo Library access restricted")
                 case .notDetermined:
@@ -515,18 +500,15 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     }
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            // Handle error
-            print("Couldn't save photo: \(error.localizedDescription)")
+           return
         } else {
             self.isSaved = true
-            print("Photo saved successfully")
         }
     }
 
 
     func saveVideo() {
         guard let videoURL = self.videoPlayback?.currentItem?.asset as? AVURLAsset else {
-            print("Couldn't retrieve video URL")
             return
         }
 
@@ -538,15 +520,12 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         if let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL.url) {
                             request.creationDate = Date()
                         } else {
-                            print("Couldnt save video request")
+                           return
                         }
                     } completionHandler: { success, error in
                         DispatchQueue.main.async {
                             if success {
                                 self.isSaved = true
-                                print("Video saved successfully")
-                            } else {
-                                print("Couldn't save video: \(error?.localizedDescription ?? "Unknown error")")
                             }
                         }
                     }
@@ -577,9 +556,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         
         
         if let error = error {
-            print("Error while recording: \(error.localizedDescription)")
-        } else {
-            print("movie success capture: \(outputFileURL)")
+            return
         }
     }
     
@@ -614,8 +591,9 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             device.exposureMode = .continuousAutoExposure
 
             device.unlockForConfiguration()
-        } catch {
-            print("Error occurred while focusing: \(error.localizedDescription)")
+        }
+        catch {
+            return
         }
     }
 
@@ -687,7 +665,7 @@ struct CameraPreview: UIViewRepresentable {
                                 device.videoZoomFactor = desiredZoomFactor
                             }
                         } catch {
-                            print("Error while trying to zoom: \(error.localizedDescription)")
+                            return
                         }
                     }
                 }
@@ -712,7 +690,7 @@ struct CameraPreview: UIViewRepresentable {
                          let zoomFactor = min(max(1.0, device.videoZoomFactor - velocity / 2000.0), device.activeFormat.videoMaxZoomFactor)
                          device.videoZoomFactor = zoomFactor
                      } catch {
-                         print("Error while trying to zoom: \(error.localizedDescription)")
+                         return
                      }
                  }
 

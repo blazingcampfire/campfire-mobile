@@ -59,9 +59,8 @@ struct PhotoPostButton: View {
                                 try await makePost.createPhotoPost(imageData: imageData)
                                 camera.reTake()
                                 isPosting = false
-                                print("success")
                             } catch {
-                                print(error)
+                                return
                             }
                         }
                     }
@@ -104,9 +103,8 @@ struct VideoPostButton: View {
                                 try await makePost.createVideoPost(videoURL: videoURL)
                                 camera.reTake()
                                 isPosting = false
-                                print("Video post created.")
                             } catch {
-                                print(error)
+                                return
                             }
                         }
                     }
@@ -200,12 +198,3 @@ struct RetakeButton: View {
         .padding(.leading, 330)
     }
 }
-
-
-
-
-//struct PreviewPostInfo_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PreviewPostInfo(currentUser: CurrentUserModel())
-//    }
-//}

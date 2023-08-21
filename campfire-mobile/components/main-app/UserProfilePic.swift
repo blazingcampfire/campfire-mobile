@@ -36,9 +36,3 @@ struct UserProfilePic: View {
         }
     }
 }
-
-//struct UserProfilePic_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UserProfilePic(pfp: David.profilepic)
-//    }
-//}

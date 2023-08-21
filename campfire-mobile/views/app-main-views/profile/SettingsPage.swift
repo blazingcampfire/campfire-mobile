@@ -11,7 +11,7 @@ struct SettingsPage: View {
     @Binding var darkMode: Bool
     @StateObject var model: SettingsModel
     var body: some View {
-        NavigationView {
+        NavigationStack {
             SettingsForm(darkMode: $darkMode)
                 .environmentObject(model)
                 .toolbar {
@@ -122,7 +122,6 @@ struct SettingsForm: View {
                         do {
                             try model.signOut()
                         } catch {
-                            print(error)
                         }
                     }, label: {
                         Label {
@@ -165,9 +164,3 @@ struct SettingsForm: View {
         }
     }
 }
-
-// struct SettingsPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsPage()
-//    }
-// }

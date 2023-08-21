@@ -71,9 +71,3 @@ struct ReplyView: View {
         }
     }
 }
-
-//struct ReplyView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReplyView(profilepic: "ragrboard6", username: "lowkeyme", reply: "hahaha", replyLikeNum: 2, replytime: "10m")
-//    }
-//}

@@ -13,7 +13,7 @@ struct NavigationBar: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
         TabView() {
                 FeedViewControllerWrapper()
                     .tabItem {
@@ -57,10 +57,3 @@ struct NavigationBar: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-
-//struct NavigationBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationBar()
-//
-//    }
-//}

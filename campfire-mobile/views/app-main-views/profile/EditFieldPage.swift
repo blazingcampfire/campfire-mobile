@@ -69,9 +69,7 @@ struct EditFieldPage: View {
         
         docRef.setData([field: newName], merge: true) { error in
             if let error = error {
-                print("Error updating document: \(error.localizedDescription)")
-            } else {
-                print("Document updated!")
+               return
             }
         }
     }
@@ -104,9 +102,3 @@ struct LimitedTextField: View {
             }
     }
 }
-//
-//struct EditFieldPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditFieldPage(maxCharacterLength: 10, field: "name", currentfield: "David")
-//    }
-//}

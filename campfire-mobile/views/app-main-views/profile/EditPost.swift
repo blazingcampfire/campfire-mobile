@@ -229,19 +229,14 @@ struct EditPost: View {
                     }
                     data["posts"] = posts
                 } else {
-                    print("Error: 'posts' field is not an array of dictionaries.")
                     return
                 }
                 
                 docRef.setData(data) { error in
                     if let error = error {
-                        print("Error updating document: \(error)")
-                    } else {
-                        print("Successfully updated document")
+                       return
                     }
                 }
-            } else {
-                print("Document does not exist")
             }
         }
     }
@@ -251,13 +246,11 @@ struct EditPost: View {
     func changePost(_ userID: String) {
         
         guard let image = selectedImage else {
-            print("No image selected.")
             return
         }
         
         let imageData = image.jpegData(compressionQuality: 0.8)
         guard let imageData = imageData else {
-            print("Image cannot be converted to data")
             return
         }
         
@@ -286,9 +279,8 @@ struct EditPost: View {
                         
                         docRef.setData(data) { error in
                             if let error = error {
-                                print("Error updating document: \(error)")
+                                return
                             } else {
-                                print("Successfully updated document")
                                 
                                     if let index = currentUser.profile.posts.firstIndex(where: { $0 == post }) {
              
@@ -297,25 +289,19 @@ struct EditPost: View {
                                     }
                             }
                         }
-                    } else {
-                        print("Document does not exist")
                     }
                 }
-            } else {
-                print("Error uploading picture to storage")
             }
         }
     }
     
     func changeBoth(_ userID: String) {
         guard let image = selectedImage else {
-            print("No image selected.")
             return
         }
 
         let imageData = image.jpegData(compressionQuality: 0.8)
         guard let imageData = imageData else {
-            print("Image cannot be converted to data")
             return
         }
 
@@ -341,24 +327,18 @@ struct EditPost: View {
 
                         docRef.setData(data) { error in
                             if let error = error {
-                                print("Error updating document: \(error)")
+                                return
                             } else {
-                                print("Successfully updated document")
                                 
                                 var posts = currentUser.profile.posts 
                                     if let index = posts.firstIndex(where: { $0 == post }) {
                                         posts[index] = newPost
                                         currentUser.profile.posts = posts
                                     }
-                                
                             }
                         }
-                    } else {
-                        print("Document does not exist")
                     }
                 }
-            } else {
-                print("Error uploading picture to storage")
             }
         }
     }
@@ -370,8 +350,6 @@ struct EditPost: View {
         @Binding var showAlert: Bool
         @EnvironmentObject var currentUser: CurrentUserModel
         @Binding var post: [String: String]
-        
-        
         
         var body: some View {
             VStack(alignment: .center) {
@@ -436,12 +414,10 @@ struct EditPost: View {
             let docRef = currentUser.profileRef.document(id)
             docRef.getDocument { document, error in
                 if let error = error {
-                    print("Error fetching user document: \(error)")
                     return
                 }
                 
                 guard let document = document, document.exists else {
-                    print("User document does not exist")
                     return
                 }
                 
@@ -459,27 +435,12 @@ struct EditPost: View {
                         
                         docRef.setData(userData) { error in
                             if let error = error {
-                                print("Error updating user document: \(error)")
-                            } else {
-                                print("Post deleted successfully!")
+                                return
                             }
                         }
-                    } else {
-                        print("Post not found in user's posts array")
                     }
-                } else {
-                    print("User's posts data is not an array or doesn't exist")
                 }
             }
         }
-    }
-}
-
-
-
-struct EditPost_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("yo")
-//        EditPost(postImage: <#Data#>, post: "ragrboard")
     }
 }

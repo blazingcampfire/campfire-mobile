@@ -177,7 +177,6 @@ struct EditProfile: View {
         Task {
             do {
                 guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
-                    print("Error converting image to data")
                     return
                 }
                 
@@ -196,30 +195,16 @@ struct EditProfile: View {
                                 
                                 docRef.setData(data) { error in
                                     if let error = error {
-                                        print("Error updating document: \(error)")
+                                        return
                                     } else {
-                                        print("Successfully updated document")
                                         currentUser.profile.profilePicURL = photoURL
                                     }
                                 }
-                            } else {
-                                print("Document does not exist")
                             }
                         }
-                    } else {
-                        print("Error uploading picture to storage")
                     }
                 }
-            } catch {
-                print("Error updating profile picture: \(error)")
-            }
+            } 
         }
     }
     }
-
-struct EditProfile_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("yo")
-        //        EditProfile(profileModel: ProfileModel(id: "s8SB7xYlJ4hbja3B8ajsLY76nV63"), postImages: <#[Post]#>)
-    }
-}

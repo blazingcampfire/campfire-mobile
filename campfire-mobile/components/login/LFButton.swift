@@ -63,22 +63,3 @@ struct LFButton: View {
                 .cornerRadius(16)
             }
         }
-
-    struct LFButton_Previews: PreviewProvider {
-        static var previews: some View {
-            VStack {
-                
-                LFButton(
-                    text: "Microsoft",
-                    icon: Image("microsoftlogo")
-                )
-                
-                LFButton(
-                    text: "Google",
-                    icon: Image("glogo2")
-                )
-                
-            }
-        }
-    }
-

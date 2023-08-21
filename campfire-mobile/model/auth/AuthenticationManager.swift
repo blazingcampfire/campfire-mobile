@@ -52,11 +52,9 @@ final class AuthenticationManager {
     
     func deleteUser() {
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("returned")
             return
         }
         Auth.auth().currentUser!.delete()
-        print("end of function call")
     }
     
     func unlinkCredential(providerID: String) {
@@ -76,10 +74,8 @@ final class AuthenticationManager {
             let email = Auth.auth().currentUser?.email!
             let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
             let validEmail: Bool = emailPredicate.evaluate(with: email) && email!.hasSuffix(".edu")
-            print(validEmail)
             if !schoolValidator(email: email!) || !validEmail
             {
-                print(schoolValidator(email: email!))
                 self.deleteUser()
                 throw EmailError.noMatch
             }
@@ -92,23 +88,17 @@ final class AuthenticationManager {
         do {
             currentUser.profileRef.document(currentUser.profile.userID).delete() { error in
                 if let error = error {
-                    print("Error removing document: \(error)")
-                } else {
-                    print("Document successfully removed!")
+                   return
                 }
             }
             currentUser.userRef.document(currentUser.profile.userID).delete() { error in
                 if let error = error {
-                    print("Error removing document: \(error)")
-                } else {
-                    print("Document successfully removed!")
+                   return
                 }
             }
             currentUser.relationshipsRef.document(currentUser.profile.userID).delete() { error in
                 if let error = error {
-                    print("Error removing document: \(error)")
-                } else {
-                    print("Document successfully removed!")
+                   return
                 }
             }
         }

@@ -148,7 +148,6 @@ extension AuthModel {
 extension AuthModel {
     func formatPhoneNumber() {
         self.phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
-        print(self.phoneNumber)
     }
 
     func getVerificationCode() {
@@ -156,13 +155,14 @@ extension AuthModel {
         Task {
             do {
                 formatPhoneNumber()
+//                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
                       if let error = error {
-                          print(error.localizedDescription)
                           return
                       }
-                      self.verificationID = verificationID!
+                      UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                      self.verificationID = UserDefaults.standard.string(forKey: "authVerificationID")!
                       self.validPhoneNumber = true
                   }
             } catch {
@@ -186,19 +186,17 @@ extension AuthModel {
             }
             do {
                 if self.login && Auth.auth().currentUser?.email == nil {
-                    try AuthenticationManager.shared.deleteUser()
+                    AuthenticationManager.shared.deleteUser()
                     throw PhoneError.noExistingUser
                 } else if self.login {
-                    print("self.login")
                         let existingProfile = await self.checkProfile(email: submittedEmail)
-                        print(existingProfile)
                         if !existingProfile {
                             do {
-                                print("Existing profile: \(existingProfile)")
                                 try AuthenticationManager.shared.signOut()
                                 throw PhoneError.noExistingUser
                             } catch {
                                 await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                                self.triggerRestart()
                                 return
                             }
                         }
@@ -210,15 +208,16 @@ extension AuthModel {
                         }
                     } catch {
                         await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                        self.triggerRestart()
                         return
                     }
                 }
+                self.validVerificationCode = true
+                print(self.validVerificationCode)
             } catch {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
                 return
             }
-        self.validVerificationCode = true
-        print("verification code is \(self.validVerificationCode)")
     }
 }
 
@@ -233,9 +232,8 @@ extension AuthModel {
 
             submittedEmail = (Auth.auth().currentUser?.email)!
             let existingProfile: Bool = await checkProfile(email: submittedEmail)
-            print(existingProfile)
             if !existingProfile {
-                try AuthenticationManager.shared.deleteUser()
+                AuthenticationManager.shared.deleteUser()
                 throw EmailError.noExistingUser
             } else {
                 emailSignInSuccess = true
@@ -254,7 +252,6 @@ extension AuthModel {
             if email != submittedEmail {
                 throw EmailError.noMatch
             }
-            print(Auth.auth().currentUser?.email)
             do {
                 let existingProfile: Bool = await checkProfile(email: submittedEmail)
                 do {
@@ -263,6 +260,7 @@ extension AuthModel {
                     }
                 } catch {
                     await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
+                    self.triggerRestart()
                     return
                 }
             } catch {
@@ -274,7 +272,7 @@ extension AuthModel {
 //            }
             AuthenticationManager.shared.deleteUser()
             await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
-            triggerRestart()
+            self.triggerRestart()
             return
         }
     }
@@ -293,30 +291,22 @@ extension AuthModel {
     }
 
     func checkProfile(email: String) async -> Bool {
-        print("checkProfile")
         guard let email = Auth.auth().currentUser?.email else {
-            print("no existing profile")
             return false
         }
         let profileRef = profileParser(school: schoolParser(email: email))
-        print(email)
         do {
             guard let document = try await profileRef?.document((Auth.auth().currentUser?.uid)!).getDocument() else {
-                print(profileRef?.path)
-                print("no document w/ \(userID) as id")
                 return false
             }
             return document.exists
         } catch {
-            print(error)
             return false
         }
-        print(profileRef?.path)
         return true
     }
 
     func triggerRestart() {
-        print("Triggered restart.")
         validUser = false
         validPhoneNumberString = false
         validPhoneNumber = false
@@ -364,7 +354,6 @@ extension AuthModel {
             profileData = try Firestore.Encoder().encode(Profile(name: name, nameInsensitive: nameInsensitive, phoneNumber: phoneNumber, email: email, username: username, posts: [], smores: 0, profilePicURL: profilePic, userID: userID, school: school, bio: ""))
             userData = try Firestore.Encoder().encode(PrivateUser(phoneNumber: phoneNumber, email: email, userID: userID, school: school))
         } catch {
-            print("Could not encode requestFields.")
             return
         }
 
@@ -372,7 +361,6 @@ extension AuthModel {
 
         profileRef.document(userID).setData(profileData)
         userRef.document(userID).setData(userData)
-        print("Documents successfully written!")
     }
 
     func getProfile() {
@@ -388,9 +376,8 @@ extension AuthModel {
                 switch result {
                 case let .success(profileData):
                     self.profile = profileData
-                    print("Profile Email: \(self.profile.email)")
                 case let .failure(error):
-                    print("Error decoding profile: \(error)")
+                   return
                 }
             }
         }

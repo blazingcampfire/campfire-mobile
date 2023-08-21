@@ -89,11 +89,15 @@ struct EllipsesButtonView: View {
                             .padding(.top, 10)// Padding to move text away from edge
                         Spacer()
                         if selectedAction == "delete" {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(Theme.Peach)
-                                .bold()
-                                .font(.system(size: 25))
-                                .padding(.trailing, 15)
+                            Button(action: {
+                                individualPostModel.deletePostDocument()
+                            }, label: {
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(Theme.Peach)
+                                    .bold()
+                                    .font(.system(size: 25))
+                                    .padding(.trailing, 15)
+                            })
                         }
                     }
                 }
@@ -101,17 +105,6 @@ struct EllipsesButtonView: View {
             }
             Spacer()
         }
-    }
-}
-
-
-
-
-
-
-struct EllipsesButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        EllipsesButtonView(equalIds: PosterIdEqualCurrentUserId())
     }
 }
 

@@ -15,7 +15,7 @@ struct TopNavBar<Content: View>: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             TopNavBarContainer {
                 content
             }

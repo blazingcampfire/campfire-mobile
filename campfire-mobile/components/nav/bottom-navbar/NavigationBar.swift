@@ -13,7 +13,7 @@ struct NavigationBar: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
         TabView() {
                 FeedViewControllerWrapper()
                     .tabItem {

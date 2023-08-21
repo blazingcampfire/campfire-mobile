@@ -12,7 +12,7 @@ struct LeaderboardPage: View {
     @StateObject var model: LeaderboardModel
 
     var body: some View {
-        NavigationStack{
+        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)

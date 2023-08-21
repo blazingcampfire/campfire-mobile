@@ -16,7 +16,7 @@ struct OwnProfilePage: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)

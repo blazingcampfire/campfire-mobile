@@ -65,9 +65,8 @@ class IndividualComment: ObservableObject {
                return nil
            }) { (object, error) in
                if let error = error {
-                   print("Transaction failed: \(error)")
+                  return
                } else {
-                   print("Transaction successfully committed!")
                    DispatchQueue.main.async {
                        self.commentItem.numLikes += Int(increment)
                        // Update user's like count in the UI, if necessary
@@ -132,9 +131,8 @@ class IndividualReply: ObservableObject {
                return nil
            }) { (object, error) in
                if let error = error {
-                   print("Transaction failed: \(error)")
+                  return
                } else {
-                   print("Transaction successfully committed!")
                    DispatchQueue.main.async {
                        self.replyItem.numLikes += Int(increment)
                    }

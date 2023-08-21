@@ -122,7 +122,6 @@ struct SettingsForm: View {
                         do {
                             try model.signOut()
                         } catch {
-                            print(error)
                         }
                     }, label: {
                         Label {

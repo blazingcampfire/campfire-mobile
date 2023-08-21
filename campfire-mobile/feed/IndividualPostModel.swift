@@ -78,9 +78,8 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["comNum": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
+                return
             } else {
-                print("Success increasing comNum")
                 DispatchQueue.main.async {
                     self.postItem.comNum += 1
                 }
@@ -92,9 +91,7 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["score": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing post score")
+              return
             }
         }
     }
@@ -103,9 +100,7 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["score": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing post score")
+                return
             }
         }
     }
@@ -117,9 +112,8 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
+                return
             } else {
-                print("Success increasing post likes")
                 DispatchQueue.main.async {
                     self.postItem.numLikes += 1
                 }
@@ -131,9 +125,8 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["numLikes": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
+                return
             } else {
-                print("Success decreasing post likes")
                 DispatchQueue.main.async {
                     self.postItem.numLikes -= 1
                 }
@@ -145,9 +138,7 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.profileRef.document(postItem.posterId)
         docRef.updateData(["smores": FieldValue.increment(Int64(1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success increasing users likes from post")
+                return
             }
         }
     }
@@ -156,9 +147,7 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.profileRef.document(postItem.posterId)
         docRef.updateData(["smores": FieldValue.increment(Int64(-1))]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success decreasing users likes from post")
+                return
             }
         }
     }
@@ -167,9 +156,7 @@ class IndividualPost: ObservableObject {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.delete() { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success deleting post document")
+                return
             }
         }
     }
@@ -182,7 +169,6 @@ class IndividualPost: ObservableObject {
             "issue": issue,
             "postType": postItem.postType
         ])
-        print(postItem.id, postItem.posterId, issue, postItem.postType)
     }
     
     

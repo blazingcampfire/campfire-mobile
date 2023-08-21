@@ -54,7 +54,6 @@ struct EnterPhoneNumber: View {
                                     Task {
                                         await model.getVerificationCode()
                                     }
-                                    print("\(model.formattedPhoneNumber)")
                                 } label: {
                                     LFButton(text: "send code")
                                 }

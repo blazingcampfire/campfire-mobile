@@ -25,7 +25,7 @@ class NotificationsManager: ObservableObject {
             try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
         }
         catch {
-            print(error)
+            return
         }
     }
     
@@ -65,7 +65,7 @@ class NotificationsManager: ObservableObject {
             try await UNUserNotificationCenter.current().add(request)
         }
         catch {
-            print(error)
+            return
         }
     }
 }

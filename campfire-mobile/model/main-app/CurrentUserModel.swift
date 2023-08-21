@@ -57,14 +57,10 @@ class CurrentUserModel: ObservableObject {
     
     func setCollectionRefs() {
         if Auth.auth().currentUser?.email == nil {
-            print("0")
             return
         } else {
             let school: String = schoolParser(email: (Auth.auth().currentUser?.email)!)
             if school == "Does not belong to a supported school" {
-                print("Sorry, but we do not currently support your school.")
-                print("1")
-                print(Auth.auth().currentUser?.email)
                 return
             }
             userRef = userParser(school: school)!
@@ -75,25 +71,19 @@ class CurrentUserModel: ObservableObject {
     }
 
     func getProfile() {
-        print("fired getProfile")
-        print(profileRef.path)
-        print(userRef.path)
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {
             guard let userID = Auth.auth().currentUser?.uid else {
                 return
             }
-            print(userID)
             let docRef = profileRef.document(userID)
             docRef.addSnapshotListener { documentSnapshot, error in
                 if let error = error {
-                    print("Error fetching document: \(error)")
                     return
                 }
                 
                 guard let document = documentSnapshot, document.exists else {
-                    print("Document does not exist or there was an error.")
                     return
                 }
                 
@@ -102,10 +92,9 @@ class CurrentUserModel: ObservableObject {
                         try AuthenticationManager.shared.signOut()
                     }
                     catch {
-                        
+                        return
                     }
-                    print("Error decoding profile in profileModel.")
-                    return
+                   return
                 }
                 
                 let postPaths = profile.posts
@@ -129,7 +118,6 @@ class CurrentUserModel: ObservableObject {
     }
 
     func getUser() {
-        print("fired getUser")
         if Auth.auth().currentUser?.uid == nil {
             return
         } else {
@@ -138,9 +126,7 @@ class CurrentUserModel: ObservableObject {
                 switch result {
                 case let .success(user):
                     self.privateUserData = user
-                    print("Profile Email: \(privateUserData.email)")
                 case let .failure(error):
-                    print("Error decoding profile: \(error)")
                     do {
                         try AuthenticationManager.shared.signOut()
                     }
@@ -158,9 +144,6 @@ class CurrentUserModel: ObservableObject {
             do {
                 try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
                 try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
-                print("Documents successfully written!")
-            } catch {
-                print("Error writing profile or user to firestore \(error)")
             }
         }
     }

@@ -24,7 +24,7 @@ class RequestsModel: ObservableObject {
         do {
             currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
                 if error != nil {
-                    print(error?.localizedDescription)
+                   return
                 } else {
                     if let documentSnapshot = documentSnapshot {
                         var requestsArray: [RequestFirestore] = []
@@ -41,15 +41,10 @@ class RequestsModel: ObservableObject {
                 
             }
         }
-        catch {
-            print(error)
-        }
     }
         
     func removeRequest(request: RequestFirestore) {
-        print("fired remove request")
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
             return
         }
         let friendID = request.userID
@@ -63,7 +58,6 @@ class RequestsModel: ObservableObject {
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
-            print("Could not encode requestFields.")
             return
         }
         friendRelationshipRef.updateData([
@@ -78,7 +72,6 @@ class RequestsModel: ObservableObject {
         self.removeRequest(request: request)
         
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
             return
         }
         let friendID = request.userID
@@ -92,10 +85,9 @@ class RequestsModel: ObservableObject {
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
-            print("Could not encode requestFields.")
             return
         }
-        print(friendRelationshipRef.documentID)
+        
         friendRelationshipRef.setData([
             "friends": FieldValue.arrayUnion([userRequestField])
         ], merge: true)

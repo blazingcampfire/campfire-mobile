@@ -39,7 +39,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(currentLocation) { placemarks, error in
             if let error = error {
-                print(error.localizedDescription)
                 return completion(nil)
             }
             

@@ -51,9 +51,8 @@ class CommentsModel: ObservableObject {
         ]
         docRef.setData(commentData) { error in
             if let error = error {
-                print("Error writing document \(error)")
+                return
             } else {
-                print("success creation")
                 self.commentText = ""
             }
         }
@@ -73,9 +72,8 @@ class CommentsModel: ObservableObject {
         ]
         docRef.setData(replyData) { error in
             if let error = error {
-                print("Error writing document \(error)")
+               return
             } else {
-                print("success creation")
                 self.replyText = ""
             }
         }
@@ -86,7 +84,6 @@ class CommentsModel: ObservableObject {
         let docRef = currentUser.postsRef.document(postId).collection("comments").order(by: "date", descending: false)
         commentListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("No documents")
                 return
             }
             self.comments = documents.map { queryDocumentSnapshot -> Comment in
@@ -111,7 +108,6 @@ class CommentsModel: ObservableObject {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(getRepliesFor).collection("replies").order(by: "date", descending: false)
         replyListener = docRef.addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("No documents")
                 return
             }
             self.repliesByComment[getRepliesFor] = documents.map { queryDocumentSnapshot -> Reply in

@@ -22,19 +22,16 @@ class LeaderboardModel: ObservableObject {
     func getTop10() {
         currentUser.profileRef.order(by: "smores", descending: true).limit(to: 10).addSnapshotListener { QuerySnapshot, err in
             if let err = err {
-                print("Error querying profiles: \(err)")
+              return
             } else {
                 self.profiles = []
                 for document in QuerySnapshot!.documents {
                     do {
                         let profile = try document.data(as: Profile.self)
-                        print(profile.name)
                         self.profiles.append(profile)
                     } catch {
-                        print("Error retrieving profile")
-                        print("\(document.documentID) => \(document.data())")
+                        return
                     }
-                    print("\(document.documentID) => \(document.data())")
                 }
             }
         }

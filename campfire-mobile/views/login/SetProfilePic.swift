@@ -66,7 +66,6 @@ struct SetProfilePic: View {
                                             currentUser.getUser()
                                             setUpFinished = true
                                         } catch {
-                                            print("Error setting profile picture: \(error)")
                                         }
                                     }
                                 }) {
@@ -84,12 +83,10 @@ struct SetProfilePic: View {
 
     func confirmProfilePic() async throws {
         guard selectedPFP != nil else {
-            print("No image")
             throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "No image"])
         }
 
         guard let imageData = selectedPFP!.jpegData(compressionQuality: 0.8) else {
-            print("Image cannot be converted to data")
             throw NSError(domain: "ImageUploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Image cannot be converted to data"])
         }
 
@@ -101,13 +98,8 @@ struct SetProfilePic: View {
                     continuation.resume(returning: photoURL)
                 }
             }
-            print("0")
-            print(photoURL)
             model.profilePic = photoURL!
-            print("1")
-            print(model.profilePic)
         } catch {
-            print("Error uploading picture to storage: \(error)")
             throw error
         }
     }

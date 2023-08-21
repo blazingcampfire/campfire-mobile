@@ -162,7 +162,6 @@
 		F83416402A40E6A500803D32 /* SetProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F834163F2A40E6A500803D32 /* SetProfilePic.swift */; };
 		F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */; };
 		F83B0EB62A4D2D1900F98CFA /* HotspotsFeedPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */; };
-		F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */; };
 		F85957B82A8825DA00E2DDC1 /* FillerPFP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85957B72A8825DA00E2DDC1 /* FillerPFP.swift */; };
 		F85F03962A3F93FC000DCBEF /* EnterPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */; };
 		F85F03982A3F9A89000DCBEF /* VerifyNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */; };
@@ -354,7 +353,6 @@
 		F834163F2A40E6A500803D32 /* SetProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfilePic.swift; sourceTree = "<group>"; };
 		F83B0EB32A4D2CF600F98CFA /* FriendsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPage.swift; sourceTree = "<group>"; };
 		F83B0EB52A4D2D1900F98CFA /* HotspotsFeedPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotsFeedPage.swift; sourceTree = "<group>"; };
-		F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		F85957B72A8825DA00E2DDC1 /* FillerPFP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillerPFP.swift; sourceTree = "<group>"; };
 		F85F03952A3F93FC000DCBEF /* EnterPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneNumber.swift; sourceTree = "<group>"; };
 		F85F03972A3F9A89000DCBEF /* VerifyNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumber.swift; sourceTree = "<group>"; };
@@ -508,7 +506,6 @@
 				B1B71FC92A48EFE900C54090 /* UserInfo.swift */,
 				F8B2C5172A5E6D3A00E11503 /* testUsers.swift */,
 				B1C7D77B2A5CC63E00ACA02A /* NumberAuth.swift */,
-				F83E54652A6DE56D0025CAF8 /* FirebaseManager.swift */,
 			);
 			path = store;
 			sourceTree = "<group>";
@@ -1159,7 +1156,6 @@
 				B1DEBFF52A82140D00D3013A /* FeedCells.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
 				E2CBD5E72A6216E1000F3547 /* AuthenticationManager.swift in Sources */,
-				F83E54662A6DE56D0025CAF8 /* FirebaseManager.swift in Sources */,
 				F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */,
 				F83B0EB42A4D2CF600F98CFA /* FriendsPage.swift in Sources */,
 				B1E9DE0A2A8826C000E0B61F /* ImageCollectionViewCell.swift in Sources */,

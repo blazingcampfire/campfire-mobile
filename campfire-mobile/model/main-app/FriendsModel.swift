@@ -23,7 +23,7 @@ class FriendsModel: ObservableObject {
     func readFriends() {
         let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
-                print(error?.localizedDescription as Any)
+                return
             } else {
                 if let documentSnapshot = documentSnapshot {
                     var friendsArray: [RequestFirestore] = []
@@ -32,7 +32,6 @@ class FriendsModel: ObservableObject {
                         guard let requestObject = RequestFirestore(data: request) else {
                             return
                         }
-                        print(requestObject)
                         friendsArray.append(requestObject)
                     }
                     self.friends = friendsArray
@@ -45,7 +44,7 @@ class FriendsModel: ObservableObject {
     func readOtherFriends(userID: String) {
         let userRelationships = currentUser.relationshipsRef.document(userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
-                print(error?.localizedDescription as Any)
+                return
             } else {
                 if let documentSnapshot = documentSnapshot {
                     var friendsArray: [RequestFirestore] = []
@@ -54,7 +53,6 @@ class FriendsModel: ObservableObject {
                         guard let requestObject = RequestFirestore(data: request) else {
                             return
                         }
-                        print(requestObject)
                         friendsArray.append(requestObject)
                     }
                     self.friends = friendsArray
@@ -65,9 +63,7 @@ class FriendsModel: ObservableObject {
     }
     
     func removeFriend(request: RequestFirestore) {
-        print("fired remove friend")
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
             return
         }
         let friendID = request.userID
@@ -81,7 +77,6 @@ class FriendsModel: ObservableObject {
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
-            print("Could not encode requestFields.")
             return
         }
         friendRelationshipRef.updateData([

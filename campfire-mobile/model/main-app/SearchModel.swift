@@ -33,7 +33,7 @@ class SearchModel: ObservableObject {
         if name == "" {
             currentUser.profileRef.order(by: "smores", descending: true).limit(to: 10).getDocuments { QuerySnapshot, err in
                 if let err = err {
-                    print("Error querying profiles: \(err)")
+                   return
                 } else {
                     self.profiles = []
                     for document in QuerySnapshot!.documents {
@@ -41,15 +41,15 @@ class SearchModel: ObservableObject {
                             let profile = try document.data(as: Profile.self)
                             self.profiles.append(profile)
                         } catch {
-                            print("Error retrieving profile")
+                            return
                         }
                     }
                 }
             }
         }
-        currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 8).getDocuments { QuerySnapshot, err in
+        currentUser.profileRef.order(by: "nameInsensitive").start(at: [name]).end(at: [name + "\u{f8ff}"]).limit(to: 10).getDocuments { QuerySnapshot, err in
             if let err = err {
-                print("Error querying profiles: \(err)")
+                return
             } else {
                 self.profiles = []
                 for document in QuerySnapshot!.documents {
@@ -57,7 +57,7 @@ class SearchModel: ObservableObject {
                         let profile = try document.data(as: Profile.self)
                         self.profiles.append(profile)
                     } catch {
-                        print("Error retrieving profile")
+                        return
                     }
                 }
             }
@@ -67,7 +67,6 @@ class SearchModel: ObservableObject {
     // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
     func requestFriend(profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
             return
         }
         let friendID = profile.userID
@@ -81,11 +80,9 @@ class SearchModel: ObservableObject {
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
         }
         catch {
-            print("Could not encode requestFields.")
             return
         }
         
-        print(friendRelationshipRef.documentID)
         friendRelationshipRef.setData([
             "ownRequests": FieldValue.arrayUnion([userRequestField])
         ], merge: true)
@@ -97,7 +94,6 @@ class SearchModel: ObservableObject {
     
     func unrequestFriend(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
             return
         }
         let friendID = request.userID
@@ -114,24 +110,20 @@ class SearchModel: ObservableObject {
     }
     
     func checkRequested(request: RequestFirestore) async -> Bool {
-        guard let userID = Auth.auth().currentUser?.uid else {
-            print("You are not currently authenticated.")
+        guard (Auth.auth().currentUser?.uid) != nil else {
             return false
         }
         do {
             guard let document = try await currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument().data() else { return false}
-            print(document)
             let docField: [[String: Any]] = document["ownRequests"] as! [[String : Any]]
             for doc in docField {
                 let requestData = RequestFirestore(data: doc)
                 if requestData?.userID == request.userID {
-                    print("Should be true")
                     return true
                 }
             }
             }
         catch {
-            print(error)
             return false
         }
         return false

@@ -266,7 +266,6 @@ struct CameraView: View {
     var tapGesture: some Gesture {
             TapGesture()
                 .onEnded {
-                    print("tapped")
                     camera.takePic()
                 }
         }

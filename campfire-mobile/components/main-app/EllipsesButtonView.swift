@@ -104,6 +104,7 @@ struct EllipsesButtonView: View {
                     }
                 }
                 .buttonStyle(PlainButtonStyle())  // Makes the button appearance neutral
+                .padding(.trailing, 15)
             }
             Spacer()
         }

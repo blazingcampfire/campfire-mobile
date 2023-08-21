@@ -102,7 +102,9 @@ final class AuthenticationManager {
                 }
             }
         }
-        self.deleteUser()
+        do {
+            self.deleteUser()
+        }
     }
 
 }

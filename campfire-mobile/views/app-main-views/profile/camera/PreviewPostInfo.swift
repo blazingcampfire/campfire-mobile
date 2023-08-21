@@ -139,7 +139,7 @@ struct PhotoSaveButton: View {
                 if !camera.isSaved{camera.savePic()}
             }) {
                 HStack(spacing: 5) {
-                    Text(camera.isSaved ? "Saved" : "Save")
+                    Text(camera.isSaved ? "saved" : "save")
                         .foregroundColor(.white)
                         .font(.custom("LexendDeca-SemiBold", size: 21))
                     Image(systemName: camera.isSaved ? "checkmark" : "arrow.down")

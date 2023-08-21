@@ -92,12 +92,14 @@ struct EllipsesButtonView: View {
                             Button(action: {
                                 individualPostModel.deletePostDocument()
                             }, label: {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(Theme.Peach)
-                                    .bold()
-                                    .font(.system(size: 25))
-                                    .padding(.trailing, 15)
+                                Text("confirm")
+                                .foregroundColor(.white)
+                                .font(.custom("LexendDeca-Bold", size: 15))
+                                .padding()
                             })
+                            .background(Theme.Peach)
+                            .buttonStyle(PlainButtonStyle())
+                            .cornerRadius(10)// Makes the button appearance neutral
                         }
                     }
                 }

@@ -412,21 +412,18 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     }
     
     func setTorchModeOn(device: AVCaptureDevice) {
-        do {
-            try device.lockForConfiguration()
-            
-            if device.hasTorch {
-                device.torchMode = on ? .on : .off
-            } else {
+            do {
+                try device.lockForConfiguration()
+                
+                if device.hasTorch {
+                    device.torchMode = isFlashOn ? .on : .off
+                }
+                device.unlockForConfiguration()
+                
+            } catch {
                 return
             }
-            
-            device.unlockForConfiguration()
-            
-        } catch {
-            return
         }
-    }
     
     func setTorchModeOff(device: AVCaptureDevice) {
         do {

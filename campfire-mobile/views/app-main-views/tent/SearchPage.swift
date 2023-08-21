@@ -12,7 +12,7 @@ struct SearchPage: View {
     @StateObject var model: SearchModel
     
     var body: some View {
-        NavigationStack{
+        NavigationView {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)

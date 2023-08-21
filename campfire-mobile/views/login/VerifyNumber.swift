@@ -65,10 +65,9 @@ struct VerifyNumber: View {
                                     do {
                                     Task {
                                             await model.verifyVerificationCode()
+                                            canAdvance = true
                                         }
                                     }
-                                    print(model.validVerificationCode)
-                                    canAdvance = true
                                 } label: {
                                     LFButton(text: "verify")
                                 }

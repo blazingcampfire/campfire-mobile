@@ -78,6 +78,7 @@ func formatAddress(_ location: String) -> String {
         "37 High St, New Haven": "Sig Nu Yale",
         "1605 Rice Blvd, Houston" : "McMurtry College",
         "1601 Rice Blvd, Houston" : "Duncan College",
+        "1611 Rice Blvd, Houston" : "Murt",
         "9 Sunset Blvd, Houston" : "Brown College",
         "23 Sunset Blvd, Houston" : "Jones College",
         "99 Sunset Blvd, Houston" : "Martel College",

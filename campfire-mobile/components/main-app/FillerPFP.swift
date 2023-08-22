@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct FillerPFP: View {
+    
+    var size = 100.0
+    
     var body: some View {
-        Image(systemName: "person.fill")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .foregroundColor(Theme.Peach)
-            .frame(width: 120, height: 120)
-            .clipShape(Circle())
         
-            .background(Color.white)
-            .clipShape(Circle())
+
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: size, height: size)
+                .foregroundColor(Color.white)
+                .background(Theme.Peach)
+                .overlay(
+                    Circle()
+                        .stroke(Color.black, lineWidth: 2)
+                        .frame(width: 120.0, height: 120.0)
+                )
+                .clipShape(Circle())
+        }
     }
-}
+

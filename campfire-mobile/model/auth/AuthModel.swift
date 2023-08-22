@@ -155,6 +155,7 @@ extension AuthModel {
         Task {
             do {
                 formatPhoneNumber()
+          //      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
                       if let error = error {

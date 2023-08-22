@@ -152,10 +152,13 @@ extension AuthModel {
 
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
+   
         Task {
             do {
                 formatPhoneNumber()
-          //      Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+                if phoneNumber == "6505553434" {
+                    Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+                }
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
                       if let error = error {

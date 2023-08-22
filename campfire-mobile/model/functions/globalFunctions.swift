@@ -102,6 +102,7 @@ func formatAddress(_ location: String) -> String {
         "54261 Wilson Dr, Notre Dame": "West Quad",
         "54570 St Joseph Rd, Notre Dame": "Library Lawn",
         
+        "35 Whalley Ave, New Haven": "Zeta House Yale"
     ]
     
     if let place = locationAddresses[location] {

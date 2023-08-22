@@ -82,24 +82,29 @@ struct EllipsesButtonView: View {
                     selectedAction = "delete"
                     equalIds.showAlert = true
                 }) {
-                    HStack {
-                        Text("delete post")
-                            .font(.custom("LexendDeca-SemiBold", size: 20))
-                            .padding(.leading, 16)
-                            .padding(.top, 10)// Padding to move text away from edge
-                        Spacer()
+                    VStack {
+                        HStack {
+                            Text("delete post")
+                                .font(.custom("LexendDeca-SemiBold", size: 20))
+                                .padding(.leading, 16)
+                                .padding(.top, 10)// Padding to move text away from edge
+                            Spacer()
+                        }
                         if selectedAction == "delete" {
-                            Button(action: {
-                                individualPostModel.deletePostDocument()
-                            }, label: {
-                                Text("confirm")
-                                .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                                .padding()
-                            })
-                            .background(Theme.Peach)
-                            .buttonStyle(PlainButtonStyle())
-                            .cornerRadius(10)// Makes the button appearance neutral
+                            VStack {
+                                Button(action: {
+                                    individualPostModel.deletePostDocument()
+                                }, label: {
+                                    Text("confirm")
+                                        .foregroundColor(.white)
+                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .padding()
+                                })
+                                .background(Theme.Peach)
+                                .buttonStyle(PlainButtonStyle())
+                                .cornerRadius(10)// Makes the button appearance neutral
+                            }
+                            .padding(.top, 45)
                         }
                     }
                 }

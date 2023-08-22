@@ -84,7 +84,7 @@ class IndividualPost: ObservableObject {
             postItem.usersWhoLiked.remove(at: index)  // Remove user ID from the list
             if postItem.numLikes > 0 {
                 decreasePostLikes()
-                decreasePostScore()
+                increasePostScore()
                 decreaseUserLikesPost()
             }
         } else { // If user hasn't liked the post yet
@@ -138,7 +138,7 @@ class IndividualPost: ObservableObject {
     
     func decreasePostScore() {
         let docRef = currentUser.postsRef.document(postItem.id)
-        docRef.updateData(["score": FieldValue.increment(Double(decreaseAlgo))]) { error in
+        docRef.updateData(["score": FieldValue.increment(Double(algorithm))]) { error in
             if let error = error {
                 return
             }

@@ -131,8 +131,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         default:
             return
         }
-    }
-   
+    } 
 
     
     //-MARK: Sets up the camera feed/session

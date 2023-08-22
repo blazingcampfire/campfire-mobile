@@ -30,7 +30,6 @@ struct SetProfilePic: View {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
                         currentUser.showInitialMessage = true
-                        print("initial modal bool set to true")
                     }
                 }
         } else {

@@ -84,7 +84,7 @@ final class AuthenticationManager {
         
     }
     
-    func deleteAccount(currentUser: CurrentUserModel) throws {
+    func deleteAccount(currentUser: CurrentUserModel) {
         do {
             currentUser.profileRef.document(currentUser.profile.userID).delete() { error in
                 if let error = error {
@@ -102,8 +102,14 @@ final class AuthenticationManager {
                 }
             }
         }
+        catch {
+            return
+        }
         do {
             self.deleteUser()
+        }
+        catch {
+            return
         }
     }
 

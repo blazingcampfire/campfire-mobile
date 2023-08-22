@@ -35,6 +35,7 @@ struct AccountSetUp: View {
                                     .padding(5)
                             })
                             .simultaneousGesture(TapGesture().onEnded({
+                                model.triggerRestart()
                                 model.createAccount = true
                                 model.login = false
                             }))
@@ -44,6 +45,7 @@ struct AccountSetUp: View {
                                     .padding(5)
                             })
                             .simultaneousGesture(TapGesture().onEnded({
+                                model.triggerRestart()
                                 model.login = true
                                 model.createAccount = false
                             }))

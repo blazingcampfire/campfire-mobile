@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SettingsPage: View {
     @Binding var darkMode: Bool
@@ -149,16 +150,18 @@ struct SettingsForm: View {
             }
             .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                    dismissButton: CustomAlertButton(title: "yes", action: {
-                       do {
-                           try AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
-                           currentUser.authStateDidChange()
-                       } catch {
-                           model.deleteErrorAlert = true
-                       }
+                do {
+                    AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
+                }
+                catch {
+                    model.deleteErrorAlert = true
+                }
+                AuthenticationManager.shared.deleteUser()
+                currentUser.authStateDidChange()
                    }),
                    isPresented: $showDeleteAlert)
             .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
-                   dismissButton: CustomAlertButton(title: "ok", action: { }),
+                   dismissButton: CustomAlertButton(title: "ok", action: {}),
                    isPresented: $model.deleteErrorAlert)
             .font(.custom("LexendDeca-Regular", size: 16))
         }

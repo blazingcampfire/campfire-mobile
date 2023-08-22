@@ -86,6 +86,7 @@ func formatAddress(_ location: String) -> String {
         "6360 Main St, Houston" : "Sid Richardson College",
         "6340 Main St, Houston" : "Wiess College",
         "6350 Main St, Houston" : "Hanszen College",
+        "35 Whalley Ave, New Haven": "Zeta House Yale"
     ]
     
     if let place = locationAddresses[location] {

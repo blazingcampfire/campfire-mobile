@@ -184,7 +184,7 @@ struct FeedUIView: View {
         }
         .onTapGesture {
             idsEqual.showAlert = false
-//            currentUser.showInitialMessage = false
+            currentUser.showInitialMessage = false
         }
     }
     

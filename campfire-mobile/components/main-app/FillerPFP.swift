@@ -22,7 +22,7 @@ struct FillerPFP: View {
                 .background(Theme.Peach)
                 .overlay(
                     Circle()
-                        .stroke(Color.black, lineWidth: 2)
+                        .stroke(Color.black, lineWidth: 15)
                         .frame(width: 120.0, height: 120.0)
                 )
                 .clipShape(Circle())

@@ -32,7 +32,9 @@ struct FeedUIView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        newFeedModel.currentAssortment = .hot
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            newFeedModel.currentAssortment = .hot
+                        }
                     }) {
                         Text("hot")
                             .font(.custom("LexendDeca-Bold", size: 37))
@@ -42,7 +44,9 @@ struct FeedUIView: View {
                         .frame(width: 2, height: 30)
                         .opacity(0.75)
                     Button(action: {
-                        newFeedModel.currentAssortment = .new
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            newFeedModel.currentAssortment = .new
+                        }
                     }) {
                         Text("new")
                             .font(.custom("LexendDeca-Bold", size: 37))

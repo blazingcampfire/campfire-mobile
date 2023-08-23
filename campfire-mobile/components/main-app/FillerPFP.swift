@@ -29,3 +29,10 @@ struct FillerPFP: View {
         }
     }
 
+
+struct FillerPFP_Previews: PreviewProvider {
+    static var previews: some View {
+        FillerPFP()
+            
+    }
+}

@@ -35,16 +35,18 @@ struct ProfilePictureView: View {
                 
                 ZStack(alignment: .bottomTrailing) {
                   
-                    Image(systemName: "person.fill")
+                    Image(systemName: "person.circle.fill")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .foregroundColor(Theme.Peach)
+                        .scaledToFit()
                         .frame(width: 120, height: 120)
+                        .foregroundColor(Color.white)
+                        .background(Theme.Peach)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white, lineWidth: 30)
+                                .frame(width: 120.0, height: 120.0)
+                        )
                         .clipShape(Circle())
-                    
-                        .background(Color.white)
-                        .clipShape(Circle())
-                    
                     Image(systemName: "plus")
                         .frame(width: 30, height: 30)
                         .foregroundColor(.white)

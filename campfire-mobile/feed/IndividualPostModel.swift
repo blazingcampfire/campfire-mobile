@@ -109,9 +109,6 @@ class IndividualPost: ObservableObject {
     }
     
     
-    
-    
-    
     func increaseComNum() {
         let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["comNum": FieldValue.increment(Int64(1))]) { error in
@@ -124,6 +121,20 @@ class IndividualPost: ObservableObject {
             }
         }
     }
+    
+    func decreaseComNum() {
+        let docRef = currentUser.postsRef.document(postItem.id)
+        docRef.updateData(["comNum": FieldValue.increment(Int64(-1))]) { error in
+            if let error = error {
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.postItem.comNum -= 1
+                }
+            }
+        }
+    }
+    
     
     func increasePostScore() {
         let docRef = currentUser.postsRef.document(postItem.id)

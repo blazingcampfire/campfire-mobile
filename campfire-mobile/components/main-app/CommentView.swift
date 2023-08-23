@@ -16,6 +16,8 @@ struct CommentView: View {
     @State private var likeTap: Bool = false
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
+    @ObservedObject var individualPost: IndividualPost
+    @State private var showDeleteAlert: Bool = false
 
     var body: some View {
         ZStack {
@@ -57,6 +59,18 @@ struct CommentView: View {
                                         .font(.custom("LexendDeca-SemiBold", size: 13))
                                         .foregroundColor(Theme.TextColor)
                                 }
+                                
+                                if individualComment.posterId == currentUser.profile.userID || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
+                                    Button(action: {
+                                        showDeleteAlert.toggle()
+                                    }) {
+                                        Image(systemName: "ellipsis.circle.fill")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                
                             }
                             if commentModel.repliesByComment[individualComment.comId]?.count ?? 0 > 0 {
                                 Button(action: {
@@ -98,9 +112,12 @@ struct CommentView: View {
                 }
                 if showingReplies {
                     ForEach(commentModel.repliesByComment[individualComment.comId] ?? [], id: \.id) { reply in
-                        ReplyView(individualReply: IndividualReply(replyItem: reply, postId: commentModel.postId, commentId: individualComment.comId, currentUser: currentUser))
+                        ReplyView(individualReply: IndividualReply(replyItem: reply, postId: commentModel.postId, commentId: individualComment.comId, currentUser: currentUser), individualPost: individualPost)
                     }
                 }
+            }
+            if showDeleteAlert {
+                DeleteComAlert(showAlert: $showDeleteAlert, individualCom: individualComment, individualPost: individualPost)
             }
         }
         .onAppear {

@@ -23,7 +23,7 @@ struct CommentsPage: View {
     var body: some View {
         NavigationView {
             VStack {
-                CommentsList(commentModel: commentModel, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId)
+                CommentsList(commentModel: commentModel, individualPost: post, replyingToComId: $replyingToCommentId, replyingToUserId: $replyingToUserId)
                 Divider()
                 VStack {
                     HStack {
@@ -138,6 +138,7 @@ struct CommentsPage: View {
 
 struct CommentsList: View {
     @ObservedObject var commentModel: CommentsModel
+    @ObservedObject var individualPost: IndividualPost
     @EnvironmentObject var currentUser: CurrentUserModel
     @Binding var replyingToComId: String?
     @Binding var replyingToUserId: String?
@@ -156,7 +157,7 @@ struct CommentsList: View {
             }
             else {
                 ForEach(commentModel.comments, id: \.id) { comment in
-                    CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId, currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId)
+                    CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId, currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, individualPost: individualPost)
                 }
             }
         }

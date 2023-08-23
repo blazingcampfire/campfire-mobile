@@ -11,12 +11,13 @@ import Kingfisher
 struct ReplyView: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     @StateObject var individualReply: IndividualReply
-    @State private var likeTap: Bool = false
-    
+    @ObservedObject var individualPost: IndividualPost
+    @State private var showDeleteAlert: Bool = false
     
     var body: some View {
-        HStack() {
-           
+        ZStack {
+        HStack {
+            
             HStack {
                 Button(action: {
                     // navigate to profile
@@ -45,6 +46,18 @@ struct ReplyView: View {
                     Text(timeAgoSinceDate(individualReply.date.dateValue()))  // time variable
                         .font(.custom("LexendDeca-Light", size: 13))
                         .foregroundColor(Theme.TextColor)
+                    
+                    if individualReply.posterId == currentUser.profile.userID || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
+                        Button(action: {
+                            showDeleteAlert.toggle()
+                        }) {
+                            Image(systemName: "ellipsis.circle.fill")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    
                 }
                 .padding(.top, 20)
             }
@@ -69,5 +82,9 @@ struct ReplyView: View {
                     .offset(x: -4, y: 20)
             }
         }
+            if showDeleteAlert {
+                DeleteReplyAlert(showAlert: $showDeleteAlert, individualReply: individualReply, individualPost: individualPost)
+            }
+    }
     }
 }

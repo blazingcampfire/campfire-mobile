@@ -39,6 +39,10 @@ class IndividualComment: ObservableObject {
         return commentItem.id
     }
     
+    var posterId: String {
+        return commentItem.posterId
+    }
+    
     init(commentItem: Comment, postId: String, currentUser: CurrentUserModel) {
         self.commentItem = commentItem
         self.postId = postId
@@ -94,6 +98,16 @@ class IndividualComment: ObservableObject {
         }
     }
     
+    func deleteComment() {
+     let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
+        docRef.delete() { error in
+            if let error = error {
+                return
+            }
+        }
+    }
+    
+    
     
 }
 
@@ -122,6 +136,10 @@ class IndividualReply: ObservableObject {
 
     var numLikes: Int {
         return replyItem.numLikes
+    }
+    
+    var posterId: String {
+        return replyItem.posterId
     }
 
     init(replyItem: Reply, postId: String, commentId: String, currentUser: CurrentUserModel) {
@@ -174,6 +192,15 @@ class IndividualReply: ObservableObject {
         docRef.updateData(["usersWhoLiked": replyItem.usersWhoLiked]) { error in
             if let error = error {
                return
+            }
+        }
+    }
+    
+    func deleteReply() {
+    let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
+        docRef.delete() { error in
+            if let error = error {
+                return
             }
         }
     }

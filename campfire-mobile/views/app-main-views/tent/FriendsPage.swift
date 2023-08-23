@@ -8,74 +8,66 @@
 import SwiftUI
 
 struct FriendsPage: View {
-    
     @Environment(\.dismiss) private var dismiss
-    
+
     @StateObject var model: FriendsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    
+
     var body: some View {
-    
-                if model.friends.isEmpty {
-                    ZStack {
-                        Theme.ScreenColor
-                            .ignoresSafeArea(.all)
-                        
+        if model.friends.isEmpty {
+            ZStack {
+                Theme.ScreenColor
+                    .ignoresSafeArea(.all)
+
+                VStack {
+                    HStack {
                         VStack {
-                            HStack {
-                                VStack {
-                                    Text("friends")
-                                        .font(.custom("LexendDeca-SemiBold", size: 30))
-                                        .foregroundColor(Theme.TextColor)
-                                        .padding()
-                                }
-                                Spacer()
-                                
-                            }
-                            Spacer()
-                            VStack {
-                                Text("go make some friends!")
-                                    .font(.custom("LexendDeca-Bold", size: 15))
-                                    .foregroundColor(Theme.TextColor)
-                            }
-                            Spacer()
+                            Text("friends")
+                                .font(.custom("LexendDeca-SemiBold", size: 30))
+                                .foregroundColor(Theme.TextColor)
+                                .padding()
                         }
+                        Spacer()
                     }
-                    .background(Color.white)
-                    .padding(-10)
-                    
+                    Spacer()
+                    VStack {
+                        Text("go make some friends!")
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                            .foregroundColor(Theme.TextColor)
+                    }
+                    Spacer()
                 }
-                else {
-                    ZStack {
-                        Theme.ScreenColor
-                            .ignoresSafeArea(.all)
+            }
+            .background(Color.white)
+            .padding(-10)
+        } else {
+            ZStack {
+                Theme.ScreenColor
+                    .ignoresSafeArea(.all)
+                VStack {
+                    HStack {
                         VStack {
-                            HStack {
-                                VStack {
-                                    Text("friends")
-                                        .font(.custom("LexendDeca-SemiBold", size: 30))
-                                        .foregroundColor(Theme.TextColor)
-                                        .padding()
-                                }
-                                Spacer()
-                                
-                            }
-                            
-                            ListFriends()
+                            Text("friends")
+                                .font(.custom("LexendDeca-SemiBold", size: 30))
+                                .foregroundColor(Theme.TextColor)
+                                .padding()
                         }
+                        Spacer()
                     }
-                    .environmentObject(model)
-                    .background(Color.white)
-                    .padding(-10)
+
+                    ListFriends()
                 }
-            
+            }
+            .environmentObject(model)
+            .background(Color.white)
+            .padding(-10)
+        }
     }
 }
 
 struct ListFriends: View {
-    
     @EnvironmentObject var model: FriendsModel
-    
+
     var body: some View {
         List {
             ForEach(model.friends, id: \.self) { request in
@@ -88,8 +80,8 @@ struct ListFriends: View {
     }
 }
 
-//struct FriendsPage_Previews: PreviewProvider {
+// struct FriendsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        FriendsPage()
 //    }
-//}
+// }

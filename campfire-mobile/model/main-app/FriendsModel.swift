@@ -5,23 +5,23 @@
 //  Created by Toni on 8/2/23.
 //
 
-import Foundation
 import Combine
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Foundation
 
 class FriendsModel: ObservableObject {
     @Published var friends: [RequestFirestore] = []
     @Published var currentUser: CurrentUserModel
-    
+
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        self.readFriends()
+        readFriends()
     }
-    
+
     func readFriends() {
-        let userRelationships = currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+        let userRelationships = currentUser.relationshipsRef.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
                 return
             } else {
@@ -37,10 +37,9 @@ class FriendsModel: ObservableObject {
                     self.friends = friendsArray
                 }
             }
-            
         }
     }
-    
+
     func readOtherFriends(userID: String) {
         let userRelationships = currentUser.relationshipsRef.document(userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
@@ -58,10 +57,9 @@ class FriendsModel: ObservableObject {
                     self.friends = friendsArray
                 }
             }
-            
         }
     }
-    
+
     func removeFriend(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -71,21 +69,19 @@ class FriendsModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-        
+
         do {
             friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        }
-        catch {
+        } catch {
             return
         }
         friendRelationshipRef.updateData([
-            "friends": FieldValue.arrayRemove([userRequestField])
+            "friends": FieldValue.arrayRemove([userRequestField]),
         ])
-        
+
         userRelationshipRef.updateData([
-            "friends": FieldValue.arrayRemove([friendRequestField])
+            "friends": FieldValue.arrayRemove([friendRequestField]),
         ])
     }
 }
-

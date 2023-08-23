@@ -14,7 +14,7 @@ struct EditFieldPage: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     @Environment(\.dismiss) private var dismiss
     var unallowedCharacters: [String]?
-    
+
     var field: String
     @State var currentfield: String
 
@@ -30,7 +30,7 @@ struct EditFieldPage: View {
                     .font(.custom("LexendDeca-Bold", size: 20))
                     .padding()
                     .multilineTextAlignment(.center)
-                
+
                 if newName != currentfield && newName != "" {
                     Button(action: {
                         saveName()
@@ -46,8 +46,7 @@ struct EditFieldPage: View {
                         }
                     }
                 }
-                
-             
+
                 LimitedTextField(text: $newName, maxCharacterLength: maxCharacterLength, unallowedCharacters: unallowedCharacters)
                     .font(.custom("LexendDeca-SemiBold", size: 18))
                     .foregroundColor(Theme.TextColor)
@@ -66,10 +65,10 @@ struct EditFieldPage: View {
 
     private func saveToFireBase() {
         let docRef = currentUser.profileRef.document(currentUser.profile.userID)
-        
+
         docRef.setData([field: newName], merge: true) { error in
             if let error = error {
-               return
+                return
             }
         }
     }
@@ -81,7 +80,6 @@ struct EditFieldPage: View {
         isEditing = false
     }
 }
-
 
 struct LimitedTextField: View {
     @Binding var text: String

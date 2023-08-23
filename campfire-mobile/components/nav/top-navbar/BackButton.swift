@@ -22,6 +22,6 @@ struct BackButton: View {
                 .font(.custom("LexendDeca-Bold", size: 20))
                 .foregroundColor(color)
         }
-        .frame(width:80, height: 40)
+        .frame(width: 80, height: 40)
     }
 }

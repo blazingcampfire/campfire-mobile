@@ -5,9 +5,9 @@
 //  Created by Femi Adebogun on 8/12/23.
 //
 
-import SwiftUI
-import Kingfisher
 import AVKit
+import Kingfisher
+import SwiftUI
 
 enum ActiveSheet: Identifiable {
     case first
@@ -18,15 +18,14 @@ enum ActiveSheet: Identifiable {
     }
 }
 
-
 struct FeedUIView: View {
     @ObservedObject var individualPost: IndividualPost
     @EnvironmentObject var currentUser: CurrentUserModel
     @State private var activeSheet: ActiveSheet?
-    @StateObject var idsEqual = PosterIdEqualCurrentUserId() //For the ellipses button
+    @StateObject var idsEqual = PosterIdEqualCurrentUserId() // For the ellipses button
     @ObservedObject var newFeedModel: NewFeedModel
     @State private var selection: Int = 0
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -57,7 +56,7 @@ struct FeedUIView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .foregroundColor(.white)
-            
+
             VStack {
                 HStack {
                     Button(action: {
@@ -72,63 +71,56 @@ struct FeedUIView: View {
                 .padding(.leading, 310)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            
-            
+
             // -MARK: User information
             VStack {
                 HStack(alignment: .bottom) {
-                    
                     VStack(alignment: .leading) {
-                        
-                        //- MARK: Profile pic/username buttons Hstack
+                        // - MARK: Profile pic/username buttons Hstack
                         NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualPost.posterId, currentUser: currentUser)), label: {
-                        HStack(spacing: 5) {
-                            VStack {
-                                KFImage(URL(string: individualPost.profilepic))
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(Circle())
-                                
-                            }
-                            .padding(.bottom, 25)
-                            .padding(.leading, 20)
-                            
-                            VStack(alignment: .leading, spacing: 5) {
+                            HStack(spacing: 5) {
                                 VStack {
-                                    Text("@\(individualPost.username)")
-                                        .font(.custom("LexendDeca-Bold", size: 16))
+                                    KFImage(URL(string: individualPost.profilepic))
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
                                 }
-                                
-                                Text(individualPost.caption)
-                                    .font(.custom("LexendDeca-Regular", size: 15))
-                                
-                                if individualPost.location == "" {
-                                    Text("")
-                                } else {
-                                    Text( "\(formatAddress(individualPost.location))" + "📍")
+                                .padding(.bottom, 25)
+                                .padding(.leading, 20)
+
+                                VStack(alignment: .leading, spacing: 5) {
+                                    VStack {
+                                        Text("@\(individualPost.username)")
+                                            .font(.custom("LexendDeca-Bold", size: 16))
+                                    }
+
+                                    Text(individualPost.caption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
+
+                                    if individualPost.location == "" {
+                                        Text("")
+                                    } else {
+                                        Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
+                                            .font(.custom("LexendDeca-Regular", size: 15))
+                                    }
                                 }
-                                
+                                .padding(.leading, 10)
                             }
-                            .padding(.leading, 10)
-                        }
-                    })
+                        })
                     }
-                    
                 }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.bottom, 40)
-            
+
             VStack(spacing: 7.5) {
-                
                 Text("\(formatNumber(individualPost.numLikes))")
                     .foregroundColor(.white)
                     .font(.custom("LexendDeca-Regular", size: 16))
                     .padding(.bottom, -60)
-                
+
                 VStack {
                     Button(action: {
                         activeSheet = .second
@@ -145,8 +137,7 @@ struct FeedUIView: View {
                         .font(.custom("LexendDeca-Regular", size: 16))
                 }
                 .padding(.top, 30)
-                
-                
+
                 Button(action: {
                     activeSheet = .third
                 }) {
@@ -191,5 +182,4 @@ struct FeedUIView: View {
             currentUser.showInitialMessage = false
         }
     }
-    
-    }
+}

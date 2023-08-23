@@ -5,8 +5,8 @@
 //  Created by Adarsh G on 6/27/23.
 //
 
-import SwiftUI
 import FirebaseFirestoreSwift
+import SwiftUI
 
 struct EditPost: View {
     @State private var selectedImage: UIImage?
@@ -19,11 +19,11 @@ struct EditPost: View {
     @State private var promptScreen = false
     @EnvironmentObject var currentUser: CurrentUserModel
     @State var showAlert = false
-    @State var post: [String : String]
+    @State var post: [String: String]
     @State var changePic = false
     @Environment(\.presentationMode) var presentationMode
     @State private var test = false
-    
+
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -36,64 +36,57 @@ struct EditPost: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 350, height: 350)
                             .clipShape(RoundedRectangle(cornerRadius: 30))
-                        
+
                     } else {
                         PostAttributes(url: postImage)
                     }
-                    
-                        Image(systemName: "camera")
-                            .font(.system(size: 100))
-                            .foregroundColor(Theme.Peach)
-                            .frame(width: 350, height: 350)
-                            .background(Color.black.opacity(0.5))
-                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                            .onTapGesture {
-                                isPickerShowing = true
+
+                    Image(systemName: "camera")
+                        .font(.system(size: 100))
+                        .foregroundColor(Theme.Peach)
+                        .frame(width: 350, height: 350)
+                        .background(Color.black.opacity(0.5))
+                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        .onTapGesture {
+                            isPickerShowing = true
+                        }
+                        .fullScreenCover(isPresented: $isPickerShowing) {
+                            ImagePicker(sourceType: .photoLibrary) { image in
+                                selectedImage = image
+                                isPickerShowing = false
                             }
-                            .fullScreenCover(isPresented: $isPickerShowing) {
-                                    ImagePicker(sourceType: .photoLibrary) { image in
-                                        selectedImage = image
-                                        isPickerShowing = false
-                                    }
-                                }
-                            .onChange(of: selectedImage) { newImage in
-                                       
-                                       changePic = true
-                                       
-                                   }
-                    
+                        }
+                        .onChange(of: selectedImage) { _ in
+
+                            changePic = true
+                        }
                 }
-                
+
                 ZStack {
                     HStack {
-                        
                         Spacer()
-                        
+
                         Image(systemName: "trash")
                             .font(.system(size: 20))
                             .foregroundColor(Theme.Peach)
                             .opacity(0)
-                        
+
                         Spacer()
                         Spacer()
-                        
-                        NavigationLink(destination: PromptsPage(prompt: $prompt))
-                        {
+
+                        NavigationLink(destination: PromptsPage(prompt: $prompt)) {
                             Text(prompt != "no prompt" ? "Change Prompt" : "Add Prompt")
                                 .font(.custom("LexendDeca-Bold", size: 20))
                                 .foregroundColor(Theme.Peach)
-                            
                         }
-                    
-                        
+
                         Spacer()
                         Spacer()
-                        
+
                         if initialPrompt == prompt && !changePic {
-                            VStack() {
+                            VStack {
                                 Button(action: {
-                                    withAnimation{
-                                        
+                                    withAnimation {
                                         self.showAlert.toggle()
                                     }
                                 }) {
@@ -108,14 +101,14 @@ struct EditPost: View {
                                 .foregroundColor(Theme.Peach)
                                 .opacity(0)
                         }
-                        
+
                         Spacer()
                     }
                 }
-                
+
                 ZStack {
                     VStack {
-                        if prompt != "no prompt" || (initialPrompt != prompt && prompt != "no prompt")  {
+                        if prompt != "no prompt" || (initialPrompt != prompt && prompt != "no prompt") {
                             VStack {
                                 Text("prompt: ")
                                     .font(.custom("LexendDeca-SemiBold", size: 15))
@@ -140,7 +133,7 @@ struct EditPost: View {
                                             .padding(.trailing)
                                         }
                                     )
-                                
+
                                     .shadow(color: Color.black.opacity(0.7), radius: 5, x: 2, y: 2)
                                     .padding(.horizontal)
                                     .padding(.bottom, 20)
@@ -157,7 +150,7 @@ struct EditPost: View {
                                         changePrompt(currentUser.profile.userID)
                                     }
                                     presentationMode.wrappedValue.dismiss()
-                                    
+
                                 }) {
                                     Text("confirm change")
                                         .font(.custom("LexendDeca-Bold", size: 15))
@@ -174,10 +167,9 @@ struct EditPost: View {
                                         )
                                 }
                                 if initialPrompt != "no prompt" || changePic || initialPrompt != prompt {
-                                    VStack() {
+                                    VStack {
                                         Button(action: {
-                                            withAnimation{
-                                                
+                                            withAnimation {
                                                 self.showAlert.toggle()
                                             }
                                         }) {
@@ -194,35 +186,29 @@ struct EditPost: View {
             }
             .padding(.bottom, 100)
             if self.showAlert {
-                
-                GeometryReader{_ in
-                    
+                GeometryReader { _ in
+
                     DeletePostAlert(showAlert: $showAlert, post: $post).environmentObject(currentUser)
-                    
+
                 }.background(
-                    
                     Color.black.opacity(0.5)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
-                            
-                            withAnimation{
-                                
+                            withAnimation {
                                 self.showAlert.toggle()
                             }
                         }
-                    
                 )
             }
         }
     }
-    
-    
+
     func changePrompt(_ userID: String) {
         let docRef = currentUser.profileRef.document(userID)
         docRef.getDocument { document, error in
             if let document = document, document.exists {
                 var data = document.data()!
-                
+
                 if var posts = data["posts"] as? [[String: String]] {
                     if let index = posts.firstIndex(where: { $0.keys.contains(postImage) }) {
                         posts[index][postImage] = prompt
@@ -231,62 +217,54 @@ struct EditPost: View {
                 } else {
                     return
                 }
-                
+
                 docRef.setData(data) { error in
                     if let error = error {
-                       return
+                        return
                     }
                 }
             }
         }
     }
 
-
-    
     func changePost(_ userID: String) {
-        
         guard let image = selectedImage else {
             return
         }
-        
+
         let imageData = image.jpegData(compressionQuality: 0.8)
         guard let imageData = imageData else {
             return
         }
-        
+
         let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
-        
+
         uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 postImage = photoURL
-               
+
                 let docRef = currentUser.profileRef.document(userID)
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
                         var data = document.data()!
-                        
+
                         if var posts = data["posts"] as? [[String: String]] {
-    
                             if let index = posts.firstIndex(where: { $0 == post }) {
                                 posts[index] = [photoURL: prompt]
                             }
-                            
+
                             data["posts"] = posts
                         } else {
-            
                             data["posts"] = [[photoURL: prompt]]
                         }
-                        
+
                         docRef.setData(data) { error in
                             if let error = error {
                                 return
                             } else {
-                                
-                                    if let index = currentUser.profile.posts.firstIndex(where: { $0 == post }) {
-             
-                                        currentUser.profile.posts[index] = [photoURL: prompt]
-                                      
-                                    }
+                                if let index = currentUser.profile.posts.firstIndex(where: { $0 == post }) {
+                                    currentUser.profile.posts[index] = [photoURL: prompt]
+                                }
                             }
                         }
                     }
@@ -294,7 +272,7 @@ struct EditPost: View {
             }
         }
     }
-    
+
     func changeBoth(_ userID: String) {
         guard let image = selectedImage else {
             return
@@ -306,7 +284,7 @@ struct EditPost: View {
         }
 
         let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
-        
+
         uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 let docRef = currentUser.profileRef.document(userID)
@@ -316,11 +294,8 @@ struct EditPost: View {
                         let newPost = [photoURL: prompt]
 
                         if var posts = data["posts"] as? [[String: String]] {
-                            
                             if let index = posts.firstIndex(where: { $0 == post }) {
-                                
-                                posts[index] = [photoURL : prompt]
-                                
+                                posts[index] = [photoURL: prompt]
                             }
                             data["posts"] = posts
                         }
@@ -329,12 +304,11 @@ struct EditPost: View {
                             if let error = error {
                                 return
                             } else {
-                                
-                                var posts = currentUser.profile.posts 
-                                    if let index = posts.firstIndex(where: { $0 == post }) {
-                                        posts[index] = newPost
-                                        currentUser.profile.posts = posts
-                                    }
+                                var posts = currentUser.profile.posts
+                                if let index = posts.firstIndex(where: { $0 == post }) {
+                                    posts[index] = newPost
+                                    currentUser.profile.posts = posts
+                                }
                             }
                         }
                     }
@@ -343,20 +317,17 @@ struct EditPost: View {
         }
     }
 
-
-    
     struct DeletePostAlert: View {
-        
         @Binding var showAlert: Bool
         @EnvironmentObject var currentUser: CurrentUserModel
         @Binding var post: [String: String]
-        
+
         var body: some View {
             VStack(alignment: .center) {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: 200, height: 100)
                     .foregroundColor(Color.white)
-                    .overlay (
+                    .overlay(
                         ZStack {
                             VStack {
                                 HStack {
@@ -370,7 +341,7 @@ struct EditPost: View {
                                 HStack {
                                     Button(action: {
                                         showAlert.toggle()
-                                        
+
                                     }) {
                                         Text("cancel")
                                             .font(.custom("LexendDeca-Bold", size: 12))
@@ -393,8 +364,6 @@ struct EditPost: View {
                                     .offset(x: 9, y: -9)
                                 }
                             }
-                            
-                            
                         }
                     )
                     .background(
@@ -408,31 +377,26 @@ struct EditPost: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        
+
         func deletePost(id: String) {
-            
             let docRef = currentUser.profileRef.document(id)
             docRef.getDocument { document, error in
                 if let error = error {
                     return
                 }
-                
+
                 guard let document = document, document.exists else {
                     return
                 }
-                
-                
+
                 var userData = document.data() ?? [:]
-                
-                
+
                 if var postsArray = userData["posts"] as? [[String: String]] {
-                    
                     if let index = postsArray.firstIndex(where: { $0 == post }) {
-                        
                         postsArray.remove(at: index)
-                        
+
                         userData["posts"] = postsArray
-                        
+
                         docRef.setData(userData) { error in
                             if let error = error {
                                 return

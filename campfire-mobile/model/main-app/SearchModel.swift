@@ -5,12 +5,11 @@
 //  Created by Toni on 7/19/23.
 //
 
-import Foundation
 import Combine
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-
+import Foundation
 
 class SearchModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
@@ -21,19 +20,19 @@ class SearchModel: ObservableObject {
             searchName(matching: name)
         }
     }
-    
+
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        self.searchName(matching: name)
+        searchName(matching: name)
     }
-    
+
     func searchName(matching: String) {
         // name is lowercased to make it case insensitive
         let name = name.lowercased()
         if name == "" {
             currentUser.profileRef.order(by: "smores", descending: true).limit(to: 10).getDocuments { QuerySnapshot, err in
                 if let err = err {
-                   return
+                    return
                 } else {
                     self.profiles = []
                     for document in QuerySnapshot!.documents {
@@ -63,7 +62,7 @@ class SearchModel: ObservableObject {
             }
         }
     }
-    
+
     // this function will create/update the document that represents the user -> <- friend relationship by showing that the user has requested to begin a friendship
     func requestFriend(profile: Profile) {
         guard let userID = Auth.auth().currentUser?.uid else {
@@ -74,24 +73,23 @@ class SearchModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-        
+
         do {
             friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile.name, username: profile.username, profilePicURL: profile.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        }
-        catch {
+        } catch {
             return
         }
-        
+
         friendRelationshipRef.setData([
-            "ownRequests": FieldValue.arrayUnion([userRequestField])
+            "ownRequests": FieldValue.arrayUnion([userRequestField]),
         ], merge: true)
-    
+
         userRelationshipRef.setData([
-            "sentRequests": FieldValue.arrayUnion([friendRequestField])
+            "sentRequests": FieldValue.arrayUnion([friendRequestField]),
         ], merge: true)
     }
-    
+
     func unrequestFriend(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -99,35 +97,32 @@ class SearchModel: ObservableObject {
         let friendID = request.userID
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
-        
+
         friendRelationshipRef.updateData([
-            "ownRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)])
+            "ownRequests": FieldValue.arrayRemove([Request(name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL)]),
         ])
-        
+
         userRelationshipRef.updateData([
-            "sentRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)])
+            "sentRequests": FieldValue.arrayRemove([Request(name: request.name, username: request.username, profilePicURL: request.profilePicURL)]),
         ])
     }
-    
+
     func checkRequested(request: RequestFirestore) async -> Bool {
         guard (Auth.auth().currentUser?.uid) != nil else {
             return false
         }
         do {
-            guard let document = try await currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).getDocument().data() else { return false}
-            let docField: [[String: Any]] = document["ownRequests"] as! [[String : Any]]
+            guard let document = try await currentUser.relationshipsRef.document(currentUser.privateUserData.userID).getDocument().data() else { return false }
+            let docField: [[String: Any]] = document["ownRequests"] as! [[String: Any]]
             for doc in docField {
                 let requestData = RequestFirestore(data: doc)
                 if requestData?.userID == request.userID {
                     return true
                 }
             }
-            }
-        catch {
+        } catch {
             return false
         }
         return false
-        
     }
-    
 }

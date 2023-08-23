@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 public struct ImagePicker: UIViewControllerRepresentable {
-
     private let sourceType: UIImagePickerController.SourceType
     private let onImagePicked: (UIImage) -> Void
     @Environment(\.presentationMode) private var presentationMode
@@ -21,22 +20,22 @@ public struct ImagePicker: UIViewControllerRepresentable {
 
     public func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
-        picker.sourceType = self.sourceType
+        picker.sourceType = sourceType
         picker.delegate = context.coordinator
         picker.allowsEditing = true
         return picker
     }
+
     public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 
     public func makeCoordinator() -> Coordinator {
         Coordinator(
             onDismiss: { self.presentationMode.wrappedValue.dismiss() },
-            onImagePicked: self.onImagePicked
+            onImagePicked: onImagePicked
         )
     }
 
-    final public class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
+    public final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         private let onDismiss: () -> Void
         private let onImagePicked: (UIImage) -> Void
 
@@ -46,19 +45,17 @@ public struct ImagePicker: UIViewControllerRepresentable {
         }
 
         public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            
             if let img = info[.editedImage] as? UIImage {
-                
-                self.onImagePicked(img)
-                
+                onImagePicked(img)
+
             } else if let image = info[.originalImage] as? UIImage {
-                self.onImagePicked(image)
+                onImagePicked(image)
             }
-            self.onDismiss()
+            onDismiss()
         }
 
         public func imagePickerControllerDidCancel(_: UIImagePickerController) {
-            self.onDismiss()
+            onDismiss()
         }
     }
 }

@@ -48,22 +48,22 @@ struct RequestsListView: View {
 
                 Spacer()
 
-                    Button(action: {
-                        model.acceptFriend(request: request)
-                    }) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(Theme.Peach)
-                            .font(.system(size: 30))
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
-                    Button(action: {
-                        model.removeRequest(request: request)
-                    }) {
-                        Image(systemName: "x.circle")
-                            .foregroundColor(Theme.Peach)
-                            .font(.system(size: 30))
-                    }
-                    .buttonStyle(BorderlessButtonStyle())
+                Button(action: {
+                    model.acceptFriend(request: request)
+                }) {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(Theme.Peach)
+                        .font(.system(size: 30))
+                }
+                .buttonStyle(BorderlessButtonStyle())
+                Button(action: {
+                    model.removeRequest(request: request)
+                }) {
+                    Image(systemName: "x.circle")
+                        .foregroundColor(Theme.Peach)
+                        .font(.system(size: 30))
+                }
+                .buttonStyle(BorderlessButtonStyle())
             }
         }
     }

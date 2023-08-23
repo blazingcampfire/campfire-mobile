@@ -24,23 +24,21 @@ struct EnterName: View {
                         Text("enter your first name")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
-                        
+
                         FormTextField(text: $model.name, placeholderText: "name", characterLimit: 20, unallowedCharacters: nameIllegalChar)
-                        
+
                         if !model.validName {
                             Text("name must be 2-17 characters w/ no special characters")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 13))
                                 .padding(.top, -40)
-                        }
-                        else {
+                        } else {
                             Text("almost there!")
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 13))
                                 .padding(.top, -40)
                         }
-                        
-                        
+
                         // MARK: - NavLink to VerifyEmail screen
 
                         VStack {

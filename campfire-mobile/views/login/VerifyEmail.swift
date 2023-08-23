@@ -15,10 +15,9 @@ struct VerifyEmail: View {
     @EnvironmentObject var model: AuthModel
     @EnvironmentObject var currentUser: CurrentUserModel
     @EnvironmentObject var notificationsManager: NotificationsManager
-   
+
     var body: some View {
-        
-        if (model.login && model.emailSignInSuccess) {
+        if model.login && model.emailSignInSuccess {
             NavigationBar()
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)
@@ -27,41 +26,39 @@ struct VerifyEmail: View {
                     currentUser.getProfile()
                     currentUser.getUser()
                 }
-        }
-        else {
+        } else {
             GradientBackground()
                 .overlay(
                     VStack {
-                        Spacer()                        
+                        Spacer()
                         VStack {
                             VStack {
                                 Image(systemName: "graduationcap.circle.fill")
                                     .font(.system(size: 100))
                                     .foregroundColor(.white)
                                     .padding(.bottom, 10)
-                                
+
                                 Text("verify your email:").font(.custom("LexendDeca-Bold", size: 20))
                                     .frame(alignment: .center)
                                     .foregroundColor(Color.white).padding(10).multilineTextAlignment(.center)
-                                
+
                                 Text(model.email) // email variable
                                     .font(.custom("LexendDeca-Bold", size: 20))
                                     .frame(width: 380, height: 10, alignment: .center)
                                     .foregroundColor(.white)
                                     .accentColor(.white).multilineTextAlignment(.center)
                                     .padding(.bottom, 30)
-                                
+
                                 // MARK: - Buttons redirecting to email verification
-                                
+
 //                                LFButton(text: "Microsoft", icon: Image("microsoftlogo"))
 //                                    .padding(5)
-                                
-                                if (model.emailSignInSuccess && model.createAccount) {
+
+                                if model.emailSignInSuccess && model.createAccount {
                                     NavigationLink(destination: EnterName(), label: {
                                         LFButton(text: "next")
                                     })
-                                }
-                                else if (model.createAccount && !model.emailSignInSuccess) {
+                                } else if model.createAccount && !model.emailSignInSuccess {
                                     LFButton(text: "Google", icon: Image("glogo2"))
                                         .onTapGesture {
                                             Task {
@@ -71,9 +68,7 @@ struct VerifyEmail: View {
                                                 }
                                             }
                                         }
-                                }
-                                else if model.login && !model.emailSignInSuccess {
-                                    
+                                } else if model.login && !model.emailSignInSuccess {
                                     LFButton(text: "Google", icon: Image("glogo2"))
                                         .onTapGesture {
                                             Task {
@@ -89,8 +84,8 @@ struct VerifyEmail: View {
                         Spacer()
                     })
                 .alert(title: "Error Verifying Email", message: model.errorMessage,
-                               dismissButton: CustomAlertButton(title: "ok", action: { }),
-                           isPresented: $model.showError)
+                       dismissButton: CustomAlertButton(title: "ok", action: { }),
+                       isPresented: $model.showError)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: BackButton(dismiss: self.dismiss, color: .white))
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CaptionTextField: View {
-   @Binding var text: String
+    @Binding var text: String
     let maxCharacterLength = 40
 
     var placeholderText: String

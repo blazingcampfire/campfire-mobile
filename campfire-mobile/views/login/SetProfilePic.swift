@@ -43,7 +43,7 @@ struct SetProfilePic: View {
                                 .foregroundColor(Color.white)
                                 .font(.custom("LexendDeca-Bold", size: 25))
                                 .padding(.top, 100)
-                            
+
                             ProfilePictureView(selectedPFP: $selectedPFP)
 
                             Text("last thing!")

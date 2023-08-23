@@ -7,12 +7,12 @@
 
 import FirebaseAuth
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     @StateObject var authModel: AuthModel = AuthModel()
     @StateObject var currentUser: CurrentUserModel = emptyCurrentUser
     @StateObject var notificationsManager = NotificationsManager()
-   
     
     var body: some View {
         if currentUser.signedIn && (!authModel.createAccount && !authModel.login) {

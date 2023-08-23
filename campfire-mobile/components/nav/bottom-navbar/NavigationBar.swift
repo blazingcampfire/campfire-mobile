@@ -25,7 +25,7 @@ struct NavigationBar: View {
                 .background(Color.black)
             
             
-            CameraView(currentUser: currentUser, post: CamPostModel(currentUser: currentUser))
+            CameraView(post: CamPostModel(currentUser: currentUser))
                 .tabItem {
                     Image(systemName: "camera")
                         .resizable()

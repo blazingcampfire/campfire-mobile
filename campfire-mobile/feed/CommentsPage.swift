@@ -103,7 +103,7 @@ struct CommentsPage: View {
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
                         
-                        Text("\(formatNumber(commentModel.comments.count))")
+                        Text("\(formatNumber(post.comNum))")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
                     }

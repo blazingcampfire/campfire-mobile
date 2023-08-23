@@ -11,7 +11,7 @@ import AVKit
 import Kingfisher
 
 struct PreviewPostInfo: View {
-    @ObservedObject var currentUser: CurrentUserModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @ObservedObject var postModel: CamPostModel
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {

@@ -19,7 +19,7 @@ import PhotosUI
 struct CameraView: View {
     
     @StateObject var camera = CameraModel()
-    @ObservedObject var currentUser: CurrentUserModel
+    @EnvironmentObject var currentUser: CurrentUserModel
     @StateObject var post: CamPostModel
     @State private var flashTap: Bool = false
     @State private var camFlip: Bool = false
@@ -49,7 +49,7 @@ struct CameraView: View {
                     .foregroundColor(.white)
                 }
                  
-                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                PreviewPostInfo(postModel: post)
                 VideoPostButton(camera: camera, makePost: post)
                 VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
@@ -68,7 +68,7 @@ struct CameraView: View {
                         .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
-                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                PreviewPostInfo(postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
                 
                 VStack {
@@ -115,7 +115,7 @@ struct CameraView: View {
                             .foregroundColor(.white)
                     }
                     
-                    PreviewPostInfo(currentUser: currentUser, postModel: post)
+                    PreviewPostInfo(postModel: post)
                 if !camera.videoTooLarge && !camera.videoSizeAlert {
                         VideoPostButton(camera: camera, makePost: post)
                     }
@@ -143,7 +143,7 @@ struct CameraView: View {
                        .edgesIgnoringSafeArea(.all)
                 }
                 PhotoSaveButton(camera: camera)
-                PreviewPostInfo(currentUser: currentUser, postModel: post)
+                PreviewPostInfo(postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
                 RetakeButton(camera: camera)
                 

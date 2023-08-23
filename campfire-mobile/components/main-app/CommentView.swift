@@ -59,7 +59,7 @@ struct CommentView: View {
                                         .font(.custom("LexendDeca-SemiBold", size: 13))
                                         .foregroundColor(Theme.TextColor)
                                 }
-                                
+
                                 if individualComment.posterId == currentUser.profile.userID || currentUser.profile.email == "adg10@rice.edu" || currentUser.profile.email == "oakintol@nd.edu" || currentUser.profile.email == "david.adebogun@yale.edu" {
                                     Button(action: {
                                         showDeleteAlert.toggle()
@@ -67,10 +67,9 @@ struct CommentView: View {
                                         Image(systemName: "ellipsis.circle.fill")
                                             .resizable()
                                             .frame(width: 20, height: 20)
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Theme.TextColor)
                                     }
                                 }
-                                
                             }
                             if commentModel.repliesByComment[individualComment.comId]?.count ?? 0 > 0 {
                                 Button(action: {

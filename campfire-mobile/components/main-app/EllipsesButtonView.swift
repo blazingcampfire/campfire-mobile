@@ -11,12 +11,11 @@ struct EllipsesButtonView: View {
     @ObservedObject var equalIds: PosterIdEqualCurrentUserId
     @EnvironmentObject var individualPostModel: IndividualPost
     @Environment(\.dismiss) private var dismiss
-    @State private var selectedAction: String? = nil   // Tracks the selected action
+    @State private var selectedAction: String? = nil // Tracks the selected action
     let optionsList = ["spam", "abuse", "threatens safety", "other"]
     @State private var option = "spam"
     var body: some View {
         VStack {
-
             // Report Post
             Button(action: {
                 // Action for reporting the post
@@ -33,7 +32,7 @@ struct EllipsesButtonView: View {
                     }
                     if selectedAction == "report" {
                         ScrollView {
-                            ForEach(0..<optionsList.count, id: \.self) { index in
+                            ForEach(0 ..< optionsList.count, id: \.self) { index in
                                 Button(action: {
                                     self.option = optionsList[index]
                                 }) {
@@ -43,9 +42,9 @@ struct EllipsesButtonView: View {
                                             .font(.custom("LexendDeca-Regular", size: 17))
                                             .padding(.leading, 16)
                                             .multilineTextAlignment(.leading)
-                                        
+
                                         Spacer()
-                                        
+
                                         if option == optionsList[index] {
                                             Image(systemName: "checkmark")
                                                 .foregroundColor(Theme.Peach)
@@ -62,19 +61,19 @@ struct EllipsesButtonView: View {
                             individualPostModel.reportPost(issue: option)
                             dismiss()
                         }, label: {
-                                Text("confirm")
+                            Text("confirm")
                                 .foregroundColor(.white)
                                 .font(.custom("LexendDeca-Bold", size: 15))
                                 .padding()
-                            
+
                         })
                         .background(Theme.Peach)
                         .buttonStyle(PlainButtonStyle())
-                        .cornerRadius(10)// Makes the button appearance neutral
+                        .cornerRadius(10) // Makes the button appearance neutral
                     }
                 }
             }
-            .buttonStyle(PlainButtonStyle())  // Makes the button appearance neutral
+            .buttonStyle(PlainButtonStyle()) // Makes the button appearance neutral
             // Delete Post (if condition met)
             if equalIds.isEqual {
                 Button(action: {
@@ -87,7 +86,7 @@ struct EllipsesButtonView: View {
                             Text("delete post")
                                 .font(.custom("LexendDeca-SemiBold", size: 20))
                                 .padding(.leading, 16)
-                                .padding(.top, 10)// Padding to move text away from edge
+                                .padding(.top, 10) // Padding to move text away from edge
                             Spacer()
                         }
                         if selectedAction == "delete" {
@@ -102,13 +101,13 @@ struct EllipsesButtonView: View {
                                 })
                                 .background(Theme.Peach)
                                 .buttonStyle(PlainButtonStyle())
-                                .cornerRadius(10)// Makes the button appearance neutral
+                                .cornerRadius(10) // Makes the button appearance neutral
                             }
                             .padding(.top, 45)
                         }
                     }
                 }
-                .buttonStyle(PlainButtonStyle())  // Makes the button appearance neutral
+                .buttonStyle(PlainButtonStyle()) // Makes the button appearance neutral
                 .padding(.trailing, 15)
             }
             Spacer()

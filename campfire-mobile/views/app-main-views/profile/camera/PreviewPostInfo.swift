@@ -5,10 +5,10 @@
 //  Created by Femi Adebogun on 7/27/23.
 //
 
-import SwiftUI
-import FirebaseStorage
 import AVKit
+import FirebaseStorage
 import Kingfisher
+import SwiftUI
 
 struct PreviewPostInfo: View {
     @EnvironmentObject var currentUser: CurrentUserModel
@@ -49,8 +49,7 @@ struct PhotoPostButton: View {
                 ProgressView("Posting...")
                     .font(.custom("LexendDeca-Regular", size: 20))
                     .foregroundColor(.white)
-            }
-            else {
+            } else {
                 Button(action: {
                     if let imageData = camera.capturedPic?.jpegData(compressionQuality: 0.8) ?? camera.selectedImageData {
                         isPosting = true
@@ -92,8 +91,8 @@ struct VideoPostButton: View {
             Spacer()
             if isPosting {
                 ProgressView("Posting...")
-                .font(.custom("LexendDeca-Regular", size: 20))
-                .foregroundColor(.white)
+                    .font(.custom("LexendDeca-Regular", size: 20))
+                    .foregroundColor(.white)
             } else {
                 Button(action: {
                     if let videoURL = camera.selectedVideoURL ?? (camera.videoPlayback?.currentItem?.asset as? AVURLAsset)?.url {
@@ -127,14 +126,13 @@ struct VideoPostButton: View {
     }
 }
 
-
 struct PhotoSaveButton: View {
     @ObservedObject var camera: CameraModel
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
-                if !camera.isSaved{camera.savePic()}
+                if !camera.isSaved { camera.savePic() }
             }) {
                 HStack(spacing: 5) {
                     Text(camera.isSaved ? "saved" : "save")
@@ -160,7 +158,7 @@ struct VideoSaveButton: View {
         VStack(alignment: .leading) {
             Spacer()
             Button(action: {
-                if !camera.isSaved{camera.saveVideo()}
+                if !camera.isSaved { camera.saveVideo() }
             }) {
                 HStack(spacing: 5) {
                     Text(camera.isSaved ? "saved" : "save")

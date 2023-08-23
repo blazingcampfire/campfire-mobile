@@ -6,48 +6,47 @@
 //
 
 import Foundation
-import UserNotifications
 import UIKit
+import UserNotifications
 
 @MainActor
 class NotificationsManager: ObservableObject {
     @Published var hasPermission = false
     @Published var notifications: [UNNotification] = []
-    
-    init () {
+
+    init() {
         Task {
             await getAuthStatus()
         }
     }
-    
+
     func request() async {
         do {
             try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
-        }
-        catch {
+        } catch {
             return
         }
     }
-    
+
     func getAuthStatus() async {
         let status = await UNUserNotificationCenter.current().notificationSettings()
         switch status.authorizationStatus {
         case .authorized,
-                .provisional,
-                .ephemeral:
+             .provisional,
+             .ephemeral:
             hasPermission = true
         default:
             hasPermission = false
         }
     }
-    
+
     func turnOffNotifications() async {
         UIApplication.shared.unregisterForRemoteNotifications()
         if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: nil)
-                        }
+            UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: nil)
+        }
     }
-    
+
     func sendNotification(title: String, subtitle: String) async {
         let content = UNMutableNotificationContent()
         content.title = title
@@ -63,8 +62,7 @@ class NotificationsManager: ObservableObject {
         // add our notification request
         do {
             try await UNUserNotificationCenter.current().add(request)
-        }
-        catch {
+        } catch {
             return
         }
     }

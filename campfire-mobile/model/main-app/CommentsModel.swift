@@ -5,12 +5,12 @@
 //  Created by Femi Adebogun on 7/30/23.
 //
 
-import SwiftUI
+import Combine
+import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
-import Firebase
-import Combine
+import SwiftUI
 
 class CommentsModel: ObservableObject {
     @Published var comments = [Comment]()
@@ -24,19 +24,17 @@ class CommentsModel: ObservableObject {
             listenForReplies()
         }
     }
-    
+
     var commentListener: ListenerRegistration?
     var replyListener: ListenerRegistration?
-    
-    
+
     init(currentUser: CurrentUserModel, postId: String) {
         self.currentUser = currentUser
         self.postId = postId
         listenForComments()
     }
-    
-    
-    //Create UserId field on each comment 
+
+    // Create UserId field on each comment
     func createComment() {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document()
         let now = Timestamp(date: Date())
@@ -48,7 +46,7 @@ class CommentsModel: ObservableObject {
             "date": now,
             "posterId": currentUser.profile.userID,
             "numLikes": 0,
-            "usersWhoLiked": [""]
+            "usersWhoLiked": [""],
         ]
         docRef.setData(commentData) { error in
             if let error = error {
@@ -58,7 +56,7 @@ class CommentsModel: ObservableObject {
             }
         }
     }
-    
+
     func createReply(comId: String) {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(comId).collection("replies").document()
         let now = Timestamp(date: Date())
@@ -70,21 +68,20 @@ class CommentsModel: ObservableObject {
             "date": now,
             "posterId": currentUser.profile.userID,
             "numLikes": 0,
-            "usersWhoLiked": [""]
+            "usersWhoLiked": [""],
         ]
         docRef.setData(replyData) { error in
             if let error = error {
-               return
+                return
             } else {
                 self.replyText = ""
             }
         }
     }
-        
-    
+
     func listenForComments() {
         let docRef = currentUser.postsRef.document(postId).collection("comments").order(by: "date", descending: false)
-        commentListener = docRef.addSnapshotListener { (querySnapshot, error) in
+        commentListener = docRef.addSnapshotListener { querySnapshot, _ in
             guard let documents = querySnapshot?.documents else {
                 return
             }
@@ -99,17 +96,16 @@ class CommentsModel: ObservableObject {
                 let numLikes = data["numLikes"] as? Int ?? 0
                 let usersWhoLiked = data["usersWhoLiked"] as? [String] ?? [""]
                 return Comment(id: id, profilepic: profilepic, username: username, comment: comment, date: date, posterId: posterId, numLikes: numLikes, usersWhoLiked: usersWhoLiked)
-            } 
-
             }
         }
-    
+    }
+
     func listenForReplies() {
         guard let getRepliesFor = getRepliesFor else {
             return
         }
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(getRepliesFor).collection("replies").order(by: "date", descending: false)
-        replyListener = docRef.addSnapshotListener { (querySnapshot, error) in
+        replyListener = docRef.addSnapshotListener { querySnapshot, _ in
             guard let documents = querySnapshot?.documents else {
                 return
             }
@@ -127,7 +123,4 @@ class CommentsModel: ObservableObject {
             }
         }
     }
-    
-    
-    
 }

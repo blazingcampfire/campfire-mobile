@@ -5,13 +5,12 @@
 //  Created by Adarsh G on 6/25/23.
 //
 
-import SwiftUI
 import Kingfisher
+import SwiftUI
 
 struct UserProfilePic: View {
-    
     let pfp: String?
-    
+
     var body: some View {
         if let pfp = pfp {
             KFImage(URL(string: pfp))

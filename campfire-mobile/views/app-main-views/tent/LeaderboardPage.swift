@@ -5,8 +5,8 @@
 //  Created by Femi Adebogun on 6/23/23.
 //
 
-import SwiftUI
 import Kingfisher
+import SwiftUI
 
 struct LeaderboardPage: View {
     @StateObject var model: LeaderboardModel
@@ -16,7 +16,7 @@ struct LeaderboardPage: View {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
-                
+
                 VStack(spacing: 0) {
                     HStack {
                         Text("leaderboard")
@@ -45,11 +45,11 @@ struct LeaderboardList: View {
                 .ignoresSafeArea(.all)
             List {
                 ForEach(model.profiles.indices, id: \.self) { index in
-                    LeaderboardListView(rank: (index + 1), profile: model.profiles[index])
+                    LeaderboardListView(rank: index + 1, profile: model.profiles[index])
                         .environmentObject(currentUser)
-                    .listRowBackground(Theme.ScreenColor)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 18, leading: 10, bottom: 15, trailing: 10))
+                        .listRowBackground(Theme.ScreenColor)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 18, leading: 10, bottom: 15, trailing: 10))
                 }
             }
             .listStyle(PlainListStyle())
@@ -61,6 +61,4 @@ struct LeaderboardList: View {
 //    static var previews: some View {
 //        LeaderboardPage(model: LeaderboardModel())
 //    }
-//}
-
-
+// }

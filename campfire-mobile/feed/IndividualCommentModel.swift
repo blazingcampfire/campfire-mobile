@@ -5,55 +5,53 @@
 //  Created by Femi Adebogun on 8/15/23.
 //
 
-import SwiftUI
 import Firebase
-
+import SwiftUI
 
 class IndividualComment: ObservableObject {
     @Published var commentItem: Comment
     @Published var postId: String
     @Published var isLiked: Bool = false
     @Published var currentUser: CurrentUserModel
-    
+
     var profilepic: String {
         return commentItem.profilepic
     }
-    
+
     var username: String {
         return commentItem.username
     }
-    
+
     var comment: String {
         return commentItem.comment
     }
-    
+
     var date: Timestamp {
         return commentItem.date
     }
-    
+
     var numLikes: Int {
         return commentItem.numLikes
     }
-    
+
     var comId: String {
         return commentItem.id
     }
-    
+
     var posterId: String {
         return commentItem.posterId
     }
-    
+
     init(commentItem: Comment, postId: String, currentUser: CurrentUserModel) {
         self.commentItem = commentItem
         self.postId = postId
         self.currentUser = currentUser
-        self.isLiked = commentItem.usersWhoLiked.contains(currentUser.profile.userID)
+        isLiked = commentItem.usersWhoLiked.contains(currentUser.profile.userID)
     }
-    
-    
+
     func toggleLikeStatus() {
-        commentItem.usersWhoLiked.removeAll(where: {$0 == ""})
-        
+        commentItem.usersWhoLiked.removeAll(where: { $0 == "" })
+
         if let index = commentItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
             isLiked = false
             commentItem.usersWhoLiked.remove(at: index)
@@ -67,28 +65,28 @@ class IndividualComment: ObservableObject {
         }
         updateUsersWhoLikedCom()
     }
-    
+
     func modifyLikes(increment: Int64) {
         let commentDocRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
         let userDocRef = currentUser.profileRef.document(commentItem.posterId)
-           
-           // Run a transaction
-           db.runTransaction({ (transaction, errorPointer) -> Any? in
-               transaction.updateData(["numLikes": FieldValue.increment(increment)], forDocument: commentDocRef)
-               transaction.updateData(["smores": FieldValue.increment(increment)], forDocument: userDocRef)
-               return nil
-           }) { (object, error) in
-               if let error = error {
-                  return
-               } else {
-                   DispatchQueue.main.async {
-                       self.commentItem.numLikes += Int(increment)
-                       // Update user's like count in the UI, if necessary
-                   }
-               }
-           }
-       }
-    
+
+        // Run a transaction
+        db.runTransaction({ transaction, _ -> Any? in
+            transaction.updateData(["numLikes": FieldValue.increment(increment)], forDocument: commentDocRef)
+            transaction.updateData(["smores": FieldValue.increment(increment)], forDocument: userDocRef)
+            return nil
+        }) { _, error in
+            if let error = error {
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.commentItem.numLikes += Int(increment)
+                    // Update user's like count in the UI, if necessary
+                }
+            }
+        }
+    }
+
     func updateUsersWhoLikedCom() {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
         docRef.updateData(["usersWhoLiked": commentItem.usersWhoLiked]) { error in
@@ -97,18 +95,15 @@ class IndividualComment: ObservableObject {
             }
         }
     }
-    
+
     func deleteComment() {
-     let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
-        docRef.delete() { error in
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
+        docRef.delete { error in
             if let error = error {
                 return
             }
         }
     }
-    
-    
-    
 }
 
 class IndividualReply: ObservableObject {
@@ -137,7 +132,7 @@ class IndividualReply: ObservableObject {
     var numLikes: Int {
         return replyItem.numLikes
     }
-    
+
     var posterId: String {
         return replyItem.posterId
     }
@@ -147,12 +142,12 @@ class IndividualReply: ObservableObject {
         self.postId = postId
         self.commentId = commentId
         self.currentUser = currentUser
-        self.isLiked = replyItem.usersWhoLiked.contains(currentUser.profile.userID)
+        isLiked = replyItem.usersWhoLiked.contains(currentUser.profile.userID)
     }
 
     func toggleLikeStatus() {
-        replyItem.usersWhoLiked.removeAll(where: {$0 == ""})
-        
+        replyItem.usersWhoLiked.removeAll(where: { $0 == "" })
+
         if let index = replyItem.usersWhoLiked.firstIndex(of: currentUser.profile.userID) {
             isLiked = false
             replyItem.usersWhoLiked.remove(at: index)
@@ -166,45 +161,42 @@ class IndividualReply: ObservableObject {
         }
         updateUsersWhoLikedReply()
     }
-    
+
     func modifyLikes(increment: Int64) {
         let replyDocRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
         let userDocRef = currentUser.profileRef.document(replyItem.posterId)
-           
-           // Run a transaction
-           db.runTransaction({ (transaction, errorPointer) -> Any? in
-               transaction.updateData(["numLikes": FieldValue.increment(increment)], forDocument: replyDocRef)
-               transaction.updateData(["smores": FieldValue.increment(increment)], forDocument: userDocRef)
-               return nil
-           }) { (object, error) in
-               if let error = error {
-                  return
-               } else {
-                   DispatchQueue.main.async {
-                       self.replyItem.numLikes += Int(increment)
-                   }
-               }
-           }
-       }
-    
-    func updateUsersWhoLikedReply() {
-        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
-        docRef.updateData(["usersWhoLiked": replyItem.usersWhoLiked]) { error in
+
+        // Run a transaction
+        db.runTransaction({ transaction, _ -> Any? in
+            transaction.updateData(["numLikes": FieldValue.increment(increment)], forDocument: replyDocRef)
+            transaction.updateData(["smores": FieldValue.increment(increment)], forDocument: userDocRef)
+            return nil
+        }) { _, error in
             if let error = error {
-               return
+                return
+            } else {
+                DispatchQueue.main.async {
+                    self.replyItem.numLikes += Int(increment)
+                }
             }
         }
     }
-    
-    func deleteReply() {
-    let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
-        docRef.delete() { error in
+
+    func updateUsersWhoLikedReply() {
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
+        docRef.updateData(["usersWhoLiked": replyItem.usersWhoLiked]) { error in
             if let error = error {
                 return
             }
         }
     }
 
+    func deleteReply() {
+        let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
+        docRef.delete { error in
+            if let error = error {
+                return
+            }
+        }
+    }
 }
-
-

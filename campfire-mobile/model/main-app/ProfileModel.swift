@@ -14,9 +14,9 @@ class ProfileModel: ObservableObject {
     init(id: String, currentUser: CurrentUserModel) {
         self.id = id
         self.currentUser = currentUser
-        self.getProfile()
+        getProfile()
     }
-    
+
     func getProfile() {
         let docRef = currentUser.profileRef.document(id)
 
@@ -83,38 +83,37 @@ class ProfileModel: ObservableObject {
         userRelationshipRef.setData([
             "sentRequests": FieldValue.arrayUnion([friendRequestField]),
         ], merge: true)
-        self.requested = true
+        requested = true
     }
-    
+
     func removeRequest() {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        guard let friendID = self.profile?.userID else {
+        guard let friendID = profile?.userID else {
             return
         }
         let friendRelationshipRef = currentUser.relationshipsRef.document(friendID)
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-        
+
         do {
-            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: self.profile!.name, username: self.profile!.username, profilePicURL: self.profile!.profilePicURL))
+            friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: profile!.name, username: profile!.username, profilePicURL: profile!.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        }
-        catch {
+        } catch {
             return
         }
         friendRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([userRequestField]),
-            "sentRequests": FieldValue.arrayRemove([userRequestField])
+            "sentRequests": FieldValue.arrayRemove([userRequestField]),
         ])
-        
+
         userRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([friendRequestField]),
-            "sentRequests": FieldValue.arrayRemove([friendRequestField])
+            "sentRequests": FieldValue.arrayRemove([friendRequestField]),
         ])
-        self.requested = false
+        requested = false
     }
 
     func removeFriend() {
@@ -143,9 +142,8 @@ class ProfileModel: ObservableObject {
         userRelationshipRef.setData([
             "friends": FieldValue.arrayRemove([friendRequestField]),
         ], merge: true)
-        self.friend = false
+        friend = false
     }
-
 
     func checkRequested(profile: Profile?) {
         guard let profile = profile else {
@@ -153,7 +151,7 @@ class ProfileModel: ObservableObject {
         }
         currentUser.relationshipsRef.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
-               return
+                return
             } else {
                 if let documentSnapshot = documentSnapshot {
                     let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
@@ -169,14 +167,14 @@ class ProfileModel: ObservableObject {
             }
         }
     }
-    
+
     func checkFriend(profile: Profile?) {
         guard let profile = profile else {
             return
         }
         currentUser.relationshipsRef.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
             if error != nil {
-               return
+                return
             } else {
                 if let documentSnapshot = documentSnapshot {
                     let requests = documentSnapshot.get("friends") as? [[String: Any]] ?? []

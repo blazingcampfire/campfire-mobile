@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchPage: View {
     @State private var viewHasAppeared: Bool = false
     @StateObject var model: SearchModel
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -29,14 +29,13 @@ struct SearchPage: View {
 }
 
 struct SearchList: View {
-    
     @EnvironmentObject var model: SearchModel
-    
+
     var body: some View {
         ZStack {
             Theme.ScreenColor
                 .ignoresSafeArea(.all)
-            
+
             List {
                 ForEach(model.profiles.indices, id: \.self) { index in
                     SearchListView(profile: model.profiles[index])
@@ -49,8 +48,8 @@ struct SearchList: View {
     }
 }
 
-//struct SearchPage_Previews: PreviewProvider {
+// struct SearchPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SearchPage()
 //    }
-//}
+// }

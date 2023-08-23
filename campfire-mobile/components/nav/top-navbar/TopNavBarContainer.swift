@@ -24,4 +24,3 @@ struct TopNavBarContainer<Content: View>: View {
         .background(.clear)
     }
 }
-

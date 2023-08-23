@@ -14,13 +14,13 @@ struct OwnProfilePage: View {
     @State private var showAddPost = false
     @AppStorage("isDarkMode") private var darkMode = false
     @Environment(\.dismiss) private var dismiss
-    
+
     var body: some View {
-        NavigationStack() {
+        NavigationStack {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
-                
+
                 ScrollView(.vertical, showsIndicators: false) {
                     let posts = currentUser.profile.posts
                     VStack {
@@ -29,19 +29,18 @@ struct OwnProfilePage: View {
                                 VStack {
                                     VStack(spacing: 0) {
                                         let profile = currentUser.profile
-                                        
+
                                         if profile.profilePicURL != "" {
                                             UserProfilePic(pfp: profile.profilePicURL)
                                         } else {
                                             FillerPFP()
                                         }
-                                        
-                                        
+
                                         Spacer()
-                                        
+
                                         Text(profile.name)
                                             .font(.custom("LexendDeca-Bold", size: 20))
-                                        
+
                                         HStack {
                                             Text(profile.username)
                                                 .font(.custom("LexendDeca-SemiBold", size: 15))
@@ -58,12 +57,11 @@ struct OwnProfilePage: View {
                                                     .offset(x: -3)
                                             }
                                         }
-                                        
+
                                         Text(profile.bio)
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                             .multilineTextAlignment(.center)
                                             .padding(8)
-                                        
                                     }
                                     .padding(.top)
                                     HStack {
@@ -82,22 +80,22 @@ struct OwnProfilePage: View {
                                                             )
                                                     )
                                             }
-                                        
+
                                         NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser)))
-                                        {
-                                            Image(systemName: "person.3.fill")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(Theme.Peach)
-                                                .padding()
-                                                .background(
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(.white)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: 10)
-                                                                .stroke(Color.black, lineWidth: 0.3)
-                                                        )
-                                                )
-                                        }
+                                            {
+                                                Image(systemName: "person.3.fill")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
                                         NavigationLink(destination: RequestsPage(model: RequestsModel(currentUser: currentUser))) {
                                             Text("requests")
                                                 .font(.custom("LexendDeca-Bold", size: 15))
@@ -112,8 +110,6 @@ struct OwnProfilePage: View {
                                                         )
                                                 )
                                         }
-                                        
-
                                     }
                                 }
                                 NavigationLink(destination: SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
@@ -126,8 +122,7 @@ struct OwnProfilePage: View {
                                 .offset(x: 155, y: -140)
                             }
                         }
-                        
-                   
+
                         VStack {
                             VStack(spacing: 20) {
                                 Spacer()
@@ -165,8 +160,7 @@ struct OwnProfilePage: View {
                                     }
                                 }
                             }
-                                                    }
-                        
+                        }
                     }
                     .padding()
                 }
@@ -174,7 +168,5 @@ struct OwnProfilePage: View {
                 }
             }
         }
-        
-        
     }
 }

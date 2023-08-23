@@ -13,8 +13,9 @@ struct AccountSetUp: View {
         NavigationView {
             GradientBackground()
                 .overlay(
-                    VStack (spacing: 0) {
+                    VStack(spacing: 0) {
                         // MARK: - App logo & title
+
                         VStack {
                             Image("s'more")
                                 .resizable()

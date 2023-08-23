@@ -29,9 +29,9 @@ class CurrentUserModel: ObservableObject {
         self.profileRef = profileRef
         self.relationshipsRef = relationshipsRef
         self.postsRef = postsRef
-        self.authStateDidChange()
+        authStateDidChange()
     }
-    
+
     func authStateDidChange() {
         Auth.auth().addStateDidChangeListener { _, user in
             if ((user?.email) != nil) && ((user?.phoneNumber) != nil) {
@@ -43,24 +43,23 @@ class CurrentUserModel: ObservableObject {
             }
         }
     }
-    
+
     func signOut() throws {
         try AuthenticationManager.shared.signOut()
-        self.authStateDidChange()
+        authStateDidChange()
     }
-        
+
     func checkProfile(email: String) async throws -> Bool {
-            guard let userID = Auth.auth().currentUser?.uid else {
-                return false
-            }
-            let profileRef = profileParser(school: schoolParser(email: email))
-            guard let document = try await profileRef?.document(userID).getDocument() else {
-                return false
-            }
-            return document.exists
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return false
         }
-        
-    
+        let profileRef = profileParser(school: schoolParser(email: email))
+        guard let document = try await profileRef?.document(userID).getDocument() else {
+            return false
+        }
+        return document.exists
+    }
+
     func setCollectionRefs() {
         if Auth.auth().currentUser?.email == nil {
             return
@@ -88,23 +87,22 @@ class CurrentUserModel: ObservableObject {
                 if let error = error {
                     return
                 }
-                
+
                 guard let document = documentSnapshot, document.exists else {
                     return
                 }
-                
+
                 guard let profile = try? document.data(as: Profile.self) else {
                     do {
                         try AuthenticationManager.shared.signOut()
-                    }
-                    catch {
+                    } catch {
                         return
                     }
-                   return
+                    return
                 }
-                
+
                 let postPaths = profile.posts
-                
+
                 if postPaths.isEmpty {
                     DispatchQueue.main.async {
                         self.profile = profile
@@ -119,7 +117,6 @@ class CurrentUserModel: ObservableObject {
                     }
                 }
             }
-
         }
     }
 
@@ -135,23 +132,20 @@ class CurrentUserModel: ObservableObject {
                 case let .failure(error):
                     do {
                         try AuthenticationManager.shared.signOut()
-                    }
-                    catch {
-                        
+                    } catch {
                     }
                 }
             }
         }
     }
-    
+
     func makeTestProfiles(testProfiles: [Profile]) {
         for testProfile in testProfiles {
-           let testUser = PrivateUser(phoneNumber: testProfile.phoneNumber, email: testProfile.email, userID: testProfile.userID, school: testProfile.school)
+            let testUser = PrivateUser(phoneNumber: testProfile.phoneNumber, email: testProfile.email, userID: testProfile.userID, school: testProfile.school)
             do {
                 try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
                 try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
-            }
-            catch {
+            } catch {
                 return
             }
         }

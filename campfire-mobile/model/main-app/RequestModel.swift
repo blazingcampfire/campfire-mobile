@@ -5,26 +5,26 @@
 //  Created by Toni on 7/30/23.
 //
 
-import Foundation
 import Combine
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Foundation
 
 class RequestsModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var requests: [RequestFirestore] = []
-    
+
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
-        self.readRequests()
+        readRequests()
     }
-    
+
     func readRequests() {
         do {
-            currentUser.relationshipsRef.document(self.currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+            currentUser.relationshipsRef.document(currentUser.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
                 if error != nil {
-                   return
+                    return
                 } else {
                     if let documentSnapshot = documentSnapshot {
                         var requestsArray: [RequestFirestore] = []
@@ -38,11 +38,10 @@ class RequestsModel: ObservableObject {
                         self.requests = requestsArray
                     }
                 }
-                
             }
         }
     }
-        
+
     func removeRequest(request: RequestFirestore) {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -52,27 +51,27 @@ class RequestsModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-        
+
         do {
             friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        }
-        catch {
+        } catch {
             return
         }
         friendRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([userRequestField]),
-            "sentRequests": FieldValue.arrayRemove([userRequestField])
+            "sentRequests": FieldValue.arrayRemove([userRequestField]),
         ])
-        
+
         userRelationshipRef.updateData([
             "ownRequests": FieldValue.arrayRemove([friendRequestField]),
-            "sentRequests": FieldValue.arrayRemove([friendRequestField])
+            "sentRequests": FieldValue.arrayRemove([friendRequestField]),
         ])
     }
+
     func acceptFriend(request: RequestFirestore) {
-        self.removeRequest(request: request)
-        
+        removeRequest(request: request)
+
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
@@ -81,21 +80,20 @@ class RequestsModel: ObservableObject {
         let userRelationshipRef = currentUser.relationshipsRef.document(userID)
         var friendRequestField: [String: Any]
         var userRequestField: [String: Any]
-        
+
         do {
             friendRequestField = try Firestore.Encoder().encode(Request(userID: friendID, name: request.name, username: request.username, profilePicURL: request.profilePicURL))
             userRequestField = try Firestore.Encoder().encode(Request(userID: userID, name: currentUser.profile.name, username: currentUser.profile.username, profilePicURL: currentUser.profile.profilePicURL))
-        }
-        catch {
+        } catch {
             return
         }
-        
+
         friendRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([userRequestField])
+            "friends": FieldValue.arrayUnion([userRequestField]),
         ], merge: true)
-    
+
         userRelationshipRef.setData([
-            "friends": FieldValue.arrayUnion([friendRequestField])
+            "friends": FieldValue.arrayUnion([friendRequestField]),
         ], merge: true)
     }
 }

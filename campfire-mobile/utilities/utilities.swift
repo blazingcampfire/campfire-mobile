@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 // MARK: - Utilities Class for View Controllers
+
 final class Utilities {
     static let shared = Utilities()
     private init() {}
 
     @MainActor
     func topViewController(controller: UIViewController? = nil) -> UIViewController? {
-        
         let controller = controller ?? UIApplication.shared.keyWindow?.rootViewController
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
@@ -33,6 +33,7 @@ final class Utilities {
 }
 
 // MARK: - Error Types
+
 enum EmailError: Error {
     case noMatch
     case existingUser

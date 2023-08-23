@@ -24,7 +24,6 @@ struct FormTextField: View {
                     }
 
                     if let unallowedChars = unallowedCharacters {
-                        
                         unallowedChars.forEach { char in
                             text = text.replacingOccurrences(of: char, with: "")
                         }
@@ -34,12 +33,11 @@ struct FormTextField: View {
             ZStack {
                 Rectangle()
                     .fill(.white.opacity(0.5))
-                
+
                 Rectangle()
                     .fill(.white)
                     .frame(width: isEnabled ? nil : 0)
                     .animation(.easeInOut(duration: 0.3), value: isEnabled)
-                    
             }
             .frame(height: 3)
         }

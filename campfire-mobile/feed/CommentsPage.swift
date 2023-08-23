@@ -5,10 +5,9 @@
 //  Created by Femi Adebogun on 7/8/23.
 //
 
+import Kingfisher
 import SwiftUI
 import UIKit
-import Kingfisher
-
 
 struct CommentsPage: View {
     @State private var isEditing: Bool = false
@@ -19,7 +18,6 @@ struct CommentsPage: View {
     @EnvironmentObject var currentUser: CurrentUserModel
     @ObservedObject var post: IndividualPost
 
-
     var body: some View {
         NavigationView {
             VStack {
@@ -28,20 +26,19 @@ struct CommentsPage: View {
                 VStack {
                     HStack {
                         if replyingToUserId != nil {
-                            
                             KFImage(URL(string: currentUser.profile.profilePicURL))
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
                                 .clipShape(Circle())
-                            
+
                             VStack {
                                 Text("Replying to: @\(replyingToUserId!)")
                                     .font(.custom("LexendDeca-Bold", size: 15))
                                     .padding(.leading, 20)
                                     .foregroundColor(Theme.TextColor)
                                     .padding(.trailing, 50)
-                                
+
                                 TextField(
                                     "",
                                     text: replyingToCommentId != nil ? $commentModel.replyText : $commentModel.commentText,
@@ -56,14 +53,13 @@ struct CommentsPage: View {
                                     .foregroundColor(Theme.Peach))
                             }
                             .padding(.bottom, 15)
-                        }  else {
-                            
+                        } else {
                             KFImage(URL(string: currentUser.profile.profilePicURL))
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
                                 .clipShape(Circle())
-                            
+
                             TextField(
                                 "",
                                 text: replyingToCommentId != nil ? $commentModel.replyText : $commentModel.commentText,
@@ -77,7 +73,7 @@ struct CommentsPage: View {
                                 .stroke(lineWidth: 2)
                                 .foregroundColor(Theme.Peach))
                         }
-                        
+
                         if (isEditing && commentModel.commentText != "") || (isEditing && commentModel.replyText != "") {
                             Button(action: {
                                 createContent()
@@ -92,7 +88,7 @@ struct CommentsPage: View {
             }
             .onTapGesture {
                 isEditing = false
-               UIApplication.shared.dismissKeyboard()
+                UIApplication.shared.dismissKeyboard()
                 replyingToCommentId = nil
                 replyingToUserId = nil
             }
@@ -102,7 +98,7 @@ struct CommentsPage: View {
                         Text("comments")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Bold", size: 23))
-                        
+
                         Text("\(formatNumber(post.comNum))")
                             .foregroundColor(Theme.TextColor)
                             .font(.custom("LexendDeca-Light", size: 16))
@@ -118,8 +114,9 @@ struct CommentsPage: View {
                     }
                 }
             }
+        }
     }
-    }
+
     func createContent() {
         if let replyingId = replyingToCommentId {
             commentModel.createReply(comId: replyingId)
@@ -134,7 +131,6 @@ struct CommentsPage: View {
         UIApplication.shared.dismissKeyboard()
     }
 }
-
 
 struct CommentsList: View {
     @ObservedObject var commentModel: CommentsModel
@@ -154,8 +150,7 @@ struct CommentsList: View {
                         .font(.system(size: 35))
                 }
                 .padding(.top, 170)
-            }
-            else {
+            } else {
                 ForEach(commentModel.comments, id: \.id) { comment in
                     CommentView(commentModel: commentModel, individualComment: IndividualComment(commentItem: comment, postId: commentModel.postId, currentUser: currentUser), replyingToComId: $replyingToComId, replyingToUserId: $replyingToUserId, individualPost: individualPost)
                 }
@@ -164,15 +159,15 @@ struct CommentsList: View {
         .tint(Theme.Peach)
     }
 }
-      
+
 extension UIApplication {
     func dismissKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
-//struct CommentsPage_Previews: PreviewProvider {
+// struct CommentsPage_Previews: PreviewProvider {
 //    static var previews: some View {
 //        CommentsPage(comments: diffComments)
 //    }
-//}
+// }

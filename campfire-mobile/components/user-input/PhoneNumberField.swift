@@ -5,15 +5,15 @@
 //  Created by Toni on 8/6/23.
 //
 
-import SwiftUI
 import iPhoneNumberField
+import SwiftUI
 
 struct PhoneNumberField: View {
     @Binding var text: String
 
     @FocusState var isEnabled: Bool
     var placeholderText: String
-    
+
     var body: some View {
         VStack {
             iPhoneNumberField(placeholderText, text: $text)
@@ -22,17 +22,15 @@ struct PhoneNumberField: View {
                 .foregroundColor(Color.white)
                 .padding(.horizontal)
                 .focused($isEnabled)
-             
 
             ZStack {
                 Rectangle()
                     .fill(.white.opacity(0.5))
-                
+
                 Rectangle()
                     .fill(.white)
                     .frame(width: isEnabled ? nil : 0)
-                    .animation(.easeInOut( duration: 0.3), value: isEnabled)
-                    
+                    .animation(.easeInOut(duration: 0.3), value: isEnabled)
             }
             .frame(height: 3)
         }

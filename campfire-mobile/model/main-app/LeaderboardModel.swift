@@ -5,24 +5,24 @@
 //  Created by Toni on 8/5/23.
 //
 
-import Foundation
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Foundation
 
 class LeaderboardModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var profiles: [Profile] = []
-    
+
     init(currentUser: CurrentUserModel) {
         self.currentUser = currentUser
         getTop10()
     }
-    
+
     func getTop10() {
         currentUser.profileRef.order(by: "smores", descending: true).limit(to: 10).addSnapshotListener { QuerySnapshot, err in
             if let err = err {
-              return
+                return
             } else {
                 self.profiles = []
                 for document in QuerySnapshot!.documents {

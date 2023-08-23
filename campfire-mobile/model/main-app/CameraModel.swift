@@ -46,6 +46,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var showSelectVideo: Bool = false
     @Published var videoTooLarge: Bool = false
     @Published var videoSizeAlert: Bool = false
+    @Published var selectVideoPlayer: AVPlayer? = nil
     
     
     var timer: AnyCancellable?
@@ -353,6 +354,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         self.videoTooLarge = false
                         self.videoSizeAlert = false
                         self.isFlashOn = false
+                        self.selectVideoPlayer = nil
                     }
                 }
             }

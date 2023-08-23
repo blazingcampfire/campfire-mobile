@@ -92,17 +92,19 @@ struct CameraView: View {
                                     .foregroundColor(.white)
                                     .progressViewStyle(CircularProgressViewStyle())
                                     .onAppear {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                             isLoading = false
                                         }
                                     }
                             }
                             else {
-                                CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
-                                    .onTapGesture {
-                                        isPlaying.toggle()
-                                        UIApplication.shared.dismissKeyboard()
-                                    }
+                                if let selectVideoPlayer = camera.selectVideoPlayer {
+                                    CustomVideoPlayer(player: selectVideoPlayer, isPlaying: $isPlaying)
+                                        .onTapGesture {
+                                            isPlaying.toggle()
+                                            UIApplication.shared.dismissKeyboard()
+                                        }
+                                }
                             }
                         }
                     }
@@ -111,7 +113,6 @@ struct CameraView: View {
                             .font(.custom("LexendDeca-Regular", size: 25))
                             .foregroundColor(.white)
                     }
-                    
                     PreviewPostInfo(postModel: post)
                 if !camera.videoTooLarge && !camera.videoSizeAlert {
                         VideoPostButton(camera: camera, makePost: post)

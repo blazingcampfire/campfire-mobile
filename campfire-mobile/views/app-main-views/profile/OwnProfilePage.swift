@@ -22,6 +22,7 @@ struct OwnProfilePage: View {
                     .ignoresSafeArea(.all)
                 
                 ScrollView(.vertical, showsIndicators: false) {
+                    let posts = currentUser.profile.posts
                     VStack {
                         VStack {
                             ZStack {
@@ -111,6 +112,8 @@ struct OwnProfilePage: View {
                                                         )
                                                 )
                                         }
+                                        
+
                                     }
                                 }
                                 NavigationLink(destination: SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
@@ -124,7 +127,7 @@ struct OwnProfilePage: View {
                             }
                         }
                         
-                        let posts = currentUser.profile.posts
+                   
                         VStack {
                             VStack(spacing: 20) {
                                 Spacer()
@@ -140,25 +143,29 @@ struct OwnProfilePage: View {
                                 }
                                 .padding(.horizontal)
                             }
-                            if posts.count < 6 {
-                                Spacer()
-                                NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
-                                    ZStack {
-                                        Rectangle()
-                                            .foregroundColor(.clear)
-                                            .frame(width: 350, height: 350)
-                                        VStack {
-                                            Image(systemName: "plus.circle")
-                                                .font(.system(size: 75))
-                                                .foregroundColor(Theme.Peach)
-                                            Text("add flick!")
-                                                .font(.custom("LexendDeca-SemiBold", size: 25))
-                                                .foregroundColor(Theme.Peach)
+                            .safeAreaInset(edge: .bottom) {
+                                if posts.count < 6 {
+                                    NavigationLink(destination: AddPost(showAddPost: $showAddPost).environmentObject(currentUser)) {
+                                        ZStack {
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(width: 350, height: 350)
+                                            VStack {
+                                                Image(systemName: "plus.circle")
+                                                    .font(.system(size: 100))
+                                                    .foregroundColor(Theme.Peach)
+                                                Text("add flick!")
+                                                    .font(.custom("LexendDeca-SemiBold", size: 25))
+                                                    .foregroundColor(Theme.Peach)
+                                                Text("(max 6)")
+                                                    .font(.custom("LexendDeca-SemiBold", size: 25))
+                                                    .foregroundColor(Theme.Peach)
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
+                                                    }
                         
                     }
                     .padding()

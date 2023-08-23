@@ -114,7 +114,6 @@ struct CameraView: View {
                             .foregroundColor(.white)
                     }
                     PreviewPostInfo(postModel: post)
-                    .toolbar(.hidden, for: .tabBar)
                 if !camera.videoTooLarge && !camera.videoSizeAlert {
                         VideoPostButton(camera: camera, makePost: post)
                     }

@@ -9,8 +9,7 @@ import Combine
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import SwiftUI
-import SwiftUIPager
+import SwiftUI  
 
 enum Assortment {
     case hot

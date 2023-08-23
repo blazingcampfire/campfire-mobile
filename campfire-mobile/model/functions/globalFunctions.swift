@@ -72,7 +72,7 @@ func formatNumber(_ number: Int) -> String {
 
 
 
-func formatAddress(_ location: String) -> String {
+func formatAddress(_ location: String, school: String) -> String {
     let locationAddresses = [
         "7 Andrews View Ct, Windsor Mill": "david house",
         "37 High St, New Haven": "Sig Nu House Yale",
@@ -86,6 +86,7 @@ func formatAddress(_ location: String) -> String {
         "6360 Main St, Houston" : "Sid Richardson College",
         "6340 Main St, Houston" : "Wiess College",
         "6350 Main St, Houston" : "Hanszen College",
+        "6296 Main St, Houston" : "Sewall Hall",
         "19330 S Dining Hall Dr, Notre Dame": "SDH",
         "54655 N Notre Dame Ave, Notre Dame": "South Quad",
         "130 Morris Inn, Notre Dame": "Morris Inn",
@@ -138,8 +139,9 @@ func formatAddress(_ location: String) -> String {
     ]
     
     if let place = locationAddresses[location] {
-        return place
+        return ("\(place)" + "📍")
     } else {
+        let location = ("\(school)" + " campfire 📍")
         return location
     }
 }

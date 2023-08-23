@@ -86,6 +86,7 @@ struct MediaPickerView: UIViewControllerRepresentable {
                         let videoData = try Data(contentsOf: newUrl)
                         DispatchQueue.main.async {
                             self.camera.selectedVideoURL = newUrl // Set the selectedVideoURL in the CameraModel
+                            self.camera.selectVideoPlayer = AVPlayer(url: newUrl)
                             if videoData.count > 15000000 {
                                 self.camera.videoTooLarge = true
                                 self.camera.videoSizeAlert = true

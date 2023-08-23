@@ -34,8 +34,6 @@ struct SettingsForm: View {
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @EnvironmentObject var notificationsManager: NotificationsManager
-    @EnvironmentObject var authModel: AuthModel
     
     var body: some View {
         NavigationStack {

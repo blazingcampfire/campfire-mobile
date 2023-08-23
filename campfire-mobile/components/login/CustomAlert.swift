@@ -199,7 +199,7 @@ struct CustomAlertButton: View {
                 .foregroundColor(.white)
                 .padding()
         }
-        .frame(width: 100, height: 30)
+        .frame(width: 120, height: 40)
         .background(Theme.Peach)
         .cornerRadius(15)
     }

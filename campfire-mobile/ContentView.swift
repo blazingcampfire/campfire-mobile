@@ -7,31 +7,30 @@
 
 import FirebaseAuth
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     @StateObject var authModel: AuthModel = AuthModel()
     @StateObject var currentUser: CurrentUserModel = emptyCurrentUser
     @StateObject var notificationsManager = NotificationsManager()
-   
     
     var body: some View {
         if currentUser.signedIn && (!authModel.createAccount && !authModel.login) {
-            NavigationBar()
-                .onAppear {
-                    currentUser.setCollectionRefs()
-                    currentUser.getUser()
-                    currentUser.getProfile()
-                }
-                .environmentObject(currentUser)
-                .environmentObject(notificationsManager)
-        }
-        else {
-            AccountSetUp()
-                .environmentObject(authModel)
-                .environmentObject(currentUser)
-                .environmentObject(notificationsManager)
-        }
-        
+                NavigationBar()
+                    .onAppear {
+                        currentUser.setCollectionRefs()
+                        currentUser.getUser()
+                        currentUser.getProfile()
+                    }
+                    .environmentObject(currentUser)
+                    .environmentObject(notificationsManager)
+            }
+            else {
+                AccountSetUp()
+                    .environmentObject(authModel)
+                    .environmentObject(currentUser)
+                    .environmentObject(notificationsManager)
+            }
     }
 
     struct ContentView_Previews: PreviewProvider {

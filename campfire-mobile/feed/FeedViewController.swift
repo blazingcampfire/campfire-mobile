@@ -40,7 +40,7 @@ class FeedViewController: UIViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
+     //   refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
         
         
         collectionView.backgroundColor = .black
@@ -62,13 +62,13 @@ class FeedViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    @objc func refreshPosts() {
-           DispatchQueue.main.async { [weak self] in
-               self?.newFeedModel.loadInitialPosts {
-                   print("refreshed posts")
-               }
-           }
-       }
+//    @objc func refreshPosts() {
+//           DispatchQueue.main.async { [weak self] in
+//               self?.newFeedModel.loadInitialPosts {
+//                   print("refreshed posts")
+//               }
+//           }
+//       }
 
 
     func updateCollectionViewLayout() {

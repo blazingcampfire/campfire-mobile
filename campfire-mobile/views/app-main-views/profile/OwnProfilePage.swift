@@ -122,7 +122,7 @@ struct OwnProfilePage: View {
                                 }
                                 .offset(x: 155, y: -140)
                                 .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
+                                   SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
                                         .presentationDragIndicator(.visible)
                                 }
                             }

@@ -62,12 +62,12 @@ class NewFeedModel: ObservableObject {
     private func switchAssortment(to assortment: Assortment) {
         self.posts.removeAll()
         removeOldListeners {
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
             self.loadInitialPosts {
                 self.lastDocumentSnapshot = nil
                 self.startListener(for: assortment)
+            }
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
             }
         }
     }

@@ -136,7 +136,7 @@ struct SettingsForm: View {
                 }
                 VStack {
                     Button(action: {
-                        showDeleteAlert = true
+                       showDeleteAlert = true
                     }, label: {
                         Label {
                             Text("delete account")
@@ -156,8 +156,6 @@ struct SettingsForm: View {
                 catch {
                     model.deleteErrorAlert = true
                 }
-                AuthenticationManager.shared.deleteUser()
-                currentUser.authStateDidChange()
                    }),
                    isPresented: $showDeleteAlert)
             .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",

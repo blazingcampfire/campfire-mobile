@@ -32,7 +32,6 @@ struct CameraView: View {
     var body: some View {
         ZStack {
             CameraPreview(camera: camera)
-                    .ignoresSafeArea(.all, edges: .all)
             
             if camera.isVideoRecorded {
                 if let recordedVideo = camera.videoPlayback {
@@ -41,7 +40,6 @@ struct CameraView: View {
                             isPlaying.toggle()
                             UIApplication.shared.dismissKeyboard()
                         }
-                        .edgesIgnoringSafeArea(.all)
                 }
                 else {
                     Text("Error Loading Recorded Video")
@@ -103,9 +101,8 @@ struct CameraView: View {
                                 CustomVideoPlayer(player: AVPlayer(url: selectedVideoURL), isPlaying: $isPlaying)
                                     .onTapGesture {
                                         isPlaying.toggle()
+                                        UIApplication.shared.dismissKeyboard()
                                     }
-                                    .edgesIgnoringSafeArea(.all)
-                                    .aspectRatio(9/16, contentMode: .fill)
                             }
                         }
                     }

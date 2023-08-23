@@ -5,8 +5,8 @@
 //  Created by Toni on 7/17/23.
 //
 
-import Foundation
 import FirebaseFirestore
+import Foundation
 // global constant of the three schools campfire will support at launch (as found in .edu emails)
 let globalSchools: [String] = ["yale", "rice", "nd"]
 
@@ -35,5 +35,3 @@ let reportsMap: [String: CollectionReference] = [
     "nd": ndReports,
     "yale": yaleReports,
     "rice": riceReports]
-
-

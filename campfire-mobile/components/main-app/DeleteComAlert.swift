@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct DeleteComAlert: View {
-    
     @Binding var showAlert: Bool
     @ObservedObject var individualCom: IndividualComment
     @ObservedObject var individualPost: IndividualPost
-    
+
     var body: some View {
         VStack(alignment: .center) {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 200, height: 100)
                 .foregroundColor(Color.white)
-                .overlay (
+                .overlay(
                     ZStack {
                         VStack {
                             HStack {
@@ -32,7 +31,7 @@ struct DeleteComAlert: View {
                             HStack {
                                 Button(action: {
                                     showAlert.toggle()
-                                    
+
                                 }) {
                                     Text("cancel")
                                         .font(.custom("LexendDeca-Bold", size: 12))
@@ -71,19 +70,17 @@ struct DeleteComAlert: View {
     }
 }
 
-
 struct DeleteReplyAlert: View {
-    
     @Binding var showAlert: Bool
     @ObservedObject var individualReply: IndividualReply
     @ObservedObject var individualPost: IndividualPost
-    
+
     var body: some View {
         VStack(alignment: .center) {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 200, height: 100)
                 .foregroundColor(Color.white)
-                .overlay (
+                .overlay(
                     ZStack {
                         VStack {
                             HStack {

@@ -116,7 +116,7 @@ extension AuthModel {
             .map {
                 name in
                 let RegEx = "\\w{2,18}"
-                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                let Test = NSPredicate(format: "SELF MATCHES %@", RegEx)
                 return Test.evaluate(with: name)
             }
             .eraseToAnyPublisher()
@@ -127,7 +127,7 @@ extension AuthModel {
             .map {
                 username in
                 let RegEx = "\\w{4,18}"
-                    let Test = NSPredicate(format:"SELF MATCHES %@", RegEx)
+                let Test = NSPredicate(format: "SELF MATCHES %@", RegEx)
                 return Test.evaluate(with: username)
             }
             .eraseToAnyPublisher()
@@ -147,12 +147,12 @@ extension AuthModel {
 
 extension AuthModel {
     func formatPhoneNumber() {
-        self.phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
+        phoneNumber = formattedPhoneNumber.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: " ", with: "")
     }
 
     func getVerificationCode() {
         UIApplication.shared.closeKeyboard()
-   
+
         Task {
             do {
                 formatPhoneNumber()
@@ -160,14 +160,14 @@ extension AuthModel {
                     Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                 }
                 PhoneAuthProvider.provider()
-                  .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
-                      if let error = error {
-                          return
-                      }
-                      UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-                      self.verificationID = UserDefaults.standard.string(forKey: "authVerificationID")!
-                      self.validPhoneNumber = true
-                  }
+                    .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
+                        if let error = error {
+                            return
+                        }
+                        UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
+                        self.verificationID = UserDefaults.standard.string(forKey: "authVerificationID")!
+                        self.validPhoneNumber = true
+                    }
             } catch {
                 await handleError(error: error, message: "The phone number you provided is invalid. Please try again.")
                 return
@@ -177,49 +177,49 @@ extension AuthModel {
 
     func verifyVerificationCode() async {
         UIApplication.shared.closeKeyboard()
-            do {
-                let credential = PhoneAuthProvider.provider().credential(
-                  withVerificationID: verificationID,
-                  verificationCode: self.verificationCode
-                )
-                try await Auth.auth().signIn(with: credential)
-            } catch {
-                await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
-                return
-            }
-            do {
-                if self.login && Auth.auth().currentUser?.email == nil {
-                    AuthenticationManager.shared.deleteUser()
-                    throw PhoneError.noExistingUser
-                } else if self.login {
-                        let existingProfile = await self.checkProfile(email: submittedEmail)
-                        if !existingProfile {
-                            do {
-                                try AuthenticationManager.shared.signOut()
-                                throw PhoneError.noExistingUser
-                            } catch {
-                                await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
-                                self.triggerRestart()
-                                return
-                            }
-                        }
-                } else if self.createAccount {
-                    let existingProfile = await self.checkProfile(email: submittedEmail)
+        do {
+            let credential = PhoneAuthProvider.provider().credential(
+                withVerificationID: verificationID,
+                verificationCode: verificationCode
+            )
+            try await Auth.auth().signIn(with: credential)
+        } catch {
+            await handleError(error: error, message: "The verification code you provided is invalid. Please try again.")
+            return
+        }
+        do {
+            if login && Auth.auth().currentUser?.email == nil {
+                AuthenticationManager.shared.deleteUser()
+                throw PhoneError.noExistingUser
+            } else if login {
+                let existingProfile = await checkProfile(email: submittedEmail)
+                if !existingProfile {
                     do {
-                        if existingProfile {
-                            throw PhoneError.existingUser
-                        }
+                        try AuthenticationManager.shared.signOut()
+                        throw PhoneError.noExistingUser
                     } catch {
-                        await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
-                        self.triggerRestart()
+                        await handleError(error: error, message: "No account was found matching the phone number you provided. Please finish our \("create account") flow and try again.")
+                        triggerRestart()
                         return
                     }
                 }
-                self.validVerificationCode = true
-            } catch {
-                await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
-                return
+            } else if createAccount {
+                let existingProfile = await checkProfile(email: submittedEmail)
+                do {
+                    if existingProfile {
+                        throw PhoneError.existingUser
+                    }
+                } catch {
+                    await handleError(error: error, message: "An account has already been created with this phone number. Please use the login option instead.")
+                    triggerRestart()
+                    return
+                }
             }
+            validVerificationCode = true
+        } catch {
+            await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
+            return
+        }
     }
 }
 
@@ -262,7 +262,7 @@ extension AuthModel {
                     }
                 } catch {
                     await handleError(error: error, message: "An account has already been created with this email. Please use the login option instead.")
-                    self.triggerRestart()
+                    triggerRestart()
                     return
                 }
             } catch {
@@ -274,7 +274,7 @@ extension AuthModel {
 //            }
             AuthenticationManager.shared.deleteUser()
             await handleError(error: error, message: "An error occurred trying to sign up with the email you provided. It might not match the .edu email you entered previously, or it might be associated with a school that we do not currently support. Please re-verify your phone number & try to create your account again.")
-            self.triggerRestart()
+            triggerRestart()
             return
         }
     }
@@ -379,7 +379,7 @@ extension AuthModel {
                 case let .success(profileData):
                     self.profile = profileData
                 case let .failure(error):
-                   return
+                    return
                 }
             }
         }

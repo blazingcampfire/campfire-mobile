@@ -5,8 +5,8 @@
 //  Created by Femi Adebogun on 6/23/23.
 //
 
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct SettingsPage: View {
     @Binding var darkMode: Bool
@@ -34,7 +34,7 @@ struct SettingsForm: View {
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -49,7 +49,7 @@ struct SettingsForm: View {
                     }
                     .tint(Theme.Peach)
                     .font(.custom("LexendDeca-Regular", size: 16))
-                    
+
                     Button(action: {
                         Task {
                             await model.notificationsManager.turnOffNotifications()
@@ -64,7 +64,7 @@ struct SettingsForm: View {
                         }
                     })
                 }
-                
+
                 .font(.custom("LexendDeca-Regular", size: 16))
                 Section(header: Text("about")) {
                     Link(destination: URL(string: "https://www.campfireco.app/community-guidelines")!) {
@@ -94,7 +94,7 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
                 .foregroundColor(Theme.TextColor)
-                
+
                 Section(header: Text("support")) {
                     Button(action: {
                         model.openMail(emailTo: "support@campfireco.app", subject: "", body: "")
@@ -104,7 +104,8 @@ struct SettingsForm: View {
                         } icon: {
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .foregroundColor(Theme.Peach)
-                        }})
+                        }
+                    })
                     Link(destination: URL(string: "https://www.campfireco.app/")!) {
                         Label {
                             Text("website")
@@ -116,8 +117,7 @@ struct SettingsForm: View {
                 }
                 .font(.custom("LexendDeca-Regular", size: 16))
                 .foregroundColor(Theme.TextColor)
-                
-                
+
                 Section(header: Text("account")) {
                     Label {
                         Text("log out")
@@ -126,23 +126,21 @@ struct SettingsForm: View {
                         Image(systemName: "lock")
                             .foregroundColor(Theme.Peach)
                     }
-                    .overlay (
+                    .overlay(
                         NavigationLink(destination: {
-                            AccountSetUp()
-                                .onAppear {
-                                    do {
-                                        try Auth.auth().signOut()
-                                    }
-                                    catch {
-                                        
-                                    }
-                                }
-                                .navigationBarBackButtonHidden(true)
-                                .navigationBarTitleDisplayMode(.inline)
-                        },
+                                           AccountSetUp()
+                                               .onAppear {
+                                                   do {
+                                                       try Auth.auth().signOut()
+                                                   } catch {
+                                                   }
+                                               }
+                                               .navigationBarBackButtonHidden(true)
+                                               .navigationBarTitleDisplayMode(.inline)
+                                       },
                                        label: { EmptyView() })
-                        .opacity(0)
-                        .frame(width: 10, height: 10)
+                            .opacity(0)
+                            .frame(width: 10, height: 10)
                     )
                     Button(action: {
                         showDeleteAlert = true
@@ -159,13 +157,13 @@ struct SettingsForm: View {
                         isPresented: $model.deleteUser) {
                             AccountSetUp()
                                 .onAppear {
-                                        AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
-                                        AuthenticationManager.shared.deleteUser()
+                                    AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
+                                    AuthenticationManager.shared.deleteUser()
                                 }
                                 .toolbar(.hidden, for: .tabBar)
                                 .navigationBarBackButtonHidden(true)
                                 .navigationBarTitleDisplayMode(.inline)
-                         }
+                    }
 //                        .overlay (
 //                            NavigationLink(destination: {
 //                                AccountSetUp()
@@ -183,8 +181,8 @@ struct SettingsForm: View {
                 }
                 .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                        dismissButton: CustomAlertButton(title: "yes", action: {
-                    model.deleteUser = true
-                }),
+                           model.deleteUser = true
+                       }),
                        isPresented: $showDeleteAlert)
                 .alert(title: "There Was An Error Deleting Your Account", message: "Please try again.",
                        dismissButton: CustomAlertButton(title: "ok", action: {}),

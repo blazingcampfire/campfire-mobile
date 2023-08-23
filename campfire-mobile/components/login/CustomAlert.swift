@@ -10,29 +10,32 @@ import SwiftUI
 import SwiftUI
 
 struct CustomAlert: View {
-
     // MARK: - Value
+
     // MARK: Public
+
     let title: String
     let message: String
     let dismissButton: CustomAlertButton?
     let primaryButton: CustomAlertButton?
     let secondaryButton: CustomAlertButton?
-    
+
     // MARK: Private
-    @State private var opacity: CGFloat           = 0
+
+    @State private var opacity: CGFloat = 0
     @State private var backgroundOpacity: CGFloat = 0
-    @State private var scale: CGFloat             = 0.001
+    @State private var scale: CGFloat = 0.001
 
     @Environment(\.dismiss) private var dismiss
 
-
     // MARK: - View
+
     // MARK: Public
+
     var body: some View {
         ZStack {
             dimView
-    
+
             alertView
                 .scaleEffect(scale)
                 .opacity(opacity)
@@ -48,6 +51,7 @@ struct CustomAlert: View {
     }
 
     // MARK: Private
+
     private var alertView: some View {
         VStack(spacing: 20) {
             titleView
@@ -89,7 +93,7 @@ struct CustomAlert: View {
         HStack(spacing: 12) {
             if dismissButton != nil {
                 dismissButtonView
-    
+
             } else if primaryButton != nil, secondaryButton != nil {
                 secondaryButtonView
                 primaryButtonView
@@ -105,7 +109,7 @@ struct CustomAlert: View {
                 animate(isShown: false) {
                     dismiss()
                 }
-            
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     button.action?()
                 }
@@ -120,7 +124,7 @@ struct CustomAlert: View {
                 animate(isShown: false) {
                     dismiss()
                 }
-        
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     button.action?()
                 }
@@ -131,13 +135,11 @@ struct CustomAlert: View {
     @ViewBuilder
     private var dismissButtonView: some View {
         if let button = dismissButton {
-            CustomAlertButton(title: button.title)
-            {
+            CustomAlertButton(title: button.title) {
                 animate(isShown: false) {
                     dismiss()
                 }
-                
-        
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     button.action?()
                 }
@@ -149,29 +151,30 @@ struct CustomAlert: View {
         GradientBackground()
     }
 
-
     // MARK: - Function
+
     // MARK: Private
+
     private func animate(isShown: Bool, completion: (() -> Void)? = nil) {
         switch isShown {
         case true:
             opacity = 1
-    
+
             withAnimation(.spring(response: 0.3, dampingFraction: 0.9, blendDuration: 0).delay(0.5)) {
                 backgroundOpacity = 1
-                scale             = 1
+                scale = 1
             }
-    
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 completion?()
             }
-    
+
         case false:
             withAnimation(.easeOut(duration: 0.2)) {
                 backgroundOpacity = 0
-                opacity           = 0
+                opacity = 0
             }
-    
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 completion?()
             }
@@ -180,19 +183,21 @@ struct CustomAlert: View {
 }
 
 struct CustomAlertButton: View {
-
     // MARK: - Value
+
     // MARK: Public
+
     let title: LocalizedStringKey
     var action: (() -> Void)? = nil
-    
-    
+
     // MARK: - View
+
     // MARK: Public
+
     var body: some View {
         Button {
-          action?()
-        
+            action?()
+
         } label: {
             Text(title)
                 .font(.custom("LexendDeca-Bold", size: 20))
@@ -206,12 +211,14 @@ struct CustomAlertButton: View {
 }
 
 struct CustomAlertModifier {
-
     // MARK: - Value
+
     // MARK: Private
+
     @Binding private var isPresented: Bool
 
     // MARK: Private
+
     private let title: String
     private let message: String
     private let dismissButton: CustomAlertButton?
@@ -219,9 +226,7 @@ struct CustomAlertModifier {
     private let secondaryButton: CustomAlertButton?
 }
 
-
 extension CustomAlertModifier: ViewModifier {
-
     func body(content: Content) -> some View {
         content
             .fullScreenCover(isPresented: $isPresented) {
@@ -231,43 +236,41 @@ extension CustomAlertModifier: ViewModifier {
 }
 
 extension CustomAlertModifier {
-
     init(title: String = "", message: String = "", dismissButton: CustomAlertButton, isPresented: Binding<Bool>) {
-        self.title         = title
-        self.message       = message
+        self.title = title
+        self.message = message
         self.dismissButton = dismissButton
-    
-        self.primaryButton   = nil
-        self.secondaryButton = nil
-    
+
+        primaryButton = nil
+        secondaryButton = nil
+
         _isPresented = isPresented
     }
 
     init(title: String = "", message: String = "", primaryButton: CustomAlertButton, secondaryButton: CustomAlertButton, isPresented: Binding<Bool>) {
-        self.title           = title
-        self.message         = message
-        self.primaryButton   = primaryButton
+        self.title = title
+        self.message = message
+        self.primaryButton = primaryButton
         self.secondaryButton = secondaryButton
-    
-        self.dismissButton = nil
-    
+
+        dismissButton = nil
+
         _isPresented = isPresented
     }
 }
 
 extension View {
-
     func alert(title: String = "", message: String = "", dismissButton: CustomAlertButton = CustomAlertButton(title: "ok"), isPresented: Binding<Bool>) -> some View {
-        let title   = NSLocalizedString(title, comment: "")
+        let title = NSLocalizedString(title, comment: "")
         let message = NSLocalizedString(message, comment: "")
-    
+
         return modifier(CustomAlertModifier(title: title, message: message, dismissButton: dismissButton, isPresented: isPresented))
     }
 
     func alert(title: String = "", message: String = "", primaryButton: CustomAlertButton, secondaryButton: CustomAlertButton, isPresented: Binding<Bool>) -> some View {
-        let title   = NSLocalizedString(title, comment: "")
+        let title = NSLocalizedString(title, comment: "")
         let message = NSLocalizedString(message, comment: "")
-    
+
         return modifier(CustomAlertModifier(title: title, message: message, primaryButton: primaryButton, secondaryButton: secondaryButton, isPresented: isPresented))
     }
 }

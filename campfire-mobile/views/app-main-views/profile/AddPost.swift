@@ -5,21 +5,21 @@
 //  Created by Adarsh G on 7/22/23.
 //
 
-import SwiftUI
-import FirebaseStorage
 import FirebaseFirestore
+import FirebaseStorage
+import SwiftUI
 struct AddPost: View {
     @State private var selectedImage: UIImage?
     @State private var isPickerShowing = false
     @State private var promptScreen = false
     @State var retrievedPosts = [Data]()
     @State var prompt: String = "no prompt"
-    
+
     @Binding var showAddPost: Bool
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+
     @EnvironmentObject var currentUser: CurrentUserModel
-    
+
     var body: some View {
         ZStack {
             Theme.ScreenColor
@@ -37,7 +37,7 @@ struct AddPost: View {
                                     .offset(x: 0, y: 0)
                                     .background(Color.black.opacity(0.5))
                                     .clipShape(RoundedRectangle(cornerRadius: 30))
-                                
+
                                 Button(action: {
                                     isPickerShowing = true
                                 }) {
@@ -62,7 +62,7 @@ struct AddPost: View {
                                     .presentationDetents([.fraction(0.7)])
                                     .presentationDragIndicator(.visible)
                             }
-                            
+
                             if prompt != "no prompt" {
                                 Spacer()
                                 VStack {
@@ -90,18 +90,18 @@ struct AddPost: View {
                                                     .padding(.trailing)
                                                 }
                                             )
-                                        .shadow(color: Color.black.opacity(0.7), radius: 5, x: 2, y: 2)
-                                        .padding(.horizontal)
-                                        .padding(.bottom, 20)
+                                            .shadow(color: Color.black.opacity(0.7), radius: 5, x: 2, y: 2)
+                                            .padding(.horizontal)
+                                            .padding(.bottom, 20)
                                     }
                                 }
                                 .padding(.top, -30)
                             }
                             Button(action: {
                                 confirmPost(userID: currentUser.profile.userID, prompt: prompt)
-                                
+
                                 presentationMode.wrappedValue.dismiss()
-                            })  {
+                            }) {
                                 HStack {
                                     Text("confirm post?")
                                         .font(.custom("LexendDeca-Bold", size: 25))
@@ -135,39 +135,39 @@ struct AddPost: View {
             }
         }
     }
-    
+
     func confirmPost(userID: String, prompt: String) {
         guard let selectedImage = selectedImage else {
             return
         }
-        
+
         let imageData = selectedImage.jpegData(compressionQuality: 0.8)
         guard let imageData = imageData else {
             return
         }
-        
+
         // Generate the UUID for the image path
         let imagePath = "profilepostimages/\(UUID().uuidString).jpg"
-        
+
         // Upload the image to BunnyCDN storage
         uploadPictureToBunnyCDNStorage(imageData: imageData, imagePath: imagePath) { photoURL in
             if let photoURL = photoURL {
                 let docRef = currentUser.profileRef.document(userID)
-                
+
                 docRef.getDocument { document, error in
                     if let document = document, document.exists {
                         var data = document.data()!
-                        
+
                         if var posts = data["posts"] as? [[String: String]] {
                             posts.append([photoURL: prompt])
                             data["posts"] = posts
                         } else {
                             data["posts"] = [[photoURL: prompt]]
                         }
-                        
+
                         docRef.setData(data) { error in
                             if let error = error {
-                               return
+                                return
                             } else {
                                 var posts = currentUser.profile.posts
                                 posts.append([photoURL: prompt])
@@ -181,21 +181,19 @@ struct AddPost: View {
     }
 }
 
-
 func uploadPictureToBunnyCDNStorage(imageData: Data, imagePath: String, completion: @escaping (String?) -> Void) {
     let storageZone = "campfireco-storage"
     let apiKey = "c86c082e-9e70-4d6f-82f4658c81a4-91f3-494a"
-        
+
     let urlString = "https://storage.bunnycdn.com/\(storageZone)/\(imagePath)"
     if let url = URL(string: urlString) {
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
         request.addValue(apiKey, forHTTPHeaderField: "AccessKey")
 
-        let task = URLSession.shared.uploadTask(with: request, from: imageData) { data, response, error in
+        let task = URLSession.shared.uploadTask(with: request, from: imageData) { _, response, _ in
             if let response = response as? HTTPURLResponse {
                 if response.statusCode == 201 {
-                   
                     let downloadURL = "https://campfirepullzone.b-cdn.net/\(imagePath)"
                     completion(downloadURL)
                 } else {

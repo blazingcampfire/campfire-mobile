@@ -1,8 +1,5 @@
 
 
-
-
-
 //
 //  MediaPicker.swift
 //  customcam
@@ -10,14 +7,12 @@
 //  Created by Femi Adebogun on 7/21/23.
 //
 
-import SwiftUI
-import PhotosUI
-import ImageIO
-import AVKit
 import AVFoundation
+import AVKit
+import ImageIO
 import MobileCoreServices
-
-
+import PhotosUI
+import SwiftUI
 
 struct MediaPickerView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
@@ -68,7 +63,7 @@ struct MediaPickerView: UIViewControllerRepresentable {
                             self.camera.selectedImageData = adjustedImage.jpegData(compressionQuality: 0.8)
                         }
                     } else if let error = error {
-                       return
+                        return
                     }
                 }
             } else if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
@@ -100,5 +95,3 @@ struct MediaPickerView: UIViewControllerRepresentable {
         }
     }
 }
-
-

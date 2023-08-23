@@ -91,6 +91,7 @@ func formatAddress(_ location: String) -> String {
         "130 Morris Inn, Notre Dame": "Morris Inn",
         "257 Fitzpatrick Hall, Notre Dame": "Cushing/Fitzpatrick Hall of Engineering",
         "19050 Moose Krause N, Notre Dame": "Debartolo Hall/Duncan Student Center",
+        "18991 Moose Krause S, Notre Dame": "Duncan Student Center/Notre Dame Stadium",
         "284 Hesburgh Library, Notre Dame": "Hesburgh Library",
         "19315 Corby Dr, Notre Dame": "Grotto of Our Lady of Lourdes",
         "1 Eck Center, Notre Dame": "Hammes Notre Dame Bookstore",

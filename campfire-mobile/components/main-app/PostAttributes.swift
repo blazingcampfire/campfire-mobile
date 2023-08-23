@@ -5,8 +5,8 @@
 //  Created by Adarsh G on 6/26/23.
 //
 
-import SwiftUI
 import Kingfisher
+import SwiftUI
 
 struct PostAttributes: View {
     var url: String
@@ -14,29 +14,28 @@ struct PostAttributes: View {
     var width: CGFloat? = 350
 
     var body: some View {
-            VStack(spacing: 1) {
-                if let prompt = prompt, prompt != "no prompt" {
-                    Rectangle()
-                        .fill(Theme.Peach)
-                        .frame(width: width, height: 325 / 7)
-                        .overlay(
-                            Text(prompt)
-                                .foregroundColor(.white)
-                                .font(.custom("LexendDeca-Bold", size: 15))
-                        )
-                }
-                
-                Button(action: {
-           
-                }) {
-                    KFImage(URL(string: url))
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: width, height: width)
-                        .clipped()
-                }
+        VStack(spacing: 1) {
+            if let prompt = prompt, prompt != "no prompt" {
+                Rectangle()
+                    .fill(Theme.Peach)
+                    .frame(width: width, height: 325 / 7)
+                    .overlay(
+                        Text(prompt)
+                            .foregroundColor(.white)
+                            .font(.custom("LexendDeca-Bold", size: 15))
+                    )
             }
-            .clipShape(RoundedRectangle(cornerRadius: 30))
+
+            Button(action: {
+            }) {
+                KFImage(URL(string: url))
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: width, height: width)
+                    .clipped()
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 30))
     }
 }
 
@@ -49,5 +48,3 @@ struct PostAttributes_Previews: PreviewProvider {
         }
     }
 }
-
-

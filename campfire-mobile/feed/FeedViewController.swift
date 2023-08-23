@@ -5,11 +5,11 @@
 //  Created by Femi Adebogun on 8/12/23.
 //
 
-import UIKit
-import SwiftUI
+import Combine
 import Firebase
 import FirebaseFirestore
-import Combine
+import SwiftUI
+import UIKit
 
 class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
@@ -17,20 +17,18 @@ class FeedViewController: UIViewController {
     var newFeedModel: NewFeedModel
     var cancellables = Set<AnyCancellable>()
 
-
     init(currentUser: CurrentUserModel) {
-        self.newFeedModel = NewFeedModel(currentUser: currentUser)
+        newFeedModel = NewFeedModel(currentUser: currentUser)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
@@ -41,19 +39,17 @@ class FeedViewController: UIViewController {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
-        
-        
+
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
         collectionView.contentInsetAdjustmentBehavior = .never
-        
+
         view.addSubview(collectionView)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCellIdentifier")
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "VideoCellIdentifier")
-        
- 
+
         newFeedModel.$posts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
@@ -61,14 +57,13 @@ class FeedViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
-    @objc func refreshPosts() {
-           DispatchQueue.main.async { [weak self] in
-               self?.newFeedModel.loadInitialPosts {
-               }
-           }
-       }
 
+    @objc func refreshPosts() {
+        DispatchQueue.main.async { [weak self] in
+            self?.newFeedModel.loadInitialPosts {
+            }
+        }
+    }
 
     func updateCollectionViewLayout() {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
@@ -77,17 +72,14 @@ class FeedViewController: UIViewController {
             layout.invalidateLayout()
         }
     }
-    
-   
-    
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         for cell in collectionView.visibleCells {
             (cell as? VideoCollectionViewCell)?.player?.pause()
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateCollectionViewLayout()
@@ -95,19 +87,16 @@ class FeedViewController: UIViewController {
             (cell as? VideoCollectionViewCell)?.player?.play()
         }
     }
-    
-    
 }
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return newFeedModel.posts.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let postItem = newFeedModel.posts[indexPath.item]
-        
+
         if postItem.postType == "image" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
             cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
@@ -123,41 +112,36 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-           if let videoCell = cell as? VideoCollectionViewCell {
-               if !newFeedModel.pauseVideos {
-                   videoCell.play()
-               }
-           }
-           // Load more posts when the user is close to the end of the current list
-           let threshold = 1 // How many more cells until the end to trigger the load more action
-           if indexPath.item >= (newFeedModel.posts.count - threshold) {
-               if !newFeedModel.reachedEndofData {
-                   newFeedModel.loadMorePosts()
-               }
-           }
-       }
-       
-      func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-          if let videoCell = cell as? VideoCollectionViewCell {
-              videoCell.stop()
-          }
-      }
-}
+        if let videoCell = cell as? VideoCollectionViewCell {
+            if !newFeedModel.pauseVideos {
+                videoCell.play()
+            }
+        }
+        // Load more posts when the user is close to the end of the current list
+        let threshold = 1 // How many more cells until the end to trigger the load more action
+        if indexPath.item >= (newFeedModel.posts.count - threshold) {
+            if !newFeedModel.reachedEndofData {
+                newFeedModel.loadMorePosts()
+            }
+        }
+    }
 
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let videoCell = cell as? VideoCollectionViewCell {
+            videoCell.stop()
+        }
+    }
+}
 
 struct FeedViewControllerWrapper: UIViewControllerRepresentable {
     @EnvironmentObject var currentUser: CurrentUserModel
-    
+
     func makeUIViewController(context: Context) -> FeedViewController {
         return FeedViewController(currentUser: currentUser)
     }
-    
+
     typealias UIViewControllerType = FeedViewController
-    
+
     func updateUIViewController(_ uiViewController: FeedViewController, context: Context) {
     }
-    
 }
-
-
-

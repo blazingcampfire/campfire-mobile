@@ -8,8 +8,7 @@
 import AVKit
 import SwiftUI
 
-
-//This sets up the unique videoplayer that doesn't show the playback features and has ability to handle user interaction
+// This sets up the unique videoplayer that doesn't show the playback features and has ability to handle user interaction
 
 struct CustomVideoPlayer: UIViewControllerRepresentable {
     var player: AVPlayer

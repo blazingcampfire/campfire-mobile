@@ -1,7 +1,5 @@
 
 
-
-
 //
 //  CameraModel.swift
 //  customcam
@@ -9,16 +7,14 @@
 //  Created by Femi Adebogun on 7/19/23.
 //
 
-import SwiftUI
 import AVFoundation
-import UIKit
 import AVKit
 import Combine
 import Photos
+import SwiftUI
+import UIKit
 
-
-class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
-    
+class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AVCaptureFileOutputRecordingDelegate {
     @Published var isTaken = false
     @Published var session = AVCaptureSession()
     @Published var alert = false
@@ -47,35 +43,35 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
     @Published var videoTooLarge: Bool = false
     @Published var videoSizeAlert: Bool = false
     @Published var selectVideoPlayer: AVPlayer? = nil
-    
-    
+
     var timer: AnyCancellable?
     var temporaryPhotoURL: URL?
     private var captureDevice: AVCaptureDevice?
-    
-    //-MARK: Alerts
+
+    // -MARK: Alerts
     enum AlertType: Identifiable {
-         case accessDenied, accessNotDetermined, cameraRollAccessDenied, sessionInterrupted
+        case accessDenied, accessNotDetermined, cameraRollAccessDenied, sessionInterrupted
         var id: Int {
-               switch self {
-               case .accessDenied: return 1
-               case .accessNotDetermined: return 2
-               case .cameraRollAccessDenied: return 3
-               case .sessionInterrupted: return 4
-               }
-           }
-     }
+            switch self {
+            case .accessDenied: return 1
+            case .accessNotDetermined: return 2
+            case .cameraRollAccessDenied: return 3
+            case .sessionInterrupted: return 4
+            }
+        }
+    }
+
     @Published var alertType: AlertType? = nil
-    
-  
-//-MARK: To Deal With Session Interuptions ex: Facetime calls
+
+    // -MARK: To Deal With Session Interuptions ex: Facetime calls
     override init() {
-       super.init()
+        super.init()
         checkCameraPermission()
         NotificationCenter.default.addObserver(self, selector: #selector(sessionWasInterrupted), name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: .AVCaptureSessionInterruptionEnded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleSessionRuntimeError), name: .AVCaptureSessionRuntimeError, object: nil)
     }
+
     @objc func sessionWasInterrupted(notification: NSNotification) {
         DispatchQueue.main.async {
             self.alertType = .sessionInterrupted
@@ -88,34 +84,34 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             if !self.session.isRunning {
                 self.session.startRunning()
             }
-           self.alertType = .sessionInterrupted
+            self.alertType = .sessionInterrupted
         }
     }
-    
+
     @objc func handleSessionRuntimeError(notification: NSNotification) {
         DispatchQueue.main.async {
             self.alertType = .sessionInterrupted
         }
     }
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionWasInterrupted, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionInterruptionEnded, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVCaptureSessionRuntimeError, object: nil)
     }
 
-    
-    //-MARK: Function to Check for Cam Access
+    // -MARK: Function to Check for Cam Access
     @objc func checkCameraPermission() {
-        self.Check()
+        Check()
     }
-   
+
     func Check() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            self.setUp()
+            setUp()
             return
         case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { (status) in
+            AVCaptureDevice.requestAccess(for: .video) { status in
                 if status {
                     self.setUp()
                 } else {
@@ -127,15 +123,13 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         case .denied:
             DispatchQueue.main.async {
                 self.alertType = .accessDenied
-                return
             }
         default:
             return
         }
-    } 
+    }
 
-    
-    //-MARK: Sets up the camera feed/session
+    // -MARK: Sets up the camera feed/session
     func setUp() {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
@@ -145,10 +139,10 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     .builtInDualWideCamera,
                     .builtInUltraWideCamera,
                     .builtInDualCamera,
-                    .builtInWideAngleCamera
+                    .builtInWideAngleCamera,
                 ]
                 if let device = cameraTypes.compactMap({ AVCaptureDevice.default($0, for: .video, position: .back) })
-                                           .first(where: { $0.hasTorch }) {
+                    .first(where: { $0.hasTorch }) {
                     let input = try AVCaptureDeviceInput(device: device)
                     if self.session.canAddInput(input) {
                         self.session.addInput(input)
@@ -169,10 +163,9 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     self.session.addInput(audioInput)
                 }
 
-
                 self.session.commitConfiguration()
-                
-                self.session.startRunning()  // It's crucial to startRunning() on a background thread to prevent blocking the UI.
+
+                self.session.startRunning() // It's crucial to startRunning() on a background thread to prevent blocking the UI.
 
                 DispatchQueue.main.async {
                     self.isSetup = true
@@ -185,8 +178,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             }
         }
     }
-  
-    
+
     @objc func handleAudioSessionInterruption(notification: NSNotification) {
         guard let info = notification.userInfo,
               let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
@@ -214,34 +206,32 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             break
         }
     }
-    
-    //-MARK: Camera Button Actions
+
+    // -MARK: Camera Button Actions
     func rotateCamera() {
         DispatchQueue.main.async {
             if let input = self.session.inputs.first as? AVCaptureDeviceInput {
                 let newCameraDevice = input.device.position == .back ? self.frontCameraDevice : self.backCameraDevice
                 self.session.beginConfiguration()
                 self.session.removeInput(input)
-                
+
                 if let newDevice = newCameraDevice, let newInput = try? AVCaptureDeviceInput(device: newDevice), self.session.canAddInput(newInput) {
                     self.session.addInput(newInput)
                 }
-                
+
                 self.session.commitConfiguration()
-                
             }
         }
     }
 
-    
     private var frontCameraDevice: AVCaptureDevice? {
         return cameras(with: .front).first
     }
-    
+
     private var backCameraDevice: AVCaptureDevice? {
         return cameras(with: .back).first
     }
-    
+
     private func cameras(with position: AVCaptureDevice.Position) -> [AVCaptureDevice] {
         let discoverySession = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.builtInUltraWideCamera, .builtInWideAngleCamera, .builtInDualCamera],
@@ -250,11 +240,10 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         )
         return discoverySession.devices.filter { $0.position == position }
     }
-    
+
     func toggleFlash() {
-               isFlashOn.toggle()
-           }
-    
+        isFlashOn.toggle()
+    }
 
     func takePic() {
         DispatchQueue.global(qos: .userInitiated).async {
@@ -273,132 +262,126 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         }
     }
 
-
     func fixImageOrientation(for image: UIImage) -> UIImage {
-                guard let cgImage = image.cgImage else { return image }
+        guard let cgImage = image.cgImage else { return image }
 
-                if image.imageOrientation == .up { return image }
+        if image.imageOrientation == .up { return image }
 
-                var transform = CGAffineTransform.identity
-                switch image.imageOrientation {
-                case .down, .downMirrored:
-                    transform = transform.translatedBy(x: image.size.width, y: image.size.height)
-                    transform = transform.rotated(by: CGFloat.pi)
-                case .left, .leftMirrored:
-                    transform = transform.translatedBy(x: image.size.width, y: 0)
-                    transform = transform.rotated(by: CGFloat.pi / 2)
-                case .right, .rightMirrored:
-                    transform = transform.translatedBy(x: 0, y: image.size.height)
-                    transform = transform.rotated(by: -CGFloat.pi / 2)
-                default:
-                    break
-                }
+        var transform = CGAffineTransform.identity
+        switch image.imageOrientation {
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: image.size.height)
+            transform = transform.rotated(by: CGFloat.pi)
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: 0)
+            transform = transform.rotated(by: CGFloat.pi / 2)
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: image.size.height)
+            transform = transform.rotated(by: -CGFloat.pi / 2)
+        default:
+            break
+        }
 
-                switch image.imageOrientation {
-                case .upMirrored, .downMirrored:
-                    transform = transform.translatedBy(x: image.size.width, y: 0)
-                    transform = transform.scaledBy(x: -1, y: 1)
-                case .leftMirrored, .rightMirrored:
-                    transform = transform.translatedBy(x: image.size.height, y: 0)
-                    transform = transform.scaledBy(x: -1, y: 1)
-                default:
-                    break
-                }
+        switch image.imageOrientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: image.size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        default:
+            break
+        }
 
-                guard let colorSpace = cgImage.colorSpace,
-                      let ctx = CGContext(data: nil, width: Int(image.size.width), height: Int(image.size.height),
-                                          bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0,
-                                          space: colorSpace, bitmapInfo: cgImage.bitmapInfo.rawValue) else {
-                    return image
-                }
+        guard let colorSpace = cgImage.colorSpace,
+              let ctx = CGContext(data: nil, width: Int(image.size.width), height: Int(image.size.height),
+                                  bitsPerComponent: cgImage.bitsPerComponent, bytesPerRow: 0,
+                                  space: colorSpace, bitmapInfo: cgImage.bitmapInfo.rawValue) else {
+            return image
+        }
 
-                ctx.concatenate(transform)
+        ctx.concatenate(transform)
 
-                switch image.imageOrientation {
-                case .left, .leftMirrored, .right, .rightMirrored:
-                    ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width))
-                default:
-                    ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
-                }
+        switch image.imageOrientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width))
+        default:
+            ctx.draw(cgImage, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        }
 
-                guard let newCGImage = ctx.makeImage() else { return image }
-                return UIImage(cgImage: newCGImage)
-            }
-    
-
+        guard let newCGImage = ctx.makeImage() else { return image }
+        return UIImage(cgImage: newCGImage)
+    }
 
     func reTake() {
-            // Perform the session start operation on a background queue
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.session.startRunning()
-                
-                guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
-                    return
-                }
-                self.setTorchModeOff(device: device.device)
-                // Perform UI updates on the main queue
-                DispatchQueue.main.async {
-                    withAnimation {
-                        self.isSaved = false
-                        self.isTaken = false
-                        self.isVideoRecorded = false
-                        self.picData = Data(count: 0)
-                        self.videoPlayback = nil
-                        self.progress = 0 // Reset progress
-                        self.selectedImageData = nil
-                        self.selectedVideoURL = nil
-                        self.capturedPic = nil
-                        self.showSelectPhoto = false
-                        self.showSelectVideo = false
-                        self.videoTooLarge = false
-                        self.videoSizeAlert = false
-                        self.isFlashOn = false
-                        self.selectVideoPlayer = nil
-                    }
+        // Perform the session start operation on a background queue
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.session.startRunning()
+
+            guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
+                return
+            }
+            self.setTorchModeOff(device: device.device)
+            // Perform UI updates on the main queue
+            DispatchQueue.main.async {
+                withAnimation {
+                    self.isSaved = false
+                    self.isTaken = false
+                    self.isVideoRecorded = false
+                    self.picData = Data(count: 0)
+                    self.videoPlayback = nil
+                    self.progress = 0 // Reset progress
+                    self.selectedImageData = nil
+                    self.selectedVideoURL = nil
+                    self.capturedPic = nil
+                    self.showSelectPhoto = false
+                    self.showSelectVideo = false
+                    self.videoTooLarge = false
+                    self.videoSizeAlert = false
+                    self.isFlashOn = false
+                    self.selectVideoPlayer = nil
                 }
             }
         }
-    
-   
-    
+    }
+
     func startRecording() {
         let maxDuration = CMTimeMakeWithSeconds(15, preferredTimescale: 30) // Max duration = 15 seconds
-        self.movieOutput.maxRecordedDuration = maxDuration
-        
+        movieOutput.maxRecordedDuration = maxDuration
+
         // Get the camera device and check if it supports video recording.
-        guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
+        guard let device = session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
             return
         }
-            if device.device.isSmoothAutoFocusSupported {
-                do {
-                    try device.device.lockForConfiguration()
-                    device.device.isSmoothAutoFocusEnabled = false
-                    setTorchModeOn(device: device.device)
-                    device.device.unlockForConfiguration()  // Unlock the configuration
-                } catch {
-                    return
-                }
+        if device.device.isSmoothAutoFocusSupported {
+            do {
+                try device.device.lockForConfiguration()
+                device.device.isSmoothAutoFocusEnabled = false
+                setTorchModeOn(device: device.device)
+                device.device.unlockForConfiguration() // Unlock the configuration
+            } catch {
+                return
             }
-  
-
-        guard let connection = self.output.connection(with: .video) else { return }
-        
-        if connection.isVideoOrientationSupported {
-            connection.videoOrientation = .portrait  // or whatever orientation you want to support
         }
-        
+
+        guard let connection = output.connection(with: .video) else { return }
+
+        if connection.isVideoOrientationSupported {
+            connection.videoOrientation = .portrait // or whatever orientation you want to support
+        }
+
         let outputDirectory = FileManager.default.temporaryDirectory
         let outputURL = outputDirectory.appendingPathComponent(UUID().uuidString).appendingPathExtension("mov")
-        
-        self.movieOutput.startRecording(to: outputURL, recordingDelegate: self)
-        
+
+        movieOutput.startRecording(to: outputURL, recordingDelegate: self)
+
         DispatchQueue.main.async {
             self.progress = 0
         }
-        
-        self.timer = Timer.publish(every: 0.05, on: .main, in: .common)
+
+        timer = Timer.publish(every: 0.05, on: .main, in: .common)
             .autoconnect()
-            .sink { _  in
+            .sink { _ in
                 DispatchQueue.main.async {
                     self.progress += 0.05 / 15 // Increase progress for every fraction of the time
                     if self.progress >= 1.0 {
@@ -410,39 +393,38 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                 }
             }
     }
-    
+
     func setTorchModeOn(device: AVCaptureDevice) {
-            do {
-                try device.lockForConfiguration()
-                
-                if device.hasTorch {
-                    device.torchMode = isFlashOn ? .on : .off
-                }
-                device.unlockForConfiguration()
-                
-            } catch {
-                return
-            }
-        }
-    
-    func setTorchModeOff(device: AVCaptureDevice) {
         do {
             try device.lockForConfiguration()
-            
+
             if device.hasTorch {
-                device.torchMode = .off
-            } else {
-                return
+                device.torchMode = isFlashOn ? .on : .off
             }
-            
             device.unlockForConfiguration()
-            
+
         } catch {
             return
         }
     }
 
-    
+    func setTorchModeOff(device: AVCaptureDevice) {
+        do {
+            try device.lockForConfiguration()
+
+            if device.hasTorch {
+                device.torchMode = .off
+            } else {
+                return
+            }
+
+            device.unlockForConfiguration()
+
+        } catch {
+            return
+        }
+    }
+
     func stopRecording() {
         DispatchQueue.main.async {
             self.movieOutput.stopRecording()
@@ -450,26 +432,23 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             self.timer = nil
         }
     }
-    
-    //-MARK: Deals with the photo output and saving
+
+    // -MARK: Deals with the photo output and saving
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-            if let error = error {
-                return
-            } else if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
-                // Here's the captured photo. You can do something with it now,
-                // like save it to your photo library or display it in your UI.
-                DispatchQueue.main.async {
-                    // Update your UI here with the captured image.
-                    let orientImage = self.fixImageOrientation(for: image)
-                    self.capturedPic = orientImage
-                }
+        if let error = error {
+            return
+        } else if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
+            // Here's the captured photo. You can do something with it now,
+            // like save it to your photo library or display it in your UI.
+            DispatchQueue.main.async {
+                // Update your UI here with the captured image.
+                let orientImage = self.fixImageOrientation(for: image)
+                self.capturedPic = orientImage
             }
         }
+    }
 
-
-    
     func savePic() {
-
         PHPhotoLibrary.requestAuthorization { status in
             DispatchQueue.main.async {
                 switch status {
@@ -481,31 +460,31 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     }
                 case .denied:
                     self.alertType = .cameraRollAccessDenied
-                    
+
                 case .restricted:
                     break
                 case .notDetermined:
                     self.alertType = .accessNotDetermined
                 case .limited:
                     // Handle limited access (optional)
-                   break
+                    break
                 @unknown default:
                     break
                 }
             }
         }
     }
+
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-           return
+            return
         } else {
-            self.isSaved = true
+            isSaved = true
         }
     }
 
-
     func saveVideo() {
-        guard let videoURL = self.videoPlayback?.currentItem?.asset as? AVURLAsset else {
+        guard let videoURL = videoPlayback?.currentItem?.asset as? AVURLAsset else {
             return
         }
 
@@ -517,9 +496,9 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                         if let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoURL.url) {
                             request.creationDate = Date()
                         } else {
-                           return
+                            return
                         }
-                    } completionHandler: { success, error in
+                    } completionHandler: { success, _ in
                         DispatchQueue.main.async {
                             if success {
                                 self.isSaved = true
@@ -530,7 +509,7 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     self.alertType = .cameraRollAccessDenied
                     break
                 case .restricted:
-                   break
+                    break
                 case .notDetermined:
                     self.alertType = .accessNotDetermined
                 case .limited:
@@ -543,28 +522,23 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
         }
     }
 
-    
-    
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         DispatchQueue.main.async {
             self.videoPlayback = AVPlayer(url: outputFileURL)
             self.isVideoRecorded = true
         }
-        
-        
+
         if let error = error {
             return
         }
     }
-    
-    
-    
+
     func focus(at devicePoint: CGPoint) {
         let cameraTypes: [AVCaptureDevice.DeviceType] = [
             .builtInDualWideCamera,
             .builtInUltraWideCamera,
             .builtInDualCamera,
-            .builtInWideAngleCamera
+            .builtInWideAngleCamera,
         ]
 
         let device = cameraTypes.compactMap {
@@ -588,56 +562,52 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
             device.exposureMode = .continuousAutoExposure
 
             device.unlockForConfiguration()
-        }
-        catch {
+        } catch {
             return
         }
     }
-
 }
 
-//-MARK: The View After Photo or Video Taken
+// -MARK: The View After Photo or Video Taken
 struct CameraPreview: UIViewRepresentable {
     @ObservedObject var camera: CameraModel
-    
+
     func makeUIView(context: Context) -> UIView {
         let view = UIView(frame: UIScreen.main.bounds)
-        
+
         let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleDoubleTap(_:)))
         doubleTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(doubleTap)
-        
+
         let pinch = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePinch(_:)))
         view.addGestureRecognizer(pinch)
-        
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap))
-            view.addGestureRecognizer(tapGestureRecognizer)
-        
+        view.addGestureRecognizer(tapGestureRecognizer)
+
         let panGestureRecognizer = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handlePan(_:)))
         view.addGestureRecognizer(panGestureRecognizer)
 
-        
         return view
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(camera)
     }
-    
 
     func updateUIView(_ uiView: UIView, context: Context) {
-          uiView.layer.sublayers?
-              .filter { $0 is AVCaptureVideoPreviewLayer }
-              .forEach { $0.removeFromSuperlayer() }
-          
-          if camera.isSetup {
-              guard let preview = camera.preview else { return }
-              preview.frame = uiView.bounds
-              preview.videoGravity = .resizeAspectFill
-              uiView.layer.addSublayer(preview)
-          }
-      }
-    
+        uiView.layer.sublayers?
+            .filter { $0 is AVCaptureVideoPreviewLayer }
+            .forEach { $0.removeFromSuperlayer() }
+
+        if camera.isSetup {
+            guard let preview = camera.preview else { return }
+            preview.frame = uiView.bounds
+            preview.videoGravity = .resizeAspectFill
+            uiView.layer.addSublayer(preview)
+        }
+    }
+
     class Coordinator: NSObject {
         var camera: CameraModel
 
@@ -646,56 +616,58 @@ struct CameraPreview: UIViewRepresentable {
         }
 
         @objc func handlePinch(_ sender: UIPinchGestureRecognizer) {
-            guard let device = (self.camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
+            guard let device = (camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
                 return
             }
-                    if sender.state == .changed {
-                        let maxZoomFactor = device.activeFormat.videoMaxZoomFactor
-                        let pinchVelocityDividerFactor: CGFloat = 20.0
+            if sender.state == .changed {
+                let maxZoomFactor = device.activeFormat.videoMaxZoomFactor
+                let pinchVelocityDividerFactor: CGFloat = 20.0
 
-                        do {
-                            try device.lockForConfiguration()
-                            defer { device.unlockForConfiguration() }
+                do {
+                    try device.lockForConfiguration()
+                    defer { device.unlockForConfiguration() }
 
-                            let desiredZoomFactor = device.videoZoomFactor + atan2(sender.velocity, pinchVelocityDividerFactor)
-                            if desiredZoomFactor >= device.minAvailableVideoZoomFactor && desiredZoomFactor <= maxZoomFactor {
-                                device.videoZoomFactor = desiredZoomFactor
-                            }
-                        } catch {
-                            return
-                        }
+                    let desiredZoomFactor = device.videoZoomFactor + atan2(sender.velocity, pinchVelocityDividerFactor)
+                    if desiredZoomFactor >= device.minAvailableVideoZoomFactor && desiredZoomFactor <= maxZoomFactor {
+                        device.videoZoomFactor = desiredZoomFactor
                     }
+                } catch {
+                    return
                 }
-        
+            }
+        }
+
         @objc func handlePan(_ sender: UIPanGestureRecognizer) {
-                    if sender.state == .changed {
-                        let velocity = sender.velocity(in: sender.view)
-                        // only take action on vertical movement
-                        if abs(velocity.y) > abs(velocity.x) {
-                            adjustZoom(for: velocity.y)
-                        }
-                    }
+            if sender.state == .changed {
+                let velocity = sender.velocity(in: sender.view)
+                // only take action on vertical movement
+                if abs(velocity.y) > abs(velocity.x) {
+                    adjustZoom(for: velocity.y)
                 }
-                func adjustZoom(for velocity: CGFloat) {
-                     guard let device = (self.camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
-                         return
-                     }
-                     do {
-                         try device.lockForConfiguration()
-                         defer { device.unlockForConfiguration() }
-                         // velocity is inverted so downswipe increases the zoom
-                         let zoomFactor = min(max(1.0, device.videoZoomFactor - velocity / 2000.0), device.activeFormat.videoMaxZoomFactor)
-                         device.videoZoomFactor = zoomFactor
-                     } catch {
-                         return
-                     }
-                 }
+            }
+        }
+
+        func adjustZoom(for velocity: CGFloat) {
+            guard let device = (camera.session.inputs.compactMap { $0 as? AVCaptureDeviceInput }.first(where: { $0.device.hasMediaType(.video) }))?.device else {
+                return
+            }
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                // velocity is inverted so downswipe increases the zoom
+                let zoomFactor = min(max(1.0, device.videoZoomFactor - velocity / 2000.0), device.activeFormat.videoMaxZoomFactor)
+                device.videoZoomFactor = zoomFactor
+            } catch {
+                return
+            }
+        }
 
         @objc func handleDoubleTap(_ sender: UITapGestureRecognizer) {
             if sender.state == .ended {
-                self.camera.rotateCamera()
+                camera.rotateCamera()
             }
         }
+
         @objc func handleTap(tapGestureRecognizer: UITapGestureRecognizer) {
             // Normalize the tapped location to coordinate system of 1x1.
             let locationInView = tapGestureRecognizer.location(in: tapGestureRecognizer.view)
@@ -706,6 +678,3 @@ struct CameraPreview: UIViewRepresentable {
         }
     }
 }
-
-
-

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
-		B140BA592A60F39400819203 /* SwiftUICam in Frameworks */ = {isa = PBXBuildFile; productRef = B140BA582A60F39400819203 /* SwiftUICam */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
 		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
@@ -87,7 +86,6 @@
 		B1F6B5412A5F74140037D857 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F6B5402A5F74140037D857 /* GoogleViewController.swift */; };
 		B1FCB34B2A5A4801002241C5 /* CommentsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FCB34A2A5A4801002241C5 /* CommentsPage.swift */; };
 		B1FEE7A22A8AE82300C4D39F /* IndividualPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */; };
-		B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */; };
 		B1FEE7A92A8B3CC500C4D39F /* IndividualCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */; };
 		E2163E492A660AA8005A20BE /* collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E482A660AA8005A20BE /* collections.swift */; };
 		E2163E4C2A6633D2005A20BE /* globalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2163E4B2A6633D2005A20BE /* globalFunctions.swift */; };
@@ -171,7 +169,6 @@
 		F8C7910C2A4E7EFF00FF21A6 /* FileTypeFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C7910B2A4E7EFF00FF21A6 /* FileTypeFunc.swift */; };
 		F8EC24202A5C89AD0010D46E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EC241F2A5C89AD0010D46E /* ImagePicker.swift */; };
 		F8FE7B5D2A6B8E91004B41A5 /* OtherProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE7B5C2A6B8E91004B41A5 /* OtherProfilePage.swift */; };
-		F8FE7B622A6B998C004B41A5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */; };
 		F8FE7B642A6B9D55004B41A5 /* icons8-fire.gif in Resources */ = {isa = PBXBuildFile; fileRef = F8FE7B632A6B9D55004B41A5 /* icons8-fire.gif */; };
 		F8FE7B662A6BA09F004B41A5 /* AddPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE7B652A6BA09F004B41A5 /* AddPost.swift */; };
 /* End PBXBuildFile section */
@@ -351,14 +348,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8FE7B622A6B998C004B41A5 /* SDWebImageSwiftUI in Frameworks */,
 				E272A0192A5BA36B008D2D78 /* FirebaseAnalytics in Frameworks */,
 				E272A01B2A5BA36B008D2D78 /* FirebaseAuth in Frameworks */,
-				B140BA592A60F39400819203 /* SwiftUICam in Frameworks */,
 				E272A0232A5BA36B008D2D78 /* FirebaseMessaging in Frameworks */,
 				F881D5162A7A1E1200E6E663 /* CropViewController in Frameworks */,
 				E272A01D2A5BA36B008D2D78 /* FirebaseDatabase in Frameworks */,
-				B1FEE7A52A8B164F00C4D39F /* SwiftUIPager in Frameworks */,
 				E272A0212A5BA36B008D2D78 /* FirebaseFunctions in Frameworks */,
 				B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
@@ -824,14 +818,11 @@
 				E272A0262A5BA36B008D2D78 /* FirebaseStorageCombine-Community */,
 				E2BDE6AA2A5E38770012D328 /* GoogleSignIn */,
 				E2BDE6AC2A5E38770012D328 /* GoogleSignInSwift */,
-				B140BA582A60F39400819203 /* SwiftUICam */,
 				F891B3592A6907A000BDA845 /* FirebaseFirestoreSwift */,
-				F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */,
 				B1EA23B92A74E0790021F0D1 /* Kingfisher */,
 				F881D5152A7A1E1200E6E663 /* CropViewController */,
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
-				B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */,
 				B1C6885B2A8FF8430049102D /* InterposeKit */,
 			);
 			productName = "campfire-mobile";
@@ -910,12 +901,9 @@
 				E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */,
-				F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
-				B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 				B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
@@ -1466,14 +1454,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pierreveron/SwiftUICam";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/steipete/InterposeKit.git";
@@ -1488,14 +1468,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.0.0;
-			};
-		};
-		B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
 			};
 		};
 		E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -1538,22 +1510,9 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B140BA582A60F39400819203 /* SwiftUICam */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B140BA572A60F39400819203 /* XCRemoteSwiftPackageReference "SwiftUICam" */;
-			productName = SwiftUICam;
-		};
 		B1C6885B2A8FF8430049102D /* InterposeKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */;
@@ -1563,11 +1522,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		B1FEE7A42A8B164F00C4D39F /* SwiftUIPager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B1FEE7A32A8B164F00C4D39F /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
-			productName = SwiftUIPager;
 		};
 		E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1643,11 +1597,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
-		};
-		F8FE7B612A6B998C004B41A5 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F8FE7B602A6B998B004B41A5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -154,24 +154,6 @@
       }
     },
     {
-      "identity" : "sdwebimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
-      "state" : {
-        "revision" : "633996a807442ec28df9d33b0f88ce57a0e2fdbf",
-        "version" : "5.17.0"
-      }
-    },
-    {
-      "identity" : "sdwebimageswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
-      "state" : {
-        "revision" : "e837c37d45449fbd3b4745c10c5b5274e73edead",
-        "version" : "2.2.3"
-      }
-    },
-    {
       "identity" : "slidingtabview",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/QuynhNguyen/SlidingTabView.git",
@@ -187,24 +169,6 @@
       "state" : {
         "revision" : "ce20dc083ee485524b802669890291c0d8090170",
         "version" : "1.22.1"
-      }
-    },
-    {
-      "identity" : "swiftuicam",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pierreveron/SwiftUICam",
-      "state" : {
-        "branch" : "master",
-        "revision" : "6e85adae49b26d734bf3810b6d237d2688cc976a"
-      }
-    },
-    {
-      "identity" : "swiftuipager",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/fermoya/SwiftUIPager.git",
-      "state" : {
-        "revision" : "4ddc04c801aac143090bb14cf26603a3bf9c74cb",
-        "version" : "2.5.0"
       }
     },
     {

@@ -73,6 +73,18 @@ func formatNumber(_ number: Int) -> String {
 
 
 func formatAddress(_ location: String, school: String) -> String {
+    var univ = school
+    switch school {
+    case "rice":
+        univ = "Rice"
+    case "yale":
+        univ = "Yale"
+    case "nd":
+        univ = "Notre Dame"
+    default:
+        univ = school
+    }
+    
     let locationAddresses = [
         "7 Andrews View Ct, Windsor Mill": "david house",
         "37 High St, New Haven": "Sig Nu House Yale",
@@ -142,7 +154,7 @@ func formatAddress(_ location: String, school: String) -> String {
     if let place = locationAddresses[location] {
         return ("\(place)" + "📍")
     } else {
-        let location = ("\(school)" + " campfire 📍")
+        let location = ("\(univ)" + " Campfire 📍")
         return location
     }
 }

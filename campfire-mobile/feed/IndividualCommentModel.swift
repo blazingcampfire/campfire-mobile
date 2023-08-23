@@ -89,9 +89,7 @@ class IndividualComment: ObservableObject {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentItem.id)
         docRef.updateData(["usersWhoLiked": commentItem.usersWhoLiked]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success updating comment usersWhoLiked array")
+                return
             }
         }
     }
@@ -175,9 +173,7 @@ class IndividualReply: ObservableObject {
         let docRef = currentUser.postsRef.document(postId).collection("comments").document(commentId).collection("replies").document(replyItem.id)
         docRef.updateData(["usersWhoLiked": replyItem.usersWhoLiked]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success updating reply usersWhoLiked array")
+               return
             }
         }
     }

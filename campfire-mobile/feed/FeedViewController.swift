@@ -65,7 +65,6 @@ class FeedViewController: UIViewController {
     @objc func refreshPosts() {
            DispatchQueue.main.async { [weak self] in
                self?.newFeedModel.loadInitialPosts {
-                   print("refreshed posts")
                }
            }
        }

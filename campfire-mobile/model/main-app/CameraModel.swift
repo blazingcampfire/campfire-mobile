@@ -332,7 +332,6 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                 self.session.startRunning()
                 
                 guard let device = self.session.inputs.first(where: { $0 is AVCaptureDeviceInput }) as? AVCaptureDeviceInput else {
-                    print("Could not find a suitable input device for turning off torch")
                     return
                 }
                 self.setTorchModeOff(device: device.device)
@@ -482,14 +481,14 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     self.alertType = .cameraRollAccessDenied
                     
                 case .restricted:
-                    print("Couldn't save photo: Photo Library access restricted")
+                    break
                 case .notDetermined:
                     self.alertType = .accessNotDetermined
                 case .limited:
                     // Handle limited access (optional)
-                    print("Limited access to Photo Library")
+                   break
                 @unknown default:
-                    print("Unknown authorization status: \(status.rawValue)")
+                    break
                 }
             }
         }
@@ -527,16 +526,16 @@ class CameraModel: NSObject,ObservableObject, AVCapturePhotoCaptureDelegate, AVC
                     }
                 case .denied:
                     self.alertType = .cameraRollAccessDenied
-                    print("denied access")
+                    break
                 case .restricted:
-                    print("Couldn't save video: Photo Library access restricted")
+                   break
                 case .notDetermined:
                     self.alertType = .accessNotDetermined
                 case .limited:
                     // Handle limited access (optional)
-                    print("Limited access to Photo Library")
+                    break
                 @unknown default:
-                    print("Unknown authorization status: \(status.rawValue)")
+                    break
                 }
             }
         }

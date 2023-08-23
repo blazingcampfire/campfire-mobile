@@ -116,6 +116,7 @@ struct CameraView: View {
                     }
                     
                     PreviewPostInfo(postModel: post)
+                    .toolbar(.hidden, for: .tabBar)
                 if !camera.videoTooLarge && !camera.videoSizeAlert {
                         VideoPostButton(camera: camera, makePost: post)
                     }
@@ -217,6 +218,9 @@ struct CameraView: View {
             }
 
         }
+        .onTapGesture {
+            UIApplication.shared.dismissKeyboard()
+        }
         .alert(item: $camera.alertType) { alertType in
             switch alertType {
             case .accessDenied:
@@ -257,9 +261,6 @@ struct CameraView: View {
         }
         .alert(isPresented: $camera.videoTooLarge) {
             Alert(title: Text("Video File Too Large"), message: Text("Consider Cropping Video"), dismissButton: .default(Text("OK")))
-        }
-        .onTapGesture {
-            UIApplication.shared.dismissKeyboard()
         }
     }
     var tapGesture: some Gesture {

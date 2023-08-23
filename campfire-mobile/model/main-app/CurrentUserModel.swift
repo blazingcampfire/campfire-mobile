@@ -33,19 +33,15 @@ class CurrentUserModel: ObservableObject {
     }
     
     func authStateDidChange() {
-        print("change")
         Auth.auth().addStateDidChangeListener { _, user in
             if ((user?.email) != nil) && ((user?.phoneNumber) != nil) {
-                print("user is signed in")
                 self.signedIn = true
                 // User is signed in. Show home screen
             } else {
-                print("user is not signed in")
                 self.signedIn = false
                 // No User is signed in. Show user the login screen
             }
         }
-        print(self.signedIn)
     }
     
     func signOut() throws {

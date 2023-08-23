@@ -103,9 +103,7 @@ class IndividualPost: ObservableObject {
     let docRef = currentUser.postsRef.document(postItem.id)
         docRef.updateData(["usersWhoLiked": postItem.usersWhoLiked]) { error in
             if let error = error {
-                print("Error updating document \(error)")
-            } else {
-                print("Success updating usersWhoLiked array")
+              return
             }
         }
     }

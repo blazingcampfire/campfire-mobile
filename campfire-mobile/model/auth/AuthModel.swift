@@ -162,7 +162,6 @@ extension AuthModel {
                 PhoneAuthProvider.provider()
                   .verifyPhoneNumber("+1\(phoneNumber)", uiDelegate: nil) { verificationID, error in
                       if let error = error {
-                          print("\(error)")
                           return
                       }
                       UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
@@ -217,7 +216,6 @@ extension AuthModel {
                     }
                 }
                 self.validVerificationCode = true
-                print(self.validVerificationCode)
             } catch {
                 await handleError(error: error, message: "Unknown error trying to authenticate with this phone number. Please try again.")
                 return

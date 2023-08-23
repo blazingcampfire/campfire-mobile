@@ -162,7 +162,7 @@ struct OtherProfilePage: View {
                                     .stroke(Theme.ScreenColor, lineWidth: 0.3)
                                     .frame(height: 200)
                                 Text("profile does not exist")
-                                    .font(.custom("LexendDeca-SemiBold", size: 35))
+                                    .font(.custom("LexendDeca-SemiBold", size: 20))
                                     .foregroundColor(Theme.TextColor)
                                     .multilineTextAlignment(.center)
                             }

@@ -32,10 +32,6 @@ struct OtherFriendsPage: View {
                             }
                             Spacer()
                             VStack {
-                                Image(systemName: "person.fill.badge.plus")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(Theme.Peach)
-                                    .padding(.bottom, 30)
                                 
                                 Text("no friends yet!")
                                     .font(.custom("LexendDeca-Bold", size: 15))

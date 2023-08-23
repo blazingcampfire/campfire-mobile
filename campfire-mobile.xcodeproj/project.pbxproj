@@ -109,7 +109,6 @@
 		E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E272A0242A5BA36B008D2D78 /* FirebaseStorage */; };
 		E272A0272A5BA36B008D2D78 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = E272A0262A5BA36B008D2D78 /* FirebaseStorageCombine-Community */; };
 		E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280A9E22A4FCF5D00410B34 /* Notification.swift */; };
-		E280A9E82A4FDEA500410B34 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = E280A9E72A4FDEA500410B34 /* SlidingTabView */; };
 		E28D3A5A2A3E4C1000B1EEE9 /* LaunchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A592A3E4C1000B1EEE9 /* LaunchScreen.swift */; };
 		E28D3A5C2A3E917900B1EEE9 /* AccountSetUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A5B2A3E917900B1EEE9 /* AccountSetUp.swift */; };
 		E28D3A652A3EB52400B1EEE9 /* colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D3A642A3EB52400B1EEE9 /* colors.swift */; };
@@ -363,7 +362,6 @@
 				E272A0252A5BA36B008D2D78 /* FirebaseStorage in Frameworks */,
 				E272A01F2A5BA36B008D2D78 /* FirebaseFirestore in Frameworks */,
 				E272A0272A5BA36B008D2D78 /* FirebaseStorageCombine-Community in Frameworks */,
-				E280A9E82A4FDEA500410B34 /* SlidingTabView in Frameworks */,
 				E2BDE6AD2A5E38770012D328 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -807,7 +805,6 @@
 			);
 			name = "campfire-mobile";
 			packageProductDependencies = (
-				E280A9E72A4FDEA500410B34 /* SlidingTabView */,
 				E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */,
 				E272A01A2A5BA36B008D2D78 /* FirebaseAuth */,
 				E272A01C2A5BA36B008D2D78 /* FirebaseDatabase */,
@@ -898,7 +895,6 @@
 			);
 			mainGroup = E29095CE2A3E473E001BEDDE;
 			packageReferences = (
-				E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
 				E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				E2BDE6A92A5E38770012D328 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B1EA23B82A74E0790021F0D1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
@@ -1478,14 +1474,6 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField.git";
@@ -1562,11 +1550,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E272A0172A5BA36B008D2D78 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
-		};
-		E280A9E72A4FDEA500410B34 /* SlidingTabView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E280A9E62A4FDEA500410B34 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
-			productName = SlidingTabView;
 		};
 		E2B248D12A800BD40004A757 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;

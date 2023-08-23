@@ -53,7 +53,7 @@ struct ReplyView: View {
                                 Image(systemName: "ellipsis.circle.fill")
                                     .resizable()
                                     .frame(width: 15, height: 15)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Theme.TextColor)
                             }
                         }
                     }

@@ -9,6 +9,7 @@ import FirebaseCore
 import FirebaseFirestore
 import Foundation
 
+let db = Firestore.firestore()
 // MARK: - Schools (Document)
 
 let notreDame = db.collection("users").document("notreDame")

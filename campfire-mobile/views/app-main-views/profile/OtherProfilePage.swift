@@ -161,8 +161,8 @@ struct OtherProfilePage: View {
                                 RoundedRectangle(cornerRadius: 30)
                                     .stroke(Theme.ScreenColor, lineWidth: 0.3)
                                     .frame(height: 200)
-                                Text("profile does not exist")
-                                    .font(.custom("LexendDeca-SemiBold", size: 20))
+                                Text("profile does not exist!")
+                                    .font(.custom("LexendDeca-SemiBold", size: 15))
                                     .foregroundColor(Theme.TextColor)
                                     .multilineTextAlignment(.center)
                             }

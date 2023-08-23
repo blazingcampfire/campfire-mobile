@@ -24,6 +24,7 @@ struct ContentView: View {
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)
+                .environmentObject(authModel)
         }
         else {
             AccountSetUp()

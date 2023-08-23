@@ -15,6 +15,7 @@ class CurrentUserModel: ObservableObject {
     @Published var privateUserData: PrivateUser
     @Published var profile: Profile
     @Published var signedIn: Bool = false
+    @Published var showNavBar: Bool = true
 
     var userRef: CollectionReference
     var profileRef: CollectionReference
@@ -32,15 +33,24 @@ class CurrentUserModel: ObservableObject {
     }
     
     func authStateDidChange() {
+        print("change")
         Auth.auth().addStateDidChangeListener { _, user in
             if ((user?.email) != nil) && ((user?.phoneNumber) != nil) {
+                print("user is signed in")
                 self.signedIn = true
                 // User is signed in. Show home screen
             } else {
+                print("user is not signed in")
                 self.signedIn = false
                 // No User is signed in. Show user the login screen
             }
         }
+        print(self.signedIn)
+    }
+    
+    func signOut() throws {
+        try AuthenticationManager.shared.signOut()
+        self.authStateDidChange()
     }
         
     func checkProfile(email: String) async throws -> Bool {
@@ -151,5 +161,3 @@ class CurrentUserModel: ObservableObject {
         }
     }
 }
-
-

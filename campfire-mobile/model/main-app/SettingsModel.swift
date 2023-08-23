@@ -9,19 +9,14 @@ import Foundation
 import FirebaseAuth
 import UIKit
 
-@MainActor
 class SettingsModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var notificationsManager: NotificationsManager
     @Published var signedOut: Bool = false
     @Published var deleteErrorAlert: Bool = false
-    @Published var notificationsOn: Bool {
-        didSet {
-            Task {
-                await setNotificationsStatus()
-            }
-        }
-    }
+    @Published var notificationsOn: Bool
+    @Published var deleteUser: Bool = false
+    @Published var deleteAlertShown: Bool = false
     
     init(currentUser: CurrentUserModel, notificationsOn: Bool, notificationsManager: NotificationsManager) {
         self.currentUser = currentUser
@@ -29,21 +24,6 @@ class SettingsModel: ObservableObject {
         self.notificationsManager = notificationsManager
     }
     
-    func signOut() throws {
-        try AuthenticationManager.shared.signOut()
-    }
-    
-    func setNotificationsStatus() async {
-        Task {
-            await notificationsManager.getAuthStatus()
-            if notificationsOn && !notificationsManager.hasPermission {
-                await notificationsManager.request()
-            }
-            else if !notificationsOn && notificationsManager.hasPermission {
-                await notificationsManager.turnOffNotifications()
-            }
-        }
-    }
     
     func openMail(emailTo:String, subject: String, body: String) {
         if let url = URL(string: "mailto:\(emailTo)?subject=\(subject.fixToBrowserString())&body=\(body.fixToBrowserString())"),

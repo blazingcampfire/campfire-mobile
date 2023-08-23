@@ -16,7 +16,7 @@ struct OwnProfilePage: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack() {
             ZStack {
                 Theme.ScreenColor
                     .ignoresSafeArea(.all)
@@ -113,18 +113,14 @@ struct OwnProfilePage: View {
                                         }
                                     }
                                 }
-                                Button(action: {
-                                    settingsPageShow.toggle()
-                                }) {
+                                NavigationLink(destination: SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
+                                    .toolbar(.hidden, for: .tabBar)
+                                ) {
                                     Image(systemName: "gearshape.fill")
                                         .font(.system(size: 30))
                                         .foregroundColor(Theme.Peach)
                                 }
                                 .offset(x: 155, y: -140)
-                                .sheet(isPresented: $settingsPageShow) {
-                                    SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
-                                        .presentationDragIndicator(.visible)
-                                }
                             }
                         }
                         

@@ -93,7 +93,7 @@ class NewFeedModel: ObservableObject {
                     let newPost = self.getPostItem(from: data)
                     newPosts.append(newPost)
                 }
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     self.posts = newPosts
                 }
             } else {  // Subsequent updates
@@ -217,7 +217,7 @@ class NewFeedModel: ObservableObject {
                     let newPost = self.getPostItem(from: data)
                     newPosts.append(newPost)
                 }
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     self.posts = newPosts
                 }
             } else {  // Subsequent updates

@@ -34,7 +34,7 @@ struct ReplyView: View {
                                 .font(.custom("LexendDeca-Bold", size: 14))
                                 .foregroundColor(Theme.TextColor)
                         })
-                        
+
                         Text(individualReply.reply)
                             .font(.custom("LexendDeca-Light", size: 15))
                             .foregroundColor(Theme.TextColor)

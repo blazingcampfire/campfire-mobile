@@ -12,6 +12,7 @@ struct EnterPhoneNumber: View {
     // setting up view dismiss == going back to previous screen, initializing authModel
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var model: AuthModel
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
     var body: some View {
         GradientBackground()
@@ -25,10 +26,17 @@ struct EnterPhoneNumber: View {
                         Text("enter your phone number")
                             .foregroundColor(Color.white)
                             .font(.custom("LexendDeca-Bold", size: 25))
+                        
+                        if horizontalSizeClass == .compact {
+                            PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
+                                .keyboardType(.numberPad)
+                                .background(Color.clear)// view laid out for smaller screens, like an iPhone
+                            } else {
+                                FormTextField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
+                                    .keyboardType(.numberPad)// view laid out for wide screens, like an iPad
+                            }
 
-                        PhoneNumberField(text: $model.formattedPhoneNumber, placeholderText: "phone number")
-                            .keyboardType(.numberPad)
-                            .background(Color.clear)
+                        
 
                         if !model.validPhoneNumberString {
                             Text("phone number must be 10 digits")

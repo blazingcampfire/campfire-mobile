@@ -31,6 +31,7 @@ struct LeaderboardPage: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
         .accentColor(Theme.Peach)
     }
 }

@@ -20,7 +20,11 @@ final class AuthModel: ObservableObject {
     @Published var profile: Profile = Profile(name: "", nameInsensitive: "", phoneNumber: "", email: "", username: "", posts: [], smores: 0, profilePicURL: "", userID: "", school: "", bio: "")
     @Published var privateUserData: PrivateUser = PrivateUser(phoneNumber: "", email: "", userID: "", school: "")
     @Published var phoneNumber: String = ""
-    @Published var formattedPhoneNumber: String = ""
+    @Published var formattedPhoneNumber: String = "" {
+        didSet {
+            formatPhoneNumber()
+        }
+    }
     @Published var verificationCode: String = ""
     @Published var email: String = ""
     @Published var submittedEmail: String = ""
@@ -83,10 +87,10 @@ final class AuthModel: ObservableObject {
 
 extension AuthModel {
     var isPhoneNumberValidPublisher: AnyPublisher<Bool, Never> {
-        $formattedPhoneNumber
+        $phoneNumber
             .map {
                 number in
-                number.count == 14
+                number.count == 10
             }
             .eraseToAnyPublisher()
     }

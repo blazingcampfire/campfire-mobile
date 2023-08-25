@@ -25,6 +25,7 @@ struct SettingsPage: View {
                     }
                 }
         }
+        .navigationViewStyle(.stack)
         .preferredColorScheme(darkMode ? .dark : .light)
     }
 }

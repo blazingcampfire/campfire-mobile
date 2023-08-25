@@ -21,6 +21,7 @@ struct SearchPage: View {
             }
             .searchable(text: $model.name, placement: .navigationBarDrawer)
         }
+        .navigationViewStyle(.stack)
         .font(.custom("LexendDeca-SemiBold", size: 15))
         .background(Color.white)
         .listStyle(PlainListStyle())

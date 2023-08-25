@@ -40,6 +40,7 @@ struct NavigationBar: View {
                     }
             }
         }
+        .navigationViewStyle(.stack)
 
         .accentColor(Theme.Peach)
         .navigationBarBackButtonHidden(true)

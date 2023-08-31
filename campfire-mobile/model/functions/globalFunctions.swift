@@ -5,36 +5,36 @@
 //  Created by Toni on 7/17/23.
 //
 
-import Foundation
 import FirebaseFirestore
+import Foundation
+
 // MARK: - School Functions
+
 // function verifies whether a given users email belongs to Yale, ND, or Rice
 func schoolValidator(email: String) -> Bool {
-    
     let schools = globalSchools
-    
+
     for school in schools {
-        if email.hasSuffix("@\(school).edu")
-        {
+        if email.hasSuffix("@\(school).edu") {
             return true
         }
     }
-    
+
     return false
 }
+
 // similar to schoolValidator, this function returns a user's school based on their email
 func schoolParser(email: String) -> String {
-    
     let schools = globalSchools
-    
+
     for school in schools {
-        if email.hasSuffix("@\(school).edu")
-        {
+        if email.hasSuffix("@\(school).edu") {
             return school
         }
     }
-   return "Does not belong to a supported school"
+    return "Does not belong to a supported school"
 }
+
 func userParser(school: String) -> CollectionReference? {
     guard let userCollection = usersMap[school] else { return nil }
     return userCollection
@@ -61,6 +61,7 @@ func reportsParser(school: String) -> CollectionReference? {
 }
 
 // MARK: - Formatting Functions
+
 func formatNumber(_ number: Int) -> String {
     if number >= 1000 {
         let numberInK = Double(number) / 1000.0
@@ -70,22 +71,33 @@ func formatNumber(_ number: Int) -> String {
     }
 }
 
+func formatAddress(_ location: String, school: String) -> String {
+    var univ = school
+    switch school {
+    case "rice":
+        univ = "Rice"
+    case "yale":
+        univ = "Yale"
+    case "nd":
+        univ = "Notre Dame"
+    default:
+        univ = school
+    }
 
-
-func formatAddress(_ location: String) -> String {
     let locationAddresses = [
         "7 Andrews View Ct, Windsor Mill": "david house",
         "37 High St, New Haven": "Sig Nu House Yale",
-        "1605 Rice Blvd, Houston" : "McMurtry College",
-        "1601 Rice Blvd, Houston" : "Duncan College",
-        "9 Sunset Blvd, Houston" : "Brown College",
-        "23 Sunset Blvd, Houston" : "Jones College",
-        "99 Sunset Blvd, Houston" : "Martel College",
-        "6310 Main St, Houston" : "Lovett College",
-        "6320 Main St, Houston" : "Baker College",
-        "6360 Main St, Houston" : "Sid Richardson College",
-        "6340 Main St, Houston" : "Wiess College",
-        "6350 Main St, Houston" : "Hanszen College",
+        "1605 Rice Blvd, Houston": "McMurtry College",
+        "1601 Rice Blvd, Houston": "Duncan College",
+        "9 Sunset Blvd, Houston": "Brown College",
+        "23 Sunset Blvd, Houston": "Jones College",
+        "99 Sunset Blvd, Houston": "Martel College",
+        "6310 Main St, Houston": "Lovett College",
+        "6320 Main St, Houston": "Baker College",
+        "6360 Main St, Houston": "Sid Richardson College",
+        "6340 Main St, Houston": "Wiess College",
+        "6350 Main St, Houston": "Hanszen College",
+        "6296 Main St, Houston": "Sewall Hall",
         "19330 S Dining Hall Dr, Notre Dame": "SDH",
         "54655 N Notre Dame Ave, Notre Dame": "South Quad",
         "130 Morris Inn, Notre Dame": "Morris Inn",
@@ -135,13 +147,13 @@ func formatAddress(_ location: String) -> String {
         "242 College St, New Haven": "Insomnia Cookies",
         "265 College St, New Haven": "The Taft Apartments",
         "320 York St, New Haven": "Humanities Quadrangle",
-        "35 Whalley Ave, New Haven": "Zeta House Yale"
+        "35 Whalley Ave, New Haven": "Zeta House Yale",
     ]
-    
+
     if let place = locationAddresses[location] {
-        return place
+        return ("\(place)" + "📍")
     } else {
+        let location = ("\(univ)" + " Campfire 📍")
         return location
     }
 }
-

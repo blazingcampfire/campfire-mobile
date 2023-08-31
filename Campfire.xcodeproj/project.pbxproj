@@ -286,16 +286,16 @@
 		E28D3A662A3FFA3400B1EEE9 /* EnterEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterEmail.swift; sourceTree = "<group>"; };
 		E28D3A682A3FFC7600B1EEE9 /* VerifyEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyEmail.swift; sourceTree = "<group>"; };
 		E28D3A6A2A400A8100B1EEE9 /* CreateUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUsername.swift; sourceTree = "<group>"; };
-		E29095D72A3E473E001BEDDE /* campfire-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "campfire-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29095D72A3E473E001BEDDE /* Campfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Campfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095DA2A3E473E001BEDDE /* campfire_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileApp.swift; sourceTree = "<group>"; };
 		E29095DC2A3E473E001BEDDE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E29095DE2A3E4741001BEDDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E29095E12A3E4741001BEDDE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E29095E32A3E4741001BEDDE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E29095E62A3E4741001BEDDE /* campfire_mobile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = campfire_mobile.xcdatamodel; sourceTree = "<group>"; };
-		E29095EC2A3E4741001BEDDE /* campfire-mobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "campfire-mobileTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29095EC2A3E4741001BEDDE /* CampfireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampfireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095F02A3E4741001BEDDE /* campfire_mobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileTests.swift; sourceTree = "<group>"; };
-		E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "campfire-mobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29095F62A3E4741001BEDDE /* CampfireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampfireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29095FA2A3E4741001BEDDE /* campfire_mobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITests.swift; sourceTree = "<group>"; };
 		E29095FC2A3E4741001BEDDE /* campfire_mobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = campfire_mobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E2A37EF52A7622DD001A4306 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
@@ -535,9 +535,9 @@
 		E29095D82A3E473E001BEDDE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E29095D72A3E473E001BEDDE /* campfire-mobile.app */,
-				E29095EC2A3E4741001BEDDE /* campfire-mobileTests.xctest */,
-				E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */,
+				E29095D72A3E473E001BEDDE /* Campfire.app */,
+				E29095EC2A3E4741001BEDDE /* CampfireTests.xctest */,
+				E29095F62A3E4741001BEDDE /* CampfireUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -791,9 +791,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E29095D62A3E473E001BEDDE /* campfire-mobile */ = {
+		E29095D62A3E473E001BEDDE /* Campfire */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E29096002A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobile" */;
+			buildConfigurationList = E29096002A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "Campfire" */;
 			buildPhases = (
 				E29095D32A3E473E001BEDDE /* Sources */,
 				E29095D42A3E473E001BEDDE /* Frameworks */,
@@ -803,7 +803,7 @@
 			);
 			dependencies = (
 			);
-			name = "campfire-mobile";
+			name = Campfire;
 			packageProductDependencies = (
 				E272A0182A5BA36B008D2D78 /* FirebaseAnalytics */,
 				E272A01A2A5BA36B008D2D78 /* FirebaseAuth */,
@@ -823,12 +823,12 @@
 				B1C6885B2A8FF8430049102D /* InterposeKit */,
 			);
 			productName = "campfire-mobile";
-			productReference = E29095D72A3E473E001BEDDE /* campfire-mobile.app */;
+			productReference = E29095D72A3E473E001BEDDE /* Campfire.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E29095EB2A3E4741001BEDDE /* campfire-mobileTests */ = {
+		E29095EB2A3E4741001BEDDE /* CampfireTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E29096032A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobileTests" */;
+			buildConfigurationList = E29096032A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "CampfireTests" */;
 			buildPhases = (
 				E29095E82A3E4741001BEDDE /* Sources */,
 				E29095E92A3E4741001BEDDE /* Frameworks */,
@@ -839,14 +839,14 @@
 			dependencies = (
 				E29095EE2A3E4741001BEDDE /* PBXTargetDependency */,
 			);
-			name = "campfire-mobileTests";
+			name = CampfireTests;
 			productName = "campfire-mobileTests";
-			productReference = E29095EC2A3E4741001BEDDE /* campfire-mobileTests.xctest */;
+			productReference = E29095EC2A3E4741001BEDDE /* CampfireTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E29095F52A3E4741001BEDDE /* campfire-mobileUITests */ = {
+		E29095F52A3E4741001BEDDE /* CampfireUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E29096062A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobileUITests" */;
+			buildConfigurationList = E29096062A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "CampfireUITests" */;
 			buildPhases = (
 				E29095F22A3E4741001BEDDE /* Sources */,
 				E29095F32A3E4741001BEDDE /* Frameworks */,
@@ -857,9 +857,9 @@
 			dependencies = (
 				E29095F82A3E4741001BEDDE /* PBXTargetDependency */,
 			);
-			name = "campfire-mobileUITests";
+			name = CampfireUITests;
 			productName = "campfire-mobileUITests";
-			productReference = E29095F62A3E4741001BEDDE /* campfire-mobileUITests.xctest */;
+			productReference = E29095F62A3E4741001BEDDE /* CampfireUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -885,7 +885,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E29095D22A3E473E001BEDDE /* Build configuration list for PBXProject "campfire-mobile" */;
+			buildConfigurationList = E29095D22A3E473E001BEDDE /* Build configuration list for PBXProject "Campfire" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -906,9 +906,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E29095D62A3E473E001BEDDE /* campfire-mobile */,
-				E29095EB2A3E4741001BEDDE /* campfire-mobileTests */,
-				E29095F52A3E4741001BEDDE /* campfire-mobileUITests */,
+				E29095D62A3E473E001BEDDE /* Campfire */,
+				E29095EB2A3E4741001BEDDE /* CampfireTests */,
+				E29095F52A3E4741001BEDDE /* CampfireUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1113,12 +1113,12 @@
 /* Begin PBXTargetDependency section */
 		E29095EE2A3E4741001BEDDE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E29095D62A3E473E001BEDDE /* campfire-mobile */;
+			target = E29095D62A3E473E001BEDDE /* Campfire */;
 			targetProxy = E29095ED2A3E4741001BEDDE /* PBXContainerItemProxy */;
 		};
 		E29095F82A3E4741001BEDDE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E29095D62A3E473E001BEDDE /* campfire-mobile */;
+			target = E29095D62A3E473E001BEDDE /* Campfire */;
 			targetProxy = E29095F72A3E4741001BEDDE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1265,8 +1265,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = finalsplashscreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1275,9 +1277,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1306,8 +1311,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = finalsplashscreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1316,9 +1323,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.campfireco.campfire-mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1340,7 +1350,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/campfire-mobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/campfire-mobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Campfire.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Campfire";
 			};
 			name = Debug;
 		};
@@ -1362,7 +1372,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/campfire-mobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/campfire-mobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Campfire.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Campfire";
 			};
 			name = Release;
 		};
@@ -1411,7 +1421,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E29095D22A3E473E001BEDDE /* Build configuration list for PBXProject "campfire-mobile" */ = {
+		E29095D22A3E473E001BEDDE /* Build configuration list for PBXProject "Campfire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29095FE2A3E4741001BEDDE /* Debug */,
@@ -1420,7 +1430,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29096002A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobile" */ = {
+		E29096002A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "Campfire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29096012A3E4741001BEDDE /* Debug */,
@@ -1429,7 +1439,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29096032A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobileTests" */ = {
+		E29096032A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "CampfireTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29096042A3E4741001BEDDE /* Debug */,
@@ -1438,7 +1448,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29096062A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "campfire-mobileUITests" */ = {
+		E29096062A3E4741001BEDDE /* Build configuration list for PBXNativeTarget "CampfireUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29096072A3E4741001BEDDE /* Debug */,

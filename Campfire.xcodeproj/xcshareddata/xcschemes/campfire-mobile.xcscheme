@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E29095D62A3E473E001BEDDE"
-               BuildableName = "campfire-mobile.app"
-               BlueprintName = "campfire-mobile"
-               ReferencedContainer = "container:campfire-mobile.xcodeproj">
+               BuildableName = "Campfire.app"
+               BlueprintName = "Campfire"
+               ReferencedContainer = "container:Campfire.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E29095EB2A3E4741001BEDDE"
-               BuildableName = "campfire-mobileTests.xctest"
-               BlueprintName = "campfire-mobileTests"
-               ReferencedContainer = "container:campfire-mobile.xcodeproj">
+               BuildableName = "CampfireTests.xctest"
+               BlueprintName = "CampfireTests"
+               ReferencedContainer = "container:Campfire.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E29095F52A3E4741001BEDDE"
-               BuildableName = "campfire-mobileUITests.xctest"
-               BlueprintName = "campfire-mobileUITests"
-               ReferencedContainer = "container:campfire-mobile.xcodeproj">
+               BuildableName = "CampfireUITests.xctest"
+               BlueprintName = "CampfireUITests"
+               ReferencedContainer = "container:Campfire.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29095D62A3E473E001BEDDE"
-            BuildableName = "campfire-mobile.app"
-            BlueprintName = "campfire-mobile"
-            ReferencedContainer = "container:campfire-mobile.xcodeproj">
+            BuildableName = "Campfire.app"
+            BlueprintName = "Campfire"
+            ReferencedContainer = "container:Campfire.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -102,9 +102,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29095D62A3E473E001BEDDE"
-            BuildableName = "campfire-mobile.app"
-            BlueprintName = "campfire-mobile"
-            ReferencedContainer = "container:campfire-mobile.xcodeproj">
+            BuildableName = "Campfire.app"
+            BlueprintName = "Campfire"
+            ReferencedContainer = "container:Campfire.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

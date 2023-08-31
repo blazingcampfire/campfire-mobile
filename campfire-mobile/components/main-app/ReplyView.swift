@@ -18,25 +18,22 @@ struct ReplyView: View {
         ZStack {
             HStack {
                 HStack {
-                    Button(action: {
-                        // navigate to profile
-                    }) {
+                    NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualReply.posterId, currentUser: currentUser)), label: {
                         KFImage(URL(string: individualReply.profilepic))
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 40, height: 40)
                             .clipShape(Circle())
-                    }
+                    })
                     .padding(.trailing, 5)
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Button(action: {
+                        NavigationLink(destination: OtherProfilePage(profileModel: ProfileModel(id: individualReply.posterId, currentUser: currentUser)), label: {
                             // navigate to profile
-                        }) {
                             Text("@\(individualReply.username)")
                                 .font(.custom("LexendDeca-Bold", size: 14))
                                 .foregroundColor(Theme.TextColor)
-                        }
+                        })
 
                         Text(individualReply.reply)
                             .font(.custom("LexendDeca-Light", size: 15))

@@ -19,6 +19,7 @@ struct NavigationBar: View {
                     }
                     .environmentObject(currentUser)
                     .background(Color.black)
+                    .toolbarBackground(.black, for: .tabBar)
 
                 CameraView(post: CamPostModel(currentUser: currentUser))
                     .tabItem {
@@ -39,6 +40,7 @@ struct NavigationBar: View {
                     }
             }
         }
+        .navigationViewStyle(.stack)
 
         .accentColor(Theme.Peach)
         .navigationBarBackButtonHidden(true)

@@ -188,6 +188,5 @@ struct SettingsForm: View {
                    isPresented: $model.deleteErrorAlert)
             .font(.custom("LexendDeca-Regular", size: 16))
         }
-        .padding(.top, -15)
     }
 }

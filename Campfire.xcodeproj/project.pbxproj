@@ -1258,17 +1258,16 @@
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Campfire;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take photos & videos within our app, so that you can post them directly to our feed.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is only ever visible to others as a \"snapshot in time\" when you upload a video to the feed, so that others on campus can be informed about where you posted from and where the fun is happening.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enable audio capture during any videos taken with our in-app camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Granting access to your photo library enables you to upload pictures from your camera roll to your school's feed.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = finalsplashscreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1304,17 +1303,16 @@
 				INFOPLIST_FILE = "/Users/Toni/The Vault/campfire-mobile/campfire-mobile/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Campfire;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "To Take Photos and Video";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To Acesss Location and School";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To Record Audio With Video";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "To Access Photos and Videos";
+				INFOPLIST_KEY_NSCameraUsageDescription = "To take photos & videos within our app, so that you can post them directly to our feed.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is only ever visible to others as a \"snapshot in time\" when you upload a video to the feed, so that others on campus can be informed about where you posted from and where the fun is happening.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enable audio capture during any videos taken with our in-app camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Granting access to your photo library enables you to upload pictures from your camera roll to your school's feed.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = finalsplashscreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

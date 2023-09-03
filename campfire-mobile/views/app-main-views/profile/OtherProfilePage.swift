@@ -165,6 +165,10 @@ struct OtherProfilePage: View {
             }
             .padding()
         }
+        .onAppear {
+            profileModel.checkFriend(profile: profileModel.profile)
+            profileModel.checkRequested(profile: profileModel.profile)
+        }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @State private var viewHasAppeared: Bool = false
     @StateObject var model: SearchModel
 
     var body: some View {
@@ -48,9 +47,3 @@ struct SearchList: View {
         }
     }
 }
-
-// struct SearchPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchPage()
-//    }
-// }

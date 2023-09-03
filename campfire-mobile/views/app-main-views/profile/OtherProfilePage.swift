@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct OtherProfilePage: View {
-    @State var settingsPageShow = false
+
     @StateObject var profileModel: ProfileModel
     @EnvironmentObject var currentUser: CurrentUserModel
-    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ZStack {

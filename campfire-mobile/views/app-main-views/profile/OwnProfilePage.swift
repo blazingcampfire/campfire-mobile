@@ -167,5 +167,6 @@ struct OwnProfilePage: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }

@@ -19,6 +19,7 @@ struct SearchPage: View {
                     .environmentObject(model)
             }
             .searchable(text: $model.name, placement: .navigationBarDrawer)
+            .autocorrectionDisabled(true)
         }
         .navigationViewStyle(.stack)
         .font(.custom("LexendDeca-SemiBold", size: 15))

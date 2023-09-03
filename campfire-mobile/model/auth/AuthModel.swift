@@ -255,7 +255,7 @@ extension AuthModel {
             let tokens = try await helper.signIn()
             try await AuthenticationManager.shared.signUpWithGoogle(tokens: tokens)
             submittedEmail = (Auth.auth().currentUser?.email)!
-            if email != submittedEmail {
+            if email.lowercased() != submittedEmail.lowercased() {
                 throw EmailError.noMatch
             }
             do {

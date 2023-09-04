@@ -37,8 +37,8 @@ class FeedViewController: UIViewController {
 
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
+    //    collectionView.refreshControl = refreshControl
+   //     refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
 
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true

@@ -43,6 +43,8 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate, AV
     @Published var videoTooLarge: Bool = false
     @Published var videoSizeAlert: Bool = false
     @Published var selectVideoPlayer: AVPlayer? = nil
+    @Published var camAccessDeny: Bool = false
+    
 
     var timer: AnyCancellable?
     var temporaryPhotoURL: URL?

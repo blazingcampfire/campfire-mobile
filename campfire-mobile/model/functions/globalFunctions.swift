@@ -148,6 +148,10 @@ func formatAddress(_ location: String, school: String) -> String {
         "265 College St, New Haven": "The Taft Apartments",
         "320 York St, New Haven": "Humanities Quadrangle",
         "35 Whalley Ave, New Haven": "Zeta House Yale",
+        "38 Mansfield St, New Haven": "Pauli Murray College",
+        "197 York St, New Haven": "Jonathan Edwards College",
+        "500 College St, New Haven": "Woosley Hall",
+        "109 Wall St, New Haven": "Schwarzman Center"
     ]
 
     if let place = locationAddresses[location] {

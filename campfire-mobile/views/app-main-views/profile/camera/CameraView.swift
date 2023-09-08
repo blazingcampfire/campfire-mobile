@@ -23,11 +23,25 @@ struct CameraView: View {
     @State private var isLoading = true
     @State var isRecording = false
     @State private var isActive = false
-
+    @State private var camDenyAlert: Bool = false
+    
     var body: some View {
+        
         ZStack {
+            
+            if camera.alertType == .accessDenied {
+                ZStack {
+                    Color.black
+                        .ignoresSafeArea()
+                    CamDenyAlert(showAlert: $camDenyAlert)
+                }
+                .onAppear {
+                    camDenyAlert = true
+                }
+            } else {
+            
             CameraPreview(camera: camera)
-
+            
             if camera.isVideoRecorded {
                 if let recordedVideo = camera.videoPlayback {
                     CustomVideoPlayer(player: recordedVideo, isPlaying: $isPlaying)
@@ -40,12 +54,12 @@ struct CameraView: View {
                         .font(.custom("LexendDeca-Regular", size: 25))
                         .foregroundColor(.white)
                 }
-
+                
                 PreviewPostInfo(postModel: post)
                 VideoPostButton(camera: camera, makePost: post)
                 VideoSaveButton(camera: camera)
                 RetakeButton(camera: camera)
-
+                
             } else if camera.showSelectPhoto {
                 Color.black
                     .ignoresSafeArea(.all)
@@ -61,7 +75,7 @@ struct CameraView: View {
                 }
                 PreviewPostInfo(postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
-
+                
                 VStack {
                     Button(action: {
                         camera.reTake()
@@ -75,7 +89,7 @@ struct CameraView: View {
                 }
                 .padding(.top, 20)
                 .padding(.leading, 330)
-
+                
             } else if camera.showSelectVideo {
                 if let selectedVideoURL = camera.selectedVideoURL {
                     Group {
@@ -132,7 +146,7 @@ struct CameraView: View {
                 PreviewPostInfo(postModel: post)
                 PhotoPostButton(camera: camera, makePost: post)
                 RetakeButton(camera: camera)
-
+                
             } else {
                 ZStack {
                     VStack(spacing: 10) {
@@ -186,9 +200,9 @@ struct CameraView: View {
                             Circle()
                                 .trim(from: 0, to: CGFloat(camera.progress))
                                 .stroke(Color.red, lineWidth: 10)
-                                // Rotate 90 degrees counter-clockwise to start from top
+                            // Rotate 90 degrees counter-clockwise to start from top
                                 .rotationEffect(.degrees(-90))
-                                // Animate any changes in progress
+                            // Animate any changes in progress
                                 .animation(.linear(duration: 0.2), value: camera.progress)
                         }
                         .frame(width: 100, height: 100)
@@ -200,6 +214,7 @@ struct CameraView: View {
                 }
             }
         }
+    }
         .onTapGesture {
             UIApplication.shared.dismissKeyboard()
         }
@@ -244,8 +259,7 @@ struct CameraView: View {
         .alert(isPresented: $camera.videoTooLarge) {
             Alert(title: Text("Video File Too Large"), message: Text("Consider Cropping Video"), dismissButton: .default(Text("OK")))
         }
-    }
-
+}
     var tapGesture: some Gesture {
         TapGesture()
             .onEnded {

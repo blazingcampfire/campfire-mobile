@@ -163,20 +163,6 @@ struct SettingsForm: View {
                             .navigationBarBackButtonHidden(true)
                             .navigationBarTitleDisplayMode(.inline)
                 }
-//                        .overlay (
-//                            NavigationLink(destination: {
-//                                AccountSetUp()
-//                                    .onAppear {
-//                                            AuthenticationManager.shared.deleteAccount(currentUser: currentUser)
-//                                            AuthenticationManager.shared.deleteUser()
-//                                    }
-//                                    .navigationBarBackButtonHidden(true)
-//                                    .navigationBarTitleDisplayMode(.inline)
-//                            },
-//                                           label: { EmptyView() })
-//                            .opacity(0)
-//                            .frame(width: 10, height: 10)
-//                        )
             }
             .alert(title: "Are You Sure You Want to Delete Your Account?", message: "WARNING: THIS ACTION CANNOT BE UNDONE (it's serious enough to make us use CAPS, and we never use CAPS...)",
                    dismissButton: CustomAlertButton(title: "yes", action: {

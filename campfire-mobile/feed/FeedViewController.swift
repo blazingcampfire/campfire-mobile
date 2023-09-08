@@ -13,7 +13,6 @@ import UIKit
 
 class FeedViewController: UIViewController {
     var collectionView: UICollectionView!
-    let refreshControl = UIRefreshControl()
     var newFeedModel: NewFeedModel
     var cancellables = Set<AnyCancellable>()
 
@@ -37,9 +36,7 @@ class FeedViewController: UIViewController {
 
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
-
+   
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -57,14 +54,7 @@ class FeedViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-
-    @objc func refreshPosts() {
-        DispatchQueue.main.async { [weak self] in
-            self?.newFeedModel.loadInitialPosts {
-            }
-        }
-    }
-
+    
     func updateCollectionViewLayout() {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -145,3 +135,4 @@ struct FeedViewControllerWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: FeedViewController, context: Context) {
     }
 }
+

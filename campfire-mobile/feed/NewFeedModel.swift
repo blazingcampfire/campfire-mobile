@@ -18,7 +18,7 @@ enum Assortment {
 
 class NewFeedModel: ObservableObject {
     @Published var posts = [PostItem]()
-    @Published var currentAssortment: Assortment = .hot
+    @Published var currentAssortment: Assortment = .new
     @Published var pauseVideos = false
     @Published var currentUser: CurrentUserModel
     var initialLoadCompleted = false
@@ -146,7 +146,7 @@ class NewFeedModel: ObservableObject {
             completion()
         }
     }
-
+    
     func loadMorePosts() {
         guard !reachedEndofData else {
             return

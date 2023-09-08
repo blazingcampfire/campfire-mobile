@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @State private var viewHasAppeared: Bool = false
     @StateObject var model: SearchModel
 
     var body: some View {
@@ -20,6 +19,7 @@ struct SearchPage: View {
                     .environmentObject(model)
             }
             .searchable(text: $model.name, placement: .navigationBarDrawer)
+            .autocorrectionDisabled(true)
         }
         .navigationViewStyle(.stack)
         .font(.custom("LexendDeca-SemiBold", size: 15))
@@ -48,9 +48,3 @@ struct SearchList: View {
         }
     }
 }
-
-// struct SearchPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchPage()
-//    }
-// }

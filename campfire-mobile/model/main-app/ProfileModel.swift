@@ -15,6 +15,8 @@ class ProfileModel: ObservableObject {
         self.id = id
         self.currentUser = currentUser
         getProfile()
+        checkRequested(profile: profile)
+        checkFriend(profile: profile)
     }
 
     func getProfile() {
@@ -154,7 +156,7 @@ class ProfileModel: ObservableObject {
                 return
             } else {
                 if let documentSnapshot = documentSnapshot {
-                    let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
+                    let requests = documentSnapshot.get("sentRequests") as? [[String: Any]] ?? []
                     for request in requests {
                         guard let requestObject = RequestFirestore(data: request) else {
                             return

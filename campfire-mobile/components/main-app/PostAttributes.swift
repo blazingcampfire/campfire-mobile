@@ -26,14 +26,12 @@ struct PostAttributes: View {
                     )
             }
 
-            Button(action: {
-            }) {
-                KFImage(URL(string: url))
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: width, height: width)
-                    .clipped()
-            }
+            KFImage(URL(string: url))
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: width, height: width)
+                .clipped()
+            
         }
         .clipShape(RoundedRectangle(cornerRadius: 30))
     }

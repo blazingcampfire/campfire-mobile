@@ -119,6 +119,24 @@ struct OwnProfilePage: View {
                                                 )
 
                                         }
+                                        NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: currentUser.profile.userID)
+                                            .environmentObject(currentUser).navigationBarBackButtonHidden(true)
+                                            )
+                                            {
+                                                Image(systemName: "camera.on.rectangle.fill")
+                                                    .font(.system(size: 18))
+                                                    .foregroundColor(Theme.Peach)
+                                                    .padding()
+                                                    .background(
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(.white)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.black, lineWidth: 0.3)
+                                                            )
+                                                    )
+                                            }
+                                    
                                     }
                                 }
                                 NavigationLink(destination: SettingsPage(darkMode: $darkMode, model: SettingsModel(currentUser: currentUser, notificationsOn: notificationsManager.hasPermission, notificationsManager: notificationsManager))
@@ -177,5 +195,6 @@ struct OwnProfilePage: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }

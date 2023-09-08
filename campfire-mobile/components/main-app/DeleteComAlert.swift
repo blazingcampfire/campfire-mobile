@@ -131,3 +131,55 @@ struct DeleteReplyAlert: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
+
+
+struct CamDenyAlert: View {
+    @Binding var showAlert: Bool
+
+    var body: some View {
+        VStack(alignment: .center) {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(width: 300, height: 150)
+                .foregroundColor(Color.white)
+                .overlay(
+                    ZStack {
+                        VStack {
+                            HStack {
+                                Text("you need to enable camera access to use campfire!")
+                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                    .foregroundColor(Theme.Peach)
+                                    .padding()
+                                    .multilineTextAlignment(.center)
+                            }
+                            .offset(y: 7)
+                            Divider()
+                            HStack {
+                                Button(action: {
+                                    showAlert.toggle()
+                                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                    }
+                                }) {
+                                    Text("open settings")
+                                        .font(.custom("LexendDeca-Bold", size: 15))
+                                        .foregroundColor(Theme.Peach)
+                                        .padding()
+                                }
+                                .offset(x: 9, y: -9)
+                            }
+                        }
+                    }
+                )
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(.white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.black, lineWidth: 0.3)
+                        )
+                )
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}

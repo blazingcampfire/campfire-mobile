@@ -98,13 +98,11 @@ struct FeedUIView: View {
                                     Text(individualPost.caption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
 
-                                    if individualPost.location == "" {
-                                        Text("")
-                                    } else {
+                                    
                                         Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
                                             .font(.custom("LexendDeca-Regular", size: 15))
                                     }
-                                }
+                                
                                 .padding(.leading, 10)
                             }
                         })

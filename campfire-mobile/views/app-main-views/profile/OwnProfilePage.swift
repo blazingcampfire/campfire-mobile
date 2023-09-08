@@ -14,6 +14,7 @@ struct OwnProfilePage: View {
     @State private var showAddPost = false
     @AppStorage("isDarkMode") private var darkMode = false
     @Environment(\.dismiss) private var dismiss
+    @State var reqsExist = false
 
     var body: some View {
         NavigationView {
@@ -108,6 +109,15 @@ struct OwnProfilePage: View {
                                                                 .stroke(Color.black, lineWidth: 0.3)
                                                         )
                                                 )
+                                                .overlay(
+                                                    !RequestsModel(currentUser: currentUser).requests.isEmpty ?
+                                                        Circle()
+                                                        .fill(Theme.Peach)
+                                                            .frame(width: 15, height: 15)
+                                                            .offset(x: 47, y: -23)
+                                                        : nil
+                                                )
+
                                         }
                                     }
                                 }

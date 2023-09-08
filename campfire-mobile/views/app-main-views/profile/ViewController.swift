@@ -55,9 +55,9 @@ class ProfileFeedViewController: UIViewController {
         dismissalButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
 
         // Calculate the button's position (e.g., 16 points from the top and centered horizontally)
-        let buttonSize: CGFloat = 300.0 // Adjust the button's size as needed
+        let buttonSize: CGFloat = 100.0 // Adjust the button's size as needed
         let buttonX = (view.frame.width - buttonSize + 320) / 2.0
-        let buttonY: CGFloat = -100
+        let buttonY: CGFloat = 0
 
         // Set the button's frame (optional, for clarity, but not used with transform)
         dismissalButton.frame = CGRect(x: buttonX, y: buttonY, width: buttonSize, height: buttonSize)

@@ -68,7 +68,7 @@ struct OwnProfilePage: View {
                                         NavigationLink(destination: EditProfile()
                                             .environmentObject(currentUser)) {
                                                 Text("edit profile")
-                                                    .font(.custom("LexendDeca-Bold", size: 15))
+                                                    .font(.custom("LexendDeca-Bold", size: 13))
                                                     .foregroundColor(Theme.Peach)
                                                     .padding()
                                                     .background(
@@ -98,7 +98,7 @@ struct OwnProfilePage: View {
                                             }
                                         NavigationLink(destination: RequestsPage(model: RequestsModel(currentUser: currentUser))) {
                                             Text("requests")
-                                                .font(.custom("LexendDeca-Bold", size: 15))
+                                                .font(.custom("LexendDeca-Bold", size: 13))
                                                 .foregroundColor(Theme.Peach)
                                                 .padding()
                                                 .background(
@@ -109,14 +109,14 @@ struct OwnProfilePage: View {
                                                                 .stroke(Color.black, lineWidth: 0.3)
                                                         )
                                                 )
-                                                .overlay(
-                                                    !RequestsModel(currentUser: currentUser).requests.isEmpty ?
-                                                        Circle()
-                                                        .fill(Theme.Peach)
-                                                            .frame(width: 15, height: 15)
-                                                            .offset(x: 47, y: -23)
-                                                        : nil
-                                                )
+//                                                .overlay(
+//                                                    !RequestsModel(currentUser: currentUser).requests.isEmpty ?
+//                                                        Circle()
+//                                                        .fill(Theme.Peach)
+//                                                            .frame(width: 15, height: 15)
+//                                                            .offset(x: 47, y: -23)
+//                                                        : nil
+//                                                )
 
                                         }
                                         NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: currentUser.profile.userID)

@@ -146,7 +146,7 @@ class NewFeedModel: ObservableObject {
             completion()
         }
     }
-
+    
     func loadMorePosts() {
         guard !reachedEndofData else {
             return

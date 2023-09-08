@@ -33,7 +33,6 @@ struct OtherProfilePage: View {
 
                                     Text(profile.name)
                                         .font(.custom("LexendDeca-Bold", size: 20))
-
                                     HStack {
                                         Text(profile.username)
                                             .font(.custom("LexendDeca-SemiBold", size: 15))
@@ -129,6 +128,25 @@ struct OtherProfilePage: View {
                                                     )
                                             )
                                     }
+                                    NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: profile.userID)
+                                        .environmentObject(currentUser)
+                                        .navigationBarBackButtonHidden(true))
+                                        {
+                                            Image(systemName: "camera.on.rectangle.fill")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(Theme.Peach)
+                                                .padding()
+                                                .background(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .fill(.white)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.black, lineWidth: 0.3)
+                                                        )
+                                                )
+                                        }
+
+                                    
                                 }
                             }
                         }

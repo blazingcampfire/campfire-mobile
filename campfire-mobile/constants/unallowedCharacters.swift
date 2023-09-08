@@ -45,13 +45,13 @@ func sendNotification(to fcmToken: String, title: String, body: String) {
     }
 }
 
-func getToken {
+func getToken() {
     Messaging.messaging().token { token, error in
       if let error = error {
         print("Error fetching FCM registration token: \(error)")
       } else if let token = token {
         print("FCM registration token: \(token)")
-        self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
+//        self.fcmRegTokenMessage.text  = "Remote FCM registration token: \(token)"
       }
     }
 }

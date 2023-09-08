@@ -35,9 +35,9 @@ struct FeedUIView: View {
                             newFeedModel.currentAssortment = .hot
                         }
                     }) {
-                        Text("hot")
+                        Text("new")
                             .font(.custom("LexendDeca-Bold", size: 37))
-                            .opacity(newFeedModel.currentAssortment == .hot ? 1.0 : 0.5)
+                            .opacity(newFeedModel.currentAssortment == .new ? 1.0 : 0.5)
                     }
                     Rectangle()
                         .frame(width: 2, height: 30)
@@ -47,9 +47,9 @@ struct FeedUIView: View {
                             newFeedModel.currentAssortment = .new
                         }
                     }) {
-                        Text("new")
+                        Text("hot")
                             .font(.custom("LexendDeca-Bold", size: 37))
-                            .opacity(newFeedModel.currentAssortment == .new ? 1.0 : 0.5)
+                            .opacity(newFeedModel.currentAssortment == .hot ? 1.0 : 0.5)
                     }
                 }
                 .padding(.top, 30)

@@ -14,7 +14,6 @@ struct OwnProfilePage: View {
     @State private var showAddPost = false
     @AppStorage("isDarkMode") private var darkMode = false
     @Environment(\.dismiss) private var dismiss
-    @State var reqsExist = false
 
     var body: some View {
         NavigationView {
@@ -84,7 +83,7 @@ struct OwnProfilePage: View {
                                         NavigationLink(destination: FriendsPage(model: FriendsModel(currentUser: currentUser)))
                                             {
                                                 Image(systemName: "person.3.fill")
-                                                    .font(.system(size: 20))
+                                                    .font(.system(size: 18))
                                                     .foregroundColor(Theme.Peach)
                                                     .padding()
                                                     .background(
@@ -109,21 +108,19 @@ struct OwnProfilePage: View {
                                                                 .stroke(Color.black, lineWidth: 0.3)
                                                         )
                                                 )
-//                                                .overlay(
-//                                                    !RequestsModel(currentUser: currentUser).requests.isEmpty ?
-//                                                        Circle()
-//                                                        .fill(Theme.Peach)
-//                                                            .frame(width: 15, height: 15)
-//                                                            .offset(x: 47, y: -23)
-//                                                        : nil
-//                                                )
+                                                .overlay(
+                                                          Circle()
+                                                        .fill(Theme.Peach)
+                                                            .frame(width: 15, height: 15)
+                                                            .offset(x: 41, y: -22)
+                                                )
 
                                         }
                                         NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: currentUser.profile.userID)
                                             .environmentObject(currentUser).navigationBarBackButtonHidden(true)
                                             )
                                             {
-                                                Image(systemName: "camera.on.rectangle.fill")
+                                                Image(systemName: "play.rectangle.fill")
                                                     .font(.system(size: 18))
                                                     .foregroundColor(Theme.Peach)
                                                     .padding()

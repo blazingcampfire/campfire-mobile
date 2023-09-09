@@ -32,7 +32,7 @@ struct FeedUIView: View {
                 HStack {
                     Button(action: {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            newFeedModel.currentAssortment = .hot
+                            newFeedModel.currentAssortment = .new
                         }
                     }) {
                         Text("new")
@@ -44,7 +44,7 @@ struct FeedUIView: View {
                         .opacity(0.75)
                     Button(action: {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            newFeedModel.currentAssortment = .new
+                            newFeedModel.currentAssortment = .hot
                         }
                     }) {
                         Text("hot")

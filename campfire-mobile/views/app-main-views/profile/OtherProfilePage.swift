@@ -132,7 +132,7 @@ struct OtherProfilePage: View {
                                         .environmentObject(currentUser)
                                         .navigationBarBackButtonHidden(true))
                                         {
-                                            Image(systemName: "camera.on.rectangle.fill")
+                                            Image(systemName: "play.rectangle.fill")
                                                 .font(.system(size: 18))
                                                 .foregroundColor(Theme.Peach)
                                                 .padding()

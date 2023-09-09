@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 import UserNotifications
+import FirebaseMessaging
 
 @MainActor
 class NotificationsManager: ObservableObject {
-    @Published var hasPermission = false
+    @Published private(set) var hasPermission = false
     @Published var notifications: [UNNotification] = []
-
+    @Published var token: String = ""
     init() {
         Task {
             await getAuthStatus()
@@ -22,7 +23,7 @@ class NotificationsManager: ObservableObject {
 
     func request() async {
         do {
-            try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+            self.hasPermission = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
         } catch {
             return
         }
@@ -66,4 +67,48 @@ class NotificationsManager: ObservableObject {
             return
         }
     }
+    
+    func sendNotification(to fcmToken: String, title: String, body: String) {
+        let urlString = "https://fcm.googleapis.com/fcm/send"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
+
+        let message: [String: Any] = [
+            "to": fcmToken,
+            "notification": [
+                "title": title,
+                "body": body
+            ]
+        ]
+
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: message, options: [])
+            request.httpBody = jsonData
+
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error sending notification: \(error)")
+                } else {
+                    print("Notification sent successfully")
+                }
+            }.resume()
+        } catch {
+            print("Error creating JSON data: \(error)")
+        }
+    }
+
+    func getToken (){
+        Messaging.messaging().token { token, error in
+          if let error = error {
+            print("Error fetching FCM registration token: \(error)")
+          } else if let token = token {
+              self.token = token
+            print("FCM registration token: \(token)")
+          }
+        }
+    }
+
 }

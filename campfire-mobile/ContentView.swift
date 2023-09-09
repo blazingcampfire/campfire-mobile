@@ -8,6 +8,7 @@
 import FirebaseAuth
 import SwiftUI
 import Combine
+import FirebaseMessaging
 
 struct ContentView: View {
     @StateObject var authModel: AuthModel = AuthModel()
@@ -21,6 +22,12 @@ struct ContentView: View {
                     currentUser.setCollectionRefs()
                     currentUser.getUser()
                     currentUser.getProfile()
+                    Task {
+                        await notificationsManager.getAuthStatus()
+                        await notificationsManager.request()
+                        await notificationsManager.sendNotification(title: "Test", subtitle: "String")
+                        notificationsManager.getToken()
+                    }
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)

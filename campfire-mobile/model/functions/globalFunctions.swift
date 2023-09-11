@@ -84,6 +84,7 @@ func formatAddress(_ location: String, school: String) -> String {
         univ = school
     }
 
+
     let locationAddresses = [
         "7 Andrews View Ct, Windsor Mill": "david house",
         "37 High St, New Haven": "Sig Nu House Yale",

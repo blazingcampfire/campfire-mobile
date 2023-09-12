@@ -60,6 +60,11 @@ func reportsParser(school: String) -> CollectionReference? {
     return reportsCollection
 }
 
+func notificationsParser(school: String) -> CollectionReference? {
+    guard let notificationsCollection = notificationsMap[school] else { return nil }
+    return notificationsCollection
+}
+
 // MARK: - Formatting Functions
 
 func formatNumber(_ number: Int) -> String {

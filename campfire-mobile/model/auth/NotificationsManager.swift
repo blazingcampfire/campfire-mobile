@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import UserNotifications
 import FirebaseMessaging
+import FirebaseAuth
 
 @MainActor
 class NotificationsManager: ObservableObject {
@@ -18,12 +19,15 @@ class NotificationsManager: ObservableObject {
     init() {
         Task {
             await getAuthStatus()
+            getToken()
         }
     }
 
     func request() async {
         do {
             self.hasPermission = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+            getToken()
+            print(token)
         } catch {
             return
         }
@@ -48,7 +52,7 @@ class NotificationsManager: ObservableObject {
         }
     }
 
-    func sendNotification(title: String, subtitle: String) async {
+    func sendLocalNotification(title: String, subtitle: String) async {
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = subtitle
@@ -68,39 +72,7 @@ class NotificationsManager: ObservableObject {
         }
     }
     
-    func sendNotification(to fcmToken: String, title: String, body: String) {
-        let urlString = "https://fcm.googleapis.com/fcm/send"
-        let url = URL(string: urlString)!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("key=\(serverKey)", forHTTPHeaderField: "Authorization")
-
-        let message: [String: Any] = [
-            "to": fcmToken,
-            "notification": [
-                "title": title,
-                "body": body
-            ]
-        ]
-
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: message, options: [])
-            request.httpBody = jsonData
-
-            URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print("Error sending notification: \(error)")
-                } else {
-                    print("Notification sent successfully")
-                }
-            }.resume()
-        } catch {
-            print("Error creating JSON data: \(error)")
-        }
-    }
-
-    func getToken (){
+    func getToken() {
         Messaging.messaging().token { token, error in
           if let error = error {
             print("Error fetching FCM registration token: \(error)")
@@ -108,6 +80,37 @@ class NotificationsManager: ObservableObject {
               self.token = token
             print("FCM registration token: \(token)")
           }
+        }
+    }
+    
+    func updateToken(school: String) {
+        let notificationsRef = notificationsParser(school: school)
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let userToken = notificationsRef?.document(userID)
+        
+        userToken?.getDocument { (document, error) in
+            if let document = document {
+                if document.exists {
+                    let data = document.data()
+                    let token = data?["fcmToken"] as? String ?? ""
+                    print(token)
+                    if(self.token == token) {
+                        return
+                    }
+                    else {
+                        userToken?.setData(["fcmToken": self.token])
+                    }
+                }
+                else {
+                    userToken?.setData(["fcmToken": self.token])
+                    print("successful write")
+                }
+            }
+            if let error = error {
+                print(error.localizedDescription)
+            }
         }
     }
 

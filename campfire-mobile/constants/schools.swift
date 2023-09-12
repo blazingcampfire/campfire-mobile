@@ -14,24 +14,35 @@ let globalSchools: [String] = ["yale", "rice", "nd"]
 let usersMap: [String: CollectionReference] = [
     "nd": ndUsers,
     "yale": yaleUsers,
-    "rice": riceUsers]
+    "rice": riceUsers
+]
 
 let profilesMap: [String: CollectionReference] = [
     "nd": ndProfiles,
     "yale": yaleProfiles,
-    "rice": riceProfiles]
+    "rice": riceProfiles
+]
 
 let relationshipsMap: [String: CollectionReference] = [
     "nd": ndRelationships,
     "yale": yaleRelationships,
-    "rice": riceRelationships]
+    "rice": riceRelationships
+]
 
 let postsMap: [String: CollectionReference] = [
     "nd": ndPosts,
     "yale": yalePosts,
-    "rice": ricePosts]
+    "rice": ricePosts
+]
 
 let reportsMap: [String: CollectionReference] = [
     "nd": ndReports,
     "yale": yaleReports,
-    "rice": riceReports]
+    "rice": riceReports
+]
+
+let notificationsMap: [String: CollectionReference] = [
+    "nd": ndNotifications,
+    "yale": yaleNotifications,
+    "rice": riceNotifications
+]

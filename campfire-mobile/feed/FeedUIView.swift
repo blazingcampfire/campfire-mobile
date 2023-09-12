@@ -99,8 +99,13 @@ struct FeedUIView: View {
                                         .font(.custom("LexendDeca-Regular", size: 15))
 
                                     
-                                        Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
-                                            .font(.custom("LexendDeca-Regular", size: 15))
+                                    Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
+                                            .font(.custom("LexendDeca-Regular", size: 13))
+                                        
+                                    Text("posted \(postTimeAgoSinceDate(individualPost.postItem.date.dateValue()))")
+                                        .font(.custom("LexendDeca-Regular", size: 13))
+                                        .foregroundColor(Color.gray)
+                                        .shadow(color: Color.black, radius: 5, x: 0, y: 2)
                                     }
                                 
                                 .padding(.leading, 10)

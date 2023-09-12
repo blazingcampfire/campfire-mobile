@@ -24,7 +24,7 @@ struct InitialMessage: View {
             .frame(alignment: .center)
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
-
+            
             VStack(alignment: .leading, spacing: 5) {
                 Text("🙅🏾‍♂️ - campfire is not associated with \(school)")
                 Text("😹 - check out funny pictures and videos on the feed")
@@ -37,17 +37,34 @@ struct InitialMessage: View {
             .multilineTextAlignment(.center)
             .padding(.leading, 7)
             .frame(width: 350, alignment: .center)
-            HStack {
-                Spacer()
-                Text("most importantly, enjoy your time around the campfire!")
-                    .font(.custom("LexendDeca-Bold", size: 15))
-                    .foregroundColor(.white)
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("most importantly, enjoy your time around the campfire!")
+                        .font(.custom("LexendDeca-Bold", size: 15))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                .padding(.bottom)
+                
+                Text("swipe down to dismiss message!")
+                    .font(.custom("LexendDeca-Bold", size: 20))
+                    .foregroundColor(.red)
                     .multilineTextAlignment(.center)
-                Spacer()
+                    .shadow(color: Color.white, radius: 5, x: 0, y: 2)
             }
             .padding(.bottom)
+            
         }
         .background(Theme.Peach, in: RoundedRectangle(cornerRadius: 10))
         .padding(.horizontal)
     }
 }
+
+struct grr: PreviewProvider {
+    static var previews: some View {
+        InitialMessage(school: "yale")
+    }
+}
+

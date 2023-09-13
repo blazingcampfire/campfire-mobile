@@ -52,9 +52,15 @@ struct ProfileFeedUIView: View {
                                     Text(individualPost.caption)
                                         .font(.custom("LexendDeca-Regular", size: 15))
 
-                                Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
-                                    .font(.custom("LexendDeca-Regular", size: 15))
-                                }
+                                    
+                                    Text("\(formatAddress(individualPost.location, school: currentUser.profile.school))")
+                                            .font(.custom("LexendDeca-Regular", size: 13))
+                                        
+                                    Text("posted \(postTimeAgoSinceDate(individualPost.postItem.date.dateValue()))")
+                                        .font(.custom("LexendDeca-Regular", size: 13))
+                                        .foregroundColor(Color.gray)
+                                    }
+                                
                                 .padding(.leading, 10)
                             }
                         })

@@ -193,7 +193,7 @@ struct OwnProfilePage: View {
             }
         }
         .onAppear {
-            notificationsManager.updateToken(school: currentUser.profile.school)
+            
         }
         .navigationViewStyle(.stack)
     }

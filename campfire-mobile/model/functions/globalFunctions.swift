@@ -116,6 +116,7 @@ func formatAddress(_ location: String, school: String) -> String {
         "2010 Moose Krause Cir, Notre Dame": "Notre Dame Stadium",
         "N Notre Dame Ave & Holy Cross Dr, Notre Dame": "Bookstore Basketball Courts",
         "100 Compton Family Ice Arena, Notre Dame": "Compton Family Ice Arena",
+        "19501 Dorr Rd, Notre Dame": "Howard Hall, Home of Our Faves",
         "101 Basilica Drive, Notre Dame": "God Quad",
         "315 LaFortune Student Center, Notre Dame": "LaFun",
         "54261 Wilson Dr, Notre Dame": "West Quad",

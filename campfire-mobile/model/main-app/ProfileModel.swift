@@ -9,6 +9,7 @@ class ProfileModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     @Published var requested: Bool = false
     @Published var friend: Bool = false
+    @Published var requests: Bool = false
     var id: String
 
     init(id: String, currentUser: CurrentUserModel) {
@@ -169,6 +170,7 @@ class ProfileModel: ObservableObject {
             }
         }
     }
+    
 
     func checkFriend(profile: Profile?) {
         guard let profile = profile else {

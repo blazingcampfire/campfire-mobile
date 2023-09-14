@@ -109,10 +109,11 @@ struct OwnProfilePage: View {
                                                         )
                                                 )
                                                 .overlay(
+                                                    currentUser.newRequests ? (
                                                           Circle()
                                                         .fill(Theme.Peach)
                                                             .frame(width: 15, height: 15)
-                                                            .offset(x: 41, y: -22)
+                                                            .offset(x: 41, y: -22)) : nil
                                                 )
 
                                         }
@@ -193,7 +194,7 @@ struct OwnProfilePage: View {
             }
         }
         .onAppear {
-            
+            currentUser.checkRequestsNotEmpty()
         }
         .navigationViewStyle(.stack)
     }

@@ -16,6 +16,7 @@ class CurrentUserModel: ObservableObject {
     @Published var profile: Profile
     @Published var signedIn: Bool = false
     @Published var showNavBar: Bool = true
+    @Published var newRequests: Bool = false
 
     var userRef: CollectionReference
     var profileRef: CollectionReference
@@ -139,14 +140,19 @@ class CurrentUserModel: ObservableObject {
         }
     }
 
-    func makeTestProfiles(testProfiles: [Profile]) {
-        for testProfile in testProfiles {
-            let testUser = PrivateUser(phoneNumber: testProfile.phoneNumber, email: testProfile.email, userID: testProfile.userID, school: testProfile.school)
-            do {
-                try ndProfiles.document("\(testProfile.userID)").setData(from: testProfile)
-                try ndUsers.document("\(testProfile.userID)").setData(from: testUser)
-            } catch {
-                return
+    
+    func checkRequestsNotEmpty() {
+        do {
+            self.relationshipsRef.document(self.privateUserData.userID).addSnapshotListener { documentSnapshot, error in
+                if error != nil {
+                    return
+                } else {
+                    if let documentSnapshot = documentSnapshot {
+//                        var requestsArray: [RequestFirestore] = []
+                        let requests = documentSnapshot.get("ownRequests") as? [[String: Any]] ?? []
+                        self.newRequests = !requests.isEmpty
+                    }
+                }
             }
         }
     }

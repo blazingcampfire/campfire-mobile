@@ -27,13 +27,15 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        newFeedModel.postsLoading = true
+        print("loading to true from viewDidLoad")
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
    
@@ -46,11 +48,14 @@ class FeedViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCellIdentifier")
         collectionView.register(VideoCollectionViewCell.self, forCellWithReuseIdentifier: "VideoCellIdentifier")
-
+        collectionView.register(LoadingPostCollectionViewCell.self, forCellWithReuseIdentifier: "LoadingPosts")
+        
         newFeedModel.$posts
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
+               self?.newFeedModel.postsLoading = false
+                print("loading to false")
             }
             .store(in: &cancellables)
     }
@@ -81,20 +86,30 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return newFeedModel.posts.count
+        if newFeedModel.postsLoading {
+            return 1
+        } else {
+            return newFeedModel.posts.count
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let postItem = newFeedModel.posts[indexPath.item]
-
-        if postItem.postType == "image" {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
-            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
+    
+        if newFeedModel.postsLoading {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingPosts", for: indexPath) as! LoadingPostCollectionViewCell
             return cell
-        } else if postItem.postType == "video" {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
-            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
-            return cell
+        }
+        else {
+            let postItem = newFeedModel.posts[indexPath.item]
+            if postItem.postType == "image" {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
+                cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
+                return cell
+            } else if postItem.postType == "video" {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
+                cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
+                return cell
+            }
         }
         return UICollectionViewCell()
     }

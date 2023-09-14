@@ -9,6 +9,7 @@ import AVKit
 import Combine
 import SwiftUI
 import UIKit
+import CachingPlayerItem
 
 class ProfilePlayerView: UIView {
     override class var layerClass: AnyClass {
@@ -144,7 +145,8 @@ class ProfileVideoCollectionViewCell: UICollectionViewCell {
         self.currentUser = currentUser
         // Safely unwrap the URL string
         if let url = URL(string: postItem.url) {
-            let playerItem = AVPlayerItem(url: url)
+            let playerItem = CachingPlayerItem(url: url)
+            playerItem.download()
 
             // Replace the current player item with the new item
             player?.replaceCurrentItem(with: playerItem)

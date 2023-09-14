@@ -23,6 +23,8 @@ class NewFeedModel: ObservableObject {
     @Published var currentUser: CurrentUserModel
     var initialLoadCompleted = false
     var cancellables = Set<AnyCancellable>()
+    @Published var postsLoading: Bool = false
+    
 
     private var newListener: ListenerRegistration?
     private var hotListener: ListenerRegistration?
@@ -118,6 +120,8 @@ class NewFeedModel: ObservableObject {
     func loadInitialPosts(completion: @escaping () -> Void) {
         reachedEndofData = false
         initialLoadCompleted = false
+        postsLoading = true
+        print("posts loading true from initial func")
         posts.removeAll()
 
         var query: Query

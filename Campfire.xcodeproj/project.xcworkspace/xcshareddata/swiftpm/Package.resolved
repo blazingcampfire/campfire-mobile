@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "cachingplayeritem",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sukov/CachingPlayerItem.git",
+      "state" : {
+        "revision" : "613ee44cac1e4fd97a58d1b98c8a79ddd17e27cb",
+        "version" : "1.0.8"
+      }
+    },
+    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",

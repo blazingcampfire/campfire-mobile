@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B11371A72A7A06A200417923 /* CamPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11371A62A7A06A200417923 /* CamPostModel.swift */; };
 		B12133682A7EBE3C00A9A93F /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12133672A7EBE3C00A9A93F /* LocationHandler.swift */; };
+		B12CF05A2AB22ED000E683DC /* LoadingPostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12CF0592AB22ED000E683DC /* LoadingPostCollectionViewCell.swift */; };
+		B12CF05D2AB286A700E683DC /* CachingPlayerItem in Frameworks */ = {isa = PBXBuildFile; productRef = B12CF05C2AB286A700E683DC /* CachingPlayerItem */; };
 		B140DB6A2A53C6EC002FFA65 /* RequestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140DB692A53C6EC002FFA65 /* RequestsPage.swift */; };
 		B14AF3452A5CE64800BDE1A4 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14AF3442A5CE64800BDE1A4 /* CommentView.swift */; };
 		B14D3A012A5B8AFA00056EAA /* sofrat.mov in Resources */ = {isa = PBXBuildFile; fileRef = B14D3A002A5B8AFA00056EAA /* sofrat.mov */; };
@@ -198,6 +200,7 @@
 /* Begin PBXFileReference section */
 		B11371A62A7A06A200417923 /* CamPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamPostModel.swift; sourceTree = "<group>"; };
 		B12133672A7EBE3C00A9A93F /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		B12CF0592AB22ED000E683DC /* LoadingPostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPostCollectionViewCell.swift; sourceTree = "<group>"; };
 		B140DB692A53C6EC002FFA65 /* RequestsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsPage.swift; sourceTree = "<group>"; };
 		B14AF3442A5CE64800BDE1A4 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		B14D3A002A5B8AFA00056EAA /* sofrat.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sofrat.mov; sourceTree = "<group>"; };
@@ -368,6 +371,7 @@
 				B1C6885C2A8FF8430049102D /* InterposeKit in Frameworks */,
 				E2BDE6AB2A5E38770012D328 /* GoogleSignIn in Frameworks */,
 				F881D5182A7A1E1200E6E663 /* TOCropViewController in Frameworks */,
+				B12CF05D2AB286A700E683DC /* CachingPlayerItem in Frameworks */,
 				F891B35A2A6907A000BDA845 /* FirebaseFirestoreSwift in Frameworks */,
 				E2B248D22A800BD40004A757 /* iPhoneNumberField in Frameworks */,
 				B1EA23BA2A74E0790021F0D1 /* Kingfisher in Frameworks */,
@@ -801,6 +805,7 @@
 				B1E9DE132A88AD7000E0B61F /* NewFeedModel.swift */,
 				B1FEE7A12A8AE82300C4D39F /* IndividualPostModel.swift */,
 				B1FEE7A82A8B3CC500C4D39F /* IndividualCommentModel.swift */,
+				B12CF0592AB22ED000E683DC /* LoadingPostCollectionViewCell.swift */,
 			);
 			name = feed;
 			path = ../../feed;
@@ -839,6 +844,7 @@
 				F881D5172A7A1E1200E6E663 /* TOCropViewController */,
 				E2B248D12A800BD40004A757 /* iPhoneNumberField */,
 				B1C6885B2A8FF8430049102D /* InterposeKit */,
+				B12CF05C2AB286A700E683DC /* CachingPlayerItem */,
 			);
 			productName = "campfire-mobile";
 			productReference = E29095D72A3E473E001BEDDE /* Campfire.app */;
@@ -919,6 +925,7 @@
 				F881D5142A7A1E1200E6E663 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				E2B248D02A800BD40004A757 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */,
+				B12CF05B2AB286A700E683DC /* XCRemoteSwiftPackageReference "CachingPlayerItem" */,
 			);
 			productRefGroup = E29095D82A3E473E001BEDDE /* Products */;
 			projectDirPath = "";
@@ -1095,6 +1102,7 @@
 				B1A383202AAA354F00828187 /* ProfileFeedUIView.swift in Sources */,
 				E29095E72A3E4741001BEDDE /* campfire_mobile.xcdatamodeld in Sources */,
 				E2163E522A663C4D005A20BE /* users.swift in Sources */,
+				B12CF05A2AB22ED000E683DC /* LoadingPostCollectionViewCell.swift in Sources */,
 				E280A9E32A4FCF5D00410B34 /* Notification.swift in Sources */,
 				E29095DB2A3E473E001BEDDE /* campfire_mobileApp.swift in Sources */,
 				F8950DCC2A4800BF00C13075 /* CustomVideoPlayer.swift in Sources */,
@@ -1482,6 +1490,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B12CF05B2AB286A700E683DC /* XCRemoteSwiftPackageReference "CachingPlayerItem" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sukov/CachingPlayerItem.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/steipete/InterposeKit.git";
@@ -1533,6 +1549,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B12CF05C2AB286A700E683DC /* CachingPlayerItem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B12CF05B2AB286A700E683DC /* XCRemoteSwiftPackageReference "CachingPlayerItem" */;
+			productName = CachingPlayerItem;
+		};
 		B1C6885B2A8FF8430049102D /* InterposeKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B1C6885A2A8FF8430049102D /* XCRemoteSwiftPackageReference "InterposeKit" */;

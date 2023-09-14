@@ -57,8 +57,9 @@ struct ProfileFeedUIView: View {
                                             .font(.custom("LexendDeca-Regular", size: 13))
                                         
                                     Text("posted \(postTimeAgoSinceDate(individualPost.postItem.date.dateValue()))")
-                                        .font(.custom("LexendDeca-Regular", size: 13))
+                                        .font(.custom("LexendDeca-Bold", size: 13))
                                         .foregroundColor(Color.gray)
+                                        .shadow(color: Color.white, radius: 5, x: 0, y: 2)
                                     }
                                 
                                 .padding(.leading, 10)

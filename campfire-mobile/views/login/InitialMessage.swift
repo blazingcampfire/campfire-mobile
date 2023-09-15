@@ -48,11 +48,11 @@ struct InitialMessage: View {
                 }
                 .padding(.bottom)
                 
-                Text("swipe down to dismiss message!")
-                    .font(.custom("LexendDeca-Bold", size: 20))
-                    .foregroundColor(.red)
+                Text("swipe down to dismiss message!!!")
+                    .font(.custom("LexendDeca-Bold", size: 19))
+                    .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .shadow(color: Color.white, radius: 5, x: 0, y: 2)
+                    .shadow(color: Color.black, radius: 5, x: 0, y: 2)
             }
             .padding(.bottom)
             

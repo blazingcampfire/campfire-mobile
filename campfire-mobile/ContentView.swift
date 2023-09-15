@@ -17,21 +17,22 @@ struct ContentView: View {
     
     var body: some View {
         if currentUser.signedIn && (!authModel.createAccount && !authModel.login) {
-            NavigationBar()
-                .onAppear {
-                    currentUser.setCollectionRefs()
-                    currentUser.getUser()
-                    currentUser.getProfile()
-                    Task {
-                        await notificationsManager.getAuthStatus()
-                        await notificationsManager.request()
-                        await notificationsManager.sendNotification(title: "Test", subtitle: "String")
-                        notificationsManager.getToken()
-                    }
-                }
-                .environmentObject(currentUser)
-                .environmentObject(notificationsManager)
-                .environmentObject(authModel)
+InitialMessage(school: "yo")
+            //            NavigationBar()
+//                .onAppear {
+//                    currentUser.setCollectionRefs()
+//                    currentUser.getUser()
+//                    currentUser.getProfile()
+//                    Task {
+//                        await notificationsManager.getAuthStatus()
+//                        await notificationsManager.request()
+//                        await notificationsManager.sendNotification(title: "Test", subtitle: "String")
+//                        notificationsManager.getToken()
+//                    }
+//                }
+//                .environmentObject(currentUser)
+//                .environmentObject(notificationsManager)
+//                .environmentObject(authModel)
         }
         else {
             AccountSetUp()

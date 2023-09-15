@@ -40,8 +40,14 @@ let ndPosts = notreDame.collection("posts")
 let yalePosts = yale.collection("posts")
 let ricePosts = rice.collection("posts")
 
-// MARK: - Reports(Collection)
+// MARK: - Reports (Collection)
 
 let ndReports = notreDame.collection("reports")
 let yaleReports = yale.collection("reports")
 let riceReports = rice.collection("reports")
+
+// MARK: - Notifications (Collection)
+
+let ndNotifications = db.collection("notifications").document("notreDame").collection("fcmTokens")
+let yaleNotifications = db.collection("notifications").document("yale").collection("fcmTokens")
+let riceNotifications = db.collection("notifications").document("rice").collection("fcmTokens")

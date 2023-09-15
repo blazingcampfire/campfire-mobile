@@ -22,12 +22,7 @@ struct ContentView: View {
                     currentUser.setCollectionRefs()
                     currentUser.getUser()
                     currentUser.getProfile()
-                    Task {
-                        await notificationsManager.getAuthStatus()
-                        await notificationsManager.request()
-                        await notificationsManager.sendNotification(title: "Test", subtitle: "String")
-                        notificationsManager.getToken()
-                    }
+                    notificationsManager.updateToken(school: currentUser.profile.school)
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)

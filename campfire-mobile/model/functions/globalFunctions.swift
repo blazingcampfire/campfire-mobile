@@ -60,6 +60,11 @@ func reportsParser(school: String) -> CollectionReference? {
     return reportsCollection
 }
 
+func notificationsParser(school: String) -> CollectionReference? {
+    guard let notificationsCollection = notificationsMap[school] else { return nil }
+    return notificationsCollection
+}
+
 // MARK: - Formatting Functions
 
 func formatNumber(_ number: Int) -> String {
@@ -111,6 +116,7 @@ func formatAddress(_ location: String, school: String) -> String {
         "2010 Moose Krause Cir, Notre Dame": "Notre Dame Stadium",
         "N Notre Dame Ave & Holy Cross Dr, Notre Dame": "Bookstore Basketball Courts",
         "100 Compton Family Ice Arena, Notre Dame": "Compton Family Ice Arena",
+        "19501 Dorr Rd, Notre Dame": "Howard Hall, Home of Our Faves",
         "101 Basilica Drive, Notre Dame": "God Quad",
         "315 LaFortune Student Center, Notre Dame": "LaFun",
         "54261 Wilson Dr, Notre Dame": "West Quad",
@@ -151,10 +157,10 @@ func formatAddress(_ location: String, school: String) -> String {
         "35 Whalley Ave, New Haven": "Zeta House Yale",
         "38 Mansfield St, New Haven": "Pauli Murray College",
         "197 York St, New Haven": "Jonathan Edwards College",
-        "500 College St, New Haven": "Woosley Hall",
+        "500 College St, New Haven": "The Commons",
         "109 Wall St, New Haven": "Schwarzman Center",
-        "145 High St, New Haven": "The Commons",
-        "39 High St, New Haven": "Sig Nu House Yale"
+        "39 High St, New Haven": "Sig Nu House Yale",
+        "100 Wall St, New Haven": "William Harkness Hall"
     ]
 
     if let place = locationAddresses[location] {

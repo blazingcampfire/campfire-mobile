@@ -9,6 +9,7 @@ import AVKit
 import Combine
 import SwiftUI
 import UIKit
+import CachingPlayerItem
 
 class PlayerView: UIView {
     override class var layerClass: AnyClass {
@@ -144,8 +145,10 @@ class VideoCollectionViewCell: UICollectionViewCell {
         self.currentUser = currentUser
         // Safely unwrap the URL string
         if let url = URL(string: postItem.url) {
-            let playerItem = AVPlayerItem(url: url)
-
+            let playerItem = CachingPlayerItem(url: url)
+            playerItem.download()
+            
+            player?.automaticallyWaitsToMinimizeStalling = false
             // Replace the current player item with the new item
             player?.replaceCurrentItem(with: playerItem)
             NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)

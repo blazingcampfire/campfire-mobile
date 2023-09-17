@@ -14,20 +14,18 @@ import FirebaseAuth
 @MainActor
 class NotificationsManager: ObservableObject {
     @Published private(set) var hasPermission = false
-    @Published var notifications: [UNNotification] = []
     @Published var token: String = ""
+    @Published var school: String = ""
     init() {
         Task {
             await getAuthStatus()
-            getToken()
+            await getToken()
         }
     }
 
     func request() async {
         do {
             self.hasPermission = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
-            getToken()
-            print(token)
         } catch {
             return
         }
@@ -77,10 +75,16 @@ class NotificationsManager: ObservableObject {
           if let error = error {
             print("Error fetching FCM registration token: \(error)")
           } else if let token = token {
-              self.token = token
+            self.token = token
             print("FCM registration token: \(token)")
+              self.updateToken(school: "nd")
           }
         }
+    
+    }
+    
+    func getSchool(school: String) {
+        self.school = school
     }
     
     func updateToken(school: String) {
@@ -89,13 +93,15 @@ class NotificationsManager: ObservableObject {
             return
         }
         let userToken = notificationsRef?.document(userID)
+        print("update function fired")
         
         userToken?.getDocument { (document, error) in
             if let document = document {
                 if document.exists {
                     let data = document.data()
-                    let token = data?["fcmToken"] as? String ?? ""
-                    print(token)
+                    guard let token = data!["fcmToken"] as? String else {
+                        return
+                    }
                     if(self.token == token) {
                         return
                     }

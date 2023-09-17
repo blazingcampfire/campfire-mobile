@@ -22,7 +22,7 @@ struct ContentView: View {
                     currentUser.setCollectionRefs()
                     currentUser.getUser()
                     currentUser.getProfile()
-                    notificationsManager.updateToken(school: currentUser.profile.school)
+
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)

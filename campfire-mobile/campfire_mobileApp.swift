@@ -66,7 +66,7 @@ extension AppDelegate: MessagingDelegate {
     }
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print(fcmToken)
+      
     }
 }
 

@@ -34,7 +34,7 @@ struct SettingsForm: View {
     @State var showDeleteAlert: Bool = false
     @EnvironmentObject var model: SettingsModel
     @EnvironmentObject var currentUser: CurrentUserModel
-
+    @EnvironmentObject var notificationsManager: NotificationsManager
     var body: some View {
         Form {
             Section(header: Text("display")) {
@@ -51,7 +51,13 @@ struct SettingsForm: View {
 
                 Button(action: {
                     Task {
-                        await model.notificationsManager.turnOffNotifications()
+                        await notificationsManager.getAuthStatus()
+                        if notificationsManager.hasPermission {
+                            await notificationsManager.turnOffNotifications()
+                        }
+                        else {
+                            await notificationsManager.request()
+                        }
                     }
                 }, label: {
                     Label {

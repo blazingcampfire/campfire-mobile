@@ -25,6 +25,12 @@ struct VerifyEmail: View {
                     currentUser.setCollectionRefs()
                     currentUser.getProfile()
                     currentUser.getUser()
+                    notificationsManager.getSchool(school: currentUser.profile.school)
+                    if !notificationsManager.hasPermission {
+                        Task {
+                            await notificationsManager.request()
+                        }
+                    }
                 }
         } else {
             GradientBackground()

@@ -118,7 +118,7 @@ struct OwnProfilePage: View {
 
                                         }
                                         NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: currentUser.profile.userID)
-                                            .environmentObject(currentUser).navigationBarBackButtonHidden(true)
+                                            .environmentObject(currentUser).navigationBarBackButtonHidden(true).toolbarBackground(.black, for: .tabBar).background(Color.black)
                                             )
                                             {
                                                 Image(systemName: "play.rectangle.fill")

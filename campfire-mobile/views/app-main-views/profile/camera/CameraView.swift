@@ -140,7 +140,6 @@ struct CameraView: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
                 }
                 PhotoSaveButton(camera: camera)
                 PreviewPostInfo(postModel: post)

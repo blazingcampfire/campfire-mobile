@@ -59,7 +59,6 @@ struct EnterPhoneNumber: View {
                                 })
                             } else {
                                 Button {
-                                    
                                     Task {
                                         model.getVerificationCode()
                                     }

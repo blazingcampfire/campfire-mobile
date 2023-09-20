@@ -104,7 +104,6 @@ struct FeedUIView: View {
                                         
                                     Text("posted \(postTimeAgoSinceDate(individualPost.postItem.date.dateValue()))")
                                         .font(.custom("LexendDeca-Bold", size: 13))
-                                        .foregroundColor(Color.gray)
                                     }
                                 
                                 .padding(.leading, 10)

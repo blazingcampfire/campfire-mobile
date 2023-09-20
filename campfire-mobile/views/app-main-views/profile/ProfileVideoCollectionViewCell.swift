@@ -147,7 +147,7 @@ class ProfileVideoCollectionViewCell: UICollectionViewCell {
         if let url = URL(string: postItem.url) {
             let playerItem = CachingPlayerItem(url: url)
             playerItem.download()
-
+            player?.automaticallyWaitsToMinimizeStalling = false
             // Replace the current player item with the new item
             player?.replaceCurrentItem(with: playerItem)
             NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)

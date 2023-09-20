@@ -17,6 +17,7 @@ class CurrentUserModel: ObservableObject {
     @Published var signedIn: Bool = false
     @Published var showNavBar: Bool = true
     @Published var newRequests: Bool = false
+    @Published var changeToBlack: Bool = false
 
     var userRef: CollectionReference
     var profileRef: CollectionReference

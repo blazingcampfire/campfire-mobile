@@ -130,7 +130,7 @@ struct OtherProfilePage: View {
                                     }
                                     NavigationLink(destination: ProfileFeedViewControllerWrapper(userID: profile.userID)
                                         .environmentObject(currentUser)
-                                        .navigationBarBackButtonHidden(true))
+                                        .navigationBarBackButtonHidden(true).toolbarBackground(.black, for: .tabBar).background(Color.black))
                                         {
                                             Image(systemName: "play.rectangle.fill")
                                                 .font(.system(size: 18))

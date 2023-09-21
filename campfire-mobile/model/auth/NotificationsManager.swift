@@ -77,17 +77,16 @@ class NotificationsManager: ObservableObject {
           } else if let token = token {
             self.token = token
             print("FCM registration token: \(token)")
-              self.updateToken(school: "nd")
+              self.updateToken()
           }
         }
-    
     }
     
-    func getSchool(school: String) {
-        self.school = school
-    }
-    
-    func updateToken(school: String) {
+    func updateToken() {
+        guard let email = Auth.auth().currentUser?.email else {
+            return
+        }
+        let school = schoolParser(email: email)
         let notificationsRef = notificationsParser(school: school)
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -121,3 +120,4 @@ class NotificationsManager: ObservableObject {
     }
 
 }
+

@@ -22,7 +22,6 @@ struct ContentView: View {
                     currentUser.setCollectionRefs()
                     currentUser.getUser()
                     currentUser.getProfile()
-
                 }
                 .environmentObject(currentUser)
                 .environmentObject(notificationsManager)

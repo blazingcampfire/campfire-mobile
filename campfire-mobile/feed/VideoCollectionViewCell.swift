@@ -143,12 +143,20 @@ class VideoCollectionViewCell: UICollectionViewCell {
 
     func configure(with postItem: PostItem, model: NewFeedModel, currentUser: CurrentUserModel) {
         self.currentUser = currentUser
+        
+        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+          loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+          contentView.addSubview(loadingIndicator)
+          
+          NSLayoutConstraint.activate([
+              loadingIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+              loadingIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+          ])
+        
+        
         // Safely unwrap the URL string
         if let url = URL(string: postItem.url) {
-            let playerItem = CachingPlayerItem(url: url)
-            playerItem.download()
-            
-            player?.automaticallyWaitsToMinimizeStalling = false
+            let playerItem = AVPlayerItem(url: url)
             // Replace the current player item with the new item
             player?.replaceCurrentItem(with: playerItem)
             NotificationCenter.default.addObserver(self, selector: #selector(videoDidEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -187,8 +195,23 @@ class VideoCollectionViewCell: UICollectionViewCell {
             // Move this line here to ensure that the likeButton is rendered above swiftUIView
             setupLikeButton()
         }
+        
+        func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+            if keyPath == "status" {
+                // Check if the status has changed to ready to play
+                if let playerItem = player?.currentItem, playerItem.status == .readyToPlay {
+                    // Hide the loading indicator when the video is ready to play
+                    loadingIndicator.stopAnimating()
+                    loadingIndicator.isHidden = true
+                }
+            }
+        }
     }
 }
+
+
+
+
 
 extension VideoCollectionViewCell {
     func play() {

@@ -27,7 +27,6 @@ class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        newFeedModel.postsLoading = true
         print("loading to true from viewDidLoad")
         
         let layout = UICollectionViewFlowLayout()
@@ -54,7 +53,6 @@ class FeedViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.collectionView.reloadData()
-               self?.newFeedModel.postsLoading = false
                 print("loading to false")
             }
             .store(in: &cancellables)
@@ -86,30 +84,19 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if newFeedModel.postsLoading {
-            return 1
-        } else {
-            return newFeedModel.posts.count
-        }
+        return newFeedModel.posts.count
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        if newFeedModel.postsLoading {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LoadingPosts", for: indexPath) as! LoadingPostCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let postItem = newFeedModel.posts[indexPath.item]
+        if postItem.postType == "image" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
+            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
             return cell
-        }
-        else {
-            let postItem = newFeedModel.posts[indexPath.item]
-            if postItem.postType == "image" {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageCollectionViewCell
-                cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
-                return cell
-            } else if postItem.postType == "video" {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
-                cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
-                return cell
-            }
+        } else if postItem.postType == "video" {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCellIdentifier", for: indexPath) as! VideoCollectionViewCell
+            cell.configure(with: postItem, model: newFeedModel, currentUser: newFeedModel.currentUser)
+            return cell
         }
         return UICollectionViewCell()
     }
